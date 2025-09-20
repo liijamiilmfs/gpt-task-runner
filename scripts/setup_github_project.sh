@@ -138,23 +138,27 @@ OWNER_KIND=""
 OWNER_ID=""
 
 determine_owner() {
-  read -r -d '' QUERY_OWNER <<'GRAPHQL'
-query($login: String!) {
-  user(login: $login) { id }
-  organization(login: $login) { id }
-}
-GRAPHQL
+  # Simplified approach - try to get owner info directly
   local response
-  response=$(run_query "$QUERY_OWNER" login "$OWNER")
-  OWNER_ID=$(printf '%s' "$response" | jq -r '.data.user.id // .data.organization.id // empty')
-  if [ -z "$OWNER_ID" ]; then
-    echo "Error: Unable to resolve owner '$OWNER'." >&2
-    exit 1
-  fi
-  if [ "$(printf '%s' "$response" | jq -r '.data.user.id // empty')" != "" ]; then
+  response=$(gh api "users/$OWNER" 2>/dev/null || echo "{}")
+  if [ "$(printf '%s' "$response" | jq -r '.type // empty')" = "User" ]; then
     OWNER_KIND="USER"
+    OWNER_ID=$(printf '%s' "$response" | jq -r '.node_id // empty')
   else
-    OWNER_KIND="ORG"
+    # Try as organization
+    response=$(gh api "orgs/$OWNER" 2>/dev/null || echo "{}")
+    if [ "$(printf '%s' "$response" | jq -r '.type // empty')" = "Organization" ]; then
+      OWNER_KIND="ORG"
+      OWNER_ID=$(printf '%s' "$response" | jq -r '.node_id // empty')
+    else
+      echo "Error: Unable to resolve owner '$OWNER' as user or organization." >&2
+      exit 1
+    fi
+  fi
+  
+  if [ -z "$OWNER_ID" ] || [ "$OWNER_ID" = "null" ]; then
+    echo "Error: Unable to get node ID for owner '$OWNER'." >&2
+    exit 1
   fi
 }
 
@@ -162,11 +166,20 @@ determine_owner
 
 log "Resolved owner $OWNER as $OWNER_KIND with id $OWNER_ID"
 
+# Debug: Check if we can access the repository
+log "Checking repository access..."
+if ! gh api "repos/$OWNER/$REPO" >/dev/null 2>&1; then
+  echo "Error: Cannot access repository $OWNER/$REPO" >&2
+  exit 1
+fi
+log "Repository access confirmed"
+
 PROJECT_ID=""
 PROJECT_NUMBER=""
 PROJECT_URL=""
 
 fetch_project() {
+  log "Fetching existing projects..."
   read -r -d '' QUERY_PROJECT <<'GRAPHQL'
 query($owner: String!, $title: String!) {
   user(login: $owner) {
@@ -183,11 +196,13 @@ query($owner: String!, $title: String!) {
 GRAPHQL
   local response
   response=$(run_query "$QUERY_PROJECT" owner "$OWNER" title "$PROJECT_NAME")
+  log "Project query response received"
   PROJECT_ID=$(printf '%s' "$response" | jq -r --arg title "$PROJECT_NAME" '.data.user.projectsV2.nodes[]?, .data.organization.projectsV2.nodes[]? | select(.title == $title) | .id' | head -n 1)
   PROJECT_NUMBER=$(printf '%s' "$response" | jq -r --arg title "$PROJECT_NAME" '.data.user.projectsV2.nodes[]?, .data.organization.projectsV2.nodes[]? | select(.title == $title) | .number' | head -n 1)
   PROJECT_URL=$(printf '%s' "$response" | jq -r --arg title "$PROJECT_NAME" '.data.user.projectsV2.nodes[]?, .data.organization.projectsV2.nodes[]? | select(.title == $title) | .url' | head -n 1)
   PROJECT_PUBLIC=$(printf '%s' "$response" | jq -r --arg title "$PROJECT_NAME" '.data.user.projectsV2.nodes[]?, .data.organization.projectsV2.nodes[]? | select(.title == $title) | .public' | head -n 1)
   PROJECT_DESCRIPTION_EXISTING=$(printf '%s' "$response" | jq -r --arg title "$PROJECT_NAME" '.data.user.projectsV2.nodes[]?, .data.organization.projectsV2.nodes[]? | select(.title == $title) | .shortDescription' | head -n 1)
+  log "Project fetch completed. Found project ID: $PROJECT_ID"
 }
 
 fetch_project
