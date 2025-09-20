@@ -9,10 +9,35 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     setupFiles: ['test/vitest/setup.ts'],
-    include: ['tools/dict_importer/tests/**/*.test.py', 'test/vitest/**/*.test.ts'],
-    exclude: ['node_modules', 'dist', 'dist-test'],
+    include: ['test/vitest/**/*.test.ts'], // Only include vitest-compatible tests
+    exclude: ['node_modules', 'dist', 'dist-test', 'tools/dict_importer'],
     testTimeout: 10000,
     hookTimeout: 10000,
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html', 'lcov'],
+      reportsDirectory: './coverage',
+      include: ['lib/**/*.ts', 'app/api/**/*.ts'],
+      exclude: [
+        'node_modules/**',
+        'dist/**',
+        'dist-test/**',
+        'test/**',
+        'tools/**',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/*.test.*',
+        '**/*.spec.*'
+      ],
+      thresholds: {
+        global: {
+          branches: 80,
+          functions: 80,
+          lines: 80,
+          statements: 80
+        }
+      }
+    }
   },
   resolve: {
     alias: {
