@@ -24,6 +24,16 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
         
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        
+    - name: Install Python dependencies
+      run: |
+        cd tools/dict_importer
+        pip install -e .
+        
     - name: Install dependencies
       run: npm ci
       
