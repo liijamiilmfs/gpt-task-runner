@@ -31,7 +31,7 @@ def test_build_command_dump_csv(tmp_path, monkeypatch):
             variant_entries=[],
         )
 
-    monkeypatch.setattr("dict_importer.cli.parse_pdf_pages", fake_parse_pdf_pages)
+    monkeypatch.setattr("dict_importer.cli.parse_libran_pdf_pages", fake_parse_pdf_pages)
     monkeypatch.setattr(
         "dict_importer.cli.build_dictionaries", fake_build_dictionaries
     )
