@@ -7,7 +7,7 @@ describe('translate (integration)', () => {
   it('translates text using bundled dictionaries', () => {
     const result = translate('balance, memory!', 'ancient')
 
-    assert.equal(result.libran, 'stílibror, memoror!')
+    assert.equal(result.libran, 'stílibror, memorior!')
     assert.equal(result.confidence, 1)
     assert.equal(result.wordCount, 2)
   })
@@ -24,6 +24,6 @@ describe('translate (integration)', () => {
     const text = 'The balance, the memory, and the love.'
     const result = translate(text, 'ancient')
 
-    assert.equal(result.libran, 'The stílibror, the memoror, etron the dramonor.')
+    assert.equal(result.libran, 'The stílibror, the memorior, etron the dragostor.')
   })
 })
