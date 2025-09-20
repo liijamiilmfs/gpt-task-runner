@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { Play, Pause, Download, Volume2, VolumeX } from 'lucide-react'
 
 // Client-side logging utility
@@ -24,21 +24,68 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
   const [volume, setVolume] = useState(1)
   const [isMuted, setIsMuted] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
+  const abortControllerRef = useRef<AbortController | null>(null)
 
-  // Cleanup audio URLs on component unmount
+  // Event handler refs to ensure stable references for cleanup
+  const handleAudioEndedRef = useRef(() => {
+    log.debug('Audio ended')
+    setIsPlaying(false)
+  })
+
+  const handleAudioPlayRef = useRef(() => {
+    log.debug('Audio started playing')
+    setIsPlaying(true)
+  })
+
+  const handleAudioPauseRef = useRef(() => {
+    log.debug('Audio paused')
+    setIsPlaying(false)
+  })
+
+  // Cleanup function for audio URLs and event listeners
+  const cleanupAudio = useCallback(() => {
+    if (audioUrl) {
+      log.debug('Cleaning up audio URL', { url: audioUrl })
+      URL.revokeObjectURL(audioUrl)
+      setAudioUrl('')
+    }
+    setIsPlaying(false)
+  }, [audioUrl])
+
+  // Cleanup on component unmount
   useEffect(() => {
     return () => {
-      if (audioUrl) {
-        URL.revokeObjectURL(audioUrl)
+      log.debug('AudioPlayer unmounting - cleaning up')
+      cleanupAudio()
+      
+      // Cancel any ongoing fetch requests
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
       }
     }
-  }, [audioUrl])
+  }, [cleanupAudio])
+
+  // Cleanup audio when text changes
+  useEffect(() => {
+    if (audioUrl) {
+      log.debug('Text changed - cleaning up previous audio')
+      cleanupAudio()
+    }
+  }, [text, cleanupAudio])
 
   const generateAudio = async () => {
     if (!text.trim()) {
       log.warn('Attempted to generate audio with empty text')
       return
     }
+
+    // Cancel any ongoing request
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+
+    // Create new abort controller for this request
+    abortControllerRef.current = new AbortController()
 
     log.info('Starting audio generation', { textLength: text.length })
     setIsGenerating(true)
@@ -55,6 +102,7 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
           voice: 'alloy',
           format: 'mp3',
         }),
+        signal: abortControllerRef.current.signal,
       })
 
       if (!response.ok) {
@@ -66,10 +114,7 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       log.debug('Audio blob received', { size: blob.size, type: blob.type })
 
       // Clean up previous audio URL to prevent memory leaks
-      if (audioUrl) {
-        URL.revokeObjectURL(audioUrl)
-        log.debug('Previous audio URL revoked')
-      }
+      cleanupAudio()
 
       const url = URL.createObjectURL(blob)
       setAudioUrl(url)
@@ -84,11 +129,16 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
         log.debug('Audio playback started')
       }
     } catch (error) {
+      if (error instanceof Error && error.name === 'AbortError') {
+        log.debug('Audio generation cancelled')
+        return
+      }
       log.error('Audio generation error', { error: error instanceof Error ? error.message : 'Unknown error' })
       alert('Audio generation failed. Please try again.')
     } finally {
       setIsGenerating(false)
       onLoadingChange(false)
+      abortControllerRef.current = null
     }
   }
 
@@ -124,29 +174,47 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
     }
   }
 
-  const downloadAudio = () => {
+  const downloadAudio = useCallback(() => {
     if (!audioUrl) return
 
+    log.debug('Starting audio download', { url: audioUrl })
     const link = document.createElement('a')
     link.href = audioUrl
     link.download = `libran-audio-${Date.now()}.mp3`
+    link.style.display = 'none'
+    
     document.body.appendChild(link)
     link.click()
-    document.body.removeChild(link)
-  }
+    
+    // Clean up the DOM element immediately
+    setTimeout(() => {
+      if (document.body.contains(link)) {
+        document.body.removeChild(link)
+        log.debug('Download link removed from DOM')
+      }
+    }, 100)
+  }, [audioUrl])
 
-  const handleAudioEnded = () => {
-    setIsPlaying(false)
-  }
-
-  // Clear audio when text changes
+  // Set up audio event listeners with proper cleanup
   useEffect(() => {
-    if (audioUrl) {
-      URL.revokeObjectURL(audioUrl)
-      setAudioUrl('')
-      setIsPlaying(false)
+    const audioElement = audioRef.current
+    if (!audioElement) return
+
+    log.debug('Setting up audio event listeners')
+
+    // Add event listeners
+    audioElement.addEventListener('ended', handleAudioEndedRef.current)
+    audioElement.addEventListener('play', handleAudioPlayRef.current)
+    audioElement.addEventListener('pause', handleAudioPauseRef.current)
+
+    // Cleanup function
+    return () => {
+      log.debug('Removing audio event listeners')
+      audioElement.removeEventListener('ended', handleAudioEndedRef.current)
+      audioElement.removeEventListener('play', handleAudioPlayRef.current)
+      audioElement.removeEventListener('pause', handleAudioPauseRef.current)
     }
-  }, [text, audioUrl])
+  }, [audioUrl]) // Re-setup when audio URL changes
 
   return (
     <div className="space-y-4">
@@ -222,9 +290,6 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       {/* Audio Element */}
       <audio
         ref={audioRef}
-        onEnded={handleAudioEnded}
-        onPlay={() => setIsPlaying(true)}
-        onPause={() => setIsPlaying(false)}
         className="hidden"
       />
 
