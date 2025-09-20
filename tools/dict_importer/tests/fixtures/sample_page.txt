@@ -1,0 +1,11 @@
+English | Ancient | Modern | POS | Notes
+hello | salaam | salaam | n | greeting
+world | dunya | dunya | n | earth
+water | maa | maa | n | liquid
+fire | nar | nar | n | flame
+wind | hawa | hawa | n | air
+earth | ard | ard | n | ground
+sun | shams | shams | n | star
+moon | qamar | qamar | n | satellite
+star | najm | najm | n | celestial body
+tree | shajar | shajar | n | plant
