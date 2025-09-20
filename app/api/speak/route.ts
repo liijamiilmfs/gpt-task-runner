@@ -63,8 +63,32 @@ export async function POST(request: NextRequest) {
       headers
     })
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('TTS error:', error)
+    
+    // Handle specific OpenAI errors
+    if (error.status === 429) {
+      return NextResponse.json(
+        { 
+          error: 'OpenAI quota exceeded. Please check your billing details or try again later.',
+          type: 'quota_exceeded',
+          details: 'You have exceeded your current OpenAI API quota. Please add credits or upgrade your plan.'
+        },
+        { status: 429 }
+      )
+    }
+    
+    if (error.type === 'insufficient_quota') {
+      return NextResponse.json(
+        { 
+          error: 'OpenAI quota exceeded. Please check your billing details.',
+          type: 'quota_exceeded',
+          details: 'Your OpenAI account has insufficient quota for this request.'
+        },
+        { status: 429 }
+      )
+    }
+    
     return NextResponse.json(
       { error: 'Speech generation failed' },
       { status: 500 }

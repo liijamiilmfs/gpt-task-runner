@@ -30,9 +30,8 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          text: text,
+          libranText: text,
           voice: 'alloy',
-          model: 'gpt-4o-mini-tts',
           format: 'mp3',
         }),
       })

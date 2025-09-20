@@ -37,7 +37,7 @@ export default function TranslationForm({ onTranslation, onLoadingChange }: Tran
       }
 
       const data = await response.json()
-      onTranslation(data.translatedText)
+      onTranslation(data.libran)
     } catch (error) {
       console.error('Translation error:', error)
       alert('Translation failed. Please try again.')
