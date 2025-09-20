@@ -423,6 +423,269 @@ Librán uses the following diacritical marks (UTF-8 encoded):
 }
 ```
 
+## Exclusion Policy and Rationale
+
+### Excluded Terms
+
+Certain categories of terms are systematically excluded from Librán dictionaries to maintain linguistic purity and avoid cultural contamination:
+
+#### 1. Divine and Pantheon Terms
+**Rationale**: Divine names and pantheon-specific terminology should remain in their original languages to preserve their sacred nature and avoid cultural appropriation.
+
+**Examples of Excluded Terms**:
+- `god`, `goddess`, `deity`, `divine`, `holy`, `sacred`
+- `jesus`, `christ`, `allah`, `yahweh`, `zeus`, `odin`
+- `heaven`, `hell`, `paradise`, `nirvana`, `valhalla`
+- `prayer`, `worship`, `temple`, `church`, `mosque`
+
+#### 2. Proper Names and Cultural References
+**Rationale**: Personal names, place names, and cultural-specific references should retain their original form to maintain historical and cultural accuracy.
+
+**Examples of Excluded Terms**:
+- Personal names: `john`, `mary`, `muhammad`, `buddha`
+- Place names: `rome`, `mecca`, `jerusalem`, `tibet`
+- Cultural terms: `christmas`, `ramadan`, `hanukkah`, `diwali`
+- Brand names: `coca-cola`, `mcdonalds`, `nike`
+
+#### 3. Technical and Modern Concepts
+**Rationale**: Modern technical terms, scientific concepts, and contemporary technology should remain in their original form to maintain precision and avoid confusion.
+
+**Examples of Excluded Terms**:
+- Technology: `computer`, `internet`, `smartphone`, `wifi`
+- Scientific: `dna`, `quantum`, `laser`, `nuclear`
+- Medical: `antibiotic`, `vaccine`, `surgery`, `chemotherapy`
+- Modern concepts: `democracy`, `capitalism`, `socialism`, `feminism`
+
+#### 4. Comoară and Mystical Entities
+**Rationale**: Specific mystical entities and concepts from the Librán universe should remain untranslated to preserve their unique cultural significance.
+
+**Examples of Excluded Terms**:
+- `comoară` (treasure/essence)
+- `spiritus` (spiritual essence)
+- `mysticus` (mystical power)
+- `arcanum` (secret knowledge)
+
+### Exclusion Implementation
+
+#### Exclusion List Format
+```json
+{
+  "exclusions": {
+    "divine_terms": [
+      "god", "goddess", "deity", "divine", "holy", "sacred",
+      "jesus", "christ", "allah", "yahweh", "zeus", "odin"
+    ],
+    "proper_names": [
+      "john", "mary", "muhammad", "buddha",
+      "rome", "mecca", "jerusalem", "tibet"
+    ],
+    "technical_terms": [
+      "computer", "internet", "smartphone", "wifi",
+      "dna", "quantum", "laser", "nuclear"
+    ],
+    "mystical_entities": [
+      "comoară", "spiritus", "mysticus", "arcanum"
+    ]
+  }
+}
+```
+
+#### Exclusion Processing
+1. **Pre-processing**: Check all input terms against exclusion lists
+2. **Case-insensitive matching**: Handle variations in capitalization
+3. **Stemming**: Check root forms of words (e.g., "gods" → "god")
+4. **Phrase detection**: Identify excluded terms within phrases
+5. **Logging**: Record excluded terms for analysis and review
+
+## Conflict Resolution
+
+### Conflict Types
+
+#### 1. Multiple Translations for Same Word
+**Scenario**: A single English word has multiple valid Librán translations.
+
+**Example Conflict**:
+```json
+{
+  "conflicts": {
+    "light": {
+      "ancient": "nur",
+      "modern": "daw'",
+      "context": "physical_illumination"
+    }
+  }
+}
+```
+
+**Resolution Strategy**:
+1. **Context-based selection**: Choose translation based on usage context
+2. **Variant-specific mapping**: Different translations for ancient vs modern
+3. **Frequency-based preference**: Use most common translation
+4. **Manual review**: Flag for human decision
+
+#### 2. Ambiguous Word Forms
+**Scenario**: English word has multiple meanings requiring different translations.
+
+**Example Conflict**:
+```json
+{
+  "conflicts": {
+    "bank": {
+      "financial": "masrif",
+      "geographical": "jurf",
+      "context": "noun_type"
+    }
+  }
+}
+```
+
+**Resolution Strategy**:
+1. **Part-of-speech analysis**: Determine word function
+2. **Semantic analysis**: Analyze surrounding context
+3. **Default mapping**: Use most common meaning
+4. **Fallback handling**: Mark as ambiguous for manual review
+
+#### 3. Cross-Variant Inconsistencies
+**Scenario**: Same English word translated differently in ancient vs modern variants.
+
+**Example Conflict**:
+```json
+{
+  "conflicts": {
+    "water": {
+      "ancient": "maa",
+      "modern": "miya",
+      "inconsistency": "phonetic_drift"
+    }
+  }
+}
+```
+
+**Resolution Strategy**:
+1. **Historical accuracy**: Maintain variant-specific translations
+2. **Consistency checking**: Flag inconsistencies for review
+3. **Documentation**: Record rationale for differences
+4. **Validation**: Ensure translations follow variant rules
+
+### Conflict Resolution Process
+
+#### 1. Detection Phase
+```json
+{
+  "conflict_detection": {
+    "duplicate_entries": "scan_for_same_english_word",
+    "inconsistent_variants": "compare_ancient_vs_modern",
+    "ambiguous_contexts": "identify_multiple_meanings",
+    "rule_violations": "check_grammatical_consistency"
+  }
+}
+```
+
+#### 2. Analysis Phase
+```json
+{
+  "conflict_analysis": {
+    "frequency_analysis": "count_usage_frequency",
+    "context_analysis": "analyze_surrounding_words",
+    "rule_validation": "check_grammatical_rules",
+    "historical_accuracy": "verify_variant_appropriateness"
+  }
+}
+```
+
+#### 3. Resolution Phase
+```json
+{
+  "conflict_resolution": {
+    "automatic_resolution": "apply_resolution_rules",
+    "manual_review": "flag_complex_cases",
+    "documentation": "record_resolution_rationale",
+    "validation": "verify_resolution_quality"
+  }
+}
+```
+
+### Conflict Examples
+
+#### Example 1: Multiple Meanings
+**English**: "spirit"
+**Conflict**: 
+- Ancient: "ruh" (soul/spirit)
+- Modern: "hawa" (air/wind)
+- Context: "The spirit of the wind"
+
+**Resolution**: Use context-aware selection
+```json
+{
+  "spirit": {
+    "ancient": "ruh",
+    "modern": "hawa",
+    "context_rules": {
+      "metaphysical": "ruh",
+      "physical_wind": "hawa",
+      "alcoholic": "khamr"
+    }
+  }
+}
+```
+
+#### Example 2: Phonetic Drift
+**English**: "book"
+**Conflict**:
+- Ancient: "kitab"
+- Modern: "kitab" (same spelling, different pronunciation)
+
+**Resolution**: Maintain spelling, document pronunciation
+```json
+{
+  "book": {
+    "ancient": "kitab",
+    "modern": "kitab",
+    "pronunciation": {
+      "ancient": "ki-TAB",
+      "modern": "ki-tab"
+    }
+  }
+}
+```
+
+#### Example 3: Cultural Adaptation
+**English**: "house"
+**Conflict**:
+- Ancient: "bayt" (traditional dwelling)
+- Modern: "manzil" (modern residence)
+
+**Resolution**: Variant-specific mapping
+```json
+{
+  "house": {
+    "ancient": "bayt",
+    "modern": "manzil",
+    "context": "architectural_style"
+  }
+}
+```
+
+### Conflict Resolution Rules
+
+#### 1. Priority Order
+1. **Context-based selection** (highest priority)
+2. **Variant-specific mapping**
+3. **Frequency-based preference**
+4. **Manual review** (lowest priority)
+
+#### 2. Validation Criteria
+- **Grammatical consistency**: Follows language rules
+- **Cultural appropriateness**: Respects cultural context
+- **Historical accuracy**: Maintains variant integrity
+- **Usage frequency**: Reflects common usage
+
+#### 3. Documentation Requirements
+- **Conflict description**: Clear explanation of the conflict
+- **Resolution rationale**: Why this resolution was chosen
+- **Alternative options**: Other possible resolutions considered
+- **Review status**: Whether manual review is required
+
 ---
 
 *This dictionary format specification ensures consistent, maintainable, and extensible translation dictionaries for the Librán Voice Forge system.*
