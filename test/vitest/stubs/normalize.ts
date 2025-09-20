@@ -24,7 +24,8 @@ function stripDiacriticsPreserving(text: string): string {
     }
 
     const normalized = char.normalize('NFD')
-    return normalized.replace(/\p{Diacritic}+/gu, '')
+    // Use a simpler regex that works with ES5
+    return normalized.replace(/[\u0300-\u036f\u1ab0-\u1aff\u1dc0-\u1dff\u20d0-\u20ff\ufe20-\ufe2f]/g, '')
   }).join('')
 }
 
@@ -41,7 +42,10 @@ export function normalizeWhitespace(text: string): string {
 export function isHyphenatedWord(word: string): boolean {
   const lower = word.toLowerCase()
 
-  for (const prefix of KNOWN_HYPHEN_PREFIXES) {
+  // Convert Set to Array for ES5 compatibility
+  const prefixes = Array.from(KNOWN_HYPHEN_PREFIXES)
+  for (let i = 0; i < prefixes.length; i++) {
+    const prefix = prefixes[i]
     if (lower.startsWith(prefix)) {
       return true
     }
