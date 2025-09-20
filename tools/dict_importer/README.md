@@ -39,6 +39,11 @@ python -m dict_importer.cli build \
     --dump-csv build/ALL_ROWS.csv
 ```
 
+When `--dump-csv` is provided, the CLI copies the generated `ALL_ROWS.csv`
+report into the requested location after the build finishes. This makes it easy
+to archive or inspect the complete row export without digging into the build
+output directory.
+
 ### Testing PDF Parsing
 
 ```bash
