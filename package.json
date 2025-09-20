@@ -11,7 +11,7 @@
     "type-check": "tsc --noEmit",
     "clean:test": "node -e \"require('fs').rmSync('dist-test', { recursive: true, force: true });\"",
     "build:test": "npm run clean:test && tsc -p tsconfig.test.json",
-    "test:run": "node -e \"const { execSync } = require('child_process'); const fs = require('fs'); const path = require('path'); const testFiles = []; function findTests(dir) { const files = fs.readdirSync(dir); for (const file of files) { const fullPath = path.join(dir, file); const stat = fs.statSync(fullPath); if (stat.isDirectory()) { findTests(fullPath); } else if (file.endsWith('.test.js')) { testFiles.push(fullPath); } } } findTests('dist-test/test'); if (testFiles.length > 0) { execSync(`node --test --test-reporter=spec ${testFiles.join(' ')}`, { stdio: 'inherit' }); } else { console.log('No test files found'); }\"",
+    "test:run": "node scripts/run-tests.js",
     "test": "npm run build:test && npm run test:run"
   },
   "dependencies": {
