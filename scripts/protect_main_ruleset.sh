@@ -18,7 +18,7 @@ REPO=""
 DRY_RUN=false
 YOU_ACTOR=""
 CODEX_ACTOR=""
-REQUIRED_CHECKS="ci/build,ci/test,lint"
+REQUIRED_CHECKS="test,lint,type-check,build,security"
 RULESET_NAME="Protect main (PR + 2 approvals + checks)"
 REQUIRED_APPROVALS=2
 

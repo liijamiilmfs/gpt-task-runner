@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
+import { metrics } from '@/lib/metrics'
 
 export async function POST(request: NextRequest) {
+  const startTime = Date.now()
+  let success = false
+  let characterCount = 0
+  let audioDuration = 0
+
   try {
     const { 
       libranText, 
@@ -10,6 +16,7 @@ export async function POST(request: NextRequest) {
     } = await request.json()
 
     if (!libranText || typeof libranText !== 'string') {
+      metrics.recordError('validation_error', 'libranText is required and must be a string')
       return NextResponse.json(
         { error: 'libranText is required and must be a string' },
         { status: 400 }
@@ -19,6 +26,7 @@ export async function POST(request: NextRequest) {
     // Validate voice parameter
     const validVoices = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
     if (!validVoices.includes(voice)) {
+      metrics.recordError('validation_error', 'Invalid voice parameter')
       return NextResponse.json(
         { error: 'Invalid voice parameter' },
         { status: 400 }
@@ -28,11 +36,14 @@ export async function POST(request: NextRequest) {
     // Validate format parameter
     const validFormats = ['mp3', 'wav', 'flac']
     if (!validFormats.includes(format)) {
+      metrics.recordError('validation_error', 'Invalid format parameter')
       return NextResponse.json(
         { error: 'Invalid format parameter' },
         { status: 400 }
       )
     }
+
+    characterCount = libranText.length
 
     // Generate speech using OpenAI TTS
     const client = new OpenAI({ 
@@ -47,6 +58,14 @@ export async function POST(request: NextRequest) {
     });
 
     const audioBuffer = Buffer.from(await response.arrayBuffer());
+    success = true
+
+    // Estimate audio duration (rough calculation: ~150 words per minute for TTS)
+    const wordCount = libranText.split(/\s+/).length
+    audioDuration = (wordCount / 150) * 60 // seconds
+
+    // Record TTS metrics
+    metrics.recordTTSGeneration(audioDuration)
 
     // Set appropriate headers for audio streaming
     const headers = new Headers()
@@ -65,9 +84,11 @@ export async function POST(request: NextRequest) {
 
   } catch (error: any) {
     console.error('TTS error:', error)
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     
     // Handle specific OpenAI errors
     if (error.status === 429) {
+      metrics.recordError('openai_quota_error', 'OpenAI quota exceeded')
       return NextResponse.json(
         { 
           error: 'OpenAI quota exceeded. Please check your billing details or try again later.',
@@ -79,6 +100,7 @@ export async function POST(request: NextRequest) {
     }
     
     if (error.type === 'insufficient_quota') {
+      metrics.recordError('openai_quota_error', 'OpenAI insufficient quota')
       return NextResponse.json(
         { 
           error: 'OpenAI quota exceeded. Please check your billing details.',
@@ -89,9 +111,13 @@ export async function POST(request: NextRequest) {
       )
     }
     
+    metrics.recordError('tts_error', errorMessage)
     return NextResponse.json(
       { error: 'Speech generation failed' },
       { status: 500 }
     )
+  } finally {
+    const responseTime = Date.now() - startTime
+    metrics.recordRequest('tts', success, responseTime, characterCount)
   }
 }
