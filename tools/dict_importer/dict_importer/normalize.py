@@ -9,9 +9,9 @@ from unidecode import unidecode
 # Known hyphenated words that should be preserved
 KNOWN_HYPHENATED = {
     "self-", "non-", "pre-", "post-", "anti-", "pro-", "co-", "ex-",
-    "multi-", "sub-", "super-", "ultra-", "inter-", "intra-", "trans-",
+    "multi-", "sub-", "super-", "ultra-", "inter-", "intra-",
     "semi-", "pseudo-", "quasi-", "neo-", "proto-", "meta-", "para-",
-    "counter-", "over-", "under-", "out-", "up-", "down-", "off-",
+    "counter-", "over-", "out-", "up-", "down-", "off-",
     "on-", "in-", "out-", "up-", "down-", "off-", "on-", "in-"
 }
 
@@ -70,21 +70,23 @@ def is_hyphenated_word(word: str) -> bool:
 
 def restore_hyphenated_words(lines: List[str]) -> List[str]:
     """Restore hyphenated words that were split across lines."""
+    # Filter out empty lines first
+    non_empty_lines = [line.strip() for line in lines if line.strip()]
+    
     result = []
     i = 0
     
-    while i < len(lines):
-        line = lines[i].strip()
+    while i < len(non_empty_lines):
+        line = non_empty_lines[i]
         
         # Check if line ends with hyphen and next line starts with lowercase
         if (line.endswith('-') and 
-            i + 1 < len(lines) and 
-            lines[i + 1].strip() and
-            lines[i + 1].strip()[0].islower()):
+            i + 1 < len(non_empty_lines) and 
+            non_empty_lines[i + 1][0].islower()):
             
             # Get the word without hyphen
             word_part = line[:-1].strip()
-            next_line = lines[i + 1].strip()
+            next_line = non_empty_lines[i + 1]
             
             # Get first word of next line
             next_words = next_line.split()
@@ -92,7 +94,7 @@ def restore_hyphenated_words(lines: List[str]) -> List[str]:
                 first_word = next_words[0]
                 potential_word = word_part + first_word
                 
-                # Check if this should be joined
+                # Check if this should be joined (not a known hyphenated word)
                 if not is_hyphenated_word(word_part + '-' + first_word):
                     # Join the lines
                     joined = word_part + next_line
