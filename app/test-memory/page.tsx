@@ -214,11 +214,11 @@ export default function MemoryTestPage() {
                 <div className="space-y-2">
                   <h4 className="font-semibold text-gray-900">Quick Start:</h4>
                   <ol className="list-decimal list-inside space-y-1 ml-4 text-gray-600">
-                    <li>Click "Start Monitoring" to begin tracking</li>
-                    <li>Use "Auto Test" for rapid audio generation</li>
+                    <li>Click &quot;Start Monitoring&quot; to begin tracking</li>
+                    <li>Use &quot;Auto Test&quot; for rapid audio generation</li>
                     <li>Manually change text and generate audio</li>
                     <li>Watch the live stats and chart</li>
-                    <li>Click "Stop Monitoring" for detailed report</li>
+                    <li>Click &quot;Stop Monitoring&quot; for detailed report</li>
                   </ol>
                 </div>
                 

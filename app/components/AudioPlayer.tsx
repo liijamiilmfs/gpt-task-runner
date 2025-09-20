@@ -71,7 +71,7 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       log.debug('Text changed - cleaning up previous audio')
       cleanupAudio()
     }
-  }, [text, cleanupAudio])
+  }, [text, cleanupAudio, audioUrl])
 
   const generateAudio = async () => {
     if (!text.trim()) {
@@ -205,17 +205,22 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
 
     log.debug('Setting up audio event listeners')
 
+    // Capture ref values to avoid stale closure issues
+    const handleEnded = handleAudioEndedRef.current
+    const handlePlay = handleAudioPlayRef.current
+    const handlePause = handleAudioPauseRef.current
+
     // Add event listeners
-    audioElement.addEventListener('ended', handleAudioEndedRef.current)
-    audioElement.addEventListener('play', handleAudioPlayRef.current)
-    audioElement.addEventListener('pause', handleAudioPauseRef.current)
+    audioElement.addEventListener('ended', handleEnded)
+    audioElement.addEventListener('play', handlePlay)
+    audioElement.addEventListener('pause', handlePause)
 
     // Cleanup function
     return () => {
       log.debug('Removing audio event listeners')
-      audioElement.removeEventListener('ended', handleAudioEndedRef.current)
-      audioElement.removeEventListener('play', handleAudioPlayRef.current)
-      audioElement.removeEventListener('pause', handleAudioPauseRef.current)
+      audioElement.removeEventListener('ended', handleEnded)
+      audioElement.removeEventListener('play', handlePlay)
+      audioElement.removeEventListener('pause', handlePause)
     }
   }, [audioUrl]) // Re-setup when audio URL changes
 
