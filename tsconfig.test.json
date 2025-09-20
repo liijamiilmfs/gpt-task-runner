@@ -23,5 +23,8 @@
     "app/api/translate/**/*.ts",
     "app/api/speak/**/*.ts",
     "app/api/metrics/**/*.ts"
+  ],
+  "exclude": [
+    "test/vitest/**/*.ts"
   ]
 }

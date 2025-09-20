@@ -14,6 +14,10 @@
     "test:run": "node scripts/run-tests.js",
     "test": "npm run build:test && npm run test:run",
     "test:ci": "node scripts/test-ci.js",
+    "test:vitest": "vitest --config vitest.config.mjs",
+    "test:vitest:ui": "vitest --ui --config vitest.config.mjs",
+    "test:vitest:run": "vitest run --config vitest.config.mjs",
+    "test:importer": "node scripts/run-vitest.js",
     "dict:build": "node scripts/dict-build.js",
     "dict:import": "node scripts/dict-import.js",
     "dict:import-libran": "node scripts/dict-import-libran.js"
@@ -29,9 +33,11 @@
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
+    "@vitest/ui": "^3.2.4",
     "eslint": "^8.0.0",
     "eslint-config-next": "^14.0.0",
-    "typescript": "^5.2.0"
+    "typescript": "^5.2.0",
+    "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=18.0.0"
