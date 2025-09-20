@@ -248,11 +248,12 @@ class DictionaryBuilder:
 
 def build_dictionaries(
     parsed_pages: List[ParsedPage],
-    output_dir: Path,
+    output_dir: str,
     exclude_terms: Set[str] = None
 ) -> DictionaryBuild:
     """Build dictionaries from parsed pages."""
     builder = DictionaryBuilder(exclude_terms)
+    output_dir = Path(output_dir)
     
     # Process all pages
     for page in parsed_pages:

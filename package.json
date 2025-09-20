@@ -12,7 +12,11 @@
     "clean:test": "node -e \"require('fs').rmSync('dist-test', { recursive: true, force: true });\"",
     "build:test": "npm run clean:test && tsc -p tsconfig.test.json",
     "test:run": "node scripts/run-tests.js",
-    "test": "npm run build:test && npm run test:run"
+    "test": "npm run build:test && npm run test:run",
+    "test:ci": "node scripts/test-ci.js",
+    "dict:build": "node scripts/dict-build.js",
+    "dict:import": "node scripts/dict-import.js",
+    "dict:import-libran": "node scripts/dict-import-libran.js"
   },
   "dependencies": {
     "lucide-react": "^0.544.0",

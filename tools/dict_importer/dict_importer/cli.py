@@ -7,6 +7,9 @@ from typing import Optional
 import click
 
 from .parse_tables import parse_pdf_pages
+from .libran_parser import parse_libran_pdf_pages
+from .json_importer import JSONDictionaryImporter, import_json_dictionaries, create_sample_json_dictionary
+from .libran_json_importer import import_libran_dictionary
 from .build_dicts import build_dictionaries
 
 
@@ -54,9 +57,9 @@ def build(pdf: str, out: str, support: Optional[str] = None,
         click.echo(f"Exclude terms: {len(exclude_terms)} loaded")
     
     try:
-        # Parse main PDF
+        # Parse main PDF using Librán-specific parser
         click.echo("Parsing main PDF...")
-        parsed_pages = parse_pdf_pages(str(pdf_path))
+        parsed_pages = parse_libran_pdf_pages(str(pdf_path))
         click.echo(f"Parsed {len(parsed_pages)} pages from main PDF")
         
         # Parse support PDF if provided
@@ -104,6 +107,118 @@ def build(pdf: str, out: str, support: Optional[str] = None,
             click.echo(f"  {english} -> {libran}")
         
         click.echo(f"\nOutput files saved to: {output_dir}")
+        
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
+        raise
+
+
+@cli.command()
+@click.option('--ancient', required=True, help='Path to ancient JSON dictionary')
+@click.option('--modern', required=True, help='Path to modern JSON dictionary')
+@click.option('--out', required=True, help='Output directory for dictionaries')
+def import_json(ancient: str, modern: str, out: str):
+    """Import dictionaries from JSON files."""
+    
+    # Validate inputs
+    ancient_path = Path(ancient)
+    modern_path = Path(modern)
+    
+    if not ancient_path.exists():
+        click.echo(f"Error: Ancient JSON file not found: {ancient}", err=True)
+        return
+    
+    if not modern_path.exists():
+        click.echo(f"Error: Modern JSON file not found: {modern}", err=True)
+        return
+    
+    output_dir = Path(out)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    click.echo("Starting JSON dictionary import...")
+    click.echo(f"Ancient JSON: {ancient_path}")
+    click.echo(f"Modern JSON: {modern_path}")
+    click.echo(f"Output: {output_dir}")
+    
+    try:
+        # Import dictionaries
+        build_result = import_json_dictionaries(str(ancient_path), str(modern_path), str(output_dir))
+        
+        # Print summary
+        click.echo("\nImport completed successfully!")
+        click.echo(f"Ancient entries: {len(build_result.ancient_entries)}")
+        click.echo(f"Modern entries: {len(build_result.modern_entries)}")
+        
+        # Show first few entries as sanity check
+        click.echo("\nFirst 10 Ancient entries:")
+        for i, (english, libran) in enumerate(list(build_result.ancient_entries.items())[:10]):
+            click.echo(f"  {english} -> {libran}")
+        
+        click.echo("\nFirst 10 Modern entries:")
+        for i, (english, libran) in enumerate(list(build_result.modern_entries.items())[:10]):
+            click.echo(f"  {english} -> {libran}")
+        
+        click.echo(f"\nOutput files saved to: {output_dir}")
+        
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
+        raise
+
+
+@cli.command()
+@click.option('--json', required=True, help='Path to Librán dictionary JSON file')
+@click.option('--out', required=True, help='Output directory for dictionaries')
+def import_libran(json: str, out: str):
+    """Import the specialized Librán dictionary JSON format."""
+    
+    json_path = Path(json)
+    if not json_path.exists():
+        click.echo(f"Error: JSON file not found: {json}", err=True)
+        return
+    
+    output_dir = Path(out)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    
+    click.echo("Starting Librán dictionary import...")
+    click.echo(f"JSON file: {json_path}")
+    click.echo(f"Output: {output_dir}")
+    
+    try:
+        # Import the dictionary
+        build_result = import_libran_dictionary(str(json_path), str(output_dir))
+        
+        # Print summary
+        click.echo("\nImport completed successfully!")
+        click.echo(f"Ancient entries: {build_result.build_stats['total_ancient']}")
+        click.echo(f"Modern entries: {build_result.build_stats['total_modern']}")
+        click.echo(f"Excluded entries: {build_result.build_stats['excluded']}")
+        click.echo(f"Clusters processed: {build_result.build_stats['clusters_processed']}")
+        
+        # Show first few entries as sanity check
+        click.echo("\nFirst 10 Ancient entries:")
+        for i, (english, libran) in enumerate(list(build_result.ancient_entries.items())[:10]):
+            click.echo(f"  {english} -> {libran}")
+        
+        click.echo("\nFirst 10 Modern entries:")
+        for i, (english, libran) in enumerate(list(build_result.modern_entries.items())[:10]):
+            click.echo(f"  {english} -> {libran}")
+        
+        click.echo(f"\nOutput files saved to: {output_dir}")
+        
+    except Exception as e:
+        click.echo(f"Error: {e}", err=True)
+        raise
+
+
+@cli.command()
+@click.option('--format', type=click.Choice(['simple', 'detailed', 'nested']), default='simple', help='JSON format type')
+@click.option('--output', required=True, help='Output file path')
+def create_sample(format: str, output: str):
+    """Create a sample JSON dictionary file."""
+    
+    try:
+        create_sample_json_dictionary(output, format)
+        click.echo(f"Sample {format} JSON dictionary created: {output}")
         
     except Exception as e:
         click.echo(f"Error: {e}", err=True)

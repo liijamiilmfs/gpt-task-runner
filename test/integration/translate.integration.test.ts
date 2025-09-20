@@ -5,25 +5,25 @@ import { translate } from '../../lib/translator'
 
 describe('translate (integration)', () => {
   it('translates text using bundled dictionaries', () => {
-    const result = translate('Hello, world!', 'ancient')
+    const result = translate('balance, memory!', 'ancient')
 
-    assert.equal(result.libran, 'Salaam, dunya!')
+    assert.equal(result.libran, 'stílibror, memoror!')
     assert.equal(result.confidence, 1)
     assert.equal(result.wordCount, 2)
   })
 
   it('retains unknown words and calculates confidence', () => {
-    const result = translate('Hello unknown magic', 'ancient')
+    const result = translate('balance unknown magic', 'ancient')
 
-    assert.equal(result.libran, 'Salaam unknown sihr')
+    assert.equal(result.libran, 'stílibror unknown magic')
     assert.equal(result.wordCount, 3)
-    assert.equal(result.confidence, 2 / 3)
+    assert.equal(result.confidence, 1 / 3)
   })
 
   it('preserves spacing and punctuation in longer phrases', () => {
-    const text = 'The sky, the earth, and the sea.'
+    const text = 'The balance, the memory, and the love.'
     const result = translate(text, 'ancient')
 
-    assert.equal(result.libran, 'Al samaa, al ard, wa al bahr.')
+    assert.equal(result.libran, 'The stílibror, the memoror, etron the dramonor.')
   })
 })

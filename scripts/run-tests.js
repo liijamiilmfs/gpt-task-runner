@@ -28,6 +28,9 @@ function findTests(dir) {
 
 function main() {
   const testDir = 'dist-test/test';
+  const isCI = process.env.CI === 'true';
+  
+  console.log(`Running in CI: ${isCI}`);
   
   if (!fs.existsSync(testDir)) {
     console.log('No test directory found. Run "npm run build:test" first.');
@@ -48,7 +51,10 @@ function main() {
   try {
     const command = `node --test --test-reporter=spec ${testFiles.join(' ')}`;
     console.log(`Running: ${command}`);
-    execSync(command, { stdio: 'inherit' });
+    execSync(command, { 
+      stdio: 'inherit',
+      env: { ...process.env, CI: isCI ? 'true' : 'false' }
+    });
     console.log('All tests passed!');
   } catch (error) {
     console.error('Tests failed:', error.message);

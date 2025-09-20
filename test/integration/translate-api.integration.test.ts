@@ -42,14 +42,14 @@ describe('POST /api/translate', () => {
 
   it('returns a successful translation response', async () => {
     const request = {
-      json: async () => ({ text: 'Hello world', variant: 'ancient' })
+      json: async () => ({ text: 'balance memory', variant: 'ancient' })
     } as any
 
     const response = await POST(request)
     assert.equal(response.status, 200)
 
     const body = await response.json()
-    assert.equal(body.libran, 'Salaam dunya')
+    assert.equal(body.libran, 'stílibror memoror')
     assert.equal(body.confidence, 1)
     assert.equal(body.wordCount, 2)
     assert.equal(body.variant, 'ancient')
