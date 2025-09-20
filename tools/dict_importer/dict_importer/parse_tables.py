@@ -161,14 +161,24 @@ class TableParser:
         """Check if line is a table header."""
         line_lower = line.lower().strip()
         
-        # Check for header patterns
+        # Check for header patterns (exact matches)
         for pattern in self.column_patterns:
             if re.search(pattern, line_lower):
                 return True
         
-        # Check for common header indicators
-        header_indicators = ['english', 'ancient', 'modern', 'headword', 'word', 'translation']
-        return any(indicator in line_lower for indicator in header_indicators)
+        # Check for common header indicators - must be at start of line or after pipe
+        header_indicators = ['english', 'ancient', 'modern', 'headword']
+        for indicator in header_indicators:
+            if (line_lower.startswith(indicator) or 
+                f'| {indicator}' in line_lower or 
+                f' {indicator} |' in line_lower):
+                return True
+        
+        # Check for "word" but only if it's the first word
+        if line_lower.startswith('word '):
+            return True
+        
+        return False
     
     def parse_dual_table_layout(self, lines: List[str]) -> List[Entry]:
         """Parse dual-table layout with Ancient and Modern columns."""
@@ -223,9 +233,9 @@ class TableParser:
             len(line) < 3):
             return False
         
-        # Skip header lines (contain column names)
+        # Skip header lines (contain column names) - be more specific
         line_lower = line.lower()
-        if any(keyword in line_lower for keyword in ['english', 'ancient', 'modern', 'headword', 'translation']):
+        if any(keyword in line_lower for keyword in ['english', 'ancient', 'modern', 'headword']):
             return False
         
         # Look for word that starts with capital letter or is a valid entry
@@ -290,13 +300,58 @@ class TableParser:
             notes=notes
         )
     
+    def normalize_table_text(self, page_text: str) -> List[str]:
+        """Normalize table text while preserving line structure."""
+        lines = page_text.split('\n')
+        
+        # Apply hyphen restoration but preserve line structure
+        from .normalize import restore_hyphenated_words
+        normalized_lines = restore_hyphenated_words(lines)
+        
+        # Handle table-specific hyphenation where words span across table rows
+        # Look for patterns like "word- | data" followed by "tion | data"
+        i = 0
+        while i < len(normalized_lines) - 1:
+            current_line = normalized_lines[i].strip()
+            next_line = normalized_lines[i + 1].strip()
+            
+            # Check if current line ends with hyphen in first column and next line starts with continuation
+            if (current_line and next_line and 
+                '|' in current_line and '|' in next_line):
+                
+                current_parts = current_line.split('|')
+                next_parts = next_line.split('|')
+                
+                if (len(current_parts) >= 2 and len(next_parts) >= 2 and
+                    current_parts[0].strip().endswith('-') and
+                    next_parts[0].strip() and
+                    not next_parts[0].strip()[0].isupper()):
+                    
+                    # Join the first columns
+                    joined_first = current_parts[0].strip()[:-1] + next_parts[0].strip()
+                    
+                    # Create new line with joined first column
+                    new_line = joined_first + ' |' + '|'.join(current_parts[1:])
+                    normalized_lines[i] = new_line
+                    
+                    # Remove the next line
+                    normalized_lines.pop(i + 1)
+                    continue
+            
+            i += 1
+        
+        return normalized_lines
+
     def parse_page(self, page_text: str, page_number: int) -> ParsedPage:
         """Parse a page of text into entries."""
         lines = page_text.split('\n')
         parsed_page = ParsedPage(page_number=page_number, raw_text=page_text)
         
-        # Try to detect table clusters first (without normalization)
-        clusters = self.detect_dual_table_clusters(lines)
+        # Apply selective normalization to handle hyphenated words while preserving table structure
+        normalized_lines = self.normalize_table_text(page_text)
+        
+        # Try to detect table clusters first
+        clusters = self.detect_dual_table_clusters(normalized_lines)
         
         if clusters:
             # Parse each cluster
@@ -306,18 +361,18 @@ class TableParser:
                     parsed_page.add_entry(entry)
         else:
             # Try to find single table structure
-            column_info = self.parse_header(lines)
+            column_info = self.parse_header(normalized_lines)
             
             if column_info:
                 if column_info['table_type'] == 'dual':
                     # Parse as dual-table layout
-                    entries = self.parse_dual_table_layout(lines)
+                    entries = self.parse_dual_table_layout(normalized_lines)
                     for entry in entries:
                         entry.source_page = page_number
                         parsed_page.add_entry(entry)
                 elif column_info['table_type'] == 'single':
                     # Parse as single-table layout
-                    entries = self.parse_single_table_layout(lines)
+                    entries = self.parse_single_table_layout(normalized_lines)
                     for entry in entries:
                         entry.source_page = page_number
                         parsed_page.add_entry(entry)
@@ -325,16 +380,14 @@ class TableParser:
                     # Fallback: parse as structured table
                     start_line = column_info['header_line'] + 1
                     
-                    for i, line in enumerate(lines[start_line:], start_line):
+                    for i, line in enumerate(normalized_lines[start_line:], start_line):
                         if self.is_entry_line(line):
                             entry = self.parse_entry_line(line, column_info)
                             if entry:
                                 entry.source_page = page_number
                                 parsed_page.add_entry(entry)
             else:
-                # Fallback: parse as unstructured text (with normalization)
-                normalized_text = normalize_text(page_text)
-                normalized_lines = normalized_text.split('\n')
+                # Fallback: parse as unstructured text
                 self.parse_unstructured_text(normalized_lines, parsed_page)
         
         return parsed_page
