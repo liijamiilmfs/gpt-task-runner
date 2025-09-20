@@ -85,7 +85,8 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
     }
 
     // Create new abort controller for this request
-    abortControllerRef.current = new AbortController()
+    const currentController = new AbortController()
+    abortControllerRef.current = currentController
 
     log.info('Starting audio generation', { textLength: text.length })
     setIsGenerating(true)
@@ -136,9 +137,11 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       log.error('Audio generation error', { error: error instanceof Error ? error.message : 'Unknown error' })
       alert('Audio generation failed. Please try again.')
     } finally {
-      setIsGenerating(false)
-      onLoadingChange(false)
-      abortControllerRef.current = null
+      if (abortControllerRef.current === currentController) {
+        setIsGenerating(false)
+        onLoadingChange(false)
+        abortControllerRef.current = null
+      }
     }
   }
 
