@@ -19,6 +19,9 @@
   "include": [
     "test/**/*.ts",
     "lib/translator/**/*.ts",
-    "app/api/translate/**/*.ts"
+    "lib/metrics.ts",
+    "app/api/translate/**/*.ts",
+    "app/api/speak/**/*.ts",
+    "app/api/metrics/**/*.ts"
   ]
 }

@@ -27,6 +27,11 @@ describe('POST /api/translate', () => {
         return originalLoad(translatorPath, parent, isMain)
       }
 
+      if (request === '@/lib/metrics') {
+        const metricsPath = `${process.cwd()}/dist-test/lib/metrics.js`
+        return originalLoad(metricsPath, parent, isMain)
+      }
+
       return originalLoad(request, parent, isMain)
     }
 
