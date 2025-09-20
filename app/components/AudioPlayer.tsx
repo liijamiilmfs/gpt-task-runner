@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Play, Pause, Download, Volume2, VolumeX } from 'lucide-react'
 
 interface AudioPlayerProps {
@@ -16,6 +16,15 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
   const [volume, setVolume] = useState(1)
   const [isMuted, setIsMuted] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null)
+
+  // Cleanup audio URLs on component unmount
+  useEffect(() => {
+    return () => {
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl)
+      }
+    }
+  }, [audioUrl])
 
   const generateAudio = async () => {
     if (!text.trim()) return
@@ -41,6 +50,12 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       }
 
       const blob = await response.blob()
+      
+      // Clean up previous audio URL to prevent memory leaks
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl)
+      }
+      
       const url = URL.createObjectURL(blob)
       setAudioUrl(url)
       onAudioGenerated(url)
@@ -106,6 +121,15 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
   const handleAudioEnded = () => {
     setIsPlaying(false)
   }
+
+  // Clear audio when text changes
+  useEffect(() => {
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl)
+      setAudioUrl('')
+      setIsPlaying(false)
+    }
+  }, [text, audioUrl])
 
   return (
     <div className="space-y-4">

@@ -29,6 +29,12 @@ class DictionaryBuilder:
             'variants': 0,
             'pages_processed': 0
         }
+        
+        # Internal tracking
+        self.ancient_entries = {}
+        self.modern_entries = {}
+        self.excluded_entries = []
+        self.variant_entries = []
     
     def should_exclude(self, entry: Entry) -> Tuple[bool, str]:
         """Check if entry should be excluded."""
@@ -46,6 +52,10 @@ class DictionaryBuilder:
         # Exclude Comoară terms (if identifiable)
         if 'comoară' in english_lower or 'treasure' in english_lower:
             return True, "Comoară term"
+        
+        # Exclude emptys
+        if not entry.english or entry.english.strip() == "":
+            return True, "empty"
         
         # Exclude very short entries
         if len(entry.english) < 2:
@@ -69,14 +79,16 @@ class DictionaryBuilder:
             if entry.notes and 'standard' in entry.notes.lower():
                 return entry
         
-        # Choose most frequent (if we had frequency data)
-        # For now, choose the first complete entry
-        for entry in entries:
-            if entry.is_complete():
-                return entry
+        # Choose by confidence score (higher is better)
+        best_entry = max(entries, key=lambda e: e.confidence)
         
-        # Fallback to first entry
-        return entries[0]
+        # If confidence is tied, choose the first complete entry
+        if best_entry.confidence == entries[0].confidence:
+            for entry in entries:
+                if entry.is_complete():
+                    return entry
+        
+        return best_entry
     
     def process_entry(self, entry: Entry) -> None:
         """Process a single entry."""
@@ -85,7 +97,8 @@ class DictionaryBuilder:
         # Check if should be excluded
         should_exclude, reason = self.should_exclude(entry)
         if should_exclude:
-            self.build.add_excluded(entry, reason)
+            entry.notes = f"EXCLUDED: {reason}"
+            self.excluded_entries.append(entry)
             self.stats['excluded_entries'] += 1
             return
         
@@ -96,8 +109,18 @@ class DictionaryBuilder:
         if english_key in self.conflicts:
             self.conflicts[english_key].append(entry)
             self.stats['conflicts'] += 1
+            # Add all entries for this key to variants
+            self.variants[english_key] = self.conflicts[english_key].copy()
         else:
             self.conflicts[english_key] = [entry]
+            # Only add to dictionaries if no conflicts
+            if entry.has_ancient():
+                self.ancient_entries[english_key] = entry.ancient
+                self.stats['ancient_entries'] += 1
+            
+            if entry.has_modern():
+                self.modern_entries[english_key] = entry.modern
+                self.stats['modern_entries'] += 1
     
     def process_page(self, page: ParsedPage) -> None:
         """Process a parsed page."""
@@ -106,8 +129,14 @@ class DictionaryBuilder:
         for entry in page.entries:
             self.process_entry(entry)
     
-    def build_dictionaries(self) -> None:
+    def build_dictionaries(self) -> DictionaryBuild:
         """Build final dictionaries from processed entries."""
+        # Reset counters to avoid double counting
+        self.stats['ancient_entries'] = 0
+        self.stats['modern_entries'] = 0
+        self.ancient_entries.clear()
+        self.modern_entries.clear()
+        
         # Resolve conflicts
         for english_key, entries in self.conflicts.items():
             if len(entries) > 1:
@@ -116,32 +145,119 @@ class DictionaryBuilder:
                 
                 # Add primary entry to dictionaries
                 if primary_entry.has_ancient():
-                    self.build.add_ancient(english_key, primary_entry.ancient)
+                    self.ancient_entries[english_key] = primary_entry.ancient
                     self.stats['ancient_entries'] += 1
                 
                 if primary_entry.has_modern():
-                    self.build.add_modern(english_key, primary_entry.modern)
+                    self.modern_entries[english_key] = primary_entry.modern
                     self.stats['modern_entries'] += 1
                 
                 # Add other entries as variants
                 for entry in entries:
                     if entry != primary_entry:
-                        self.build.add_variant(entry)
+                        self.variant_entries.append(entry)
                         self.stats['variants'] += 1
             else:
                 # Single entry
                 entry = entries[0]
                 
                 if entry.has_ancient():
-                    self.build.add_ancient(english_key, entry.ancient)
+                    self.ancient_entries[english_key] = entry.ancient
                     self.stats['ancient_entries'] += 1
                 
                 if entry.has_modern():
-                    self.build.add_modern(english_key, entry.modern)
+                    self.modern_entries[english_key] = entry.modern
                     self.stats['modern_entries'] += 1
         
-        # Update build stats
+        # Update build object
+        self.build.ancient_entries = self.ancient_entries
+        self.build.modern_entries = self.modern_entries
+        self.build.excluded_entries = self.excluded_entries
+        self.build.variant_entries = self.variant_entries
         self.build.build_stats = self.stats.copy()
+        
+        # Add missing keys for compatibility
+        self.build.build_stats['total_ancient'] = self.stats['ancient_entries']
+        self.build.build_stats['total_modern'] = self.stats['modern_entries']
+        
+        return self.build
+    
+    # Additional methods for enhanced conflict resolution tests
+    
+    def get_conflicts(self) -> Dict[str, List[Entry]]:
+        """Get all conflicts."""
+        return dict(self.conflicts)
+    
+    def get_excluded_entries(self) -> List[Entry]:
+        """Get all excluded entries."""
+        return self.excluded_entries
+    
+    def get_variants(self) -> Dict[str, List[Entry]]:
+        """Get all variants."""
+        return dict(self.variants)
+    
+    def resolve_conflicts(self) -> None:
+        """Resolve all conflicts."""
+        for english_key, entries in self.conflicts.items():
+            if len(entries) > 1:
+                primary_entry = self.resolve_conflict(english_key, entries)
+                # Update the conflicts dict with resolved entry
+                self.conflicts[english_key] = [primary_entry]
+    
+    def create_variants(self) -> List[Entry]:
+        """Create variant entries for unresolved conflicts."""
+        variants = []
+        for english_key, entries in self.conflicts.items():
+            if len(entries) > 1:
+                # Keep all entries as variants
+                variants.extend(entries)
+        return variants
+    
+    def merge_entries(self, entry1: Entry, entry2: Entry) -> Entry:
+        """Merge two entries."""
+        merged = Entry(
+            english=entry1.english,
+            ancient=entry1.ancient or entry2.ancient,
+            modern=entry1.modern or entry2.modern,
+            pos=entry1.pos or entry2.pos,
+            notes=entry1.notes or entry2.notes,
+            sacred=entry1.sacred or entry2.sacred,
+            source_page=entry1.source_page or entry2.source_page,
+            confidence=max(entry1.confidence, entry2.confidence)
+        )
+        return merged
+    
+    def filter_low_confidence(self, threshold: float) -> None:
+        """Filter out entries with low confidence."""
+        filtered_conflicts = {}
+        for english_key, entries in self.conflicts.items():
+            filtered_entries = [e for e in entries if e.confidence >= threshold]
+            if filtered_entries:
+                filtered_conflicts[english_key] = filtered_entries
+        self.conflicts = defaultdict(list, filtered_conflicts)
+    
+    def filter_incomplete_entries(self) -> None:
+        """Filter out incomplete entries."""
+        filtered_conflicts = {}
+        for english_key, entries in self.conflicts.items():
+            filtered_entries = [e for e in entries if e.is_complete()]
+            if filtered_entries:
+                filtered_conflicts[english_key] = filtered_entries
+        self.conflicts = defaultdict(list, filtered_conflicts)
+    
+    def filter_placeholder_entries(self) -> None:
+        """Filter out placeholder entries."""
+        placeholders = {'—', '-', '...', 'TBD', 'TODO', 'N/A'}
+        filtered_conflicts = {}
+        for english_key, entries in self.conflicts.items():
+            filtered_entries = []
+            for entry in entries:
+                if (entry.ancient not in placeholders and 
+                    entry.modern not in placeholders):
+                    filtered_entries.append(entry)
+            if filtered_entries:
+                filtered_conflicts[english_key] = filtered_entries
+        self.conflicts = defaultdict(list, filtered_conflicts)
     
     def save_dictionaries(self, output_dir: Path) -> None:
         """Save dictionaries to JSON files."""

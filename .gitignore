@@ -9,6 +9,7 @@ out/
 dist/
 dist-test/
 build/
+coverage/
 
 # Environment variables
 .env
