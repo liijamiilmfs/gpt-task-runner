@@ -1,0 +1,86 @@
+English,Ancient,Modern,POS,Notes,Page,Status
+Destiny,fatorë,,,EXCLUDED: In exclude list,4,EXCLUDED
+Destiny,fatë,,,EXCLUDED: In exclude list,4,EXCLUDED
+Treasure,CoamárorComoară,,,EXCLUDED: Comoară term,5,EXCLUDED
+Blessing,benorë,,,EXCLUDED: In exclude list,39,EXCLUDED
+Curse,malnë,,,EXCLUDED: In exclude list,40,EXCLUDED
+Curse,maledictiorë,,,EXCLUDED: In exclude list,40,EXCLUDED
+Fate,fatorë,,,EXCLUDED: In exclude list,61,EXCLUDED
+Fortune,fortunë,,,EXCLUDED: In exclude list,62,EXCLUDED
+God,devarë,,,EXCLUDED: In exclude list,64,EXCLUDED
+Heaven,caelëa,,,EXCLUDED: In exclude list,66,EXCLUDED
+Trickster-god,csalóCsalonorDivine,,,EXCLUDED: Divine/religious term,79,EXCLUDED
+Balance,StílibrorHigher,,,,39,VARIANT
+Dream,somnë,,,,30,VARIANT
+Joy,bucirë,,,,67,VARIANT
+Mercy,milëa,,,,69,VARIANT
+Clan,rë,,,,9,VARIANT
+Enemy,hostrë,,,,10,VARIANT
+Hero,rë,,,,10,VARIANT
+Tribe,tribeë,,,,13,VARIANT
+Tribe,tribrë,,,,13,VARIANT
+Boar,goltë,,,,14,VARIANT
+Crow,vë,,,,14,VARIANT
+Forest,silvrë,,,,16,VARIANT
+Horse,lóTotem,,,,40,VARIANT
+Serpent,serpë,,,,17,VARIANT
+Wolf,úlfrTotem,,,,43,VARIANT
+Cloud,nubesrë,,,,19,VARIANT
+Desert,desertrë,,,,19,VARIANT
+Earthquake,terraemotrë,,,,19,VARIANT
+Fog,nebulrë,,,,20,VARIANT
+Hill,collrë,,,,20,VARIANT
+Ice,glaciesrë,,,,20,VARIANT
+Lake,lacrë,,,,21,VARIANT
+Lightning,fulgurrë,,,,21,VARIANT
+Meadow,pratrë,,,,21,VARIANT
+Ocean,oceanrë,,,,21,VARIANT
+Rain,pluvirë,,,,22,VARIANT
+Sea,marrë,,,,22,VARIANT
+Snow,nixrë,,,,22,VARIANT
+Storm,tempestasrë,,,,23,VARIANT
+Valley,vallrë,,,,23,VARIANT
+Volcano,vulcanrë,,,,23,VARIANT
+Comet,cometesrë,,,,24,VARIANT
+Galaxy,galaxiasrë,,,,24,VARIANT
+Moon,lunrë,,,,25,VARIANT
+Star,stellrë,,,,26,VARIANT
+Bridge,ponë,,,,29,VARIANT
+City,urbsrë,,,,30,VARIANT
+Crown,onë,,,,30,VARIANT
+Gate,portë,,,,31,VARIANT
+Justice,iustitirë,,,,32,VARIANT
+Knife,culë,,,,32,VARIANT
+Law,lexrë,,,,33,VARIANT
+Market,forrë,,,,33,VARIANT
+Ship,navarë,,,,34,VARIANT
+Song,songë,,,,34,VARIANT
+Song,songorë,,,,34,VARIANT
+Town,oppidrë,,,,35,VARIANT
+Village,villrë,,,,36,VARIANT
+Siege,obsidiorë,,,,37,VARIANT
+Chant,cantrë,,,,39,VARIANT
+Dance,danzë,,,,58,VARIANT
+Herb,iarbë,,,,66,VARIANT
+Oracle,oraculrë,,,,41,VARIANT
+Order,ordë,,,,72,VARIANT
+Prayer,oratiorë,,,,41,VARIANT
+Prophecy,oracaë,,,,42,VARIANT
+Ritual,ritrë,,,,42,VARIANT
+Rope,funë,,,,75,VARIANT
+Sacrifice,sacrificirë,,,,42,VARIANT
+Truth,veritaë,,,,79,VARIANT
+Glory,glorirë,,,,44,VARIANT
+Honor,honorrë,,,,45,VARIANT
+Strength,fortitudorë,,,,46,VARIANT
+Wisdom,sapientirë,,,,47,VARIANT
+Wisdom,intelëa,,,,82,VARIANT
+Birth,nativë,,,,57,VARIANT
+Chaos,abyssë,,,,57,VARIANT
+Death,mortrë,,,,58,VARIANT
+Death,morëa,,,,59,VARIANT
+Festival,festirë,,,,61,VARIANT
+Giant,risëa,,,,64,VARIANT
+Harbor,porthë,,,,65,VARIANT
+Oath,heitë,,,,71,VARIANT
+Voice,voxë,,,,81,VARIANT
