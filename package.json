@@ -10,7 +10,7 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "clean:test": "node -e \"require('fs').rmSync('dist-test', { recursive: true, force: true });\"",
-    "build:test": "npm run clean:test && tsc -p tsconfig.test.json",
+    "build:test": "npm run clean:test && tsc -p tsconfig.test.json && tsc-alias -p tsconfig.test.json",
     "test:run": "node scripts/run-tests.js",
     "test": "npm run build:test && npm run test:run",
     "test:ci": "node scripts/test-ci.js",
@@ -28,18 +28,21 @@
     "next": "^14.0.0",
     "openai": "^4.20.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
-    "@vitest/coverage-v8": "^3.2.4",
-    "@vitest/ui": "^3.2.4",
+    "@vitest/coverage-v8": "^2.1.9",
+    "@vitest/ui": "^2.1.9",
     "eslint": "^8.0.0",
     "eslint-config-next": "^14.0.0",
+    "tsc-alias": "^1.8.16",
     "typescript": "^5.2.0",
-    "vitest": "^3.2.4"
+    "vitest": "^2.1.9"
   },
   "engines": {
     "node": ">=18.0.0"
