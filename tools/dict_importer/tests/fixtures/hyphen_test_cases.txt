@@ -1,0 +1,103 @@
+# Hyphen Restoration Test Cases
+# This file contains test cases for hyphen restoration functionality
+
+# Soft hyphens (should be joined across line breaks)
+soft-hyphen-1:
+hello-
+world
+expected: helloworld
+
+soft-hyphen-2:
+trans-
+lation
+expected: translation
+
+soft-hyphen-3:
+under-
+standing
+expected: understanding
+
+soft-hyphen-4:
+re-
+construction
+expected: reconstruction
+
+# Lexical hyphens (should be preserved)
+lexical-hyphen-1:
+self-aware
+expected: self-aware
+
+lexical-hyphen-2:
+non-existent
+expected: non-existent
+
+lexical-hyphen-3:
+pre-war
+expected: pre-war
+
+lexical-hyphen-4:
+co-operation
+expected: co-operation
+
+# Mixed cases
+mixed-1:
+self-
+aware
+expected: self-aware
+
+mixed-2:
+non-
+existent
+expected: non-existent
+
+mixed-3:
+hello-
+world
+expected: helloworld
+
+# Complex cases
+complex-1:
+multi-
+purpose
+expected: multi-purpose
+
+complex-2:
+under-
+standing
+expected: understanding
+
+complex-3:
+pre-
+determined
+expected: pre-determined
+
+# Edge cases
+edge-1:
+word-
+expected: word-
+
+edge-2:
+-
+word
+expected: -word
+
+edge-3:
+word-
+word
+expected: word-word
+
+# Real dictionary examples
+dictionary-1:
+trans-
+lation
+expected: translation
+
+dictionary-2:
+under-
+standing
+expected: understanding
+
+dictionary-3:
+re-
+construction
+expected: reconstruction
