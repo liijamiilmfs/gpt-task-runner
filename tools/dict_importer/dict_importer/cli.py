@@ -1,8 +1,10 @@
 """CLI interface for dictionary importer."""
 
-import click
+import shutil
 from pathlib import Path
-from typing import Set, Optional
+from typing import Optional
+
+import click
 
 from .parse_tables import parse_pdf_pages
 from .build_dicts import build_dictionaries
@@ -71,6 +73,19 @@ def build(pdf: str, out: str, support: Optional[str] = None,
         # Build dictionaries
         click.echo("Building dictionaries...")
         build_result = build_dictionaries(parsed_pages, output_dir, exclude_terms)
+
+        if dump_csv:
+            dump_path = Path(dump_csv)
+            dump_path.parent.mkdir(parents=True, exist_ok=True)
+            source_csv = output_dir / "ALL_ROWS.csv"
+            if source_csv.exists():
+                shutil.copy2(source_csv, dump_path)
+                click.echo(f"ALL_ROWS.csv copied to: {dump_path}")
+            else:
+                click.echo(
+                    "Warning: ALL_ROWS.csv was not generated; cannot copy to dump location.",
+                    err=True,
+                )
         
         # Print summary
         click.echo("\nBuild completed successfully!")
