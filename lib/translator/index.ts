@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { log } from '../logger';
 
 export interface TranslationResult {
   libran: string;
@@ -20,8 +21,17 @@ export interface TranslateOptions {
 // Load dictionary from file
 function loadDictionary(variant: Variant): Dictionary {
   const filePath = path.join(process.cwd(), 'lib', 'translator', 'dictionaries', `${variant}.json`);
-  const data = fs.readFileSync(filePath, 'utf-8');
-  return JSON.parse(data);
+  log.debug('Loading dictionary', { variant, filePath });
+  
+  try {
+    const data = fs.readFileSync(filePath, 'utf-8');
+    const dictionary = JSON.parse(data);
+    log.info('Dictionary loaded successfully', { variant, entryCount: Object.keys(dictionary).length });
+    return dictionary;
+  } catch (error) {
+    log.errorWithContext(error as Error, 'Dictionary loading', { variant, filePath });
+    throw error;
+  }
 }
 
 // Tokenize text while preserving punctuation
@@ -119,11 +129,15 @@ function fixSpacing(tokens: Array<{ type: string, value: string, original: strin
 }
 
 export function translate(text: string, variant: Variant, options: TranslateOptions = {}): TranslationResult {
+  const startTime = Date.now();
+  log.debug('Starting translation', { textLength: text.length, variant, hasCustomDictionary: !!options.dictionary });
+  
   const dictionary = options.dictionary ?? loadDictionary(variant);
   const tokens = tokenize(text);
   const translatedTokens = [];
   let translatedWordCount = 0;
   let totalWordCount = 0;
+  const unknownWords: string[] = [];
   
   for (const token of tokens) {
     if (token.type === 'word') {
@@ -140,9 +154,12 @@ export function translate(text: string, variant: Variant, options: TranslateOpti
         translated = applySoundShifts(translated, variant);
         translated = preserveCase(token.original, translated);
         translatedWordCount++;
+        log.debug('Word translated', { original: token.value, translated, variant });
       } else {
         // Keep original if no translation found
         translated = token.original;
+        unknownWords.push(token.value);
+        log.debug('Word not found in dictionary', { word: token.value, variant });
       }
       
       translatedTokens.push({ ...token, value: translated });
@@ -153,6 +170,17 @@ export function translate(text: string, variant: Variant, options: TranslateOpti
   
   const libran = fixSpacing(translatedTokens);
   const confidence = totalWordCount > 0 ? translatedWordCount / totalWordCount : 0;
+  const duration = Date.now() - startTime;
+  
+  log.info('Translation completed', {
+    textLength: text.length,
+    variant,
+    totalWords: totalWordCount,
+    translatedWords: translatedWordCount,
+    unknownWords: unknownWords.length,
+    confidence,
+    duration
+  });
   
   return {
     libran,
