@@ -49,7 +49,7 @@ describe('POST /api/translate', () => {
     assert.equal(response.status, 200)
 
     const body = await response.json()
-    assert.equal(body.libran, 'stílibror memoror')
+    assert.equal(body.libran, 'stílibror memorior')
     assert.equal(body.confidence, 1)
     assert.equal(body.wordCount, 2)
     assert.equal(body.variant, 'ancient')

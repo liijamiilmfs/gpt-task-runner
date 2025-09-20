@@ -1,63 +1,63 @@
 # Librán Dictionary Import Report
 
 **Import Date**: C:\Projects\Worldbuilding\english-to-libran-text-to-voice\tools\dict_importer
-**Total Ancient Entries**: 142
-**Total Modern Entries**: 482
-**Excluded Entries**: 371
+**Total Ancient Entries**: 579
+**Total Modern Entries**: 916
+**Excluded Entries**: 13
 **Clusters Processed**: 12
 
 ## Sample Ancient Entries
+- english → AncientLibránor
 - balance → Stílibror
-- destiny → Fator
-- memory → Memoror
+- destiny → fator
+- memory → memorior
 - treasure → Coamáror
-- anger → Íror
-- fear → Felonor
-- hope → Speror
-- love → Dramonor
-- vision → ioror
-- clan → ron
-- enemy → hostron
-- hero → ron
-- kingdom → regnron
-- spirit → Animaor
-- tribe → tribron
-- forest → silvron
-- canyon → faucesron
-- cloud → nubesron
-- desert → desertron
-- earthquake → terraemotron
+- justice-rite → iustitior
+- cunning-lore → șiretenior
+- secret-path → secretor
+- taboo-path → tabor
+- justice-mark → iustitior
+- truth-lore → veritasor
+- destiny-lore → fator
+- cunning-mark → șiretenior
+- truth-path → veritasor
+- mercy-path → misericordior
+- silence-rite → silentior
+- memory-rite → memorior
+- taboo-mark → tabor
+- truth-mark → veritasor
+- oath-path → iusiurandor
 
 ## Sample Modern Entries
+- english → ModernLibrána
 - balance → stílibra
-- destiny → fata
+- destiny → fatë
 - flame → flama
-- memory → memira
+- memory → memorië
 - treasure → Coamára
 - void → tómara
-- anger → íra
-- courage → ëa
-- dream → ira
-- envy → invida
-- hope → spera
-- joy → bucorë
-- love → drama
-- mercy → milëa
-- vision → iora
-- ancestor → ancesa
-- ancestor-shade → manorë
-- ancestral kin → oskir
-- archer → sagita
-- clan → ra
+- justice-rite → iustitië
+- cunning-lore → șiretenië
+- secret-path → secretë
+- taboo-path → tabë
+- justice-mark → iustitië
+- truth-lore → veritasë
+- destiny-lore → fatë
+- cunning-mark → șiretenië
+- truth-path → veritasë
+- mercy-path → misericordië
+- silence-rite → silentië
+- memory-rite → memorië
+- taboo-mark → tabë
 
 ## Excluded Entries
-- Flame: EXCLUDED: No ancient translation
-- Shadow: EXCLUDED: No ancient translation
-- Stone: EXCLUDED: No ancient translation
-- Void: EXCLUDED: No ancient translation
-- Courage: EXCLUDED: No ancient translation
-- Courage: EXCLUDED: No ancient translation
-- Dream: EXCLUDED: No ancient translation
-- Envy: EXCLUDED: No ancient translation
-- Faith: EXCLUDED: No ancient translation
-- Joy: EXCLUDED: No ancient translation
+- Sorrow: EXCLUDED: Invalid Librán word
+- Sorrow-rite: EXCLUDED: Invalid Librán word
+- Sorrow-lore: EXCLUDED: Invalid Librán word
+- Sorrow: EXCLUDED: Invalid Librán word
+- Sorrow-path: EXCLUDED: Invalid Librán word
+- Sorrow-mark: EXCLUDED: Invalid Librán word
+- Fate-sisters: EXCLUDED: Invalid Librán word
+- Father: EXCLUDED: Invalid Librán word
+- Stone-path: EXCLUDED: Invalid Librán word
+- Stone-rite: EXCLUDED: Invalid Librán word
