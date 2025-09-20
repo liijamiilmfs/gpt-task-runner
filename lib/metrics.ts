@@ -3,6 +3,8 @@
  * Tracks requests, cache hits, characters processed, and other system metrics
  */
 
+import { log } from './logger'
+
 export interface MetricsData {
   // Request metrics
   totalRequests: number
@@ -125,6 +127,16 @@ export class MetricsCollector {
 
     // Update uptime
     this.metrics.uptime = Date.now() - this.startTime
+
+    // Log request metrics
+    log.debug('Request recorded', {
+      type,
+      success,
+      responseTime,
+      characterCount,
+      totalRequests: this.metrics.totalRequests,
+      successRate: this.metrics.successfulRequests / this.metrics.totalRequests
+    })
   }
 
   /**
@@ -148,6 +160,12 @@ export class MetricsCollector {
     this.metrics.errorCounts[errorType] = (this.metrics.errorCounts[errorType] || 0) + 1
     this.metrics.lastError = errorMessage
     this.metrics.lastErrorTime = new Date().toISOString()
+    
+    log.warn('Error recorded', {
+      errorType,
+      errorMessage,
+      totalErrors: Object.values(this.metrics.errorCounts).reduce((a, b) => a + b, 0)
+    })
   }
 
   /**

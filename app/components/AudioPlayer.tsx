@@ -3,6 +3,14 @@
 import { useState, useRef, useEffect } from 'react'
 import { Play, Pause, Download, Volume2, VolumeX } from 'lucide-react'
 
+// Client-side logging utility
+const log = {
+  info: (message: string, meta?: any) => console.log(`[AudioPlayer] ${message}`, meta),
+  warn: (message: string, meta?: any) => console.warn(`[AudioPlayer] ${message}`, meta),
+  error: (message: string, meta?: any) => console.error(`[AudioPlayer] ${message}`, meta),
+  debug: (message: string, meta?: any) => console.debug(`[AudioPlayer] ${message}`, meta)
+}
+
 interface AudioPlayerProps {
   text: string
   onAudioGenerated: (url: string) => void
@@ -27,8 +35,12 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
   }, [audioUrl])
 
   const generateAudio = async () => {
-    if (!text.trim()) return
+    if (!text.trim()) {
+      log.warn('Attempted to generate audio with empty text')
+      return
+    }
 
+    log.info('Starting audio generation', { textLength: text.length })
     setIsGenerating(true)
     onLoadingChange(true)
 
@@ -46,28 +58,33 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       })
 
       if (!response.ok) {
+        log.error('Audio generation failed', { status: response.status, statusText: response.statusText })
         throw new Error('Audio generation failed')
       }
 
       const blob = await response.blob()
-      
+      log.debug('Audio blob received', { size: blob.size, type: blob.type })
+
       // Clean up previous audio URL to prevent memory leaks
       if (audioUrl) {
         URL.revokeObjectURL(audioUrl)
+        log.debug('Previous audio URL revoked')
       }
-      
+
       const url = URL.createObjectURL(blob)
       setAudioUrl(url)
       onAudioGenerated(url)
+      log.info('Audio generated successfully', { url, size: blob.size })
 
       // Auto-play the generated audio
       if (audioRef.current) {
         audioRef.current.src = url
         audioRef.current.play()
         setIsPlaying(true)
+        log.debug('Audio playback started')
       }
     } catch (error) {
-      console.error('Audio generation error:', error)
+      log.error('Audio generation error', { error: error instanceof Error ? error.message : 'Unknown error' })
       alert('Audio generation failed. Please try again.')
     } finally {
       setIsGenerating(false)
