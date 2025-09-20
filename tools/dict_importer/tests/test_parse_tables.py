@@ -28,8 +28,8 @@ def test_split_into_columns():
     boundaries = [7, 15]
     columns = parser.split_into_columns(line, boundaries)
     assert len(columns) == 3
-    assert columns[0] == "hello |"
-    assert columns[1] == "world |"
+    assert columns[0] == "hello"
+    assert columns[1] == "world"
     assert columns[2] == "test"
 
 
@@ -78,3 +78,135 @@ def test_parse_unstructured_entry():
     assert entry.ancient == "world"
     assert entry.modern == "test"
     assert entry.notes == "noun"
+
+
+def test_detect_table_type():
+    """Test table type detection."""
+    parser = TableParser()
+    
+    # Dual table
+    columns = ["English", "Ancient", "Modern"]
+    table_type = parser.detect_table_type(columns)
+    assert table_type == "dual"
+    
+    # Single table (ancient only)
+    columns = ["English", "Ancient"]
+    table_type = parser.detect_table_type(columns)
+    assert table_type == "single"
+    
+    # Single table (modern only)
+    columns = ["English", "Modern"]
+    table_type = parser.detect_table_type(columns)
+    assert table_type == "single"
+    
+    # Unknown table
+    columns = ["Word", "Meaning"]
+    table_type = parser.detect_table_type(columns)
+    assert table_type == "unknown"
+
+
+def test_is_table_header():
+    """Test table header detection."""
+    parser = TableParser()
+    
+    assert parser.is_table_header("English | Ancient | Modern") == True
+    assert parser.is_table_header("English    Ancient    Modern") == True
+    assert parser.is_table_header("Hello world") == False
+    assert parser.is_table_header("") == False
+
+
+def test_parse_dual_table_layout():
+    """Test dual table layout parsing."""
+    parser = TableParser()
+    
+    lines = [
+        "English | Ancient | Modern",
+        "hello   | salaam  | marhaba",
+        "world   | dunya   | alam"
+    ]
+    
+    entries = parser.parse_dual_table_layout(lines)
+    
+    assert len(entries) == 2
+    assert entries[0].english == "hello"
+    assert entries[0].ancient == "salaam"
+    assert entries[0].modern == "marhaba"
+    assert entries[1].english == "world"
+    assert entries[1].ancient == "dunya"
+    assert entries[1].modern == "alam"
+
+
+def test_parse_single_table_layout():
+    """Test single table layout parsing."""
+    parser = TableParser()
+    
+    lines = [
+        "English | Ancient",
+        "hello   | salaam",
+        "world   | dunya"
+    ]
+    
+    entries = parser.parse_single_table_layout(lines)
+    
+    assert len(entries) == 2
+    assert entries[0].english == "hello"
+    assert entries[0].ancient == "salaam"
+    assert entries[0].modern is None
+    assert entries[1].english == "world"
+    assert entries[1].ancient == "dunya"
+    assert entries[1].modern is None
+
+
+def test_detect_dual_table_clusters():
+    """Test detection of multiple table clusters."""
+    parser = TableParser()
+    
+    lines = [
+        "English | Ancient | Modern",
+        "hello   | salaam  | marhaba",
+        "",
+        "English | Ancient",
+        "world   | dunya"
+    ]
+    
+    clusters = parser.detect_dual_table_clusters(lines)
+    
+    assert len(clusters) == 2
+    assert len(clusters[0]['entries']) == 1
+    assert len(clusters[1]['entries']) == 1
+    assert clusters[0]['entries'][0].english == "hello"
+    assert clusters[1]['entries'][0].english == "world"
+
+
+def test_parse_page_with_dual_tables():
+    """Test parsing page with dual table layout."""
+    parser = TableParser()
+    
+    page_text = """English | Ancient | Modern
+hello   | salaam  | marhaba
+world   | dunya   | alam"""
+    
+    parsed_page = parser.parse_page(page_text, 1)
+    
+    assert len(parsed_page.entries) == 2
+    assert parsed_page.entries[0].english == "hello"
+    assert parsed_page.entries[0].ancient == "salaam"
+    assert parsed_page.entries[0].modern == "marhaba"
+    assert parsed_page.entries[0].source_page == 1
+
+
+def test_parse_page_with_single_table():
+    """Test parsing page with single table layout."""
+    parser = TableParser()
+    
+    page_text = """English | Ancient
+hello   | salaam
+world   | dunya"""
+    
+    parsed_page = parser.parse_page(page_text, 1)
+    
+    assert len(parsed_page.entries) == 2
+    assert parsed_page.entries[0].english == "hello"
+    assert parsed_page.entries[0].ancient == "salaam"
+    assert parsed_page.entries[0].modern is None
+    assert parsed_page.entries[0].source_page == 1
