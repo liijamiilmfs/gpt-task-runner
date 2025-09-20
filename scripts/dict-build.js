@@ -72,6 +72,26 @@ function parseArgs() {
   return config;
 }
 
+function resolveConfigPaths(config) {
+  const projectRoot = path.resolve(__dirname, '..');
+  const resolvePathIfNeeded = (targetPath) => {
+    if (!targetPath) {
+      return targetPath;
+    }
+
+    return path.isAbsolute(targetPath)
+      ? targetPath
+      : path.resolve(projectRoot, targetPath);
+  };
+
+  return {
+    pdf: resolvePathIfNeeded(config.pdf),
+    support: resolvePathIfNeeded(config.support),
+    output: resolvePathIfNeeded(config.output),
+    exclude: resolvePathIfNeeded(config.exclude)
+  };
+}
+
 function checkPythonEnvironment() {
   return new Promise((resolve, reject) => {
     const python = spawn('python', ['--version'], { stdio: 'pipe' });
@@ -186,11 +206,11 @@ async function main() {
     console.log('🔍 Checking dictionary importer...');
     await checkDictImporter();
     console.log('✅ Dictionary importer is available');
-    
+
     console.log('📋 Parsing arguments...');
-    const config = parseArgs();
+    const config = resolveConfigPaths(parseArgs());
     console.log('✅ Configuration:', config);
-    
+
     // Check if PDF files exist
     if (!fs.existsSync(config.pdf)) {
       console.error(`❌ PDF file not found: ${config.pdf}`);
