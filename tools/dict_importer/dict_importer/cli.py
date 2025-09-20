@@ -11,6 +11,7 @@ from .libran_parser import parse_libran_pdf_pages
 from .json_importer import JSONDictionaryImporter, import_json_dictionaries, create_sample_json_dictionary
 from .libran_json_importer import import_libran_dictionary
 from .build_dicts import build_dictionaries
+from .logging_config import get_logger, structured_logger
 
 
 @click.group()
@@ -28,10 +29,12 @@ def cli():
 def build(pdf: str, out: str, support: Optional[str] = None, 
           exclude_list: Optional[str] = None, dump_csv: Optional[str] = None):
     """Build dictionaries from PDF files."""
+    logger = get_logger('cli.build')
     
     # Validate inputs
     pdf_path = Path(pdf)
     if not pdf_path.exists():
+        logger.error(f"PDF file not found: {pdf}")
         click.echo(f"Error: PDF file not found: {pdf}", err=True)
         return
     
