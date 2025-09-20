@@ -46,15 +46,22 @@ function sanitizeLogData(data: any): any {
 
 // Custom format that sanitizes sensitive data
 const sanitizeFormat = winston.format((info) => {
-  if (info.message) {
-    info.message = sanitizeLogData(info.message)
+  const infoWithSymbols = info as Record<string | symbol, any>
+
+  for (const key of Object.keys(infoWithSymbols)) {
+    infoWithSymbols[key] = sanitizeLogData(infoWithSymbols[key])
   }
-  if (info.meta) {
-    info.meta = sanitizeLogData(info.meta)
+
+  const splatKey = Symbol.for('splat')
+  if (Array.isArray(infoWithSymbols[splatKey])) {
+    infoWithSymbols[splatKey] = infoWithSymbols[splatKey].map(item => sanitizeLogData(item))
   }
-  if (info[Symbol.for('message')]) {
-    info[Symbol.for('message')] = sanitizeLogData(info[Symbol.for('message')])
+
+  const messageKey = Symbol.for('message')
+  if (infoWithSymbols[messageKey]) {
+    infoWithSymbols[messageKey] = sanitizeLogData(infoWithSymbols[messageKey])
   }
+
   return info
 })
 
