@@ -31,7 +31,12 @@ jobs:
         cd tools/dict_importer
         python -m pip install --upgrade pip
         pip install -e .
-        
+
+    - name: Run Python tests
+      run: |
+        cd tools/dict_importer
+        pytest tests
+
     - name: Install dependencies
       run: npm ci
       
