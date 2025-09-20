@@ -28,9 +28,9 @@ describe('JSON Import Integration', () => {
   });
   
   it('should import simple JSON dictionaries', async () => {
-    // Skip this test in CI if Python is not available
-    if (process.env.CI && !await isPythonAvailable()) {
-      console.log('Skipping test in CI - Python not available');
+    // Skip this test if Python is not available
+    if (!await isPythonAvailable()) {
+      console.log('Skipping test - Python not available');
       return;
     }
 
@@ -61,7 +61,7 @@ describe('JSON Import Integration', () => {
     ]);
     
     // In CI, we expect this to fail due to missing Python, so check for that
-    if (process.env.CI) {
+    if (process.env.CI && !await isPythonAvailable()) {
       assert.notStrictEqual(result.exitCode, 0, 'Expected failure in CI due to missing Python');
       return;
     }
@@ -136,9 +136,9 @@ describe('JSON Import Integration', () => {
   });
   
   it('should handle missing files gracefully', async () => {
-    // Skip this test in CI if Python is not available
-    if (process.env.CI && !await isPythonAvailable()) {
-      console.log('Skipping test in CI - Python not available');
+    // Skip this test if Python is not available
+    if (!await isPythonAvailable()) {
+      console.log('Skipping test - Python not available');
       return;
     }
 
@@ -161,9 +161,9 @@ describe('JSON Import Integration', () => {
   });
   
   it('should validate JSON syntax', async () => {
-    // Skip this test in CI if Python is not available
-    if (process.env.CI && !await isPythonAvailable()) {
-      console.log('Skipping test in CI - Python not available');
+    // Skip this test if Python is not available
+    if (!await isPythonAvailable()) {
+      console.log('Skipping test - Python not available');
       return;
     }
 
