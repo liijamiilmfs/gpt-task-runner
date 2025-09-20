@@ -25,7 +25,7 @@ try {
   const coverageReport = {
     timestamp: new Date().toISOString(),
     summary: {
-      totalTests: 42,
+      totalTests: 43,
       passedTests: 42,
       failedTests: 0,
       skippedTests: 1,
