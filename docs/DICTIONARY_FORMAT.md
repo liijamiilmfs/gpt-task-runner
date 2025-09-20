@@ -426,3 +426,6 @@ Librán uses the following diacritical marks (UTF-8 encoded):
 ---
 
 *This dictionary format specification ensures consistent, maintainable, and extensible translation dictionaries for the Librán Voice Forge system.*
+
+
+

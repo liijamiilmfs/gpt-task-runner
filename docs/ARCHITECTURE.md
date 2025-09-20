@@ -257,3 +257,6 @@ app/
 ---
 
 *This architecture document is maintained alongside the codebase and updated with each major release.*
+
+
+
