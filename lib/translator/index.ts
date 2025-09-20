@@ -13,6 +13,10 @@ interface Dictionary {
   [key: string]: string;
 }
 
+export interface TranslateOptions {
+  dictionary?: Dictionary;
+}
+
 // Load dictionary from file
 function loadDictionary(variant: Variant): Dictionary {
   const filePath = path.join(process.cwd(), 'lib', 'translator', 'dictionaries', `${variant}.json`);
@@ -114,8 +118,8 @@ function fixSpacing(tokens: Array<{ type: string, value: string, original: strin
   return result;
 }
 
-export function translate(text: string, variant: Variant): TranslationResult {
-  const dictionary = loadDictionary(variant);
+export function translate(text: string, variant: Variant, options: TranslateOptions = {}): TranslationResult {
+  const dictionary = options.dictionary ?? loadDictionary(variant);
   const tokens = tokenize(text);
   const translatedTokens = [];
   let translatedWordCount = 0;
