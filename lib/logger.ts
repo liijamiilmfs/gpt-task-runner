@@ -12,17 +12,18 @@ const SENSITIVE_PATTERNS = [
   /credential/gi,
   /openai[_-]?key/gi,
   /bearer\s+[a-zA-Z0-9._-]+/gi,
-  /sk-[a-zA-Z0-9]{20,}/g, // OpenAI API keys
+  /sk-[a-zA-Z0-9]{5,}/g, // OpenAI API keys
   /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g, // Email addresses
   /\b\d{4}[-\s]?\d{4}[-\s]?\d{4}[-\s]?\d{4}\b/g, // Credit card numbers
   /\b\d{3}-\d{2}-\d{4}\b/g, // SSN
 ]
 
 // Sanitize sensitive data from log objects
-function sanitizeLogData(data: any): any {
+export function sanitizeLogData(data: any): any {
   if (typeof data === 'string') {
     let sanitized = data
     SENSITIVE_PATTERNS.forEach(pattern => {
+      pattern.lastIndex = 0 // Reset regex state to avoid global flag issues
       sanitized = sanitized.replace(pattern, '[REDACTED]')
     })
     return sanitized
@@ -220,22 +221,22 @@ export const log = {
   // Basic logging methods
   debug: (msg: string, data?: any) => {
     const normalized = normalizeLogData(data || {})
-    logger.debug({ ...normalized, msg })
+    logger.debug(normalizeLogData({ ...normalized, msg }))
   },
   
   info: (msg: string, data?: any) => {
     const normalized = normalizeLogData(data || {})
-    logger.info({ ...normalized, msg })
+    logger.info(normalizeLogData({ ...normalized, msg }))
   },
   
   warn: (msg: string, data?: any) => {
     const normalized = normalizeLogData(data || {})
-    logger.warn({ ...normalized, msg })
+    logger.warn(normalizeLogData({ ...normalized, msg }))
   },
   
   error: (msg: string, data?: any) => {
     const normalized = normalizeLogData(data || {})
-    logger.error({ ...normalized, msg })
+    logger.error(normalizeLogData({ ...normalized, msg }))
   },
 
   // Structured logging methods
@@ -251,7 +252,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.info({ ...logData, msg: 'API Request' })
+    logger.info(normalizeLogData({ ...logData, msg: 'API Request' }))
   },
 
   apiResponse: (method: string, url: string, statusCode: number, durationMs: number, corrId: string, data?: any) => {
@@ -268,7 +269,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.info({ ...logData, msg: 'API Response' })
+    logger.info(normalizeLogData({ ...logData, msg: 'API Response' }))
   },
 
   translation: (text: string, variant: string, result: string, confidence: number, corrId: string, data?: any) => {
@@ -287,7 +288,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.info({ ...logData, msg: 'Translation completed' })
+    logger.info(normalizeLogData({ ...logData, msg: 'Translation completed' }))
   },
 
   tts: (text: string, voice: string, durationMs: number, corrId: string, data?: any) => {
@@ -302,7 +303,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.info({ ...logData, msg: 'TTS Generation completed' })
+    logger.info(normalizeLogData({ ...logData, msg: 'TTS Generation completed' }))
   },
 
   ttsCacheHit: (text: string, voice: string, corrId: string, data?: any) => {
@@ -316,7 +317,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.info({ ...logData, msg: 'TTS Cache Hit' })
+    logger.info(normalizeLogData({ ...logData, msg: 'TTS Cache Hit' }))
   },
 
   ttsRateLimit: (text: string, voice: string, corrId: string, data?: any) => {
@@ -336,7 +337,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.error({ ...logData, msg: 'TTS request throttled' })
+    logger.error(normalizeLogData({ ...logData, msg: 'TTS request throttled' }))
   },
 
   unknownToken: (token: string, variant: string, corrId: string, data?: any) => {
@@ -350,7 +351,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.warn({ ...logData, msg: 'Unknown token encountered' })
+    logger.warn(normalizeLogData({ ...logData, msg: 'Unknown token encountered' }))
   },
 
   validationFail: (field: string, reason: string, corrId: string, data?: any) => {
@@ -369,7 +370,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.warn({ ...logData, msg: 'Validation failed' })
+    logger.warn(normalizeLogData({ ...logData, msg: 'Validation failed' }))
   },
 
   errorWithContext: (error: Error, event: string, corrId: string, data?: any) => {
@@ -387,7 +388,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.error({ ...logData, msg: 'Error occurred' })
+    logger.error(normalizeLogData({ ...logData, msg: 'Error occurred' }))
   },
 
   performance: (operation: string, durationMs: number, corrId: string, data?: any) => {
@@ -401,7 +402,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.info({ ...logData, msg: 'Performance metric' })
+    logger.info(normalizeLogData({ ...logData, msg: 'Performance metric' }))
   },
 
   security: (event: string, corrId: string, data?: any) => {
@@ -413,7 +414,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.warn({ ...logData, msg: 'Security event' })
+    logger.warn(normalizeLogData({ ...logData, msg: 'Security event' }))
   },
 
   // Legacy compatibility methods
@@ -435,7 +436,7 @@ export const log = {
         ...normalized
       }
     }
-    logger.error({ ...logData, msg: 'Error Taxonomy' })
+    logger.error(normalizeLogData({ ...logData, msg: 'Error Taxonomy' }))
   },
 
   withCorrelationId: (correlationId: string, data?: any) => {
