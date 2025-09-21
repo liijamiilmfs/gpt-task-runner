@@ -45,3 +45,27 @@ English: Trickster-god
 Reason: EXCLUDED: Divine/religious term
 Page: 79
 ----------------------------------------
+English: Treasure
+Reason: EXCLUDED: Comoară term
+Page: 9
+----------------------------------------
+English: Sacred
+Reason: EXCLUDED: In exclude list
+Page: 19
+----------------------------------------
+English: Sacred
+Reason: EXCLUDED: In exclude list
+Page: 21
+----------------------------------------
+English: Cursed
+Reason: EXCLUDED: In exclude list
+Page: 24
+----------------------------------------
+English: Sacred
+Reason: EXCLUDED: In exclude list
+Page: 31
+----------------------------------------
+English: Fate
+Reason: EXCLUDED: In exclude list
+Page: 35
+----------------------------------------

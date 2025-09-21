@@ -4,19 +4,19 @@
 
 ## Statistics
 
-- **Total Entries Processed:** 491
-- **Pages Processed:** 78
-- **Ancient Entries:** 384
-- **Modern Entries:** 0
-- **Excluded Entries:** 11
-- **Conflicts Resolved:** 96
-- **Variants Found:** 74
+- **Total Entries Processed:** 716
+- **Pages Processed:** 116
+- **Ancient Entries:** 488
+- **Modern Entries:** 11
+- **Excluded Entries:** 17
+- **Conflicts Resolved:** 180
+- **Variants Found:** 180
 
 ## Dictionary Coverage
 
-- **Ancient Dictionary:** 384 entries
-- **Modern Dictionary:** 0 entries
-- **Total Unique English Words:** 384
+- **Ancient Dictionary:** 488 entries
+- **Modern Dictionary:** 11 entries
+- **Total Unique English Words:** 488
 
 ## Files Generated
 
