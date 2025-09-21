@@ -83,7 +83,8 @@ jobs:
         npm run build:test
         echo "Test files built, checking dist-test contents:"
         ls -la dist-test/test/ || echo "No test files found in dist-test"
-        CI=true npm run test:run
+        echo "Running tests with timeout..."
+        timeout 300 npm run test:run || (echo "Tests timed out or failed" && exit 1)
       
     - name: Build application
       run: |

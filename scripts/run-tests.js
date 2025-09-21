@@ -51,13 +51,25 @@ function main() {
   try {
     const command = `node --test --test-reporter=spec ${testFiles.join(' ')}`;
     console.log(`Running: ${command}`);
+    
+    // Add timeout for CI environment
+    const timeoutMs = isCI ? 300000 : 0; // 5 minutes for CI, no timeout for local
+    
+    if (timeoutMs > 0) {
+      console.log(`Running with ${timeoutMs/1000}s timeout for CI environment`);
+    }
+    
     execSync(command, { 
       stdio: 'inherit',
-      env: { ...process.env, CI: isCI ? 'true' : 'false' }
+      env: { ...process.env, CI: isCI ? 'true' : 'false' },
+      timeout: timeoutMs
     });
     console.log('All tests passed!');
   } catch (error) {
     console.error('Tests failed:', error.message);
+    if (error.signal === 'SIGTERM') {
+      console.error('Tests timed out!');
+    }
     process.exit(1);
   }
 }
