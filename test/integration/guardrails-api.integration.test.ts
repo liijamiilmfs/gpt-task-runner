@@ -3,7 +3,7 @@
  */
 
 // Set test environment before any imports
-process.env.NODE_ENV = 'test'
+Object.defineProperty(process.env, 'NODE_ENV', { value: 'test', writable: true })
 
 import { describe, it, before, after } from 'node:test'
 import assert from 'node:assert/strict'
