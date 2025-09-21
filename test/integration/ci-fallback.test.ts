@@ -22,7 +22,7 @@ describe('CI Fallback Tests', () => {
 
   it('should be able to import core modules', () => {
     // Test that core functionality is available
-    const { translate } = require('../../dist-test/lib/translator');
+    const { translate } = require('../../lib/translator');
     assert.ok(typeof translate === 'function');
   });
 });
