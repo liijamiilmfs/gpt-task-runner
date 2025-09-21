@@ -2,8 +2,7 @@
 name: 📚 Documentation
 about: Suggest updates, fixes, or additions to docs
 title: "[Docs]: "
-labels: documentation
-assignees: ""
+labels: ["documentation"]
 ---
 
 ## Description

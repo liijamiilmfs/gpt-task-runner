@@ -2,8 +2,7 @@
 name: 🔧 Enhancement
 about: Improve an existing feature or system
 title: "[Enhancement]: "
-labels: enhancement
-assignees: ""
+labels: ["enhancement"]
 ---
 
 ## Summary

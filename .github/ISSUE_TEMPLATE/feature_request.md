@@ -2,8 +2,7 @@
 name: ✨ Feature Request
 about: Propose a new feature or capability
 title: "[Feature]: "
-labels: feature
-assignees: ""
+labels: ["enhancement"]
 ---
 
 ## Summary
