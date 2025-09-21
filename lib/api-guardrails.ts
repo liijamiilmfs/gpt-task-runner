@@ -68,18 +68,22 @@ function createRateLimitResponse(rateLimitResult: RateLimitResult): NextResponse
   headers.set('X-RateLimit-Remaining', rateLimitResult.remaining.toString())
   headers.set('X-RateLimit-Reset', new Date(rateLimitResult.resetTime).toISOString())
 
-  return NextResponse.json(
+  const response = NextResponse.json(
     {
       error: 'Rate limit exceeded',
       message: 'Too many requests, please try again later',
       retryAfter: rateLimitResult.retryAfter,
       resetTime: new Date(rateLimitResult.resetTime).toISOString()
     },
-    { 
-      status: 429,
-      headers
-    }
+    { status: 429 }
   )
+  
+  // Set headers
+  headers.forEach((value, key) => {
+    response.headers.set(key, value)
+  })
+  
+  return response
 }
 
 /**
@@ -91,7 +95,7 @@ function createBudgetExceededResponse(budgetResult: BudgetCheckResult): NextResp
   headers.set('X-Budget-Remaining-Monthly', budgetResult.remainingMonthly.toString())
   headers.set('X-Budget-Reset-Time', new Date(budgetResult.resetTime).toISOString())
 
-  return NextResponse.json(
+  const response = NextResponse.json(
     {
       error: 'Budget exceeded',
       message: budgetResult.reason || 'Character limit exceeded',
@@ -99,11 +103,15 @@ function createBudgetExceededResponse(budgetResult: BudgetCheckResult): NextResp
       remainingMonthly: budgetResult.remainingMonthly,
       resetTime: new Date(budgetResult.resetTime).toISOString()
     },
-    { 
-      status: 429,
-      headers
-    }
+    { status: 429 }
   )
+  
+  // Set headers
+  headers.forEach((value, key) => {
+    response.headers.set(key, value)
+  })
+  
+  return response
 }
 
 /**

@@ -195,7 +195,7 @@ export class RateLimiter {
     const now = Date.now()
     const maxAge = 24 * 60 * 60 * 1000 // 24 hours
     
-    for (const [userId, limit] of this.userLimits.entries()) {
+    for (const [userId, limit] of Array.from(this.userLimits.entries())) {
       if (now - limit.windowStart > maxAge) {
         this.userLimits.delete(userId)
         log.debug('Cleaned up old rate limit for user', { userId })

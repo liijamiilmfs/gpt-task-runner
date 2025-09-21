@@ -291,7 +291,7 @@ export class BudgetGuardrails {
     const now = Date.now()
     const maxAge = 30 * 24 * 60 * 60 * 1000 // 30 days
     
-    for (const [userId, budget] of this.userBudgets.entries()) {
+    for (const [userId, budget] of Array.from(this.userBudgets.entries())) {
       if (now - budget.lastRequestTime > maxAge) {
         this.userBudgets.delete(userId)
         log.debug('Cleaned up old budget for user', { userId })
