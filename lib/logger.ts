@@ -109,7 +109,7 @@ const logger = pino({
   base: baseConfig,
   timestamp: pino.stdTimeFunctions.isoTime,
   formatters: {
-    level(label) { return { level: label } }
+    level(label: string) { return { level: label } }
   }
 }, pino.multistream([
   // File transport for all logs with daily rotation
