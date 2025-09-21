@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { log } from '../logger';
+import { unknownTokenLogger } from '../unknown-token-logger';
 
 export interface TranslationResult {
   libran: string;
@@ -171,6 +172,12 @@ export function translate(text: string, variant: Variant, options: TranslateOpti
   const libran = fixSpacing(translatedTokens);
   const confidence = totalWordCount > 0 ? translatedWordCount / totalWordCount : 0;
   const duration = Date.now() - startTime;
+  
+  // Log unknown tokens for analysis
+  if (unknownWords.length > 0) {
+    unknownTokenLogger.logUnknownTokens(unknownWords, variant, text.substring(0, 100))
+      .catch(error => log.error('Failed to log unknown tokens', { error: error.message }));
+  }
   
   log.info('Translation completed', {
     textLength: text.length,
