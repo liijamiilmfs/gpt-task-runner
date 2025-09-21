@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { metrics } from '@/lib/metrics'
 import { log } from '@/lib/logger'
+import { ttsCache } from '@/lib/tts-cache'
 
 export async function POST(request: NextRequest) {
   const startTime = Date.now()
@@ -53,19 +54,50 @@ export async function POST(request: NextRequest) {
     characterCount = libranText.length
     log.info('Starting TTS generation', { requestId, textLength: libranText.length, voice, format })
 
-    // Generate speech using OpenAI TTS
-    const client = new OpenAI({ 
-      apiKey: process.env.OPENAI_API_KEY! 
-    });
+    // Check cache first
+    const model = process.env.OPENAI_TTS_MODEL ?? 'gpt-4o-mini-tts'
+    const cacheKey = ttsCache.generateHash(libranText, voice, format, model)
     
-    const response = await client.audio.speech.create({
-      model: process.env.OPENAI_TTS_MODEL ?? 'gpt-4o-mini-tts',
-      voice: voice as any,
-      input: libranText,
-      response_format: format as any,
-    });
+    let audioBuffer: Buffer
+    let isCacheHit = false
+    
+    // Try to get from cache
+    const cachedAudio = await ttsCache.getCachedAudio(cacheKey)
+    if (cachedAudio) {
+      audioBuffer = cachedAudio
+      isCacheHit = true
+      log.info('TTS cache hit', { requestId, cacheKey, bufferSize: audioBuffer.length })
+    } else {
+      // Generate new audio using OpenAI TTS
+      log.info('TTS cache miss, generating new audio', { requestId, cacheKey })
+      const client = new OpenAI({ 
+        apiKey: process.env.OPENAI_API_KEY! 
+      });
+      
+      const response = await client.audio.speech.create({
+        model: model,
+        voice: voice as any,
+        input: libranText,
+        response_format: format as any,
+      });
 
-    const audioBuffer = Buffer.from(await response.arrayBuffer());
+      audioBuffer = Buffer.from(await response.arrayBuffer())
+      
+      // Store in cache for future use
+      const wordCount = libranText.split(/\s+/).length
+      const audioDuration = (wordCount / 150) * 60 // seconds
+      
+      await ttsCache.storeCachedAudio(
+        cacheKey,
+        libranText,
+        voice,
+        format,
+        model,
+        audioBuffer,
+        audioDuration
+      )
+    }
+    
     success = true
 
     // Estimate audio duration (rough calculation: ~150 words per minute for TTS)
@@ -77,7 +109,9 @@ export async function POST(request: NextRequest) {
       requestId,
       format,
       wordCount,
-      bufferSize: audioBuffer.length
+      bufferSize: audioBuffer.length,
+      cacheHit: isCacheHit,
+      cacheKey: isCacheHit ? cacheKey : undefined
     })
 
     // Record TTS metrics
@@ -90,10 +124,17 @@ export async function POST(request: NextRequest) {
                        'audio/flac'
     headers.set('Content-Type', contentType)
     headers.set('Content-Length', audioBuffer.length.toString())
-    headers.set('Cache-Control', 'no-cache, no-store, must-revalidate')
+    // Set cache headers based on whether this was a cache hit
+    if (isCacheHit) {
+      headers.set('Cache-Control', 'public, max-age=31536000') // 1 year for cached content
+      headers.set('X-Cache-Status', 'HIT')
+    } else {
+      headers.set('Cache-Control', 'public, max-age=3600') // 1 hour for new content
+      headers.set('X-Cache-Status', 'MISS')
+    }
     headers.set('Content-Disposition', `attachment; filename="libran-audio.${format}"`)
 
-    return new NextResponse(audioBuffer, {
+    return new NextResponse(audioBuffer as any, {
       status: 200,
       headers
     })
