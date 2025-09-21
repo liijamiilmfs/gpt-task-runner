@@ -20,7 +20,7 @@
 ### Project Status
 - ✅ **CI/CD**: Automated testing and security audits on every push
 - ✅ **Code Quality**: TypeScript, ESLint, and Prettier for consistent code style
-- ✅ **Test Coverage**: 85% code coverage with 112+ passing tests (43 Node.js + 69 Python)
+- ✅ **Test Coverage**: 85% code coverage with 49+ passing tests (43 Node.js + 6 Python JSON parsing)
 - ✅ **Multi-Platform**: Node.js 18+ and Python 3.12+ support
 - ✅ **Security**: Dependency overrides to replace deprecated packages with secure alternatives
 - ✅ **Compatibility**: Maintains Node.js 18.0+ compatibility while using modern dependencies
@@ -219,7 +219,13 @@ The deterministic translation system ensures consistency across projects, while 
 - [ ] Real-time audio streaming
 - [ ] Voice activity detection
 
-### Phase 4: Batch Rendering
+### Phase 4: PDF Dictionary Import
+- [ ] PDF table parsing for dictionary creation
+- [ ] Automated dictionary building from PDF sources
+- [ ] Enhanced conflict resolution for dictionary entries
+- [ ] *Note: PDF parsing functionality is available in `feature/pdf-parsing-future` branch*
+
+### Phase 5: Batch Rendering
 - [ ] Bulk text processing
 - [ ] Batch audio generation
 - [ ] Export multiple formats
