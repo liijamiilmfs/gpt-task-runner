@@ -35,7 +35,9 @@ class TestConflictDetection:
 
         conflicts = builder.get_conflicts()
         assert len(conflicts) == 1
-        assert conflicts[0].english == 'balance'
+        assert 'balance' in conflicts
+        assert len(conflicts['balance']) == 2
+        assert conflicts['balance'][0].english == 'balance'
 
     def test_detect_same_variant_conflicts(self, builder):
         """Test detection of same-variant conflicts."""

@@ -20,8 +20,10 @@
 ### Project Status
 - ✅ **CI/CD**: Automated testing and security audits on every push
 - ✅ **Code Quality**: TypeScript, ESLint, and Prettier for consistent code style
-- ✅ **Test Coverage**: 85% code coverage with 43+ passing tests
+- ✅ **Test Coverage**: 85% code coverage with 49+ passing tests (43 Node.js + 6 Python JSON parsing)
 - ✅ **Multi-Platform**: Node.js 18+ and Python 3.12+ support
+- ✅ **Security**: Dependency overrides to replace deprecated packages with secure alternatives
+- ✅ **Compatibility**: Maintains Node.js 18.0+ compatibility while using modern dependencies
 - ✅ **Modern Stack**: Next.js 14, TypeScript 5.0+, OpenAI TTS integration
 
 ## What is Librán Voice Forge?
@@ -134,6 +136,31 @@ The coverage report includes:
 - `coverage-summary.json` - Detailed coverage metrics
 - `lcov.info` - LCOV format for badge integration
 
+## Security & Dependency Management
+
+### Deprecated Package Handling
+We actively monitor and replace deprecated dependencies to maintain security and compatibility:
+
+**Replaced/Removed Packages:**
+- `inflight@1.0.6` → `lru-cache@^10.0.0` (memory leak fix)
+- `@humanwhocodes/config-array@0.13.0` → `@eslint/config-array@^0.18.0`
+- `rimraf@3.0.2` → `rimraf@^5.0.0` (security updates)
+- `glob@7.2.3` → `glob@^10.0.0` (performance & security)
+- `@humanwhocodes/object-schema@2.0.3` → `@eslint/object-schema@^0.18.0`
+- `node-domexception@1.0.0` → **removed** (use native Node.js 18+ DOMException)
+
+**Compatibility Considerations:**
+- ✅ Maintains Node.js 18.0+ compatibility (avoiding engine conflicts)
+- ✅ Uses npm overrides to replace deprecated packages at the dependency level
+- ✅ Removes unnecessary polyfills in favor of native Node.js APIs
+- ✅ Regular security audits with `npm audit`
+
+### Security Features
+- **Automated Security Scanning**: CI runs `npm audit` on every push
+- **Dependency Pinning**: Critical packages are pinned to specific versions
+- **Sensitive Data Sanitization**: Logging system automatically redacts API keys and credentials
+- **Environment Isolation**: Separate configurations for development and production
+
 ## Environment Variables
 
 | Variable | Required | Default | Description |
@@ -192,7 +219,13 @@ The deterministic translation system ensures consistency across projects, while 
 - [ ] Real-time audio streaming
 - [ ] Voice activity detection
 
-### Phase 4: Batch Rendering
+### Phase 4: PDF Dictionary Import
+- [ ] PDF table parsing for dictionary creation
+- [ ] Automated dictionary building from PDF sources
+- [ ] Enhanced conflict resolution for dictionary entries
+- [ ] *Note: PDF parsing functionality is available in `feature/pdf-parsing-future` branch*
+
+### Phase 5: Batch Rendering
 - [ ] Bulk text processing
 - [ ] Batch audio generation
 - [ ] Export multiple formats

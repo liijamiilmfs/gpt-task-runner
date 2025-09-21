@@ -38,6 +38,7 @@ function sanitizeLogData(data: any): any {
         sanitized[lowerKey] = sanitizeLogData(value)
       }
     }
+
     return sanitized
   }
   
@@ -125,9 +126,11 @@ if (process.env.NODE_ENV !== 'production') {
       sanitizeFormat(),
       winston.format.colorize(),
       winston.format.timestamp({ format: 'HH:mm:ss' }),
-      winston.format.printf(({ timestamp, level, message, ...meta }) => {
-        const metaStr = Object.keys(meta).length ? JSON.stringify(meta, null, 2) : ''
-        return `${timestamp} [${level}]: ${message} ${metaStr}`
+      winston.format.printf(({ timestamp, level, message, service, environment, ...meta }) => {
+        const serviceStr = service ? `[${service}]` : ''
+        const envStr = environment && environment !== 'production' ? `[${environment}]` : ''
+        const metaStr = Object.keys(meta).length ? `\n${JSON.stringify(meta, null, 2)}` : ''
+        return `${timestamp} ${serviceStr}${envStr} [${level}]: ${message}${metaStr}`
       })
     )
   }))
