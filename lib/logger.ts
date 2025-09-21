@@ -106,7 +106,7 @@ const sanitizeFormat = winston.format((info) => {
 const humanReadableFormat = winston.format.printf(({ timestamp, level, message, service, environment, type, correlationId, ...meta }) => {
   const color = colors[level as keyof typeof colors] || colors.reset
   const reset = colors.reset
-  const time = timestamp.replace('T', ' ').replace('Z', '')
+  const time = typeof timestamp === 'string' ? timestamp.replace('T', ' ').replace('Z', '') : new Date().toISOString().replace('T', ' ').replace('Z', '')
   const serviceStr = service ? `[${service}]` : ''
   const envStr = environment && environment !== 'production' ? `[${environment}]` : ''
   const corrStr = correlationId ? `[${correlationId}]` : ''
