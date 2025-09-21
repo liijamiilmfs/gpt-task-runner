@@ -33,7 +33,10 @@ function sanitizeLogData(data: any): any {
     try {
       const jsonString = JSON.stringify(data, (key, value) => {
         // Check if key matches sensitive patterns
-        if (SENSITIVE_PATTERNS.some(pattern => pattern.test(key))) {
+        if (SENSITIVE_PATTERNS.some(pattern => {
+          pattern.lastIndex = 0 // Reset regex state to avoid global flag issues
+          return pattern.test(key)
+        })) {
           return '[REDACTED]'
         }
         
@@ -41,6 +44,7 @@ function sanitizeLogData(data: any): any {
         if (typeof value === 'string') {
           let sanitizedValue = value
           SENSITIVE_PATTERNS.forEach(pattern => {
+            pattern.lastIndex = 0 // Reset regex state to avoid global flag issues
             sanitizedValue = sanitizedValue.replace(pattern, '[REDACTED]')
           })
           return sanitizedValue
