@@ -1,4 +1,4 @@
-name: Coverage
+name: Coverage Report
 
 on:
   push:
@@ -7,7 +7,8 @@ on:
     branches: [ main, dev ]
 
 jobs:
-  coverage:
+  coverage-report:
+    name: Detailed Coverage Analysis
     runs-on: ubuntu-latest
     
     steps:
@@ -26,30 +27,38 @@ jobs:
         python-version: '3.12'
         cache: 'pip'
         
+    - name: Install Node.js dependencies
+      run: npm ci
+      
     - name: Install Python dependencies
       run: |
         cd tools/dict_importer
-        python -m pip install --upgrade pip
-        pip install -e ".[dev]"
-
-    - name: Run Python tests
+        python -m pip install --user -e ".[dev]"
+        
+    - name: Run Node.js tests with coverage
+      run: |
+        echo "Running Node.js tests with coverage..."
+        npm run test:coverage
+        
+    - name: Run Python tests with coverage
       run: |
         cd tools/dict_importer
-        python -m pytest tests/test_normalize.py tests/test_parse_tables.py tests/test_validation.py tests/test_integration.py tests/test_json_importer.py tests/test_libran_json_importer.py -v
-
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Run tests
-      run: npm test
-      
-    - name: Generate coverage report
-      run: npm run test:coverage
-      
+        echo "Running Python tests with coverage..."
+        python -m pytest tests/ --cov=dict_importer --cov-report=xml --cov-report=html --cov-report=term-missing -v
+        
+    - name: Generate coverage summary
+      run: |
+        echo "=== Node.js Coverage Summary ==="
+        cat coverage/coverage-summary.json || echo "No Node.js coverage summary found"
+        echo ""
+        echo "=== Python Coverage Summary ==="
+        cd tools/dict_importer
+        python -m pytest tests/ --cov=dict_importer --cov-report=term-missing --quiet || echo "No Python coverage summary available"
+        
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
       with:
-        file: ./coverage/lcov.info
+        files: ./coverage/lcov.info,./tools/dict_importer/coverage.xml
         flags: unittests
         name: codecov-umbrella
         fail_ci_if_error: false
