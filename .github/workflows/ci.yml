@@ -11,6 +11,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     
     steps:
     - name: Checkout code
@@ -32,6 +33,7 @@ jobs:
   types:
     name: Type Check
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     
     steps:
     - name: Checkout code
@@ -54,6 +56,7 @@ jobs:
     name: Translator & API Tests
     runs-on: ubuntu-latest
     needs: [lint, types]
+    timeout-minutes: 10
     
     strategy:
       matrix:
@@ -105,6 +108,7 @@ jobs:
   importer-tests:
     name: Importer Tests
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     env:
       PYTHONPATH: ${{ github.workspace }}/tools/dict_importer
@@ -155,6 +159,7 @@ jobs:
     name: Coverage Report
     runs-on: ubuntu-latest
     needs: [lint, types, translator-tests, importer-tests]
+    timeout-minutes: 15
     
     env:
       PYTHONPATH: ${{ github.workspace }}/tools/dict_importer
@@ -205,6 +210,7 @@ jobs:
       
   security:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     
     steps:
     - name: Checkout code
