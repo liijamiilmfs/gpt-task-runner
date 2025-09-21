@@ -9,7 +9,8 @@
 
 const fs = require('fs')
 const path = require('path')
-const { execSync } = require('child_process')
+const { execSync, spawn } = require('child_process')
+const os = require('os')
 
 // Color codes for terminal output
 const colors = {
@@ -24,6 +25,28 @@ const colors = {
   cyan: '\x1b[36m',
   white: '\x1b[37m',
   gray: '\x1b[90m'
+}
+
+// Cross-platform file reading functions
+function readFileTail(filePath, lines = 50) {
+  try {
+    if (os.platform() === 'win32') {
+      return execSync(`Get-Content "${filePath}" -Tail ${lines}`, { encoding: 'utf8', shell: 'powershell' })
+    } else {
+      return execSync(`tail -n ${lines} "${filePath}"`, { encoding: 'utf8' })
+    }
+  } catch (error) {
+    console.error(`Error reading ${filePath}: ${error.message}`)
+    return ''
+  }
+}
+
+function createFileWatcher(filePath) {
+  if (os.platform() === 'win32') {
+    return spawn('powershell', ['-Command', `Get-Content "${filePath}" -Wait -Tail 10`])
+  } else {
+    return spawn('tail', ['-f', filePath])
+  }
 }
 
 // Log level colors
@@ -224,7 +247,7 @@ function viewLogs() {
     // Follow mode - show recent logs and then follow
     logFiles.forEach(file => {
       try {
-        const content = execSync(`Get-Content "${file}" -Tail ${config.lines}`, { encoding: 'utf8', shell: 'powershell' })
+        const content = readFileTail(file, config.lines)
         const lines = content.split('\n').filter(line => line.trim())
         lines.forEach(line => {
           const formatted = formatLogLine(line)
@@ -241,7 +264,7 @@ function viewLogs() {
     console.log(`${colors.dim}Press Ctrl+C to stop${colors.reset}`)
     
     const { spawn } = require('child_process')
-    const tail = spawn('powershell', ['-Command', `Get-Content "${mostRecentFile}" -Wait -Tail 10`])
+    const tail = createFileWatcher(mostRecentFile)
     
     tail.stdout.on('data', (data) => {
       const lines = data.toString().split('\n').filter(line => line.trim())
@@ -263,7 +286,7 @@ function viewLogs() {
     // Show recent logs
     logFiles.forEach(file => {
       try {
-        const content = execSync(`Get-Content "${file}" -Tail ${config.lines}`, { encoding: 'utf8', shell: 'powershell' })
+        const content = readFileTail(file, config.lines)
         const lines = content.split('\n').filter(line => line.trim())
         lines.forEach(line => {
           const formatted = formatLogLine(line)

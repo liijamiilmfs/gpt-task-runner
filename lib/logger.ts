@@ -32,9 +32,20 @@ function sanitizeLogData(data: any): any {
     // Use JSON.stringify/parse to handle circular references safely
     try {
       const jsonString = JSON.stringify(data, (key, value) => {
+        // Check if key matches sensitive patterns
         if (SENSITIVE_PATTERNS.some(pattern => pattern.test(key))) {
           return '[REDACTED]'
         }
+        
+        // Check if value is a string and contains sensitive data
+        if (typeof value === 'string') {
+          let sanitizedValue = value
+          SENSITIVE_PATTERNS.forEach(pattern => {
+            sanitizedValue = sanitizedValue.replace(pattern, '[REDACTED]')
+          })
+          return sanitizedValue
+        }
+        
         return value
       })
       return JSON.parse(jsonString)
