@@ -20,14 +20,14 @@ async function handleTranslateRequest(request: NextRequest) {
 
     if (!text || typeof text !== 'string') {
       const errorResponse = createErrorResponse(ErrorCode.VALIDATION_MISSING_TEXT, { requestId })
-      log.errorTaxonomy(ErrorCode.VALIDATION_MISSING_TEXT, errorResponse.body.userMessage, 'validation', 'low', { requestId })
+      log.errorTaxonomy(ErrorCode.VALIDATION_MISSING_TEXT, errorResponse.body.error, 'validation', 'low', { requestId })
       metrics.recordError('validation_error', 'Text is required and must be a string')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     if (!['ancient', 'modern'].includes(variant)) {
       const errorResponse = createErrorResponse(ErrorCode.VALIDATION_INVALID_VARIANT, { requestId, variant })
-      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_VARIANT, errorResponse.body.userMessage, 'validation', 'low', { requestId, variant })
+      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_VARIANT, errorResponse.body.error, 'validation', 'low', { requestId, variant })
       metrics.recordError('validation_error', 'Variant must be either "ancient" or "modern"')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
@@ -68,7 +68,7 @@ async function handleTranslateRequest(request: NextRequest) {
 
   } catch (error) {
     const errorResponse = createErrorResponse(ErrorCode.TRANSLATION_FAILED, { requestId }, error as Error)
-    log.errorTaxonomy(ErrorCode.TRANSLATION_FAILED, errorResponse.body.userMessage, 'translation', 'high', { requestId })
+    log.errorTaxonomy(ErrorCode.TRANSLATION_FAILED, errorResponse.body.error, 'translation', 'high', { requestId })
     log.errorWithContext(error as Error, 'Translation API', { requestId })
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     metrics.recordError('translation_error', errorMessage)

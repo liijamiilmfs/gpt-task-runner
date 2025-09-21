@@ -24,7 +24,7 @@ async function handleSpeakRequest(request: NextRequest) {
 
     if (!libranText || typeof libranText !== 'string') {
       const errorResponse = createErrorResponse(ErrorCode.VALIDATION_MISSING_TEXT, { requestId })
-      log.errorTaxonomy(ErrorCode.VALIDATION_MISSING_TEXT, errorResponse.body.userMessage, 'validation', 'low', { requestId })
+      log.errorTaxonomy(ErrorCode.VALIDATION_MISSING_TEXT, errorResponse.body.error, 'validation', 'low', { requestId })
       metrics.recordError('validation_error', 'libranText is required and must be a string')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
@@ -33,7 +33,7 @@ async function handleSpeakRequest(request: NextRequest) {
     const validVoices = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
     if (!validVoices.includes(voice)) {
       const errorResponse = createErrorResponse(ErrorCode.VALIDATION_INVALID_VOICE, { requestId, voice })
-      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_VOICE, errorResponse.body.userMessage, 'validation', 'low', { requestId, voice })
+      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_VOICE, errorResponse.body.error, 'validation', 'low', { requestId, voice })
       metrics.recordError('validation_error', 'Invalid voice parameter')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
@@ -42,7 +42,7 @@ async function handleSpeakRequest(request: NextRequest) {
     const validFormats = ['mp3', 'wav', 'flac']
     if (!validFormats.includes(format)) {
       const errorResponse = createErrorResponse(ErrorCode.VALIDATION_INVALID_FORMAT, { requestId, format })
-      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_FORMAT, errorResponse.body.userMessage, 'validation', 'low', { requestId, format })
+      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_FORMAT, errorResponse.body.error, 'validation', 'low', { requestId, format })
       metrics.recordError('validation_error', 'Invalid format parameter')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
@@ -142,14 +142,14 @@ async function handleSpeakRequest(request: NextRequest) {
     // Handle specific OpenAI errors
     if (error.status === 429) {
       const errorResponse = createErrorResponse(ErrorCode.OPENAI_QUOTA_EXCEEDED, { requestId })
-      log.errorTaxonomy(ErrorCode.OPENAI_QUOTA_EXCEEDED, errorResponse.body.userMessage, 'external_api', 'high', { requestId })
+      log.errorTaxonomy(ErrorCode.OPENAI_QUOTA_EXCEEDED, errorResponse.body.error, 'external_api', 'high', { requestId })
       metrics.recordError('openai_quota_error', 'OpenAI quota exceeded')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     if (error.type === 'insufficient_quota') {
       const errorResponse = createErrorResponse(ErrorCode.OPENAI_QUOTA_EXCEEDED, { requestId })
-      log.errorTaxonomy(ErrorCode.OPENAI_QUOTA_EXCEEDED, errorResponse.body.userMessage, 'external_api', 'high', { requestId })
+      log.errorTaxonomy(ErrorCode.OPENAI_QUOTA_EXCEEDED, errorResponse.body.error, 'external_api', 'high', { requestId })
       metrics.recordError('openai_quota_error', 'OpenAI insufficient quota')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
@@ -157,14 +157,14 @@ async function handleSpeakRequest(request: NextRequest) {
     // Handle other OpenAI errors
     if (error.name === 'OpenAIError') {
       const errorResponse = createErrorResponse(ErrorCode.OPENAI_API_ERROR, { requestId }, error)
-      log.errorTaxonomy(ErrorCode.OPENAI_API_ERROR, errorResponse.body.userMessage, 'external_api', 'high', { requestId })
+      log.errorTaxonomy(ErrorCode.OPENAI_API_ERROR, errorResponse.body.error, 'external_api', 'high', { requestId })
       metrics.recordError('openai_error', errorMessage)
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     // Handle general TTS errors
     const errorResponse = createErrorResponse(ErrorCode.TTS_GENERATION_FAILED, { requestId }, error)
-    log.errorTaxonomy(ErrorCode.TTS_GENERATION_FAILED, errorResponse.body.userMessage, 'tts', 'high', { requestId })
+    log.errorTaxonomy(ErrorCode.TTS_GENERATION_FAILED, errorResponse.body.error, 'tts', 'high', { requestId })
     metrics.recordError('tts_error', errorMessage)
     return NextResponse.json(errorResponse.body, { status: errorResponse.status })
   } finally {
