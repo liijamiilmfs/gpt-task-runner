@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Librán Voice Forge Styles */
+:root {
+  --libran-gold: #ffd700;
+  --libran-blue: #0f3460;
+  --libran-dark: #16213e;
+  --libran-darker: #1a1a2e;
+  --libran-red: #e94560;
+}
+
+/* Define custom color utilities */
+.bg-libran-gold { background-color: var(--libran-gold); }
+.bg-libran-blue { background-color: var(--libran-blue); }
+.bg-libran-dark { background-color: var(--libran-dark); }
+.bg-libran-darker { background-color: var(--libran-darker); }
+.bg-libran-red { background-color: var(--libran-red); }
+
+.text-libran-gold { color: var(--libran-gold); }
+.text-libran-blue { color: var(--libran-blue); }
+.text-libran-dark { color: var(--libran-dark); }
+.text-libran-darker { color: var(--libran-darker); }
+.text-libran-red { color: var(--libran-red); }
+
+.border-libran-gold { border-color: var(--libran-gold); }
+.border-libran-blue { border-color: var(--libran-blue); }
+
+.from-libran-red { --tw-gradient-from: var(--libran-red); }
+.to-libran-gold { --tw-gradient-to: var(--libran-gold); }
+
+/* Base styles */
+body {
+  font-family: 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.6;
+  color: white;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+}
+
+/* Component classes */
+.btn-primary {
+  @apply bg-libran-red text-white px-4 py-2 rounded-md font-medium transition-all duration-200 hover:bg-libran-red/90 focus:outline-none focus:ring-2 focus:ring-libran-red focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.btn-secondary {
+  @apply bg-libran-blue text-white px-4 py-2 rounded-md font-medium transition-all duration-200 hover:bg-libran-blue/90 focus:outline-none focus:ring-2 focus:ring-libran-blue focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+}
+
+.input-field {
+  @apply w-full px-3 py-2 bg-libran-darker border border-libran-blue rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-libran-gold focus:border-transparent;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--libran-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--libran-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--libran-gold);
+  opacity: 0.8;
+}
+
+/* Animation classes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Utility classes */
+.text-libran-gold { color: var(--libran-gold); }
+.text-libran-blue { color: var(--libran-blue); }
+.text-libran-dark { color: var(--libran-dark); }
+.text-libran-darker { color: var(--libran-darker); }
+.text-libran-red { color: var(--libran-red); }
+
+.bg-libran-gold { background-color: var(--libran-gold); }
+.bg-libran-blue { background-color: var(--libran-blue); }
+.bg-libran-dark { background-color: var(--libran-dark); }
+.bg-libran-darker { background-color: var(--libran-darker); }
+.bg-libran-red { background-color: var(--libran-red); }
+
+.border-libran-gold { border-color: var(--libran-gold); }
+.border-libran-blue { border-color: var(--libran-blue); }
+
+/* Focus styles */
+.focus\:ring-libran-gold:focus {
+  --tw-ring-color: var(--libran-gold);
+}
+
+.focus\:ring-libran-blue:focus {
+  --tw-ring-color: var(--libran-blue);
+}
+
+.focus\:ring-libran-red:focus {
+  --tw-ring-color: var(--libran-red);
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+  .mobile-stack {
+    @apply flex-col space-y-4 space-x-0;
+  }
+  
+  .mobile-full {
+    @apply w-full;
+  }
+}
