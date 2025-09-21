@@ -200,7 +200,7 @@ class TestExclusionPipeline:
         """Create a TableParser instance for testing."""
         return TableParser()
 
-    def test_exclude_terms_throughout_pipeline(self):
+    def test_exclude_terms_throughout_pipeline(self, parser):
         """Test exclusion of terms throughout pipeline."""
         exclude_terms = {'test', 'example'}
         builder = DictionaryBuilder(exclude_terms)

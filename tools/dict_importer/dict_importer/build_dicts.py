@@ -82,11 +82,18 @@ class DictionaryBuilder:
         # Choose by confidence score (higher is better)
         best_entry = max(entries, key=lambda e: e.confidence)
         
-        # If confidence is tied, choose the first complete entry
+        # If confidence is tied, choose by source page (higher is better)
         if best_entry.confidence == entries[0].confidence:
-            for entry in entries:
-                if entry.is_complete():
-                    return entry
+            # Check if all entries have the same confidence
+            same_confidence = all(e.confidence == best_entry.confidence for e in entries)
+            if same_confidence:
+                # Choose by source page priority (higher page number wins)
+                best_entry = max(entries, key=lambda e: e.source_page or 0)
+            else:
+                # Choose the first complete entry
+                for entry in entries:
+                    if entry.is_complete():
+                        return entry
         
         return best_entry
     
@@ -107,13 +114,29 @@ class DictionaryBuilder:
         
         # Check for conflicts
         if english_key in self.conflicts:
+            # Check if this is a duplicate of existing entries
+            existing_entries = self.conflicts[english_key]
+            is_duplicate = any(
+                e.ancient == entry.ancient and e.modern == entry.modern and e.pos == entry.pos
+                for e in existing_entries
+            )
+            
+            if is_duplicate:
+                # Skip duplicate entries
+                return
+            
+            # This is a conflict - multiple different entries for same English key
             self.conflicts[english_key].append(entry)
             self.stats['conflicts'] += 1
             # Add all entries for this key to variants
             self.variants[english_key] = self.conflicts[english_key].copy()
+            # Remove from dictionaries since we have conflicts
+            self.ancient_entries.pop(english_key, None)
+            self.modern_entries.pop(english_key, None)
         else:
+            # First entry for this key - add to dictionaries
             self.conflicts[english_key] = [entry]
-            # Only add to dictionaries if no conflicts
+            
             if entry.has_ancient():
                 self.ancient_entries[english_key] = entry.ancient
                 self.stats['ancient_entries'] += 1
@@ -179,14 +202,16 @@ class DictionaryBuilder:
         # Add missing keys for compatibility
         self.build.build_stats['total_ancient'] = self.stats['ancient_entries']
         self.build.build_stats['total_modern'] = self.stats['modern_entries']
+        self.build.build_stats['conflicts_resolved'] = self.stats['conflicts']
+        self.build.build_stats['entries_excluded'] = self.stats['excluded_entries']
         
         return self.build
     
     # Additional methods for enhanced conflict resolution tests
     
     def get_conflicts(self) -> Dict[str, List[Entry]]:
-        """Get all conflicts."""
-        return dict(self.conflicts)
+        """Get all conflicts (entries with multiple entries for same key)."""
+        return {k: v for k, v in self.conflicts.items() if len(v) > 1}
     
     def get_excluded_entries(self) -> List[Entry]:
         """Get all excluded entries."""
@@ -196,33 +221,66 @@ class DictionaryBuilder:
         """Get all variants."""
         return dict(self.variants)
     
-    def resolve_conflicts(self) -> None:
-        """Resolve all conflicts."""
+    def resolve_conflicts(self) -> List[Entry]:
+        """Resolve all conflicts and return resolved entries."""
+        resolved_entries = []
         for english_key, entries in self.conflicts.items():
             if len(entries) > 1:
                 primary_entry = self.resolve_conflict(english_key, entries)
+                resolved_entries.append(primary_entry)
                 # Update the conflicts dict with resolved entry
                 self.conflicts[english_key] = [primary_entry]
+        return resolved_entries
     
     def create_variants(self) -> List[Entry]:
         """Create variant entries for unresolved conflicts."""
         variants = []
         for english_key, entries in self.conflicts.items():
             if len(entries) > 1:
-                # Keep all entries as variants
-                variants.extend(entries)
+                # Choose primary entry and add others as variants
+                primary_entry = self.resolve_conflict(english_key, entries)
+                for entry in entries:
+                    if entry != primary_entry:
+                        variants.append(entry)
         return variants
     
-    def merge_entries(self, entry1: Entry, entry2: Entry) -> Entry:
-        """Merge two entries."""
+    def merge_entries(self, entry1: Entry = None, entry2: Entry = None) -> List[Entry]:
+        """Merge entries. If no arguments provided, merge all conflicts."""
+        if entry1 is None and entry2 is None:
+            # Merge all conflicts
+            merged_entries = []
+            for english_key, entries in self.conflicts.items():
+                if len(entries) > 1:
+                    # Merge all entries for this key
+                    merged_entry = entries[0]
+                    for entry in entries[1:]:
+                        merged_entry = self._merge_two_entries(merged_entry, entry)
+                    merged_entries.append(merged_entry)
+                    # Update conflicts with merged entry
+                    self.conflicts[english_key] = [merged_entry]
+            return merged_entries
+        elif entry1 is not None and entry2 is not None:
+            # Merge two specific entries
+            return [self._merge_two_entries(entry1, entry2)]
+        else:
+            raise ValueError("Either provide both entry1 and entry2, or neither")
+    
+    def _merge_two_entries(self, entry1: Entry, entry2: Entry) -> Entry:
+        """Merge two entries, with higher confidence entry taking precedence."""
+        # Determine which entry has higher confidence
+        if entry1.confidence >= entry2.confidence:
+            primary, secondary = entry1, entry2
+        else:
+            primary, secondary = entry2, entry1
+        
         merged = Entry(
-            english=entry1.english,
-            ancient=entry1.ancient or entry2.ancient,
-            modern=entry1.modern or entry2.modern,
-            pos=entry1.pos or entry2.pos,
-            notes=entry1.notes or entry2.notes,
-            sacred=entry1.sacred or entry2.sacred,
-            source_page=entry1.source_page or entry2.source_page,
+            english=primary.english,
+            ancient=primary.ancient or secondary.ancient,
+            modern=primary.modern or secondary.modern,
+            pos=primary.pos or secondary.pos,
+            notes=primary.notes or secondary.notes,
+            sacred=primary.sacred or secondary.sacred,
+            source_page=primary.source_page or secondary.source_page,
             confidence=max(entry1.confidence, entry2.confidence)
         )
         return merged
@@ -231,7 +289,15 @@ class DictionaryBuilder:
         """Filter out entries with low confidence."""
         filtered_conflicts = {}
         for english_key, entries in self.conflicts.items():
-            filtered_entries = [e for e in entries if e.confidence >= threshold]
+            filtered_entries = []
+            for entry in entries:
+                if entry.confidence >= threshold:
+                    filtered_entries.append(entry)
+                else:
+                    # Move to excluded entries
+                    entry.notes = f"EXCLUDED: Low confidence ({entry.confidence} < {threshold})"
+                    self.excluded_entries.append(entry)
+                    self.stats['excluded_entries'] += 1
             if filtered_entries:
                 filtered_conflicts[english_key] = filtered_entries
         self.conflicts = defaultdict(list, filtered_conflicts)
@@ -240,7 +306,15 @@ class DictionaryBuilder:
         """Filter out incomplete entries."""
         filtered_conflicts = {}
         for english_key, entries in self.conflicts.items():
-            filtered_entries = [e for e in entries if e.is_complete()]
+            filtered_entries = []
+            for entry in entries:
+                if entry.is_complete():
+                    filtered_entries.append(entry)
+                else:
+                    # Move to excluded entries
+                    entry.notes = "EXCLUDED: Incomplete entry"
+                    self.excluded_entries.append(entry)
+                    self.stats['excluded_entries'] += 1
             if filtered_entries:
                 filtered_conflicts[english_key] = filtered_entries
         self.conflicts = defaultdict(list, filtered_conflicts)
@@ -255,6 +329,11 @@ class DictionaryBuilder:
                 if (entry.ancient not in placeholders and 
                     entry.modern not in placeholders):
                     filtered_entries.append(entry)
+                else:
+                    # Move to excluded entries
+                    entry.notes = "EXCLUDED: Placeholder entry"
+                    self.excluded_entries.append(entry)
+                    self.stats['excluded_entries'] += 1
             if filtered_entries:
                 filtered_conflicts[english_key] = filtered_entries
         self.conflicts = defaultdict(list, filtered_conflicts)
