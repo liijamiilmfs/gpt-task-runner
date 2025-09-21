@@ -21,8 +21,10 @@ export default function Home() {
     wordCount?: number
   }>({})
 
-  const handleTranslation = (translatedText: string) => {
+  const handleTranslation = (translatedText: string, selectedVariant: 'ancient' | 'modern', originalText: string) => {
     setLibranText(translatedText)
+    setVariant(selectedVariant)
+    setInputText(originalText)
   }
 
   const handleTranslationComplete = async (text: string, variant: 'ancient' | 'modern') => {

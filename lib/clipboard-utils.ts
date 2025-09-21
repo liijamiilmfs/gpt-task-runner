@@ -2,19 +2,28 @@
  * Clipboard and filename utilities for Librán Voice Forge
  */
 
-import { createHash } from 'crypto'
+/**
+ * Generate a simple hash using Web Crypto API (browser-compatible)
+ */
+async function generateHash(content: string): Promise<string> {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(content)
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data)
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  return hashArray.map(b => b.toString(16).padStart(2, '0')).join('').substring(0, 8)
+}
 
 /**
  * Generate a filename template for audio files
  * Format: {variant}-{hash}-{timestamp}.{extension}
  */
-export function generateFilename(
+export async function generateFilename(
   variant: 'ancient' | 'modern',
   content: string,
   extension: string = 'mp3'
-): string {
+): Promise<string> {
   // Generate a short hash of the content for uniqueness
-  const hash = createHash('md5').update(content).digest('hex').substring(0, 8)
+  const hash = await generateHash(content)
   
   // Generate timestamp in YYYYMMDD-HHMMSS format
   const now = new Date()

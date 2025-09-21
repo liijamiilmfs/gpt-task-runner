@@ -40,7 +40,7 @@ export default function AudioDownloadButton({
       setIsDownloading(true)
       
       // Generate filename based on content and variant
-      const filename = generateFilename(variant, content, 'mp3')
+      const filename = await generateFilename(variant, content, 'mp3')
       const sanitizedFilename = sanitizeFilename(filename)
       
       downloadAudioFile(audioBlob, sanitizedFilename)

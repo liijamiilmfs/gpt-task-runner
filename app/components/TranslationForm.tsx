@@ -12,7 +12,7 @@ const log = {
 }
 
 interface TranslationFormProps {
-  onTranslation: (text: string) => void
+  onTranslation: (text: string, variant: 'ancient' | 'modern', originalText: string) => void
   onLoadingChange: (loading: boolean) => void
 }
 
@@ -56,7 +56,7 @@ export default function TranslationForm({ onTranslation, onLoadingChange }: Tran
         confidence: data.confidence,
         wordCount: data.wordCount
       })
-      onTranslation(data.libran)
+      onTranslation(data.libran, variant, inputText)
     } catch (error) {
       log.error('Translation error', { error: error instanceof Error ? error.message : 'Unknown error' })
       alert('Translation failed. Please try again.')
@@ -68,7 +68,7 @@ export default function TranslationForm({ onTranslation, onLoadingChange }: Tran
 
   const handleClear = () => {
     setInputText('')
-    onTranslation('')
+    onTranslation('', variant, '')
   }
 
   return (

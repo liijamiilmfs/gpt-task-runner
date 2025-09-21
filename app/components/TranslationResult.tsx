@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { BookOpen, FileText, Hash, Calendar } from 'lucide-react'
 import CopyButton from './CopyButton'
 import { generateFilename, formatFileSize } from '@/lib/clipboard-utils'
@@ -23,11 +23,17 @@ export default function TranslationResult({
   className = ''
 }: TranslationResultProps) {
   const [showDetails, setShowDetails] = useState(false)
+  const [filename, setFilename] = useState<string>('')
+  const fileSize = new Blob([libranText]).size
+
+  // Generate filename asynchronously
+  useEffect(() => {
+    if (libranText.trim()) {
+      generateFilename(variant, libranText, 'txt').then(setFilename)
+    }
+  }, [variant, libranText])
 
   if (!libranText.trim()) return null
-
-  const filename = generateFilename(variant, libranText, 'txt')
-  const fileSize = new Blob([libranText]).size
 
   return (
     <div className={`bg-libran-dark border border-libran-gold/20 rounded-lg p-6 ${className}`}>
