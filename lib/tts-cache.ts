@@ -271,11 +271,13 @@ class TTSCache {
         break;
       }
       
-      await this.removeCacheEntry(hash);
+      // Get entry size before deletion
       const entry = this.cache.get(hash);
       if (entry) {
         currentSize -= entry.fileSize;
       }
+      
+      await this.removeCacheEntry(hash);
     }
 
     log.info('TTS cache cleanup completed', { 
