@@ -2,9 +2,14 @@
  * Guardrails API Integration Tests
  */
 
+// Set test environment before any imports
+process.env.NODE_ENV = 'test'
+
 import { describe, it, before, after } from 'node:test'
 import assert from 'node:assert/strict'
 import { NextRequest } from 'next/server'
+import { createRateLimiter } from '../../lib/rate-limiter'
+import { createBudgetGuardrails } from '../../lib/budget-guardrails'
 import { withGuardrails, resetGuardrails } from '../../lib/api-guardrails'
 
 describe('Guardrails API Integration', () => {

@@ -2,7 +2,8 @@
  * Rate Limiter Tests
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, beforeEach, afterEach } from 'node:test'
+import assert from 'node:assert/strict'
 import { RateLimiter, RateLimitConfig } from '../../lib/rate-limiter'
 
 describe('RateLimiter', () => {
@@ -30,8 +31,8 @@ describe('RateLimiter', () => {
       // Should allow burst allowance requests
       for (let i = 0; i < config.burstAllowance; i++) {
         const result = rateLimiter.checkUserLimit(userId)
-        expect(result.allowed).toBe(true)
-        expect(result.remaining).toBe(config.burstAllowance - i - 1)
+        assert.equal(result.allowed, true)
+        assert.equal(result.remaining,config.burstAllowance - i - 1)
       }
     })
 
@@ -45,8 +46,8 @@ describe('RateLimiter', () => {
       
       // Next request should be blocked
       const result = rateLimiter.checkUserLimit(userId)
-      expect(result.allowed).toBe(false)
-      expect(result.retryAfter).toBeDefined()
+      assert.equal(result.allowed, false)
+      assert.ok(result.retryAfter)
     })
 
     it('should refill tokens over time', async () => {
@@ -59,7 +60,7 @@ describe('RateLimiter', () => {
       
       // Should be blocked
       let result = rateLimiter.checkUserLimit(userId)
-      expect(result.allowed).toBe(false)
+      assert.equal(result.allowed, false)
       
       // Mock time passage (1 minute)
       const originalNow = Date.now
@@ -67,7 +68,7 @@ describe('RateLimiter', () => {
       
       // Should allow one more request
       result = rateLimiter.checkUserLimit(userId)
-      expect(result.allowed).toBe(true)
+      assert.equal(result.allowed, true)
       
       // Restore original Date.now
       Date.now = originalNow
@@ -79,8 +80,8 @@ describe('RateLimiter', () => {
       // Should allow burst allowance requests
       for (let i = 0; i < config.burstAllowance; i++) {
         const result = rateLimiter.checkGlobalLimit()
-        expect(result.allowed).toBe(true)
-        expect(result.remaining).toBe(config.burstAllowance - i - 1)
+        assert.equal(result.allowed, true)
+        assert.equal(result.remaining,config.burstAllowance - i - 1)
       }
     })
 
@@ -92,8 +93,8 @@ describe('RateLimiter', () => {
       
       // Next request should be blocked
       const result = rateLimiter.checkGlobalLimit()
-      expect(result.allowed).toBe(false)
-      expect(result.retryAfter).toBeDefined()
+      assert.equal(result.allowed, false)
+      assert.ok(result.retryAfter)
     })
   })
 
@@ -108,15 +109,15 @@ describe('RateLimiter', () => {
       
       // User limit should also be blocked due to global limit
       const result = rateLimiter.checkLimits(userId)
-      expect(result.allowed).toBe(false)
+      assert.equal(result.allowed, false)
     })
 
     it('should allow request if both limits pass', () => {
       const userId = 'test-user-5'
       
       const result = rateLimiter.checkLimits(userId)
-      expect(result.allowed).toBe(true)
-      expect(result.remaining).toBe(config.burstAllowance - 1)
+      assert.equal(result.allowed, true)
+      assert.equal(result.remaining,config.burstAllowance - 1)
     })
   })
 
@@ -128,10 +129,10 @@ describe('RateLimiter', () => {
       rateLimiter.checkLimits(userId)
       
       const status = rateLimiter.getStatus(userId)
-      expect(status.user.tokens).toBe(config.burstAllowance - 1)
-      expect(status.user.requestCount).toBe(1)
-      expect(status.global.tokens).toBe(config.burstAllowance - 1)
-      expect(status.global.requestCount).toBe(1)
+      assert.equal(status.user.tokens,config.burstAllowance - 1)
+      assert.equal(status.user.requestCount,1)
+      assert.equal(status.global.tokens,config.burstAllowance - 1)
+      assert.equal(status.global.requestCount,1)
     })
   })
 
@@ -147,19 +148,19 @@ describe('RateLimiter', () => {
       // Exhaust initial burst
       for (let i = 0; i < config.burstAllowance; i++) {
         const result = rateLimiter.checkUserLimit(userId)
-        expect(result.allowed).toBe(true)
+        assert.equal(result.allowed, true)
       }
       
       // Should be blocked by burst limit
       let result = rateLimiter.checkUserLimit(userId)
-      expect(result.allowed).toBe(false)
+      assert.equal(result.allowed, false)
       
       // Advance time by 1 minute to refill tokens
       mockTime += 60 * 1000 // 1 minute later
       
       // Should allow requests again (tokens refilled based on maxRequestsPerMinute)
       result = rateLimiter.checkUserLimit(userId)
-      expect(result.allowed).toBe(true)
+      assert.equal(result.allowed, true)
       
       // Restore original Date.now
       Date.now = originalNow
@@ -175,8 +176,8 @@ describe('RateLimiter', () => {
       
       // Check status to verify tracking
       const status = rateLimiter.getStatus(userId)
-      expect(status.user.hourlyRequests).toBe(5)
-      expect(status.user.dailyRequests).toBe(5)
+      assert.equal(status.user.hourlyRequests,5)
+      assert.equal(status.user.dailyRequests,5)
     })
 
     it('should reset hourly and daily windows after time passes', () => {
@@ -194,8 +195,8 @@ describe('RateLimiter', () => {
       
       // Check initial counts
       let status = rateLimiter.getStatus(userId)
-      expect(status.user.hourlyRequests).toBe(5)
-      expect(status.user.dailyRequests).toBe(5)
+      assert.equal(status.user.hourlyRequests,5)
+      assert.equal(status.user.dailyRequests,5)
       
       // Advance time by 1 hour to reset hourly window
       mockTime += 60 * 60 * 1000 // 1 hour later
@@ -205,8 +206,8 @@ describe('RateLimiter', () => {
       
       // Check that hourly count reset but daily count continued
       status = rateLimiter.getStatus(userId)
-      expect(status.user.hourlyRequests).toBe(1) // Reset to 1
-      expect(status.user.dailyRequests).toBe(6) // Continued from 5
+      assert.equal(status.user.hourlyRequests,1) // Reset to 1
+      assert.equal(status.user.dailyRequests,6) // Continued from 5
       
       // Restore original Date.now
       Date.now = originalNow
@@ -226,10 +227,10 @@ describe('RateLimiter', () => {
       
       // Should be back to initial state
       const status = rateLimiter.getStatus(userId)
-      expect(status.user.tokens).toBe(config.burstAllowance)
-      expect(status.user.requestCount).toBe(0)
-      expect(status.global.tokens).toBe(config.burstAllowance)
-      expect(status.global.requestCount).toBe(0)
+      assert.equal(status.user.tokens,config.burstAllowance)
+      assert.equal(status.user.requestCount,0)
+      assert.equal(status.global.tokens,config.burstAllowance)
+      assert.equal(status.global.requestCount,0)
     })
   })
 })

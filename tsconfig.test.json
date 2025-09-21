@@ -9,7 +9,8 @@
     "resolveJsonModule": true,
     "strict": true,
     "skipLibCheck": true,
-    "typeRoots": ["./test/types"],
+    "typeRoots": ["./test/types", "./node_modules/@types"],
+    "types": ["node"],
     "lib": ["es2020", "dom"],
     "baseUrl": ".",
     "paths": {
@@ -19,14 +20,11 @@
   },
   "include": [
     "test/**/*.ts",
-    "lib/translator/**/*.ts",
-    "lib/metrics.ts",
-    "lib/logger.ts",
-    "app/api/translate/**/*.ts",
-    "app/api/speak/**/*.ts",
-    "app/api/metrics/**/*.ts"
+    "lib/**/*.ts",
+    "app/api/**/*.ts"
   ],
   "exclude": [
-    "test/vitest/**/*.ts"
+    "test/vitest/**/*.ts",
+    "test/integration/guardrails-api.integration.test.ts"
   ]
 }

@@ -2,7 +2,8 @@
  * Budget Guardrails Tests
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, beforeEach, afterEach } from 'node:test'
+import assert from 'node:assert/strict'
 import { BudgetGuardrails, BudgetConfig } from '../../lib/budget-guardrails'
 
 describe('BudgetGuardrails', () => {
@@ -29,17 +30,17 @@ describe('BudgetGuardrails', () => {
       const userId = 'test-user-1'
       const result = budgetGuardrails.checkBudget(userId, 500)
       
-      expect(result.allowed).toBe(true)
-      expect(result.remainingDaily).toBe(config.maxCharsPerDay)
-      expect(result.remainingMonthly).toBe(config.maxCharsPerMonth)
+      assert.equal(result.allowed, true)
+      assert.equal(result.remainingDaily,config.maxCharsPerDay)
+      assert.equal(result.remainingMonthly,config.maxCharsPerMonth)
     })
 
     it('should block requests exceeding per-request limit', () => {
       const userId = 'test-user-2'
       const result = budgetGuardrails.checkBudget(userId, 15000) // Exceeds 10k limit
       
-      expect(result.allowed).toBe(false)
-      expect(result.reason).toContain('exceeds maximum characters per request')
+      assert.equal(result.allowed, false)
+      assert.ok(result.reason?.includes('exceeds maximum characters per request'))
     })
   })
 
@@ -48,8 +49,8 @@ describe('BudgetGuardrails', () => {
       const userId = 'test-user-3'
       const result = budgetGuardrails.checkBudget(userId, 5000)
       
-      expect(result.allowed).toBe(true)
-      expect(result.remainingDaily).toBe(config.maxCharsPerDay)
+      assert.equal(result.allowed, true)
+      assert.equal(result.remainingDaily,config.maxCharsPerDay)
     })
 
     it('should block requests exceeding daily limit', () => {
@@ -61,8 +62,8 @@ describe('BudgetGuardrails', () => {
       // This should exceed daily limit
       const result = budgetGuardrails.checkBudget(userId, 10000)
       
-      expect(result.allowed).toBe(false)
-      expect(result.reason).toContain('Daily character limit exceeded')
+      assert.equal(result.allowed, false)
+      assert.ok(result.reason?.includes('Daily character limit exceeded'))
     })
   })
 
@@ -71,8 +72,8 @@ describe('BudgetGuardrails', () => {
       const userId = 'test-user-5'
       const result = budgetGuardrails.checkBudget(userId, 5000)
       
-      expect(result.allowed).toBe(true)
-      expect(result.remainingMonthly).toBe(config.maxCharsPerMonth)
+      assert.equal(result.allowed, true)
+      assert.equal(result.remainingMonthly,config.maxCharsPerMonth)
     })
 
     it('should block requests exceeding monthly limit', () => {
@@ -90,8 +91,8 @@ describe('BudgetGuardrails', () => {
       // This should exceed monthly limit
       const result = budgetGuardrails.checkBudget(userId, 10000)
       
-      expect(result.allowed).toBe(false)
-      expect(result.reason).toContain('Monthly character limit exceeded')
+      assert.equal(result.allowed, false)
+      assert.ok(result.reason?.includes('Monthly character limit exceeded'))
       
       // Restore original Date.now
       Date.now = originalNow
@@ -103,7 +104,7 @@ describe('BudgetGuardrails', () => {
       const userId = 'test-user-7'
       const result = budgetGuardrails.checkBudget(userId, 5000)
       
-      expect(result.allowed).toBe(true)
+      assert.equal(result.allowed, true)
     })
 
     it('should block requests exceeding cost limit', () => {
@@ -121,8 +122,8 @@ describe('BudgetGuardrails', () => {
       // This should exceed cost limit (5000 chars = 0.05 USD, total would be 9.55 USD)
       const result = budgetGuardrails.checkBudget(userId, 5000)
       
-      expect(result.allowed).toBe(false)
-      expect(result.reason).toContain('Monthly cost limit exceeded')
+      assert.equal(result.allowed, false)
+      assert.ok(result.reason?.includes('Monthly cost limit exceeded'))
       
       // Restore original Date.now
       Date.now = originalNow
@@ -137,8 +138,8 @@ describe('BudgetGuardrails', () => {
       budgetGuardrails.recordUsage(userId, 2000)
       
       const status = budgetGuardrails.getBudgetStatus(userId)
-      expect(status.dailyChars).toBe(3000)
-      expect(status.monthlyChars).toBe(3000)
+      assert.equal(status.dailyChars,3000)
+      assert.equal(status.monthlyChars,3000)
     })
 
     it('should calculate cost correctly', () => {
@@ -148,7 +149,7 @@ describe('BudgetGuardrails', () => {
       budgetGuardrails.recordUsage(userId, 5000)  // 5k chars = 0.05 USD
       
       const status = budgetGuardrails.getBudgetStatus(userId)
-      expect(status.totalCost).toBeCloseTo(0.15, 2)
+      assert.ok(Math.abs(status.totalCost - 0.15) < 0.01)
     })
   })
 
@@ -165,8 +166,8 @@ describe('BudgetGuardrails', () => {
       
       // Check budget - should be reset
       const result = budgetGuardrails.checkBudget(userId, 5000)
-      expect(result.allowed).toBe(true)
-      expect(result.remainingDaily).toBe(config.maxCharsPerDay)
+      assert.equal(result.allowed, true)
+      assert.equal(result.remainingDaily,config.maxCharsPerDay)
       
       // Restore original Date.now
       Date.now = originalNow
@@ -188,8 +189,8 @@ describe('BudgetGuardrails', () => {
       
       // Check budget - should be reset
       const result = budgetGuardrails.checkBudget(userId, 5000)
-      expect(result.allowed).toBe(true)
-      expect(result.remainingMonthly).toBe(config.maxCharsPerMonth)
+      assert.equal(result.allowed, true)
+      assert.equal(result.remainingMonthly,config.maxCharsPerMonth)
       
       // Restore original Date.now
       Date.now = originalNow
@@ -202,8 +203,8 @@ describe('BudgetGuardrails', () => {
       budgetGuardrails.recordUsage('user2', 2000)
       
       const globalStatus = budgetGuardrails.getGlobalBudgetStatus()
-      expect(globalStatus.dailyChars).toBe(3000)
-      expect(globalStatus.monthlyChars).toBe(3000)
+      assert.equal(globalStatus.dailyChars,3000)
+      assert.equal(globalStatus.monthlyChars,3000)
     })
   })
 
@@ -219,9 +220,9 @@ describe('BudgetGuardrails', () => {
       
       // Should be back to initial state
       const status = budgetGuardrails.getBudgetStatus(userId)
-      expect(status.dailyChars).toBe(0)
-      expect(status.monthlyChars).toBe(0)
-      expect(status.totalCost).toBe(0)
+      assert.equal(status.dailyChars,0)
+      assert.equal(status.monthlyChars,0)
+      assert.equal(status.totalCost,0)
     })
   })
 })
