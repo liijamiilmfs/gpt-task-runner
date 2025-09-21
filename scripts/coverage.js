@@ -17,9 +17,9 @@ if (!fs.existsSync(coverageDir)) {
 console.log('📊 Collecting test metrics...');
 
 try {
-  // Run Node.js tests
+  // Run Node.js tests (this will build and run tests)
   console.log('Running Node.js tests...');
-  execSync('npm run test:run', { stdio: 'pipe' });
+  execSync('npm test', { stdio: 'pipe' });
   
   // Generate a simple coverage report
   const coverageReport = {
