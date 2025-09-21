@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🆘 GitHub Community Support
+    url: https://github.com/liijamiilmfs/english-to-libran-text-to-voice/discussions
+    about: Ask questions and get help from the community
+  - name: 📖 Documentation
+    url: https://github.com/liijamiilmfs/english-to-libran-text-to-voice/blob/main/README.md
+    about: Check our documentation for setup and usage guides
