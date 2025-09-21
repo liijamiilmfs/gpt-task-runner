@@ -19,7 +19,7 @@ const SENSITIVE_PATTERNS = [
 ]
 
 // Sanitize sensitive data from log objects
-function sanitizeLogData(data: any, visited = new WeakSet()): any {
+function sanitizeLogData(data: any): any {
   if (typeof data === 'string') {
     let sanitized = data
     SENSITIVE_PATTERNS.forEach(pattern => {
@@ -29,22 +29,19 @@ function sanitizeLogData(data: any, visited = new WeakSet()): any {
   }
   
   if (typeof data === 'object' && data !== null) {
-    // Check for circular references
-    if (visited.has(data)) {
+    // Use JSON.stringify/parse to handle circular references safely
+    try {
+      const jsonString = JSON.stringify(data, (key, value) => {
+        if (SENSITIVE_PATTERNS.some(pattern => pattern.test(key))) {
+          return '[REDACTED]'
+        }
+        return value
+      })
+      return JSON.parse(jsonString)
+    } catch (error) {
+      // If JSON.stringify fails due to circular reference, return a safe representation
       return '[Circular Reference]'
     }
-    visited.add(data)
-    
-    const sanitized: any = Array.isArray(data) ? [] : {}
-    for (const [key, value] of Object.entries(data)) {
-      const lowerKey = key.toLowerCase()
-      if (SENSITIVE_PATTERNS.some(pattern => pattern.test(key))) {
-        sanitized[key] = '[REDACTED]'
-      } else {
-        sanitized[lowerKey] = sanitizeLogData(value, visited)
-      }
-    }
-    return sanitized
   }
   
   return data
@@ -79,7 +76,18 @@ const baseConfig = {
   env: process.env.NODE_ENV || 'development'
 }
 
-// Create main logger
+// Create rotating file streams
+function createRotatingStream(logDir: string, filename: string) {
+  const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD
+  const filePath = path.join(logDir, `${filename}-${today}.log`)
+  
+  return pino.destination({
+    dest: filePath,
+    sync: false
+  })
+}
+
+// Create main logger with file transports
 const logger = pino({
   level: process.env.LOG_LEVEL || (isDev ? 'debug' : 'info'),
   base: baseConfig,
@@ -87,20 +95,30 @@ const logger = pino({
   formatters: {
     level(label) { return { level: label } }
   }
-}, isDev && !isTest
-  ? pino.transport({
+}, pino.multistream([
+  // File transport for all logs with daily rotation
+  {
+    stream: createRotatingStream(logsSubDirs.application, 'application')
+  },
+  // Error file transport with daily rotation
+  {
+    level: 'error',
+    stream: createRotatingStream(logsSubDirs.errors, 'error')
+  },
+  // Console transport for development
+  ...(isDev && !isTest ? [{
+    stream: pino.transport({
       target: 'pino-pretty',
       options: {
         colorize: true,
         translateTime: 'SYS:standard',
         singleLine: false,
         messageKey: 'msg',
-        ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id',
-        // Remove customPrettifiers as they cause DataCloneError in worker threads
+        ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id'
       }
     })
-  : undefined
-)
+  }] : [])
+]))
 
 // Note: We use the main logger with daily rotation instead of separate file loggers
 // to avoid creating empty files and duplicate logging

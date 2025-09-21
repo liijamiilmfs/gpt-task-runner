@@ -224,7 +224,7 @@ function viewLogs() {
     // Follow mode - show recent logs and then follow
     logFiles.forEach(file => {
       try {
-        const content = execSync(`tail -n ${config.lines} "${file}"`, { encoding: 'utf8' })
+        const content = execSync(`Get-Content "${file}" -Tail ${config.lines}`, { encoding: 'utf8', shell: 'powershell' })
         const lines = content.split('\n').filter(line => line.trim())
         lines.forEach(line => {
           const formatted = formatLogLine(line)
@@ -241,7 +241,7 @@ function viewLogs() {
     console.log(`${colors.dim}Press Ctrl+C to stop${colors.reset}`)
     
     const { spawn } = require('child_process')
-    const tail = spawn('tail', ['-f', mostRecentFile])
+    const tail = spawn('powershell', ['-Command', `Get-Content "${mostRecentFile}" -Wait -Tail 10`])
     
     tail.stdout.on('data', (data) => {
       const lines = data.toString().split('\n').filter(line => line.trim())
@@ -263,7 +263,7 @@ function viewLogs() {
     // Show recent logs
     logFiles.forEach(file => {
       try {
-        const content = execSync(`tail -n ${config.lines} "${file}"`, { encoding: 'utf8' })
+        const content = execSync(`Get-Content "${file}" -Tail ${config.lines}`, { encoding: 'utf8', shell: 'powershell' })
         const lines = content.split('\n').filter(line => line.trim())
         lines.forEach(line => {
           const formatted = formatLogLine(line)
