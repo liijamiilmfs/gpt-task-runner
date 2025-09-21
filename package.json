@@ -22,6 +22,12 @@
     "test:all": "node scripts/run-all-tests.js",
     "test:all:coverage": "node scripts/run-all-tests.js --coverage",
     "test:load": "node scripts/load-test-guardrails.js",
+    "logs:view": "node scripts/view-logs.js",
+    "logs:follow": "node scripts/view-logs.js --follow",
+    "logs:api": "node scripts/view-logs.js --type=api --follow",
+    "logs:error": "node scripts/view-logs.js --type=error --follow",
+    "logs:translation": "node scripts/view-logs.js --type=translation --follow",
+    "logs:tts": "node scripts/view-logs.js --type=tts --follow",
     "dict:build": "node scripts/dict-build.js",
     "dict:import": "node scripts/dict-import.js",
     "dict:import-libran": "node scripts/dict-import-libran.js"

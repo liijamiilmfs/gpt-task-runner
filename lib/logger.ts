@@ -1,6 +1,7 @@
 import * as winston from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'
 import * as path from 'path'
+import * as fs from 'fs'
 
 // Sensitive data patterns to sanitize
 const SENSITIVE_PATTERNS = [
@@ -38,11 +39,46 @@ function sanitizeLogData(data: any): any {
         sanitized[lowerKey] = sanitizeLogData(value)
       }
     }
-
     return sanitized
   }
   
   return data
+}
+
+// Create logs directory structure
+const logsDir = path.join(process.cwd(), 'logs')
+const logsSubDirs = {
+  application: path.join(logsDir, 'application'),
+  errors: path.join(logsDir, 'errors'),
+  api: path.join(logsDir, 'api'),
+  translation: path.join(logsDir, 'translation'),
+  tts: path.join(logsDir, 'tts'),
+  metrics: path.join(logsDir, 'metrics'),
+  performance: path.join(logsDir, 'performance'),
+  security: path.join(logsDir, 'security')
+}
+
+// Ensure all log directories exist
+Object.values(logsSubDirs).forEach(dir => {
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true })
+  }
+})
+
+// Environment-based log rotation settings
+const isDevelopment = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+const maxSize = isDevelopment ? '200m' : '100m'
+const maxFiles = isDevelopment ? '7d' : '14d'
+
+// Color coding for different log levels
+const colors = {
+  error: '\x1b[31m', // Red
+  warn: '\x1b[33m', // Yellow
+  info: '\x1b[36m', // Cyan
+  http: '\x1b[35m', // Magenta
+  debug: '\x1b[90m', // Gray
+  success: '\x1b[32m', // Green
+  reset: '\x1b[0m' // Reset
 }
 
 // Custom format that sanitizes sensitive data
@@ -66,17 +102,23 @@ const sanitizeFormat = winston.format((info) => {
   return info
 })
 
-// Create logs directory if it doesn't exist
-const logsDir = path.join(process.cwd(), 'logs')
+// Human-readable format for console
+const humanReadableFormat = winston.format.printf(({ timestamp, level, message, service, environment, type, correlationId, ...meta }) => {
+  const color = colors[level as keyof typeof colors] || colors.reset
+  const reset = colors.reset
+  const time = timestamp.replace('T', ' ').replace('Z', '')
+  const serviceStr = service ? `[${service}]` : ''
+  const envStr = environment && environment !== 'production' ? `[${environment}]` : ''
+  const corrStr = correlationId ? `[${correlationId}]` : ''
+  const typeStr = type ? `[${type}]` : ''
+  const metaStr = Object.keys(meta).length ? `\n${JSON.stringify(meta, null, 2)}` : ''
+  
+  return `${color}${time} ${serviceStr}${envStr}${corrStr}${typeStr} [${level.toUpperCase()}]${reset} ${message}${metaStr}`
+})
 
-// Environment-based log rotation settings
-const isDevelopment = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
-const maxSize = isDevelopment ? '500m' : '200m' // Increased size for error taxonomy logging
-const maxFiles = isDevelopment ? '7d' : '30d' // Longer retention for production error analysis
-
-// Configure daily rotate file transport
+// Configure daily rotate file transport for application logs
 const dailyRotateTransport = new DailyRotateFile({
-  filename: path.join(logsDir, 'application-%DATE%.log'),
+  filename: path.join(logsSubDirs.application, 'application-%DATE%.log'),
   datePattern: 'YYYY-MM-DD',
   maxSize: maxSize,
   maxFiles: maxFiles,
@@ -91,16 +133,91 @@ const dailyRotateTransport = new DailyRotateFile({
 
 // Error log transport
 const errorRotateTransport = new DailyRotateFile({
-  filename: path.join(logsDir, 'error-%DATE%.log'),
+  filename: path.join(logsSubDirs.errors, 'error-%DATE%.log'),
   datePattern: 'YYYY-MM-DD',
   level: 'error',
-  maxSize: isDevelopment ? '200m' : '100m', // Increased size for error taxonomy logging
-  maxFiles: isDevelopment ? '14d' : '60d', // Longer retention for production error analysis
+  maxSize: isDevelopment ? '100m' : '50m',
+  maxFiles: isDevelopment ? '14d' : '30d',
   zippedArchive: true,
   format: winston.format.combine(
     sanitizeFormat(),
     winston.format.timestamp(),
     winston.format.errors({ stack: true }),
+    winston.format.json()
+  )
+})
+
+// API log transport
+const apiRotateTransport = new DailyRotateFile({
+  filename: path.join(logsSubDirs.api, 'api-%DATE%.log'),
+  datePattern: 'YYYY-MM-DD',
+  level: 'http',
+  maxSize: '50m',
+  maxFiles: '7d',
+  zippedArchive: true,
+  format: winston.format.combine(
+    sanitizeFormat(),
+    winston.format.timestamp(),
+    winston.format.json()
+  )
+})
+
+// Translation log transport
+const translationRotateTransport = new DailyRotateFile({
+  filename: path.join(logsSubDirs.translation, 'translation-%DATE%.log'),
+  datePattern: 'YYYY-MM-DD',
+  level: 'info',
+  maxSize: '50m',
+  maxFiles: '7d',
+  zippedArchive: true,
+  format: winston.format.combine(
+    sanitizeFormat(),
+    winston.format.timestamp(),
+    winston.format.json()
+  )
+})
+
+// TTS log transport
+const ttsRotateTransport = new DailyRotateFile({
+  filename: path.join(logsSubDirs.tts, 'tts-%DATE%.log'),
+  datePattern: 'YYYY-MM-DD',
+  level: 'info',
+  maxSize: '50m',
+  maxFiles: '7d',
+  zippedArchive: true,
+  format: winston.format.combine(
+    sanitizeFormat(),
+    winston.format.timestamp(),
+    winston.format.json()
+  )
+})
+
+// Performance log transport
+const performanceRotateTransport = new DailyRotateFile({
+  filename: path.join(logsSubDirs.performance, 'performance-%DATE%.log'),
+  datePattern: 'YYYY-MM-DD',
+  level: 'info',
+  maxSize: '25m',
+  maxFiles: '3d',
+  zippedArchive: true,
+  format: winston.format.combine(
+    sanitizeFormat(),
+    winston.format.timestamp(),
+    winston.format.json()
+  )
+})
+
+// Security log transport
+const securityRotateTransport = new DailyRotateFile({
+  filename: path.join(logsSubDirs.security, 'security-%DATE%.log'),
+  datePattern: 'YYYY-MM-DD',
+  level: 'warn',
+  maxSize: '25m',
+  maxFiles: '30d',
+  zippedArchive: true,
+  format: winston.format.combine(
+    sanitizeFormat(),
+    winston.format.timestamp(),
     winston.format.json()
   )
 })
@@ -120,30 +237,30 @@ const logger = winston.createLogger({
   },
   transports: [
     dailyRotateTransport,
-    errorRotateTransport
+    errorRotateTransport,
+    apiRotateTransport,
+    translationRotateTransport,
+    ttsRotateTransport,
+    performanceRotateTransport,
+    securityRotateTransport
   ]
 })
 
-// Add console transport for development
+// Add console transport for development with colors
 if (process.env.NODE_ENV !== 'production') {
   logger.add(new winston.transports.Console({
     format: winston.format.combine(
       sanitizeFormat(),
       winston.format.colorize(),
       winston.format.timestamp({ format: 'HH:mm:ss' }),
-      winston.format.printf(({ timestamp, level, message, service, environment, ...meta }) => {
-        const serviceStr = service ? `[${service}]` : ''
-        const envStr = environment && environment !== 'production' ? `[${environment}]` : ''
-        const metaStr = Object.keys(meta).length ? `\n${JSON.stringify(meta, null, 2)}` : ''
-        return `${timestamp} ${serviceStr}${envStr} [${level}]: ${message}${metaStr}`
-      })
+      humanReadableFormat
     )
   }))
 }
 
 // Add rotation event handlers for monitoring
 dailyRotateTransport.on('rotate', (oldFilename, newFilename) => {
-  console.log(`Log rotated: ${oldFilename} -> ${newFilename}`)
+  console.log(`📁 Log rotated: ${oldFilename} -> ${newFilename}`)
   logger.info('Log file rotated', {
     type: 'log_rotation',
     oldFile: oldFilename,
@@ -153,7 +270,7 @@ dailyRotateTransport.on('rotate', (oldFilename, newFilename) => {
 })
 
 errorRotateTransport.on('rotate', (oldFilename, newFilename) => {
-  console.log(`Error log rotated: ${oldFilename} -> ${newFilename}`)
+  console.log(`🔴 Error log rotated: ${oldFilename} -> ${newFilename}`)
   logger.info('Error log file rotated', {
     type: 'log_rotation',
     oldFile: oldFilename,
@@ -264,6 +381,25 @@ export const log = {
       type: 'performance',
       operation,
       duration,
+      ...meta
+    })
+  },
+
+  // Security logging
+  security: (event: string, meta?: any) => {
+    logger.warn('Security Event', {
+      type: 'security',
+      event,
+      ...meta
+    })
+  },
+
+  // Metrics logging
+  metrics: (metric: string, value: number, meta?: any) => {
+    logger.info('Metrics', {
+      type: 'metrics',
+      metric,
+      value,
       ...meta
     })
   }
