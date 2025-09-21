@@ -71,8 +71,8 @@ const logsDir = path.join(process.cwd(), 'logs')
 
 // Environment-based log rotation settings
 const isDevelopment = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
-const maxSize = isDevelopment ? '200m' : '100m' // Larger size for development/testing
-const maxFiles = isDevelopment ? '7d' : '14d' // Shorter retention for development
+const maxSize = isDevelopment ? '500m' : '200m' // Increased size for error taxonomy logging
+const maxFiles = isDevelopment ? '7d' : '30d' // Longer retention for production error analysis
 
 // Configure daily rotate file transport
 const dailyRotateTransport = new DailyRotateFile({
@@ -94,8 +94,8 @@ const errorRotateTransport = new DailyRotateFile({
   filename: path.join(logsDir, 'error-%DATE%.log'),
   datePattern: 'YYYY-MM-DD',
   level: 'error',
-  maxSize: isDevelopment ? '100m' : '50m', // Larger size for development/testing
-  maxFiles: isDevelopment ? '14d' : '30d', // Shorter retention for development
+  maxSize: isDevelopment ? '200m' : '100m', // Increased size for error taxonomy logging
+  maxFiles: isDevelopment ? '14d' : '60d', // Longer retention for production error analysis
   zippedArchive: true,
   format: winston.format.combine(
     sanitizeFormat(),
@@ -236,6 +236,26 @@ export const log = {
       },
       ...meta
     })
+  },
+
+  // Error taxonomy logging with correlation ID
+  errorTaxonomy: (errorCode: string, userMessage: string, category: string, severity: string, meta?: any) => {
+    logger.error('Error Taxonomy', {
+      type: 'error_taxonomy',
+      errorCode,
+      userMessage,
+      category,
+      severity,
+      ...meta
+    })
+  },
+
+  // Correlation ID logging
+  withCorrelationId: (correlationId: string, meta?: any) => {
+    return {
+      correlationId,
+      ...meta
+    }
   },
   
   // Performance logging
