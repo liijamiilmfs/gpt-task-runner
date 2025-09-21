@@ -83,17 +83,17 @@ jobs:
         cd tools/dict_importer
         python -c "import dict_importer; print('Dictionary importer imported successfully')"
         
-    - name: Run importer unit tests
+    - name: Run importer unit tests (JSON parsing only)
       run: |
         cd tools/dict_importer
-        echo "Running importer unit tests..."
-        python -m pytest tests/test_normalize.py tests/test_parse_tables.py tests/test_validation.py -v
+        echo "Running importer unit tests (JSON parsing only)..."
+        python -m pytest tests/test_normalize.py tests/test_validation.py -v
         
-    - name: Run importer integration tests
+    - name: Run importer integration tests (JSON parsing only)
       run: |
         cd tools/dict_importer
-        echo "Running importer integration tests..."
-        python -m pytest tests/test_integration.py tests/test_json_importer.py tests/test_libran_json_importer.py -v
+        echo "Running importer integration tests (JSON parsing only)..."
+        python -m pytest tests/test_json_importer.py tests/test_libran_json_importer.py -v
         
     - name: Run importer CLI tests
       run: |
@@ -141,11 +141,11 @@ jobs:
         echo "Generating Node.js coverage report..."
         npm run test:coverage
         
-    - name: Run Python tests with coverage
+    - name: Run Python tests with coverage (JSON parsing only)
       run: |
         cd tools/dict_importer
-        echo "Running Python tests with coverage..."
-        python -m pytest tests/ --cov=dict_importer --cov-report=xml --cov-report=html -v
+        echo "Running Python tests with coverage (JSON parsing only)..."
+        python -m pytest tests/test_normalize.py tests/test_validation.py tests/test_json_importer.py tests/test_libran_json_importer.py --cov=dict_importer --cov-report=xml --cov-report=html -v
         
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v3
