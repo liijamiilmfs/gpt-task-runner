@@ -69,12 +69,17 @@ const sanitizeFormat = winston.format((info) => {
 // Create logs directory if it doesn't exist
 const logsDir = path.join(process.cwd(), 'logs')
 
+// Environment-based log rotation settings
+const isDevelopment = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
+const maxSize = isDevelopment ? '200m' : '100m' // Larger size for development/testing
+const maxFiles = isDevelopment ? '7d' : '14d' // Shorter retention for development
+
 // Configure daily rotate file transport
 const dailyRotateTransport = new DailyRotateFile({
   filename: path.join(logsDir, 'application-%DATE%.log'),
   datePattern: 'YYYY-MM-DD',
-  maxSize: '20m',
-  maxFiles: '14d',
+  maxSize: maxSize,
+  maxFiles: maxFiles,
   zippedArchive: true,
   format: winston.format.combine(
     sanitizeFormat(),
@@ -89,8 +94,8 @@ const errorRotateTransport = new DailyRotateFile({
   filename: path.join(logsDir, 'error-%DATE%.log'),
   datePattern: 'YYYY-MM-DD',
   level: 'error',
-  maxSize: '20m',
-  maxFiles: '30d',
+  maxSize: isDevelopment ? '100m' : '50m', // Larger size for development/testing
+  maxFiles: isDevelopment ? '14d' : '30d', // Shorter retention for development
   zippedArchive: true,
   format: winston.format.combine(
     sanitizeFormat(),
@@ -135,6 +140,27 @@ if (process.env.NODE_ENV !== 'production') {
     )
   }))
 }
+
+// Add rotation event handlers for monitoring
+dailyRotateTransport.on('rotate', (oldFilename, newFilename) => {
+  console.log(`Log rotated: ${oldFilename} -> ${newFilename}`)
+  logger.info('Log file rotated', {
+    type: 'log_rotation',
+    oldFile: oldFilename,
+    newFile: newFilename,
+    reason: 'size_limit_reached'
+  })
+})
+
+errorRotateTransport.on('rotate', (oldFilename, newFilename) => {
+  console.log(`Error log rotated: ${oldFilename} -> ${newFilename}`)
+  logger.info('Error log file rotated', {
+    type: 'log_rotation',
+    oldFile: oldFilename,
+    newFile: newFilename,
+    reason: 'size_limit_reached'
+  })
+})
 
 // Log levels for different types of operations
 export const LogLevels = {
