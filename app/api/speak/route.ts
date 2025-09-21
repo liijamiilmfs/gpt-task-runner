@@ -4,13 +4,14 @@ import { metrics } from '@/lib/metrics'
 import { log } from '@/lib/logger'
 import { ttsCache } from '@/lib/tts-cache'
 import { withGuardrails } from '@/lib/api-guardrails'
+import { ErrorTaxonomy, ErrorCode, createErrorResponse } from '@/lib/error-taxonomy'
 
 async function handleSpeakRequest(request: NextRequest) {
   const startTime = Date.now()
   let success = false
   let characterCount = 0
   let audioDuration = 0
-  const requestId = Math.random().toString(36).substring(7)
+  const requestId = ErrorTaxonomy.generateCorrelationId()
 
   log.apiRequest('POST', '/api/speak', { requestId })
 
@@ -22,34 +23,28 @@ async function handleSpeakRequest(request: NextRequest) {
     } = await request.json()
 
     if (!libranText || typeof libranText !== 'string') {
-      log.warn('TTS validation failed: missing or invalid libranText', { requestId })
+      const errorResponse = createErrorResponse(ErrorCode.VALIDATION_MISSING_TEXT, { requestId })
+      log.errorTaxonomy(ErrorCode.VALIDATION_MISSING_TEXT, errorResponse.body.userMessage, 'validation', 'low', { requestId })
       metrics.recordError('validation_error', 'libranText is required and must be a string')
-      return NextResponse.json(
-        { error: 'libranText is required and must be a string' },
-        { status: 400 }
-      )
+      return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     // Validate voice parameter
     const validVoices = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
     if (!validVoices.includes(voice)) {
-      log.warn('TTS validation failed: invalid voice parameter', { requestId, voice })
+      const errorResponse = createErrorResponse(ErrorCode.VALIDATION_INVALID_VOICE, { requestId, voice })
+      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_VOICE, errorResponse.body.userMessage, 'validation', 'low', { requestId, voice })
       metrics.recordError('validation_error', 'Invalid voice parameter')
-      return NextResponse.json(
-        { error: 'Invalid voice parameter' },
-        { status: 400 }
-      )
+      return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     // Validate format parameter
     const validFormats = ['mp3', 'wav', 'flac']
     if (!validFormats.includes(format)) {
-      log.warn('TTS validation failed: invalid format parameter', { requestId, format })
+      const errorResponse = createErrorResponse(ErrorCode.VALIDATION_INVALID_FORMAT, { requestId, format })
+      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_FORMAT, errorResponse.body.userMessage, 'validation', 'low', { requestId, format })
       metrics.recordError('validation_error', 'Invalid format parameter')
-      return NextResponse.json(
-        { error: 'Invalid format parameter' },
-        { status: 400 }
-      )
+      return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     characterCount = libranText.length
@@ -146,36 +141,32 @@ async function handleSpeakRequest(request: NextRequest) {
 
     // Handle specific OpenAI errors
     if (error.status === 429) {
-      log.warn('OpenAI quota exceeded', { requestId, errorType: 'quota_exceeded' })
+      const errorResponse = createErrorResponse(ErrorCode.OPENAI_QUOTA_EXCEEDED, { requestId })
+      log.errorTaxonomy(ErrorCode.OPENAI_QUOTA_EXCEEDED, errorResponse.body.userMessage, 'external_api', 'high', { requestId })
       metrics.recordError('openai_quota_error', 'OpenAI quota exceeded')
-      return NextResponse.json(
-        {
-          error: 'OpenAI quota exceeded. Please check your billing details or try again later.',
-          type: 'quota_exceeded',
-          details: 'You have exceeded your current OpenAI API quota. Please add credits or upgrade your plan.'
-        },
-        { status: 429 }
-      )
+      return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     if (error.type === 'insufficient_quota') {
-      log.warn('OpenAI insufficient quota', { requestId, errorType: 'insufficient_quota' })
+      const errorResponse = createErrorResponse(ErrorCode.OPENAI_QUOTA_EXCEEDED, { requestId })
+      log.errorTaxonomy(ErrorCode.OPENAI_QUOTA_EXCEEDED, errorResponse.body.userMessage, 'external_api', 'high', { requestId })
       metrics.recordError('openai_quota_error', 'OpenAI insufficient quota')
-      return NextResponse.json(
-        {
-          error: 'OpenAI quota exceeded. Please check your billing details.',
-          type: 'quota_exceeded',
-          details: 'Your OpenAI account has insufficient quota for this request.'
-        },
-        { status: 429 }
-      )
+      return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
+    // Handle other OpenAI errors
+    if (error.name === 'OpenAIError') {
+      const errorResponse = createErrorResponse(ErrorCode.OPENAI_API_ERROR, { requestId }, error)
+      log.errorTaxonomy(ErrorCode.OPENAI_API_ERROR, errorResponse.body.userMessage, 'external_api', 'high', { requestId })
+      metrics.recordError('openai_error', errorMessage)
+      return NextResponse.json(errorResponse.body, { status: errorResponse.status })
+    }
+
+    // Handle general TTS errors
+    const errorResponse = createErrorResponse(ErrorCode.TTS_GENERATION_FAILED, { requestId }, error)
+    log.errorTaxonomy(ErrorCode.TTS_GENERATION_FAILED, errorResponse.body.userMessage, 'tts', 'high', { requestId })
     metrics.recordError('tts_error', errorMessage)
-    return NextResponse.json(
-      { error: 'Speech generation failed' },
-      { status: 500 }
-    )
+    return NextResponse.json(errorResponse.body, { status: errorResponse.status })
   } finally {
     const responseTime = Date.now() - startTime
     log.apiResponse('POST', '/api/speak', success ? 200 : 500, responseTime, { requestId })
