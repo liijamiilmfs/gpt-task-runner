@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getGuardrailsStatus } from '@/lib/api-guardrails'
-import { log } from '@/lib/logger'
+import { log, generateCorrelationId, LogEvents } from '@/lib/logger'
 
 /**
  * GET /api/guardrails-status
  * Returns current guardrails status for the requesting user
  */
 export async function GET(request: NextRequest) {
-  const requestId = Math.random().toString(36).substring(7)
+  const requestId = generateCorrelationId()
   
   try {
     // Extract user ID from request (same logic as in api-guardrails.ts)
@@ -17,11 +17,11 @@ export async function GET(request: NextRequest) {
                'unknown'
     const userId = ip
 
-    log.apiRequest('GET', '/api/guardrails-status', { requestId, userId })
+    log.apiRequest('GET', '/api/guardrails-status', requestId, { userId })
 
     const status = getGuardrailsStatus(userId)
 
-    log.apiResponse('GET', '/api/guardrails-status', 200, 0, { requestId })
+    log.apiResponse('GET', '/api/guardrails-status', 200, 0, requestId, { userId })
 
     return NextResponse.json({
       userId,
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     })
 
   } catch (error) {
-    log.errorWithContext(error as Error, 'Guardrails status API', { requestId })
+    log.errorWithContext(error as Error, LogEvents.INTERNAL_ERROR, requestId, { api: 'guardrails-status' })
     return NextResponse.json(
       { error: 'Failed to get guardrails status' },
       { status: 500 }

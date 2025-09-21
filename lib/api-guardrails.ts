@@ -211,7 +211,7 @@ export function withGuardrails(
       return response
 
     } catch (error) {
-      log.errorWithContext(error as Error, 'Guardrails middleware error', { requestId, userId })
+      log.errorWithContext(error as Error, 'GUARDRAILS_MIDDLEWARE_ERROR', requestId, { userId })
       return NextResponse.json(
         { error: 'Internal server error' },
         { status: 500 }

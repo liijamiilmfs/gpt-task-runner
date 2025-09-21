@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { translate, Variant } from '@/lib/translator'
 import { metrics } from '@/lib/metrics'
-import { log } from '@/lib/logger'
+import { log, generateCorrelationId, LogEvents } from '@/lib/logger'
 import { withGuardrails } from '@/lib/api-guardrails'
+import { ErrorCode, createErrorResponse } from '@/lib/error-taxonomy'
 
 async function handleTranslateRequest(request: NextRequest) {
   const startTime = Date.now()
@@ -10,33 +11,33 @@ async function handleTranslateRequest(request: NextRequest) {
   let characterCount = 0
   let unknownTokens = 0
   let confidence = 0
-  const requestId = Math.random().toString(36).substring(7)
+  const requestId = generateCorrelationId()
 
-  log.apiRequest('POST', '/api/translate', { requestId })
+  log.apiRequest('POST', '/api/translate', requestId)
 
   try {
     const { text, variant = 'ancient' } = await request.json()
 
     if (!text || typeof text !== 'string') {
-      log.warn('Translation validation failed: missing or invalid text', { requestId })
+      const errorResponse = createErrorResponse(ErrorCode.VALIDATION_MISSING_TEXT, { requestId })
+      log.validationFail('text', 'Text is required and must be a string', requestId)
       metrics.recordError('validation_error', 'Text is required and must be a string')
-      return NextResponse.json(
-        { error: 'Text is required and must be a string' },
-        { status: 400 }
-      )
+      return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     if (!['ancient', 'modern'].includes(variant)) {
-      log.warn('Translation validation failed: invalid variant', { requestId, variant })
+      const errorResponse = createErrorResponse(ErrorCode.VALIDATION_INVALID_VARIANT, { requestId, variant })
+      log.validationFail('variant', 'Variant must be either "ancient" or "modern"', requestId, { variant })
       metrics.recordError('validation_error', 'Variant must be either "ancient" or "modern"')
-      return NextResponse.json(
-        { error: 'Variant must be either "ancient" or "modern"' },
-        { status: 400 }
-      )
+      return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     characterCount = text.length
-    log.info('Starting translation', { requestId, textLength: text.length, variant })
+    log.info('Starting translation', {
+      event: LogEvents.TRANSLATE_START,
+      corr_id: requestId,
+      ctx: { text_length: text.length, variant }
+    })
 
     // Translate the text
     const result = translate(text, variant as Variant)
@@ -51,11 +52,21 @@ async function handleTranslateRequest(request: NextRequest) {
       !translatedWords.some(tWord => tWord.includes(word) || word.includes(tWord))
     ).length
 
-    // Log translation details
-    log.translation(text, variant, result.libran, confidence, {
-      requestId,
-      wordCount: result.wordCount,
-      unknownTokens
+    // Log unknown tokens individually
+    if (unknownTokens > 0) {
+      const unknownWords = words.filter(word => 
+        word.length > 0 && 
+        !translatedWords.some(tWord => tWord.includes(word) || word.includes(tWord))
+      )
+      unknownWords.forEach(word => {
+        log.unknownToken(word, variant, requestId)
+      })
+    }
+
+    // Log translation completion
+    log.translation(text, variant, result.libran, confidence, requestId, {
+      unknownWords: unknownTokens,
+      wordCount: result.wordCount
     })
 
     // Record translation metrics
@@ -70,17 +81,20 @@ async function handleTranslateRequest(request: NextRequest) {
     })
 
   } catch (error) {
-    log.errorWithContext(error as Error, 'Translation API', { requestId })
+    const errorResponse = createErrorResponse(ErrorCode.TRANSLATION_FAILED, { requestId }, error as Error)
+    log.errorWithContext(error instanceof Error ? error : new Error('Unknown error'), LogEvents.TRANSLATE_ERROR, requestId)
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     metrics.recordError('translation_error', errorMessage)
-    return NextResponse.json(
-      { error: 'Translation failed' },
-      { status: 500 }
-    )
+    return NextResponse.json(errorResponse.body, { status: errorResponse.status })
   } finally {
     const responseTime = Date.now() - startTime
-    log.apiResponse('POST', '/api/translate', success ? 200 : 500, responseTime, { requestId })
-    log.performance('translation', responseTime, { requestId, success })
+    log.apiResponse('POST', '/api/translate', success ? 200 : 500, responseTime, requestId, {
+      success,
+      characterCount,
+      unknownTokens,
+      confidence
+    })
+    log.performance('translation', responseTime, requestId, { success })
     metrics.recordRequest('translation', success, responseTime, characterCount)
   }
 }
