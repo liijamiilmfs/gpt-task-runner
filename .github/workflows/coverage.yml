@@ -33,7 +33,7 @@ jobs:
     - name: Install Python dependencies
       run: |
         cd tools/dict_importer
-        python -m pip install --user -e ".[dev]"
+        python -m pip install -e ".[dev]"
         
     - name: Run Node.js tests with coverage
       run: |
