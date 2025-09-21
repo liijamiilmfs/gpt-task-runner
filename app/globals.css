@@ -9,26 +9,8 @@
   --libran-dark: #16213e;
   --libran-darker: #1a1a2e;
   --libran-red: #e94560;
+  --libran-accent: #4a90e2;
 }
-
-/* Define custom color utilities */
-.bg-libran-gold { background-color: var(--libran-gold); }
-.bg-libran-blue { background-color: var(--libran-blue); }
-.bg-libran-dark { background-color: var(--libran-dark); }
-.bg-libran-darker { background-color: var(--libran-darker); }
-.bg-libran-red { background-color: var(--libran-red); }
-
-.text-libran-gold { color: var(--libran-gold); }
-.text-libran-blue { color: var(--libran-blue); }
-.text-libran-dark { color: var(--libran-dark); }
-.text-libran-darker { color: var(--libran-darker); }
-.text-libran-red { color: var(--libran-red); }
-
-.border-libran-gold { border-color: var(--libran-gold); }
-.border-libran-blue { border-color: var(--libran-blue); }
-
-.from-libran-red { --tw-gradient-from: var(--libran-red); }
-.to-libran-gold { --tw-gradient-to: var(--libran-gold); }
 
 /* Base styles */
 body {
@@ -41,15 +23,39 @@ body {
 
 /* Component classes */
 .btn-primary {
-  @apply bg-libran-red text-white px-4 py-2 rounded-md font-medium transition-all duration-200 hover:bg-libran-red/90 focus:outline-none focus:ring-2 focus:ring-libran-red focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply text-white px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  background-color: var(--libran-red);
+}
+
+.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--libran-red) 90%, transparent);
+}
+
+.btn-primary:focus {
+  --tw-ring-color: var(--libran-red);
 }
 
 .btn-secondary {
-  @apply bg-libran-blue text-white px-4 py-2 rounded-md font-medium transition-all duration-200 hover:bg-libran-blue/90 focus:outline-none focus:ring-2 focus:ring-libran-blue focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  @apply text-white px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  background-color: var(--libran-blue);
+}
+
+.btn-secondary:hover {
+  background-color: color-mix(in srgb, var(--libran-blue) 90%, transparent);
+}
+
+.btn-secondary:focus {
+  --tw-ring-color: var(--libran-blue);
 }
 
 .input-field {
-  @apply w-full px-3 py-2 bg-libran-darker border border-libran-blue rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-libran-gold focus:border-transparent;
+  @apply w-full px-3 py-2 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent;
+  background-color: var(--libran-darker);
+  border-color: var(--libran-blue);
+}
+
+.input-field:focus {
+  --tw-ring-color: var(--libran-gold);
 }
 
 /* Custom scrollbar */
@@ -90,21 +96,7 @@ body {
   animation: pulse 2s infinite;
 }
 
-/* Utility classes */
-.text-libran-gold { color: var(--libran-gold); }
-.text-libran-blue { color: var(--libran-blue); }
-.text-libran-dark { color: var(--libran-dark); }
-.text-libran-darker { color: var(--libran-darker); }
-.text-libran-red { color: var(--libran-red); }
-
-.bg-libran-gold { background-color: var(--libran-gold); }
-.bg-libran-blue { background-color: var(--libran-blue); }
-.bg-libran-dark { background-color: var(--libran-dark); }
-.bg-libran-darker { background-color: var(--libran-darker); }
-.bg-libran-red { background-color: var(--libran-red); }
-
-.border-libran-gold { border-color: var(--libran-gold); }
-.border-libran-blue { border-color: var(--libran-blue); }
+/* Utility classes - using Tailwind config colors */
 
 /* Focus styles */
 .focus\:ring-libran-gold:focus {

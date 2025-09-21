@@ -1,5 +1,6 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import { defineConfig } from '@tailwindcss/postcss'
+
+export default defineConfig({
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -13,8 +14,8 @@ module.exports = {
         'libran-dark': '#16213e',
         'libran-darker': '#1a1a2e',
         'libran-red': '#e94560',
+        'libran-accent': '#4a90e2',
       },
     },
   },
-  plugins: [],
-}
+})

@@ -1,13 +1,19 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Enable static export for GitHub Pages
-  output: 'export',
-  trailingSlash: true,
-  images: {
-    unoptimized: true
+  // Enable streaming for audio responses
+  async headers() {
+    return [
+      {
+        source: '/api/speak',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'no-cache, no-store, must-revalidate',
+          },
+        ],
+      },
+    ];
   },
-  // Note: Custom headers don't work with static export
-  // For GitHub Pages, we'll rely on the hosting platform's caching
 };
 
 export default nextConfig;
