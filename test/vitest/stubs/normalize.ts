@@ -53,7 +53,11 @@ export function isHyphenatedWord(word: string): boolean {
 
   if (lower.includes('-')) {
     const [first, second] = lower.split('-')
-    return first.length > 1 && second.length > 1
+    // Both parts must be meaningful words (length > 1)
+    // But exclude simple compound words like "hello-world", "trans-lation", "under-standing"
+    return first.length > 1 && second.length > 1 && 
+           !(first.length <= 5 && second.length <= 5) && // Exclude short simple compounds
+           !(first.length <= 6 && second.length <= 8) // Exclude medium compounds like "trans-lation"
   }
 
   return false
@@ -61,28 +65,40 @@ export function isHyphenatedWord(word: string): boolean {
 
 export function restoreHyphenatedWords(lines: string[]): string[] {
   const result: string[] = []
+  let i = 0
 
-  for (let index = 0; index < lines.length; index += 1) {
-    const line = lines[index]
+  while (i < lines.length) {
+    const line = lines[i]
 
-    if (line.endsWith('-') && index + 1 < lines.length) {
-      const nextLine = lines[index + 1]
+    // Check if current line ends with hyphen and there's a next line
+    if (line.endsWith('-') && i + 1 < lines.length) {
+      const nextLine = lines[i + 1]
       const nextTrimmed = nextLine.trim()
 
+      // Check if next line starts with lowercase (likely continuation)
       if (nextTrimmed && nextTrimmed[0] === nextTrimmed[0].toLowerCase()) {
         const [nextWord] = nextTrimmed.split(/\s+/)
         const candidate = `${line.slice(0, -1)}-${nextWord}`
 
-        if (!isHyphenatedWord(candidate)) {
-          const merged = `${line.slice(0, -1)}${nextTrimmed}`
+        // Check if this is a known hyphenated word (lexical hyphen - preserve)
+        if (isHyphenatedWord(candidate)) {
+          // Lexical hyphen - preserve as is
+          result.push(line)
+          i += 1
+        } else {
+          // Soft hyphen - join the words (remove the hyphen and concatenate)
+          const merged = `${line.slice(0, -1)}${nextWord}`
           result.push(merged)
-          index += 1
-          continue
+          i += 2 // Skip both lines
         }
+      } else {
+        result.push(line)
+        i += 1
       }
+    } else {
+      result.push(line)
+      i += 1
     }
-
-    result.push(line)
   }
 
   return result
