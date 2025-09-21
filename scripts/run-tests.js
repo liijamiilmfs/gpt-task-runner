@@ -49,7 +49,20 @@ function main() {
   console.log('');
   
   try {
-    const command = `node --test --test-reporter=spec ${testFiles.join(' ')}`;
+    // Check Node.js version to determine if --test-reporter is supported
+    const nodeVersion = process.version;
+    const majorVersion = parseInt(nodeVersion.slice(1).split('.')[0]);
+    const supportsTestReporter = majorVersion >= 20;
+    
+    // Build command based on Node.js version
+    let command;
+    if (supportsTestReporter) {
+      command = `node --test --test-reporter=spec ${testFiles.join(' ')}`;
+    } else {
+      command = `node --test ${testFiles.join(' ')}`;
+      console.log(`Node.js ${nodeVersion} detected - using basic test runner (no spec reporter)`);
+    }
+    
     console.log(`Running: ${command}`);
     
     // Add timeout for CI environment
