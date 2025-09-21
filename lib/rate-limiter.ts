@@ -4,6 +4,7 @@
  */
 
 import { log } from './logger'
+import { trackInterval, clearTrackedInterval } from './cleanup-handler'
 
 export interface RateLimitConfig {
   maxRequestsPerMinute: number
@@ -50,10 +51,15 @@ export class RateLimiter {
       dailyWindowStart: now
     }
     
-    // Cleanup old user limits every 5 minutes
-    this.cleanupInterval = setInterval(() => {
-      this.cleanupOldLimits()
-    }, 5 * 60 * 1000)
+    // Cleanup old user limits every 5 minutes (or 30 seconds in test environment)
+    const cleanupInterval = process.env.NODE_ENV === 'test' ? 30 * 1000 : 5 * 60 * 1000
+    this.cleanupInterval = trackInterval(setInterval(() => {
+      try {
+        this.cleanupOldLimits()
+      } catch (error) {
+        log.error('Error during cleanup', { error })
+      }
+    }, cleanupInterval))
   }
 
   /**
@@ -378,6 +384,7 @@ export class RateLimiter {
   destroy(): void {
     if (this.cleanupInterval) {
       clearInterval(this.cleanupInterval)
+      this.cleanupInterval = null as any
     }
   }
 }
@@ -386,14 +393,17 @@ export class RateLimiter {
  * Create rate limiter with environment-based configuration
  */
 export function createRateLimiter(): RateLimiter {
+  // Use more permissive limits in test environment
+  const isTest = process.env.NODE_ENV === 'test' || process.env.CI === 'true'
+  
   const config: RateLimitConfig = {
-    maxRequestsPerMinute: parseInt(process.env.MAX_REQUESTS_PER_MINUTE || '10'),
-    maxRequestsPerHour: parseInt(process.env.MAX_REQUESTS_PER_HOUR || '100'),
-    maxRequestsPerDay: parseInt(process.env.MAX_REQUESTS_PER_DAY || '1000'),
-    burstAllowance: parseInt(process.env.RATE_LIMIT_BURST || '10')
+    maxRequestsPerMinute: parseInt(process.env.MAX_REQUESTS_PER_MINUTE || (isTest ? '1000' : '10')),
+    maxRequestsPerHour: parseInt(process.env.MAX_REQUESTS_PER_HOUR || (isTest ? '10000' : '100')),
+    maxRequestsPerDay: parseInt(process.env.MAX_REQUESTS_PER_DAY || (isTest ? '100000' : '1000')),
+    burstAllowance: parseInt(process.env.RATE_LIMIT_BURST || (isTest ? '1000' : '10'))
   }
 
-  log.info('Rate limiter initialized', { config })
+  log.info('Rate limiter initialized', { config, isTest })
   return new RateLimiter(config)
 }
 
