@@ -135,6 +135,84 @@ describe('RateLimiter', () => {
     })
   })
 
+  describe('Configuration-Based Rate Limiting', () => {
+    it('should use configured maxRequestsPerMinute for token refill', () => {
+      const userId = 'test-user-config'
+      
+      // Mock time to control token refill
+      const originalNow = Date.now
+      let mockTime = Date.now()
+      Date.now = () => mockTime
+      
+      // Exhaust initial burst
+      for (let i = 0; i < config.burstAllowance; i++) {
+        const result = rateLimiter.checkUserLimit(userId)
+        expect(result.allowed).toBe(true)
+      }
+      
+      // Should be blocked by burst limit
+      let result = rateLimiter.checkUserLimit(userId)
+      expect(result.allowed).toBe(false)
+      
+      // Advance time by 1 minute to refill tokens
+      mockTime += 60 * 1000 // 1 minute later
+      
+      // Should allow requests again (tokens refilled based on maxRequestsPerMinute)
+      result = rateLimiter.checkUserLimit(userId)
+      expect(result.allowed).toBe(true)
+      
+      // Restore original Date.now
+      Date.now = originalNow
+    })
+
+    it('should track hourly and daily request counts', () => {
+      const userId = 'test-user-tracking'
+      
+      // Make several requests
+      for (let i = 0; i < 5; i++) {
+        rateLimiter.checkUserLimit(userId)
+      }
+      
+      // Check status to verify tracking
+      const status = rateLimiter.getStatus(userId)
+      expect(status.user.hourlyRequests).toBe(5)
+      expect(status.user.dailyRequests).toBe(5)
+    })
+
+    it('should reset hourly and daily windows after time passes', () => {
+      const userId = 'test-user-window-reset'
+      
+      // Mock time to control window resets
+      const originalNow = Date.now
+      let mockTime = Date.now()
+      Date.now = () => mockTime
+      
+      // Make some requests
+      for (let i = 0; i < 5; i++) {
+        rateLimiter.checkUserLimit(userId)
+      }
+      
+      // Check initial counts
+      let status = rateLimiter.getStatus(userId)
+      expect(status.user.hourlyRequests).toBe(5)
+      expect(status.user.dailyRequests).toBe(5)
+      
+      // Advance time by 1 hour to reset hourly window
+      mockTime += 60 * 60 * 1000 // 1 hour later
+      
+      // Make another request
+      rateLimiter.checkUserLimit(userId)
+      
+      // Check that hourly count reset but daily count continued
+      status = rateLimiter.getStatus(userId)
+      expect(status.user.hourlyRequests).toBe(1) // Reset to 1
+      expect(status.user.dailyRequests).toBe(6) // Continued from 5
+      
+      // Restore original Date.now
+      Date.now = originalNow
+    })
+  })
+
   describe('Reset Functionality', () => {
     it('should reset all limits', () => {
       const userId = 'test-user-7'

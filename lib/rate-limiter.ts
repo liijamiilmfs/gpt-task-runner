@@ -24,6 +24,10 @@ export interface UserRateLimit {
   lastRefill: number
   requestCount: number
   windowStart: number
+  hourlyRequests: number
+  dailyRequests: number
+  hourlyWindowStart: number
+  dailyWindowStart: number
 }
 
 export class RateLimiter {
@@ -34,11 +38,16 @@ export class RateLimiter {
 
   constructor(config: RateLimitConfig) {
     this.config = config
+    const now = Date.now()
     this.globalLimit = {
       tokens: config.burstAllowance,
-      lastRefill: Date.now(),
+      lastRefill: now,
       requestCount: 0,
-      windowStart: Date.now()
+      windowStart: now,
+      hourlyRequests: 0,
+      dailyRequests: 0,
+      hourlyWindowStart: now,
+      dailyWindowStart: now
     }
     
     // Cleanup old user limits every 5 minutes
@@ -54,6 +63,47 @@ export class RateLimiter {
     const now = Date.now()
     const userLimit = this.getOrCreateUserLimit(userId)
     
+    // Reset windows if needed
+    this.resetWindowsIfNeeded(userLimit, now)
+    
+    // Check daily limit first
+    if (userLimit.dailyRequests >= this.config.maxRequestsPerDay) {
+      const retryAfter = this.getNextDayReset(userLimit.dailyWindowStart) - now
+      
+      log.warn('Daily rate limit exceeded for user', {
+        userId,
+        dailyRequests: userLimit.dailyRequests,
+        maxDaily: this.config.maxRequestsPerDay,
+        retryAfter
+      })
+      
+      return {
+        allowed: false,
+        remaining: 0,
+        resetTime: this.getNextDayReset(userLimit.dailyWindowStart),
+        retryAfter: Math.ceil(retryAfter / 1000)
+      }
+    }
+    
+    // Check hourly limit
+    if (userLimit.hourlyRequests >= this.config.maxRequestsPerHour) {
+      const retryAfter = this.getNextHourReset(userLimit.hourlyWindowStart) - now
+      
+      log.warn('Hourly rate limit exceeded for user', {
+        userId,
+        hourlyRequests: userLimit.hourlyRequests,
+        maxHourly: this.config.maxRequestsPerHour,
+        retryAfter
+      })
+      
+      return {
+        allowed: false,
+        remaining: 0,
+        resetTime: this.getNextHourReset(userLimit.hourlyWindowStart),
+        retryAfter: Math.ceil(retryAfter / 1000)
+      }
+    }
+    
     // Refill tokens based on time passed
     this.refillTokens(userLimit, now)
     
@@ -61,11 +111,15 @@ export class RateLimiter {
     if (userLimit.tokens >= 1) {
       userLimit.tokens -= 1
       userLimit.requestCount++
+      userLimit.hourlyRequests++
+      userLimit.dailyRequests++
       
       log.debug('Rate limit check passed', {
         userId,
         remainingTokens: userLimit.tokens,
-        requestCount: userLimit.requestCount
+        requestCount: userLimit.requestCount,
+        hourlyRequests: userLimit.hourlyRequests,
+        dailyRequests: userLimit.dailyRequests
       })
       
       return {
@@ -97,6 +151,45 @@ export class RateLimiter {
   checkGlobalLimit(): RateLimitResult {
     const now = Date.now()
     
+    // Reset windows if needed
+    this.resetWindowsIfNeeded(this.globalLimit, now)
+    
+    // Check daily limit first
+    if (this.globalLimit.dailyRequests >= this.config.maxRequestsPerDay) {
+      const retryAfter = this.getNextDayReset(this.globalLimit.dailyWindowStart) - now
+      
+      log.warn('Global daily rate limit exceeded', {
+        dailyRequests: this.globalLimit.dailyRequests,
+        maxDaily: this.config.maxRequestsPerDay,
+        retryAfter
+      })
+      
+      return {
+        allowed: false,
+        remaining: 0,
+        resetTime: this.getNextDayReset(this.globalLimit.dailyWindowStart),
+        retryAfter: Math.ceil(retryAfter / 1000)
+      }
+    }
+    
+    // Check hourly limit
+    if (this.globalLimit.hourlyRequests >= this.config.maxRequestsPerHour) {
+      const retryAfter = this.getNextHourReset(this.globalLimit.hourlyWindowStart) - now
+      
+      log.warn('Global hourly rate limit exceeded', {
+        hourlyRequests: this.globalLimit.hourlyRequests,
+        maxHourly: this.config.maxRequestsPerHour,
+        retryAfter
+      })
+      
+      return {
+        allowed: false,
+        remaining: 0,
+        resetTime: this.getNextHourReset(this.globalLimit.hourlyWindowStart),
+        retryAfter: Math.ceil(retryAfter / 1000)
+      }
+    }
+    
     // Refill global tokens
     this.refillTokens(this.globalLimit, now)
     
@@ -104,10 +197,14 @@ export class RateLimiter {
     if (this.globalLimit.tokens >= 1) {
       this.globalLimit.tokens -= 1
       this.globalLimit.requestCount++
+      this.globalLimit.hourlyRequests++
+      this.globalLimit.dailyRequests++
       
       log.debug('Global rate limit check passed', {
         remainingTokens: this.globalLimit.tokens,
-        requestCount: this.globalLimit.requestCount
+        requestCount: this.globalLimit.requestCount,
+        hourlyRequests: this.globalLimit.hourlyRequests,
+        dailyRequests: this.globalLimit.dailyRequests
       })
       
       return {
@@ -158,22 +255,30 @@ export class RateLimiter {
    */
   private getOrCreateUserLimit(userId: string): UserRateLimit {
     if (!this.userLimits.has(userId)) {
+      const now = Date.now()
       this.userLimits.set(userId, {
         tokens: this.config.burstAllowance,
-        lastRefill: Date.now(),
+        lastRefill: now,
         requestCount: 0,
-        windowStart: Date.now()
+        windowStart: now,
+        hourlyRequests: 0,
+        dailyRequests: 0,
+        hourlyWindowStart: now,
+        dailyWindowStart: now
       })
     }
     return this.userLimits.get(userId)!
   }
 
   /**
-   * Refill tokens based on time passed
+   * Refill tokens based on time passed and configuration
    */
   private refillTokens(limit: UserRateLimit, now: number): void {
     const timePassed = now - limit.lastRefill
-    const tokensToAdd = Math.floor(timePassed / (60 * 1000)) // 1 token per minute
+    const minutesPassed = timePassed / (60 * 1000)
+    
+    // Calculate tokens to add based on configured rate per minute
+    const tokensToAdd = Math.floor(minutesPassed * this.config.maxRequestsPerMinute)
     
     if (tokensToAdd > 0) {
       limit.tokens = Math.min(this.config.burstAllowance, limit.tokens + tokensToAdd)
@@ -186,6 +291,37 @@ export class RateLimiter {
    */
   private getNextRefillTime(lastRefill: number): number {
     return lastRefill + (60 * 1000) // Next minute
+  }
+
+  /**
+   * Reset windows if needed (hourly and daily)
+   */
+  private resetWindowsIfNeeded(limit: UserRateLimit, now: number): void {
+    // Reset hourly window if needed
+    if (now - limit.hourlyWindowStart >= 60 * 60 * 1000) { // 1 hour
+      limit.hourlyRequests = 0
+      limit.hourlyWindowStart = now
+    }
+    
+    // Reset daily window if needed
+    if (now - limit.dailyWindowStart >= 24 * 60 * 60 * 1000) { // 24 hours
+      limit.dailyRequests = 0
+      limit.dailyWindowStart = now
+    }
+  }
+
+  /**
+   * Get next hour reset time
+   */
+  private getNextHourReset(hourlyWindowStart: number): number {
+    return hourlyWindowStart + (60 * 60 * 1000) // Next hour
+  }
+
+  /**
+   * Get next day reset time
+   */
+  private getNextDayReset(dailyWindowStart: number): number {
+    return dailyWindowStart + (24 * 60 * 60 * 1000) // Next day
   }
 
   /**
@@ -223,11 +359,16 @@ export class RateLimiter {
    */
   reset(): void {
     this.userLimits.clear()
+    const now = Date.now()
     this.globalLimit = {
       tokens: this.config.burstAllowance,
-      lastRefill: Date.now(),
+      lastRefill: now,
       requestCount: 0,
-      windowStart: Date.now()
+      windowStart: now,
+      hourlyRequests: 0,
+      dailyRequests: 0,
+      hourlyWindowStart: now,
+      dailyWindowStart: now
     }
   }
 
