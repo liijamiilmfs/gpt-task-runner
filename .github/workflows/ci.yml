@@ -7,10 +7,53 @@ on:
     branches: [ main, dev ]
 
 jobs:
+  # Linting check
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run linting
+      run: npm run lint
+
+  # Type checking
+  types:
+    name: Type Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run type checking
+      run: npm run type-check
+
   # Node.js/TypeScript tests (translator, API, frontend)
   translator-tests:
     name: Translator & API Tests
     runs-on: ubuntu-latest
+    needs: [lint, types]
     
     strategy:
       matrix:
@@ -28,12 +71,6 @@ jobs:
         
     - name: Install dependencies
       run: npm ci
-      
-    - name: Run linting
-      run: npm run lint
-      
-    - name: Run type checking
-      run: npm run type-check
       
     - name: Run translator tests
       run: |
@@ -106,7 +143,7 @@ jobs:
   coverage:
     name: Coverage Report
     runs-on: ubuntu-latest
-    needs: [translator-tests, importer-tests]
+    needs: [lint, types, translator-tests, importer-tests]
     
     env:
       PYTHONPATH: ${{ github.workspace }}/tools/dict_importer
