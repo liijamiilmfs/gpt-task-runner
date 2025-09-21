@@ -1,30 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server'
 import OpenAI from 'openai'
 import { metrics } from '@/lib/metrics'
-import { log } from '@/lib/logger'
+import { log, generateCorrelationId, LogEvents } from '@/lib/logger'
 import { ttsCache } from '@/lib/tts-cache'
 import { withGuardrails } from '@/lib/api-guardrails'
-import { ErrorTaxonomy, ErrorCode, createErrorResponse } from '@/lib/error-taxonomy'
+import { ErrorCode, createErrorResponse } from '@/lib/error-taxonomy'
 
 async function handleSpeakRequest(request: NextRequest) {
   const startTime = Date.now()
   let success = false
   let characterCount = 0
   let audioDuration = 0
-  const requestId = ErrorTaxonomy.generateCorrelationId()
+  let libranText = ''
+  let voice = 'alloy'
+  const requestId = generateCorrelationId()
 
-  log.apiRequest('POST', '/api/speak', { requestId })
+  log.apiRequest('POST', '/api/speak', requestId)
 
   try {
-    const { 
-      libranText, 
-      voice = process.env.OPENAI_TTS_VOICE ?? 'alloy', 
-      format = process.env.AUDIO_FORMAT ?? 'mp3'
-    } = await request.json()
+    const requestBody = await request.json()
+    libranText = requestBody.libranText || ''
+    voice = requestBody.voice || (process.env.OPENAI_TTS_VOICE ?? 'alloy')
+    const format = requestBody.format || (process.env.AUDIO_FORMAT ?? 'mp3')
 
     if (!libranText || typeof libranText !== 'string') {
       const errorResponse = createErrorResponse(ErrorCode.VALIDATION_MISSING_TEXT, { requestId })
-      log.errorTaxonomy(ErrorCode.VALIDATION_MISSING_TEXT, errorResponse.body.error, 'validation', 'low', { requestId })
+      log.validationFail('libranText', 'libranText is required and must be a string', requestId)
       metrics.recordError('validation_error', 'libranText is required and must be a string')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
@@ -33,7 +34,7 @@ async function handleSpeakRequest(request: NextRequest) {
     const validVoices = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer']
     if (!validVoices.includes(voice)) {
       const errorResponse = createErrorResponse(ErrorCode.VALIDATION_INVALID_VOICE, { requestId, voice })
-      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_VOICE, errorResponse.body.error, 'validation', 'low', { requestId, voice })
+      log.validationFail('voice', 'Invalid voice parameter', requestId, { voice })
       metrics.recordError('validation_error', 'Invalid voice parameter')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
@@ -42,13 +43,17 @@ async function handleSpeakRequest(request: NextRequest) {
     const validFormats = ['mp3', 'wav', 'flac']
     if (!validFormats.includes(format)) {
       const errorResponse = createErrorResponse(ErrorCode.VALIDATION_INVALID_FORMAT, { requestId, format })
-      log.errorTaxonomy(ErrorCode.VALIDATION_INVALID_FORMAT, errorResponse.body.error, 'validation', 'low', { requestId, format })
+      log.validationFail('format', 'Invalid format parameter', requestId, { format })
       metrics.recordError('validation_error', 'Invalid format parameter')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     characterCount = libranText.length
-    log.info('Starting TTS generation', { requestId, textLength: libranText.length, voice, format })
+    log.info('Starting TTS generation', {
+      event: LogEvents.TTS_START,
+      corr_id: requestId,
+      ctx: { text_length: libranText.length, voice, format }
+    })
 
     // Check cache first
     const model = process.env.OPENAI_TTS_MODEL ?? 'gpt-4o-mini-tts'
@@ -62,10 +67,14 @@ async function handleSpeakRequest(request: NextRequest) {
     if (cachedAudio) {
       audioBuffer = cachedAudio
       isCacheHit = true
-      log.info('TTS cache hit', { requestId, cacheKey, bufferSize: audioBuffer.length })
+      log.ttsCacheHit(libranText, voice, requestId, { cacheKey, bufferSize: audioBuffer.length })
     } else {
       // Generate new audio using OpenAI TTS
-      log.info('TTS cache miss, generating new audio', { requestId, cacheKey })
+      log.info('TTS cache miss, generating new audio', {
+        event: LogEvents.TTS_CACHE_MISS,
+        corr_id: requestId,
+        ctx: { cacheKey }
+      })
       const client = new OpenAI({ 
         apiKey: process.env.OPENAI_API_KEY! 
       });
@@ -100,9 +109,8 @@ async function handleSpeakRequest(request: NextRequest) {
     const wordCount = libranText.split(/\s+/).length
     audioDuration = (wordCount / 150) * 60 // seconds
 
-    // Log TTS generation details
-    log.tts(libranText, voice, audioDuration, {
-      requestId,
+    // Log TTS generation completion
+    log.tts(libranText, voice, audioDuration * 1000, requestId, {
       format,
       wordCount,
       bufferSize: audioBuffer.length,
@@ -136,20 +144,19 @@ async function handleSpeakRequest(request: NextRequest) {
     })
 
   } catch (error: any) {
-    log.errorWithContext(error, 'TTS API', { requestId })
     const errorMessage = error instanceof Error ? error.message : 'Unknown error'
 
     // Handle specific OpenAI errors
     if (error.status === 429) {
       const errorResponse = createErrorResponse(ErrorCode.OPENAI_QUOTA_EXCEEDED, { requestId })
-      log.errorTaxonomy(ErrorCode.OPENAI_QUOTA_EXCEEDED, errorResponse.body.error, 'external_api', 'high', { requestId })
+      log.ttsRateLimit(libranText || '', voice || 'alloy', requestId, { error: errorMessage })
       metrics.recordError('openai_quota_error', 'OpenAI quota exceeded')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     if (error.type === 'insufficient_quota') {
       const errorResponse = createErrorResponse(ErrorCode.OPENAI_QUOTA_EXCEEDED, { requestId })
-      log.errorTaxonomy(ErrorCode.OPENAI_QUOTA_EXCEEDED, errorResponse.body.error, 'external_api', 'high', { requestId })
+      log.ttsRateLimit(libranText || '', voice || 'alloy', requestId, { error: errorMessage })
       metrics.recordError('openai_quota_error', 'OpenAI insufficient quota')
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
@@ -157,20 +164,24 @@ async function handleSpeakRequest(request: NextRequest) {
     // Handle other OpenAI errors
     if (error.name === 'OpenAIError') {
       const errorResponse = createErrorResponse(ErrorCode.OPENAI_API_ERROR, { requestId }, error)
-      log.errorTaxonomy(ErrorCode.OPENAI_API_ERROR, errorResponse.body.error, 'external_api', 'high', { requestId })
+      log.errorWithContext(error, LogEvents.EXTERNAL_API_ERROR, requestId, { api: 'openai' })
       metrics.recordError('openai_error', errorMessage)
       return NextResponse.json(errorResponse.body, { status: errorResponse.status })
     }
 
     // Handle general TTS errors
     const errorResponse = createErrorResponse(ErrorCode.TTS_GENERATION_FAILED, { requestId }, error)
-    log.errorTaxonomy(ErrorCode.TTS_GENERATION_FAILED, errorResponse.body.error, 'tts', 'high', { requestId })
+    log.errorWithContext(error instanceof Error ? error : new Error(errorMessage), LogEvents.TTS_ERROR, requestId)
     metrics.recordError('tts_error', errorMessage)
     return NextResponse.json(errorResponse.body, { status: errorResponse.status })
   } finally {
     const responseTime = Date.now() - startTime
-    log.apiResponse('POST', '/api/speak', success ? 200 : 500, responseTime, { requestId })
-    log.performance('tts', responseTime, { requestId, success, audioDuration })
+    log.apiResponse('POST', '/api/speak', success ? 200 : 500, responseTime, requestId, {
+      success,
+      characterCount,
+      audioDuration: audioDuration * 1000 // Convert to milliseconds
+    })
+    log.performance('tts', responseTime, requestId, { success, audioDuration: audioDuration * 1000 })
     metrics.recordRequest('tts', success, responseTime, characterCount)
   }
 }

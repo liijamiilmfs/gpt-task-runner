@@ -1,5 +1,4 @@
-import * as winston from 'winston'
-import DailyRotateFile from 'winston-daily-rotate-file'
+import pino from 'pino'
 import * as path from 'path'
 import * as fs from 'fs'
 
@@ -19,7 +18,7 @@ const SENSITIVE_PATTERNS = [
   /\b\d{3}-\d{2}-\d{4}\b/g, // SSN
 ]
 
-// Sanitize sensitive data from log messages
+// Sanitize sensitive data from log objects
 function sanitizeLogData(data: any): any {
   if (typeof data === 'string') {
     let sanitized = data
@@ -49,11 +48,10 @@ function sanitizeLogData(data: any): any {
 const logsDir = path.join(process.cwd(), 'logs')
 const logsSubDirs = {
   application: path.join(logsDir, 'application'),
-  errors: path.join(logsDir, 'errors'),
   api: path.join(logsDir, 'api'),
   translation: path.join(logsDir, 'translation'),
   tts: path.join(logsDir, 'tts'),
-  metrics: path.join(logsDir, 'metrics'),
+  errors: path.join(logsDir, 'errors'),
   performance: path.join(logsDir, 'performance'),
   security: path.join(logsDir, 'security')
 }
@@ -65,343 +63,374 @@ Object.values(logsSubDirs).forEach(dir => {
   }
 })
 
-// Environment-based log rotation settings
-const isDevelopment = process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test'
-const maxSize = isDevelopment ? '200m' : '100m'
-const maxFiles = isDevelopment ? '7d' : '14d'
+// Environment detection
+const isDev = process.env.NODE_ENV !== 'production'
+const isTest = process.env.NODE_ENV === 'test'
 
-// Color coding for different log levels
-const colors = {
-  error: '\x1b[31m', // Red
-  warn: '\x1b[33m', // Yellow
-  info: '\x1b[36m', // Cyan
-  http: '\x1b[35m', // Magenta
-  debug: '\x1b[90m', // Gray
-  success: '\x1b[32m', // Green
-  reset: '\x1b[0m' // Reset
+// Base logger configuration
+const baseConfig = {
+  service: 'libran-voice-forge',
+  env: process.env.NODE_ENV || 'development'
 }
 
-// Custom format that sanitizes sensitive data
-const sanitizeFormat = winston.format((info) => {
-  const infoWithSymbols = info as Record<string | symbol, any>
-
-  for (const key of Object.keys(infoWithSymbols)) {
-    infoWithSymbols[key] = sanitizeLogData(infoWithSymbols[key])
+// Create main logger
+const logger = pino({
+  level: process.env.LOG_LEVEL || (isDev ? 'debug' : 'info'),
+  base: baseConfig,
+  timestamp: pino.stdTimeFunctions.isoTime,
+  formatters: {
+    level(label) { return { level: label } }
   }
+}, isDev && !isTest
+  ? pino.transport({
+      target: 'pino-pretty',
+      options: {
+        colorize: true,
+        translateTime: 'SYS:standard',
+        singleLine: false,
+        messageKey: 'msg',
+        ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id',
+        // Remove customPrettifiers as they cause DataCloneError in worker threads
+      }
+    })
+  : undefined
+)
 
-  const splatKey = Symbol.for('splat')
-  if (Array.isArray(infoWithSymbols[splatKey])) {
-    infoWithSymbols[splatKey] = infoWithSymbols[splatKey].map(item => sanitizeLogData(item))
-  }
+// Create specialized loggers for different log types
+const createFileLogger = (subDir: string, level?: string) => {
+  const logFile = path.join(logsSubDirs[subDir as keyof typeof logsSubDirs], `${subDir}.log`)
+  return pino({
+    level: level || 'info',
+    base: baseConfig,
+    timestamp: pino.stdTimeFunctions.isoTime,
+    formatters: {
+      level(label) { return { level: label } }
+    }
+  }, pino.destination(logFile))
+}
 
-  const messageKey = Symbol.for('message')
-  if (infoWithSymbols[messageKey]) {
-    infoWithSymbols[messageKey] = sanitizeLogData(infoWithSymbols[messageKey])
-  }
+// Specialized loggers
+const apiLogger = createFileLogger('api')
+const translationLogger = createFileLogger('translation')
+const ttsLogger = createFileLogger('tts')
+const errorLogger = createFileLogger('errors', 'error')
+const performanceLogger = createFileLogger('performance')
+const securityLogger = createFileLogger('security', 'warn')
 
-  return info
-})
-
-// Human-readable format for console
-const humanReadableFormat = winston.format.printf(({ timestamp, level, message, service, environment, type, correlationId, ...meta }) => {
-  const color = colors[level as keyof typeof colors] || colors.reset
-  const reset = colors.reset
-  const time = typeof timestamp === 'string' ? timestamp.replace('T', ' ').replace('Z', '') : new Date().toISOString().replace('T', ' ').replace('Z', '')
-  const serviceStr = service ? `[${service}]` : ''
-  const envStr = environment && environment !== 'production' ? `[${environment}]` : ''
-  const corrStr = correlationId ? `[${correlationId}]` : ''
-  const typeStr = type ? `[${type}]` : ''
-  const metaStr = Object.keys(meta).length ? `\n${JSON.stringify(meta, null, 2)}` : ''
+// Log event types (SCREAMING_SNAKE_CASE)
+export const LogEvents = {
+  // API events
+  API_REQUEST: 'API_REQUEST',
+  API_RESPONSE: 'API_RESPONSE',
+  API_ERROR: 'API_ERROR',
   
-  return `${color}${time} ${serviceStr}${envStr}${corrStr}${typeStr} [${level.toUpperCase()}]${reset} ${message}${metaStr}`
-})
-
-// Configure daily rotate file transport for application logs
-const dailyRotateTransport = new DailyRotateFile({
-  filename: path.join(logsSubDirs.application, 'application-%DATE%.log'),
-  datePattern: 'YYYY-MM-DD',
-  maxSize: maxSize,
-  maxFiles: maxFiles,
-  zippedArchive: true,
-  format: winston.format.combine(
-    sanitizeFormat(),
-    winston.format.timestamp(),
-    winston.format.errors({ stack: true }),
-    winston.format.json()
-  )
-})
-
-// Error log transport
-const errorRotateTransport = new DailyRotateFile({
-  filename: path.join(logsSubDirs.errors, 'error-%DATE%.log'),
-  datePattern: 'YYYY-MM-DD',
-  level: 'error',
-  maxSize: isDevelopment ? '100m' : '50m',
-  maxFiles: isDevelopment ? '14d' : '30d',
-  zippedArchive: true,
-  format: winston.format.combine(
-    sanitizeFormat(),
-    winston.format.timestamp(),
-    winston.format.errors({ stack: true }),
-    winston.format.json()
-  )
-})
-
-// API log transport
-const apiRotateTransport = new DailyRotateFile({
-  filename: path.join(logsSubDirs.api, 'api-%DATE%.log'),
-  datePattern: 'YYYY-MM-DD',
-  level: 'http',
-  maxSize: '50m',
-  maxFiles: '7d',
-  zippedArchive: true,
-  format: winston.format.combine(
-    sanitizeFormat(),
-    winston.format.timestamp(),
-    winston.format.json()
-  )
-})
-
-// Translation log transport
-const translationRotateTransport = new DailyRotateFile({
-  filename: path.join(logsSubDirs.translation, 'translation-%DATE%.log'),
-  datePattern: 'YYYY-MM-DD',
-  level: 'info',
-  maxSize: '50m',
-  maxFiles: '7d',
-  zippedArchive: true,
-  format: winston.format.combine(
-    sanitizeFormat(),
-    winston.format.timestamp(),
-    winston.format.json()
-  )
-})
-
-// TTS log transport
-const ttsRotateTransport = new DailyRotateFile({
-  filename: path.join(logsSubDirs.tts, 'tts-%DATE%.log'),
-  datePattern: 'YYYY-MM-DD',
-  level: 'info',
-  maxSize: '50m',
-  maxFiles: '7d',
-  zippedArchive: true,
-  format: winston.format.combine(
-    sanitizeFormat(),
-    winston.format.timestamp(),
-    winston.format.json()
-  )
-})
-
-// Performance log transport
-const performanceRotateTransport = new DailyRotateFile({
-  filename: path.join(logsSubDirs.performance, 'performance-%DATE%.log'),
-  datePattern: 'YYYY-MM-DD',
-  level: 'info',
-  maxSize: '25m',
-  maxFiles: '3d',
-  zippedArchive: true,
-  format: winston.format.combine(
-    sanitizeFormat(),
-    winston.format.timestamp(),
-    winston.format.json()
-  )
-})
-
-// Security log transport
-const securityRotateTransport = new DailyRotateFile({
-  filename: path.join(logsSubDirs.security, 'security-%DATE%.log'),
-  datePattern: 'YYYY-MM-DD',
-  level: 'warn',
-  maxSize: '25m',
-  maxFiles: '30d',
-  zippedArchive: true,
-  format: winston.format.combine(
-    sanitizeFormat(),
-    winston.format.timestamp(),
-    winston.format.json()
-  )
-})
-
-// Create logger instance
-const logger = winston.createLogger({
-  level: process.env.LOG_LEVEL || 'info',
-  format: winston.format.combine(
-    sanitizeFormat(),
-    winston.format.timestamp(),
-    winston.format.errors({ stack: true }),
-    winston.format.json()
-  ),
-  defaultMeta: { 
-    service: 'libran-voice-forge',
-    environment: process.env.NODE_ENV || 'development'
-  },
-  transports: [
-    dailyRotateTransport,
-    errorRotateTransport,
-    apiRotateTransport,
-    translationRotateTransport,
-    ttsRotateTransport,
-    performanceRotateTransport,
-    securityRotateTransport
-  ]
-})
-
-// Add console transport for development with colors
-if (process.env.NODE_ENV !== 'production') {
-  logger.add(new winston.transports.Console({
-    format: winston.format.combine(
-      sanitizeFormat(),
-      winston.format.colorize(),
-      winston.format.timestamp({ format: 'HH:mm:ss' }),
-      humanReadableFormat
-    )
-  }))
-}
-
-// Add rotation event handlers for monitoring
-dailyRotateTransport.on('rotate', (oldFilename, newFilename) => {
-  console.log(`📁 Log rotated: ${oldFilename} -> ${newFilename}`)
-  logger.info('Log file rotated', {
-    type: 'log_rotation',
-    oldFile: oldFilename,
-    newFile: newFilename,
-    reason: 'size_limit_reached'
-  })
-})
-
-errorRotateTransport.on('rotate', (oldFilename, newFilename) => {
-  console.log(`🔴 Error log rotated: ${oldFilename} -> ${newFilename}`)
-  logger.info('Error log file rotated', {
-    type: 'log_rotation',
-    oldFile: oldFilename,
-    newFile: newFilename,
-    reason: 'size_limit_reached'
-  })
-})
-
-// Log levels for different types of operations
-export const LogLevels = {
-  ERROR: 'error',
-  WARN: 'warn', 
-  INFO: 'info',
-  HTTP: 'http',
-  DEBUG: 'debug'
+  // Translation events
+  TRANSLATE_START: 'TRANSLATE_START',
+  TRANSLATE_DONE: 'TRANSLATE_DONE',
+  TRANSLATE_ERROR: 'TRANSLATE_ERROR',
+  UNKNOWN_TOKEN: 'UNKNOWN_TOKEN',
+  
+  // TTS events
+  TTS_START: 'TTS_START',
+  TTS_DONE: 'TTS_DONE',
+  TTS_ERROR: 'TTS_ERROR',
+  TTS_CACHE_HIT: 'TTS_CACHE_HIT',
+  TTS_CACHE_MISS: 'TTS_CACHE_MISS',
+  TTS_RATE_LIMIT: 'TTS_RATE_LIMIT',
+  
+  // System events
+  SERVICE_START: 'SERVICE_START',
+  SERVICE_STOP: 'SERVICE_STOP',
+  CONFIG_LOAD: 'CONFIG_LOAD',
+  
+  // Error events
+  VALIDATION_FAIL: 'VALIDATION_FAIL',
+  AUTH_FAIL: 'AUTH_FAIL',
+  RATE_LIMIT: 'RATE_LIMIT',
+  EXTERNAL_API_ERROR: 'EXTERNAL_API_ERROR',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
+  
+  // Performance events
+  PERF_SLOW_QUERY: 'PERF_SLOW_QUERY',
+  PERF_HIGH_MEMORY: 'PERF_HIGH_MEMORY',
+  PERF_CACHE_MISS: 'PERF_CACHE_MISS',
+  
+  // Security events
+  SEC_AUTH_FAIL: 'SEC_AUTH_FAIL',
+  SEC_RATE_LIMIT: 'SEC_RATE_LIMIT',
+  SEC_SUSPICIOUS: 'SEC_SUSPICIOUS'
 } as const
 
-// Structured logging methods
+// Error types for err object
+export const ErrorTypes = {
+  VALIDATION_ERROR: 'validation_error',
+  AUTH_ERROR: 'auth_error',
+  RATE_LIMIT: 'rate_limit',
+  EXTERNAL_API: 'external_api',
+  INTERNAL: 'internal',
+  NETWORK: 'network',
+  TIMEOUT: 'timeout',
+  CONFIG: 'config'
+} as const
+
+// Normalize log data to our schema
+function normalizeLogData(data: any): any {
+  const sanitized = sanitizeLogData(data)
+  
+  // Convert duration from seconds to milliseconds
+  if (sanitized.duration && typeof sanitized.duration === 'number') {
+    sanitized.duration_ms = Math.round(sanitized.duration * 1000)
+    delete sanitized.duration
+  }
+  
+  return sanitized
+}
+
+// Generate correlation ID
+export function generateCorrelationId(): string {
+  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+}
+
+// Main logging interface
 export const log = {
-  error: (message: string, meta?: any) => logger.error(message, meta),
-  warn: (message: string, meta?: any) => logger.warn(message, meta),
-  info: (message: string, meta?: any) => logger.info(message, meta),
-  http: (message: string, meta?: any) => logger.info(`[HTTP] ${message}`, meta),
-  debug: (message: string, meta?: any) => logger.debug(message, meta),
-  
-  // API request logging
-  apiRequest: (method: string, url: string, meta?: any) => {
-    logger.info('API Request', {
-      type: 'api_request',
-      method,
-      url: url.replace(/\/api\/[^\/]+\/[^\/]+/g, '/api/[endpoint]/[id]'), // Sanitize dynamic URLs
-      ...meta
-    })
+  // Basic logging methods
+  debug: (msg: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    logger.debug({ ...normalized, msg })
   },
   
-  // API response logging
-  apiResponse: (method: string, url: string, statusCode: number, responseTime: number, meta?: any) => {
-    logger.info('API Response', {
-      type: 'api_response',
-      method,
-      url: url.replace(/\/api\/[^\/]+\/[^\/]+/g, '/api/[endpoint]/[id]'),
-      statusCode,
-      responseTime,
-      ...meta
-    })
+  info: (msg: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    logger.info({ ...normalized, msg })
   },
   
-  // Translation logging
-  translation: (text: string, variant: string, result: string, confidence: number, meta?: any) => {
-    logger.info('Translation', {
-      type: 'translation',
-      textLength: text.length,
-      variant,
-      resultLength: result.length,
-      confidence,
-      ...meta
-    })
+  warn: (msg: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    logger.warn({ ...normalized, msg })
   },
   
-  // TTS logging
-  tts: (text: string, voice: string, duration: number, meta?: any) => {
-    logger.info('TTS Generation', {
-      type: 'tts',
-      textLength: text.length,
-      voice,
-      duration,
-      ...meta
-    })
+  error: (msg: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    logger.error({ ...normalized, msg })
   },
-  
-  // Error logging with context
-  errorWithContext: (error: Error, context: string, meta?: any) => {
-    logger.error('Error occurred', {
-      type: 'error',
-      context,
-      error: {
-        name: error.name,
-        message: error.message,
+
+  // Structured logging methods
+  apiRequest: (method: string, url: string, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.API_REQUEST,
+      corr_id: corrId,
+      route: url.replace(/\/api\/[^\/]+\/[^\/]+/g, '/api/[endpoint]/[id]'), // Sanitize dynamic URLs
+      ctx: {
+        method,
+        url: url.replace(/\/api\/[^\/]+\/[^\/]+/g, '/api/[endpoint]/[id]'),
+        ...normalized
+      }
+    }
+    logger.info({ ...logData, msg: 'API Request' })
+    apiLogger.info({ ...logData, msg: 'API Request' })
+  },
+
+  apiResponse: (method: string, url: string, statusCode: number, durationMs: number, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.API_RESPONSE,
+      corr_id: corrId,
+      status: statusCode,
+      duration_ms: durationMs,
+      route: url.replace(/\/api\/[^\/]+\/[^\/]+/g, '/api/[endpoint]/[id]'),
+      ctx: {
+        method,
+        url: url.replace(/\/api\/[^\/]+\/[^\/]+/g, '/api/[endpoint]/[id]'),
+        ...normalized
+      }
+    }
+    logger.info({ ...logData, msg: 'API Response' })
+    apiLogger.info({ ...logData, msg: 'API Response' })
+  },
+
+  translation: (text: string, variant: string, result: string, confidence: number, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.TRANSLATE_DONE,
+      corr_id: corrId,
+      ctx: {
+        variant,
+        text_length: text.length,
+        result_length: result.length,
+        confidence,
+        words_total: text.split(/\s+/).length,
+        words_translated: result.split(/\s+/).length,
+        words_unknown: (normalized.unknownWords || 0),
+        ...normalized
+      }
+    }
+    logger.info({ ...logData, msg: 'Translation completed' })
+    translationLogger.info({ ...logData, msg: 'Translation completed' })
+  },
+
+  tts: (text: string, voice: string, durationMs: number, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.TTS_DONE,
+      corr_id: corrId,
+      duration_ms: durationMs,
+      ctx: {
+        voice,
+        text_length: text.length,
+        ...normalized
+      }
+    }
+    logger.info({ ...logData, msg: 'TTS Generation completed' })
+    ttsLogger.info({ ...logData, msg: 'TTS Generation completed' })
+  },
+
+  ttsCacheHit: (text: string, voice: string, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.TTS_CACHE_HIT,
+      corr_id: corrId,
+      ctx: {
+        voice,
+        text_length: text.length,
+        ...normalized
+      }
+    }
+    logger.info({ ...logData, msg: 'TTS Cache Hit' })
+    ttsLogger.info({ ...logData, msg: 'TTS Cache Hit' })
+  },
+
+  ttsRateLimit: (text: string, voice: string, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.TTS_RATE_LIMIT,
+      corr_id: corrId,
+      status: 429,
+      err: {
+        type: ErrorTypes.RATE_LIMIT,
+        code: 'RATE_LIMIT',
+        msg: 'TTS request throttled'
+      },
+      ctx: {
+        voice,
+        text_length: text.length,
+        ...normalized
+      }
+    }
+    logger.error({ ...logData, msg: 'TTS request throttled' })
+    ttsLogger.error({ ...logData, msg: 'TTS request throttled' })
+  },
+
+  unknownToken: (token: string, variant: string, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.UNKNOWN_TOKEN,
+      corr_id: corrId,
+      ctx: {
+        token,
+        variant,
+        ...normalized
+      }
+    }
+    logger.warn({ ...logData, msg: 'Unknown token encountered' })
+    translationLogger.warn({ ...logData, msg: 'Unknown token encountered' })
+  },
+
+  validationFail: (field: string, reason: string, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.VALIDATION_FAIL,
+      corr_id: corrId,
+      status: 400,
+      err: {
+        type: ErrorTypes.VALIDATION_ERROR,
+        msg: 'Invalid input'
+      },
+      ctx: {
+        field,
+        reason,
+        ...normalized
+      }
+    }
+    logger.warn({ ...logData, msg: 'Validation failed' })
+    errorLogger.warn({ ...logData, msg: 'Validation failed' })
+  },
+
+  errorWithContext: (error: Error, event: string, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event,
+      corr_id: corrId,
+      err: {
+        type: ErrorTypes.INTERNAL,
+        msg: error.message,
         stack: error.stack
       },
-      ...meta
-    })
-  },
-
-  // Error taxonomy logging with correlation ID
-  errorTaxonomy: (errorCode: string, userMessage: string, category: string, severity: string, meta?: any) => {
-    logger.error('Error Taxonomy', {
-      type: 'error_taxonomy',
-      errorCode,
-      userMessage,
-      category,
-      severity,
-      ...meta
-    })
-  },
-
-  // Correlation ID logging
-  withCorrelationId: (correlationId: string, meta?: any) => {
-    return {
-      correlationId,
-      ...meta
+      ctx: {
+        error_name: error.name,
+        ...normalized
+      }
     }
-  },
-  
-  // Performance logging
-  performance: (operation: string, duration: number, meta?: any) => {
-    logger.info('Performance', {
-      type: 'performance',
-      operation,
-      duration,
-      ...meta
-    })
+    logger.error({ ...logData, msg: 'Error occurred' })
+    errorLogger.error({ ...logData, msg: 'Error occurred' })
   },
 
-  // Security logging
-  security: (event: string, meta?: any) => {
-    logger.warn('Security Event', {
-      type: 'security',
+  performance: (operation: string, durationMs: number, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.PERF_SLOW_QUERY,
+      corr_id: corrId,
+      duration_ms: durationMs,
+      ctx: {
+        operation,
+        ...normalized
+      }
+    }
+    logger.info({ ...logData, msg: 'Performance metric' })
+    performanceLogger.info({ ...logData, msg: 'Performance metric' })
+  },
+
+  security: (event: string, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
       event,
-      ...meta
-    })
+      corr_id: corrId,
+      ctx: {
+        ...normalized
+      }
+    }
+    logger.warn({ ...logData, msg: 'Security event' })
+    securityLogger.warn({ ...logData, msg: 'Security event' })
   },
 
-  // Metrics logging
-  metrics: (metric: string, value: number, meta?: any) => {
-    logger.info('Metrics', {
-      type: 'metrics',
-      metric,
-      value,
-      ...meta
-    })
+  // Legacy compatibility methods
+  http: (msg: string, data?: any) => log.info(`[HTTP] ${msg}`, data),
+  
+  errorTaxonomy: (errorCode: string, userMessage: string, category: string, severity: string, corrId: string, data?: any) => {
+    const normalized = normalizeLogData(data || {})
+    const logData = {
+      event: LogEvents.INTERNAL_ERROR,
+      corr_id: corrId,
+      err: {
+        type: ErrorTypes.INTERNAL,
+        code: errorCode,
+        msg: userMessage
+      },
+      ctx: {
+        category,
+        severity,
+        ...normalized
+      }
+    }
+    logger.error({ ...logData, msg: 'Error Taxonomy' })
+    errorLogger.error({ ...logData, msg: 'Error Taxonomy' })
+  },
+
+  withCorrelationId: (correlationId: string, data?: any) => {
+    return {
+      corr_id: correlationId,
+      ...normalizeLogData(data || {})
+    }
   }
 }
 

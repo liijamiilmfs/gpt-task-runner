@@ -4,6 +4,7 @@
  * Log Viewer for Librán Voice Forge
  * 
  * Provides human-readable log viewing with filtering and color coding
+ * Works with the new structured JSON schema
  */
 
 const fs = require('fs')
@@ -30,9 +31,24 @@ const levelColors = {
   error: colors.red,
   warn: colors.yellow,
   info: colors.cyan,
-  http: colors.magenta,
   debug: colors.gray,
-  success: colors.green
+  http: colors.magenta
+}
+
+// Event type colors
+const eventColors = {
+  API_REQUEST: colors.blue,
+  API_RESPONSE: colors.blue,
+  TRANSLATE_START: colors.cyan,
+  TRANSLATE_DONE: colors.green,
+  TTS_START: colors.magenta,
+  TTS_DONE: colors.green,
+  TTS_CACHE_HIT: colors.yellow,
+  TTS_CACHE_MISS: colors.blue,
+  VALIDATION_FAIL: colors.red,
+  INTERNAL_ERROR: colors.red,
+  EXTERNAL_API_ERROR: colors.red,
+  UNKNOWN_TOKEN: colors.yellow
 }
 
 // Configuration
@@ -44,6 +60,7 @@ const config = {
   filter: process.argv.find(arg => arg.startsWith('--filter='))?.split('=')[1],
   type: process.argv.find(arg => arg.startsWith('--type='))?.split('=')[1],
   level: process.argv.find(arg => arg.startsWith('--level='))?.split('=')[1],
+  event: process.argv.find(arg => arg.startsWith('--event='))?.split('=')[1],
   help: process.argv.includes('--help') || process.argv.includes('-h')
 }
 
@@ -60,12 +77,14 @@ Options:
   --filter=STRING     Filter logs containing string
   --type=TYPE         Filter by log type (api, translation, tts, error, performance, security)
   --level=LEVEL       Filter by log level (error, warn, info, debug)
+  --event=EVENT       Filter by event type (API_REQUEST, TRANSLATE_DONE, etc.)
   -h, --help          Show this help
 
 Examples:
   node scripts/view-logs.js --type=api --follow
   node scripts/view-logs.js --level=error --lines=100
   node scripts/view-logs.js --filter="translation" --type=translation
+  node scripts/view-logs.js --event=API_REQUEST --follow
   node scripts/view-logs.js --tail --lines=20
 
 Log Types:
@@ -76,6 +95,14 @@ Log Types:
   - error: Error logs only
   - performance: Performance metrics
   - security: Security events
+
+Event Types:
+  - API_REQUEST, API_RESPONSE: API operations
+  - TRANSLATE_START, TRANSLATE_DONE: Translation operations
+  - TTS_START, TTS_DONE, TTS_CACHE_HIT, TTS_CACHE_MISS: TTS operations
+  - VALIDATION_FAIL: Input validation errors
+  - INTERNAL_ERROR, EXTERNAL_API_ERROR: System errors
+  - UNKNOWN_TOKEN: Unknown translation tokens
 `)
 }
 
@@ -120,16 +147,19 @@ function getLogFiles() {
 function formatLogLine(line) {
   try {
     const logEntry = JSON.parse(line)
-    const timestamp = logEntry.timestamp || new Date().toISOString()
+    const ts = logEntry.ts || logEntry.timestamp || new Date().toISOString()
     const level = logEntry.level || 'info'
-    const message = logEntry.message || ''
-    const type = logEntry.type || ''
-    const correlationId = logEntry.correlationId || ''
+    const msg = logEntry.msg || logEntry.message || ''
+    const event = logEntry.event || ''
+    const corrId = logEntry.corr_id || logEntry.correlationId || ''
     const service = logEntry.service || ''
-    const environment = logEntry.environment || ''
+    const env = logEntry.env || logEntry.environment || ''
+    const ctx = logEntry.ctx || {}
+    const err = logEntry.err || {}
 
     // Apply filters
-    if (config.filter && !message.toLowerCase().includes(config.filter.toLowerCase())) {
+    if (config.filter && !msg.toLowerCase().includes(config.filter.toLowerCase()) && 
+        !event.toLowerCase().includes(config.filter.toLowerCase())) {
       return null
     }
 
@@ -137,35 +167,36 @@ function formatLogLine(line) {
       return null
     }
 
+    if (config.event && event !== config.event) {
+      return null
+    }
+
     // Format timestamp
-    const time = timestamp.replace('T', ' ').replace('Z', '').substring(0, 19)
+    const time = ts.replace('T', ' ').replace('Z', '').substring(0, 19)
     
     // Color coding
     const levelColor = levelColors[level] || colors.white
+    const eventColor = eventColors[event] || colors.reset
     const reset = colors.reset
     
     // Build log line
     let logLine = `${colors.gray}${time}${reset} `
     
     if (service) logLine += `${colors.blue}[${service}]${reset} `
-    if (environment && environment !== 'production') logLine += `${colors.dim}[${environment}]${reset} `
-    if (correlationId) logLine += `${colors.magenta}[${correlationId}]${reset} `
-    if (type) logLine += `${colors.cyan}[${type}]${reset} `
+    if (env && env !== 'production') logLine += `${colors.dim}[${env}]${reset} `
+    if (corrId) logLine += `${colors.magenta}[${corrId.substring(0, 8)}]${reset} `
+    if (event) logLine += `${eventColor}[${event}]${reset} `
     
-    logLine += `${levelColor}[${level.toUpperCase()}]${reset} ${message}`
+    logLine += `${levelColor}[${level.toUpperCase()}]${reset} ${msg}`
     
-    // Add metadata if present
-    const meta = { ...logEntry }
-    delete meta.timestamp
-    delete meta.level
-    delete meta.message
-    delete meta.type
-    delete meta.correlationId
-    delete meta.service
-    delete meta.environment
+    // Add context if present
+    if (Object.keys(ctx).length > 0) {
+      logLine += `\n${colors.dim}  ctx: ${JSON.stringify(ctx, null, 2).replace(/\n/g, '\n  ')}${reset}`
+    }
     
-    if (Object.keys(meta).length > 0) {
-      logLine += `\n${colors.dim}${JSON.stringify(meta, null, 2)}${reset}`
+    // Add error details if present
+    if (Object.keys(err).length > 0) {
+      logLine += `\n${colors.red}  err: ${JSON.stringify(err, null, 2).replace(/\n/g, '\n  ')}${reset}`
     }
     
     return logLine
