@@ -1,27 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import fallbackPino, { type FallbackPino } from './pino-fallback'
-
-function loadPino(): FallbackPino {
-  try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const realPino = require('pino') as { default?: FallbackPino } | FallbackPino
-    if (typeof realPino === 'function') {
-      return ('default' in realPino && typeof realPino.default === 'function'
-        ? realPino.default
-        : realPino) as FallbackPino
-    }
-    if (realPino && typeof (realPino as { default?: unknown }).default === 'function') {
-      return (realPino as { default: FallbackPino }).default
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('Using fallback pino implementation:', (error as Error).message)
-  }
-  return fallbackPino
-}
-
-const pino = loadPino()
+import pino from 'pino'
 
 // Sensitive data patterns to sanitize
 const SENSITIVE_PATTERNS = [
