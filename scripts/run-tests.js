@@ -31,6 +31,10 @@ function main() {
   const isCI = process.env.CI === 'true';
   
   console.log(`Running in CI: ${isCI}`);
+  console.log(`Node.js version: ${process.version}`);
+  console.log(`Platform: ${process.platform}`);
+  console.log(`Architecture: ${process.arch}`);
+  console.log(`Working directory: ${process.cwd()}`);
   
   if (!fs.existsSync(testDir)) {
     console.log('No test directory found. Run "npm run build:test" first.');
@@ -49,15 +53,52 @@ function main() {
   console.log('');
   
   try {
-    const command = `node --test --test-reporter=spec ${testFiles.join(' ')}`;
+    // Check Node.js version to determine if --test-reporter is supported
+    const nodeVersion = process.version;
+    const majorVersion = parseInt(nodeVersion.slice(1).split('.')[0]);
+    const supportsTestReporter = majorVersion >= 20;
+    
+    // Build command based on Node.js version
+    let command;
+    if (supportsTestReporter) {
+      command = `node --test --test-reporter=spec ${testFiles.join(' ')}`;
+    } else {
+      command = `node --test ${testFiles.join(' ')}`;
+      console.log(`Node.js ${nodeVersion} detected - using basic test runner (no spec reporter)`);
+    }
+    
     console.log(`Running: ${command}`);
+    
+    // Add timeout for CI environment
+    const timeoutMs = isCI ? 300000 : 0; // 5 minutes for CI, no timeout for local
+    
+    if (timeoutMs > 0) {
+      console.log(`Running with ${timeoutMs/1000}s timeout for CI environment`);
+    }
+    
+    console.log('Starting test execution...');
+    const startTime = Date.now();
+    
     execSync(command, { 
       stdio: 'inherit',
-      env: { ...process.env, CI: isCI ? 'true' : 'false' }
+      env: { ...process.env, CI: isCI ? 'true' : 'false' },
+      timeout: timeoutMs
     });
+    
+    const endTime = Date.now();
+    console.log(`Test execution completed in ${endTime - startTime}ms`);
     console.log('All tests passed!');
   } catch (error) {
     console.error('Tests failed:', error.message);
+    console.error('Error details:', {
+      name: error.name,
+      signal: error.signal,
+      code: error.code,
+      stack: error.stack
+    });
+    if (error.signal === 'SIGTERM') {
+      console.error('Tests timed out!');
+    }
     process.exit(1);
   }
 }

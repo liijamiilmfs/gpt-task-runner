@@ -21,6 +21,7 @@
     "test:importer": "node scripts/run-vitest.js",
     "test:all": "node scripts/run-all-tests.js",
     "test:all:coverage": "node scripts/run-all-tests.js --coverage",
+    "test:load": "node scripts/load-test-guardrails.js",
     "dict:build": "node scripts/dict-build.js",
     "dict:import": "node scripts/dict-import.js",
     "dict:import-libran": "node scripts/dict-import-libran.js"
