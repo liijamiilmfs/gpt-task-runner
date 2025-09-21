@@ -24,6 +24,6 @@ describe('translate (integration)', () => {
     const text = 'The balance, the memory, and the love.'
     const result = translate(text, 'ancient')
 
-    assert.equal(result.libran, 'The stílibror, the memorior, etron the dragostor.')
+    assert.equal(result.libran, 'The stílibror, the memorior, andon the dragostor.')
   })
 })
