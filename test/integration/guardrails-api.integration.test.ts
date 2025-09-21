@@ -2,16 +2,17 @@
  * Guardrails API Integration Tests
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest'
+import { describe, it, before, after } from 'node:test'
+import assert from 'node:assert/strict'
 import { NextRequest } from 'next/server'
 import { withGuardrails, resetGuardrails } from '../../lib/api-guardrails'
 
 describe('Guardrails API Integration', () => {
-  beforeEach(() => {
+  before(() => {
     resetGuardrails()
   })
 
-  afterEach(() => {
+  after(() => {
     resetGuardrails()
   })
 
@@ -37,7 +38,7 @@ describe('Guardrails API Integration', () => {
       })
 
       const response = await guardedHandler(request)
-      expect(response.status).toBe(200)
+      assert.equal(response.status, 200)
     })
 
     it('should block requests exceeding rate limit', async () => {
@@ -63,16 +64,16 @@ describe('Guardrails API Integration', () => {
       // Make requests up to the burst limit (10 by default)
       for (let i = 0; i < 10; i++) {
         const response = await guardedHandler(request)
-        expect(response.status).toBe(200)
+        assert.equal(response.status, 200)
       }
 
       // Next request should be rate limited
       const response = await guardedHandler(request)
-      expect(response.status).toBe(429)
+      assert.equal(response.status, 429)
       
       const body = await response.json()
-      expect(body.error).toBe('Rate limit exceeded')
-      expect(body.retryAfter).toBeDefined()
+      assert.equal(body.error, 'Rate limit exceeded')
+      assert.ok(body.retryAfter)
     })
   })
 
@@ -98,7 +99,7 @@ describe('Guardrails API Integration', () => {
       })
 
       const response = await guardedHandler(request)
-      expect(response.status).toBe(200)
+      assert.equal(response.status, 200)
     })
 
     it('should block requests exceeding per-request character limit', async () => {
@@ -124,11 +125,11 @@ describe('Guardrails API Integration', () => {
       })
 
       const response = await guardedHandler(request)
-      expect(response.status).toBe(429)
+      assert.equal(response.status, 429)
       
       const body = await response.json()
-      expect(body.error).toBe('Budget exceeded')
-      expect(body.message).toContain('exceeds maximum characters per request')
+      assert.equal(body.error, 'Budget exceeded')
+      assert.ok(body.message.includes('exceeds maximum characters per request'))
     })
 
     it('should block requests exceeding daily character limit', async () => {
@@ -156,7 +157,7 @@ describe('Guardrails API Integration', () => {
       })
 
       const response1 = await guardedHandler(request1)
-      expect(response1.status).toBe(200)
+      assert.equal(response1.status, 200)
 
       // Second request should exceed daily limit
       const request2 = new NextRequest('http://localhost:3000/api/test', {
@@ -166,11 +167,11 @@ describe('Guardrails API Integration', () => {
       })
 
       const response2 = await guardedHandler(request2)
-      expect(response2.status).toBe(429)
+      assert.equal(response2.status, 429)
       
       const body = await response2.json()
-      expect(body.error).toBe('Budget exceeded')
-      expect(body.message).toContain('Daily character limit exceeded')
+      assert.equal(body.error, 'Budget exceeded')
+      assert.ok(body.message.includes('Daily character limit exceeded'))
     })
   })
 
@@ -197,11 +198,11 @@ describe('Guardrails API Integration', () => {
 
       // Should work within limits
       const response = await guardedHandler(request)
-      expect(response.status).toBe(200)
+      assert.equal(response.status, 200)
       
       // Check headers are present
-      expect(response.headers.get('X-RateLimit-Limit')).toBeDefined()
-      expect(response.headers.get('X-Budget-Remaining-Daily')).toBeDefined()
+      assert.ok(response.headers.get('X-RateLimit-Limit'))
+      assert.ok(response.headers.get('X-Budget-Remaining-Daily'))
     })
   })
 
@@ -224,10 +225,10 @@ describe('Guardrails API Integration', () => {
       })
 
       const response = await guardedHandler(request)
-      expect(response.status).toBe(500)
+      assert.equal(response.status, 500)
       
       const body = await response.json()
-      expect(body.error).toBe('Internal server error')
+      assert.equal(body.error, 'Internal server error')
     })
   })
 })
