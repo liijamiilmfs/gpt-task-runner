@@ -37,7 +37,7 @@ export async function GET(request: NextRequest) {
         }, { status: 400 });
     }
   } catch (error) {
-    log.error('Unknown tokens API error', { error: error.message });
+    log.error('Unknown tokens API error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ 
       success: false, 
       error: 'Internal server error' 
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
       message: 'Token logged successfully' 
     });
   } catch (error) {
-    log.error('Unknown tokens API error', { error: error.message });
+    log.error('Unknown tokens API error', { error: error instanceof Error ? error.message : String(error) });
     return NextResponse.json({ 
       success: false, 
       error: 'Internal server error' 
