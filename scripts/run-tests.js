@@ -31,6 +31,10 @@ function main() {
   const isCI = process.env.CI === 'true';
   
   console.log(`Running in CI: ${isCI}`);
+  console.log(`Node.js version: ${process.version}`);
+  console.log(`Platform: ${process.platform}`);
+  console.log(`Architecture: ${process.arch}`);
+  console.log(`Working directory: ${process.cwd()}`);
   
   if (!fs.existsSync(testDir)) {
     console.log('No test directory found. Run "npm run build:test" first.');
@@ -72,14 +76,26 @@ function main() {
       console.log(`Running with ${timeoutMs/1000}s timeout for CI environment`);
     }
     
+    console.log('Starting test execution...');
+    const startTime = Date.now();
+    
     execSync(command, { 
       stdio: 'inherit',
       env: { ...process.env, CI: isCI ? 'true' : 'false' },
       timeout: timeoutMs
     });
+    
+    const endTime = Date.now();
+    console.log(`Test execution completed in ${endTime - startTime}ms`);
     console.log('All tests passed!');
   } catch (error) {
     console.error('Tests failed:', error.message);
+    console.error('Error details:', {
+      name: error.name,
+      signal: error.signal,
+      code: error.code,
+      stack: error.stack
+    });
     if (error.signal === 'SIGTERM') {
       console.error('Tests timed out!');
     }

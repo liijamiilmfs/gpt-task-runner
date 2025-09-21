@@ -73,8 +73,18 @@ jobs:
       run: npm ci
       
     - name: Run translator tests
+      env:
+        CI: true
+        NODE_ENV: test
       run: |
         echo "Running translator and API tests..."
+        echo "Node.js version:"
+        node --version
+        echo "NPM version:"
+        npm --version
+        echo "Environment variables:"
+        echo "CI=$CI"
+        echo "NODE_ENV=$NODE_ENV"
         echo "Current directory contents:"
         ls -la
         echo "Checking for dist-test directory:"
@@ -83,8 +93,8 @@ jobs:
         npm run build:test
         echo "Test files built, checking dist-test contents:"
         ls -la dist-test/test/ || echo "No test files found in dist-test"
-        echo "Running tests with timeout..."
-        timeout 300 npm run test:run || (echo "Tests timed out or failed" && exit 1)
+        echo "Running tests..."
+        npm run test:run
       
     - name: Build application
       run: |
