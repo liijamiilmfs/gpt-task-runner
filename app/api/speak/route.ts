@@ -3,8 +3,9 @@ import OpenAI from 'openai'
 import { metrics } from '@/lib/metrics'
 import { log } from '@/lib/logger'
 import { ttsCache } from '@/lib/tts-cache'
+import { withGuardrails } from '@/lib/api-guardrails'
 
-export async function POST(request: NextRequest) {
+async function handleSpeakRequest(request: NextRequest) {
   const startTime = Date.now()
   let success = false
   let characterCount = 0
@@ -182,3 +183,10 @@ export async function POST(request: NextRequest) {
     metrics.recordRequest('tts', success, responseTime, characterCount)
   }
 }
+
+// Export the guarded handler
+export const POST = withGuardrails(handleSpeakRequest, {
+  enableRateLimiting: true,
+  enableBudgetGuardrails: true,
+  requireUserId: false
+})

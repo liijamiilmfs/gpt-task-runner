@@ -2,8 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { translate, Variant } from '@/lib/translator'
 import { metrics } from '@/lib/metrics'
 import { log } from '@/lib/logger'
+import { withGuardrails } from '@/lib/api-guardrails'
 
-export async function POST(request: NextRequest) {
+async function handleTranslateRequest(request: NextRequest) {
   const startTime = Date.now()
   let success = false
   let characterCount = 0
@@ -83,3 +84,10 @@ export async function POST(request: NextRequest) {
     metrics.recordRequest('translation', success, responseTime, characterCount)
   }
 }
+
+// Export the guarded handler
+export const POST = withGuardrails(handleTranslateRequest, {
+  enableRateLimiting: true,
+  enableBudgetGuardrails: true,
+  requireUserId: false
+})
