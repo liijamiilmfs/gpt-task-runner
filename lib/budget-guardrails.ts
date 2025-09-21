@@ -4,6 +4,7 @@
  */
 
 import { log } from './logger'
+import { trackInterval, clearTrackedInterval } from './cleanup-handler'
 
 export interface BudgetConfig {
   maxCharsPerRequest: number
@@ -50,13 +51,13 @@ export class BudgetGuardrails {
     
     // Cleanup old user budgets every hour (or 30 seconds in test environment)
     const cleanupInterval = process.env.NODE_ENV === 'test' ? 30 * 1000 : 60 * 60 * 1000
-    this.cleanupInterval = setInterval(() => {
+    this.cleanupInterval = trackInterval(setInterval(() => {
       try {
         this.cleanupOldBudgets()
       } catch (error) {
         log.error('Error during budget cleanup', { error })
       }
-    }, cleanupInterval)
+    }, cleanupInterval))
   }
 
   /**
@@ -317,7 +318,7 @@ export class BudgetGuardrails {
    */
   destroy(): void {
     if (this.cleanupInterval) {
-      clearInterval(this.cleanupInterval)
+      clearTrackedInterval(this.cleanupInterval)
       this.cleanupInterval = null as any
     }
   }

@@ -5,6 +5,7 @@
 import { describe, it, beforeEach, afterEach } from 'node:test'
 import assert from 'node:assert/strict'
 import { BudgetGuardrails, BudgetConfig } from '../../lib/budget-guardrails'
+import { cleanupAll } from '../../lib/cleanup-handler'
 
 describe('BudgetGuardrails', () => {
   let budgetGuardrails: BudgetGuardrails
@@ -23,6 +24,7 @@ describe('BudgetGuardrails', () => {
 
   afterEach(() => {
     budgetGuardrails.destroy()
+    cleanupAll()
   })
 
   describe('Per-Request Limits', () => {

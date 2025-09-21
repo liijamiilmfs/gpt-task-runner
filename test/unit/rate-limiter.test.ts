@@ -5,6 +5,7 @@
 import { describe, it, beforeEach, afterEach } from 'node:test'
 import assert from 'node:assert/strict'
 import { RateLimiter, RateLimitConfig } from '../../lib/rate-limiter'
+import { cleanupAll } from '../../lib/cleanup-handler'
 
 describe('RateLimiter', () => {
   let rateLimiter: RateLimiter
@@ -22,6 +23,7 @@ describe('RateLimiter', () => {
 
   afterEach(() => {
     rateLimiter.destroy()
+    cleanupAll()
   })
 
   describe('User Rate Limiting', () => {
