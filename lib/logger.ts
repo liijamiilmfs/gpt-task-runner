@@ -19,7 +19,7 @@ const SENSITIVE_PATTERNS = [
 ]
 
 // Sanitize sensitive data from log objects
-function sanitizeLogData(data: any): any {
+function sanitizeLogData(data: any, visited = new WeakSet()): any {
   if (typeof data === 'string') {
     let sanitized = data
     SENSITIVE_PATTERNS.forEach(pattern => {
@@ -29,13 +29,19 @@ function sanitizeLogData(data: any): any {
   }
   
   if (typeof data === 'object' && data !== null) {
+    // Check for circular references
+    if (visited.has(data)) {
+      return '[Circular Reference]'
+    }
+    visited.add(data)
+    
     const sanitized: any = Array.isArray(data) ? [] : {}
     for (const [key, value] of Object.entries(data)) {
       const lowerKey = key.toLowerCase()
       if (SENSITIVE_PATTERNS.some(pattern => pattern.test(key))) {
         sanitized[key] = '[REDACTED]'
       } else {
-        sanitized[lowerKey] = sanitizeLogData(value)
+        sanitized[lowerKey] = sanitizeLogData(value, visited)
       }
     }
     return sanitized
@@ -96,26 +102,8 @@ const logger = pino({
   : undefined
 )
 
-// Create specialized loggers for different log types
-const createFileLogger = (subDir: string, level?: string) => {
-  const logFile = path.join(logsSubDirs[subDir as keyof typeof logsSubDirs], `${subDir}.log`)
-  return pino({
-    level: level || 'info',
-    base: baseConfig,
-    timestamp: pino.stdTimeFunctions.isoTime,
-    formatters: {
-      level(label) { return { level: label } }
-    }
-  }, pino.destination(logFile))
-}
-
-// Specialized loggers
-const apiLogger = createFileLogger('api')
-const translationLogger = createFileLogger('translation')
-const ttsLogger = createFileLogger('tts')
-const errorLogger = createFileLogger('errors', 'error')
-const performanceLogger = createFileLogger('performance')
-const securityLogger = createFileLogger('security', 'warn')
+// Note: We use the main logger with daily rotation instead of separate file loggers
+// to avoid creating empty files and duplicate logging
 
 // Log event types (SCREAMING_SNAKE_CASE)
 export const LogEvents = {
@@ -188,7 +176,10 @@ function normalizeLogData(data: any): any {
 
 // Generate correlation ID
 export function generateCorrelationId(): string {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
+  // Generate a consistent 26-character correlation ID
+  const part1 = Math.random().toString(36).substring(2, 15).padEnd(13, '0')
+  const part2 = Math.random().toString(36).substring(2, 15).padEnd(13, '0')
+  return part1 + part2
 }
 
 // Main logging interface
@@ -228,7 +219,6 @@ export const log = {
       }
     }
     logger.info({ ...logData, msg: 'API Request' })
-    apiLogger.info({ ...logData, msg: 'API Request' })
   },
 
   apiResponse: (method: string, url: string, statusCode: number, durationMs: number, corrId: string, data?: any) => {
@@ -246,7 +236,6 @@ export const log = {
       }
     }
     logger.info({ ...logData, msg: 'API Response' })
-    apiLogger.info({ ...logData, msg: 'API Response' })
   },
 
   translation: (text: string, variant: string, result: string, confidence: number, corrId: string, data?: any) => {
@@ -266,7 +255,6 @@ export const log = {
       }
     }
     logger.info({ ...logData, msg: 'Translation completed' })
-    translationLogger.info({ ...logData, msg: 'Translation completed' })
   },
 
   tts: (text: string, voice: string, durationMs: number, corrId: string, data?: any) => {
@@ -282,7 +270,6 @@ export const log = {
       }
     }
     logger.info({ ...logData, msg: 'TTS Generation completed' })
-    ttsLogger.info({ ...logData, msg: 'TTS Generation completed' })
   },
 
   ttsCacheHit: (text: string, voice: string, corrId: string, data?: any) => {
@@ -297,7 +284,6 @@ export const log = {
       }
     }
     logger.info({ ...logData, msg: 'TTS Cache Hit' })
-    ttsLogger.info({ ...logData, msg: 'TTS Cache Hit' })
   },
 
   ttsRateLimit: (text: string, voice: string, corrId: string, data?: any) => {
@@ -318,7 +304,6 @@ export const log = {
       }
     }
     logger.error({ ...logData, msg: 'TTS request throttled' })
-    ttsLogger.error({ ...logData, msg: 'TTS request throttled' })
   },
 
   unknownToken: (token: string, variant: string, corrId: string, data?: any) => {
@@ -333,7 +318,6 @@ export const log = {
       }
     }
     logger.warn({ ...logData, msg: 'Unknown token encountered' })
-    translationLogger.warn({ ...logData, msg: 'Unknown token encountered' })
   },
 
   validationFail: (field: string, reason: string, corrId: string, data?: any) => {
@@ -353,7 +337,6 @@ export const log = {
       }
     }
     logger.warn({ ...logData, msg: 'Validation failed' })
-    errorLogger.warn({ ...logData, msg: 'Validation failed' })
   },
 
   errorWithContext: (error: Error, event: string, corrId: string, data?: any) => {
@@ -372,7 +355,6 @@ export const log = {
       }
     }
     logger.error({ ...logData, msg: 'Error occurred' })
-    errorLogger.error({ ...logData, msg: 'Error occurred' })
   },
 
   performance: (operation: string, durationMs: number, corrId: string, data?: any) => {
@@ -387,7 +369,6 @@ export const log = {
       }
     }
     logger.info({ ...logData, msg: 'Performance metric' })
-    performanceLogger.info({ ...logData, msg: 'Performance metric' })
   },
 
   security: (event: string, corrId: string, data?: any) => {
@@ -400,7 +381,6 @@ export const log = {
       }
     }
     logger.warn({ ...logData, msg: 'Security event' })
-    securityLogger.warn({ ...logData, msg: 'Security event' })
   },
 
   // Legacy compatibility methods
@@ -423,7 +403,6 @@ export const log = {
       }
     }
     logger.error({ ...logData, msg: 'Error Taxonomy' })
-    errorLogger.error({ ...logData, msg: 'Error Taxonomy' })
   },
 
   withCorrelationId: (correlationId: string, data?: any) => {
