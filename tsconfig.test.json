@@ -25,6 +25,7 @@
   ],
   "exclude": [
     "test/vitest/**/*.ts",
-    "test/integration/guardrails-api.integration.test.ts"
+    "test/integration/guardrails-api.integration.test.ts",
+    "test/integration/translate-api.integration.test.ts"
   ]
 }
