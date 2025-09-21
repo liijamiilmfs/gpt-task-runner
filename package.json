@@ -1,33 +1,62 @@
 {
-  "name": "english-to-libran-text-to-voice",
+  "name": "libran-voice-forge",
   "version": "1.0.0",
-  "description": "A Next.js application for translating English to Libran with text-to-speech capabilities",
+  "description": "English to Librán text-to-speech translation and synthesis",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "type-check": "tsc --noEmit",
+    "clean:test": "node -e \"require('fs').rmSync('dist-test', { recursive: true, force: true });\"",
+    "build:test": "npm run clean:test && tsc -p tsconfig.test.json && tsc-alias -p tsconfig.test.json",
+    "test:run": "node scripts/run-tests.js",
+    "test": "npm run build:test && npm run test:run",
+    "test:ci": "node scripts/test-ci.js",
+    "test:vitest": "vitest --config vitest.config.mjs",
+    "test:vitest:ui": "vitest --ui --config vitest.config.mjs",
+    "test:vitest:run": "vitest run --config vitest.config.mjs",
+    "test:coverage": "node scripts/coverage.js",
+    "test:importer": "node scripts/run-vitest.js",
+    "test:all": "node scripts/run-all-tests.js",
+    "test:all:coverage": "node scripts/run-all-tests.js --coverage",
+    "dict:build": "node scripts/dict-build.js",
+    "dict:import": "node scripts/dict-import.js",
+    "dict:import-libran": "node scripts/dict-import-libran.js"
   },
   "dependencies": {
+    "lucide-react": "^0.544.0",
     "next": "^14.0.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "openai": "^4.20.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "winston": "^3.17.0",
+    "winston-daily-rotate-file": "^5.0.0"
   },
   "devDependencies": {
     "@types/node": "^20.0.0",
-    "@types/react": "^18.0.0",
-    "@types/react-dom": "^18.0.0",
-    "eslint": "^8.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@vitest/coverage-v8": "^2.1.9",
+    "@vitest/ui": "^2.1.9",
+    "esbuild": "^0.25.10",
+    "eslint": "^8.57.1",
     "eslint-config-next": "^14.0.0",
-    "typescript": "^5.0.0",
-    "vitest": "^1.0.0"
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.2.0",
+    "vitest": "^2.1.9"
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "overrides": {
+    "esbuild": "^0.25.10",
+    "inflight": "npm:lru-cache@^10.0.0",
+    "@humanwhocodes/config-array": "npm:@eslint/config-array@^0.18.0",
+    "rimraf": "^5.0.0",
+    "glob": "^10.0.0",
+    "@humanwhocodes/object-schema": "npm:@eslint/object-schema@^0.18.0",
+    "node-domexception": false
   }
 }

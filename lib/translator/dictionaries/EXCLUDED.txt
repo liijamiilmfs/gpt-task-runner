@@ -1,0 +1,47 @@
+EXCLUDED ENTRIES
+================
+
+English: Destiny
+Reason: EXCLUDED: In exclude list
+Page: 4
+----------------------------------------
+English: Destiny
+Reason: EXCLUDED: In exclude list
+Page: 4
+----------------------------------------
+English: Treasure
+Reason: EXCLUDED: Comoară term
+Page: 5
+----------------------------------------
+English: Blessing
+Reason: EXCLUDED: In exclude list
+Page: 39
+----------------------------------------
+English: Curse
+Reason: EXCLUDED: In exclude list
+Page: 40
+----------------------------------------
+English: Curse
+Reason: EXCLUDED: In exclude list
+Page: 40
+----------------------------------------
+English: Fate
+Reason: EXCLUDED: In exclude list
+Page: 61
+----------------------------------------
+English: Fortune
+Reason: EXCLUDED: In exclude list
+Page: 62
+----------------------------------------
+English: God
+Reason: EXCLUDED: In exclude list
+Page: 64
+----------------------------------------
+English: Heaven
+Reason: EXCLUDED: In exclude list
+Page: 66
+----------------------------------------
+English: Trickster-god
+Reason: EXCLUDED: Divine/religious term
+Page: 79
+----------------------------------------

@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dict-importer"
+version = "1.0.0"
+description = "PDF dictionary parser for Librán Voice Forge"
+authors = [{name = "Librán Voice Forge Team"}]
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = [
+    "pdfplumber>=0.10.0",
+    "pydantic>=2.0.0",
+    "click>=8.0.0",
+    "regex>=2023.0.0",
+    "unidecode>=1.3.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-xdist>=3.0.0",
+    "black>=23.0.0",
+    "isort>=5.12.0",
+]
+
+[project.scripts]
+dict-importer = "dict_importer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dict_importer*"]
+
+[tool.black]
+line-length = 88
+target-version = ['py38']
+
+[tool.isort]
+profile = "black"
+line_length = 88
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "-v",
+    "--tb=short",
+    "--strict-markers",
+    "--disable-warnings",
+]
+markers = [
+    "unit: Unit tests",
+    "integration: Integration tests", 
+    "slow: Slow running tests",
+]

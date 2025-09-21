@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "outDir": "./dist-test",
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "typeRoots": ["./test/types"],
+    "lib": ["es2020", "dom"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"],
+      "@/lib/*": ["./lib/*"]
+    }
+  },
+  "include": [
+    "test/**/*.ts",
+    "lib/translator/**/*.ts",
+    "lib/metrics.ts",
+    "lib/logger.ts",
+    "app/api/translate/**/*.ts",
+    "app/api/speak/**/*.ts",
+    "app/api/metrics/**/*.ts"
+  ],
+  "exclude": [
+    "test/vitest/**/*.ts"
+  ]
+}

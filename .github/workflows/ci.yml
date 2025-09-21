@@ -2,34 +2,214 @@ name: CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, dev, features/* ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, dev ]
 
 jobs:
-  test:
+  # Linting check
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
     
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-    
+      
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
-    
+        node-version: '20.x'
+        cache: 'npm'
+        
     - name: Install dependencies
-      run: npm install
-    
-    - name: Run tests
-      run: npm run test:run
-      continue-on-error: true
-    
-    - name: Build
-      run: npm run build
-      continue-on-error: true
-    
-    - name: Lint
+      run: npm ci
+      
+    - name: Run linting
       run: npm run lint
-      continue-on-error: true
+
+  # Type checking
+  types:
+    name: Type Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run type checking
+      run: npm run type-check
+
+  # Node.js/TypeScript tests (translator, API, frontend)
+  translator-tests:
+    name: Translator & API Tests
+    runs-on: ubuntu-latest
+    needs: [lint, types]
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run translator tests
+      run: |
+        echo "Running translator and API tests..."
+        echo "Current directory contents:"
+        ls -la
+        echo "Checking for dist-test directory:"
+        ls -la dist-test || echo "dist-test directory not found"
+        echo "Building test files..."
+        npm run build:test
+        echo "Test files built, checking dist-test contents:"
+        ls -la dist-test/test/ || echo "No test files found in dist-test"
+        CI=true npm run test:run
+      
+    - name: Build application
+      run: |
+        echo "Building application..."
+        npm run build || (echo "Build failed, trying with clean cache..." && rm -rf .next && npm run build)
+
+  # Python importer tests
+  importer-tests:
+    name: Importer Tests
+    runs-on: ubuntu-latest
+    
+    env:
+      PYTHONPATH: ${{ github.workspace }}/tools/dict_importer
+      NODE_ENV: test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+        
+    - name: Install Python dependencies
+      run: |
+        cd tools/dict_importer
+        python -m pip install -e ".[dev]"
+        
+    - name: Verify Python installation
+      run: |
+        python --version
+        cd tools/dict_importer
+        python -c "import dict_importer; print('Dictionary importer imported successfully')"
+        
+    - name: Run importer unit tests (JSON parsing only)
+      run: |
+        cd tools/dict_importer
+        echo "Running importer unit tests (JSON parsing only)..."
+        python -m pytest tests/test_normalize.py tests/test_validation.py -v
+        
+    - name: Run importer integration tests (JSON parsing only)
+      run: |
+        cd tools/dict_importer
+        echo "Running importer integration tests (JSON parsing only)..."
+        python -m pytest tests/test_json_importer.py tests/test_libran_json_importer.py -v
+        
+    - name: Run importer CLI tests
+      run: |
+        cd tools/dict_importer
+        echo "Testing importer CLI..."
+        dict-importer --help
+        echo "CLI test passed"
+
+  # Combined coverage job
+  coverage:
+    name: Coverage Report
+    runs-on: ubuntu-latest
+    needs: [lint, types, translator-tests, importer-tests]
+    
+    env:
+      PYTHONPATH: ${{ github.workspace }}/tools/dict_importer
+      NODE_ENV: test
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        cache: 'pip'
+        
+    - name: Install Node.js dependencies
+      run: npm ci
+      
+    - name: Install Python dependencies
+      run: |
+        cd tools/dict_importer
+        python -m pip install -e ".[dev]"
+        
+    - name: Generate Node.js coverage report
+      run: |
+        echo "Generating Node.js coverage report..."
+        npm run test:coverage
+        
+    - name: Run Python tests with coverage (JSON parsing only)
+      run: |
+        cd tools/dict_importer
+        echo "Running Python tests with coverage (JSON parsing only)..."
+        python -m pytest tests/test_normalize.py tests/test_validation.py tests/test_json_importer.py tests/test_libran_json_importer.py --cov=dict_importer --cov-report=xml --cov-report=html -v
+        
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        files: ./coverage/lcov.info,./tools/dict_importer/coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+        fail_ci_if_error: false
+      
+  security:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run security audit
+      run: npm audit --audit-level=moderate
+      
+    - name: Check for vulnerabilities
+      run: npm audit --audit-level=high
