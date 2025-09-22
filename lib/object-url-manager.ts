@@ -43,9 +43,9 @@ class ObjectURLManager {
   // Clean up all URLs (emergency cleanup)
   cleanupAll(): void {
     console.log(`[ObjectURLManager] Emergency cleanup: revoking ${this.activeURLs.size} URLs`)
-    for (const url of this.activeURLs) {
+    this.activeURLs.forEach(url => {
       this.originalRevokeObjectURL(url)
-    }
+    })
     this.activeURLs.clear()
   }
 

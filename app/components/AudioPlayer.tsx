@@ -68,16 +68,18 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
   useEffect(() => {
     return () => {
       log.debug('AudioPlayer unmounting - cleaning up')
-      // On unmount, we can safely clear the src since the component is being destroyed
-      if (audioRef.current) {
-        audioRef.current.pause()
-        audioRef.current.src = '' // Only safe to do on component destruction
+      // Capture the ref value to avoid stale closure warning
+      const audioElement = audioRef.current
+      if (audioElement) {
+        audioElement.pause()
+        audioElement.src = '' // Only safe to do on component destruction
       }
       cleanupAudio()
       
       // Cancel any ongoing fetch requests
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort()
+      const abortController = abortControllerRef.current
+      if (abortController) {
+        abortController.abort()
       }
     }
   }, [cleanupAudio])
@@ -382,7 +384,7 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       {/* Audio Element */}
       <audio
         ref={(ref) => {
-          audioRef.current = ref
+          (audioRef as React.MutableRefObject<HTMLAudioElement | null>).current = ref
           if (ref) {
             log.debug('Audio element created', { 
               readyState: ref.readyState,
