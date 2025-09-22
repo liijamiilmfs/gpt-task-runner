@@ -37,6 +37,12 @@ declare module 'module' {
   export = Module
 }
 
+declare module 'pino' {
+  export type DestinationStream = any
+  const pino: any
+  export default pino
+}
+
 declare function require(moduleName: string): any
 
 declare module 'next/server' {
