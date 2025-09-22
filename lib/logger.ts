@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import pino from 'pino'
+import * as pino from 'pino'
 
 // Sensitive data patterns to sanitize
 const SENSITIVE_PATTERNS = [
@@ -123,10 +123,10 @@ function createRotatingStream(logDir: string, filename: string) {
 }
 
 // Create main logger with simple stream (no workers)
-const logger = pino({
+const logger = pino.default({
   level: process.env.LOG_LEVEL || (isDev ? 'debug' : 'info'),
   base: baseConfig,
-  timestamp: pino.stdTimeFunctions.isoTime,
+  timestamp: pino.default.stdTimeFunctions.isoTime,
   formatters: {
     level(label: string) { return { level: label } }
   }
