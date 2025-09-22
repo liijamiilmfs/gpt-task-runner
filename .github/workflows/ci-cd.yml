@@ -10,11 +10,11 @@ on:
 
 env:
   NODE_VERSION: '20'
-  PYTHON_VERSION: '3.11'
+  PYTHON_VERSION: '3.12'
 
 jobs:
   # Lint and Type Check
-  lint-and-typecheck:
+  lint:
     name: Lint & Type Check
     runs-on: ubuntu-latest
     steps:
@@ -37,10 +37,10 @@ jobs:
         run: npm run type-check
 
   # Test Suite
-  test:
+  ci_test:
     name: Test Suite
     runs-on: ubuntu-latest
-    needs: lint-and-typecheck
+    needs: lint
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -62,15 +62,10 @@ jobs:
       - name: Install Python dependencies
         run: |
           cd tools/dict_importer
-          pip install -e ".[dev]"
+          pip install pdfplumber pydantic click regex unidecode pytest pytest-cov pytest-xdist black isort
 
-      - name: Run Node.js tests
-        run: npm test
-
-      - name: Run Python tests
-        run: |
-          cd tools/dict_importer
-          python -m pytest tests/ -v --cov=dict_importer --cov-report=xml
+      - name: Run comprehensive test suite
+        run: npm run test:all
 
       - name: Upload coverage reports
         uses: codecov/codecov-action@v3
@@ -79,10 +74,10 @@ jobs:
           fail_ci_if_error: false
 
   # Build and Security Scan
-  build-and-scan:
+  ci_build:
     name: Build & Security Scan
     runs-on: ubuntu-latest
-    needs: test
+    needs: ci_test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -103,7 +98,7 @@ jobs:
         run: npm audit --audit-level=moderate
 
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-files
           path: .next/
@@ -113,14 +108,14 @@ jobs:
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
-    needs: build-and-scan
+    needs: ci_build
     if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build-files
           path: .next/
@@ -135,7 +130,7 @@ jobs:
   deploy-production:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
-    needs: build-and-scan
+    needs: ci_build
     if: (github.ref == 'refs/heads/main' && github.event_name == 'push') || github.event_name == 'release'
     environment:
       name: production
@@ -188,7 +183,7 @@ jobs:
   performance-test:
     name: Performance Test
     runs-on: ubuntu-latest
-    needs: build-and-scan
+    needs: ci_build
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout code
