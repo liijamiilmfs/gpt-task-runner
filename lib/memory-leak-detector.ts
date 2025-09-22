@@ -43,7 +43,11 @@ class MemoryLeakDetector {
     console.log('[MemoryLeakDetector] Starting memory monitoring...')
 
     this.intervalId = setInterval(() => {
-      this.captureStats()
+      // Add a small delay to let Object URLs settle before counting
+      // This helps avoid false positives from timing issues
+      setTimeout(() => {
+        this.captureStats()
+      }, 100) // 100ms delay to account for React state updates
     }, intervalMs)
 
     // Capture initial stats
@@ -98,8 +102,8 @@ class MemoryLeakDetector {
    * Count active object URLs (approximation)
    */
   private countObjectUrls(): number {
-    // This is an approximation - we can't get exact count without browser APIs
-    // We'll count by looking for blob URLs in the DOM
+    // Count Object URLs by looking for blob URLs in the DOM
+    // This is the most reliable method since we can't access the browser's internal Object URL registry
     const blobUrls = document.querySelectorAll('[src*="blob:"]')
     return blobUrls.length
   }

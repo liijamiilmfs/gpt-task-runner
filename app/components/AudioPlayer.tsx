@@ -44,13 +44,16 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
 
   // Cleanup function for audio URLs and event listeners
   const cleanupAudio = useCallback(() => {
-    if (audioUrl) {
-      log.debug('Cleaning up audio URL', { url: audioUrl })
-      URL.revokeObjectURL(audioUrl)
-      setAudioUrl('')
-    }
+    // Get the current audioUrl from state at cleanup time to avoid stale closures
+    setAudioUrl(currentUrl => {
+      if (currentUrl) {
+        log.debug('Cleaning up audio URL', { url: currentUrl })
+        URL.revokeObjectURL(currentUrl)
+      }
+      return ''
+    })
     setIsPlaying(false)
-  }, [audioUrl])
+  }, []) // Remove audioUrl dependency to avoid stale closures
 
   // Cleanup on component unmount
   useEffect(() => {
@@ -71,7 +74,7 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       log.debug('Text changed - cleaning up previous audio')
       cleanupAudio()
     }
-  }, [text, cleanupAudio, audioUrl])
+  }, [text, cleanupAudio]) // Remove audioUrl dependency since cleanupAudio now handles it internally
 
   const generateAudio = async () => {
     if (!text.trim()) {
