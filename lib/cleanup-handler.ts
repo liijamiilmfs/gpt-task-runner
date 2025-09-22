@@ -48,7 +48,8 @@ export function clearTrackedTimeout(timeout: NodeJS.Timeout): void {
  * Clear all tracked intervals and timeouts
  */
 export function cleanupAll(): void {
-  log.info('Cleaning up all tracked intervals and timeouts', {
+  // Don't use logger in cleanup - it can cause cascading errors
+  console.log('Cleaning up all tracked intervals and timeouts', {
     intervalCount: intervals.size,
     timeoutCount: timeouts.size
   })
@@ -57,7 +58,7 @@ export function cleanupAll(): void {
     try {
       clearInterval(interval)
     } catch (error) {
-      log.error('Error clearing interval', { error })
+      console.error('Error clearing interval:', error)
     }
   })
   intervals.clear()
@@ -66,7 +67,7 @@ export function cleanupAll(): void {
     try {
       clearTimeout(timeout)
     } catch (error) {
-      log.error('Error clearing timeout', { error })
+      console.error('Error clearing timeout:', error)
     }
   })
   timeouts.clear()
@@ -77,20 +78,24 @@ if (typeof process !== 'undefined') {
   process.on('exit', cleanupAll)
   process.on('SIGINT', () => {
     cleanupAll()
+    // Force exit immediately to avoid logger issues
     process.exit(0)
   })
   process.on('SIGTERM', () => {
     cleanupAll()
+    // Force exit immediately to avoid logger issues
     process.exit(0)
   })
   process.on('uncaughtException', (error) => {
-    log.error('Uncaught exception, cleaning up', { error })
+    console.error('Uncaught exception, cleaning up:', error)
     cleanupAll()
+    // Force exit immediately to avoid logger issues
     process.exit(1)
   })
   process.on('unhandledRejection', (reason) => {
-    log.error('Unhandled rejection, cleaning up', { reason })
+    console.error('Unhandled rejection, cleaning up:', reason)
     cleanupAll()
+    // Force exit immediately to avoid logger issues
     process.exit(1)
   })
 }
