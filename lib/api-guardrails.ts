@@ -145,6 +145,39 @@ export function withGuardrails(
 
     log.debug('Guardrails check started', { requestId, userId, config })
 
+    let parsedRequestBody: unknown
+    let hasAttemptedBodyParse = false
+
+    const parseRequestBody = async () => {
+      if (!hasAttemptedBodyParse) {
+        hasAttemptedBodyParse = true
+        try {
+          parsedRequestBody = await request.clone().json()
+        } catch (error) {
+          log.debug('Could not parse request body for character count', { requestId, error })
+          parsedRequestBody = undefined
+        }
+      }
+      return parsedRequestBody
+    }
+
+    const getCharacterCount = (body: unknown): number => {
+      if (!body || typeof body !== 'object') {
+        return 0
+      }
+
+      const payload = body as Record<string, unknown>
+      if (typeof payload.text === 'string') {
+        return payload.text.length
+      }
+
+      if (typeof payload.libranText === 'string') {
+        return payload.libranText.length
+      }
+
+      return 0
+    }
+
     try {
       // Check rate limits if enabled
       if (config.enableRateLimiting) {
