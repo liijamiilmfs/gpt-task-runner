@@ -144,18 +144,23 @@ const logger = pino({
   }
 
   if (isDev && !isTest) {
-    streams.push({
-      stream: pino.transport({
-        target: 'pino-pretty',
-        options: {
+    // Use direct pino-pretty instead of transport to avoid worker issues
+    try {
+      const pretty = require('pino-pretty')
+      streams.push({
+        stream: pretty({
           colorize: true,
           translateTime: 'SYS:standard',
           singleLine: false,
           messageKey: 'msg',
           ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id'
-        }
+        })
       })
-    })
+    } catch (error) {
+      // Fallback to stdout if pino-pretty is not available
+      console.warn('pino-pretty not available, using stdout')
+      streams.push({ stream: pino.destination(1) })
+    }
   }
 
   if (streams.length === 0) {
