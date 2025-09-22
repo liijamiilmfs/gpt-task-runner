@@ -84,7 +84,7 @@ async function applyFallbackRules(
 }
 
 function applyLibránSuffix(baseTranslation: string, suffix: string, dictionary: Dictionary): string {
-  const rules = dictionary.rules
+  const rules = dictionary.rules || {}
   
   switch (suffix) {
     case 'ing':
