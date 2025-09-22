@@ -44,23 +44,42 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
 
   // Cleanup function for audio URLs and event listeners
   const cleanupAudio = useCallback(() => {
-    if (audioUrl) {
-      log.debug('Cleaning up audio URL', { url: audioUrl })
-      URL.revokeObjectURL(audioUrl)
-      setAudioUrl('')
+    // Get the current audioUrl from state at cleanup time to avoid stale closures
+    setAudioUrl(currentUrl => {
+      if (currentUrl) {
+        log.debug('Cleaning up audio URL', { url: currentUrl })
+        URL.revokeObjectURL(currentUrl)
+      }
+      return ''
+    })
+    
+    // Pause the audio but NEVER clear the src attribute
+    // This prevents MEDIA_ELEMENT_ERROR while allowing proper Object URL tracking
+    if (audioRef.current) {
+      audioRef.current.pause()
+      // DO NOT clear src - this causes MEDIA_ELEMENT_ERROR
+      // The Object URL manager will track the blob URL lifecycle properly
     }
+    
     setIsPlaying(false)
-  }, [audioUrl])
+  }, []) // Remove audioUrl dependency to avoid stale closures
 
   // Cleanup on component unmount
   useEffect(() => {
     return () => {
       log.debug('AudioPlayer unmounting - cleaning up')
+      // Capture the ref value to avoid stale closure warning
+      const audioElement = audioRef.current
+      if (audioElement) {
+        audioElement.pause()
+        audioElement.src = '' // Only safe to do on component destruction
+      }
       cleanupAudio()
       
       // Cancel any ongoing fetch requests
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort()
+      const abortController = abortControllerRef.current
+      if (abortController) {
+        abortController.abort()
       }
     }
   }, [cleanupAudio])
@@ -71,7 +90,7 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       log.debug('Text changed - cleaning up previous audio')
       cleanupAudio()
     }
-  }, [text, cleanupAudio, audioUrl])
+  }, [text, audioUrl, cleanupAudio]) // Include audioUrl dependency
 
   const generateAudio = async () => {
     if (!text.trim()) {
@@ -115,19 +134,80 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       log.debug('Audio blob received', { size: blob.size, type: blob.type })
 
       // Clean up previous audio URL to prevent memory leaks
+      log.debug('Cleaning up previous audio before setting new one')
       cleanupAudio()
 
       const url = URL.createObjectURL(blob)
+      log.debug('Created blob URL', { url, blobSize: blob.size, blobType: blob.type })
+      
       setAudioUrl(url)
       onAudioGenerated(url)
-      log.info('Audio generated successfully', { url, size: blob.size })
+      log.info('Audio generated successfully', { 
+        url, 
+        size: blob.size, 
+        type: blob.type,
+        blobConstructor: blob.constructor.name 
+      })
 
       // Auto-play the generated audio
       if (audioRef.current) {
+        log.debug('Setting audio source and attempting playback', { url, volume, isMuted })
+        
+        // Blob URLs are created locally and should be accessible
+        
+        // Set the new source directly (don't clear first as it causes errors)
+        log.debug('Setting audio source', { 
+          currentSrc: audioRef.current.src,
+          newSrc: url,
+          volume: isMuted ? 0 : volume
+        })
         audioRef.current.src = url
-        audioRef.current.play()
-        setIsPlaying(true)
-        log.debug('Audio playback started')
+        audioRef.current.volume = isMuted ? 0 : volume
+        log.debug('Audio source set', { 
+          src: audioRef.current.src,
+          volume: audioRef.current.volume
+        })
+        
+        // Load and play the audio
+        audioRef.current.load()
+        
+        log.debug('Audio element state after load', { 
+          readyState: audioRef.current.readyState,
+          src: audioRef.current.src,
+          networkState: audioRef.current.networkState
+        })
+        
+        // Wait a moment for the audio to load, then play
+        setTimeout(() => {
+          if (audioRef.current) {
+            log.debug('Attempting audio playback', { 
+              readyState: audioRef.current.readyState,
+              networkState: audioRef.current.networkState,
+              src: audioRef.current.src,
+              volume: audioRef.current.volume,
+              muted: audioRef.current.muted
+            })
+            
+            const playPromise = audioRef.current.play()
+            if (playPromise !== undefined) {
+              playPromise.then(() => {
+                log.debug('Audio playback started successfully')
+                setIsPlaying(true)
+              }).catch(error => {
+                if (error.name === 'AbortError') {
+                  log.debug('Audio playback cancelled')
+                } else {
+                  log.warn('Audio playback failed', { error: error.message, errorName: error.name })
+                }
+              })
+            } else {
+              log.debug('Audio playback started (no promise returned)')
+              setIsPlaying(true)
+            }
+          }
+        }, 100)
+      } else {
+        log.warn('Audio ref is null, cannot play audio')
       }
     } catch (error) {
       if (error instanceof Error && error.name === 'AbortError') {
@@ -152,7 +232,13 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       audioRef.current.pause()
       setIsPlaying(false)
     } else {
-      audioRef.current.play()
+      audioRef.current.play().catch(error => {
+        if (error.name === 'AbortError') {
+          log.debug('Audio playback cancelled')
+        } else {
+          log.warn('Audio playback failed', { error: error.message })
+        }
+      })
       setIsPlaying(true)
     }
   }
@@ -297,8 +383,36 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
 
       {/* Audio Element */}
       <audio
-        ref={audioRef}
+        ref={(ref) => {
+          (audioRef as React.MutableRefObject<HTMLAudioElement | null>).current = ref
+          if (ref) {
+            log.debug('Audio element created', { 
+              readyState: ref.readyState,
+              networkState: ref.networkState,
+              src: ref.src,
+              volume: ref.volume,
+              muted: ref.muted
+            })
+          }
+        }}
         className="hidden"
+        controls={false}
+        preload="none"
+        onLoadedData={() => log.debug('Audio loaded successfully')}
+        onCanPlay={() => log.debug('Audio can play')}
+        onPlay={() => log.debug('Audio started playing')}
+        onPause={() => log.debug('Audio paused')}
+        onError={(e) => {
+          const error = e.currentTarget.error
+          log.error('Audio error', { 
+            error: error,
+            errorCode: error?.code,
+            errorMessage: error?.message,
+            networkState: e.currentTarget.networkState,
+            readyState: e.currentTarget.readyState,
+            src: e.currentTarget.src
+          })
+        }}
       />
 
       {/* Status Message */}
