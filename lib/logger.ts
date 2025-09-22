@@ -122,7 +122,7 @@ function createRotatingStream(logDir: string, filename: string) {
   })
 }
 
-// Create main logger with file transports
+// Create main logger with simple stream (no workers)
 const logger = pino({
   level: process.env.LOG_LEVEL || (isDev ? 'debug' : 'info'),
   base: baseConfig,
@@ -130,45 +130,33 @@ const logger = pino({
   formatters: {
     level(label: string) { return { level: label } }
   }
-}, pino.multistream((() => {
-  const streams = [] as Array<{ level?: string, stream: pino.DestinationStream }>
-
-  if (fileLoggingEnabled) {
-    streams.push({
-      stream: createRotatingStream(logsSubDirs.application, 'application')
-    })
-    streams.push({
-      level: 'error',
-      stream: createRotatingStream(logsSubDirs.errors, 'error')
-    })
-  }
-
+}, (() => {
+  // Use simple destination to avoid worker issues
   if (isDev && !isTest) {
-    // Use direct pino-pretty instead of transport to avoid worker issues
+    // In development, use pino-pretty directly without transport
     try {
       const pretty = require('pino-pretty')
-      streams.push({
-        stream: pretty({
-          colorize: true,
-          translateTime: 'SYS:standard',
-          singleLine: false,
-          messageKey: 'msg',
-          ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id'
-        })
+      return pretty({
+        colorize: true,
+        translateTime: 'SYS:standard',
+        singleLine: false,
+        messageKey: 'msg',
+        ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id'
       })
     } catch (error) {
       // Fallback to stdout if pino-pretty is not available
       console.warn('pino-pretty not available, using stdout')
-      streams.push({ stream: pino.destination(1) })
+      return pino.destination(1)
+    }
+  } else {
+    // In production, use file logging if available, otherwise stdout
+    if (fileLoggingEnabled) {
+      return createRotatingStream(logsSubDirs.application, 'application')
+    } else {
+      return pino.destination(1)
     }
   }
-
-  if (streams.length === 0) {
-    streams.push({ stream: pino.destination(1) })
-  }
-
-  return streams
-})()))
+})())
 
 // Note: We use the main logger with daily rotation instead of separate file loggers
 // to avoid creating empty files and duplicate logging
