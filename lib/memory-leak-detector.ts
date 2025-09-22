@@ -3,10 +3,12 @@
  * 
  * This utility helps detect potential memory leaks by tracking:
  * - Event listener counts
- * - Object URL counts
+ * - Object URL counts (using ObjectURLManager)
  * - DOM element counts
  * - Component mount/unmount cycles
  */
+
+import { objectURLManager } from './object-url-manager'
 
 interface MemoryStats {
   eventListeners: number
@@ -47,7 +49,7 @@ class MemoryLeakDetector {
       // This helps avoid false positives from timing issues
       setTimeout(() => {
         this.captureStats()
-      }, 100) // 100ms delay to account for React state updates
+      }, 200) // Increased delay to account for audio element cleanup timing
     }, intervalMs)
 
     // Capture initial stats
@@ -102,18 +104,15 @@ class MemoryLeakDetector {
    * Count active object URLs (approximation)
    */
   private countObjectUrls(): number {
-    // Count Object URLs by looking for blob URLs in the DOM
-    // This is the most reliable method since we can't access the browser's internal Object URL registry
-    const blobUrls = document.querySelectorAll('[src*="blob:"]')
-    const count = blobUrls.length
+    // Use the Object URL Manager to get accurate count
+    const count = objectURLManager.getActiveCount()
     
     // Debug logging to help identify the source
     if (count > 0) {
       console.log('[MemoryLeakDetector] Found Object URLs:', count)
-      blobUrls.forEach((url, index) => {
-        console.log(`[MemoryLeakDetector] URL ${index + 1}:`, url.src)
-        console.log(`[MemoryLeakDetector] Element:`, url.tagName, url)
-        console.log(`[MemoryLeakDetector] Parent:`, url.parentElement)
+      const activeURLs = objectURLManager.getActiveURLs()
+      activeURLs.forEach((url, index) => {
+        console.log(`[MemoryLeakDetector] URL ${index + 1}:`, url)
       })
     }
     

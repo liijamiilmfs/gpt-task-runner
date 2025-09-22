@@ -27,7 +27,7 @@ export default function MemoryTestPage() {
       URL.revokeObjectURL(audioUrl)
       setAudioUrl('')
     }
-  }, [testText])
+  }, [testText, audioUrl]) // Include audioUrl dependency
 
   // Update stats display
   useEffect(() => {
