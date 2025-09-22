@@ -109,20 +109,41 @@ function startFileWatching() {
   const variants: ('ancient' | 'modern')[] = ['ancient', 'modern']
   
   variants.forEach(variant => {
-    const filePath = path.join(dictionariesDir, `${variant}.json`)
-    
-    if (fs.existsSync(filePath)) {
-      const watcher = watch(filePath, (eventType) => {
-        if (eventType === 'change') {
-          console.log(`[DictionaryLoader] Dictionary file changed: ${variant}.json`)
-          invalidateCache(variant)
-        }
-      })
-      
-      fileWatchers.set(variant, watcher)
-      console.log(`[DictionaryLoader] Watching ${filePath}`)
-    }
+    setupFileWatcher(variant, dictionariesDir)
   })
+}
+
+function setupFileWatcher(variant: 'ancient' | 'modern', dictionariesDir: string) {
+  const filePath = path.join(dictionariesDir, `${variant}.json`)
+  
+  if (fs.existsSync(filePath)) {
+    const watcher = watch(filePath, (eventType, filename) => {
+      if (eventType === 'change') {
+        console.log(`[DictionaryLoader] Dictionary file changed: ${variant}.json`)
+        invalidateCache(variant)
+      } else if (eventType === 'rename') {
+        console.log(`[DictionaryLoader] Dictionary file renamed (atomic save): ${variant}.json`)
+        invalidateCache(variant)
+        
+        // Re-attach watcher after rename (atomic save creates new file)
+        setTimeout(() => {
+          if (fs.existsSync(filePath)) {
+            console.log(`[DictionaryLoader] Re-attaching watcher for ${variant}.json after rename`)
+            // Close old watcher
+            const oldWatcher = fileWatchers.get(variant)
+            if (oldWatcher) {
+              oldWatcher.close()
+            }
+            // Setup new watcher
+            setupFileWatcher(variant, dictionariesDir)
+          }
+        }, 100) // Small delay to ensure file is fully written
+      }
+    })
+    
+    fileWatchers.set(variant, watcher)
+    console.log(`[DictionaryLoader] Watching ${filePath}`)
+  }
 }
 
 function invalidateCache(variant: 'ancient' | 'modern') {
