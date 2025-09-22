@@ -99,6 +99,115 @@ curl -X POST http://localhost:3000/api/speak \
   --output test-audio.mp3
 ```
 
+## Semantic Versioning
+
+This project follows [Semantic Versioning 2.0.0](https://semver.org/) to ensure clear and predictable versioning.
+
+### Version Format
+```
+MAJOR.MINOR.PATCH (e.g., 1.0.0)
+```
+
+- **MAJOR**: Incompatible API changes
+- **MINOR**: New functionality in a backwards compatible manner
+- **PATCH**: Backwards compatible bug fixes
+
+### Commit Message Format
+
+We use [Conventional Commits](https://www.conventionalcommits.org/) for consistent commit messages:
+
+```
+<type>[optional scope]: <description>
+
+[optional body]
+
+[optional footer(s)]
+```
+
+#### Commit Types
+- `feat`: New features
+- `fix`: Bug fixes
+- `docs`: Documentation changes
+- `style`: Code style changes (formatting, etc.)
+- `refactor`: Code refactoring
+- `perf`: Performance improvements
+- `test`: Adding or updating tests
+- `build`: Build system changes
+- `ci`: CI/CD changes
+- `chore`: Maintenance tasks
+- `revert`: Reverting previous commits
+
+#### Examples
+```bash
+feat(ui): add clipboard copy functionality
+fix(api): resolve translation error handling
+docs(readme): update installation instructions
+perf(tts): optimize audio generation pipeline
+```
+
+### Release Process
+
+#### Automated Release
+```bash
+# Create a new release (automatically determines version bump)
+npm run release
+
+# Create specific version types
+npm run release:patch    # 1.0.0 → 1.0.1
+npm run release:minor    # 1.0.0 → 1.1.0
+npm run release:major    # 1.0.0 → 2.0.0
+
+# Preview what would be released
+npm run release:dry-run
+```
+
+#### Manual Release Process
+1. **Ensure all tests pass**: `npm run test:all`
+2. **Update CHANGELOG.md**: Document new features/fixes
+3. **Create release commit**: `npm run release`
+4. **Push tags**: `git push --follow-tags origin main`
+5. **Create GitHub Release**: Use the generated changelog
+
+### Version Bump Rules
+
+| Commit Type | Version Bump | Example |
+|-------------|--------------|---------|
+| `feat:` | MINOR | 1.0.0 → 1.1.0 |
+| `fix:` | PATCH | 1.0.0 → 1.0.1 |
+| `perf:` | PATCH | 1.0.0 → 1.0.1 |
+| `docs:` | PATCH | 1.0.0 → 1.0.1 |
+| `refactor:` | PATCH | 1.0.0 → 1.0.1 |
+| `test:` | PATCH | 1.0.0 → 1.0.1 |
+| `build:` | PATCH | 1.0.0 → 1.0.1 |
+| `ci:` | PATCH | 1.0.0 → 1.0.1 |
+| `chore:` | PATCH | 1.0.0 → 1.0.1 |
+| `BREAKING CHANGE:` | MAJOR | 1.0.0 → 2.0.0 |
+
+### Pre-release Versions
+
+For pre-release versions, use the following format:
+```bash
+# Alpha release
+npm run release -- --prerelease alpha
+
+# Beta release  
+npm run release -- --prerelease beta
+
+# Release candidate
+npm run release -- --prerelease rc
+```
+
+### Git Hooks
+
+We use [Husky](https://typicode.github.io/husky/) to enforce commit message standards:
+
+- **Pre-commit**: Runs linting and type checking
+- **Commit-msg**: Validates commit message format
+
+### Changelog Generation
+
+The `CHANGELOG.md` is automatically generated from commit messages using [standard-version](https://github.com/conventional-changelog/standard-version).
+
 ## Development & Testing
 
 ### Running Tests
