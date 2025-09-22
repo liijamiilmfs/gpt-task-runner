@@ -57,7 +57,7 @@ jobs:
         run: npm run type-check
 
   # Test Suite
-  test:
+  ci_test:
     name: Test Suite
     runs-on: ubuntu-latest
     needs: lint
@@ -94,10 +94,10 @@ jobs:
           fail_ci_if_error: false
 
   # Build and Security Scan
-  build:
+  ci_build:
     name: Build & Security Scan
     runs-on: ubuntu-latest
-    needs: test
+    needs: ci_test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -125,7 +125,7 @@ jobs:
   security:
     name: Security Scan
     runs-on: ubuntu-latest
-    needs: build
+    needs: ci_build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -146,7 +146,7 @@ jobs:
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
-    needs: build
+    needs: ci_build
     if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
     steps:
       - name: Checkout code
@@ -168,7 +168,7 @@ jobs:
   deploy-production:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
-    needs: build
+    needs: ci_build
     if: (github.ref == 'refs/heads/main' && github.event_name == 'push') || github.event_name == 'release'
     environment:
       name: production
@@ -221,7 +221,7 @@ jobs:
   performance-test:
     name: Performance Test
     runs-on: ubuntu-latest
-    needs: build
+    needs: ci_build
     if: github.event_name == 'pull_request'
     steps:
       - name: Checkout code
