@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, dev, develop ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, dev, develop ]
   release:
     types: [ published ]
 
@@ -85,13 +85,14 @@ jobs:
           pip install pdfplumber pydantic click regex unidecode pytest pytest-cov pytest-xdist black isort
 
       - name: Run comprehensive test suite
-        run: npm run test:all
+        run: npm run test:all:coverage
 
       - name: Upload coverage reports
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: ./coverage/lcov.info,./tools/dict_importer/coverage.xml
           fail_ci_if_error: false
+          verbose: true
 
   # Build and Security Scan
   ci_build:

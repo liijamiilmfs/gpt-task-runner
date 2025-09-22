@@ -1,7 +1,7 @@
 {
   "required_status_checks": {
     "strict": true,
-    "contexts": ["ci_test", "lint", "type-check", "ci_build", "security"]
+    "contexts": ["ci_test", "lint", "type-check", "ci_build", "security", "deploy-staging", "deploy-production"]
   },
   "enforce_admins": true,
   "required_pull_request_reviews": {
