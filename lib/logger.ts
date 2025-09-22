@@ -89,17 +89,17 @@ function ensureWritableDirectory(dir: string): boolean {
   }
 }
 
-const fileLoggingEnabled = ensureWritableDirectory(logsDir) &&
+// Environment detection (must be first)
+const isDev = process.env.NODE_ENV !== 'production'
+const isTest = process.env.NODE_ENV === 'test'
+
+const fileLoggingEnabled = !isDev && ensureWritableDirectory(logsDir) &&
   Object.values(logsSubDirs).every(ensureWritableDirectory)
 
-if (!fileLoggingEnabled) {
+if (!fileLoggingEnabled && !isDev) {
   // eslint-disable-next-line no-console
   console.warn('File-based logging disabled: logs directory is not writable. Falling back to console logging only.')
 }
-
-// Environment detection
-const isDev = process.env.NODE_ENV !== 'production'
-const isTest = process.env.NODE_ENV === 'test'
 
 // Base logger configuration
 const baseConfig = {
@@ -118,7 +118,9 @@ function createRotatingStream(logDir: string, filename: string) {
 
   return pino.destination({
     dest: filePath,
-    sync: false
+    sync: false,
+    minLength: 0,
+    maxLength: 0
   })
 }
 
