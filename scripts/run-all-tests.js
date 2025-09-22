@@ -150,14 +150,14 @@ function runPythonTests() {
   
   // Install Python dependencies
   const installResult = runCommand(
-    `cd ${importerDir} && python -m pip install -e .`,
+    `cd ${importerDir} && python -m pip install --user -e .`,
     'Installing Python dependencies',
     { cwd: process.cwd() }
   );
   if (!installResult.success) {
     log('Basic installation failed, trying with dev dependencies...', 'warn');
     const devInstallResult = runCommand(
-      `cd ${importerDir} && python -m pip install -e '.[dev]'`,
+      `cd ${importerDir} && python -m pip install --user -e '.[dev]'`,
       'Installing Python dev dependencies',
       { cwd: process.cwd() }
     );
