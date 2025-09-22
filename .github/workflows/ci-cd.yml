@@ -280,6 +280,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Verify Vercel secrets
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "Error: VERCEL_TOKEN secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.VERCEL_ORG_ID }}" ]; then
+            echo "Error: VERCEL_ORG_ID secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "Error: VERCEL_PROJECT_ID secret is not set"
+            exit 1
+          fi
+          echo "All Vercel secrets are configured"
+
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:
