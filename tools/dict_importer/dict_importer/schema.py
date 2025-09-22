@@ -15,6 +15,7 @@ class Entry(BaseModel):
     sacred: bool = Field(False, description="Whether this is a sacred variant")
     source_page: Optional[int] = Field(None, description="Source page number")
     confidence: float = Field(1.0, description="Parsing confidence (0-1)")
+    table_order: Optional[int] = Field(None, description="Order of table within page (0-based)")
     
     def has_ancient(self) -> bool:
         """Check if entry has ancient translation."""
