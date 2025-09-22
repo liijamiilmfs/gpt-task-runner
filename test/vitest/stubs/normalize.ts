@@ -8,8 +8,6 @@ const LIGATURES: Record<string, string> = {
   'ﬅ': 'ft',
 }
 
-const PRESERVE_DIACRITICS = new Set(['í', 'Í', 'ë', 'Ë'])
-
 const KNOWN_HYPHEN_PREFIXES = new Set([
   'self-', 'non-', 'pre-', 'post-', 'anti-', 'pro-', 'co-', 'ex-',
   'multi-', 'sub-', 'super-', 'ultra-', 'inter-', 'intra-',
@@ -17,16 +15,10 @@ const KNOWN_HYPHEN_PREFIXES = new Set([
   'counter-', 'over-', 'out-', 'up-', 'down-', 'off-', 'on-', 'in-'
 ])
 
-function stripDiacriticsPreserving(text: string): string {
-  return Array.from(text).map(char => {
-    if (PRESERVE_DIACRITICS.has(char)) {
-      return char
-    }
-
-    const normalized = char.normalize('NFD')
-    // Use a simpler regex that works with ES5
-    return normalized.replace(/[\u0300-\u036f\u1ab0-\u1aff\u1dc0-\u1dff\u20d0-\u20ff\ufe20-\ufe2f]/g, '')
-  }).join('')
+function normalizeDiacritics(text: string): string {
+  // Preserve UTF-8 diacritics exactly, just normalize to NFC form for consistent handling
+  // This matches the Python implementation's normalize_diacritics function
+  return text.normalize('NFC')
 }
 
 export function normalizeLigatures(text: string): string {
@@ -139,10 +131,14 @@ export function cleanHeadword(word: string): string {
     return ''
   }
 
-  const whitespaceNormalized = normalizeWhitespace(word)
+  // Remove leading/trailing punctuation except apostrophes
+  let cleaned = word.replace(/^[^\w']+/, '').replace(/[^\w']+$/, '')
+  
+  const whitespaceNormalized = normalizeWhitespace(cleaned)
   const ligaturesNormalized = normalizeLigatures(whitespaceNormalized)
-
-  return stripDiacriticsPreserving(ligaturesNormalized)
+  
+  // Preserve diacritics (don't strip them)
+  return normalizeDiacritics(ligaturesNormalized)
 }
 
 export function cleanTranslation(text: string): string {
@@ -152,8 +148,12 @@ export function cleanTranslation(text: string): string {
 
   const whitespaceNormalized = normalizeWhitespace(text)
   const ligaturesNormalized = normalizeLigatures(whitespaceNormalized)
-
-  return stripDiacriticsPreserving(ligaturesNormalized)
+  
+  // Preserve diacritics (don't strip them)
+  const diacriticsNormalized = normalizeDiacritics(ligaturesNormalized)
+  
+  // Remove extra punctuation at end
+  return diacriticsNormalized.replace(/[.,;:!?]+$/, '')
 }
 
 export function normalizeText(text: string): string {
@@ -167,7 +167,9 @@ export function normalizeText(text: string): string {
 
   const normalized = merged.map(line => {
     const whitespaceNormalized = normalizeWhitespace(line)
-    return stripDiacriticsPreserving(whitespaceNormalized)
+    const ligaturesNormalized = normalizeLigatures(whitespaceNormalized)
+    // Preserve diacritics (don't strip them)
+    return normalizeDiacritics(ligaturesNormalized)
   })
 
   return normalized.join('\n')
