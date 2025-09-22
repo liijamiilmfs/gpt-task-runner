@@ -67,7 +67,7 @@ function createConsoleLogger(): LoggerLike {
 
 function loadPinoModule(): PinoModule | null {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires, global-require
+    // eslint-disable-next-line global-require
     return require('pino') as PinoModule
   } catch (error) {
     // eslint-disable-next-line no-console
@@ -215,7 +215,7 @@ function createPrettyStream(): PinoDestinationStream | null {
   }
 
   try {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    // eslint-disable-next-line global-require
     const pretty = require('pino-pretty')
     if (typeof pretty === 'function') {
       return pretty(prettyPrintOptions)
