@@ -105,7 +105,19 @@ class MemoryLeakDetector {
     // Count Object URLs by looking for blob URLs in the DOM
     // This is the most reliable method since we can't access the browser's internal Object URL registry
     const blobUrls = document.querySelectorAll('[src*="blob:"]')
-    return blobUrls.length
+    const count = blobUrls.length
+    
+    // Debug logging to help identify the source
+    if (count > 0) {
+      console.log('[MemoryLeakDetector] Found Object URLs:', count)
+      blobUrls.forEach((url, index) => {
+        console.log(`[MemoryLeakDetector] URL ${index + 1}:`, url.src)
+        console.log(`[MemoryLeakDetector] Element:`, url.tagName, url)
+        console.log(`[MemoryLeakDetector] Parent:`, url.parentElement)
+      })
+    }
+    
+    return count
   }
 
   /**

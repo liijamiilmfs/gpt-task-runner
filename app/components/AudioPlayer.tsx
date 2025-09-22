@@ -52,6 +52,13 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
       }
       return ''
     })
+    
+    // Also clear the audio element's src to prevent memory leak detection
+    if (audioRef.current) {
+      audioRef.current.src = ''
+      audioRef.current.load() // Reset the audio element
+    }
+    
     setIsPlaying(false)
   }, []) // Remove audioUrl dependency to avoid stale closures
 
