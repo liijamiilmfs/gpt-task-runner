@@ -1,13 +1,13 @@
-# Librán Dictionary Import Report
+# Librán Dictionary Import Report (FIXED)
 
-**Import Date**: C:\Projects\Worldbuilding\english-to-libran-text-to-voice\tools\dict_importer
-**Total Ancient Entries**: 579
-**Total Modern Entries**: 916
-**Excluded Entries**: 13
+**Import Date**: C:\Projects\Worldbuilding\english-to-libran-text-to-voice
+**Total Ancient Entries**: 2651
+**Total Modern Entries**: 2987
+**Excluded Entries**: 348
 **Clusters Processed**: 12
 
 ## Sample Ancient Entries
-- english → AncientLibránor
+- english → Ancient Libránor
 - balance → Stílibror
 - destiny → fator
 - memory → memorior
@@ -29,7 +29,7 @@
 - oath-path → iusiurandor
 
 ## Sample Modern Entries
-- english → ModernLibrána
+- english → Modern Librán (root)a
 - balance → stílibra
 - destiny → fatë
 - flame → flama
@@ -51,13 +51,13 @@
 - taboo-mark → tabë
 
 ## Excluded Entries
-- Sorrow: EXCLUDED: Invalid Librán word
-- Sorrow-rite: EXCLUDED: Invalid Librán word
-- Sorrow-lore: EXCLUDED: Invalid Librán word
-- Sorrow: EXCLUDED: Invalid Librán word
-- Sorrow-path: EXCLUDED: Invalid Librán word
-- Sorrow-mark: EXCLUDED: Invalid Librán word
-- Fate-sisters: EXCLUDED: Invalid Librán word
-- Father: EXCLUDED: Invalid Librán word
-- Stone-path: EXCLUDED: Invalid Librán word
-- Stone-rite: EXCLUDED: Invalid Librán word
+- Flame: EXCLUDED: No ancient translation
+- Shadow: EXCLUDED: No ancient translation
+- Stone: EXCLUDED: No ancient translation
+- Void: EXCLUDED: No ancient translation
+- Courage: EXCLUDED: No ancient translation
+- Dream: EXCLUDED: No ancient translation
+- Envy: EXCLUDED: No ancient translation
+- Faith: EXCLUDED: No ancient translation
+- Joy: EXCLUDED: No ancient translation
+- Mercy: EXCLUDED: No ancient translation

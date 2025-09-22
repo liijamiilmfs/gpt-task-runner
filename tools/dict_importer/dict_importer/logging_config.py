@@ -60,9 +60,9 @@ class SensitiveDataFilter(logging.Filter):
 def setup_logging(
     log_level: str = 'INFO',
     log_dir: str = 'logs',
-    max_file_size: int = 20 * 1024 * 1024,  # 20MB
-    backup_count: int = 14,  # Keep 14 days
-    error_backup_count: int = 30  # Keep 30 days for errors
+    max_file_size: int = 50 * 1024 * 1024,  # 50MB - increased for error taxonomy logging
+    backup_count: int = 30,  # Keep 30 days
+    error_backup_count: int = 60  # Keep 60 days for errors
 ) -> logging.Logger:
     """
     Set up logging configuration for the dictionary importer.

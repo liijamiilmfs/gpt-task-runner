@@ -2,7 +2,6 @@
 
 [![CI](https://github.com/liijamiilmfs/english-to-libran-text-to-voice/workflows/CI/badge.svg)](https://github.com/liijamiilmfs/english-to-libran-text-to-voice/actions)
 [![Security Audit](https://github.com/liijamiilmfs/english-to-libran-text-to-voice/workflows/CI/badge.svg?label=security)](https://github.com/liijamiilmfs/english-to-libran-text-to-voice/actions)
-[![Coverage](https://codecov.io/gh/liijamiilmfs/english-to-libran-text-to-voice/branch/main/graph/badge.svg)](https://codecov.io/gh/liijamiilmfs/english-to-libran-text-to-voice)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)

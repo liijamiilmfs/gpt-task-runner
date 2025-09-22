@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Librán Voice Forge',
@@ -19,14 +20,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body style={{ 
-        minHeight: '100vh', 
-        background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-        color: 'white',
-        fontFamily: 'system-ui, -apple-system, sans-serif',
-        margin: 0,
-        padding: 0
-      }}>
+      <body>
         {children}
       </body>
     </html>

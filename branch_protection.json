@@ -1,7 +1,7 @@
 {
   "required_status_checks": {
     "strict": true,
-    "contexts": ["test", "lint", "type-check", "build", "security"]
+    "contexts": ["CI/CD Pipeline / Test Suite", "CI/CD Pipeline / Lint & Type Check", "CI/CD Pipeline / Type Check", "CI/CD Pipeline / Build & Security Scan", "CI/CD Pipeline / Security Scan", "CI/CD Pipeline / Coverage Report", "CI/CD Pipeline / Detailed Coverage Analysis", "CI/CD Pipeline / Performance Test"]
   },
   "enforce_admins": true,
   "required_pull_request_reviews": {

@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Librán Voice Forge Styles */
+:root {
+  --libran-gold: #ffd700;
+  --libran-blue: #0f3460;
+  --libran-dark: #16213e;
+  --libran-darker: #1a1a2e;
+  --libran-red: #e94560;
+  --libran-accent: #4a90e2;
+}
+
+/* Base styles */
+body {
+  font-family: 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+  line-height: 1.6;
+  color: white;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  min-height: 100vh;
+}
+
+/* Component classes */
+.btn-primary {
+  @apply text-white px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  background-color: var(--libran-red);
+}
+
+.btn-primary:hover {
+  background-color: color-mix(in srgb, var(--libran-red) 90%, transparent);
+}
+
+.btn-primary:focus {
+  --tw-ring-color: var(--libran-red);
+}
+
+.btn-secondary {
+  @apply text-white px-4 py-2 rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  background-color: var(--libran-blue);
+}
+
+.btn-secondary:hover {
+  background-color: color-mix(in srgb, var(--libran-blue) 90%, transparent);
+}
+
+.btn-secondary:focus {
+  --tw-ring-color: var(--libran-blue);
+}
+
+.input-field {
+  @apply w-full px-3 py-2 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent;
+  background-color: var(--libran-darker);
+  border-color: var(--libran-blue);
+}
+
+.input-field:focus {
+  --tw-ring-color: var(--libran-gold);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--libran-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--libran-gold);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--libran-gold);
+  opacity: 0.8;
+}
+
+/* Animation classes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Utility classes - using Tailwind config colors */
+
+/* Focus styles */
+.focus\:ring-libran-gold:focus {
+  --tw-ring-color: var(--libran-gold);
+}
+
+.focus\:ring-libran-blue:focus {
+  --tw-ring-color: var(--libran-blue);
+}
+
+.focus\:ring-libran-red:focus {
+  --tw-ring-color: var(--libran-red);
+}
+
+/* Responsive design helpers */
+@media (max-width: 768px) {
+  .mobile-stack {
+    @apply flex-col space-y-4 space-x-0;
+  }
+  
+  .mobile-full {
+    @apply w-full;
+  }
+}

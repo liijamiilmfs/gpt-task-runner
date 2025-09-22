@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { log } from '../logger';
+import { log, generateCorrelationId } from '../logger';
 import { unknownTokenLogger } from '../unknown-token-logger';
 
 export interface TranslationResult {
@@ -30,7 +30,7 @@ function loadDictionary(variant: Variant): Dictionary {
     log.info('Dictionary loaded successfully', { variant, entryCount: Object.keys(dictionary).length });
     return dictionary;
   } catch (error) {
-    log.errorWithContext(error as Error, 'Dictionary loading', { variant, filePath });
+    log.errorWithContext(error as Error, 'DICTIONARY_LOAD_ERROR', generateCorrelationId(), { variant, filePath });
     throw error;
   }
 }
