@@ -242,40 +242,43 @@ function createRotatingStream(logDir: string, filename: string): PinoDestination
   })
 }
 
-// Create main logger with file transports
-const logger: LoggerLike = pinoModule ? pinoModule({
+
+// Create main logger with simple stream (no workers)
+const logger = pinoModule ? pinoModule({
   level: process.env.LOG_LEVEL || (isDev ? 'debug' : 'info'),
   base: baseConfig,
   timestamp: pinoModule.stdTimeFunctions?.isoTime ?? (() => new Date().toISOString()),
   formatters: {
     level(label: string) { return { level: label } }
   }
-}, pinoModule.multistream((() => {
-  const streams: Array<{ level?: string, stream: PinoDestinationStream }> = []
 
-  if (fileLoggingEnabled) {
-    streams.push({
-      stream: createRotatingStream(logsSubDirs.application, 'application')
-    })
-    streams.push({
-      level: 'error',
-      stream: createRotatingStream(logsSubDirs.errors, 'error')
-    })
+}, (() => {
+  // Use simple destination to avoid worker issues
+  if (isDev && !isTest) {
+    // In development, use pino-pretty directly without transport
+    try {
+      const pretty = require('pino-pretty')
+      return pretty({
+        colorize: true,
+        translateTime: 'SYS:standard',
+        singleLine: false,
+        messageKey: 'msg',
+        ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id'
+      })
+    } catch (error) {
+      // Fallback to stdout if pino-pretty is not available
+      console.warn('pino-pretty not available, using stdout')
+      return getStdoutDestination()
+    }
+  } else {
+    // In production, use file logging if available, otherwise stdout
+    if (fileLoggingEnabled) {
+      return createRotatingStream(logsSubDirs.application, 'application')
+    } else {
+      return getStdoutDestination()
+    }
   }
-
-  const prettyStream = createPrettyStream()
-  if (prettyStream) {
-    streams.push({
-      stream: prettyStream
-    })
-  }
-
-  if (streams.length === 0) {
-    streams.push({ stream: getStdoutDestination() })
-  }
-
-  return streams
-})())) : createConsoleLogger()
+})()) : createConsoleLogger()
 
 // Note: We use the main logger with daily rotation instead of separate file loggers
 // to avoid creating empty files and duplicate logging

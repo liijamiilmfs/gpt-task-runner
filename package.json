@@ -37,7 +37,7 @@
     "release:major": "standard-version --release-as major",
     "release:patch": "standard-version --release-as patch",
     "release:dry-run": "standard-version --dry-run",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "lucide-react": "^0.544.0",
@@ -71,7 +71,7 @@
     "vitest": "^2.1.9"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.17.0"
   },
   "overrides": {
     "esbuild": "^0.25.10",

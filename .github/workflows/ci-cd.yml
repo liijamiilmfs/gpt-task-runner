@@ -2,9 +2,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, dev, develop ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main, dev, develop ]
+    branches: [ main, dev ]
   release:
     types: [ published ]
 
@@ -14,7 +14,7 @@ permissions:
   id-token: write
 
 env:
-  NODE_VERSION: '20'
+  NODE_VERSION: '20.17.0'
   PYTHON_VERSION: '3.12'
 
 jobs:
