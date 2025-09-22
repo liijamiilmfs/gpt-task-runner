@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "libran-dict-importer"
+version = "1.0.0"
+description = "Librán Dictionary Importer"
+authors = [{name = "Librán Voice Forge Team"}]
+dependencies = [
+    "pypdf2",
+    "pandas",
+    "numpy",
+]
+
+[tool.setuptools.packages.find]
+where = ["tools"]
+include = ["dict_importer*"]
+
+[tool.setuptools.package-dir]
+"" = "tools"
