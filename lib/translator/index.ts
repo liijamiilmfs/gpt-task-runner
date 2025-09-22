@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { log, generateCorrelationId } from '../logger';
 import { unknownTokenLogger } from '../unknown-token-logger';
+import { loadDictionary as loadDictionaryFromLoader, getDictionaryEntry } from './dictionary-loader';
 
 export interface TranslationResult {
   libran: string;
@@ -12,25 +13,31 @@ export interface TranslationResult {
 export type Variant = 'ancient' | 'modern';
 
 interface Dictionary {
-  [key: string]: string;
+  [key: string]: string | {
+    base?: string
+    plural?: string
+    possessive?: string
+    present?: string
+    past?: string
+    future?: string
+  };
 }
 
 export interface TranslateOptions {
   dictionary?: Dictionary;
 }
 
-// Load dictionary from file
-function loadDictionary(variant: Variant): Dictionary {
-  const filePath = path.join(process.cwd(), 'lib', 'translator', 'dictionaries', `${variant}.json`);
-  log.debug('Loading dictionary', { variant, filePath });
+// Load dictionary from file using the new dictionary loader
+async function loadDictionary(variant: Variant): Promise<Dictionary> {
+  log.debug('Loading dictionary', { variant });
   
   try {
-    const data = fs.readFileSync(filePath, 'utf-8');
-    const dictionary = JSON.parse(data);
+    const dictionaryData = await loadDictionaryFromLoader(variant);
+    const dictionary = dictionaryData.entries;
     log.info('Dictionary loaded successfully', { variant, entryCount: Object.keys(dictionary).length });
     return dictionary;
   } catch (error) {
-    log.errorWithContext(error as Error, 'DICTIONARY_LOAD_ERROR', generateCorrelationId(), { variant, filePath });
+    log.errorWithContext(error as Error, 'DICTIONARY_LOAD_ERROR', generateCorrelationId(), { variant });
     throw error;
   }
 }
@@ -129,11 +136,11 @@ function fixSpacing(tokens: Array<{ type: string, value: string, original: strin
   return result;
 }
 
-export function translate(text: string, variant: Variant, options: TranslateOptions = {}): TranslationResult {
+export async function translate(text: string, variant: Variant, options: TranslateOptions = {}): Promise<TranslationResult> {
   const startTime = Date.now();
   log.debug('Starting translation', { textLength: text.length, variant, hasCustomDictionary: !!options.dictionary });
   
-  const dictionary = options.dictionary ?? loadDictionary(variant);
+  const dictionary = options.dictionary ?? await loadDictionary(variant);
   const tokens = tokenize(text);
   const translatedTokens = [];
   let translatedWordCount = 0;
@@ -152,7 +159,9 @@ export function translate(text: string, variant: Variant, options: TranslateOpti
       }
       
       if (translated) {
-        translated = applySoundShifts(translated, variant);
+        // Extract string value from dictionary entry
+        const translatedString = typeof translated === 'string' ? translated : (translated.base || '');
+        translated = applySoundShifts(translatedString, variant);
         translated = preserveCase(token.original, translated);
         translatedWordCount++;
         log.debug('Word translated', { original: token.value, translated, variant });
