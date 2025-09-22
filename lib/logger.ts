@@ -73,14 +73,29 @@ const logsSubDirs = {
   errors: path.join(logsDir, 'errors'),
   performance: path.join(logsDir, 'performance'),
   security: path.join(logsDir, 'security')
+} as const
+
+function ensureWritableDirectory(dir: string): boolean {
+  try {
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true })
+    } else {
+      // Ensure we actually have write access to the existing directory
+      fs.accessSync(dir, fs.constants.W_OK)
+    }
+    return true
+  } catch (error) {
+    return false
+  }
 }
 
-// Ensure all log directories exist
-Object.values(logsSubDirs).forEach(dir => {
-  if (!fs.existsSync(dir)) {
-    fs.mkdirSync(dir, { recursive: true })
-  }
-})
+const fileLoggingEnabled = ensureWritableDirectory(logsDir) &&
+  Object.values(logsSubDirs).every(ensureWritableDirectory)
+
+if (!fileLoggingEnabled) {
+  // eslint-disable-next-line no-console
+  console.warn('File-based logging disabled: logs directory is not writable. Falling back to console logging only.')
+}
 
 // Environment detection
 const isDev = process.env.NODE_ENV !== 'production'
@@ -94,9 +109,13 @@ const baseConfig = {
 
 // Create rotating file streams
 function createRotatingStream(logDir: string, filename: string) {
+  if (!fileLoggingEnabled) {
+    return pino.destination(1) // stdout fallback when filesystem is read-only
+  }
+
   const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD
   const filePath = path.join(logDir, `${filename}-${today}.log`)
-  
+
   return pino.destination({
     dest: filePath,
     sync: false
@@ -111,30 +130,40 @@ const logger = pino({
   formatters: {
     level(label: string) { return { level: label } }
   }
-}, pino.multistream([
-  // File transport for all logs with daily rotation
-  {
-    stream: createRotatingStream(logsSubDirs.application, 'application')
-  },
-  // Error file transport with daily rotation
-  {
-    level: 'error',
-    stream: createRotatingStream(logsSubDirs.errors, 'error')
-  },
-  // Console transport for development
-  ...(isDev && !isTest ? [{
-    stream: pino.transport({
-      target: 'pino-pretty',
-      options: {
-        colorize: true,
-        translateTime: 'SYS:standard',
-        singleLine: false,
-        messageKey: 'msg',
-        ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id'
-      }
+}, pino.multistream((() => {
+  const streams = [] as Array<{ level?: string, stream: pino.DestinationStream }>
+
+  if (fileLoggingEnabled) {
+    streams.push({
+      stream: createRotatingStream(logsSubDirs.application, 'application')
     })
-  }] : [])
-]))
+    streams.push({
+      level: 'error',
+      stream: createRotatingStream(logsSubDirs.errors, 'error')
+    })
+  }
+
+  if (isDev && !isTest) {
+    streams.push({
+      stream: pino.transport({
+        target: 'pino-pretty',
+        options: {
+          colorize: true,
+          translateTime: 'SYS:standard',
+          singleLine: false,
+          messageKey: 'msg',
+          ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id'
+        }
+      })
+    })
+  }
+
+  if (streams.length === 0) {
+    streams.push({ stream: pino.destination(1) })
+  }
+
+  return streams
+})()))
 
 // Note: We use the main logger with daily rotation instead of separate file loggers
 // to avoid creating empty files and duplicate logging
