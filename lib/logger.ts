@@ -1,6 +1,85 @@
 import * as path from 'path'
 import * as fs from 'fs'
-import pino from 'pino'
+
+type PinoDestinationStream = {
+  write: (chunk: any) => void
+  flush?: () => void
+  end?: () => void
+}
+
+type LoggerLike = {
+  debug: (data: any) => void
+  info: (data: any) => void
+  warn: (data: any) => void
+  error: (data: any) => void
+}
+
+type PinoModule = {
+  (options?: any, destination?: any): LoggerLike
+  destination: (options?: any) => PinoDestinationStream
+  multistream: (streams: Array<{ level?: string, stream: PinoDestinationStream }>) => any
+  transport?: (options: any) => PinoDestinationStream
+  stdTimeFunctions?: { isoTime: () => string }
+}
+
+function formatForConsole(data: any): string {
+  if (typeof data === 'string') {
+    return data
+  }
+
+  try {
+    return JSON.stringify(data)
+  } catch (error) {
+    return String(data)
+  }
+}
+
+function createConsoleDestination(): PinoDestinationStream {
+  return {
+    write(chunk: any) {
+      const output = formatForConsole(chunk)
+      // eslint-disable-next-line no-console
+      console.log(output)
+    }
+  }
+}
+
+function createConsoleLogger(): LoggerLike {
+  return {
+    debug(data: any) {
+      // eslint-disable-next-line no-console
+      console.debug(formatForConsole(data))
+    },
+    info(data: any) {
+      // eslint-disable-next-line no-console
+      console.info(formatForConsole(data))
+    },
+    warn(data: any) {
+      // eslint-disable-next-line no-console
+      console.warn(formatForConsole(data))
+    },
+    error(data: any) {
+      // eslint-disable-next-line no-console
+      console.error(formatForConsole(data))
+    }
+  }
+}
+
+function loadPinoModule(): PinoModule | null {
+  try {
+    // eslint-disable-next-line global-require
+    return require('pino') as PinoModule
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('pino module not found, using console-based logger fallback.', {
+      error: error instanceof Error ? error.message : String(error)
+    })
+    return null
+  }
+}
+
+const pinoModule = loadPinoModule()
+const fallbackDestination = createConsoleDestination()
 
 // Sensitive data patterns to sanitize
 const SENSITIVE_PATTERNS = [
@@ -89,17 +168,17 @@ function ensureWritableDirectory(dir: string): boolean {
   }
 }
 
-const fileLoggingEnabled = ensureWritableDirectory(logsDir) &&
+// Environment detection (must be first)
+const isDev = process.env.NODE_ENV !== 'production'
+const isTest = process.env.NODE_ENV === 'test'
+
+const fileLoggingEnabled = !isDev && ensureWritableDirectory(logsDir) &&
   Object.values(logsSubDirs).every(ensureWritableDirectory)
 
-if (!fileLoggingEnabled) {
+if (!fileLoggingEnabled && !isDev) {
   // eslint-disable-next-line no-console
   console.warn('File-based logging disabled: logs directory is not writable. Falling back to console logging only.')
 }
-
-// Environment detection
-const isDev = process.env.NODE_ENV !== 'production'
-const isTest = process.env.NODE_ENV === 'test'
 
 // Base logger configuration
 const baseConfig = {
@@ -107,29 +186,73 @@ const baseConfig = {
   env: process.env.NODE_ENV || 'development'
 }
 
+const prettyPrintOptions = {
+  colorize: true,
+  translateTime: 'SYS:standard',
+  singleLine: false,
+  messageKey: 'msg',
+  ignore: 'service,env,event,ctx,err,corr_id,duration_ms,status,route,user_id'
+} as const
+
+function createPrettyStream(): PinoDestinationStream | null {
+  if (!pinoModule || !isDev || isTest) {
+    return null
+  }
+
+  // Skip pino transport in development to avoid worker path issues
+  // Use direct pino-pretty instead
+  try {
+    // eslint-disable-next-line global-require
+    const pretty = require('pino-pretty')
+    if (typeof pretty === 'function') {
+      return pretty(prettyPrintOptions)
+    }
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn('pino-pretty could not be loaded. Continuing without pretty logging.', {
+      error: error instanceof Error ? error.message : String(error)
+    })
+  }
+
+  return null
+}
+
 // Create rotating file streams
-function createRotatingStream(logDir: string, filename: string) {
-  if (!fileLoggingEnabled) {
-    return pino.destination(1) // stdout fallback when filesystem is read-only
+function getStdoutDestination(): PinoDestinationStream {
+  if (pinoModule) {
+    return pinoModule.destination(1)
+  }
+
+  return fallbackDestination
+}
+
+function createRotatingStream(logDir: string, filename: string): PinoDestinationStream {
+  if (!pinoModule || !fileLoggingEnabled) {
+    return getStdoutDestination() // stdout fallback when filesystem is read-only or pino missing
   }
 
   const today = new Date().toISOString().split('T')[0] // YYYY-MM-DD
   const filePath = path.join(logDir, `${filename}-${today}.log`)
 
-  return pino.destination({
+  return pinoModule.destination({
     dest: filePath,
-    sync: false
+    sync: false,
+    minLength: 0,
+    maxLength: 0
   })
 }
 
+
 // Create main logger with simple stream (no workers)
 const logger = pino({
+
   level: process.env.LOG_LEVEL || (isDev ? 'debug' : 'info'),
   base: baseConfig,
-  timestamp: pino.stdTimeFunctions.isoTime,
+  timestamp: pinoModule.stdTimeFunctions?.isoTime ?? (() => new Date().toISOString()),
   formatters: {
     level(label: string) { return { level: label } }
   }
+
 }, (() => {
   // Use simple destination to avoid worker issues
   if (isDev && !isTest) {
