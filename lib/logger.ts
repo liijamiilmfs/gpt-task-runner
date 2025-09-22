@@ -199,21 +199,8 @@ function createPrettyStream(): PinoDestinationStream | null {
     return null
   }
 
-  try {
-    const transport = pinoModule.transport?.({
-      target: 'pino-pretty',
-      options: prettyPrintOptions
-    })
-    if (transport) {
-      return transport as unknown as PinoDestinationStream
-    }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.warn('Pretty logging transport unavailable, falling back to stdout.', {
-      error: error instanceof Error ? error.message : String(error)
-    })
-  }
-
+  // Skip pino transport in development to avoid worker path issues
+  // Use direct pino-pretty instead
   try {
     // eslint-disable-next-line global-require
     const pretty = require('pino-pretty')
