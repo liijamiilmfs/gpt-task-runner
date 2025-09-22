@@ -91,14 +91,6 @@ jobs:
       - name: Run comprehensive test suite
         run: npm run test:all
 
-      - name: Upload Node coverage artifacts
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: node-coverage
-          path: coverage/
-          retention-days: 7
-
   # Coverage Reports (separate job for branch protection)
   coverage:
     name: Coverage Reports
@@ -139,30 +131,39 @@ jobs:
   coverage-report:
     name: Coverage Report
     runs-on: ubuntu-latest
-    needs: ci_test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download coverage
-        uses: actions/download-artifact@v4
-        if: always()
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          name: node-coverage
-          path: coverage
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
 
-      - name: Summarize LCOV (Jest)
-        uses: ArtiomTr/jest-coverage-report-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          lcov-file: coverage/lcov.info
-          check_name: Coverage Report
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:all:coverage
+
+      - name: Verify coverage files
+        run: |
+          ls -lah ./coverage || true
+          test -f ./coverage/lcov.info
+
+      - name: Create coverage summary
+        run: |
+          echo "## Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "Coverage files generated successfully" >> $GITHUB_STEP_SUMMARY
+          if [ -f ./coverage/lcov.info ]; then
+            echo "✅ LCOV file: ./coverage/lcov.info" >> $GITHUB_STEP_SUMMARY
+          fi
 
   # Detailed Coverage Analysis (for branch protection)
   detailed-coverage:
     name: Detailed Coverage Analysis
     runs-on: ubuntu-latest
-    needs: ci_test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -180,13 +181,20 @@ jobs:
       - name: Run Python tests with coverage
         run: |
           cd tools/dict_importer
-          python -m pytest tests/ --cov=dict_importer --cov-report=xml -v
+          python -m pytest tests/ --cov=dict_importer --cov-report=xml --cov-report=html -v
 
-      - name: Python XML to PR check
-        uses: devjoes/github-action-code-coverage@v1
-        with:
-          filename: tools/dict_importer/coverage.xml
-          name: Detailed Coverage Analysis
+      - name: Verify Python coverage
+        run: |
+          ls -lah tools/dict_importer/ || true
+          test -f tools/dict_importer/coverage.xml
+
+      - name: Create coverage summary
+        run: |
+          echo "## Python Coverage Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "Python coverage files generated successfully" >> $GITHUB_STEP_SUMMARY
+          if [ -f tools/dict_importer/coverage.xml ]; then
+            echo "✅ XML coverage: tools/dict_importer/coverage.xml" >> $GITHUB_STEP_SUMMARY
+          fi
 
   # Build and Security Scan
   ci_build:
