@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)
-[![Node.js](https://img.shields.io/badge/Node.js-18%2B-green.svg)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20%2B-green.svg)](https://nodejs.org/)
 [![Python](https://img.shields.io/badge/Python-3.12+-blue.svg)](https://python.org/)
 [![OpenAI](https://img.shields.io/badge/OpenAI-GPT--4o--mini-blue)](https://openai.com/)
 [![Tests](https://img.shields.io/badge/tests-43%20passing-brightgreen.svg)](#development--testing)
@@ -20,9 +20,9 @@
 - ✅ **CI/CD**: Automated testing and security audits on every push
 - ✅ **Code Quality**: TypeScript, ESLint, and Prettier for consistent code style
 - ✅ **Test Coverage**: 85% code coverage with 49+ passing tests (43 Node.js + 6 Python JSON parsing)
-- ✅ **Multi-Platform**: Node.js 18+ and Python 3.12+ support
+- ✅ **Multi-Platform**: Node.js 20+ and Python 3.12+ support
 - ✅ **Security**: Dependency overrides to replace deprecated packages with secure alternatives
-- ✅ **Compatibility**: Maintains Node.js 18.0+ compatibility while using modern dependencies
+- ✅ **Compatibility**: Maintains Node.js 20.0+ compatibility while using modern dependencies
 - ✅ **Modern Stack**: Next.js 14, TypeScript 5.0+, OpenAI TTS integration
 
 ## What is Librán Voice Forge?
@@ -47,7 +47,7 @@ English Text → Librán Translation → AI Voice Synthesis → Audio Output
 ## Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+- Node.js 20+ 
 - pnpm (recommended) or npm
 - OpenAI API key
 
@@ -149,7 +149,7 @@ We actively monitor and replace deprecated dependencies to maintain security and
 - `node-domexception@1.0.0` → **removed** (use native Node.js 18+ DOMException)
 
 **Compatibility Considerations:**
-- ✅ Maintains Node.js 18.0+ compatibility (avoiding engine conflicts)
+- ✅ Maintains Node.js 20.0+ compatibility (avoiding engine conflicts)
 - ✅ Uses npm overrides to replace deprecated packages at the dependency level
 - ✅ Removes unnecessary polyfills in favor of native Node.js APIs
 - ✅ Regular security audits with `npm audit`
