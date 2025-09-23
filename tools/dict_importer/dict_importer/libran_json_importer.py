@@ -54,10 +54,18 @@ class LibranJSONImporter:
         for section_name, section_data in sections.items():
             if not isinstance(section_data, dict):
                 continue
-                
+
             self.stats['clusters_processed'] += 1
-            
-            # Process files within the section
+
+            # Some builds store entries directly under a `data` array while older
+            # builds nest them under `files[].data`. Support both formats so new
+            # unified dumps (v1.7.0+) can be parsed without additional transforms.
+            direct_entries = section_data.get('data')
+            if isinstance(direct_entries, list):
+                for entry in direct_entries:
+                    self._process_entry(entry, 'ancient', section_name)
+                    self._process_entry(entry, 'modern', section_name)
+
             files = section_data.get('files', [])
             for file_data in files:
                 if isinstance(file_data, dict) and 'data' in file_data:
