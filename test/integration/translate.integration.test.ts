@@ -24,6 +24,6 @@ describe('translate (integration)', () => {
     const text = 'The Farmer, the Field, and the love.'
     const result = await translate(text, 'ancient')
 
-    assert.equal(result.libran, 'The Agricola, the Ager, and the love.')
+    assert.equal(result.libran, 'The Agricola, the Ager, et the love.')
   })
 })
