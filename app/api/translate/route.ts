@@ -40,7 +40,7 @@ async function handleTranslateRequest(request: NextRequest) {
     })
 
     // Translate the text
-    const result = translate(text, variant as Variant)
+    const result = await translate(text, variant as Variant)
     success = true
     confidence = result.confidence
     

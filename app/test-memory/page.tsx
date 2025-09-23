@@ -12,6 +12,23 @@ export default function MemoryTestPage() {
   const [stats, setStats] = useState<any>(null)
   const [testHistory, setTestHistory] = useState<any[]>([])
 
+  // Cleanup audio URL when component unmounts or when text changes
+  useEffect(() => {
+    return () => {
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl)
+      }
+    }
+  }, [audioUrl])
+
+  // Clear audio URL when text changes to prevent stale references
+  useEffect(() => {
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl)
+      setAudioUrl('')
+    }
+  }, [testText, audioUrl]) // Include audioUrl dependency
+
   // Update stats display
   useEffect(() => {
     if (isMonitoring) {
@@ -38,12 +55,32 @@ export default function MemoryTestPage() {
   }
 
   const clearStats = () => {
+    // Stop monitoring temporarily to prevent immediate re-capture
+    const wasMonitoring = isMonitoring
+    if (wasMonitoring) {
+      memoryLeakDetector.stopMonitoring()
+    }
+    
+    // Clear all stats
     memoryLeakDetector.clearStats()
     setStats(null)
     setTestHistory([])
+    
+    // Also clear the audio URL to prevent memory leaks
+    if (audioUrl) {
+      URL.revokeObjectURL(audioUrl)
+      setAudioUrl('')
+    }
+    
+    // Restart monitoring if it was running
+    if (wasMonitoring) {
+      setTimeout(() => {
+        memoryLeakDetector.startMonitoring(2000)
+      }, 100)
+    }
   }
 
-  const testAudioGeneration = () => {
+  const testAudioGeneration = async () => {
     // Simulate rapid audio generation to test for leaks
     const texts = [
       'Hello world',
@@ -53,16 +90,51 @@ export default function MemoryTestPage() {
       'Another test phrase'
     ]
     
-    let index = 0
-    const interval = setInterval(() => {
-      if (index < texts.length) {
-        setTestText(texts[index])
-        index++
-      } else {
-        clearInterval(interval)
-        setTestText('Test completed')
+    for (let i = 0; i < texts.length; i++) {
+      setTestText(texts[i])
+      
+      // Wait a moment for the text to update, then trigger audio generation
+      await new Promise(resolve => setTimeout(resolve, 500))
+      
+      // Trigger audio generation by calling the speak API directly
+      try {
+        const response = await fetch('/api/speak', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ 
+            libranText: texts[i], 
+            voice: 'alloy', 
+            format: 'mp3' 
+          })
+        })
+        
+        if (response.ok) {
+          const blob = await response.blob()
+          const url = URL.createObjectURL(blob)
+          
+          // Clean up previous URL
+          if (audioUrl) {
+            URL.revokeObjectURL(audioUrl)
+          }
+          
+          setAudioUrl(url)
+          
+          // Wait a bit before cleaning up to test the leak detection
+          await new Promise(resolve => setTimeout(resolve, 1000))
+          
+          // Clean up the URL
+          URL.revokeObjectURL(url)
+          setAudioUrl('')
+        }
+      } catch (error) {
+        console.error('Audio generation failed:', error)
       }
-    }, 1000)
+      
+      // Wait between tests
+      await new Promise(resolve => setTimeout(resolve, 1000))
+    }
+    
+    setTestText('Auto test completed')
   }
 
   return (
