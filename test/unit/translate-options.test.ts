@@ -4,8 +4,8 @@ import assert from 'node:assert/strict'
 import { translate } from '../../lib/translator'
 
 describe('translate with custom dictionary', () => {
-  it('uses the provided dictionary when supplied', () => {
-    const result = translate('Hello friend', 'ancient', {
+  it('uses the provided dictionary when supplied', async () => {
+    const result = await translate('Hello friend', 'ancient', {
       dictionary: {
         hello: 'salaam',
         friend: 'sadiq'
@@ -17,8 +17,8 @@ describe('translate with custom dictionary', () => {
     assert.equal(result.wordCount, 2)
   })
 
-  it('falls back to stemmed forms for simple suffixes', () => {
-    const result = translate('Walks', 'ancient', {
+  it('falls back to stemmed forms for simple suffixes', async () => {
+    const result = await translate('Walks', 'ancient', {
       dictionary: {
         walk: 'tor'
       }
@@ -28,8 +28,8 @@ describe('translate with custom dictionary', () => {
     assert.equal(result.confidence, 1)
   })
 
-  it('applies modern sound shifts to -or endings', () => {
-    const result = translate('Valor', 'modern', {
+  it('applies modern sound shifts to -or endings', async () => {
+    const result = await translate('Valor', 'modern', {
       dictionary: {
         valor: 'valor'
       }
