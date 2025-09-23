@@ -32,6 +32,7 @@
     "dict:build": "node scripts/dict-build.js",
     "dict:import": "node scripts/dict-import.js",
     "dict:import-libran": "node scripts/dict-import-libran.js",
+    "batch-render": "node scripts/batch-render.js",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
