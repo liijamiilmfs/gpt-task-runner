@@ -21,10 +21,13 @@ export default function Home() {
     wordCount?: number
   }>({})
 
-  const handleTranslation = (translatedText: string, selectedVariant: 'ancient' | 'modern', originalText: string) => {
+  const handleTranslation = (translatedText: string, selectedVariant: 'ancient' | 'modern', originalText: string, translationData?: { confidence?: number, wordCount?: number }) => {
     setLibranText(translatedText)
     setVariant(selectedVariant)
     setInputText(originalText)
+    if (translationData) {
+      setTranslationData(translationData)
+    }
   }
 
   const handleTranslationComplete = async (text: string, variant: 'ancient' | 'modern') => {
