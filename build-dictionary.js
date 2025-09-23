@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 console.log('=== UNIFIED LIBRAN DICTIONARY BUILD SYSTEM ===');
-console.log('Version: 1.6.3+');
+console.log('Version: 1.7.0');
 console.log('Date:', new Date().toISOString());
 console.log('');
 
@@ -11,7 +11,7 @@ const CONFIG = {
   tranchesDir: './data/Tranches',
   mergedDir: './data/Tranches/merged',
   deleteDir: './data/Tranches/delete',
-  outputFile: './data/UnifiedLibranDictionaryv1.6.3.json',
+  outputFile: './data/UnifiedLibranDictionaryv1.7.0.json',
   qaThreshold: 95, // Minimum QA score required
   phrasebookFile: './data/phrasebook-v1.2.json' // Reference phrasebook
 };
