@@ -1,0 +1,752 @@
+[
+  {
+    "english": "music",
+    "ancient": "Musica",
+    "modern": "muzík",
+    "notes": "Lat musica; Hu k-, Modern z-, ík"
+  },
+  {
+    "english": "musician",
+    "ancient": "Musicus",
+    "modern": "muzíkúsh",
+    "notes": "Lat musicus; Hu k-, Modern z-, í-ú-sh"
+  },
+  {
+    "english": "song",
+    "ancient": "Carmen",
+    "modern": "karmé",
+    "notes": "Lat carmen; Hu k-, Modern é"
+  },
+  {
+    "english": "melody",
+    "ancient": "Melodia",
+    "modern": "melódí",
+    "notes": "Lat melodia; Modern ó-í"
+  },
+  {
+    "english": "harmony",
+    "ancient": "Harmonia",
+    "modern": "harmoní",
+    "notes": "Lat harmonia; Modern í ending"
+  },
+  {
+    "english": "rhythm",
+    "ancient": "Rhythmus",
+    "modern": "rítmúsh",
+    "notes": "Lat rhythmus; Modern í-ú-sh"
+  },
+  {
+    "english": "tempo",
+    "ancient": "Tempus",
+    "modern": "tempúsh",
+    "notes": "Lat tempus; Modern ú-sh"
+  },
+  {
+    "english": "beat",
+    "ancient": "Ictus",
+    "modern": "íktúsh",
+    "notes": "Lat ictus; Hu k-, Modern í-ú-sh"
+  },
+  {
+    "english": "note",
+    "ancient": "Nota",
+    "modern": "notá",
+    "notes": "Lat nota; Modern á ending"
+  },
+  {
+    "english": "tone",
+    "ancient": "Tonus",
+    "modern": "tonúsh",
+    "notes": "Lat tonus; Modern ú-sh"
+  },
+  {
+    "english": "pitch",
+    "ancient": "Acumen",
+    "modern": "akúmé",
+    "notes": "Lat acumen; Hu k-, Modern é"
+  },
+  {
+    "english": "scale",
+    "ancient": "Scala",
+    "modern": "skalá",
+    "notes": "Lat scala; Hu k-, Modern á"
+  },
+  {
+    "english": "chord",
+    "ancient": "Concordia",
+    "modern": "konkórd",
+    "notes": "Lat concordia; Hu k-, Modern órd"
+  },
+  {
+    "english": "voice",
+    "ancient": "Vox",
+    "modern": "vóksh",
+    "notes": "Lat vox; Hu k-, Modern ó-sh"
+  },
+  {
+    "english": "singer",
+    "ancient": "Cantor",
+    "modern": "kantór",
+    "notes": "Lat cantor; Hu k-, Modern ór"
+  },
+  {
+    "english": "choir",
+    "ancient": "Chorus",
+    "modern": "korúsh",
+    "notes": "Lat chorus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "solo",
+    "ancient": "Solus",
+    "modern": "solúsh",
+    "notes": "Lat solus; Modern ú-sh"
+  },
+  {
+    "english": "duet",
+    "ancient": "Duo",
+    "modern": "duó",
+    "notes": "Lat duo; Modern ó ending"
+  },
+  {
+    "english": "ensemble",
+    "ancient": "Concentus",
+    "modern": "kontsentúsh",
+    "notes": "Lat concentus; Hu k-, Modern ts-, ú-sh"
+  },
+  {
+    "english": "orchestra",
+    "ancient": "Orchestra",
+    "modern": "orkestrá",
+    "notes": "Lat orchestra; Hu k-, Modern á"
+  },
+  {
+    "english": "conductor",
+    "ancient": "Moderator",
+    "modern": "moderatór",
+    "notes": "Lat moderator; Modern ór ending"
+  },
+  {
+    "english": "composer",
+    "ancient": "Compositor",
+    "modern": "kompozítór",
+    "notes": "Lat compositor; Hu k-, Modern z-, ór"
+  },
+  {
+    "english": "composition",
+    "ancient": "Compositio",
+    "modern": "kompozíts",
+    "notes": "Lat compositio; Hu k-, Modern z-, íts"
+  },
+  {
+    "english": "improvisation",
+    "ancient": "Extemporalis",
+    "modern": "ekstemporál",
+    "notes": "Lat extemporalis; Hu k-, Modern ál"
+  },
+  {
+    "english": "instrument",
+    "ancient": "Instrumentum",
+    "modern": "instrumé",
+    "notes": "Lat instrumentum; Modern é ending"
+  },
+  {
+    "english": "string",
+    "ancient": "Chorda",
+    "modern": "kordá",
+    "notes": "Lat chorda; Hu k-, Modern á"
+  },
+  {
+    "english": "lyre",
+    "ancient": "Lyra",
+    "modern": "lírë",
+    "notes": "Lat lyra; Modern í-ë"
+  },
+  {
+    "english": "harp",
+    "ancient": "Cithara",
+    "modern": "tsitarë",
+    "notes": "Lat cithara; Modern ts-, ë"
+  },
+  {
+    "english": "lute",
+    "ancient": "Testudo",
+    "modern": "testúd",
+    "notes": "Lat testudo; Modern úd ending"
+  },
+  {
+    "english": "guitar",
+    "ancient": "Cithara hispanica",
+    "modern": "tsitarispán",
+    "notes": "Lat compound; Modern ts-, simplified"
+  },
+  {
+    "english": "violin",
+    "ancient": "Vitula",
+    "modern": "vitúl",
+    "notes": "Lat vitula; Modern úl ending"
+  },
+  {
+    "english": "bow (violin)",
+    "ancient": "Arculus",
+    "modern": "arkúl",
+    "notes": "Lat arculus; Hu k-, Modern úl"
+  },
+  {
+    "english": "drum",
+    "ancient": "Tympanum",
+    "modern": "timpanú",
+    "notes": "Lat tympanum; Modern ú ending"
+  },
+  {
+    "english": "tambourine",
+    "ancient": "Tympanulum",
+    "modern": "timpanúl",
+    "notes": "Lat tympanulum; Modern úl ending"
+  },
+  {
+    "english": "cymbal",
+    "ancient": "Cymbalum",
+    "modern": "tsimbalú",
+    "notes": "Lat cymbalum; Modern ts-, ú"
+  },
+  {
+    "english": "bell",
+    "ancient": "Campana",
+    "modern": "kampán",
+    "notes": "Lat campana; Hu k-, Modern án"
+  },
+  {
+    "english": "chime",
+    "ancient": "Tinnitus",
+    "modern": "tinitúsh",
+    "notes": "Lat tinnitus; Modern ú-sh, single-n"
+  },
+  {
+    "english": "flute",
+    "ancient": "Tibia",
+    "modern": "tibíá",
+    "notes": "Lat tibia; Modern í-á"
+  },
+  {
+    "english": "pipe",
+    "ancient": "Fistula",
+    "modern": "fistúl",
+    "notes": "Lat fistula; Modern úl ending"
+  },
+  {
+    "english": "horn",
+    "ancient": "Cornu",
+    "modern": "kornú",
+    "notes": "Lat cornu; Hu k-, Modern ú"
+  },
+  {
+    "english": "trumpet",
+    "ancient": "Tuba",
+    "modern": "tubá",
+    "notes": "Lat tuba; Modern á ending"
+  },
+  {
+    "english": "bugle",
+    "ancient": "Buccina",
+    "modern": "buktsín",
+    "notes": "Lat buccina; Hu k-, Modern ts-, ín, single-c"
+  },
+  {
+    "english": "organ",
+    "ancient": "Organum",
+    "modern": "organú",
+    "notes": "Lat organum; Modern ú ending"
+  },
+  {
+    "english": "reed",
+    "ancient": "Calamus",
+    "modern": "kalamúsh",
+    "notes": "Lat calamus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "bagpipe",
+    "ancient": "Utricularius",
+    "notes": "Lat utricularius; Modern simplified",
+    "modern": "utrikúl"
+  },
+  {
+    "english": "whistle",
+    "ancient": "Sibilus",
+    "modern": "sibilúsh",
+    "notes": "Lat sibilus; Modern ú-sh"
+  },
+  {
+    "english": "dance",
+    "ancient": "Saltatio",
+    "modern": "saltatś",
+    "notes": "Lat saltatio; Modern áts ending"
+  },
+  {
+    "english": "dancer",
+    "ancient": "Saltator",
+    "modern": "saltatór",
+    "notes": "Lat saltator; Modern ór ending"
+  },
+  {
+    "english": "ballet",
+    "ancient": "Saltus nobilis",
+    "modern": "saltnóbil",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "waltz",
+    "ancient": "Tripudium",
+    "modern": "tripúd",
+    "notes": "Lat tripudium; Modern úd ending"
+  },
+  {
+    "english": "folk dance",
+    "ancient": "Saltus popularis",
+    "modern": "saltpopúl",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "step",
+    "ancient": "Gradus",
+    "modern": "gradúsh",
+    "notes": "Lat gradus; Modern ú-sh"
+  },
+  {
+    "english": "leap",
+    "ancient": "Saltus",
+    "modern": "saltúsh",
+    "notes": "Lat saltus; Modern ú-sh"
+  },
+  {
+    "english": "turn",
+    "ancient": "Versus",
+    "modern": "verzúsh",
+    "notes": "Lat versus; Modern z-, ú-sh"
+  },
+  {
+    "english": "partner",
+    "ancient": "Consors",
+    "modern": "konzórsh",
+    "notes": "Lat consors; Hu k-, Modern z-, ó-sh"
+  },
+  {
+    "english": "theater",
+    "ancient": "Theatrum",
+    "modern": "teátr",
+    "notes": "Lat theatrum; Modern simplified"
+  },
+  {
+    "english": "stage",
+    "ancient": "Scaena",
+    "modern": "skaenë",
+    "notes": "Lat scaena; Hu k-, Modern ë"
+  },
+  {
+    "english": "actor",
+    "ancient": "Actor",
+    "modern": "aktór",
+    "notes": "Lat actor; Hu k-, Modern ór"
+  },
+  {
+    "english": "actress",
+    "ancient": "Actrix",
+    "modern": "aktríks",
+    "notes": "Lat actrix; Hu k-, Modern íks"
+  },
+  {
+    "english": "play",
+    "ancient": "Fabula",
+    "modern": "fabúl",
+    "notes": "Lat fabula; Modern úl ending"
+  },
+  {
+    "english": "drama",
+    "ancient": "Drama",
+    "modern": "dramá",
+    "notes": "Lat drama; Modern á ending"
+  },
+  {
+    "english": "comedy",
+    "ancient": "Comoedia",
+    "modern": "komoedí",
+    "notes": "Lat comoedia; Hu k-, Modern í"
+  },
+  {
+    "english": "tragedy",
+    "ancient": "Tragoedia",
+    "modern": "tragoedí",
+    "notes": "Lat tragoedia; Modern í ending"
+  },
+  {
+    "english": "character",
+    "ancient": "Persona",
+    "modern": "perzonë",
+    "notes": "Lat persona; Modern z-, ë"
+  },
+  {
+    "english": "role",
+    "ancient": "Pars",
+    "modern": "pársh",
+    "notes": "Lat pars; Modern á-sh"
+  },
+  {
+    "english": "scene",
+    "ancient": "Scaena",
+    "modern": "skaenë",
+    "notes": "Lat scaena; Hu k-, Modern ë"
+  },
+  {
+    "english": "act",
+    "ancient": "Actus",
+    "modern": "aktúsh",
+    "notes": "Lat actus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "prologue",
+    "ancient": "Prologus",
+    "modern": "prológúsh",
+    "notes": "Lat prologus; Modern ó-ú-sh"
+  },
+  {
+    "english": "epilogue",
+    "ancient": "Epilogus",
+    "modern": "epilógúsh",
+    "notes": "Lat epilogus; Modern ó-ú-sh"
+  },
+  {
+    "english": "monologue",
+    "ancient": "Monologus",
+    "modern": "monológúsh",
+    "notes": "Lat monologus; Modern ó-ú-sh"
+  },
+  {
+    "english": "dialogue",
+    "ancient": "Dialogus",
+    "modern": "dialógúsh",
+    "notes": "Lat dialogus; Modern ó-ú-sh"
+  },
+  {
+    "english": "script",
+    "ancient": "Scriptum",
+    "modern": "skriptú",
+    "notes": "Lat scriptum; Hu k-, Modern ú"
+  },
+  {
+    "english": "rehearsal",
+    "ancient": "Exercitatio",
+    "modern": "eksértsitáts",
+    "notes": "Lat exercitatio; Hu k-, Modern ts-, áts"
+  },
+  {
+    "english": "performance",
+    "ancient": "Spectaculum",
+    "modern": "spektakúl",
+    "notes": "Lat spectaculum; Hu k-, Modern úl"
+  },
+  {
+    "english": "audience",
+    "ancient": "Spectator",
+    "modern": "spektatór",
+    "notes": "Lat spectator; Hu k-, Modern ór"
+  },
+  {
+    "english": "applause",
+    "ancient": "Plausus",
+    "modern": "plauzúsh",
+    "notes": "Lat plausus; Modern z-, ú-sh"
+  },
+  {
+    "english": "curtain",
+    "ancient": "Velum",
+    "modern": "velú",
+    "notes": "Lat velum; Modern ú ending"
+  },
+  {
+    "english": "costume",
+    "ancient": "Vestitus",
+    "modern": "vestítúsh",
+    "notes": "Lat vestitus; Modern í-ú-sh"
+  },
+  {
+    "english": "mask",
+    "ancient": "Persona",
+    "modern": "perzonë",
+    "notes": "Lat persona; Modern z-, ë"
+  },
+  {
+    "english": "makeup",
+    "ancient": "Fucus",
+    "modern": "fukúsh",
+    "notes": "Lat fucus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "props",
+    "ancient": "Ornamenta",
+    "modern": "ornaméntë",
+    "notes": "Lat ornamenta; Modern é-ë"
+  },
+  {
+    "english": "scenery",
+    "ancient": "Apparatus",
+    "modern": "aparatúsh",
+    "notes": "Lat apparatus; Modern ú-sh, single-p"
+  },
+  {
+    "english": "backdrop",
+    "ancient": "Tela",
+    "modern": "telá",
+    "notes": "Lat tela; Modern á ending"
+  },
+  {
+    "english": "juggler",
+    "ancient": "Praestigiator",
+    "modern": "praestigiatór",
+    "notes": "Lat praestigiator; Modern ór ending"
+  },
+  {
+    "english": "acrobat",
+    "ancient": "Funambulus",
+    "modern": "funambúl",
+    "notes": "Lat funambulus; Modern úl ending"
+  },
+  {
+    "english": "mime",
+    "ancient": "Mimus",
+    "modern": "mímúsh",
+    "notes": "Lat mimus; Modern í-ú-sh"
+  },
+  {
+    "english": "jester",
+    "ancient": "Scurra",
+    "modern": "skurá",
+    "notes": "Lat scurra; Hu k-, Modern á, single-r"
+  },
+  {
+    "english": "fool",
+    "ancient": "Sannio",
+    "modern": "saní",
+    "notes": "Lat sannio; Modern í, single-n"
+  },
+  {
+    "english": "storyteller",
+    "ancient": "Narrator",
+    "modern": "naratór",
+    "notes": "Lat narrator; Modern single-r, ór"
+  },
+  {
+    "english": "poet",
+    "ancient": "Poeta",
+    "modern": "poetë",
+    "notes": "Lat poeta; Modern ë ending"
+  },
+  {
+    "english": "poetry",
+    "ancient": "Poesis",
+    "modern": "poezísh",
+    "notes": "Lat poesis; Modern z-, í-sh"
+  },
+  {
+    "english": "verse",
+    "ancient": "Versus",
+    "modern": "verzúsh",
+    "notes": "Lat versus; Modern z-, ú-sh"
+  },
+  {
+    "english": "rhyme",
+    "ancient": "Rhythmus",
+    "modern": "rítmúsh",
+    "notes": "Lat rhythmus; Modern í-ú-sh"
+  },
+  {
+    "english": "meter",
+    "ancient": "Metrum",
+    "modern": "metrú",
+    "notes": "Lat metrum; Modern ú ending"
+  },
+  {
+    "english": "ballad",
+    "ancient": "Canticum",
+    "modern": "kantíkú",
+    "notes": "Lat canticum; Hu k-, Modern í-ú"
+  },
+  {
+    "english": "epic",
+    "ancient": "Epos",
+    "modern": "epósh",
+    "notes": "Lat epos; Modern ó-sh"
+  },
+  {
+    "english": "hymn",
+    "ancient": "Hymnus",
+    "modern": "hímnúsh",
+    "notes": "Lat hymnus; Modern í-ú-sh"
+  },
+  {
+    "english": "chant",
+    "ancient": "Cantus",
+    "modern": "kantúsh",
+    "notes": "Lat cantus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "anthem",
+    "ancient": "Antiphona",
+    "modern": "antifonë",
+    "notes": "Lat antiphona; Modern ë ending"
+  },
+  {
+    "english": "lullaby",
+    "ancient": "Nenia",
+    "modern": "nenrí",
+    "notes": "Lat nenia; Modern í ending"
+  },
+  {
+    "english": "festival",
+    "ancient": "Festum",
+    "modern": "festú",
+    "notes": "Lat festum; Modern ú ending"
+  },
+  {
+    "english": "celebration",
+    "ancient": "Celebratio",
+    "modern": "tselerbráts",
+    "notes": "Lat celebratio; Modern ts-, áts"
+  },
+  {
+    "english": "parade",
+    "ancient": "Pompa",
+    "modern": "pompá",
+    "notes": "Lat pompa; Modern á ending"
+  },
+  {
+    "english": "procession",
+    "ancient": "Processio",
+    "modern": "protsésí",
+    "notes": "Lat processio; Modern ts-, í, single-s"
+  },
+  {
+    "english": "carnival",
+    "ancient": "Carnisprivium",
+    "modern": "karnisprív",
+    "notes": "Lat carnisprivium; Hu k-, Modern simplified"
+  },
+  {
+    "english": "circus",
+    "ancient": "Circus",
+    "modern": "tsirkúsh",
+    "notes": "Lat circus; Modern ts-, ú-sh"
+  },
+  {
+    "english": "arena",
+    "ancient": "Arena",
+    "modern": "arén",
+    "notes": "Lat arena; Modern én ending"
+  },
+  {
+    "english": "amphitheater",
+    "ancient": "Amphitheatrum",
+    "modern": "amfiteátr",
+    "notes": "Lat amphitheatrum; Modern simplified"
+  },
+  {
+    "english": "concert",
+    "ancient": "Concentus",
+    "modern": "kontsénts",
+    "notes": "Lat concentus; Hu k-, Modern ts-, énts"
+  },
+  {
+    "english": "recital",
+    "ancient": "Recitatio",
+    "modern": "retsitáts",
+    "notes": "Lat recitatio; Modern ts-, áts"
+  },
+  {
+    "english": "entertainment",
+    "ancient": "Oblectamentum",
+    "modern": "oblektamé",
+    "notes": "Lat oblectamentum; Hu k-, Modern é"
+  },
+  {
+    "english": "spectacle",
+    "ancient": "Spectaculum",
+    "modern": "spektakúl",
+    "notes": "Lat spectaculum; Hu k-, Modern úl"
+  },
+  {
+    "english": "show",
+    "ancient": "Exhibitio",
+    "modern": "eksibíts",
+    "notes": "Lat exhibitio; Hu k-, Modern íts"
+  },
+  {
+    "english": "talent",
+    "ancient": "Ingenium",
+    "modern": "ingení",
+    "notes": "Lat ingenium; Modern í ending"
+  },
+  {
+    "english": "skill",
+    "ancient": "Ars",
+    "modern": "ársh",
+    "notes": "Lat ars; Modern á-sh"
+  },
+  {
+    "english": "practice",
+    "ancient": "Exercitium",
+    "modern": "eksértsí",
+    "notes": "Lat exercitium; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "technique",
+    "ancient": "Techne",
+    "modern": "tekné",
+    "notes": "Gr techne; Hu k-, Modern é"
+  },
+  {
+    "english": "mastery",
+    "ancient": "Peritia",
+    "modern": "peritsí",
+    "notes": "Lat peritia; Modern ts-, í"
+  },
+  {
+    "english": "novice",
+    "ancient": "Tyro",
+    "modern": "tíró",
+    "notes": "Lat tyro; Modern í-ó"
+  },
+  {
+    "english": "virtuoso",
+    "ancient": "Peritus",
+    "modern": "perítúsh",
+    "notes": "Lat peritus; Modern í-ú-sh"
+  },
+  {
+    "english": "maestro",
+    "ancient": "Magister",
+    "modern": "magístér",
+    "notes": "Lat magister; Modern í-ér"
+  },
+  {
+    "english": "tutor",
+    "ancient": "Praeceptor",
+    "modern": "praetseptór",
+    "notes": "Lat praeceptor; Modern ts-, ór"
+  },
+  {
+    "english": "student",
+    "ancient": "Discipulus",
+    "modern": "diskipúl",
+    "notes": "Lat discipulus; Hu k-, Modern úl"
+  },
+  {
+    "english": "lesson",
+    "ancient": "Lectio",
+    "modern": "lektsí",
+    "notes": "Lat lectio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "repertoire",
+    "ancient": "Repertorium",
+    "modern": "repertór",
+    "notes": "Lat repertorium; Modern ór ending"
+  }
+]

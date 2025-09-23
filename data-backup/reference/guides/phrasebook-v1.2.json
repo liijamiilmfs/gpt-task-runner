@@ -1,0 +1,37 @@
+{
+  "metadata": {
+    "version": "1.2",
+    "created_on": "2025-09-23T01:00:00.000Z",
+    "description": "Essential 100-phrase Librán phrasebook for QA testing",
+    "total_phrases": 100
+  },
+  "phrases": [
+    "I am", "you are", "he is", "she is", "it is",
+    "we are", "you are (plural)", "they are",
+    "I have", "you have", "he has", "she has",
+    "I want", "you want", "he wants", "she wants",
+    "I go", "you go", "he goes", "she goes",
+    "I see", "you see", "he sees", "she sees",
+    "I hear", "you hear", "he hears", "she hears",
+    "I speak", "you speak", "he speaks", "she speaks",
+    "I eat", "you eat", "he eats", "she eats",
+    "I drink", "you drink", "he drinks", "she drinks",
+    "I sleep", "you sleep", "he sleeps", "she sleeps",
+    "good", "bad", "big", "small", "old", "new",
+    "hot", "cold", "fast", "slow", "high", "low",
+    "beautiful", "ugly", "strong", "weak", "rich", "poor",
+    "happy", "sad", "angry", "calm", "tired", "awake",
+    "house", "water", "food", "fire", "earth", "air",
+    "sun", "moon", "star", "tree", "flower", "grass",
+    "mountain", "river", "sea", "forest", "field", "road",
+    "hand", "foot", "eye", "ear", "mouth", "nose",
+    "head", "heart", "blood", "bone", "skin", "hair",
+    "father", "mother", "brother", "sister", "son", "daughter",
+    "friend", "enemy", "person", "man", "woman", "child",
+    "king", "queen", "warrior", "priest", "farmer", "merchant",
+    "sword", "shield", "bow", "arrow", "horse", "dog",
+    "bread", "meat", "wine", "beer", "milk", "honey",
+    "gold", "silver", "iron", "stone", "wood", "leather",
+    "morning", "afternoon", "evening", "night", "day", "year"
+  ]
+}

@@ -1,0 +1,794 @@
+[
+  {
+    "english": "healer",
+    "ancient": "Medicus",
+    "modern": "medíkúsh",
+    "notes": "Lat medicus; Hu k-, Modern í-ú-sh"
+  },
+  {
+    "english": "physician",
+    "ancient": "Physicus",
+    "modern": "fizíkúsh",
+    "notes": "Lat physicus; Modern z-, í-ú-sh"
+  },
+  {
+    "english": "surgeon",
+    "ancient": "Chirurgus",
+    "modern": "kirúrgúsh",
+    "notes": "Lat chirurgus; Hu k-, Modern ú-ú-sh"
+  },
+  {
+    "english": "medicine",
+    "ancient": "Medicina",
+    "modern": "meditsín",
+    "notes": "Lat medicina; Modern ts-, ín"
+  },
+  {
+    "english": "remedy",
+    "ancient": "Remedium",
+    "modern": "remedí",
+    "notes": "Lat remedium; Modern í ending"
+  },
+  {
+    "english": "cure",
+    "ancient": "Curatio",
+    "modern": "kuráts",
+    "notes": "Lat curatio; Hu k-, Modern áts"
+  },
+  {
+    "english": "treatment",
+    "ancient": "Tractatio",
+    "modern": "traktáts",
+    "notes": "Lat tractatio; Hu k-, Modern áts"
+  },
+  {
+    "english": "healing",
+    "ancient": "Sanatio",
+    "modern": "zanáts",
+    "notes": "Lat sanatio; Modern z-, áts"
+  },
+  {
+    "english": "health",
+    "ancient": "Salus",
+    "modern": "zalúsh",
+    "notes": "Lat salus; Modern z-, ú-sh"
+  },
+  {
+    "english": "disease",
+    "ancient": "Morbus",
+    "modern": "morbúsh",
+    "notes": "Lat morbus; Modern ú-sh"
+  },
+  {
+    "english": "illness",
+    "ancient": "Aegritudo",
+    "modern": "aegritúd",
+    "notes": "Lat aegritudo; Modern úd ending"
+  },
+  {
+    "english": "sickness",
+    "ancient": "Infirmitas",
+    "modern": "infirmít",
+    "notes": "Lat infirmitas; Modern ít ending"
+  },
+  {
+    "english": "infection",
+    "ancient": "Infectio",
+    "modern": "infektsí",
+    "notes": "Lat infectio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "fever",
+    "ancient": "Febris",
+    "modern": "febrish",
+    "notes": "Lat febris; Modern í-sh"
+  },
+  {
+    "english": "pain",
+    "ancient": "Dolor",
+    "modern": "dolór",
+    "notes": "Lat dolor; Modern ór ending"
+  },
+  {
+    "english": "ache",
+    "ancient": "Dolus",
+    "modern": "dolúsh",
+    "notes": "Lat dolus; Modern ú-sh"
+  },
+  {
+    "english": "wound",
+    "ancient": "Vulnus",
+    "modern": "vulnúsh",
+    "notes": "Lat vulnus; Modern ú-sh"
+  },
+  {
+    "english": "injury",
+    "ancient": "Laesio",
+    "modern": "laezí",
+    "notes": "Lat laesio; Modern z-, í"
+  },
+  {
+    "english": "bruise",
+    "ancient": "Livor",
+    "modern": "livór",
+    "notes": "Lat livor; Modern ór ending"
+  },
+  {
+    "english": "cut",
+    "ancient": "Incisio",
+    "modern": "intsizí",
+    "notes": "Lat incisio; Modern ts-, z-, í"
+  },
+  {
+    "english": "burn",
+    "ancient": "Ustio",
+    "modern": "ustí",
+    "notes": "Lat ustio; Modern í ending"
+  },
+  {
+    "english": "fracture",
+    "ancient": "Fractura",
+    "modern": "fraktúr",
+    "notes": "Lat fractura; Hu k-, Modern úr"
+  },
+  {
+    "english": "break",
+    "ancient": "Ruptura",
+    "modern": "ruptúr",
+    "notes": "Lat ruptura; Modern úr ending"
+  },
+  {
+    "english": "swelling",
+    "ancient": "Tumor",
+    "modern": "tumór",
+    "notes": "Lat tumor; Modern ór ending"
+  },
+  {
+    "english": "inflammation",
+    "ancient": "Inflammatio",
+    "modern": "inflamáts",
+    "notes": "Lat inflammatio; Modern áts, single-m"
+  },
+  {
+    "english": "rash",
+    "ancient": "Exanthema",
+    "modern": "eksantemë",
+    "notes": "Lat exanthema; Hu k-, Modern ë"
+  },
+  {
+    "english": "scar",
+    "ancient": "Cicatrix",
+    "modern": "tsikatríks",
+    "notes": "Lat cicatrix; Modern ts-, íks"
+  },
+  {
+    "english": "blood",
+    "ancient": "Sanguis",
+    "modern": "sangvísh",
+    "notes": "Lat sanguis; Hu -v, Modern í-sh"
+  },
+  {
+    "english": "bleeding",
+    "ancient": "Haemorrhagia",
+    "modern": "haemorágí",
+    "notes": "Lat haemorrhagia; Modern á-í, single-r"
+  },
+  {
+    "english": "pulse",
+    "ancient": "Pulsus",
+    "modern": "pulzúsh",
+    "notes": "Lat pulsus; Modern z-, ú-sh"
+  },
+  {
+    "english": "heartbeat",
+    "ancient": "Cordis ictus",
+    "modern": "kordíkt",
+    "notes": "Lat compound; Hu k-, Modern simplified"
+  },
+  {
+    "english": "breath",
+    "ancient": "Spiritus",
+    "modern": "spirítúsh",
+    "notes": "Lat spiritus; Modern í-ú-sh"
+  },
+  {
+    "english": "cough",
+    "ancient": "Tussis",
+    "modern": "tusísh",
+    "notes": "Lat tussis; Modern í-sh, single-s"
+  },
+  {
+    "english": "sneeze",
+    "ancient": "Sternutatio",
+    "modern": "sternutáts",
+    "notes": "Lat sternutatio; Modern áts ending"
+  },
+  {
+    "english": "vomit",
+    "ancient": "Vomitus",
+    "modern": "vomítúsh",
+    "notes": "Lat vomitus; Modern í-ú-sh"
+  },
+  {
+    "english": "nausea",
+    "ancient": "Nausea",
+    "modern": "nauzeá",
+    "notes": "Lat nausea; Modern z-, eá"
+  },
+  {
+    "english": "dizziness",
+    "ancient": "Vertigo",
+    "modern": "vertígó",
+    "notes": "Lat vertigo; Modern í-ó"
+  },
+  {
+    "english": "headache",
+    "ancient": "Cephalgia",
+    "modern": "tsefalígí",
+    "notes": "Lat cephalgia; Modern ts-, í-í"
+  },
+  {
+    "english": "stomach ache",
+    "ancient": "Gastralgia",
+    "modern": "gastralgí",
+    "notes": "Lat gastralgia; Modern í ending"
+  },
+  {
+    "english": "diagnosis",
+    "ancient": "Diagnosis",
+    "modern": "diagnózísh",
+    "notes": "Lat diagnosis; Modern z-, í-sh"
+  },
+  {
+    "english": "symptom",
+    "ancient": "Symptoma",
+    "modern": "símptomë",
+    "notes": "Lat symptoma; Modern í-ë"
+  },
+  {
+    "english": "examination",
+    "ancient": "Exploratio",
+    "modern": "eksploráts",
+    "notes": "Lat exploratio; Hu k-, Modern áts"
+  },
+  {
+    "english": "anatomy",
+    "ancient": "Anatomia",
+    "modern": "anatomí",
+    "notes": "Lat anatomia; Modern í ending"
+  },
+  {
+    "english": "body",
+    "ancient": "Corpus",
+    "modern": "korpúsh",
+    "notes": "Lat corpus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "head",
+    "ancient": "Caput",
+    "modern": "kaputúsh",
+    "notes": "Lat caput; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "brain",
+    "ancient": "Cerebrum",
+    "modern": "tserebr",
+    "notes": "Lat cerebrum; Modern ts-, simplified"
+  },
+  {
+    "english": "skull",
+    "ancient": "Cranium",
+    "modern": "kraní",
+    "notes": "Lat cranium; Hu k-, Modern í"
+  },
+  {
+    "english": "eye",
+    "ancient": "Oculus",
+    "modern": "okulúsh",
+    "notes": "Lat oculus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "ear",
+    "ancient": "Auris",
+    "modern": "aurísh",
+    "notes": "Lat auris; Modern í-sh"
+  },
+  {
+    "english": "nose",
+    "ancient": "Nasus",
+    "modern": "nazúsh",
+    "notes": "Lat nasus; Modern z-, ú-sh"
+  },
+  {
+    "english": "mouth",
+    "ancient": "Os",
+    "modern": "ósh",
+    "notes": "Lat os; Modern ó-sh"
+  },
+  {
+    "english": "tooth",
+    "ancient": "Dens",
+    "modern": "dénsh",
+    "notes": "Lat dens; Modern é-sh"
+  },
+  {
+    "english": "tongue",
+    "ancient": "Lingua",
+    "modern": "linguë",
+    "notes": "Lat lingua; Modern ë ending"
+  },
+  {
+    "english": "throat",
+    "ancient": "Guttur",
+    "modern": "gutur",
+    "notes": "Lat guttur; Modern single-t"
+  },
+  {
+    "english": "neck",
+    "ancient": "Collum",
+    "modern": "kolú",
+    "notes": "Lat collum; Hu k-, Modern ú, single-l"
+  },
+  {
+    "english": "shoulder",
+    "ancient": "Humerus",
+    "modern": "humerúsh",
+    "notes": "Lat humerus; Modern ú-sh"
+  },
+  {
+    "english": "arm",
+    "ancient": "Brachium",
+    "modern": "brakí",
+    "notes": "Lat brachium; Hu k-, Modern í"
+  },
+  {
+    "english": "hand",
+    "ancient": "Manus",
+    "modern": "manúsh",
+    "notes": "Lat manus; Modern ú-sh"
+  },
+  {
+    "english": "finger",
+    "ancient": "Digitus",
+    "modern": "digítúsh",
+    "notes": "Lat digitus; Modern í-ú-sh"
+  },
+  {
+    "english": "chest",
+    "ancient": "Pectus",
+    "modern": "pektúsh",
+    "notes": "Lat pectus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "heart",
+    "ancient": "Cor",
+    "modern": "kór",
+    "notes": "Lat cor; Hu k-, Modern ór"
+  },
+  {
+    "english": "lung",
+    "ancient": "Pulmo",
+    "modern": "púlmó",
+    "notes": "Lat pulmo; Modern ú-ó"
+  },
+  {
+    "english": "stomach",
+    "ancient": "Stomachus",
+    "modern": "stomakúsh",
+    "notes": "Lat stomachus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "liver",
+    "ancient": "Hepar",
+    "modern": "hepár",
+    "notes": "Lat hepar; Modern ár ending"
+  },
+  {
+    "english": "kidney",
+    "ancient": "Ren",
+    "modern": "rén",
+    "notes": "Lat ren; Modern én ending"
+  },
+  {
+    "english": "back",
+    "ancient": "Dorsum",
+    "modern": "dorzú",
+    "notes": "Lat dorsum; Modern z-, ú"
+  },
+  {
+    "english": "spine",
+    "ancient": "Spina",
+    "modern": "spínë",
+    "notes": "Lat spina; Modern í-ë"
+  },
+  {
+    "english": "leg",
+    "ancient": "Crus",
+    "modern": "krúsh",
+    "notes": "Lat crus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "foot",
+    "ancient": "Pes",
+    "modern": "pésh",
+    "notes": "Lat pes; Modern é-sh"
+  },
+  {
+    "english": "bone",
+    "ancient": "Os",
+    "modern": "ósh",
+    "notes": "Lat os; Modern ó-sh"
+  },
+  {
+    "english": "muscle",
+    "ancient": "Musculus",
+    "modern": "muskúl",
+    "notes": "Lat musculus; Hu k-, Modern úl"
+  },
+  {
+    "english": "nerve",
+    "ancient": "Nervus",
+    "modern": "nervúsh",
+    "notes": "Lat nervus; Modern ú-sh"
+  },
+  {
+    "english": "vein",
+    "ancient": "Vena",
+    "modern": "venë",
+    "notes": "Lat vena; Modern ë ending"
+  },
+  {
+    "english": "artery",
+    "ancient": "Arteria",
+    "modern": "arterí",
+    "notes": "Lat arteria; Modern í ending"
+  },
+  {
+    "english": "skin",
+    "ancient": "Cutis",
+    "modern": "kutísh",
+    "notes": "Lat cutis; Hu k-, Modern í-sh"
+  },
+  {
+    "english": "hair",
+    "ancient": "Capillus",
+    "modern": "kapílúsh",
+    "notes": "Lat capillus; Hu k-, Modern í-ú-sh, single-l"
+  },
+  {
+    "english": "nail",
+    "ancient": "Unguis",
+    "modern": "ungvísh",
+    "notes": "Lat unguis; Hu -v, Modern í-sh"
+  },
+  {
+    "english": "herb",
+    "ancient": "Herba",
+    "modern": "herbá",
+    "notes": "Lat herba; Modern á ending"
+  },
+  {
+    "english": "plant",
+    "ancient": "Planta",
+    "modern": "plantá",
+    "notes": "Lat planta; Modern á ending"
+  },
+  {
+    "english": "root",
+    "ancient": "Radix",
+    "modern": "radíks",
+    "notes": "Lat radix; Modern íks ending"
+  },
+  {
+    "english": "leaf",
+    "ancient": "Folium",
+    "modern": "folí",
+    "notes": "Lat folium; Modern í ending"
+  },
+  {
+    "english": "flower",
+    "ancient": "Flos",
+    "modern": "flósh",
+    "notes": "Lat flos; Modern ó-sh"
+  },
+  {
+    "english": "seed",
+    "ancient": "Semen",
+    "modern": "semé",
+    "notes": "Lat semen; Modern é ending"
+  },
+  {
+    "english": "bark",
+    "ancient": "Cortex",
+    "modern": "kortéks",
+    "notes": "Lat cortex; Hu k-, Modern éks"
+  },
+  {
+    "english": "sap",
+    "ancient": "Succus",
+    "modern": "sukúsh",
+    "notes": "Lat succus; Hu k-, Modern ú-sh, single-c"
+  },
+  {
+    "english": "potion",
+    "ancient": "Potio",
+    "modern": "potsí",
+    "notes": "Lat potio; Modern ts-, í"
+  },
+  {
+    "english": "tincture",
+    "ancient": "Tinctura",
+    "modern": "tínktúr",
+    "notes": "Lat tinctura; Modern í-úr"
+  },
+  {
+    "english": "extract",
+    "ancient": "Extractum",
+    "modern": "ekstrakt",
+    "notes": "Lat extractum; Hu k-, Modern simplified"
+  },
+  {
+    "english": "powder",
+    "ancient": "Pulvis",
+    "modern": "pulvísh",
+    "notes": "Lat pulvis; Modern í-sh"
+  },
+  {
+    "english": "ointment",
+    "ancient": "Unguentum",
+    "modern": "ungventú",
+    "notes": "Lat unguentum; Hu -v, Modern ú"
+  },
+  {
+    "english": "salve",
+    "ancient": "Unguen",
+    "modern": "ungvé",
+    "notes": "Lat unguen; Hu -v, Modern é"
+  },
+  {
+    "english": "bandage",
+    "ancient": "Fascia",
+    "modern": "faskí",
+    "notes": "Lat fascia; Hu k-, Modern í"
+  },
+  {
+    "english": "compress",
+    "ancient": "Compressus",
+    "modern": "kompresúsh",
+    "notes": "Lat compressus; Hu k-, Modern ú-sh, single-s"
+  },
+  {
+    "english": "splint",
+    "ancient": "Ferula",
+    "modern": "ferúl",
+    "notes": "Lat ferula; Modern úl ending"
+  },
+  {
+    "english": "needle",
+    "ancient": "Acus",
+    "modern": "akúsh",
+    "notes": "Lat acus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "thread",
+    "ancient": "Filum",
+    "modern": "fílú",
+    "notes": "Lat filum; Modern í-ú"
+  },
+  {
+    "english": "surgery",
+    "ancient": "Chirurgia",
+    "modern": "kirúrgí",
+    "notes": "Lat chirurgia; Hu k-, Modern í"
+  },
+  {
+    "english": "operation",
+    "ancient": "Operatio",
+    "modern": "operáts",
+    "notes": "Lat operatio; Modern áts ending"
+  },
+  {
+    "english": "incision",
+    "ancient": "Incisio",
+    "modern": "intsizí",
+    "notes": "Lat incisio; Modern ts-, z-, í"
+  },
+  {
+    "english": "amputation",
+    "ancient": "Amputatio",
+    "modern": "amputáts",
+    "notes": "Lat amputatio; Modern áts ending"
+  },
+  {
+    "english": "suture",
+    "ancient": "Sutura",
+    "modern": "sutúr",
+    "notes": "Lat sutura; Modern úr ending"
+  },
+  {
+    "english": "cauterize",
+    "ancient": "Cauterizare",
+    "modern": "kauterizár",
+    "notes": "Lat cauterizare; Hu k-, Modern z-, ár"
+  },
+  {
+    "english": "lancet",
+    "ancient": "Lanceta",
+    "modern": "lantsetë",
+    "notes": "Lat lanceta; Modern ts-, ë"
+  },
+  {
+    "english": "scalpel",
+    "ancient": "Scalpellum",
+    "modern": "skalpelú",
+    "notes": "Lat scalpellum; Hu k-, Modern ú, single-l"
+  },
+  {
+    "english": "forceps",
+    "ancient": "Forceps",
+    "modern": "fortsépsh",
+    "notes": "Lat forceps; Modern ts-, é-sh"
+  },
+  {
+    "english": "probe",
+    "ancient": "Specillum",
+    "modern": "spetsílú",
+    "notes": "Lat specillum; Modern ts-, í-ú, single-l"
+  },
+  {
+    "english": "pestle",
+    "ancient": "Pistillum",
+    "modern": "pistílú",
+    "notes": "Lat pistillum; Modern í-ú, single-l"
+  },
+  {
+    "english": "mortar",
+    "ancient": "Mortarium",
+    "modern": "mortár",
+    "notes": "Lat mortarium; Modern ár ending"
+  },
+  {
+    "english": "dose",
+    "ancient": "Dosis",
+    "modern": "dozísh",
+    "notes": "Lat dosis; Modern z-, í-sh"
+  },
+  {
+    "english": "prescription",
+    "ancient": "Praescriptio",
+    "modern": "praeskriptsí",
+    "notes": "Lat praescriptio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "patient",
+    "ancient": "Patiens",
+    "modern": "patíéns",
+    "notes": "Lat patiens; Modern í-éns"
+  },
+  {
+    "english": "recovery",
+    "ancient": "Recuperatio",
+    "modern": "rekuperáts",
+    "notes": "Lat recuperatio; Hu k-, Modern áts"
+  },
+  {
+    "english": "convalescence",
+    "ancient": "Convalescentia",
+    "modern": "konvalests",
+    "notes": "Lat convalescentia; Hu k-, Modern sts"
+  },
+  {
+    "english": "relapse",
+    "ancient": "Recidiva",
+    "modern": "retsidív",
+    "notes": "Lat recidiva; Modern ts-, ív"
+  },
+  {
+    "english": "epidemic",
+    "ancient": "Epidemia",
+    "modern": "epidemí",
+    "notes": "Lat epidemia; Modern í ending"
+  },
+  {
+    "english": "contagion",
+    "ancient": "Contagio",
+    "modern": "kontagí",
+    "notes": "Lat contagio; Hu k-, Modern í"
+  },
+  {
+    "english": "quarantine",
+    "ancient": "Quarantena",
+    "modern": "kvarantenë",
+    "notes": "Lat quarantena; Hu k-v, Modern ë"
+  },
+  {
+    "english": "immunity",
+    "ancient": "Immunitas",
+    "modern": "imunít",
+    "notes": "Lat immunitas; Modern ít, single-m"
+  },
+  {
+    "english": "vaccination",
+    "ancient": "Vaccinatio",
+    "modern": "vaktsinats",
+    "notes": "Lat vaccinatio; Hu k-, Modern ts-, áts"
+  },
+  {
+    "english": "midwife",
+    "ancient": "Obstetrix",
+    "modern": "obstetríks",
+    "notes": "Lat obstetrix; Modern íks ending"
+  },
+  {
+    "english": "childbirth",
+    "ancient": "Partus",
+    "modern": "partúsh",
+    "notes": "Lat partus; Modern ú-sh"
+  },
+  {
+    "english": "pregnancy",
+    "ancient": "Graviditas",
+    "modern": "gravidít",
+    "notes": "Lat graviditas; Modern ít ending"
+  },
+  {
+    "english": "birth",
+    "ancient": "Nativitas",
+    "modern": "nativít",
+    "notes": "Lat nativitas; Modern ít ending"
+  },
+  {
+    "english": "death",
+    "ancient": "Mors",
+    "modern": "mórsh",
+    "notes": "Lat mors; Modern ó-sh"
+  },
+  {
+    "english": "autopsy",
+    "ancient": "Anatomia cadaveris",
+    "modern": "anatokadáv",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "poison",
+    "ancient": "Venenum",
+    "modern": "venenú",
+    "notes": "Lat venenum; Modern ú ending"
+  },
+  {
+    "english": "antidote",
+    "ancient": "Antidotum",
+    "modern": "antidót",
+    "notes": "Lat antidotum; Modern ót ending"
+  },
+  {
+    "english": "madness",
+    "ancient": "Insania",
+    "modern": "inzaní",
+    "notes": "Lat insania; Modern z-, í"
+  },
+  {
+    "english": "blindness",
+    "ancient": "Caecitas",
+    "modern": "kaetsít",
+    "notes": "Lat caecitas; Hu k-, Modern ts-, ít"
+  },
+  {
+    "english": "deafness",
+    "ancient": "Surditas",
+    "modern": "zurdít",
+    "notes": "Lat surditas; Modern z-, ít"
+  },
+  {
+    "english": "paralysis",
+    "ancient": "Paralysis",
+    "modern": "paralízísh",
+    "notes": "Lat paralysis; Modern z-, í-sh"
+  },
+  {
+    "english": "weakness",
+    "ancient": "Debilitas",
+    "modern": "debilít",
+    "notes": "Lat debilitas; Modern ít ending"
+  }
+]

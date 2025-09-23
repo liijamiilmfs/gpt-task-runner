@@ -1,0 +1,476 @@
+[
+  {
+    "english": "bee",
+    "ancient": "Apira",
+    "modern": "méha",
+    "notes": "Lat apis; Ro albină; Hu méh"
+  },
+  {
+    "english": "wasp",
+    "ancient": "Vespa",
+    "modern": "darázsa",
+    "notes": "Lat vespa; Ro viespe; Hu darázs"
+  },
+  {
+    "english": "ant",
+    "ancient": "Formica",
+    "modern": "hangya",
+    "notes": "Lat formica; Ro furnică; Hu hangya"
+  },
+  {
+    "english": "butterfly",
+    "ancient": "Papilio",
+    "modern": "pillangó",
+    "notes": "Lat papilio; Ro fluture; Hu pillangó"
+  },
+  {
+    "english": "moth",
+    "ancient": "Noctua",
+    "modern": "molya",
+    "notes": "Lat noctua; Ro molie; Hu moly"
+  },
+  {
+    "english": "spider",
+    "ancient": "Aranea",
+    "modern": "póka",
+    "notes": "Lat aranea; Ro păianjen; Hu pók"
+  },
+  {
+    "english": "wolf",
+    "ancient": "Lupus",
+    "modern": "farkas",
+    "notes": "Lat lupus; Ro lup; Hu farkas"
+  },
+  {
+    "english": "bear",
+    "ancient": "Ursus",
+    "modern": "medve",
+    "notes": "Lat ursus; Ro urs; Hu medve"
+  },
+  {
+    "english": "lion",
+    "ancient": "Leo",
+    "modern": "oroszlán",
+    "notes": "Lat leo; Ro leu; Hu oroszlán"
+  },
+  {
+    "english": "eagle",
+    "ancient": "Aquila",
+    "modern": "sas",
+    "notes": "Lat aquila; Ro vultur; Hu sas"
+  },
+  {
+    "english": "demon",
+    "ancient": "Daemon",
+    "modern": "démon",
+    "notes": "Gr daimon; Ro demon; Hu démon"
+  },
+  {
+    "english": "angel",
+    "ancient": "Angelus",
+    "modern": "angyal",
+    "notes": "Lat angelus; Ro înger; Hu angyal"
+  },
+  {
+    "english": "ghost",
+    "ancient": "Phantasma",
+    "modern": "szellem",
+    "notes": "Gr phantasma; Ro fantomă; Hu szellem"
+  },
+  {
+    "english": "giant",
+    "ancient": "Gigantus",
+    "modern": "óriás",
+    "notes": "Gr gigas; Ro gigant; Hu óriás"
+  },
+  {
+    "english": "troll",
+    "ancient": "Trolus",
+    "modern": "troll",
+    "notes": "Scand troll; Hu troll"
+  },
+  {
+    "english": "dwarf",
+    "ancient": "Nanus",
+    "modern": "törpe",
+    "notes": "Lat nanus; Ro pitic; Hu törpe"
+  },
+  {
+    "english": "elf",
+    "ancient": "Alfus",
+    "modern": "tünde",
+    "notes": "Germ alf; Hu tünde/elf"
+  },
+  {
+    "english": "goblin",
+    "ancient": "Gobelinus",
+    "modern": "kobold",
+    "notes": "Fr gobelinus; Hu kobold"
+  },
+  {
+    "english": "orc",
+    "ancient": "Orcus",
+    "modern": "ork",
+    "notes": "Lat orcus; Hu ork"
+  },
+  {
+    "english": "dragon",
+    "ancient": "Draco",
+    "modern": "sárkány",
+    "notes": "Lat draco; Ro dragon; Hu sárkány"
+  },
+  {
+    "english": "hero",
+    "ancient": "Herous",
+    "modern": "hős",
+    "notes": "Gr heros; Hu hős"
+  },
+  {
+    "english": "trickster",
+    "ancient": "Dolus",
+    "modern": "csaló",
+    "notes": "Lat dolus; Hu csaló"
+  },
+  {
+    "english": "sage",
+    "ancient": "Sophos",
+    "modern": "bölcs",
+    "notes": "Gr sophos; Hu bölcs"
+  },
+  {
+    "english": "prophet",
+    "ancient": "Propheta",
+    "modern": "próféta",
+    "notes": "Gr prophetes; Hu próféta"
+  },
+  {
+    "english": "warrior",
+    "ancient": "Bellator",
+    "modern": "harcos",
+    "notes": "Lat bellator; Hu harcos"
+  },
+  {
+    "english": "wanderer",
+    "ancient": "Viator",
+    "modern": "vándor",
+    "notes": "Lat viator; Hu vándor"
+  },
+  {
+    "english": "ascendant",
+    "ancient": "Ascendens",
+    "modern": "felemelkedő",
+    "notes": "Lat ascendens; Hu felemelkedő"
+  },
+  {
+    "english": "guardian",
+    "ancient": "Custos",
+    "modern": "őr",
+    "notes": "Lat custos; Hu őr"
+  },
+  {
+    "english": "healer",
+    "ancient": "Sanator",
+    "modern": "gyógyító",
+    "notes": "Lat sanator; Hu gyógyító"
+  },
+  {
+    "english": "hunter",
+    "ancient": "Venator",
+    "modern": "vadász",
+    "notes": "Lat venator; Hu vadász"
+  },
+  {
+    "english": "horse",
+    "ancient": "Equus",
+    "modern": "ló",
+    "notes": "Lat equus; Ro cal; Hu ló"
+  },
+  {
+    "english": "cow",
+    "ancient": "Bos",
+    "modern": "tehén",
+    "notes": "Lat bos; Ro vacă; Hu tehén"
+  },
+  {
+    "english": "pig",
+    "ancient": "Sus",
+    "modern": "disznó",
+    "notes": "Lat sus; Ro porc; Hu disznó"
+  },
+  {
+    "english": "sheep",
+    "ancient": "Ovis",
+    "modern": "juh",
+    "notes": "Lat ovis; Ro oaie; Hu juh"
+  },
+  {
+    "english": "goat",
+    "ancient": "Capra",
+    "modern": "kecske",
+    "notes": "Lat capra; Ro capră; Hu kecske"
+  },
+  {
+    "english": "dog",
+    "ancient": "Canis",
+    "modern": "kutya",
+    "notes": "Lat canis; Ro câine; Hu kutya"
+  },
+  {
+    "english": "cat",
+    "ancient": "Feles",
+    "modern": "macska",
+    "notes": "Lat feles/felis; Ro pisică; Hu macska"
+  },
+  {
+    "english": "stag",
+    "ancient": "Cervus",
+    "modern": "szarvas",
+    "notes": "Lat cervus; Ro cerb; Hu szarvas"
+  },
+  {
+    "english": "elk",
+    "ancient": "Alces",
+    "modern": "jávor",
+    "notes": "Lat alces; Ro elan; Hu jávorszarvas"
+  },
+  {
+    "english": "swan",
+    "ancient": "Cygnus",
+    "modern": "hattyú",
+    "notes": "Lat cygnus; Ro lebădă; Hu hattyú"
+  },
+  {
+    "english": "owl",
+    "ancient": "Strix",
+    "modern": "bagoly",
+    "notes": "Lat strix; Hu bagoly"
+  },
+  {
+    "english": "crow",
+    "ancient": "Corvus",
+    "modern": "holló",
+    "notes": "Lat corvus; Ro corb; Hu holló"
+  },
+  {
+    "english": "raven",
+    "ancient": "Corax",
+    "modern": "varjú",
+    "notes": "Gr corax; Hu varjú"
+  },
+  {
+    "english": "hawk",
+    "ancient": "Accipiter",
+    "modern": "ölyv",
+    "notes": "Lat accipiter; Hu ölyv"
+  },
+  {
+    "english": "falcon",
+    "ancient": "Falco",
+    "modern": "sólyom",
+    "notes": "Lat falco; Hu sólyom"
+  },
+  {
+    "english": "hydra",
+    "ancient": "Hydra",
+    "modern": "hidra",
+    "notes": "Gr hydra; Hu hidra"
+  },
+  {
+    "english": "phoenix",
+    "ancient": "Phoenix",
+    "modern": "főnix",
+    "notes": "Gr phoenix; Hu főnix"
+  },
+  {
+    "english": "basilisk",
+    "ancient": "Basiliscus",
+    "modern": "baziliszkusz",
+    "notes": "Lat basiliscus; Hu baziliszkusz"
+  },
+  {
+    "english": "griffin",
+    "ancient": "Gryps",
+    "modern": "griff",
+    "notes": "Gr gryps; Ro grifon; Hu griff"
+  },
+  {
+    "english": "chimera",
+    "ancient": "Chimaera",
+    "modern": "kiméra",
+    "notes": "Gr chimaera; Hu kiméra"
+  },
+  {
+    "english": "minotaur",
+    "ancient": "Minotaurus",
+    "modern": "minotaurusz",
+    "notes": "Gr minotauros; Hu minotaurusz"
+  },
+  {
+    "english": "harpy",
+    "ancient": "Harpyia",
+    "modern": "hárpia",
+    "notes": "Gr harpyia; Hu hárpia"
+  },
+  {
+    "english": "sphinx",
+    "ancient": "Sphinx",
+    "modern": "szfinx",
+    "notes": "Gr sphinx; Hu szfinx"
+  },
+  {
+    "english": "mermaid",
+    "ancient": "Nereis",
+    "modern": "sellő",
+    "notes": "Gr nereid; Ro sirenă; Hu sellő"
+  },
+  {
+    "english": "siren",
+    "ancient": "Siren",
+    "modern": "szirén",
+    "notes": "Gr siren; Ro sirenă; Hu szirén"
+  },
+  {
+    "english": "satyr",
+    "ancient": "Satyrus",
+    "modern": "szatír",
+    "notes": "Gr satyros; Hu szatír"
+  },
+  {
+    "english": "centaur",
+    "ancient": "Centaurus",
+    "modern": "kentaur",
+    "notes": "Gr kentauros; Hu kentaur"
+  },
+  {
+    "english": "cyclops",
+    "ancient": "Cyclops",
+    "modern": "küklopsz",
+    "notes": "Gr kyklops; Hu küklopsz"
+  },
+  {
+    "english": "werewolf",
+    "ancient": "Versipellis",
+    "modern": "farkasember",
+    "notes": "Lat versipellis; Hu farkasember"
+  },
+  {
+    "english": "lich",
+    "ancient": "Lichus",
+    "modern": "lich",
+    "notes": "Eng lich; Hu lich"
+  },
+  {
+    "english": "zombie",
+    "ancient": "Zombius",
+    "modern": "zombi",
+    "notes": "Slavic; Hu zombi"
+  },
+  {
+    "english": "skeleton",
+    "ancient": "Sceletus",
+    "modern": "csontváz",
+    "notes": "Lat sceletus; Ro schelet; Hu csontváz"
+  },
+  {
+    "english": "vampire",
+    "ancient": "Vampirus",
+    "modern": "vámpír",
+    "notes": "Slavic vampir; Hu vámpír"
+  },
+  {
+    "english": "ghoul",
+    "ancient": "Ghul",
+    "modern": "ghoul",
+    "notes": "Arab ghul; Hu ghoul"
+  },
+  {
+    "english": "king",
+    "ancient": "Rex",
+    "modern": "király",
+    "notes": "Lat rex; Ro rege; Hu király"
+  },
+  {
+    "english": "queen",
+    "ancient": "Regina",
+    "modern": "királynő",
+    "notes": "Lat regina; Ro regină; Hu királynő"
+  },
+  {
+    "english": "prince",
+    "ancient": "Princeps",
+    "modern": "herceg",
+    "notes": "Lat princeps; Hu herceg"
+  },
+  {
+    "english": "princess",
+    "ancient": "Principissa",
+    "modern": "hercegnő",
+    "notes": "Lat principissa; Hu hercegnő"
+  },
+  {
+    "english": "chieftain",
+    "ancient": "Dux",
+    "modern": "vezér",
+    "notes": "Lat dux; Hu vezér"
+  },
+  {
+    "english": "priest",
+    "ancient": "Sacerdos",
+    "modern": "pap",
+    "notes": "Lat sacerdos; Hu pap"
+  },
+  {
+    "english": "sorcerer",
+    "ancient": "Magus",
+    "modern": "mágus",
+    "notes": "Lat magus; Hu mágus"
+  },
+  {
+    "english": "witch",
+    "ancient": "Saga",
+    "modern": "boszorkány",
+    "notes": "Lat saga; Hu boszorkány"
+  },
+  {
+    "english": "oracle",
+    "ancient": "Oraculum",
+    "modern": "jós",
+    "notes": "Lat oraculum; Hu jós"
+  },
+  {
+    "english": "bard",
+    "ancient": "Bardus",
+    "modern": "bárd",
+    "notes": "Celt bard; Hu bárd"
+  },
+  {
+    "english": "thief",
+    "ancient": "Fur",
+    "modern": "tolvaj",
+    "notes": "Lat fur; Hu tolvaj"
+  },
+  {
+    "english": "assassin",
+    "ancient": "Sicarius",
+    "modern": "orgyilkos",
+    "notes": "Lat sicarius; Hu orgyilkos"
+  },
+  {
+    "english": "slave",
+    "ancient": "Servus",
+    "modern": "szolga",
+    "notes": "Lat servus; Hu szolga"
+  },
+  {
+    "english": "freeman",
+    "ancient": "Liberus",
+    "modern": "szabad",
+    "notes": "Lat liberus; Hu szabad"
+  },
+  {
+    "english": "outlaw",
+    "ancient": "Exlex",
+    "modern": "törvényen kívüli",
+    "notes": "Lat ex lex; Hu törvényen kívüli"
+  }
+]

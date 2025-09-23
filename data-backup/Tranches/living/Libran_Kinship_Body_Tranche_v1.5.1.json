@@ -1,0 +1,680 @@
+[
+  {
+    "english": "mother",
+    "ancient": "matera",
+    "modern": "anyaë",
+    "notes": "Lat mater→matera; Hu anya → modern with ë."
+  },
+  {
+    "english": "father",
+    "ancient": "patera",
+    "modern": "apaë",
+    "notes": "Lat pater→patera; Hu apa → modern with ë."
+  },
+  {
+    "english": "parent",
+    "ancient": "paronor",
+    "modern": "szülë",
+    "notes": "Lat parens→paronor; Hu szülő → modern schwa ending."
+  },
+  {
+    "english": "child",
+    "ancient": "infanor",
+    "modern": "gyermekë",
+    "notes": "Lat infans→infanor; Hu gyermek → modern ë."
+  },
+  {
+    "english": "son",
+    "ancient": "filius",
+    "modern": "fiúra",
+    "notes": "Lat filius→filius; Hu fiú → modern -ra."
+  },
+  {
+    "english": "daughter",
+    "ancient": "filia",
+    "modern": "lánya",
+    "notes": "Lat filia→filia; Hu lány → modern -a."
+  },
+  {
+    "english": "sibling",
+    "ancient": "germanor",
+    "modern": "testvéra",
+    "notes": "Lat germanus→germanor; Hu testvér → modern -a."
+  },
+  {
+    "english": "brother",
+    "ancient": "frator",
+    "modern": "bátya",
+    "notes": "Lat frater→frator; Hu báty/bátya → modern."
+  },
+  {
+    "english": "sister",
+    "ancient": "sorora",
+    "modern": "nóva",
+    "notes": "Lat soror→sorora; Hu nővér → modern contracted."
+  },
+  {
+    "english": "cousin",
+    "ancient": "consobrinor",
+    "modern": "unokatesta",
+    "notes": "Lat consobrinus→consobrinor; Hu unokatestvér → shortened."
+  },
+  {
+    "english": "uncle",
+    "ancient": "avunculor",
+    "modern": "nagybátya",
+    "notes": "Lat avunculus→avunculor; Hu nagybátya."
+  },
+  {
+    "english": "aunt",
+    "ancient": "amitor",
+    "modern": "nagynóva",
+    "notes": "Lat amita→amitor; Hu nagynéni/nővér → nagynóva."
+  },
+  {
+    "english": "grandfather",
+    "ancient": "avius",
+    "modern": "nagyapaë",
+    "notes": "Lat avus→avius; Hu nagyapa → modern ë."
+  },
+  {
+    "english": "grandmother",
+    "ancient": "avia",
+    "modern": "nagyanyaë",
+    "notes": "Lat avia→avia; Hu nagyanya → modern ë."
+  },
+  {
+    "english": "grandson",
+    "ancient": "nepoton",
+    "modern": "unoka-fiú",
+    "notes": "Lat nepos→nepoton; Hu unoka fiú (compound)."
+  },
+  {
+    "english": "granddaughter",
+    "ancient": "nepta",
+    "modern": "unoka-lány",
+    "notes": "Lat neptis→nepta; Hu unoka lány."
+  },
+  {
+    "english": "ancestor",
+    "ancient": "antecessor",
+    "modern": "ősë",
+    "notes": "Lat antecessor→antecessor; Hu ős → modern ë."
+  },
+  {
+    "english": "descendant",
+    "ancient": "posteris",
+    "modern": "ivadéka",
+    "notes": "Lat posterus→posteris; Hu ivadék → -a."
+  },
+  {
+    "english": "lineage",
+    "ancient": "lineor",
+    "modern": "vérvona",
+    "notes": "Lat linea→lineor; Hu vérvonal → -a."
+  },
+  {
+    "english": "heir",
+    "ancient": "heredor",
+    "modern": "örökösë",
+    "notes": "Lat heres→heredor; Hu örökös → ë."
+  },
+  {
+    "english": "spouse",
+    "ancient": "coniunxor",
+    "modern": "házastársa",
+    "notes": "Lat coniunx→coniunxor; Hu házastárs → -a."
+  },
+  {
+    "english": "husband",
+    "ancient": "maritor",
+    "modern": "férja",
+    "notes": "Lat maritus→maritor; Hu férj → -a."
+  },
+  {
+    "english": "wife",
+    "ancient": "uxora",
+    "modern": "felesë",
+    "notes": "Lat uxor→uxora; Hu feleség → clipped modern."
+  },
+  {
+    "english": "partner",
+    "ancient": "socius",
+    "modern": "társa",
+    "notes": "Lat socius→socius; Hu társ → -a."
+  },
+  {
+    "english": "lover",
+    "ancient": "amator",
+    "modern": "szeretőë",
+    "notes": "Lat amator; Hu szerető → ë."
+  },
+  {
+    "english": "widow",
+    "ancient": "vidua",
+    "modern": "özvegya",
+    "notes": "Lat vidua→vidua; Hu özvegy → -a."
+  },
+  {
+    "english": "widower",
+    "ancient": "viduor",
+    "modern": "özvegyor",
+    "notes": "Lat viduus→viduor; Hu özvegy + Lat -or."
+  },
+  {
+    "english": "orphan",
+    "ancient": "orphanos",
+    "modern": "árvaë",
+    "notes": "Lat orphanus→orphanos; Hu árva → ë."
+  },
+  {
+    "english": "stepfather",
+    "ancient": "vitricus",
+    "modern": "mostoha-apaë",
+    "notes": "Lat vitricus→vitricus; Hu mostohaapa → ë."
+  },
+  {
+    "english": "stepmother",
+    "ancient": "noverca",
+    "modern": "mostoha-anyaë",
+    "notes": "Lat noverca→noverca; Hu mostohaanya → ë."
+  },
+  {
+    "english": "stepson",
+    "ancient": "privignus",
+    "modern": "mostohafiúra",
+    "notes": "Lat privignus→privignus; Hu mostohafiú → -ra."
+  },
+  {
+    "english": "stepdaughter",
+    "ancient": "privigna",
+    "modern": "mostohalánya",
+    "notes": "Lat privigna→privigna; Hu mostohalány → -a."
+  },
+  {
+    "english": "in-law",
+    "ancient": "affinis",
+    "modern": "rokona",
+    "notes": "Lat affinis; Hu rokon → -a."
+  },
+  {
+    "english": "father-in-law",
+    "ancient": "socer",
+    "modern": "apósa",
+    "notes": "Lat socer; Hu após → -a."
+  },
+  {
+    "english": "mother-in-law",
+    "ancient": "socera",
+    "modern": "anyósa",
+    "notes": "Lat socrus; Hu anyós → -a."
+  },
+  {
+    "english": "brother-in-law",
+    "ancient": "levir",
+    "modern": "sógora",
+    "notes": "Lat levir; Hu sógor → -a."
+  },
+  {
+    "english": "sister-in-law",
+    "ancient": "glosor",
+    "modern": "sógornóva",
+    "notes": "Lat glos→glosor; Hu sógornő → nova."
+  },
+  {
+    "english": "elder",
+    "ancient": "senior",
+    "modern": "véna",
+    "notes": "Lat senior→senior; Hu vén → -a."
+  },
+  {
+    "english": "tribal elder",
+    "ancient": "patronor",
+    "modern": "vénduka",
+    "notes": "Lat patronus→patronor; Hu vén + duka (leader suffix)."
+  },
+  {
+    "english": "clan",
+    "ancient": "gensora",
+    "modern": "nemzë",
+    "notes": "Lat gens→gensora; Hu nemzetség → clipped."
+  },
+  {
+    "english": "tribe",
+    "ancient": "tribor",
+    "modern": "törzsa",
+    "notes": "Lat tribus→tribor; Hu törzs → -a."
+  },
+  {
+    "english": "family",
+    "ancient": "familia",
+    "modern": "családa",
+    "notes": "Lat familia→familia; Hu család → -a."
+  },
+  {
+    "english": "kin",
+    "ancient": "rudor",
+    "modern": "rudae",
+    "notes": "Lat rudis→rudor; Hu rokon → derived tribal rudae in lore."
+  },
+  {
+    "english": "bloodline",
+    "ancient": "sanguinor",
+    "modern": "vérvonaë",
+    "notes": "Lat sanguis→sanguinor; Hu vérvonal → ë."
+  },
+  {
+    "english": "descendant (poetic)",
+    "ancient": "progenor",
+    "modern": "ivadóra",
+    "notes": "Lat progenies→progenor; Hu ivadék → poetic -óra."
+  },
+  {
+    "english": "head",
+    "ancient": "capitor",
+    "modern": "feja",
+    "notes": "Lat caput→capitor; Hu fej → -a."
+  },
+  {
+    "english": "hair",
+    "ancient": "crinor",
+    "modern": "haja",
+    "notes": "Lat crinis→crinor; Hu haj → -a."
+  },
+  {
+    "english": "face",
+    "ancient": "facior",
+    "modern": "arca",
+    "notes": "Lat facies→facior; Hu arc → -a."
+  },
+  {
+    "english": "eye",
+    "ancient": "oculara",
+    "modern": "szemë",
+    "notes": "Lat oculus→oculara; Hu szem → ë."
+  },
+  {
+    "english": "ear",
+    "ancient": "aurora",
+    "modern": "füla",
+    "notes": "Lat auris→aurora; Hu fül → -a."
+  },
+  {
+    "english": "nose",
+    "ancient": "nasor",
+    "modern": "orra",
+    "notes": "Lat nasus→nasor; Hu orr → -a."
+  },
+  {
+    "english": "mouth",
+    "ancient": "orora",
+    "modern": "szája",
+    "notes": "Lat os→orora; Hu száj → -a."
+  },
+  {
+    "english": "tooth",
+    "ancient": "dentor",
+    "modern": "foga",
+    "notes": "Lat dens→dentor; Hu fog → -a."
+  },
+  {
+    "english": "tongue",
+    "ancient": "lingua",
+    "modern": "nyelve",
+    "notes": "Lat lingua; Hu nyelv → -e."
+  },
+  {
+    "english": "neck",
+    "ancient": "collor",
+    "modern": "nyaka",
+    "notes": "Lat collum→collor; Hu nyak → -a."
+  },
+  {
+    "english": "shoulder",
+    "ancient": "umeror",
+    "modern": "válla",
+    "notes": "Lat umerus→umeror; Hu váll → -a."
+  },
+  {
+    "english": "arm",
+    "ancient": "bracor",
+    "modern": "kara",
+    "notes": "Lat bracchium→bracor; Hu kar → -a."
+  },
+  {
+    "english": "elbow",
+    "ancient": "cubitor",
+    "modern": "könyöka",
+    "notes": "Lat cubitus→cubitor; Hu könyök → -a."
+  },
+  {
+    "english": "hand",
+    "ancient": "manora",
+    "modern": "kéza",
+    "notes": "Lat manus→manora; Hu kéz → -a."
+  },
+  {
+    "english": "finger",
+    "ancient": "digitor",
+    "modern": "ujja",
+    "notes": "Lat digitus→digitor; Hu ujj → -a."
+  },
+  {
+    "english": "thumb",
+    "ancient": "pollexor",
+    "modern": "hüvelya",
+    "notes": "Lat pollex→pollexor; Hu hüvelykujj → truncated."
+  },
+  {
+    "english": "chest",
+    "ancient": "pector",
+    "modern": "mella",
+    "notes": "Lat pectus→pector; Hu mell → -a."
+  },
+  {
+    "english": "back",
+    "ancient": "dorsor",
+    "modern": "háta",
+    "notes": "Lat dorsum→dorsor; Hu hát → -a."
+  },
+  {
+    "english": "heart",
+    "ancient": "corara",
+    "modern": "szíve",
+    "notes": "Lat cor→corara; Hu szív → -e."
+  },
+  {
+    "english": "lung",
+    "ancient": "pulmonor",
+    "modern": "tüdea",
+    "notes": "Lat pulmo→pulmonor; Hu tüdő → -a."
+  },
+  {
+    "english": "belly",
+    "ancient": "ventor",
+    "modern": "hasa",
+    "notes": "Lat venter→ventor; Hu has → -a."
+  },
+  {
+    "english": "hip",
+    "ancient": "coxor",
+    "modern": "csípa",
+    "notes": "Lat coxa→coxor; Hu csípő → -a."
+  },
+  {
+    "english": "leg",
+    "ancient": "cruror",
+    "modern": "lába",
+    "notes": "Lat crus→cruror; Hu láb → -a."
+  },
+  {
+    "english": "knee",
+    "ancient": "genuor",
+    "modern": "térde",
+    "notes": "Lat genu→genuor; Hu térd → -e."
+  },
+  {
+    "english": "foot",
+    "ancient": "pedor",
+    "modern": "lábaë",
+    "notes": "Lat pes→pedor; Hu láb → ë."
+  },
+  {
+    "english": "toe",
+    "ancient": "digitior",
+    "modern": "lábujja",
+    "notes": "Lat digitus pedis→digitior; Hu lábujj → -a."
+  },
+  {
+    "english": "bone",
+    "ancient": "ossor",
+    "modern": "csontë",
+    "notes": "Lat os→ossor; Hu csont → ë."
+  },
+  {
+    "english": "blood",
+    "ancient": "sorgë",
+    "modern": "vérë",
+    "notes": "Lat sanguis→sanguis>obsolete; lore has sorgë; Hu vér → ë."
+  },
+  {
+    "english": "skin",
+    "ancient": "cutor",
+    "modern": "bőra",
+    "notes": "Lat cutis→cutor; Hu bőr → -a."
+  },
+  {
+    "english": "brain",
+    "ancient": "cerebror",
+    "modern": "agyë",
+    "notes": "Lat cerebrum→cerebror; Hu agy → ë."
+  },
+  {
+    "english": "sinew",
+    "ancient": "nervor",
+    "modern": "ínë",
+    "notes": "Lat nervus→nervor; Hu ín → ë."
+  },
+  {
+    "english": "muscle",
+    "ancient": "musculor",
+    "modern": "izma",
+    "notes": "Lat musculus→musculor; Hu izom → -a."
+  },
+  {
+    "english": "stomach",
+    "ancient": "stomacor",
+    "modern": "gyomra",
+    "notes": "Lat stomachus→stomacor; Hu gyomor → -a."
+  },
+  {
+    "english": "liver",
+    "ancient": "heparor",
+    "modern": "mája",
+    "notes": "Lat hepar→heparor; Hu máj → -a."
+  },
+  {
+    "english": "kidney",
+    "ancient": "renor",
+    "modern": "veséë",
+    "notes": "Lat ren→renor; Hu vese → ë."
+  },
+  {
+    "english": "spleen",
+    "ancient": "lienor",
+    "modern": "lépa",
+    "notes": "Lat lien→lienor; Hu lép → -a."
+  },
+  {
+    "english": "throat",
+    "ancient": "gutturor",
+    "modern": "torka",
+    "notes": "Lat guttur→gutturor; Hu torok → -a."
+  },
+  {
+    "english": "voice",
+    "ancient": "vocor",
+    "modern": "hangja",
+    "notes": "Lat vox→vocor; Hu hang → -ja."
+  },
+  {
+    "english": "breath",
+    "ancient": "spiror",
+    "modern": "lélega",
+    "notes": "Lat spiritus→spiror; Hu lélegzet → truncated."
+  },
+  {
+    "english": "soul",
+    "ancient": "animor",
+    "modern": "lélekë",
+    "notes": "Lat anima→animor; Hu lélek → ë."
+  },
+  {
+    "english": "spirit",
+    "ancient": "spiritusor",
+    "modern": "szellema",
+    "notes": "Lat spiritus→spiritusor; Hu szellem → -a."
+  },
+  {
+    "english": "shadow (body)",
+    "ancient": "umbra",
+    "modern": "árnya",
+    "notes": "Lat umbra→umbra; Hu árnyék → truncated."
+  },
+  {
+    "english": "womb",
+    "ancient": "uteror",
+    "modern": "méhe",
+    "notes": "Lat uterus→uteror; Hu méh → -e."
+  },
+  {
+    "english": "vein",
+    "ancient": "venor",
+    "modern": "véna",
+    "notes": "Lat vena→venor; Hu véna loan."
+  },
+  {
+    "english": "artery",
+    "ancient": "arterior",
+    "modern": "ütőera",
+    "notes": "Lat arteria→arterior; Hu ütőér → -a."
+  },
+  {
+    "english": "pulse",
+    "ancient": "pulsor",
+    "modern": "lüktë",
+    "notes": "Lat pulsus→pulsor; Hu lüktet → ë."
+  },
+  {
+    "english": "nail",
+    "ancient": "unguisor",
+    "modern": "körme",
+    "notes": "Lat unguis→unguisor; Hu köröm → -e."
+  },
+  {
+    "english": "jaw",
+    "ancient": "maxillor",
+    "modern": "álla",
+    "notes": "Lat maxilla→maxillor; Hu áll → -a."
+  },
+  {
+    "english": "cheek",
+    "ancient": "genor",
+    "modern": "orca",
+    "notes": "Lat gena→genor; Hu orca/arc → -a."
+  },
+  {
+    "english": "chin",
+    "ancient": "mentonor",
+    "modern": "állcsontë",
+    "notes": "Lat mentum→mentonor; Hu állcsont → ë."
+  },
+  {
+    "english": "forehead",
+    "ancient": "fronsor",
+    "modern": "homloka",
+    "notes": "Lat frons→fronsor; Hu homlok → -a."
+  },
+  {
+    "english": "eyebrow",
+    "ancient": "supercilior",
+    "modern": "szemöldöka",
+    "notes": "Lat supercilium→supercilior; Hu szemöldök → -a."
+  },
+  {
+    "english": "eyelash",
+    "ancient": "cilior",
+    "modern": "szempillë",
+    "notes": "Lat cilium→cilior; Hu szempilla → ë."
+  },
+  {
+    "english": "beard",
+    "ancient": "barbor",
+    "modern": "szakálla",
+    "notes": "Lat barba→barbor; Hu szakáll → -a."
+  },
+  {
+    "english": "voice-box",
+    "ancient": "laryngor",
+    "modern": "gégea",
+    "notes": "Lat larynx→laryngor; Hu gége → -a."
+  },
+  {
+    "english": "tear",
+    "ancient": "lacrimor",
+    "modern": "könnye",
+    "notes": "Lat lacrima→lacrimor; Hu könny → -e."
+  },
+  {
+    "english": "sweat",
+    "ancient": "sudor",
+    "modern": "izzada",
+    "notes": "Lat sudor→sudor; Hu izzadtság → -a."
+  },
+  {
+    "english": "urine",
+    "ancient": "urinor",
+    "modern": "vizele",
+    "notes": "Lat urina→urinor; Hu vizelet → -e."
+  },
+  {
+    "english": "seed (sperm)",
+    "ancient": "seminor",
+    "modern": "magva",
+    "notes": "Lat semen→seminor; Hu mag → -va suffix."
+  },
+  {
+    "english": "heart-blood (poetic)",
+    "ancient": "cor-soror",
+    "modern": "véraë",
+    "notes": "Compound; Lat cor+sanguis; Hu vér → ë."
+  },
+  {
+    "english": "spine",
+    "ancient": "spinalor",
+    "modern": "gerinca",
+    "notes": "Lat spina→spinalor; Hu gerinc → -a."
+  },
+  {
+    "english": "rib",
+    "ancient": "costor",
+    "modern": "bordája",
+    "notes": "Lat costa→costor; Hu borda → -ja."
+  },
+  {
+    "english": "shoulderblade",
+    "ancient": "scapulor",
+    "modern": "lapocca",
+    "notes": "Lat scapula→scapulor; Hu lapocka → -a."
+  },
+  {
+    "english": "ankle",
+    "ancient": "talonor",
+    "modern": "bokája",
+    "notes": "Lat talus→talonor; Hu boka → -ja."
+  },
+  {
+    "english": "heel",
+    "ancient": "calcaneor",
+    "modern": "sarka",
+    "notes": "Lat calcaneus→calcaneor; Hu sarok → -a."
+  },
+  {
+    "english": "thigh",
+    "ancient": "femoror",
+    "modern": "comba",
+    "notes": "Lat femur→femoror; Hu comb → -a."
+  },
+  {
+    "english": "breast",
+    "ancient": "mammor",
+    "modern": "mellaë",
+    "notes": "Lat mamma→mammor; Hu mell → ë."
+  },
+  {
+    "english": "navel",
+    "ancient": "umbilcor",
+    "modern": "köldöke",
+    "notes": "Lat umbilicus→umbilcor; Hu köldök → -e."
+  }
+]
