@@ -306,6 +306,31 @@ jobs:
           # Example: rsync, scp, or cloud provider CLI commands
 
   # Deploy to Production (Vercel)
+  vercel-secrets-check:
+    name: Verify Vercel Secrets
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || !github.event.pull_request.head.repo.fork
+    steps:
+      - name: Ensure required secrets are available
+        run: |
+          missing=false
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "::error::Missing required secret: VERCEL_TOKEN"
+            missing=true
+          fi
+          if [ -z "${{ secrets.VERCEL_ORG_ID }}" ]; then
+            echo "::error::Missing required secret: VERCEL_ORG_ID"
+            missing=true
+          fi
+          if [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "::error::Missing required secret: VERCEL_PROJECT_ID"
+            missing=true
+          fi
+          if [ "$missing" = "true" ]; then
+            exit 1
+          fi
+          echo "All required Vercel secrets are present."
+
   deploy-production:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
