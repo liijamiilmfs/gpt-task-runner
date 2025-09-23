@@ -1,58 +1,54 @@
 # Librán Dictionary Import Report
 
 **Import Date**: C:\Projects\Worldbuilding\english-to-libran-text-to-voice\tools\dict_importer
-**Total Ancient Entries**: 920
-**Total Modern Entries**: 925
-**Excluded Entries**: 5
-**Clusters Processed**: 3
+**Total Ancient Entries**: 142
+**Total Modern Entries**: 143
+**Excluded Entries**: 1
+**Clusters Processed**: 2
 
 ## Sample Ancient Entries
-- warrior → Bellator
-- soldier → Miles
-- army → Exercitus
-- legion → Legio
-- cohort → Cohors
-- century → Centuria
-- squad → Contubernium
-- general → Imperator
-- commander → Dux
-- captain → Magisternavis
-- lieutenant → Optio
-- sergeant → Tesserarius
-- scout → Explorator
-- guard → Custos
-- sentinel → Vigil
-- cavalry → Equites
-- infantry → Pedites
-- spearman → Hastarius
-- swordsman → Gladiator
-- sword → Gladius
+- farmer → Agricola
+- farm → Fundus
+- field → Ager
+- pasture → Pascuum
+- meadow → Pratum
+- pond → Stagnum
+- furrow → Sulcus
+- plow → Aratrum
+- to plow → Arare
+- oxen → Boves
+- yoke → Jugum
+- harrow → Irpex
+- hoe → Sarculum
+- rake → Rastrum
+- scythe → Falx
+- sickle → Secula
+- spade → Pala
+- shovel → Rutrum
+- pitchfork → Fuscina
+- seed → Semen
 
 ## Sample Modern Entries
-- warrior → belatór
-- soldier → mílésh
-- army → eksértsít
-- legion → legí
-- cohort → kohórsh
-- century → tsénturí
-- squad → kontubérn
-- general → imperatór
-- commander → dúksh
-- captain → magistnav
-- lieutenant → optsí
-- sergeant → teserár
-- scout → eksploratór
-- guard → kustósh
-- sentinel → vígíl
-- archer → sagitár
-- cavalry → ekvítésh
-- infantry → pedítésh
-- spearman → hastár
-- swordsman → gladiatór
+- farmer → agrikól
+- farm → fundúsh
+- field → agér
+- pasture → paskú
+- meadow → pratú
+- pond → stagnú
+- furrow → sulkúsh
+- plow → aratrú
+- to plow → arár
+- oxen → bovésh
+- yoke → jugú
+- harrow → irpésh
+- hoe → sarkúl
+- rake → rastrú
+- scythe → falsh
+- sickle → sekúl
+- spade → palá
+- shovel → rutrú
+- pitchfork → fustsín
+- seed → semé
 
 ## Excluded Entries
-- Archer: EXCLUDED: Invalid Librán word
-- Enemy: EXCLUDED: Invalid Librán word
-- Heart: EXCLUDED: Invalid Librán word
-- Flame: EXCLUDED: Invalid Librán word
-- Scales: EXCLUDED: Invalid Librán word
+- Stone: EXCLUDED: Invalid Librán word
