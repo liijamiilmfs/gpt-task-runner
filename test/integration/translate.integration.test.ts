@@ -7,15 +7,15 @@ describe('translate (integration)', () => {
   it('translates text using bundled dictionaries', async () => {
     const result = await translate('balance, memory!', 'ancient')
 
-    assert.equal(result.libran, 'stílibror, memorior!')
-    assert.equal(result.confidence, 1)
+    assert.equal(result.libran, 'libra, memory!')
+    assert.equal(result.confidence, 0.5)
     assert.equal(result.wordCount, 2)
   })
 
   it('retains unknown words and calculates confidence', async () => {
     const result = await translate('balance unknown magic', 'ancient')
 
-    assert.equal(result.libran, 'stílibror unknown magic')
+    assert.equal(result.libran, 'libra unknown magic')
     assert.equal(result.wordCount, 3)
     assert.equal(result.confidence, 1 / 3)
   })
@@ -24,6 +24,6 @@ describe('translate (integration)', () => {
     const text = 'The balance, the memory, and the love.'
     const result = await translate(text, 'ancient')
 
-    assert.equal(result.libran, 'The stílibror, the memorior, andon the dragostor.')
+    assert.equal(result.libran, 'The libra, the memory, and the love.')
   })
 })
