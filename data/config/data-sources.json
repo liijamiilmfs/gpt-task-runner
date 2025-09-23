@@ -1,0 +1,95 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-09-23T03:32:14.155Z",
+  "structure": "recommended",
+  "directories": {
+    "dictionaries": {
+      "current": [
+        "UnifiedLibranDictionaryv1.7.0.json",
+        "UnifiedLibranDictionaryv1.6.3.json"
+      ],
+      "baseline": [
+        "UnifiedLibranDictionaryv1.3Baseline.json"
+      ],
+      "archive": []
+    },
+    "tranches": {
+      "core": [
+        "Libran_Core_Grammar_Pack_v1.5.1.json",
+        "Libran_Core_Nature_Places_Tranche_v1.5.1.json"
+      ],
+      "concepts": [
+        "Libran_Abstract_Concepts_Qualities_Tranche_v1.5.1.json"
+      ],
+      "living": [
+        "Libran_Animals_Plants_Tranche_v1.5.1.json",
+        "Libran_Creatures_Mythic_Beings_Tranche_v1.5.1.json",
+        "Libran_Kinship_Body_Tranche_v1.5.1.json"
+      ],
+      "society": [
+        "Libran_Alesii_Politics_Tranche_v1.5.1.json",
+        "libran_law_justice_v1.json",
+        "libran_trade_commerce_v1.json"
+      ],
+      "craft": [
+        "Libran_Materials_Crafting_Tranche_v1.5.1.json",
+        "libran_craftwork_corrected_v1_6_1.json",
+        "libran_agriculture_fixed_v1_6_1.json"
+      ],
+      "culture": [
+        "libran_music_performance_v1.json",
+        "libran_healing_medicine_v1.json",
+        "libran_weapons_warfare_v1.json",
+        "libran_weather_natural_phenomena_v1.json"
+      ]
+    },
+    "reference": {
+      "pdfs": [
+        "LibránLexiconReferenceGuide.pdf",
+        "Unified_Libran_Dictionary_Ancient_Modern_v1_2.pdf"
+      ],
+      "guides": [
+        "phrasebook-v1.2.json"
+      ],
+      "samples": [
+        "sample_ancient.json",
+        "sample_modern.json"
+      ]
+    },
+    "training": {
+      "csv": [
+        "VARIANTS.csv",
+        "ALL_ROWS.csv"
+      ],
+      "exclusions": [
+        "audit-exclusions.json",
+        "exclude_terms.txt"
+      ],
+      "validation": [
+        "qa_report_v1.7.0.json"
+      ]
+    },
+    "workflow": {
+      "approved": [],
+      "proposed": [],
+      "rejected": []
+    }
+  },
+  "priorities": {
+    "high": [
+      "dictionaries/current",
+      "tranches/core",
+      "reference/pdfs"
+    ],
+    "medium": [
+      "tranches",
+      "training/csv",
+      "training/exclusions"
+    ],
+    "low": [
+      "dictionaries/archive",
+      "reference/samples",
+      "workflow"
+    ]
+  }
+}
