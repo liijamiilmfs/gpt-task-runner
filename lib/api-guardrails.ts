@@ -152,7 +152,13 @@ export function withGuardrails(
       if (!hasAttemptedBodyParse) {
         hasAttemptedBodyParse = true
         try {
-          parsedRequestBody = await request.clone().json()
+          const clonedRequest = request.clone()
+          const bodyText = await clonedRequest.text()
+          if (bodyText) {
+            parsedRequestBody = JSON.parse(bodyText)
+          } else {
+            parsedRequestBody = undefined
+          }
         } catch (error) {
           log.debug('Could not parse request body for character count', { requestId, error })
           parsedRequestBody = undefined
@@ -194,8 +200,12 @@ export function withGuardrails(
       // Check budget guardrails if enabled
       if (config.enableBudgetGuardrails) {
         try {
-          cachedRequestBody = await request.clone().json() as RequestBody
-          cachedCharacterCount = extractCharacterCount(cachedRequestBody)
+          const clonedRequest = request.clone()
+          const bodyText = await clonedRequest.text()
+          if (bodyText) {
+            cachedRequestBody = JSON.parse(bodyText) as RequestBody
+            cachedCharacterCount = extractCharacterCount(cachedRequestBody)
+          }
         } catch (error) {
           log.debug('Could not parse request body for character count', { requestId, error })
         }

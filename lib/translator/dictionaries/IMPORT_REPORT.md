@@ -1,63 +1,58 @@
-# Librán Dictionary Import Report (FIXED)
+# Librán Dictionary Import Report
 
-**Import Date**: C:\Projects\Worldbuilding\english-to-libran-text-to-voice
-**Total Ancient Entries**: 2651
-**Total Modern Entries**: 2987
-**Excluded Entries**: 348
-**Clusters Processed**: 12
+**Import Date**: C:\Projects\Worldbuilding\english-to-libran-text-to-voice\tools\dict_importer
+**Total Ancient Entries**: 920
+**Total Modern Entries**: 925
+**Excluded Entries**: 5
+**Clusters Processed**: 3
 
 ## Sample Ancient Entries
-- english → Ancient Libránor
-- balance → Stílibror
-- destiny → fator
-- memory → memorior
-- treasure → Coamáror
-- justice-rite → iustitior
-- cunning-lore → șiretenior
-- secret-path → secretor
-- taboo-path → tabor
-- justice-mark → iustitior
-- truth-lore → veritasor
-- destiny-lore → fator
-- cunning-mark → șiretenior
-- truth-path → veritasor
-- mercy-path → misericordior
-- silence-rite → silentior
-- memory-rite → memorior
-- taboo-mark → tabor
-- truth-mark → veritasor
-- oath-path → iusiurandor
+- warrior → Bellator
+- soldier → Miles
+- army → Exercitus
+- legion → Legio
+- cohort → Cohors
+- century → Centuria
+- squad → Contubernium
+- general → Imperator
+- commander → Dux
+- captain → Magisternavis
+- lieutenant → Optio
+- sergeant → Tesserarius
+- scout → Explorator
+- guard → Custos
+- sentinel → Vigil
+- cavalry → Equites
+- infantry → Pedites
+- spearman → Hastarius
+- swordsman → Gladiator
+- sword → Gladius
 
 ## Sample Modern Entries
-- english → Modern Librán (root)a
-- balance → stílibra
-- destiny → fatë
-- flame → flama
-- memory → memorië
-- treasure → Coamára
-- void → tómara
-- justice-rite → iustitië
-- cunning-lore → șiretenië
-- secret-path → secretë
-- taboo-path → tabë
-- justice-mark → iustitië
-- truth-lore → veritasë
-- destiny-lore → fatë
-- cunning-mark → șiretenië
-- truth-path → veritasë
-- mercy-path → misericordië
-- silence-rite → silentië
-- memory-rite → memorië
-- taboo-mark → tabë
+- warrior → belatór
+- soldier → mílésh
+- army → eksértsít
+- legion → legí
+- cohort → kohórsh
+- century → tsénturí
+- squad → kontubérn
+- general → imperatór
+- commander → dúksh
+- captain → magistnav
+- lieutenant → optsí
+- sergeant → teserár
+- scout → eksploratór
+- guard → kustósh
+- sentinel → vígíl
+- archer → sagitár
+- cavalry → ekvítésh
+- infantry → pedítésh
+- spearman → hastár
+- swordsman → gladiatór
 
 ## Excluded Entries
-- Flame: EXCLUDED: No ancient translation
-- Shadow: EXCLUDED: No ancient translation
-- Stone: EXCLUDED: No ancient translation
-- Void: EXCLUDED: No ancient translation
-- Courage: EXCLUDED: No ancient translation
-- Dream: EXCLUDED: No ancient translation
-- Envy: EXCLUDED: No ancient translation
-- Faith: EXCLUDED: No ancient translation
-- Joy: EXCLUDED: No ancient translation
-- Mercy: EXCLUDED: No ancient translation
+- Archer: EXCLUDED: Invalid Librán word
+- Enemy: EXCLUDED: Invalid Librán word
+- Heart: EXCLUDED: Invalid Librán word
+- Flame: EXCLUDED: Invalid Librán word
+- Scales: EXCLUDED: Invalid Librán word

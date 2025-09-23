@@ -34,8 +34,11 @@ class LibranJSONImporter:
     
     def import_from_file_data(self, data: Dict[str, Any]) -> DictionaryBuild:
         """Import dictionary from data directly."""
-        # Process the clusters
-        self._process_clusters(data.get('clusters', {}))
+        # Process the sections (new format) or clusters (old format)
+        if 'sections' in data:
+            self._process_sections(data.get('sections', {}))
+        else:
+            self._process_clusters(data.get('clusters', {}))
         
         # Create the build result
         build = DictionaryBuild()
@@ -45,6 +48,24 @@ class LibranJSONImporter:
         build.build_stats = self.stats
         
         return build
+    
+    def _process_sections(self, sections: Dict[str, Any]) -> None:
+        """Process all sections in the new dictionary format."""
+        for section_name, section_data in sections.items():
+            if not isinstance(section_data, dict):
+                continue
+                
+            self.stats['clusters_processed'] += 1
+            
+            # Process files within the section
+            files = section_data.get('files', [])
+            for file_data in files:
+                if isinstance(file_data, dict) and 'data' in file_data:
+                    entries = file_data['data']
+                    if isinstance(entries, list):
+                        for entry in entries:
+                            self._process_entry(entry, 'ancient', section_name)
+                            self._process_entry(entry, 'modern', section_name)
     
     def _process_clusters(self, clusters: Dict[str, Any]) -> None:
         """Process all clusters in the dictionary."""
