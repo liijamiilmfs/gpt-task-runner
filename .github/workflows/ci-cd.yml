@@ -2,19 +2,24 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, dev ]
   pull_request:
-    branches: [ main, develop ]
+    branches: [ main, dev ]
   release:
     types: [ published ]
 
+permissions:
+  contents: read
+  checks: write
+  id-token: write
+
 env:
-  NODE_VERSION: '20'
-  PYTHON_VERSION: '3.11'
+  NODE_VERSION: '20.17.0'
+  PYTHON_VERSION: '3.12'
 
 jobs:
   # Lint and Type Check
-  lint-and-typecheck:
+  lint:
     name: Lint & Type Check
     runs-on: ubuntu-latest
     steps:
@@ -36,11 +41,30 @@ jobs:
       - name: Run TypeScript type check
         run: npm run type-check
 
+  # Type Check (separate job for branch protection)
+  type-check:
+    name: Type Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run TypeScript type check
+        run: npm run type-check
+
   # Test Suite
-  test:
+  ci_test:
     name: Test Suite
     runs-on: ubuntu-latest
-    needs: lint-and-typecheck
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -62,27 +86,121 @@ jobs:
       - name: Install Python dependencies
         run: |
           cd tools/dict_importer
-          pip install -e ".[dev]"
+          pip install pdfplumber pydantic click regex unidecode pytest pytest-cov pytest-xdist black isort
 
-      - name: Run Node.js tests
-        run: npm test
+      - name: Run comprehensive test suite
+        run: npm run test:all
 
-      - name: Run Python tests
+  # Coverage Reports (separate job for branch protection)
+  coverage:
+    name: Coverage Reports
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Install Python dependencies
         run: |
           cd tools/dict_importer
-          python -m pytest tests/ -v --cov=dict_importer --cov-report=xml
+          pip install pdfplumber pydantic click regex unidecode pytest pytest-cov pytest-xdist black isort
 
-      - name: Upload coverage reports
-        uses: codecov/codecov-action@v3
+      - name: Run comprehensive test suite with coverage
+        run: npm run test:all:coverage
+
+      - name: Verify coverage files
+        run: |
+          ls -lah ./coverage || true
+          test -f ./coverage/lcov.info
+          test -f ./tools/dict_importer/coverage.xml
+
+  # Coverage Report (for branch protection)
+  coverage-report:
+    name: Coverage Report
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          files: ./coverage/lcov.info,./tools/dict_importer/coverage.xml
-          fail_ci_if_error: false
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests with coverage
+        run: npm run test:all:coverage
+
+      - name: Verify coverage files
+        run: |
+          ls -lah ./coverage || true
+          test -f ./coverage/lcov.info
+
+      - name: Create coverage summary
+        run: |
+          echo "## Coverage Report" >> $GITHUB_STEP_SUMMARY
+          echo "Coverage files generated successfully" >> $GITHUB_STEP_SUMMARY
+          if [ -f ./coverage/lcov.info ]; then
+            echo "✅ LCOV file: ./coverage/lcov.info" >> $GITHUB_STEP_SUMMARY
+          fi
+
+  # Detailed Coverage Analysis (for branch protection)
+  detailed-coverage:
+    name: Detailed Coverage Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Install Python dependencies
+        run: |
+          cd tools/dict_importer
+          pip install pdfplumber pydantic click regex unidecode pytest pytest-cov pytest-xdist black isort
+
+      - name: Run Python tests with coverage
+        run: |
+          cd tools/dict_importer
+          python -m pytest tests/ --cov=dict_importer --cov-report=xml --cov-report=html -v
+
+      - name: Verify Python coverage
+        run: |
+          ls -lah tools/dict_importer/ || true
+          test -f tools/dict_importer/coverage.xml
+
+      - name: Create coverage summary
+        run: |
+          echo "## Python Coverage Analysis" >> $GITHUB_STEP_SUMMARY
+          echo "Python coverage files generated successfully" >> $GITHUB_STEP_SUMMARY
+          if [ -f tools/dict_importer/coverage.xml ]; then
+            echo "✅ XML coverage: tools/dict_importer/coverage.xml" >> $GITHUB_STEP_SUMMARY
+          fi
 
   # Build and Security Scan
-  build-and-scan:
+  ci_build:
     name: Build & Security Scan
     runs-on: ubuntu-latest
-    needs: test
+    needs: ci_test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -99,29 +217,46 @@ jobs:
       - name: Build application
         run: npm run build
 
-      - name: Run security audit
-        run: npm audit --audit-level=moderate
-
       - name: Upload build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: build-files
           path: .next/
           retention-days: 7
 
+  # Security Scan (separate job for branch protection)
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: ci_build
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run security audit
+        run: npm audit --audit-level=moderate
+
   # Deploy to Staging (on develop branch)
   deploy-staging:
     name: Deploy to Staging
     runs-on: ubuntu-latest
-    needs: build-and-scan
+    needs: ci_build
     if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
-    environment: staging
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Download build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: build-files
           path: .next/
@@ -136,7 +271,7 @@ jobs:
   deploy-production:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
-    needs: build-and-scan
+    needs: ci_build
     if: (github.ref == 'refs/heads/main' && github.event_name == 'push') || github.event_name == 'release'
     environment:
       name: production
@@ -144,6 +279,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Verify Vercel secrets
+        run: |
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "Error: VERCEL_TOKEN secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.VERCEL_ORG_ID }}" ]; then
+            echo "Error: VERCEL_ORG_ID secret is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "Error: VERCEL_PROJECT_ID secret is not set"
+            exit 1
+          fi
+          echo "All Vercel secrets are configured"
 
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v25
@@ -155,11 +306,13 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Notify deployment success
-        run: echo "Deployment to Vercel successful! URL: https://libran-voice-forge.vercel.app"
+        run: |
+          echo "Deployment to Vercel successful! URL: https://libran-voice-forge.vercel.app"
 
       - name: Create GitHub Release
         if: github.event_name == 'release'
         uses: actions/create-release@v1
+
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
@@ -187,8 +340,7 @@ jobs:
   performance-test:
     name: Performance Test
     runs-on: ubuntu-latest
-    needs: build-and-scan
-    if: github.event_name == 'pull_request'
+    needs: ci_build
     steps:
       - name: Checkout code
         uses: actions/checkout@v4

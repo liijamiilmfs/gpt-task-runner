@@ -174,6 +174,14 @@ def is_continuation_line(line: str, prev_line: str) -> bool:
     if not line or not prev_line:
         return False
     
+    # Don't merge table rows - check for table indicators
+    if '|' in line or '|' in prev_line:
+        return False
+    
+    # Don't merge if line looks like a table header
+    if any(header in line.lower() for header in ['english', 'ancient', 'modern', 'headword', 'word']):
+        return False
+    
     # If line doesn't start with capital letter, likely continuation
     if not line[0].isupper():
         return True

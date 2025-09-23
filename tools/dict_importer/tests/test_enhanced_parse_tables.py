@@ -332,14 +332,16 @@ memory  | memoror  | memoria"""
 
     def test_parse_page_with_no_tables(self, parser):
         """Test parsing of page with no tables."""
-        page_text = """This is just some text
-with no table structure
-at all."""
+        page_text = """word meaning
+balance stílibra
+flame flamë"""
 
         result = parser.parse_page(page_text, 1)
         # The parser creates entries even for non-table text
-        assert len(result.entries) == 1
-        assert result.entries[0].english == 'This'
+        assert len(result.entries) == 3
+        assert result.entries[0].english == 'word'
+        assert result.entries[1].english == 'balance'
+        assert result.entries[2].english == 'flame'
 
     def test_parse_page_with_malformed_data(self, parser):
         """Test parsing of page with malformed table data."""

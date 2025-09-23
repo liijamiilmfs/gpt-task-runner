@@ -4,12 +4,13 @@
   "description": "English to Librán text-to-speech translation and synthesis",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run build:workers && next dev",
+    "build": "npm run build:workers && next build",
     "export": "next build && next export",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
+    "build:workers": "tsc -p tsconfig.worker.json",
     "clean:test": "node -e \"require('fs').rmSync('dist-test', { recursive: true, force: true });\"",
     "build:test": "npm run clean:test && tsc -p tsconfig.test.json && tsc-alias -p tsconfig.test.json",
     "test:run": "node scripts/run-tests.js",
@@ -32,12 +33,13 @@
     "dict:build": "node scripts/dict-build.js",
     "dict:import": "node scripts/dict-import.js",
     "dict:import-libran": "node scripts/dict-import-libran.js",
+    "batch-render": "node scripts/batch-render.js",
     "release": "standard-version",
     "release:minor": "standard-version --release-as minor",
     "release:major": "standard-version --release-as major",
     "release:patch": "standard-version --release-as patch",
     "release:dry-run": "standard-version --dry-run",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "dependencies": {
     "lucide-react": "^0.544.0",
@@ -53,7 +55,6 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "@tailwindcss/postcss": "^4.1.13",
     "@types/node": "^20.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
@@ -66,13 +67,13 @@
     "husky": "^9.1.7",
     "postcss": "^8.5.6",
     "standard-version": "^9.5.0",
-    "tailwindcss": "^4.1.13",
+    "tailwindcss": "^3.4.0",
     "tsc-alias": "^1.8.16",
     "typescript": "^5.2.0",
     "vitest": "^2.1.9"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.17.0"
   },
   "overrides": {
     "esbuild": "^0.25.10",

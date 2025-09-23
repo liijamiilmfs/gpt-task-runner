@@ -89,6 +89,10 @@ class DictionaryBuilder:
             if same_confidence:
                 # Choose by source page priority (higher page number wins)
                 best_entry = max(entries, key=lambda e: e.source_page or 0)
+                
+                # If source page is also tied, choose by table order (higher table order wins)
+                if all(e.source_page == best_entry.source_page for e in entries):
+                    best_entry = max(entries, key=lambda e: e.table_order or 0)
             else:
                 # Choose the first complete entry
                 for entry in entries:
@@ -96,6 +100,35 @@ class DictionaryBuilder:
                         return entry
         
         return best_entry
+    
+    def _are_complementary(self, entry1: Entry, entry2: Entry) -> bool:
+        """Check if two entries are complementary (one has ancient, other has modern)."""
+        # They must have the same English word
+        if entry1.english.lower() != entry2.english.lower():
+            return False
+        
+        # One should have ancient and not modern, the other should have modern and not ancient
+        entry1_has_ancient = entry1.has_ancient() and not entry1.has_modern()
+        entry1_has_modern = entry1.has_modern() and not entry1.has_ancient()
+        entry2_has_ancient = entry2.has_ancient() and not entry2.has_modern()
+        entry2_has_modern = entry2.has_modern() and not entry2.has_ancient()
+        
+        return (entry1_has_ancient and entry2_has_modern) or (entry1_has_modern and entry2_has_ancient)
+    
+    def _merge_entries(self, entry1: Entry, entry2: Entry) -> Entry:
+        """Merge two complementary entries into one."""
+        # Create a new entry with both ancient and modern
+        merged = Entry(
+            english=entry1.english,  # Use the first entry's English
+            ancient=entry1.ancient or entry2.ancient,
+            modern=entry1.modern or entry2.modern,
+            pos=entry1.pos or entry2.pos,
+            notes=entry1.notes or entry2.notes,
+            sacred=entry1.sacred or entry2.sacred,
+            source_page=entry1.source_page or entry2.source_page,
+            confidence=max(entry1.confidence, entry2.confidence)
+        )
+        return merged
     
     def process_entry(self, entry: Entry) -> None:
         """Process a single entry."""
@@ -125,14 +158,30 @@ class DictionaryBuilder:
                 # Skip duplicate entries
                 return
             
-            # This is a conflict - multiple different entries for same English key
-            self.conflicts[english_key].append(entry)
-            self.stats['conflicts'] += 1
-            # Add all entries for this key to variants
-            self.variants[english_key] = self.conflicts[english_key].copy()
-            # Remove from dictionaries since we have conflicts
-            self.ancient_entries.pop(english_key, None)
-            self.modern_entries.pop(english_key, None)
+            # Check if this is a complementary entry (one has ancient, other has modern)
+            existing_entry = existing_entries[0]  # We only have one entry so far
+            if self._are_complementary(existing_entry, entry):
+                # Merge complementary entries
+                merged_entry = self._merge_entries(existing_entry, entry)
+                self.conflicts[english_key] = [merged_entry]
+                
+                # Update dictionaries
+                if merged_entry.has_ancient():
+                    self.ancient_entries[english_key] = merged_entry.ancient
+                    self.stats['ancient_entries'] += 1
+                
+                if merged_entry.has_modern():
+                    self.modern_entries[english_key] = merged_entry.modern
+                    self.stats['modern_entries'] += 1
+            else:
+                # This is a conflict - multiple different entries for same English key
+                self.conflicts[english_key].append(entry)
+                self.stats['conflicts'] += 1
+                # Add all entries for this key to variants
+                self.variants[english_key] = self.conflicts[english_key].copy()
+                # Remove from dictionaries since we have conflicts
+                self.ancient_entries.pop(english_key, None)
+                self.modern_entries.pop(english_key, None)
         else:
             # First entry for this key - add to dictionaries
             self.conflicts[english_key] = [entry]
@@ -251,13 +300,33 @@ class DictionaryBuilder:
             merged_entries = []
             for english_key, entries in self.conflicts.items():
                 if len(entries) > 1:
-                    # Merge all entries for this key
-                    merged_entry = entries[0]
-                    for entry in entries[1:]:
-                        merged_entry = self._merge_two_entries(merged_entry, entry)
-                    merged_entries.append(merged_entry)
-                    # Update conflicts with merged entry
-                    self.conflicts[english_key] = [merged_entry]
+                    # Check if these are complementary entries
+                    if self._are_complementary(entries[0], entries[1]):
+                        # Merge complementary entries
+                        merged_entry = self._merge_entries(entries[0], entries[1])
+                        merged_entries.append(merged_entry)
+                        # Update conflicts with merged entry
+                        self.conflicts[english_key] = [merged_entry]
+                        
+                        # Update dictionaries
+                        if merged_entry.has_ancient():
+                            self.ancient_entries[english_key] = merged_entry.ancient
+                            self.stats['ancient_entries'] += 1
+                        
+                        if merged_entry.has_modern():
+                            self.modern_entries[english_key] = merged_entry.modern
+                            self.stats['modern_entries'] += 1
+                    else:
+                        # Merge conflicting entries (keep first, others become variants)
+                        merged_entry = entries[0]
+                        for entry in entries[1:]:
+                            merged_entry = self._merge_two_entries(merged_entry, entry)
+                        merged_entries.append(merged_entry)
+                        # Update conflicts with merged entry
+                        self.conflicts[english_key] = [merged_entry]
+                elif len(entries) == 1:
+                    # Single entry, just return it
+                    merged_entries.append(entries[0])
             return merged_entries
         elif entry1 is not None and entry2 is not None:
             # Merge two specific entries

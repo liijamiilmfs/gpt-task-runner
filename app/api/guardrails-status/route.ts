@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getGuardrailsStatus } from '@/lib/api-guardrails'
 import { log, generateCorrelationId, LogEvents } from '@/lib/logger'
 
+// Force dynamic rendering since we use request.headers
+export const dynamic = 'force-dynamic'
+
 /**
  * GET /api/guardrails-status
  * Returns current guardrails status for the requesting user

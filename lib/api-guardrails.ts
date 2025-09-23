@@ -8,6 +8,8 @@ import { rateLimiter, RateLimitResult } from './rate-limiter'
 import { budgetGuardrails, BudgetCheckResult } from './budget-guardrails'
 import { log } from './logger'
 
+type RequestBody = Record<string, unknown> | null
+
 export interface GuardrailResult {
   allowed: boolean
   statusCode: number
@@ -56,6 +58,18 @@ function checkBudgetGuardrails(userId: string, characterCount: number): BudgetCh
  */
 function recordUsage(userId: string, characterCount: number): void {
   budgetGuardrails.recordUsage(userId, characterCount)
+}
+
+function extractCharacterCount(body: RequestBody): number {
+  if (!body) {
+    return 0
+  }
+
+  const textValue = typeof body['text'] === 'string' ? body['text'] as string :
+    typeof body['libranText'] === 'string' ? body['libranText'] as string :
+    null
+
+  return textValue ? textValue.length : 0
 }
 
 /**
@@ -131,6 +145,45 @@ export function withGuardrails(
 
     log.debug('Guardrails check started', { requestId, userId, config })
 
+    let parsedRequestBody: unknown
+    let hasAttemptedBodyParse = false
+
+    const parseRequestBody = async () => {
+      if (!hasAttemptedBodyParse) {
+        hasAttemptedBodyParse = true
+        try {
+          const clonedRequest = request.clone()
+          const bodyText = await clonedRequest.text()
+          if (bodyText) {
+            parsedRequestBody = JSON.parse(bodyText)
+          } else {
+            parsedRequestBody = undefined
+          }
+        } catch (error) {
+          log.debug('Could not parse request body for character count', { requestId, error })
+          parsedRequestBody = undefined
+        }
+      }
+      return parsedRequestBody
+    }
+
+    const getCharacterCount = (body: unknown): number => {
+      if (!body || typeof body !== 'object') {
+        return 0
+      }
+
+      const payload = body as Record<string, unknown>
+      if (typeof payload.text === 'string') {
+        return payload.text.length
+      }
+
+      if (typeof payload.libranText === 'string') {
+        return payload.libranText.length
+      }
+
+      return 0
+    }
+
     try {
       // Check rate limits if enabled
       if (config.enableRateLimiting) {
@@ -141,26 +194,26 @@ export function withGuardrails(
         }
       }
 
+      let cachedRequestBody: RequestBody = null
+      let cachedCharacterCount = 0
+
       // Check budget guardrails if enabled
       if (config.enableBudgetGuardrails) {
-        // Extract character count from request body
-        let characterCount = 0
         try {
-          const body = await request.clone().json()
-          if (body.text && typeof body.text === 'string') {
-            characterCount = body.text.length
-          } else if (body.libranText && typeof body.libranText === 'string') {
-            characterCount = body.libranText.length
+          const clonedRequest = request.clone()
+          const bodyText = await clonedRequest.text()
+          if (bodyText) {
+            cachedRequestBody = JSON.parse(bodyText) as RequestBody
+            cachedCharacterCount = extractCharacterCount(cachedRequestBody)
           }
         } catch (error) {
-          // If we can't parse the body, we'll check after processing
-          log.debug('Could not parse request body for character count', { requestId })
+          log.debug('Could not parse request body for character count', { requestId, error })
         }
 
-        if (characterCount > 0) {
-          const budgetResult = checkBudgetGuardrails(userId, characterCount)
+        if (cachedCharacterCount > 0) {
+          const budgetResult = checkBudgetGuardrails(userId, cachedCharacterCount)
           if (!budgetResult.allowed) {
-            log.warn('Request blocked by budget guardrails', { requestId, userId, characterCount, budgetResult })
+            log.warn('Request blocked by budget guardrails', { requestId, userId, characterCount: cachedCharacterCount, budgetResult })
             return createBudgetExceededResponse(budgetResult)
           }
         }
@@ -171,20 +224,10 @@ export function withGuardrails(
 
       // Record usage for budget tracking if enabled and request was successful
       if (config.enableBudgetGuardrails && response.status < 400) {
-        try {
-          const body = await request.clone().json()
-          let characterCount = 0
-          if (body.text && typeof body.text === 'string') {
-            characterCount = body.text.length
-          } else if (body.libranText && typeof body.libranText === 'string') {
-            characterCount = body.libranText.length
-          }
-          
-          if (characterCount > 0) {
-            recordUsage(userId, characterCount)
-          }
-        } catch (error) {
-          log.debug('Could not record usage after request', { requestId, error })
+        if (cachedCharacterCount > 0) {
+          recordUsage(userId, cachedCharacterCount)
+        } else if (!cachedRequestBody) {
+          log.debug('Could not record usage after request: request body unavailable', { requestId })
         }
       }
 

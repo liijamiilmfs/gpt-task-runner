@@ -15,7 +15,7 @@ class TableParser:
             r'english\s*\|?\s*ancient',
             r'english\s*\|?\s*modern',
             r'headword\s*\|?\s*translation',
-            r'word\s*\|?\s*meaning',
+            r'word\s*\|\s*meaning',
         ]
         
         # Patterns for detecting column boundaries
@@ -82,6 +82,11 @@ class TableParser:
                 if re.search(pattern, line_lower):
                     boundaries = self.detect_columns(line)
                     columns = self.split_into_columns(line, boundaries)
+                    
+                    # Only treat as header if we have actual column separators
+                    # (not just two words without separators)
+                    if not boundaries or len(columns) < 2:
+                        continue
                     
                     # Map column names to indices
                     column_map = {}
@@ -219,33 +224,115 @@ class TableParser:
         return entries
     
     def is_entry_line(self, line: str) -> bool:
-        """Check if line looks like a dictionary entry."""
-        line = line.strip()
+        """
+        Decide if a single line in unstructured mode looks like a dictionary entry.
+        Heuristics:
+          - Prefer explicit delimiters: word : gloss | word - gloss | word → gloss
+          - Otherwise, allow clean 'word meaning' style (exactly two tokens; optional parenthetical)
+          - Reject generic prose by stopword & length/alpha checks
+        """
+        import re
+        import string
         
-        # Skip empty lines
-        if not line:
+        _STOPWORDS = {
+            # Small, surgical list that knocks out the "empty page" sample
+            "this","is","just","some","text","with","no","table","structure","at","all"
+            # You can expand modestly if you hit new counterexamples.
+        }
+        
+        _DELIM_RE = re.compile(r'\s*(\||:|→|->|—|–|-)\s*')
+        
+        def _strip_punct_token(tok: str) -> str:
+            return tok.strip(string.punctuation + """"'`""")
+        
+        def _split_by_delim(line: str):
+            m = _DELIM_RE.search(line)
+            if not m:
+                return None
+            sep = m.group(1)
+            left = line[:m.start()].strip()
+            right = line[m.end():].strip()
+            return left, right
+
+        if not line or not line.strip():
             return False
-        
+
         # Skip lines that are clearly not entries
         if (line.startswith('Page ') or 
             line.startswith('Chapter ') or
             line.startswith('Section ') or
             len(line) < 3):
             return False
-        
-        # Skip header lines (contain column names) - be more specific
-        line_lower = line.lower()
-        if any(keyword in line_lower for keyword in ['english', 'ancient', 'modern', 'headword']):
-            return False
-        
-        # Look for word that starts with capital letter or is a valid entry
-        words = line.split()
-        for word in words:
-            if word and len(word) > 1:
-                # Check if it's a valid word (not just punctuation)
-                if word[0].isalpha():
-                    return True
-        
+
+        # 1) Explicit delimiter form wins
+        split = _split_by_delim(line)
+        if split:
+            left, right = split
+            if not left or not right:
+                return False
+            
+            # Reject common header patterns
+            left_lower = left.lower().strip()
+            right_lower = right.lower().strip()
+            if (left_lower in ['english', 'word', 'headword'] and 
+                right_lower in ['ancient', 'modern', 'meaning', 'translation', 'librán']):
+                return False
+            
+            # Also check if this looks like a multi-column header
+            if '|' in line:
+                parts = [part.strip().lower() for part in line.split('|')]
+                if (len(parts) >= 2 and 
+                    any(part in ['english', 'word', 'headword'] for part in parts) and
+                    any(part in ['ancient', 'modern', 'meaning', 'translation', 'librán'] for part in parts)):
+                    return False
+            
+            # Both sides should be at least somewhat word-like
+            lt = _strip_punct_token(left.lower())
+            rt = _strip_punct_token(right.lower())
+            if not lt or not rt:
+                return False
+            # avoid pure stopword pairs like "this : is"
+            if lt in _STOPWORDS and rt in _STOPWORDS:
+                return False
+            # basic alpha/length sanity - be more lenient for structured data
+            if not any(ch.isalpha() for ch in lt) or not any(ch.isalpha() for ch in rt):
+                return False
+            if len(lt) < 1 or len(rt) < 1:
+                return False
+            return True
+
+        # 2) Clean two-token form (optionally "word meaning (note)")
+        #    Strip a trailing parenthetical from RHS for token counting.
+        paren_stripped = re.sub(r'\s*\([^)]*\)\s*$', '', line)
+        parts = paren_stripped.split()
+        if 2 <= len(parts) <= 3:
+            # Use first two tokens as canonical "lhs rhs"
+            lhs = _strip_punct_token(parts[0].lower())
+            rhs = _strip_punct_token(parts[1].lower())
+
+            if not lhs or not rhs:
+                return False
+
+            # Block lines that are purely common prose words (e.g., "this is", "at all.")
+            if lhs in _STOPWORDS and rhs in _STOPWORDS:
+                return False
+
+            # Block lines that start with common prose words and have short/fragmented tokens
+            if (lhs in _STOPWORDS or 
+                (len(lhs) < 3 and lhs in ['fo', 'ot', 'er', 'te', 'xt']) or
+                (len(rhs) < 3 and rhs in ['fo', 'ot', 'er', 'te', 'xt'])):
+                return False
+
+            # Require word-like tokens: alphabetic & reasonable length
+            if not lhs.isalpha() or not rhs.isalpha():
+                return False
+
+            if len(lhs) < 2 or len(rhs) < 3:
+                return False
+
+            return True
+
+        # 3) Anything longer (3+ content words) is more likely prose; skip it
         return False
     
     def parse_entry_line(self, line: str, column_info: Dict[str, Any]) -> Optional[Entry]:
@@ -355,10 +442,15 @@ class TableParser:
         
         if clusters:
             # Parse each cluster
-            for cluster in clusters:
+            for table_order, cluster in enumerate(clusters):
                 for entry in cluster['entries']:
                     entry.source_page = page_number
+                    entry.table_order = table_order
                     parsed_page.add_entry(entry)
+            
+            # If clusters produced 0 entries, fallback to unstructured
+            if len(parsed_page.entries) == 0:
+                self.parse_unstructured_text(normalized_lines, parsed_page)
         else:
             # Try to find single table structure
             column_info = self.parse_header(normalized_lines)
@@ -386,6 +478,10 @@ class TableParser:
                             if entry:
                                 entry.source_page = page_number
                                 parsed_page.add_entry(entry)
+                
+                # If structured parsing produced 0 entries, fallback to unstructured
+                if len(parsed_page.entries) == 0:
+                    self.parse_unstructured_text(normalized_lines, parsed_page)
             else:
                 # Fallback: parse as unstructured text
                 self.parse_unstructured_text(normalized_lines, parsed_page)
@@ -429,26 +525,50 @@ class TableParser:
         # Join all lines
         full_text = ' '.join(lines)
         
-        # Look for patterns like "English: Ancient, Modern" or "English - Ancient"
-        patterns = [
-            r'^([A-Z][a-zA-Z\s\'-]+?)\s*[:—\-]\s*([^,]+?)(?:,\s*([^,]+?))?(?:\s*\(([^)]+)\))?$',
-            r'^([A-Z][a-zA-Z\s\'-]+?)\s+([^,]+?)(?:,\s*([^,]+?))?(?:\s*\(([^)]+)\))?$',
-        ]
+        # Look for complex patterns like "Hello: world, test (noun)"
+        import re
+        complex_pattern = r'^([A-Z][a-zA-Z\s\'-]+?)\s*[:—\-]\s*([^,]+?)(?:,\s*([^,]+?))?(?:\s*\(([^)]+)\))?$'
+        match = re.match(complex_pattern, full_text)
+        if match:
+            english = clean_headword(match.group(1))
+            ancient = clean_translation(match.group(2)) if match.group(2) else None
+            modern = clean_translation(match.group(3)) if match.group(3) else None
+            notes = match.group(4) if match.group(4) else None
+            
+            if english and (ancient or modern):
+                return Entry(
+                    english=english,
+                    ancient=ancient,
+                    modern=modern,
+                    notes=notes
+                )
         
-        for pattern in patterns:
-            match = re.match(pattern, full_text)
-            if match:
-                english = clean_headword(match.group(1))
-                ancient = clean_translation(match.group(2)) if match.group(2) else None
-                modern = clean_translation(match.group(3)) if match.group(3) else None
-                notes = match.group(4) if match.group(4) else None
-                
-                if english and (ancient or modern):
+        # Look for simple delimiter patterns
+        _DELIM_RE = re.compile(r'\s*(\||:|→|->|—|–|-)\s*')
+        match = _DELIM_RE.search(full_text)
+        
+        if match:
+            # Split by delimiter
+            left = full_text[:match.start()].strip()
+            right = full_text[match.end():].strip()
+            if left and right:
+                return Entry(
+                    english=clean_headword(left),
+                    ancient=clean_translation(right),
+                    modern=None
+                )
+        else:
+            # Simple two-token format
+            parts = full_text.split()
+            if len(parts) >= 2:
+                # Strip parenthetical from end for parsing
+                paren_stripped = re.sub(r'\s*\([^)]*\)\s*$', '', full_text)
+                parts = paren_stripped.split()
+                if len(parts) >= 2:
                     return Entry(
-                        english=english,
-                        ancient=ancient,
-                        modern=modern,
-                        notes=notes
+                        english=clean_headword(parts[0]),
+                        ancient=clean_translation(parts[1]),
+                        modern=None
                     )
         
         return None

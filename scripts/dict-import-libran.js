@@ -12,7 +12,7 @@ const fs = require('fs');
 
 // Default configuration
 const DEFAULT_CONFIG = {
-  json: 'data/libran_dictionary.json',
+  json: 'data/UnifiedLibranDictionaryv1.6.0.json',
   output: 'lib/translator/dictionaries'
 };
 
@@ -136,11 +136,15 @@ except ImportError as e:
 function runLibranImporter(config, pythonCmd) {
   return new Promise((resolve, reject) => {
     const dictImporterPath = path.join(__dirname, '..', 'tools', 'dict_importer');
+    const projectRoot = path.join(__dirname, '..');
+    const absoluteJsonPath = path.isAbsolute(config.json) ? config.json : path.join(projectRoot, config.json);
+    const absoluteOutputPath = path.isAbsolute(config.output) ? config.output : path.join(projectRoot, config.output);
+    
     const args = [
       '-m', 'dict_importer.cli',
       'import-libran',
-      '--json', config.json,
-      '--out', config.output
+      '--json', absoluteJsonPath,
+      '--out', absoluteOutputPath
     ];
     
     console.log(`Running: ${pythonCmd} ${args.join(' ')}`);

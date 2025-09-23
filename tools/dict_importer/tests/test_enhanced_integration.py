@@ -105,9 +105,9 @@ résumé  | memoror  | memoria"""
         parsed_page = parser.parse_page(normalized_text, 1)
         
         assert len(parsed_page.entries) == 3
-        assert parsed_page.entries[0].english == 'cafe'
-        assert parsed_page.entries[1].english == 'naive'
-        assert parsed_page.entries[2].english == 'resume'
+        assert parsed_page.entries[0].english == 'café'
+        assert parsed_page.entries[1].english == 'naïve'
+        assert parsed_page.entries[2].english == 'résumé'
 
     def test_handle_hyphen_restoration_in_pipeline(self, parser, builder):
         """Test handling of hyphen restoration in pipeline."""
