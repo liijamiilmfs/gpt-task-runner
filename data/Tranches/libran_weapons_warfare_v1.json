@@ -1,0 +1,776 @@
+[
+  {
+    "english": "warrior",
+    "ancient": "Bellator",
+    "modern": "belatór",
+    "notes": "Lat bellator; Modern single-l, ór"
+  },
+  {
+    "english": "soldier",
+    "ancient": "Miles",
+    "modern": "mílésh",
+    "notes": "Lat miles; Modern í-é-sh"
+  },
+  {
+    "english": "army",
+    "ancient": "Exercitus",
+    "modern": "eksértsít",
+    "notes": "Lat exercitus; Hu k-, Modern ts-, ít"
+  },
+  {
+    "english": "legion",
+    "ancient": "Legio",
+    "modern": "legí",
+    "notes": "Lat legio; Modern í ending"
+  },
+  {
+    "english": "cohort",
+    "ancient": "Cohors",
+    "modern": "kohórsh",
+    "notes": "Lat cohors; Hu k-, Modern ó-sh"
+  },
+  {
+    "english": "century",
+    "ancient": "Centuria",
+    "modern": "tsénturí",
+    "notes": "Lat centuria; Modern ts-, í"
+  },
+  {
+    "english": "squad",
+    "ancient": "Contubernium",
+    "modern": "kontubérn",
+    "notes": "Lat contubernium; Hu k-, Modern érn"
+  },
+  {
+    "english": "general",
+    "ancient": "Imperator",
+    "modern": "imperatór",
+    "notes": "Lat imperator; Modern ór ending"
+  },
+  {
+    "english": "commander",
+    "ancient": "Dux",
+    "modern": "dúksh",
+    "notes": "Lat dux; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "captain",
+    "ancient": "Centurio",
+    "modern": "tsenturí",
+    "notes": "Lat centurio; Modern ts-, í"
+  },
+  {
+    "english": "lieutenant",
+    "ancient": "Optio",
+    "modern": "optsí",
+    "notes": "Lat optio; Modern ts-, í"
+  },
+  {
+    "english": "sergeant",
+    "ancient": "Tesserarius",
+    "modern": "teserár",
+    "notes": "Lat tesserarius; Modern ár, single-s"
+  },
+  {
+    "english": "scout",
+    "ancient": "Explorator",
+    "modern": "eksploratór",
+    "notes": "Lat explorator; Hu k-, Modern ór"
+  },
+  {
+    "english": "guard",
+    "ancient": "Custos",
+    "modern": "kustósh",
+    "notes": "Lat custos; Hu k-, Modern ó-sh"
+  },
+  {
+    "english": "sentinel",
+    "ancient": "Vigil",
+    "modern": "vígíl",
+    "notes": "Lat vigil; Modern í-íl"
+  },
+  {
+    "english": "archer",
+    "ancient": "Sagittarius",
+    "modern": "sagitár",
+    "notes": "Lat sagittarius; Modern ár, single-t"
+  },
+  {
+    "english": "cavalry",
+    "ancient": "Equites",
+    "modern": "ekvítésh",
+    "notes": "Lat equites; Hu k-v, Modern í-é-sh"
+  },
+  {
+    "english": "infantry",
+    "ancient": "Pedites",
+    "modern": "pedítésh",
+    "notes": "Lat pedites; Modern í-é-sh"
+  },
+  {
+    "english": "spearman",
+    "ancient": "Hastarius",
+    "modern": "hastár",
+    "notes": "Lat hastarius; Modern ár ending"
+  },
+  {
+    "english": "swordsman",
+    "ancient": "Gladiator",
+    "modern": "gladiatór",
+    "notes": "Lat gladiator; Modern ór ending"
+  },
+  {
+    "english": "sword",
+    "ancient": "Gladius",
+    "modern": "gladí",
+    "notes": "Lat gladius; Modern í ending"
+  },
+  {
+    "english": "blade",
+    "ancient": "Lamina",
+    "modern": "lamín",
+    "notes": "Lat lamina; Modern ín ending"
+  },
+  {
+    "english": "spear",
+    "ancient": "Hasta",
+    "modern": "hastá",
+    "notes": "Lat hasta; Modern á ending"
+  },
+  {
+    "english": "lance",
+    "ancient": "Lancea",
+    "modern": "lantseá",
+    "notes": "Lat lancea; Modern ts-, eá"
+  },
+  {
+    "english": "javelin",
+    "ancient": "Pilum",
+    "modern": "pílú",
+    "notes": "Lat pilum; Modern í-ú"
+  },
+  {
+    "english": "pike",
+    "ancient": "Sarissa",
+    "modern": "sarísë",
+    "notes": "Lat sarissa; Modern í-ë, single-s"
+  },
+  {
+    "english": "dagger",
+    "ancient": "Pugio",
+    "modern": "púgí",
+    "notes": "Lat pugio; Modern ú-í"
+  },
+  {
+    "english": "knife",
+    "ancient": "Culter",
+    "modern": "kultér",
+    "notes": "Lat culter; Hu k-, Modern ér"
+  },
+  {
+    "english": "axe",
+    "ancient": "Securis",
+    "modern": "sekúr",
+    "notes": "Lat securis; Hu k-, Modern ú"
+  },
+  {
+    "english": "battle axe",
+    "ancient": "Bipennis",
+    "modern": "bipénish",
+    "notes": "Lat bipennis; Modern é-ish, single-n"
+  },
+  {
+    "english": "mace",
+    "ancient": "Clava",
+    "modern": "klavá",
+    "notes": "Lat clava; Hu k-, Modern á"
+  },
+  {
+    "english": "club",
+    "ancient": "Fustis",
+    "modern": "fustísh",
+    "notes": "Lat fustis; Modern í-sh"
+  },
+  {
+    "english": "hammer",
+    "ancient": "Malleus",
+    "modern": "malé",
+    "notes": "Lat malleus; Modern é ending"
+  },
+  {
+    "english": "flail",
+    "ancient": "Flagellum",
+    "modern": "flagelú",
+    "notes": "Lat flagellum; Modern ú, single-l"
+  },
+  {
+    "english": "whip",
+    "ancient": "Flagrum",
+    "modern": "flagrú",
+    "notes": "Lat flagrum; Modern ú ending"
+  },
+  {
+    "english": "bow",
+    "ancient": "Arcus",
+    "modern": "arkúsh",
+    "notes": "Lat arcus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "crossbow",
+    "ancient": "Ballista",
+    "modern": "balíst",
+    "notes": "Lat ballista; Modern íst, single-l"
+  },
+  {
+    "english": "arrow",
+    "ancient": "Sagitta",
+    "modern": "sagít",
+    "notes": "Lat sagitta; Modern ít, single-t"
+  },
+  {
+    "english": "bolt",
+    "ancient": "Telum",
+    "modern": "telú",
+    "notes": "Lat telum; Modern ú ending"
+  },
+  {
+    "english": "quiver",
+    "ancient": "Pharetra",
+    "modern": "faretrá",
+    "notes": "Lat pharetra; Modern á ending"
+  },
+  {
+    "english": "bowstring",
+    "ancient": "Nervus",
+    "modern": "nervúsh",
+    "notes": "Lat nervus; Modern ú-sh"
+  },
+  {
+    "english": "sling",
+    "ancient": "Funda",
+    "modern": "fundá",
+    "notes": "Lat funda; Modern á ending"
+  },
+  {
+    "english": "stone",
+    "ancient": "Lapis",
+    "modern": "lapísh",
+    "notes": "Lat lapis; Modern í-sh"
+  },
+  {
+    "english": "shield",
+    "ancient": "Scutum",
+    "modern": "skutú",
+    "notes": "Lat scutum; Hu k-, Modern ú"
+  },
+  {
+    "english": "buckler",
+    "ancient": "Parma",
+    "modern": "parmá",
+    "notes": "Lat parma; Modern á ending"
+  },
+  {
+    "english": "armor",
+    "ancient": "Armatura",
+    "modern": "armatúr",
+    "notes": "Lat armatura; Modern úr ending"
+  },
+  {
+    "english": "mail",
+    "ancient": "Lorica",
+    "modern": "lorík",
+    "notes": "Lat lorica; Hu k-, Modern í"
+  },
+  {
+    "english": "breastplate",
+    "ancient": "Thorax",
+    "modern": "toráks",
+    "notes": "Lat thorax; Hu k-, Modern á"
+  },
+  {
+    "english": "helmet",
+    "ancient": "Galea",
+    "modern": "galeá",
+    "notes": "Lat galea; Modern á ending"
+  },
+  {
+    "english": "visor",
+    "ancient": "Facies",
+    "modern": "fatsíésh",
+    "notes": "Lat facies; Modern ts-, í-é-sh"
+  },
+  {
+    "english": "greaves",
+    "ancient": "Ocreae",
+    "modern": "okreë",
+    "notes": "Lat ocreae; Hu k-, Modern ë"
+  },
+  {
+    "english": "gauntlets",
+    "ancient": "Chirothecae",
+    "modern": "kirotekë",
+    "notes": "Lat chirothecae; Hu k-, Modern ë"
+  },
+  {
+    "english": "siege",
+    "ancient": "Obsidio",
+    "modern": "obsíd",
+    "notes": "Lat obsidio; Modern íd ending"
+  },
+  {
+    "english": "assault",
+    "ancient": "Oppugnatio",
+    "modern": "opugnáts",
+    "notes": "Lat oppugnatio; Modern áts, single-p"
+  },
+  {
+    "english": "attack",
+    "ancient": "Impetus",
+    "modern": "impét",
+    "notes": "Lat impetus; Modern ét ending"
+  },
+  {
+    "english": "charge",
+    "ancient": "Incursus",
+    "modern": "inkúrs",
+    "notes": "Lat incursus; Hu k-, Modern úrs"
+  },
+  {
+    "english": "retreat",
+    "ancient": "Recessus",
+    "modern": "rekesúsh",
+    "notes": "Lat recessus; Hu k-, Modern ú-sh, single-c"
+  },
+  {
+    "english": "advance",
+    "ancient": "Progressus",
+    "modern": "progresúsh",
+    "notes": "Lat progressus; Modern ú-sh, single-s"
+  },
+  {
+    "english": "flank",
+    "ancient": "Latus",
+    "modern": "latúsh",
+    "notes": "Lat latus; Modern ú-sh"
+  },
+  {
+    "english": "ambush",
+    "ancient": "Insidiae",
+    "modern": "insídíë",
+    "notes": "Lat insidiae; Modern í-í-ë"
+  },
+  {
+    "english": "trap",
+    "ancient": "Laqueus",
+    "modern": "lakvésh",
+    "notes": "Lat laqueus; Hu k-v, Modern é-sh"
+  },
+  {
+    "english": "battle",
+    "ancient": "Pugna",
+    "modern": "púgnë",
+    "notes": "Lat pugna; Modern ú-ë"
+  },
+  {
+    "english": "combat",
+    "ancient": "Certamen",
+    "modern": "tsértamé",
+    "notes": "Lat certamen; Modern ts-, é"
+  },
+  {
+    "english": "duel",
+    "ancient": "Singulare certamen",
+    "modern": "singutsért",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "skirmish",
+    "ancient": "Velitatio",
+    "modern": "velitáts",
+    "notes": "Lat velitatio; Modern áts ending"
+  },
+  {
+    "english": "war",
+    "ancient": "Bellum",
+    "modern": "belú",
+    "notes": "Lat bellum; Modern ú, single-l"
+  },
+  {
+    "english": "peace",
+    "ancient": "Pax",
+    "modern": "páksh",
+    "notes": "Lat pax; Hu k-, Modern á-sh"
+  },
+  {
+    "english": "victory",
+    "ancient": "Victoria",
+    "modern": "viktórí",
+    "notes": "Lat victoria; Hu k-, Modern í"
+  },
+  {
+    "english": "defeat",
+    "ancient": "Clades",
+    "modern": "kladésh",
+    "notes": "Lat clades; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "conquest",
+    "ancient": "Expugnatio",
+    "modern": "ekspugnáts",
+    "notes": "Lat expugnatio; Hu k-, Modern áts"
+  },
+  {
+    "english": "surrender",
+    "ancient": "Deditio",
+    "modern": "dedíts",
+    "notes": "Lat deditio; Modern íts ending"
+  },
+  {
+    "english": "truce",
+    "ancient": "Indutiae",
+    "modern": "indutsíë",
+    "notes": "Lat indutiae; Modern ts-, í-ë"
+  },
+  {
+    "english": "alliance",
+    "ancient": "Foedus",
+    "modern": "foedúsh",
+    "notes": "Lat foedus; Modern ú-sh"
+  },
+  {
+    "english": "enemy",
+    "ancient": "Hostis",
+    "modern": "hostísh",
+    "notes": "Lat hostis; Modern í-sh"
+  },
+  {
+    "english": "ally",
+    "ancient": "Socius",
+    "modern": "zotsíú",
+    "notes": "Lat socius; Modern z-, ts-, í-ú"
+  },
+  {
+    "english": "mercenary",
+    "ancient": "Mercenarius",
+    "modern": "mertsenár",
+    "notes": "Lat mercenarius; Modern ts-, ár"
+  },
+  {
+    "english": "veteran",
+    "ancient": "Veteranus",
+    "modern": "veterán",
+    "notes": "Lat veteranus; Modern án ending"
+  },
+  {
+    "english": "recruit",
+    "ancient": "Tiro",
+    "modern": "tíró",
+    "notes": "Lat tiro; Modern í-ó"
+  },
+  {
+    "english": "siege engine",
+    "ancient": "Tormentum",
+    "modern": "tormentú",
+    "notes": "Lat tormentum; Modern ú ending"
+  },
+  {
+    "english": "catapult",
+    "ancient": "Catapulta",
+    "modern": "katapúlt",
+    "notes": "Lat catapulta; Hu k-, Modern últ"
+  },
+  {
+    "english": "ballista",
+    "ancient": "Ballista",
+    "modern": "balíst",
+    "notes": "Lat ballista; Modern íst, single-l"
+  },
+  {
+    "english": "battering ram",
+    "ancient": "Aries",
+    "modern": "ariésh",
+    "notes": "Lat aries; Modern é-sh"
+  },
+  {
+    "english": "siege tower",
+    "ancient": "Turris",
+    "modern": "turís",
+    "notes": "Lat turris; Modern ís, single-r"
+  },
+  {
+    "english": "ladder",
+    "ancient": "Scala",
+    "modern": "skalá",
+    "notes": "Lat scala; Hu k-, Modern á"
+  },
+  {
+    "english": "rope",
+    "ancient": "Funis",
+    "modern": "funís",
+    "notes": "Lat funis; Modern ís ending"
+  },
+  {
+    "english": "grappling hook",
+    "ancient": "Harpago",
+    "modern": "harpagó",
+    "notes": "Lat harpago; Modern ó ending"
+  },
+  {
+    "english": "fortification",
+    "ancient": "Munimentum",
+    "modern": "muniméntú",
+    "notes": "Lat munimentum; Modern é-ú"
+  },
+  {
+    "english": "palisade",
+    "ancient": "Vallum",
+    "modern": "valú",
+    "notes": "Lat vallum; Modern ú, single-l"
+  },
+  {
+    "english": "trench",
+    "ancient": "Fossa",
+    "modern": "fosá",
+    "notes": "Lat fossa; Modern á, single-s"
+  },
+  {
+    "english": "earthwork",
+    "ancient": "Agger",
+    "modern": "agér",
+    "notes": "Lat agger; Modern ér, single-g"
+  },
+  {
+    "english": "bastion",
+    "ancient": "Propugnaculum",
+    "modern": "propúgnakúl",
+    "notes": "Lat propugnaculum; Hu k-, Modern úl"
+  },
+  {
+    "english": "sally port",
+    "ancient": "Porta erumpendi",
+    "modern": "porterúmp",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "parapet",
+    "ancient": "Lorica",
+    "modern": "lorík",
+    "notes": "Lat lorica; Hu k-, Modern í"
+  },
+  {
+    "english": "embrasure",
+    "ancient": "Fenestra",
+    "modern": "fenestrá",
+    "notes": "Lat fenestra; Modern á ending"
+  },
+  {
+    "english": "camp",
+    "ancient": "Castra",
+    "modern": "kastrá",
+    "notes": "Lat castra; Hu k-, Modern á"
+  },
+  {
+    "english": "tent",
+    "ancient": "Tentorium",
+    "modern": "tentór",
+    "notes": "Lat tentorium; Modern ór ending"
+  },
+  {
+    "english": "standard",
+    "ancient": "Vexillum",
+    "modern": "veksílú",
+    "notes": "Lat vexillum; Hu k-, Modern í-ú, single-l"
+  },
+  {
+    "english": "banner",
+    "ancient": "Signum",
+    "modern": "sígnú",
+    "notes": "Lat signum; Modern í-ú"
+  },
+  {
+    "english": "trumpet",
+    "ancient": "Tuba",
+    "modern": "tubá",
+    "notes": "Lat tuba; Modern á ending"
+  },
+  {
+    "english": "horn",
+    "ancient": "Cornu",
+    "modern": "kornú",
+    "notes": "Lat cornu; Hu k-, Modern ú"
+  },
+  {
+    "english": "drum",
+    "ancient": "Tympanum",
+    "modern": "timpanú",
+    "notes": "Lat tympanum; Modern anú ending"
+  },
+  {
+    "english": "signal",
+    "ancient": "Signum",
+    "modern": "sígnú",
+    "notes": "Lat signum; Modern í-ú"
+  },
+  {
+    "english": "watchword",
+    "ancient": "Tessera",
+    "modern": "teserá",
+    "notes": "Lat tessera; Modern á, single-s"
+  },
+  {
+    "english": "password",
+    "ancient": "Symbolum",
+    "modern": "símbolú",
+    "notes": "Lat symbolum; Modern í-ú"
+  },
+  {
+    "english": "patrol",
+    "ancient": "Statio",
+    "modern": "statsí",
+    "notes": "Lat statio; Modern ts-, í"
+  },
+  {
+    "english": "watch",
+    "ancient": "Vigilia",
+    "modern": "vigílí",
+    "notes": "Lat vigilia; Modern í-í"
+  },
+  {
+    "english": "garrison",
+    "ancient": "Praesidium",
+    "modern": "praezíd",
+    "notes": "Lat praesidium; Modern z-, íd"
+  },
+  {
+    "english": "reinforcement",
+    "ancient": "Subsidium",
+    "modern": "subzíd",
+    "notes": "Lat subsidium; Modern z-, íd"
+  },
+  {
+    "english": "supply",
+    "ancient": "Commeatus",
+    "notes": "Lat commeatus; Modern simplified",
+    "modern": "komeát"
+  },
+  {
+    "english": "provisions",
+    "ancient": "Cibaria",
+    "modern": "tsibárí",
+    "notes": "Lat cibaria; Modern ts-, í"
+  },
+  {
+    "english": "rations",
+    "ancient": "Demensum",
+    "modern": "demenzú",
+    "notes": "Lat demensum; Modern z-, ú"
+  },
+  {
+    "english": "baggage",
+    "ancient": "Impedimenta",
+    "modern": "impediméntë",
+    "notes": "Lat impedimenta; Modern é-ë"
+  },
+  {
+    "english": "loot",
+    "ancient": "Praeda",
+    "modern": "praedá",
+    "notes": "Lat praeda; Modern á ending"
+  },
+  {
+    "english": "spoils",
+    "ancient": "Spolia",
+    "modern": "spolí",
+    "notes": "Lat spolia; Modern í ending"
+  },
+  {
+    "english": "plunder",
+    "ancient": "Rapina",
+    "modern": "rapín",
+    "notes": "Lat rapina; Modern ín ending"
+  },
+  {
+    "english": "ransom",
+    "ancient": "Pretium",
+    "modern": "pretsí",
+    "notes": "Lat pretium; Modern ts-, í"
+  },
+  {
+    "english": "prisoner",
+    "ancient": "Captivus",
+    "modern": "kaptív",
+    "notes": "Lat captivus; Hu k-, Modern ív"
+  },
+  {
+    "english": "hostage",
+    "ancient": "Obses",
+    "modern": "obsésh",
+    "notes": "Lat obses; Modern é-sh"
+  },
+  {
+    "english": "deserter",
+    "ancient": "Desertor",
+    "modern": "dezertór",
+    "notes": "Lat desertor; Modern z-, ór"
+  },
+  {
+    "english": "traitor",
+    "ancient": "Proditor",
+    "modern": "prodítór",
+    "notes": "Lat proditor; Modern í-ór"
+  },
+  {
+    "english": "spy",
+    "ancient": "Speculator",
+    "modern": "spekulatór",
+    "notes": "Lat speculator; Hu k-, Modern ór"
+  },
+  {
+    "english": "courier",
+    "ancient": "Cursor",
+    "modern": "kursór",
+    "notes": "Lat cursor; Hu k-, Modern ór"
+  },
+  {
+    "english": "messenger",
+    "ancient": "Nuntius",
+    "modern": "nuntsí",
+    "notes": "Lat nuntius; Modern ts-, í"
+  },
+  {
+    "english": "wound",
+    "ancient": "Vulnus",
+    "modern": "vulnúsh",
+    "notes": "Lat vulnus; Modern ú-sh"
+  },
+  {
+    "english": "blood",
+    "ancient": "Sanguis",
+    "modern": "sangvísh",
+    "notes": "Lat sanguis; Hu -v, Modern í-sh"
+  },
+  {
+    "english": "scar",
+    "ancient": "Cicatrix",
+    "modern": "tsikatríks",
+    "notes": "Lat cicatrix; Modern ts-, íks"
+  },
+  {
+    "english": "death",
+    "ancient": "Mors",
+    "modern": "mórsh",
+    "notes": "Lat mors; Modern ó-sh"
+  },
+  {
+    "english": "slaughter",
+    "ancient": "Caedes",
+    "modern": "kaedésh",
+    "notes": "Lat caedes; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "massacre",
+    "ancient": "Trucidatio",
+    "modern": "trutsidáts",
+    "notes": "Lat trucidatio; Modern ts-, áts"
+  }
+]

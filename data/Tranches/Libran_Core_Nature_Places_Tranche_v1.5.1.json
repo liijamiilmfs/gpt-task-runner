@@ -1,0 +1,626 @@
+[
+  {
+    "english": "mountain",
+    "ancient": "Montor",
+    "modern": "Hegya",
+    "notes": "Lat mons→Montor; Hu hegy → -a."
+  },
+  {
+    "english": "hill",
+    "ancient": "Collisor",
+    "modern": "Dombë",
+    "notes": "Lat collis→Collisor; Hu domb → ë."
+  },
+  {
+    "english": "cliff",
+    "ancient": "Rupor",
+    "modern": "Sziklaë",
+    "notes": "Lat rupes→Rupor; Hu szikla → ë."
+  },
+  {
+    "english": "valley",
+    "ancient": "Vallisor",
+    "modern": "Völga",
+    "notes": "Lat vallis→Vallisor; Hu völgy → -a."
+  },
+  {
+    "english": "plain",
+    "ancient": "Planor",
+    "modern": "Síksa",
+    "notes": "Lat planum→Planor; Hu síkság → -a."
+  },
+  {
+    "english": "steppe",
+    "ancient": "Stepor",
+    "modern": "Pusztá",
+    "notes": "Loan from steppe; Hu puszta → -á."
+  },
+  {
+    "english": "meadow",
+    "ancient": "Prator",
+    "modern": "Rétë",
+    "notes": "Lat pratum→Prator; Hu rét → ë."
+  },
+  {
+    "english": "forest",
+    "ancient": "Silvor",
+    "modern": "Erdöa",
+    "notes": "Lat silva→Silvor; Hu erdő → -a."
+  },
+  {
+    "english": "grove",
+    "ancient": "Lucor",
+    "modern": "Ligeta",
+    "notes": "Lat lucus→Lucor; Hu liget → -a."
+  },
+  {
+    "english": "jungle",
+    "ancient": "Saltusor",
+    "modern": "Dzsungla",
+    "notes": "Lat saltus→Saltusor; Hu dzsungel → -a."
+  },
+  {
+    "english": "swamp",
+    "ancient": "Paludor",
+    "modern": "Mocsara",
+    "notes": "Lat palus→Paludor; Hu mocsár → -a."
+  },
+  {
+    "english": "marsh",
+    "ancient": "Mariscor",
+    "modern": "Lápë",
+    "notes": "Lat mariscus→Mariscor; Hu láp → ë."
+  },
+  {
+    "english": "bog",
+    "ancient": "Tremor",
+    "modern": "Mocsinga",
+    "notes": "Lat tremulus ground; Hu mocsingó → clipped."
+  },
+  {
+    "english": "fen",
+    "ancient": "Fenor",
+    "modern": "Lápföldë",
+    "notes": "Lat fenum; Hu lápföld → ë."
+  },
+  {
+    "english": "river",
+    "ancient": "Fluvior",
+    "modern": "Folyóa",
+    "notes": "Lat fluvius→Fluvior; Hu folyó → -a."
+  },
+  {
+    "english": "stream",
+    "ancient": "Rivulor",
+    "modern": "Pataka",
+    "notes": "Lat rivulus→Rivulor; Hu patak → -a."
+  },
+  {
+    "english": "brook",
+    "ancient": "Brocor",
+    "modern": "Csermelyë",
+    "notes": "Lat brocus (folk); Hu csermely → ë."
+  },
+  {
+    "english": "waterfall",
+    "ancient": "Cataractor",
+    "modern": "Vízesë",
+    "notes": "Lat cataracta→Cataractor; Hu vízesés → ë."
+  },
+  {
+    "english": "lake",
+    "ancient": "Lacor",
+    "modern": "Tava",
+    "notes": "Lat lacus→Lacor; Hu tó/tava → -a."
+  },
+  {
+    "english": "sea",
+    "ancient": "Mareor",
+    "modern": "Tengë",
+    "notes": "Lat mare→Mareor; Hu tenger → truncated."
+  },
+  {
+    "english": "ocean",
+    "ancient": "Oceanor",
+    "modern": "Óceána",
+    "notes": "Lat oceanus→Oceanor; Hu óceán → -a."
+  },
+  {
+    "english": "bay",
+    "ancient": "Sinor",
+    "modern": "Öbla",
+    "notes": "Lat sinus→Sinor; Hu öböl → -a."
+  },
+  {
+    "english": "gulf",
+    "ancient": "Gulfus",
+    "modern": "Földköza",
+    "notes": "Lat gulfus; Hu földköz (archaic gulf) → -a."
+  },
+  {
+    "english": "strait",
+    "ancient": "Fretor",
+    "modern": "Szorosë",
+    "notes": "Lat fretum→Fretor; Hu szoros → ë."
+  },
+  {
+    "english": "shore",
+    "ancient": "Litoror",
+    "modern": "Partja",
+    "notes": "Lat litus→Litoror; Hu part → -ja."
+  },
+  {
+    "english": "beach",
+    "ancient": "Arenor",
+    "modern": "Homoka",
+    "notes": "Lat arena→Arenor; Hu homok → -a."
+  },
+  {
+    "english": "dune",
+    "ancient": "Dunor",
+    "modern": "Dűnea",
+    "notes": "Lat duna; Hu dűne → -a."
+  },
+  {
+    "english": "desert",
+    "ancient": "Desertor",
+    "modern": "Sivata",
+    "notes": "Lat desertum→Desertor; Hu sivatag → truncated."
+  },
+  {
+    "english": "oasis",
+    "ancient": "Oasor",
+    "modern": "Oázisa",
+    "notes": "Lat oasis→Oasor; Hu oázis → -a."
+  },
+  {
+    "english": "island",
+    "ancient": "Insulor",
+    "modern": "Szigeta",
+    "notes": "Lat insula→Insulor; Hu sziget → -a."
+  },
+  {
+    "english": "reef",
+    "ancient": "Recifor",
+    "modern": "Zátoa",
+    "notes": "Lat recif; Hu zátony → -a."
+  },
+  {
+    "english": "fjord",
+    "ancient": "Fiordor",
+    "modern": "Fjordë",
+    "notes": "Loan Is fjörðr; Hu fjord → ë."
+  },
+  {
+    "english": "glacier",
+    "ancient": "Glacior",
+    "modern": "Jégora",
+    "notes": "Lat glacies→Glacior; Hu jég → -ora."
+  },
+  {
+    "english": "snowfield",
+    "ancient": "Nivor",
+    "modern": "Hómeze",
+    "notes": "Lat nix→Nivor; Hu hómező → -e."
+  },
+  {
+    "english": "volcano",
+    "ancient": "Volcanor",
+    "modern": "Vulkána",
+    "notes": "Lat vulcanus→Volcanor; Hu vulkán → -a."
+  },
+  {
+    "english": "crater",
+    "ancient": "Crator",
+    "modern": "Krátera",
+    "notes": "Lat crater→Crator; Hu kráter → -a."
+  },
+  {
+    "english": "lava",
+    "ancient": "Lavor",
+    "modern": "Lávaja",
+    "notes": "Lat lava; Hu láva → -ja."
+  },
+  {
+    "english": "ashfield",
+    "ancient": "Cineror",
+    "modern": "Hamu-meze",
+    "notes": "Lat cinis; Hu hamumező → -e."
+  },
+  {
+    "english": "cave",
+    "ancient": "Cavor",
+    "modern": "Barlanga",
+    "notes": "Lat cava→Cavor; Hu barlang → -a."
+  },
+  {
+    "english": "cavern",
+    "ancient": "Specusor",
+    "modern": "Üregë",
+    "notes": "Lat specus→Specusor; Hu üreg → ë."
+  },
+  {
+    "english": "grotto",
+    "ancient": "Grottor",
+    "modern": "Barlangocsa",
+    "notes": "It grotta; Hu barlangocska → -a."
+  },
+  {
+    "english": "spring",
+    "ancient": "Fontor",
+    "modern": "Forrása",
+    "notes": "Lat fons→Fontor; Hu forrás → -a."
+  },
+  {
+    "english": "geyser",
+    "ancient": "Geysiror",
+    "modern": "Gejzíra",
+    "notes": "Is geysir; Hu gejzír → -a."
+  },
+  {
+    "english": "ravine",
+    "ancient": "Ravinor",
+    "modern": "Szurdoka",
+    "notes": "Lat ravina→Ravinor; Hu szurdok → -a."
+  },
+  {
+    "english": "canyon",
+    "ancient": "Canyor",
+    "modern": "Kanyona",
+    "notes": "Sp canyón; Hu kanyon → -a."
+  },
+  {
+    "english": "plateau",
+    "ancient": "Platyor",
+    "modern": "Fennsíka",
+    "notes": "Fr plateau; Hu fennsík → -a."
+  },
+  {
+    "english": "mesa",
+    "ancient": "Mesor",
+    "modern": "Asztala",
+    "notes": "Sp mesa; Hu asztal (mesa table) → -a."
+  },
+  {
+    "english": "moor",
+    "ancient": "Moror",
+    "modern": "Mocsárfölda",
+    "notes": "Lat morus; Hu mocsárföld → -a."
+  },
+  {
+    "english": "heath",
+    "ancient": "Brucor",
+    "modern": "Pusztaföldë",
+    "notes": "Lat brucus; Hu pusztaföld → ë."
+  },
+  {
+    "english": "sky",
+    "ancient": "Caelior",
+    "modern": "Égë",
+    "notes": "Lat caelum→Caelior; Hu ég → ë."
+  },
+  {
+    "english": "sun",
+    "ancient": "Solor",
+    "modern": "Napë",
+    "notes": "Lat sol→Solor; Hu nap → ë."
+  },
+  {
+    "english": "moon",
+    "ancient": "Lunor",
+    "modern": "Holda",
+    "notes": "Lat luna→Lunor; Hu hold → -a."
+  },
+  {
+    "english": "star",
+    "ancient": "Stellor",
+    "modern": "Csilla",
+    "notes": "Lat stella→Stellor; Hu csillag → -a."
+  },
+  {
+    "english": "constellation",
+    "ancient": "Astron",
+    "modern": "Csillagképë",
+    "notes": "Lat astrum; Hu csillagkép → ë."
+  },
+  {
+    "english": "dawn",
+    "ancient": "Auroror",
+    "modern": "Hajna",
+    "notes": "Lat aurora→Auroror; Hu hajnal → -a."
+  },
+  {
+    "english": "dusk",
+    "ancient": "Crepuscor",
+    "modern": "Alkonyë",
+    "notes": "Lat crepusculum→Crepuscor; Hu alkony → ë."
+  },
+  {
+    "english": "day",
+    "ancient": "Diurnor",
+    "modern": "Napja",
+    "notes": "Lat diurnus→Diurnor; Hu nap → -ja."
+  },
+  {
+    "english": "night",
+    "ancient": "Noctor",
+    "modern": "Éja",
+    "notes": "Lat nox→Noctor; Hu éj → -a."
+  },
+  {
+    "english": "storm",
+    "ancient": "Tempestor",
+    "modern": "Vihara",
+    "notes": "Lat tempestas→Tempestor; Hu vihar → -a."
+  },
+  {
+    "english": "rain",
+    "ancient": "Pluvior",
+    "modern": "Esőë",
+    "notes": "Lat pluvia→Pluvior; Hu eső → ë."
+  },
+  {
+    "english": "snow",
+    "ancient": "Nivor",
+    "modern": "Hóë",
+    "notes": "Lat nix→Nivor; Hu hó → ë."
+  },
+  {
+    "english": "ice",
+    "ancient": "Glacior",
+    "modern": "Jégë",
+    "notes": "Lat glacies→Glacior; Hu jég → ë."
+  },
+  {
+    "english": "cloud",
+    "ancient": "Nubor",
+    "modern": "Felhőë",
+    "notes": "Lat nubes→Nubor; Hu felhő → ë."
+  },
+  {
+    "english": "fog",
+    "ancient": "Neblor",
+    "modern": "Köda",
+    "notes": "Lat nebula→Neblor; Hu köd → -a."
+  },
+  {
+    "english": "mist",
+    "ancient": "Caligor",
+    "modern": "Párája",
+    "notes": "Lat caligo→Caligor; Hu pára → -ja."
+  },
+  {
+    "english": "wind",
+    "ancient": "Ventor",
+    "modern": "Szélë",
+    "notes": "Lat ventus→Ventor; Hu szél → ë."
+  },
+  {
+    "english": "thunder",
+    "ancient": "Tonitror",
+    "modern": "Mennydörgë",
+    "notes": "Lat tonitrus→Tonitror; Hu mennydörgés → ë."
+  },
+  {
+    "english": "lightning",
+    "ancient": "Fulminor",
+    "modern": "Villáma",
+    "notes": "Lat fulmen→Fulminor; Hu villám → -a."
+  },
+  {
+    "english": "rainbow",
+    "ancient": "Arcusor",
+    "modern": "Szivárványa",
+    "notes": "Lat arcus; Hu szivárvány → -a."
+  },
+  {
+    "english": "village",
+    "ancient": "Vicanor",
+    "modern": "Falua",
+    "notes": "Lat vicus→Vicanor; Hu falu → -a."
+  },
+  {
+    "english": "town",
+    "ancient": "Oppidor",
+    "modern": "Városa",
+    "notes": "Lat oppidum→Oppidor; Hu város → -a."
+  },
+  {
+    "english": "city",
+    "ancient": "Civitor",
+    "modern": "Városaë",
+    "notes": "Lat civitas→Civitor; Hu város → ë."
+  },
+  {
+    "english": "fortress",
+    "ancient": "Castellor",
+    "modern": "Vára",
+    "notes": "Lat castellum→Castellor; Hu vár → -a."
+  },
+  {
+    "english": "tower",
+    "ancient": "Turror",
+    "modern": "Tornya",
+    "notes": "Lat turris→Turror; Hu torony → -a."
+  },
+  {
+    "english": "wall",
+    "ancient": "Murusor",
+    "modern": "Fala",
+    "notes": "Lat murus→Murusor; Hu fal → -a."
+  },
+  {
+    "english": "gate",
+    "ancient": "Portor",
+    "modern": "Kapua",
+    "notes": "Lat porta→Portor; Hu kapu → -a."
+  },
+  {
+    "english": "bridge",
+    "ancient": "Pontor",
+    "modern": "Hídja",
+    "notes": "Lat pons→Pontor; Hu híd → -ja."
+  },
+  {
+    "english": "harbor",
+    "ancient": "Portusor",
+    "modern": "Kikötőë",
+    "notes": "Lat portus→Portusor; Hu kikötő → ë."
+  },
+  {
+    "english": "market",
+    "ancient": "Forumor",
+    "modern": "Piaca",
+    "notes": "Lat forum→Forumor; Hu piac → -a."
+  },
+  {
+    "english": "bazaar",
+    "ancient": "Bazaror",
+    "modern": "Bazára",
+    "notes": "Pers bazar; Hu bazár → -a."
+  },
+  {
+    "english": "granary",
+    "ancient": "Horreor",
+    "modern": "Magtára",
+    "notes": "Lat horreum→Horreor; Hu magtár → -a."
+  },
+  {
+    "english": "barn",
+    "ancient": "Horrior",
+    "modern": "Csűra",
+    "notes": "Lat horreum barn sense; Hu csűr → -a."
+  },
+  {
+    "english": "stable",
+    "ancient": "Stabulor",
+    "modern": "Istállóë",
+    "notes": "Lat stabulum→Stabulor; Hu istálló → ë."
+  },
+  {
+    "english": "corral",
+    "ancient": "Curralor",
+    "modern": "Karama",
+    "notes": "Pt curral; Hu karám → -a."
+  },
+  {
+    "english": "warehouse",
+    "ancient": "Depositor",
+    "modern": "Raktára",
+    "notes": "Lat depositum→Depositor; Hu raktár → -a."
+  },
+  {
+    "english": "library",
+    "ancient": "Libraror",
+    "modern": "Könyvtára",
+    "notes": "Lat librarium→Libraror; Hu könyvtár → -a."
+  },
+  {
+    "english": "archive",
+    "ancient": "Archivor",
+    "modern": "Levéltára",
+    "notes": "Lat archivum→Archivor; Hu levéltár → -a."
+  },
+  {
+    "english": "court",
+    "ancient": "Curiar",
+    "modern": "Bírósága",
+    "notes": "Lat curia→Curiar; Hu bíróság → -a."
+  },
+  {
+    "english": "prison",
+    "ancient": "Carceror",
+    "modern": "Börtöna",
+    "notes": "Lat carcer→Carceror; Hu börtön → -a."
+  },
+  {
+    "english": "barracks",
+    "ancient": "Casernor",
+    "modern": "Laktanyaë",
+    "notes": "Fr caserne; Hu laktanya → ë."
+  },
+  {
+    "english": "watchpost",
+    "ancient": "Speculator",
+    "modern": "Őrtornya",
+    "notes": "Lat speculator; Hu őrtorony → -a."
+  },
+  {
+    "english": "lighthouse",
+    "ancient": "Pharor",
+    "modern": "Világítótoronya",
+    "notes": "Lat pharos→Pharor; Hu világítótorony → -a."
+  },
+  {
+    "english": "temple",
+    "ancient": "Templor",
+    "modern": "Temploma",
+    "notes": "Lat templum→Templor; Hu templom → -a."
+  },
+  {
+    "english": "shrine",
+    "ancient": "Sacellor",
+    "modern": "Szentélyë",
+    "notes": "Lat sacellum→Sacellor; Hu szentély → ë."
+  },
+  {
+    "english": "altar",
+    "ancient": "Altarior",
+    "modern": "Oltára",
+    "notes": "Lat altare→Altarior; Hu oltár → -a."
+  },
+  {
+    "english": "crypt",
+    "ancient": "Cryptor",
+    "modern": "Kriptája",
+    "notes": "Lat crypta→Cryptor; Hu kripta → -ja."
+  },
+  {
+    "english": "tomb",
+    "ancient": "Sepulcror",
+    "modern": "Síra",
+    "notes": "Lat sepulcrum→Sepulcror; Hu sír → -a."
+  },
+  {
+    "english": "cairn",
+    "ancient": "Cairnor",
+    "modern": "Kőhalma",
+    "notes": "Scot cairn; Hu kőhalom → -a."
+  },
+  {
+    "english": "pillar",
+    "ancient": "Pilaror",
+    "modern": "Oszlopa",
+    "notes": "Lat pilar→Pilaror; Hu oszlop → -a."
+  },
+  {
+    "english": "sanctuary",
+    "ancient": "Sanctor",
+    "modern": "Menedéke",
+    "notes": "Lat sanctuarium→Sanctor; Hu menedék → -e."
+  },
+  {
+    "english": "holy mountain",
+    "ancient": "Mons Sacror",
+    "modern": "Szent Hegya",
+    "notes": "Lat mons sacer; Hu szent hegy → -a."
+  },
+  {
+    "english": "sacred grove",
+    "ancient": "Lucus Sacror",
+    "modern": "Szent Ligeta",
+    "notes": "Lat lucus sacer; Hu szent liget → -a."
+  },
+  {
+    "english": "undercity",
+    "ancient": "Suburbis",
+    "modern": "Alvilága",
+    "notes": "Compound; Hu alvilág (undercity) → -a."
+  },
+  {
+    "english": "high hall",
+    "ancient": "Aula Magna",
+    "modern": "Nagyaulaë",
+    "notes": "Lat aula magna; Hu nagy aula → ë."
+  }
+]

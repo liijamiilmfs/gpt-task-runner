@@ -1,0 +1,500 @@
+[
+  {
+    "english": "pound",
+    "ancient": "Libra",
+    "modern": "font",
+    "notes": "Lat libra > Ancient Libra; Hu font modern."
+  },
+  {
+    "english": "ounce",
+    "ancient": "Uncia",
+    "modern": "uncia",
+    "notes": "Lat uncia > Ancient Uncia; loan modern."
+  },
+  {
+    "english": "stone",
+    "ancient": "Saxum",
+    "modern": "kő",
+    "notes": "Lat saxum > Ancient Saxum; Hu kő modern."
+  },
+  {
+    "english": "talent",
+    "ancient": "Talentum",
+    "modern": "talánt",
+    "notes": "Gr talanton > Ancient Talentum; Ro talant modern."
+  },
+  {
+    "english": "drachma",
+    "ancient": "Drachma",
+    "modern": "dráma",
+    "notes": "Gr drachma; Ro dramă modern."
+  },
+  {
+    "english": "denarius",
+    "ancient": "Denarius",
+    "modern": "denár",
+    "notes": "Lat denarius; Hu denár modern."
+  },
+  {
+    "english": "solidus",
+    "ancient": "Solidus",
+    "modern": "solid",
+    "notes": "Lat solidus; Hu solid modern coin."
+  },
+  {
+    "english": "sesterce",
+    "ancient": "Sestertius",
+    "modern": "sesterce",
+    "notes": "Lat sestertius; Ro sesterce modern."
+  },
+  {
+    "english": "mark",
+    "ancient": "Marca",
+    "modern": "márka",
+    "notes": "Gmc marka > Ancient Marca; Hu márka modern."
+  },
+  {
+    "english": "florin",
+    "ancient": "Florinus",
+    "modern": "forint",
+    "notes": "Lat florinus; Hu forint modern currency."
+  },
+  {
+    "english": "ducat",
+    "ancient": "Ducat",
+    "modern": "dukát",
+    "notes": "Lat ducatus; Hu dukát modern."
+  },
+  {
+    "english": "groschen",
+    "ancient": "Grossus",
+    "modern": "garas",
+    "notes": "Med Lat grossus > Ancient Grossus; Hu garas modern."
+  },
+  {
+    "english": "peso",
+    "ancient": "Pessus",
+    "modern": "peso",
+    "notes": "Sp peso; Ro peso modern."
+  },
+  {
+    "english": "shekel",
+    "ancient": "Sicelus",
+    "modern": "sekél",
+    "notes": "Heb/Lat shekel > Ancient Sicelus; Ro șechel modern."
+  },
+  {
+    "english": "obol",
+    "ancient": "Obolos",
+    "modern": "obol",
+    "notes": "Gr obolos > Ancient Obolos; Hu obol modern."
+  },
+  {
+    "english": "zino",
+    "ancient": "Zinon",
+    "modern": "zino",
+    "notes": "Lore coin; Ancient reshaped; modern kept as zino."
+  },
+  {
+    "english": "crown",
+    "ancient": "Corona",
+    "modern": "korona",
+    "notes": "Lat corona > Ancient Corona; Hu korona modern."
+  },
+  {
+    "english": "sovereign",
+    "ancient": "Sovranus",
+    "modern": "szuverén",
+    "notes": "Lat sovereignus > Ancient Sovranus; Hu szuverén modern."
+  },
+  {
+    "english": "guilders",
+    "ancient": "Guldinus",
+    "modern": "gulden",
+    "notes": "Ger gulden > Ancient Guldinus; Hu gulden modern."
+  },
+  {
+    "english": "minae",
+    "ancient": "Mina",
+    "modern": "mina",
+    "notes": "Gr mina; Ro mina modern."
+  },
+  {
+    "english": "sheaf",
+    "ancient": "Manipulus",
+    "modern": "kévë",
+    "notes": "Lat manipulus > Ancient Manipulus; Hu kéve modern measure."
+  },
+  {
+    "english": "grain (measure)",
+    "ancient": "Granum",
+    "modern": "szem",
+    "notes": "Lat granum > Ancient Granum; Hu szem modern unit."
+  },
+  {
+    "english": "carat",
+    "ancient": "Caratus",
+    "modern": "karát",
+    "notes": "Gr keration > Ancient Caratus; Ro/Hu karát modern."
+  },
+  {
+    "english": "cubit",
+    "ancient": "Cubitus",
+    "modern": "könyök",
+    "notes": "Lat cubitus > Ancient Cubitus; Hu könyök modern."
+  },
+  {
+    "english": "span",
+    "ancient": "Spanna",
+    "modern": "arasz",
+    "notes": "Gmc spanna > Ancient Spanna; Hu arasz modern."
+  },
+  {
+    "english": "foot",
+    "ancient": "Pes",
+    "modern": "láb",
+    "notes": "Lat pes > Ancient Pes; Hu láb modern."
+  },
+  {
+    "english": "pace",
+    "ancient": "Passus",
+    "modern": "lépés",
+    "notes": "Lat passus > Ancient Passus; Hu lépés modern."
+  },
+  {
+    "english": "ell",
+    "ancient": "Ulna",
+    "modern": "rőf",
+    "notes": "Lat ulna > Ancient Ulna; Hu rőf modern."
+  },
+  {
+    "english": "rod",
+    "ancient": "Virga",
+    "modern": "rúd",
+    "notes": "Lat virga > Ancient Virga; Hu rúd modern."
+  },
+  {
+    "english": "furlong",
+    "ancient": "Stadium",
+    "modern": "stadion",
+    "notes": "Gr stadion > Ancient Stadium; Hu stadion modern."
+  },
+  {
+    "english": "league",
+    "ancient": "Leuga",
+    "modern": "liga",
+    "notes": "Celtic leuga > Lat; Ro ligă modern."
+  },
+  {
+    "english": "mile",
+    "ancient": "Mille Passus",
+    "modern": "mérföld",
+    "notes": "Lat mille passus > Ancient; Hu mérföld modern."
+  },
+  {
+    "english": "meter",
+    "ancient": "Metron",
+    "modern": "méter",
+    "notes": "Gr metron > Ancient; Hu méter modern."
+  },
+  {
+    "english": "centimeter",
+    "ancient": "Centimetrum",
+    "modern": "centiméter",
+    "notes": "Lat centimetrum > Ancient; Hu centiméter modern."
+  },
+  {
+    "english": "kilometer",
+    "ancient": "Chiliometrum",
+    "modern": "kilométer",
+    "notes": "Gr khilioi+metron > Ancient; Hu kilométer modern."
+  },
+  {
+    "english": "cup",
+    "ancient": "Cyathus",
+    "modern": "csésze",
+    "notes": "Lat cyathus > Ancient; Hu csésze modern."
+  },
+  {
+    "english": "goblet",
+    "ancient": "Poculum",
+    "modern": "pohár",
+    "notes": "Lat poculum > Ancient; Hu pohár modern."
+  },
+  {
+    "english": "amphora",
+    "ancient": "Amphora",
+    "modern": "amfora",
+    "notes": "Gr amphora > Ancient; Ro amforă modern."
+  },
+  {
+    "english": "jar",
+    "ancient": "Urna",
+    "modern": "urna",
+    "notes": "Lat urna > Ancient; Ro urnă modern."
+  },
+  {
+    "english": "jug",
+    "ancient": "Cruzta",
+    "modern": "kancsó",
+    "notes": "Lat crater/crusta > Ancient; Hu kancsó modern."
+  },
+  {
+    "english": "flask",
+    "ancient": "Lagena",
+    "modern": "palack",
+    "notes": "Lat lagena > Ancient; Hu palack modern."
+  },
+  {
+    "english": "bottle",
+    "ancient": "Ampulla",
+    "modern": "üveg",
+    "notes": "Lat ampulla > Ancient; Hu üveg modern."
+  },
+  {
+    "english": "barrel",
+    "ancient": "Dolium",
+    "modern": "hordó",
+    "notes": "Lat dolium > Ancient; Hu hordó modern."
+  },
+  {
+    "english": "cask",
+    "ancient": "Cadus",
+    "modern": "kád",
+    "notes": "Lat cadus > Ancient; Hu kád modern."
+  },
+  {
+    "english": "tun",
+    "ancient": "Tunna",
+    "modern": "tona",
+    "notes": "Gmc tunna > Ancient; Ro tonă modern."
+  },
+  {
+    "english": "bucket",
+    "ancient": "Situla",
+    "modern": "vödör",
+    "notes": "Lat situla > Ancient; Hu vödör modern."
+  },
+  {
+    "english": "ladle",
+    "ancient": "Trulla",
+    "modern": "merő",
+    "notes": "Lat trulla > Ancient; Hu merő modern."
+  },
+  {
+    "english": "cauldron",
+    "ancient": "Caldarium",
+    "modern": "üst",
+    "notes": "Lat caldarium > Ancient; Hu üst modern."
+  },
+  {
+    "english": "pot",
+    "ancient": "Olla",
+    "modern": "fazék",
+    "notes": "Lat olla > Ancient; Hu fazék modern."
+  },
+  {
+    "english": "bowl",
+    "ancient": "Patina",
+    "modern": "tál",
+    "notes": "Lat patina > Ancient; Hu tál modern."
+  },
+  {
+    "english": "basin",
+    "ancient": "Pelvis",
+    "modern": "teknő",
+    "notes": "Lat pelvis > Ancient; Hu teknő modern."
+  },
+  {
+    "english": "kettle",
+    "ancient": "Ahenum",
+    "modern": "bogrács",
+    "notes": "Lat ahenum > Ancient; Hu bogrács modern."
+  },
+  {
+    "english": "market",
+    "ancient": "Mercatus",
+    "modern": "piac",
+    "notes": "Lat mercatus > Ancient; Hu piac modern."
+  },
+  {
+    "english": "trade",
+    "ancient": "Commercium",
+    "modern": "kereskedelem",
+    "notes": "Lat commercium > Ancient; Hu kereskedelem modern."
+  },
+  {
+    "english": "barter",
+    "ancient": "Permutatio",
+    "modern": "csere",
+    "notes": "Lat permutatio > Ancient; Hu csere modern."
+  },
+  {
+    "english": "bargain",
+    "ancient": "Pactum",
+    "modern": "alku",
+    "notes": "Lat pactum > Ancient; Hu alku modern."
+  },
+  {
+    "english": "contract",
+    "ancient": "Contractus",
+    "modern": "szerződés",
+    "notes": "Lat contractus > Ancient; Hu szerződés modern."
+  },
+  {
+    "english": "oath",
+    "ancient": "Iusiurandum",
+    "modern": "eskü",
+    "notes": "Lat iusiurandum > Ancient; Hu eskü modern."
+  },
+  {
+    "english": "debt",
+    "ancient": "Debitum",
+    "modern": "adósság",
+    "notes": "Lat debitum > Ancient; Hu adósság modern."
+  },
+  {
+    "english": "tribute",
+    "ancient": "Tributum",
+    "modern": "adó",
+    "notes": "Lat tributum > Ancient; Hu adó modern."
+  },
+  {
+    "english": "tithe",
+    "ancient": "Decima",
+    "modern": "tized",
+    "notes": "Lat decima > Ancient; Hu tized modern."
+  },
+  {
+    "english": "fine",
+    "ancient": "Multa",
+    "modern": "bírság",
+    "notes": "Lat multa > Ancient; Hu bírság modern."
+  },
+  {
+    "english": "sanction",
+    "ancient": "Sanctio",
+    "modern": "szankció",
+    "notes": "Lat sanctio > Ancient; Hu szankció modern."
+  },
+  {
+    "english": "tax",
+    "ancient": "Vectigal",
+    "modern": "adó",
+    "notes": "Lat vectigal > Ancient; Hu adó modern."
+  },
+  {
+    "english": "toll",
+    "ancient": "Teloneum",
+    "modern": "vám",
+    "notes": "Gr teloneion > Ancient; Hu vám modern."
+  },
+  {
+    "english": "guild due",
+    "ancient": "Census",
+    "modern": "cenzus",
+    "notes": "Lat census > Ancient; Ro cenz modern."
+  },
+  {
+    "english": "tribute oath",
+    "ancient": "Sacramentum",
+    "modern": "fogadalom",
+    "notes": "Lat sacramentum > Ancient; Hu fogadalom modern."
+  },
+  {
+    "english": "ledger",
+    "ancient": "Codex",
+    "modern": "könyv",
+    "notes": "Lat codex > Ancient; Hu könyv modern (account)."
+  },
+  {
+    "english": "tally-stick",
+    "ancient": "Talea",
+    "modern": "rovás",
+    "notes": "Lat talea > Ancient; Hu rovás modern."
+  },
+  {
+    "english": "seal",
+    "ancient": "Sigillum",
+    "modern": "pecsét",
+    "notes": "Lat sigillum > Ancient; Hu pecsét modern."
+  },
+  {
+    "english": "signature",
+    "ancient": "Subscriptio",
+    "modern": "aláírás",
+    "notes": "Lat subscriptio > Ancient; Hu aláírás modern."
+  },
+  {
+    "english": "contract tablet",
+    "ancient": "Tabula",
+    "modern": "tábla",
+    "notes": "Lat tabula > Ancient; Hu tábla modern."
+  },
+  {
+    "english": "scroll",
+    "ancient": "Volumen",
+    "modern": "tekercs",
+    "notes": "Lat volumen > Ancient; Hu tekercs modern."
+  },
+  {
+    "english": "charter",
+    "ancient": "Charta",
+    "modern": "oklevél",
+    "notes": "Lat charta > Ancient; Hu oklevél modern."
+  },
+  {
+    "english": "grant",
+    "ancient": "Concessio",
+    "modern": "engedély",
+    "notes": "Lat concessio > Ancient; Hu engedély modern."
+  },
+  {
+    "english": "hour",
+    "ancient": "Hora",
+    "modern": "óra",
+    "notes": "Lat hora > Ancient; Hu óra modern."
+  },
+  {
+    "english": "day",
+    "ancient": "Dies",
+    "modern": "nap",
+    "notes": "Lat dies > Ancient; Hu nap modern."
+  },
+  {
+    "english": "week",
+    "ancient": "Septimana",
+    "modern": "hét",
+    "notes": "Lat septimana > Ancient; Hu hét modern."
+  },
+  {
+    "english": "month",
+    "ancient": "Mensis",
+    "modern": "hónap",
+    "notes": "Lat mensis > Ancient; Hu hónap modern."
+  },
+  {
+    "english": "year",
+    "ancient": "Annus",
+    "modern": "év",
+    "notes": "Lat annus > Ancient; Hu év modern."
+  },
+  {
+    "english": "decade",
+    "ancient": "Decas",
+    "modern": "évtized",
+    "notes": "Gr decas > Ancient; Hu évtized modern."
+  },
+  {
+    "english": "century",
+    "ancient": "Saeculum",
+    "modern": "század",
+    "notes": "Lat saeculum > Ancient; Hu század modern."
+  },
+  {
+    "english": "millennium",
+    "ancient": "Millenarium",
+    "modern": "évezred",
+    "notes": "Lat millenarium > Ancient; Hu évezred modern."
+  }
+]

@@ -1,0 +1,902 @@
+[
+  {
+    "english": "merchant",
+    "ancient": "Mercator",
+    "modern": "merkatór",
+    "notes": "Lat mercator; Hu k-, Modern ór"
+  },
+  {
+    "english": "trader",
+    "ancient": "Negotiator",
+    "modern": "negotsiátór",
+    "notes": "Lat negotiator; Modern ts-, ór"
+  },
+  {
+    "english": "commerce",
+    "ancient": "Commercium",
+    "modern": "komerts",
+    "notes": "Lat commercium; Hu k-, Modern ts"
+  },
+  {
+    "english": "trade",
+    "ancient": "Negotium",
+    "modern": "negótsí",
+    "notes": "Lat negotium; Modern ts-, í"
+  },
+  {
+    "english": "business",
+    "ancient": "Negotium",
+    "modern": "negótsí",
+    "notes": "Lat negotium; Modern ts-, í"
+  },
+  {
+    "english": "market",
+    "ancient": "Mercatus",
+    "modern": "merkát",
+    "notes": "Lat mercatus; Hu k-, Modern át"
+  },
+  {
+    "english": "marketplace",
+    "ancient": "Forum",
+    "modern": "forú",
+    "notes": "Lat forum; Modern ú ending"
+  },
+  {
+    "english": "bazaar",
+    "ancient": "Emporium",
+    "modern": "emporí",
+    "notes": "Lat emporium; Modern í ending"
+  },
+  {
+    "english": "shop",
+    "ancient": "Taberna",
+    "modern": "tabern",
+    "notes": "Lat taberna; Modern simplified"
+  },
+  {
+    "english": "store",
+    "ancient": "Apotheca",
+    "modern": "apotekë",
+    "notes": "Lat apotheca; Hu k-, Modern ë"
+  },
+  {
+    "english": "warehouse",
+    "ancient": "Horreum",
+    "modern": "horé",
+    "notes": "Lat horreum; Modern é, single-r"
+  },
+  {
+    "english": "stall",
+    "ancient": "Tabula",
+    "modern": "tabulá",
+    "notes": "Lat tabula; Modern á ending"
+  },
+  {
+    "english": "vendor",
+    "ancient": "Venditor",
+    "modern": "venditór",
+    "notes": "Lat venditor; Modern ór ending"
+  },
+  {
+    "english": "seller",
+    "ancient": "Venditor",
+    "modern": "venditór",
+    "notes": "Lat venditor; Modern ór ending"
+  },
+  {
+    "english": "buyer",
+    "ancient": "Emptor",
+    "modern": "emptór",
+    "notes": "Lat emptor; Modern ór ending"
+  },
+  {
+    "english": "customer",
+    "ancient": "Cliens",
+    "modern": "kliénsh",
+    "notes": "Lat cliens; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "client",
+    "ancient": "Cliens",
+    "modern": "kliénsh",
+    "notes": "Lat cliens; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "patron",
+    "ancient": "Patronus",
+    "modern": "patronúsh",
+    "notes": "Lat patronus; Modern ú-sh"
+  },
+  {
+    "english": "goods",
+    "ancient": "Merces",
+    "modern": "mertsé",
+    "notes": "Lat merces; Modern ts-, é"
+  },
+  {
+    "english": "merchandise",
+    "ancient": "Merx",
+    "modern": "mérksh",
+    "notes": "Lat merx; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "commodity",
+    "ancient": "Commoditas",
+    "modern": "komodít",
+    "notes": "Lat commoditas; Hu k-, Modern ít, single-m"
+  },
+  {
+    "english": "product",
+    "ancient": "Productum",
+    "modern": "produktú",
+    "notes": "Lat productum; Hu k-, Modern ú"
+  },
+  {
+    "english": "cargo",
+    "ancient": "Onus",
+    "modern": "onúsh",
+    "notes": "Lat onus; Modern ú-sh"
+  },
+  {
+    "english": "freight",
+    "ancient": "Vectura",
+    "modern": "vektúr",
+    "notes": "Lat vectura; Hu k-, Modern úr"
+  },
+  {
+    "english": "shipment",
+    "ancient": "Missio",
+    "modern": "misí",
+    "notes": "Lat missio; Modern í, single-s"
+  },
+  {
+    "english": "consignment",
+    "ancient": "Mandatum",
+    "modern": "mandát",
+    "notes": "Lat mandatum; Modern át ending"
+  },
+  {
+    "english": "inventory",
+    "ancient": "Inventarium",
+    "modern": "inventár",
+    "notes": "Lat inventarium; Modern ár ending"
+  },
+  {
+    "english": "stock",
+    "ancient": "Copia",
+    "modern": "kopí",
+    "notes": "Lat copia; Hu k-, Modern í"
+  },
+  {
+    "english": "supply",
+    "ancient": "Provisio",
+    "modern": "provízí",
+    "notes": "Lat provisio; Modern z-, í"
+  },
+  {
+    "english": "demand",
+    "ancient": "Requisitio",
+    "modern": "rekvizíts",
+    "notes": "Lat requisitio; Hu k-v, Modern z-, íts"
+  },
+  {
+    "english": "price",
+    "ancient": "Pretium",
+    "modern": "pretsí",
+    "notes": "Lat pretium; Modern ts-, í"
+  },
+  {
+    "english": "cost",
+    "ancient": "Sumptus",
+    "modern": "súmptúsh",
+    "notes": "Lat sumptus; Modern ú-ú-sh"
+  },
+  {
+    "english": "value",
+    "ancient": "Valor",
+    "modern": "valór",
+    "notes": "Lat valor; Modern ór ending"
+  },
+  {
+    "english": "worth",
+    "ancient": "Dignitas",
+    "modern": "dignít",
+    "notes": "Lat dignitas; Modern ít ending"
+  },
+  {
+    "english": "expense",
+    "ancient": "Impensa",
+    "modern": "impenzë",
+    "notes": "Lat impensa; Modern z-, ë"
+  },
+  {
+    "english": "profit",
+    "ancient": "Lucrum",
+    "modern": "lukrú",
+    "notes": "Lat lucrum; Hu k-, Modern ú"
+  },
+  {
+    "english": "loss",
+    "ancient": "Damnum",
+    "modern": "damnú",
+    "notes": "Lat damnum; Modern ú ending"
+  },
+  {
+    "english": "gain",
+    "ancient": "Quaestus",
+    "modern": "kvaestúsh",
+    "notes": "Lat quaestus; Hu k-v, Modern ú-sh"
+  },
+  {
+    "english": "revenue",
+    "ancient": "Reditus",
+    "modern": "redítúsh",
+    "notes": "Lat reditus; Modern í-ú-sh"
+  },
+  {
+    "english": "income",
+    "ancient": "Proventus",
+    "modern": "proventúsh",
+    "notes": "Lat proventus; Modern ú-sh"
+  },
+  {
+    "english": "salary",
+    "ancient": "Salarium",
+    "modern": "zalár",
+    "notes": "Lat salarium; Modern z-, ár"
+  },
+  {
+    "english": "wage",
+    "ancient": "Merces",
+    "modern": "mertsé",
+    "notes": "Lat merces; Modern ts-, é"
+  },
+  {
+    "english": "fee",
+    "ancient": "Honorarium",
+    "modern": "honorár",
+    "notes": "Lat honorarium; Modern ár ending"
+  },
+  {
+    "english": "commission",
+    "ancient": "Provisio",
+    "modern": "provízí",
+    "notes": "Lat provisio; Modern z-, í"
+  },
+  {
+    "english": "tax",
+    "ancient": "Tributum",
+    "modern": "tribút",
+    "notes": "Lat tributum; Modern út ending"
+  },
+  {
+    "english": "tariff",
+    "ancient": "Vectigal",
+    "modern": "vektígál",
+    "notes": "Lat vectigal; Hu k-, Modern í-ál"
+  },
+  {
+    "english": "duty",
+    "ancient": "Portorium",
+    "modern": "portór",
+    "notes": "Lat portorium; Modern ór ending"
+  },
+  {
+    "english": "toll",
+    "ancient": "Telonium",
+    "modern": "telón",
+    "notes": "Lat telonium; Modern ón ending"
+  },
+  {
+    "english": "customs",
+    "ancient": "Portus",
+    "modern": "portúsh",
+    "notes": "Lat portus; Modern ú-sh"
+  },
+  {
+    "english": "money",
+    "ancient": "Pecunia",
+    "modern": "pekúní",
+    "notes": "Lat pecunia; Hu k-, Modern í"
+  },
+  {
+    "english": "coin",
+    "ancient": "Nummus",
+    "modern": "numúsh",
+    "notes": "Lat nummus; Modern ú-sh, single-m"
+  },
+  {
+    "english": "currency",
+    "ancient": "Moneta",
+    "modern": "monetë",
+    "notes": "Lat moneta; Modern ë ending"
+  },
+  {
+    "english": "gold",
+    "ancient": "Aurum",
+    "modern": "aurú",
+    "notes": "Lat aurum; Modern ú ending"
+  },
+  {
+    "english": "silver",
+    "ancient": "Argentum",
+    "modern": "argé",
+    "notes": "Lat argentum; Modern é ending"
+  },
+  {
+    "english": "bronze",
+    "ancient": "Aes",
+    "modern": "aésh",
+    "notes": "Lat aes; Modern é-sh"
+  },
+  {
+    "english": "denarius",
+    "ancient": "Denarius",
+    "modern": "denár",
+    "notes": "Lat denarius; Modern ár ending"
+  },
+  {
+    "english": "sestertius",
+    "ancient": "Sestertius",
+    "modern": "zeztertsí",
+    "notes": "Lat sestertius; Modern z-, ts-, í"
+  },
+  {
+    "english": "aureus",
+    "ancient": "Aureus",
+    "modern": "aurésh",
+    "notes": "Lat aureus; Modern é-sh"
+  },
+  {
+    "english": "talent",
+    "ancient": "Talentum",
+    "modern": "talentú",
+    "notes": "Lat talentum; Modern ú ending"
+  },
+  {
+    "english": "mina",
+    "ancient": "Mina",
+    "modern": "mínë",
+    "notes": "Lat mina; Modern í-ë"
+  },
+  {
+    "english": "shekel",
+    "ancient": "Siclus",
+    "modern": "ziklúsh",
+    "notes": "Lat siclus; Modern z-, k-, ú-sh"
+  },
+  {
+    "english": "purse",
+    "ancient": "Marsupium",
+    "modern": "marzupí",
+    "notes": "Lat marsupium; Modern z-, í"
+  },
+  {
+    "english": "wallet",
+    "ancient": "Loculus",
+    "modern": "lokúl",
+    "notes": "Lat loculus; Hu k-, Modern úl"
+  },
+  {
+    "english": "treasury",
+    "ancient": "Aerarium",
+    "modern": "aerár",
+    "notes": "Lat aerarium; Modern ár ending"
+  },
+  {
+    "english": "vault",
+    "ancient": "Thesaurus",
+    "modern": "tezaurúsh",
+    "notes": "Lat thesaurus; Modern z-, ú-sh"
+  },
+  {
+    "english": "bank",
+    "ancient": "Trapeza",
+    "modern": "trapezë",
+    "notes": "Gr trapeza; Modern ë ending"
+  },
+  {
+    "english": "banker",
+    "ancient": "Trapezita",
+    "modern": "trapezít",
+    "notes": "Gr trapezita; Modern ít ending"
+  },
+  {
+    "english": "loan",
+    "ancient": "Mutuum",
+    "modern": "mutuú",
+    "notes": "Lat mutuum; Modern ú ending"
+  },
+  {
+    "english": "debt",
+    "ancient": "Debitum",
+    "modern": "debít",
+    "notes": "Lat debitum; Modern ít ending"
+  },
+  {
+    "english": "credit",
+    "ancient": "Creditum",
+    "modern": "kredít",
+    "notes": "Lat creditum; Hu k-, Modern ít"
+  },
+  {
+    "english": "interest",
+    "ancient": "Usura",
+    "modern": "uzúr",
+    "notes": "Lat usura; Modern z-, úr"
+  },
+  {
+    "english": "usury",
+    "ancient": "Foenus",
+    "modern": "foenúsh",
+    "notes": "Lat foenus; Modern ú-sh"
+  },
+  {
+    "english": "mortgage",
+    "ancient": "Hypotheca",
+    "modern": "hipotekë",
+    "notes": "Lat hypotheca; Hu k-, Modern ë"
+  },
+  {
+    "english": "security",
+    "ancient": "Pignus",
+    "modern": "pígnúsh",
+    "notes": "Lat pignus; Modern í-ú-sh"
+  },
+  {
+    "english": "pledge",
+    "ancient": "Vas",
+    "modern": "vásh",
+    "notes": "Lat vas; Modern á-sh"
+  },
+  {
+    "english": "guarantee",
+    "ancient": "Praes",
+    "modern": "praesha",
+    "notes": "Lat praes; Modern -ha ending"
+  },
+  {
+    "english": "surety",
+    "ancient": "Sponsor",
+    "modern": "spontsór",
+    "notes": "Lat sponsor; Modern ts-, ór"
+  },
+  {
+    "english": "contract",
+    "ancient": "Contractus",
+    "modern": "kontrákt",
+    "notes": "Lat contractus; Hu k-, Modern ákt"
+  },
+  {
+    "english": "agreement",
+    "ancient": "Pactum",
+    "modern": "paktú",
+    "notes": "Lat pactum; Hu k-, Modern ú"
+  },
+  {
+    "english": "deal",
+    "ancient": "Pactio",
+    "modern": "paktsí",
+    "notes": "Lat pactio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "bargain",
+    "ancient": "Merx",
+    "modern": "mérksh",
+    "notes": "Lat merx; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "negotiation",
+    "ancient": "Negotiatio",
+    "modern": "negotsiáts",
+    "notes": "Lat negotiatio; Modern ts-, áts"
+  },
+  {
+    "english": "auction",
+    "ancient": "Auctio",
+    "modern": "auktsí",
+    "notes": "Lat auctio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "bid",
+    "ancient": "Licitatio",
+    "modern": "litsitáts",
+    "notes": "Lat licitatio; Modern ts-, áts"
+  },
+  {
+    "english": "offer",
+    "ancient": "Oblatio",
+    "modern": "obláts",
+    "notes": "Lat oblatio; Modern áts ending"
+  },
+  {
+    "english": "sale",
+    "ancient": "Venditio",
+    "modern": "vendíts",
+    "notes": "Lat venditio; Modern íts ending"
+  },
+  {
+    "english": "purchase",
+    "ancient": "Emptio",
+    "modern": "emptsí",
+    "notes": "Lat emptio; Modern ts-, í"
+  },
+  {
+    "english": "exchange",
+    "ancient": "Permutatio",
+    "modern": "permutáts",
+    "notes": "Lat permutatio; Modern áts ending"
+  },
+  {
+    "english": "barter",
+    "ancient": "Commercium",
+    "modern": "komerts",
+    "notes": "Lat commercium; Hu k-, Modern ts"
+  },
+  {
+    "english": "transaction",
+    "ancient": "Transactio",
+    "modern": "tranzákts",
+    "notes": "Lat transactio; Modern z-, áks"
+  },
+  {
+    "english": "payment",
+    "ancient": "Solutio",
+    "modern": "zolúts",
+    "notes": "Lat solutio; Modern z-, úts"
+  },
+  {
+    "english": "receipt",
+    "ancient": "Acceptio",
+    "modern": "aktseptsí",
+    "notes": "Lat acceptio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "invoice",
+    "ancient": "Ratio",
+    "modern": "ráts",
+    "notes": "Lat ratio; Modern áts ending"
+  },
+  {
+    "english": "account",
+    "ancient": "Ratio",
+    "modern": "ráts",
+    "notes": "Lat ratio; Modern áts ending"
+  },
+  {
+    "english": "ledger",
+    "ancient": "Codex",
+    "modern": "kodéks",
+    "notes": "Lat codex; Hu k-, Modern éks"
+  },
+  {
+    "english": "record",
+    "ancient": "Acta",
+    "modern": "aktë",
+    "notes": "Lat acta; Hu k-, Modern ë"
+  },
+  {
+    "english": "balance",
+    "ancient": "Libra",
+    "modern": "líbrë",
+    "notes": "Lat libra; Modern í-ë"
+  },
+  {
+    "english": "scales",
+    "ancient": "Statera",
+    "modern": "staterë",
+    "notes": "Lat statera; Modern ë ending"
+  },
+  {
+    "english": "weight",
+    "ancient": "Pondus",
+    "modern": "pondúsh",
+    "notes": "Lat pondus; Modern ú-sh"
+  },
+  {
+    "english": "measure",
+    "ancient": "Mensura",
+    "modern": "menzúr",
+    "notes": "Lat mensura; Modern z-, úr"
+  },
+  {
+    "english": "bushel",
+    "ancient": "Modius",
+    "modern": "modí",
+    "notes": "Lat modius; Modern í ending"
+  },
+  {
+    "english": "amphora",
+    "ancient": "Amphora",
+    "modern": "amforë",
+    "notes": "Lat amphora; Modern ë ending"
+  },
+  {
+    "english": "ounce",
+    "ancient": "Uncia",
+    "modern": "untsíë",
+    "notes": "Lat uncia; Modern ts-, í-ë"
+  },
+  {
+    "english": "pound",
+    "ancient": "Libra",
+    "modern": "líbrë",
+    "notes": "Lat libra; Modern í-ë"
+  },
+  {
+    "english": "ton",
+    "ancient": "Tonnellus",
+    "modern": "tonelúsh",
+    "notes": "Lat tonnellus; Modern ú-sh, single-l"
+  },
+  {
+    "english": "foot",
+    "ancient": "Pes",
+    "modern": "pésh",
+    "notes": "Lat pes; Modern é-sh"
+  },
+  {
+    "english": "yard",
+    "ancient": "Ulna",
+    "modern": "ulnë",
+    "notes": "Lat ulna; Modern ë ending"
+  },
+  {
+    "english": "mile",
+    "ancient": "Mille",
+    "modern": "mílë",
+    "notes": "Lat mille; Modern í-ë, single-l"
+  },
+  {
+    "english": "caravan",
+    "ancient": "Agmen",
+    "modern": "agmé",
+    "notes": "Lat agmen; Modern é ending"
+  },
+  {
+    "english": "convoy",
+    "ancient": "Comitatus",
+    "modern": "komitát",
+    "notes": "Lat comitatus; Hu k-, Modern át"
+  },
+  {
+    "english": "escort",
+    "ancient": "Praesidium",
+    "modern": "praezíd",
+    "notes": "Lat praesidium; Modern z-, íd"
+  },
+  {
+    "english": "route",
+    "ancient": "Iter",
+    "modern": "ítér",
+    "notes": "Lat iter; Modern í-ér"
+  },
+  {
+    "english": "journey",
+    "ancient": "Itinera",
+    "modern": "itínerë",
+    "notes": "Lat itinera; Modern í-ë"
+  },
+  {
+    "english": "destination",
+    "ancient": "Meta",
+    "modern": "metë",
+    "notes": "Lat meta; Modern ë ending"
+  },
+  {
+    "english": "port",
+    "ancient": "Portus",
+    "modern": "portúsh",
+    "notes": "Lat portus; Modern ú-sh"
+  },
+  {
+    "english": "harbor",
+    "ancient": "Portus",
+    "modern": "portú",
+    "notes": "Lat portus; Modern ú ending"
+  },
+  {
+    "english": "dock",
+    "ancient": "Navale",
+    "modern": "naválë",
+    "notes": "Lat navale; Modern á-ë"
+  },
+  {
+    "english": "wharf",
+    "ancient": "Crepido",
+    "modern": "krepíd",
+    "notes": "Lat crepido; Hu k-, Modern íd"
+  },
+  {
+    "english": "ship",
+    "ancient": "Navis",
+    "modern": "navísh",
+    "notes": "Lat navis; Modern í-sh"
+  },
+  {
+    "english": "vessel",
+    "ancient": "Navigium",
+    "modern": "navigí",
+    "notes": "Lat navigium; Modern í ending"
+  },
+  {
+    "english": "cargo ship",
+    "ancient": "Navis oneraria",
+    "modern": "navoner",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "galley",
+    "ancient": "Triremis",
+    "modern": "triremísh",
+    "notes": "Lat triremis; Modern í-sh"
+  },
+  {
+    "english": "captain",
+    "ancient": "Magister navis",
+    "modern": "magistnav",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "sailor",
+    "ancient": "Nauta",
+    "modern": "nautë",
+    "notes": "Lat nauta; Modern ë ending"
+  },
+  {
+    "english": "crew",
+    "ancient": "Nautae",
+    "modern": "nautë",
+    "notes": "Lat nautae; Modern ë ending"
+  },
+  {
+    "english": "anchor",
+    "ancient": "Ancora",
+    "modern": "ankorë",
+    "notes": "Lat ancora; Hu k-, Modern ë"
+  },
+  {
+    "english": "sail",
+    "ancient": "Velum",
+    "modern": "velú",
+    "notes": "Lat velum; Modern ú ending"
+  },
+  {
+    "english": "mast",
+    "ancient": "Malus",
+    "modern": "malúsh",
+    "notes": "Lat malus; Modern ú-sh"
+  },
+  {
+    "english": "rigging",
+    "ancient": "Armamenta",
+    "modern": "armaméntë",
+    "notes": "Lat armamenta; Modern é-ë"
+  },
+  {
+    "english": "cargo hold",
+    "ancient": "Sentina",
+    "modern": "zentín",
+    "notes": "Lat sentina; Modern z-, ín"
+  },
+  {
+    "english": "manifest",
+    "ancient": "Designatio",
+    "modern": "dezignáts",
+    "notes": "Lat designatio; Modern z-, áts"
+  },
+  {
+    "english": "bill of lading",
+    "ancient": "Charta oneris",
+    "modern": "kartoner",
+    "notes": "Lat compound; Hu k-, Modern simplified"
+  },
+  {
+    "english": "export",
+    "ancient": "Exportatio",
+    "modern": "eksportáts",
+    "notes": "Lat exportatio; Hu k-, Modern áts"
+  },
+  {
+    "english": "import",
+    "ancient": "Importatio",
+    "modern": "importáts",
+    "notes": "Lat importatio; Modern áts ending"
+  },
+  {
+    "english": "embassy",
+    "ancient": "Legatio",
+    "modern": "legáts",
+    "notes": "Lat legatio; Modern áts ending"
+  },
+  {
+    "english": "ambassador",
+    "ancient": "Legatus",
+    "modern": "legatúsh",
+    "notes": "Lat legatus; Modern ú-sh"
+  },
+  {
+    "english": "envoy",
+    "ancient": "Missus",
+    "modern": "misúsh",
+    "notes": "Lat missus; Modern ú-sh, single-s"
+  },
+  {
+    "english": "embassy",
+    "ancient": "Domus legati",
+    "modern": "domlegát",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "guild",
+    "ancient": "Collegium",
+    "modern": "kolegí",
+    "notes": "Lat collegium; Hu k-, Modern í, single-l"
+  },
+  {
+    "english": "association",
+    "ancient": "Societas",
+    "modern": "zotsietásh",
+    "notes": "Lat societas; Modern z-, ts-, á-sh"
+  },
+  {
+    "english": "partnership",
+    "ancient": "Societas",
+    "modern": "zotsietásh",
+    "notes": "Lat societas; Modern z-, ts-, á-sh"
+  },
+  {
+    "english": "company",
+    "ancient": "Societas",
+    "modern": "zotsietë",
+    "notes": "Lat societas; Modern z-, ts-, ë"
+  },
+  {
+    "english": "corporation",
+    "ancient": "Universitas",
+    "modern": "univerzít",
+    "notes": "Lat universitas; Modern z-, ít"
+  },
+  {
+    "english": "monopoly",
+    "ancient": "Monopolium",
+    "modern": "monopolí",
+    "notes": "Lat monopolium; Modern í ending"
+  },
+  {
+    "english": "franchise",
+    "ancient": "Privilegium",
+    "modern": "privilégí",
+    "notes": "Lat privilegium; Modern é-í"
+  },
+  {
+    "english": "license",
+    "ancient": "Licentia",
+    "modern": "litsentsí",
+    "notes": "Lat licentia; Modern ts-, í"
+  },
+  {
+    "english": "permit",
+    "ancient": "Permissio",
+    "modern": "permisí",
+    "notes": "Lat permissio; Modern í, single-s"
+  },
+  {
+    "english": "charter",
+    "ancient": "Charta",
+    "modern": "kartë",
+    "notes": "Lat charta; Hu k-, Modern ë"
+  },
+  {
+    "english": "seal",
+    "ancient": "Sigillum",
+    "modern": "sigílú",
+    "notes": "Lat sigillum; Modern í-ú, single-l"
+  },
+  {
+    "english": "signature",
+    "ancient": "Subscriptio",
+    "modern": "subskriptsí",
+    "notes": "Lat subscriptio; Hu k-, Modern ts-, í"
+  }
+]

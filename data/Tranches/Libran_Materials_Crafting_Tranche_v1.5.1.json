@@ -1,0 +1,1838 @@
+[
+  {
+    "english": "iron",
+    "ancient": "Iron",
+    "modern": "vas",
+    "notes": "Modern loan: Hu vas. Materials domain"
+  },
+  {
+    "english": "copper",
+    "ancient": "Copperor",
+    "modern": "réz",
+    "notes": "Modern loan: Hu réz. Materials domain"
+  },
+  {
+    "english": "silver",
+    "ancient": "Silveror",
+    "modern": "ezüst",
+    "notes": "Modern loan: Hu ezüst. Materials domain"
+  },
+  {
+    "english": "gold",
+    "ancient": "Goldor",
+    "modern": "arany",
+    "notes": "Modern loan: Hu arany. Materials domain"
+  },
+  {
+    "english": "bronze",
+    "ancient": "Bronzeor",
+    "modern": "bronz",
+    "notes": "Modern loan: Hu bronz. Materials domain"
+  },
+  {
+    "english": "tin",
+    "ancient": "Tinis",
+    "modern": "ón",
+    "notes": "Modern loan: Hu ón. Materials domain"
+  },
+  {
+    "english": "lead",
+    "ancient": "Leador",
+    "modern": "ólom",
+    "notes": "Modern loan: Hu ólom. Materials domain"
+  },
+  {
+    "english": "steel",
+    "ancient": "Steelor",
+    "modern": "acél",
+    "notes": "Modern loan: Hu acél. Materials domain"
+  },
+  {
+    "english": "mithril",
+    "ancient": "Mithrilor",
+    "modern": "mithríl",
+    "notes": "Modern loan: Hu mithríl. Materials domain"
+  },
+  {
+    "english": "electrum",
+    "ancient": "Electrum",
+    "modern": "elektrum",
+    "notes": "Modern loan: Hu elektrum. Materials domain"
+  },
+  {
+    "english": "obsidian",
+    "ancient": "Obsidianis",
+    "modern": "obszidián",
+    "notes": "Modern loan: Hu obszidián. Materials domain"
+  },
+  {
+    "english": "basalt",
+    "ancient": "Basaltor",
+    "modern": "bazalt",
+    "notes": "Modern loan: Hu bazalt. Materials domain"
+  },
+  {
+    "english": "granite",
+    "ancient": "Graniteor",
+    "modern": "gránit",
+    "notes": "Modern loan: Hu gránit. Materials domain"
+  },
+  {
+    "english": "marble",
+    "ancient": "Marbleor",
+    "modern": "márvány",
+    "notes": "Modern loan: Hu márvány. Materials domain"
+  },
+  {
+    "english": "quartz",
+    "ancient": "Cuartzor",
+    "modern": "kvarc",
+    "notes": "Modern loan: Hu kvarc. Materials domain"
+  },
+  {
+    "english": "crystal",
+    "ancient": "Crystalor",
+    "modern": "kristály",
+    "notes": "Modern loan: Hu kristály. Materials domain"
+  },
+  {
+    "english": "coal",
+    "ancient": "Coalor",
+    "modern": "szén",
+    "notes": "Modern loan: Hu szén. Materials domain"
+  },
+  {
+    "english": "salt",
+    "ancient": "Saltor",
+    "modern": "só",
+    "notes": "Modern loan: Hu só. Materials domain"
+  },
+  {
+    "english": "sand",
+    "ancient": "Sandor",
+    "modern": "homok",
+    "notes": "Modern loan: Hu homok. Materials domain"
+  },
+  {
+    "english": "clay",
+    "ancient": "Clayor",
+    "modern": "agyag",
+    "notes": "Modern loan: Hu agyag. Materials domain"
+  },
+  {
+    "english": "glass",
+    "ancient": "Glassor",
+    "modern": "üveg",
+    "notes": "Modern loan: Hu üveg. Materials domain"
+  },
+  {
+    "english": "ore",
+    "ancient": "Oreor",
+    "modern": "érc",
+    "notes": "Modern loan: Hu érc. Materials domain"
+  },
+  {
+    "english": "metal",
+    "ancient": "Metalor",
+    "modern": "fém",
+    "notes": "Modern loan: Hu fém. Materials domain"
+  },
+  {
+    "english": "alloy",
+    "ancient": "Alloyor",
+    "modern": "ötvözet",
+    "notes": "Modern loan: Hu ötvözet. Materials domain"
+  },
+  {
+    "english": "charcoal",
+    "ancient": "Karcoalor",
+    "modern": "faszén",
+    "notes": "Modern loan: Hu faszén. Materials domain"
+  },
+  {
+    "english": "coke",
+    "ancient": "Cokeor",
+    "modern": "koksz",
+    "notes": "Modern loan: Hu koksz. Materials domain"
+  },
+  {
+    "english": "slate",
+    "ancient": "Slateor",
+    "modern": "slate",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "shale",
+    "ancient": "Shaleor",
+    "modern": "sale",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "limestone",
+    "ancient": "Limestoneor",
+    "modern": "limestone",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "chalk",
+    "ancient": "Kalkor",
+    "modern": "khalka",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "flint",
+    "ancient": "Flintor",
+    "modern": "flinta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "jade",
+    "ancient": "Jadeor",
+    "modern": "jade",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "amber",
+    "ancient": "Amberor",
+    "modern": "ambera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "opal",
+    "ancient": "Opalor",
+    "modern": "opala",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "agate",
+    "ancient": "Agateor",
+    "modern": "agate",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "onyx",
+    "ancient": "Onyxor",
+    "modern": "onyksa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "basaltic glass",
+    "ancient": "Basaltic glassor",
+    "modern": "basaltik glassa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "saltpeter",
+    "ancient": "Saltpeteror",
+    "modern": "saltpetera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "sulfur",
+    "ancient": "Sulfuror",
+    "modern": "sulfura",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "bitumen",
+    "ancient": "Bitumenis",
+    "modern": "bitumena",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "pitchstone",
+    "ancient": "Pitkstoneor",
+    "modern": "pitkhstone",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "wood",
+    "ancient": "Woodor",
+    "modern": "fa",
+    "notes": "Modern loan: Hu fa. Wood & carpentry"
+  },
+  {
+    "english": "timber",
+    "ancient": "Timberor",
+    "modern": "gerenda",
+    "notes": "Modern loan: Hu gerenda. Wood & carpentry"
+  },
+  {
+    "english": "hardwood",
+    "ancient": "Hardwoodor",
+    "modern": "keményfa",
+    "notes": "Modern loan: Hu keményfa. Wood & carpentry"
+  },
+  {
+    "english": "softwood",
+    "ancient": "Softwoodor",
+    "modern": "puhafa",
+    "notes": "Modern loan: Hu puhafa. Wood & carpentry"
+  },
+  {
+    "english": "oakwood",
+    "ancient": "Oakwoodor",
+    "modern": "tölgyfa",
+    "notes": "Modern loan: Hu tölgyfa. Wood & carpentry"
+  },
+  {
+    "english": "pinewood",
+    "ancient": "Pinewoodor",
+    "modern": "fenyőfa",
+    "notes": "Modern loan: Hu fenyőfa. Wood & carpentry"
+  },
+  {
+    "english": "ash wood",
+    "ancient": "Ash woodor",
+    "modern": "kőrisfa",
+    "notes": "Modern loan: Hu kőrisfa. Wood & carpentry"
+  },
+  {
+    "english": "birch wood",
+    "ancient": "Birk woodor",
+    "modern": "nyírfa",
+    "notes": "Modern loan: Hu nyírfa. Wood & carpentry"
+  },
+  {
+    "english": "willow wood",
+    "ancient": "Willow woodor",
+    "modern": "fűzfa",
+    "notes": "Modern loan: Hu fűzfa. Wood & carpentry"
+  },
+  {
+    "english": "yew wood",
+    "ancient": "Yew woodor",
+    "modern": "tisza fa",
+    "notes": "Modern loan: Hu tisza fa. Wood & carpentry"
+  },
+  {
+    "english": "cedar wood",
+    "ancient": "Sedar woodor",
+    "modern": "cédrusfa",
+    "notes": "Modern loan: Hu cédrusfa. Wood & carpentry"
+  },
+  {
+    "english": "wool",
+    "ancient": "Woolor",
+    "modern": "gyapjú",
+    "notes": "Modern loan: Hu gyapjú. Textiles & finishes"
+  },
+  {
+    "english": "linen",
+    "ancient": "Linenis",
+    "modern": "vászon",
+    "notes": "Modern loan: Hu vászon. Textiles & finishes"
+  },
+  {
+    "english": "flax",
+    "ancient": "Flaxor",
+    "modern": "len",
+    "notes": "Modern loan: Hu len. Textiles & finishes"
+  },
+  {
+    "english": "hemp",
+    "ancient": "Hempor",
+    "modern": "kender",
+    "notes": "Modern loan: Hu kender. Textiles & finishes"
+  },
+  {
+    "english": "cotton",
+    "ancient": "Cotton",
+    "modern": "pamut",
+    "notes": "Modern loan: Hu pamut. Textiles & finishes"
+  },
+  {
+    "english": "silk",
+    "ancient": "Silkor",
+    "modern": "selyem",
+    "notes": "Modern loan: Hu selyem. Textiles & finishes"
+  },
+  {
+    "english": "felt",
+    "ancient": "Feltor",
+    "modern": "nemez",
+    "notes": "Modern loan: Hu nemez. Textiles & finishes"
+  },
+  {
+    "english": "leather",
+    "ancient": "Leatheror",
+    "modern": "bőr",
+    "notes": "Modern loan: Hu bőr. Textiles & finishes"
+  },
+  {
+    "english": "hide",
+    "ancient": "Hideor",
+    "modern": "nyersbőr",
+    "notes": "Modern loan: Hu nyersbőr. Textiles & finishes"
+  },
+  {
+    "english": "fur",
+    "ancient": "Furor",
+    "modern": "prém",
+    "notes": "Modern loan: Hu prém. Textiles & finishes"
+  },
+  {
+    "english": "sinew (cord)",
+    "ancient": "Sinew (cord)or",
+    "modern": "ín zsinór",
+    "notes": "Modern loan: Hu ín zsinór. Textiles & finishes"
+  },
+  {
+    "english": "gut string",
+    "ancient": "Gut stringor",
+    "modern": "bélhúr",
+    "notes": "Modern loan: Hu bélhúr. Textiles & finishes"
+  },
+  {
+    "english": "dye",
+    "ancient": "Dyeor",
+    "modern": "festék",
+    "notes": "Modern loan: Hu festék. Textiles & finishes"
+  },
+  {
+    "english": "tannin",
+    "ancient": "Tanninis",
+    "modern": "csersav",
+    "notes": "Modern loan: Hu csersav. Textiles & finishes"
+  },
+  {
+    "english": "glue",
+    "ancient": "Glueor",
+    "modern": "enyv",
+    "notes": "Modern loan: Hu enyv. Textiles & finishes"
+  },
+  {
+    "english": "resin",
+    "ancient": "Resinis",
+    "modern": "gyanta",
+    "notes": "Modern loan: Hu gyanta. Textiles & finishes"
+  },
+  {
+    "english": "tar",
+    "ancient": "Taror",
+    "modern": "kátrány",
+    "notes": "Modern loan: Hu kátrány. Textiles & finishes"
+  },
+  {
+    "english": "pitch",
+    "ancient": "Pitkor",
+    "modern": "szurok",
+    "notes": "Modern loan: Hu szurok. Textiles & finishes"
+  },
+  {
+    "english": "oil",
+    "ancient": "Oilor",
+    "modern": "olaj",
+    "notes": "Modern loan: Hu olaj. Textiles & finishes"
+  },
+  {
+    "english": "varnish",
+    "ancient": "Varnishor",
+    "modern": "lakk",
+    "notes": "Modern loan: Hu lakk. Textiles & finishes"
+  },
+  {
+    "english": "enamel",
+    "ancient": "Enamelor",
+    "modern": "zománc",
+    "notes": "Modern loan: Hu zománc. Textiles & finishes"
+  },
+  {
+    "english": "glaze",
+    "ancient": "Glazeor",
+    "modern": "máz",
+    "notes": "Modern loan: Hu máz. Textiles & finishes"
+  },
+  {
+    "english": "hammer",
+    "ancient": "Hammeror",
+    "modern": "kalapács",
+    "notes": "Modern loan: Hu kalapács. Workshop tools"
+  },
+  {
+    "english": "sledgehammer",
+    "ancient": "Sledgehammeror",
+    "modern": "pöröly",
+    "notes": "Modern loan: Hu pöröly. Workshop tools"
+  },
+  {
+    "english": "mallet",
+    "ancient": "Malletor",
+    "modern": "fa kalapács",
+    "notes": "Modern loan: Hu fa kalapács. Workshop tools"
+  },
+  {
+    "english": "chisel",
+    "ancient": "Kiselor",
+    "modern": "véső",
+    "notes": "Modern loan: Hu véső. Workshop tools"
+  },
+  {
+    "english": "adze",
+    "ancient": "Adzeor",
+    "modern": "bárd",
+    "notes": "Modern loan: Hu bárd. Workshop tools"
+  },
+  {
+    "english": "axe",
+    "ancient": "Axeor",
+    "modern": "fejsze",
+    "notes": "Modern loan: Hu fejsze. Workshop tools"
+  },
+  {
+    "english": "saw",
+    "ancient": "Sawor",
+    "modern": "fűrész",
+    "notes": "Modern loan: Hu fűrész. Workshop tools"
+  },
+  {
+    "english": "file",
+    "ancient": "Fileor",
+    "modern": "reszelő",
+    "notes": "Modern loan: Hu reszelő. Workshop tools"
+  },
+  {
+    "english": "rasp",
+    "ancient": "Raspor",
+    "modern": "ráspoly",
+    "notes": "Modern loan: Hu ráspoly. Workshop tools"
+  },
+  {
+    "english": "plane",
+    "ancient": "Planeor",
+    "modern": "gyalu",
+    "notes": "Modern loan: Hu gyalu. Workshop tools"
+  },
+  {
+    "english": "auger",
+    "ancient": "Augeror",
+    "modern": "fúró",
+    "notes": "Modern loan: Hu fúró. Workshop tools"
+  },
+  {
+    "english": "drill",
+    "ancient": "Drillor",
+    "modern": "fúrógép",
+    "notes": "Modern loan: Hu fúrógép. Workshop tools"
+  },
+  {
+    "english": "tongs",
+    "ancient": "Tongsor",
+    "modern": "fogó",
+    "notes": "Modern loan: Hu fogó. Workshop tools"
+  },
+  {
+    "english": "pliers",
+    "ancient": "Pliersor",
+    "modern": "fogófogó",
+    "notes": "Modern loan: Hu fogófogó. Workshop tools"
+  },
+  {
+    "english": "anvil",
+    "ancient": "Anvilor",
+    "modern": "üllő",
+    "notes": "Modern loan: Hu üllő. Workshop tools"
+  },
+  {
+    "english": "bellows",
+    "ancient": "Bellowsor",
+    "modern": "fújtató",
+    "notes": "Modern loan: Hu fújtató. Workshop tools"
+  },
+  {
+    "english": "forge",
+    "ancient": "Forgeor",
+    "modern": "kohó",
+    "notes": "Modern loan: Hu kohó. Workshop tools"
+  },
+  {
+    "english": "smithy",
+    "ancient": "Smithyor",
+    "modern": "kovácsműhely",
+    "notes": "Modern loan: Hu kovácsműhely. Workshop tools"
+  },
+  {
+    "english": "crucible",
+    "ancient": "Crusibleor",
+    "modern": "tégely",
+    "notes": "Modern loan: Hu tégely. Workshop tools"
+  },
+  {
+    "english": "mold",
+    "ancient": "Moldor",
+    "modern": "öntőforma",
+    "notes": "Modern loan: Hu öntőforma. Workshop tools"
+  },
+  {
+    "english": "ladle",
+    "ancient": "Ladleor",
+    "modern": "kanál",
+    "notes": "Modern loan: Hu kanál. Workshop tools"
+  },
+  {
+    "english": "quench tub",
+    "ancient": "Cuenk tubor",
+    "modern": "edzőkád",
+    "notes": "Modern loan: Hu edzőkád. Workshop tools"
+  },
+  {
+    "english": "grindstone",
+    "ancient": "Grindstoneor",
+    "modern": "köszörűkő",
+    "notes": "Modern loan: Hu köszörűkő. Workshop tools"
+  },
+  {
+    "english": "spindle",
+    "ancient": "Spindleor",
+    "modern": "orsó",
+    "notes": "Modern loan: Hu orsó. Workshop tools"
+  },
+  {
+    "english": "distaff",
+    "ancient": "Distaffor",
+    "modern": "rokka",
+    "notes": "Modern loan: Hu rokka. Workshop tools"
+  },
+  {
+    "english": "loom",
+    "ancient": "Loomis",
+    "modern": "szövőszék",
+    "notes": "Modern loan: Hu szövőszék. Workshop tools"
+  },
+  {
+    "english": "shuttle",
+    "ancient": "Shuttleor",
+    "modern": "vetélő",
+    "notes": "Modern loan: Hu vetélő. Workshop tools"
+  },
+  {
+    "english": "needle",
+    "ancient": "Needleor",
+    "modern": "tű",
+    "notes": "Modern loan: Hu tű. Workshop tools"
+  },
+  {
+    "english": "awl",
+    "ancient": "Awlor",
+    "modern": "ár",
+    "notes": "Modern loan: Hu ár. Workshop tools"
+  },
+  {
+    "english": "knife",
+    "ancient": "Knifeor",
+    "modern": "kés",
+    "notes": "Modern loan: Hu kés. Workshop tools"
+  },
+  {
+    "english": "shears",
+    "ancient": "Shearsor",
+    "modern": "olló",
+    "notes": "Modern loan: Hu olló. Workshop tools"
+  },
+  {
+    "english": "clipper",
+    "ancient": "Clipperor",
+    "modern": "nyíró",
+    "notes": "Modern loan: Hu nyíró. Workshop tools"
+  },
+  {
+    "english": "vise",
+    "ancient": "Viseor",
+    "modern": "satu",
+    "notes": "Modern loan: Hu satu. Workshop tools"
+  },
+  {
+    "english": "clamp",
+    "ancient": "Clampor",
+    "modern": "szorító",
+    "notes": "Modern loan: Hu szorító. Workshop tools"
+  },
+  {
+    "english": "measuring rod",
+    "ancient": "Measuring rodor",
+    "modern": "mérőrúd",
+    "notes": "Modern loan: Hu mérőrúd. Workshop tools"
+  },
+  {
+    "english": "square (tool)",
+    "ancient": "Scuare (tool)or",
+    "modern": "derékszög",
+    "notes": "Modern loan: Hu derékszög. Workshop tools"
+  },
+  {
+    "english": "compass (tool)",
+    "ancient": "Compass (tool)or",
+    "modern": "körző",
+    "notes": "Modern loan: Hu körző. Workshop tools"
+  },
+  {
+    "english": "scale (weigh)",
+    "ancient": "Scale (weig)or",
+    "modern": "mérleg",
+    "notes": "Modern loan: Hu mérleg. Workshop tools"
+  },
+  {
+    "english": "weights",
+    "ancient": "Weigtsor",
+    "modern": "súlyok",
+    "notes": "Modern loan: Hu súlyok. Workshop tools"
+  },
+  {
+    "english": "sword",
+    "ancient": "Swordor",
+    "modern": "kard",
+    "notes": "Modern loan: Hu kard. Arms & armor"
+  },
+  {
+    "english": "longsword",
+    "ancient": "Longswordor",
+    "modern": "hosszúkard",
+    "notes": "Modern loan: Hu hosszúkard. Arms & armor"
+  },
+  {
+    "english": "shortsword",
+    "ancient": "Shortswordor",
+    "modern": "rövidkard",
+    "notes": "Modern loan: Hu rövidkard. Arms & armor"
+  },
+  {
+    "english": "dagger",
+    "ancient": "Daggeror",
+    "modern": "tőr",
+    "notes": "Modern loan: Hu tőr. Arms & armor"
+  },
+  {
+    "english": "knife (weapon)",
+    "ancient": "Knife (weapon)or",
+    "modern": "kés",
+    "notes": "Modern loan: Hu kés. Arms & armor"
+  },
+  {
+    "english": "spear",
+    "ancient": "Spearor",
+    "modern": "lándzsa",
+    "notes": "Modern loan: Hu lándzsa. Arms & armor"
+  },
+  {
+    "english": "pike",
+    "ancient": "Pikeor",
+    "modern": "dárda",
+    "notes": "Modern loan: Hu dárda. Arms & armor"
+  },
+  {
+    "english": "halberd",
+    "ancient": "Halberdor",
+    "modern": "fokos",
+    "notes": "Modern loan: Hu fokos. Arms & armor"
+  },
+  {
+    "english": "axe (battle)",
+    "ancient": "Axe (battle)or",
+    "modern": "csatabárd",
+    "notes": "Modern loan: Hu csatabárd. Arms & armor"
+  },
+  {
+    "english": "mace",
+    "ancient": "Maseor",
+    "modern": "buzogány",
+    "notes": "Modern loan: Hu buzogány. Arms & armor"
+  },
+  {
+    "english": "club",
+    "ancient": "Clubor",
+    "modern": "bunkó",
+    "notes": "Modern loan: Hu bunkó. Arms & armor"
+  },
+  {
+    "english": "bow",
+    "ancient": "Bowor",
+    "modern": "íj",
+    "notes": "Modern loan: Hu íj. Arms & armor"
+  },
+  {
+    "english": "arrow",
+    "ancient": "Arrowor",
+    "modern": "nyíl",
+    "notes": "Modern loan: Hu nyíl. Arms & armor"
+  },
+  {
+    "english": "quiver",
+    "ancient": "Cuiveror",
+    "modern": "tegez",
+    "notes": "Modern loan: Hu tegez. Arms & armor"
+  },
+  {
+    "english": "crossbow",
+    "ancient": "Crossbowor",
+    "modern": "számszeríj",
+    "notes": "Modern loan: Hu számszeríj. Arms & armor"
+  },
+  {
+    "english": "bolt",
+    "ancient": "Boltor",
+    "modern": "vessző",
+    "notes": "Modern loan: Hu vessző. Arms & armor"
+  },
+  {
+    "english": "shield",
+    "ancient": "Shieldor",
+    "modern": "pajzs",
+    "notes": "Modern loan: Hu pajzs. Arms & armor"
+  },
+  {
+    "english": "helmet",
+    "ancient": "Helmetor",
+    "modern": "sisak",
+    "notes": "Modern loan: Hu sisak. Arms & armor"
+  },
+  {
+    "english": "helm",
+    "ancient": "Helmis",
+    "modern": "sisak",
+    "notes": "Modern loan: Hu sisak. Arms & armor"
+  },
+  {
+    "english": "cuirass",
+    "ancient": "Cuirassor",
+    "modern": "mellvért",
+    "notes": "Modern loan: Hu mellvért. Arms & armor"
+  },
+  {
+    "english": "mail",
+    "ancient": "Mailor",
+    "modern": "láncing",
+    "notes": "Modern loan: Hu láncing. Arms & armor"
+  },
+  {
+    "english": "greaves",
+    "ancient": "Greavesor",
+    "modern": "sípcsontvért",
+    "notes": "Modern loan: Hu sípcsontvért. Arms & armor"
+  },
+  {
+    "english": "gauntlet",
+    "ancient": "Gauntletor",
+    "modern": "kézvért",
+    "notes": "Modern loan: Hu kézvért. Arms & armor"
+  },
+  {
+    "english": "pauldron",
+    "ancient": "Pauldron",
+    "modern": "vállvért",
+    "notes": "Modern loan: Hu vállvért. Arms & armor"
+  },
+  {
+    "english": "bracer",
+    "ancient": "Braseror",
+    "modern": "alvért",
+    "notes": "Modern loan: Hu alvért. Arms & armor"
+  },
+  {
+    "english": "saber",
+    "ancient": "Saberor",
+    "modern": "szablya",
+    "notes": "Modern loan: Hu szablya. Arms & armor"
+  },
+  {
+    "english": "scimitar",
+    "ancient": "Ssimitaror",
+    "modern": "szablya görbe",
+    "notes": "Modern loan: Hu szablya görbe. Arms & armor"
+  },
+  {
+    "english": "flail",
+    "ancient": "Flailor",
+    "modern": "láncos buzogány",
+    "notes": "Modern loan: Hu láncos buzogány. Arms & armor"
+  },
+  {
+    "english": "whip",
+    "ancient": "Whipor",
+    "modern": "ostor",
+    "notes": "Modern loan: Hu ostor. Arms & armor"
+  },
+  {
+    "english": "sling",
+    "ancient": "Slingor",
+    "modern": "parittya",
+    "notes": "Modern loan: Hu parittya. Arms & armor"
+  },
+  {
+    "english": "staff",
+    "ancient": "Staffor",
+    "modern": "bot",
+    "notes": "Modern loan: Hu bot. Arms & armor"
+  },
+  {
+    "english": "cup",
+    "ancient": "Cupor",
+    "modern": "csésze",
+    "notes": "Modern loan: Hu csésze. Containers & tableware"
+  },
+  {
+    "english": "mug",
+    "ancient": "Mugor",
+    "modern": "bögré",
+    "notes": "Modern loan: Hu bögré. Containers & tableware"
+  },
+  {
+    "english": "bowl",
+    "ancient": "Bowlor",
+    "modern": "tál",
+    "notes": "Modern loan: Hu tál. Containers & tableware"
+  },
+  {
+    "english": "plate",
+    "ancient": "Plateor",
+    "modern": "tányér",
+    "notes": "Modern loan: Hu tányér. Containers & tableware"
+  },
+  {
+    "english": "spoon",
+    "ancient": "Spoon",
+    "modern": "kanál",
+    "notes": "Modern loan: Hu kanál. Containers & tableware"
+  },
+  {
+    "english": "fork",
+    "ancient": "Forkor",
+    "modern": "villa",
+    "notes": "Modern loan: Hu villa. Containers & tableware"
+  },
+  {
+    "english": "knife (table)",
+    "ancient": "Knife (table)or",
+    "modern": "kés",
+    "notes": "Modern loan: Hu kés. Containers & tableware"
+  },
+  {
+    "english": "pot",
+    "ancient": "Potor",
+    "modern": "fazék",
+    "notes": "Modern loan: Hu fazék. Containers & tableware"
+  },
+  {
+    "english": "pan",
+    "ancient": "Panis",
+    "modern": "serpenyő",
+    "notes": "Modern loan: Hu serpenyő. Containers & tableware"
+  },
+  {
+    "english": "kettle",
+    "ancient": "Kettleor",
+    "modern": "üst",
+    "notes": "Modern loan: Hu üst. Containers & tableware"
+  },
+  {
+    "english": "cauldron",
+    "ancient": "Cauldron",
+    "modern": "üst nagy",
+    "notes": "Modern loan: Hu üst nagy. Containers & tableware"
+  },
+  {
+    "english": "jar",
+    "ancient": "Jaror",
+    "modern": "korsó",
+    "notes": "Modern loan: Hu korsó. Containers & tableware"
+  },
+  {
+    "english": "jug",
+    "ancient": "Jugor",
+    "modern": "kancsó",
+    "notes": "Modern loan: Hu kancsó. Containers & tableware"
+  },
+  {
+    "english": "amphora",
+    "ancient": "Amforaor",
+    "modern": "amfóra",
+    "notes": "Modern loan: Hu amfóra. Containers & tableware"
+  },
+  {
+    "english": "bottle",
+    "ancient": "Bottleor",
+    "modern": "palack",
+    "notes": "Modern loan: Hu palack. Containers & tableware"
+  },
+  {
+    "english": "vial",
+    "ancient": "Vialor",
+    "modern": "fiola",
+    "notes": "Modern loan: Hu fiola. Containers & tableware"
+  },
+  {
+    "english": "skin (waterskin)",
+    "ancient": "Skin (waterskin)or",
+    "modern": "kulacs",
+    "notes": "Modern loan: Hu kulacs. Containers & tableware"
+  },
+  {
+    "english": "barrel",
+    "ancient": "Barrelor",
+    "modern": "hordó",
+    "notes": "Modern loan: Hu hordó. Containers & tableware"
+  },
+  {
+    "english": "cask",
+    "ancient": "Caskor",
+    "modern": "hordó nagy",
+    "notes": "Modern loan: Hu hordó nagy. Containers & tableware"
+  },
+  {
+    "english": "tun",
+    "ancient": "Tunis",
+    "modern": "nagyhordó",
+    "notes": "Modern loan: Hu nagyhordó. Containers & tableware"
+  },
+  {
+    "english": "bucket",
+    "ancient": "Bucketor",
+    "modern": "vödör",
+    "notes": "Modern loan: Hu vödör. Containers & tableware"
+  },
+  {
+    "english": "basket",
+    "ancient": "Basketor",
+    "modern": "kosár",
+    "notes": "Modern loan: Hu kosár. Containers & tableware"
+  },
+  {
+    "english": "crate",
+    "ancient": "Crateor",
+    "modern": "láda",
+    "notes": "Modern loan: Hu láda. Containers & tableware"
+  },
+  {
+    "english": "chest",
+    "ancient": "Kestor",
+    "modern": "láda nagy",
+    "notes": "Modern loan: Hu láda nagy. Containers & tableware"
+  },
+  {
+    "english": "pouch",
+    "ancient": "Poukor",
+    "modern": "erszény",
+    "notes": "Modern loan: Hu erszény. Containers & tableware"
+  },
+  {
+    "english": "purse",
+    "ancient": "Purseor",
+    "modern": "erszény pénz",
+    "notes": "Modern loan: Hu erszény pénz. Containers & tableware"
+  },
+  {
+    "english": "sack",
+    "ancient": "Sackor",
+    "modern": "zsák",
+    "notes": "Modern loan: Hu zsák. Containers & tableware"
+  },
+  {
+    "english": "satchel",
+    "ancient": "Satkelor",
+    "modern": "tarisznya",
+    "notes": "Modern loan: Hu tarisznya. Containers & tableware"
+  },
+  {
+    "english": "pack",
+    "ancient": "Packor",
+    "modern": "hátizsák",
+    "notes": "Modern loan: Hu hátizsák. Containers & tableware"
+  },
+  {
+    "english": "house",
+    "ancient": "Houseor",
+    "modern": "ház",
+    "notes": "Modern loan: Hu ház. Structures (crafting)"
+  },
+  {
+    "english": "hut",
+    "ancient": "Hutor",
+    "modern": "kunyhó",
+    "notes": "Modern loan: Hu kunyhó. Structures (crafting)"
+  },
+  {
+    "english": "tent",
+    "ancient": "Tentor",
+    "modern": "sátor",
+    "notes": "Modern loan: Hu sátor. Structures (crafting)"
+  },
+  {
+    "english": "yurt",
+    "ancient": "Yurtor",
+    "modern": "jurta",
+    "notes": "Modern loan: Hu jurta. Structures (crafting)"
+  },
+  {
+    "english": "hall",
+    "ancient": "Hallor",
+    "modern": "csarnok",
+    "notes": "Modern loan: Hu csarnok. Structures (crafting)"
+  },
+  {
+    "english": "longhouse",
+    "ancient": "Longouseor",
+    "modern": "hosszúház",
+    "notes": "Modern loan: Hu hosszúház. Structures (crafting)"
+  },
+  {
+    "english": "forge-house",
+    "ancient": "Forge-houseor",
+    "modern": "kovácsműhely",
+    "notes": "Modern loan: Hu kovácsműhely. Structures (crafting)"
+  },
+  {
+    "english": "smithy-yard",
+    "ancient": "Smithy-yardor",
+    "modern": "kovácsudvar",
+    "notes": "Modern loan: Hu kovácsudvar. Structures (crafting)"
+  },
+  {
+    "english": "kiln",
+    "ancient": "Kilnis",
+    "modern": "kemence",
+    "notes": "Modern loan: Hu kemence. Structures (crafting)"
+  },
+  {
+    "english": "lime kiln",
+    "ancient": "Lime kilnis",
+    "modern": "mészégető",
+    "notes": "Modern loan: Hu mészégető. Structures (crafting)"
+  },
+  {
+    "english": "mill",
+    "ancient": "Millor",
+    "modern": "malom",
+    "notes": "Modern loan: Hu malom. Structures (crafting)"
+  },
+  {
+    "english": "sawmill",
+    "ancient": "Sawmillor",
+    "modern": "fűrészmalom",
+    "notes": "Modern loan: Hu fűrészmalom. Structures (crafting)"
+  },
+  {
+    "english": "tower",
+    "ancient": "Toweror",
+    "modern": "torony",
+    "notes": "Modern loan: Hu torony. Structures (crafting)"
+  },
+  {
+    "english": "bridge",
+    "ancient": "Bridgeor",
+    "modern": "híd",
+    "notes": "Modern loan: Hu híd. Structures (crafting)"
+  },
+  {
+    "english": "workshop",
+    "ancient": "Workshopor",
+    "modern": "műhely",
+    "notes": "Modern loan: Hu műhely. Structures (crafting)"
+  },
+  {
+    "english": "warehouse",
+    "ancient": "Warehouseor",
+    "modern": "raktár",
+    "notes": "Modern loan: Hu raktár. Structures (crafting)"
+  },
+  {
+    "english": "barn",
+    "ancient": "Barnis",
+    "modern": "csűr",
+    "notes": "Modern loan: Hu csűr. Structures (crafting)"
+  },
+  {
+    "english": "granary",
+    "ancient": "Granaryor",
+    "modern": "magtár",
+    "notes": "Modern loan: Hu magtár. Structures (crafting)"
+  },
+  {
+    "english": "stable",
+    "ancient": "Stableor",
+    "modern": "istálló",
+    "notes": "Modern loan: Hu istálló. Structures (crafting)"
+  },
+  {
+    "english": "corral",
+    "ancient": "Corralor",
+    "modern": "karám",
+    "notes": "Modern loan: Hu karám. Structures (crafting)"
+  },
+  {
+    "english": "blacksmith",
+    "ancient": "Blacksmithor",
+    "modern": "kovács",
+    "notes": "Modern loan: Hu kovács. Craft professions"
+  },
+  {
+    "english": "armorer",
+    "ancient": "Armoreror",
+    "modern": "fegyverkészítő",
+    "notes": "Modern loan: Hu fegyverkészítő. Craft professions"
+  },
+  {
+    "english": "weaponsmith",
+    "ancient": "Weaponsmithor",
+    "modern": "fegyverkovács",
+    "notes": "Modern loan: Hu fegyverkovács. Craft professions"
+  },
+  {
+    "english": "bladesmith",
+    "ancient": "Bladesmithor",
+    "modern": "pengemester",
+    "notes": "Modern loan: Hu pengemester. Craft professions"
+  },
+  {
+    "english": "arrowsmith",
+    "ancient": "Arrowsmithor",
+    "modern": "nyílkovács",
+    "notes": "Modern loan: Hu nyílkovács. Craft professions"
+  },
+  {
+    "english": "bowyer",
+    "ancient": "Bowyeror",
+    "modern": "íjkészítő",
+    "notes": "Modern loan: Hu íjkészítő. Craft professions"
+  },
+  {
+    "english": "fletcher",
+    "ancient": "Fletkeror",
+    "modern": "nyílkészítő",
+    "notes": "Modern loan: Hu nyílkészítő. Craft professions"
+  },
+  {
+    "english": "tanner",
+    "ancient": "Tanneror",
+    "modern": "tímár",
+    "notes": "Modern loan: Hu tímár. Craft professions"
+  },
+  {
+    "english": "leatherworker",
+    "ancient": "Leatherworkeror",
+    "modern": "bőrműves",
+    "notes": "Modern loan: Hu bőrműves. Craft professions"
+  },
+  {
+    "english": "cobbler",
+    "ancient": "Cobbleror",
+    "modern": "cipész",
+    "notes": "Modern loan: Hu cipész. Craft professions"
+  },
+  {
+    "english": "tailor",
+    "ancient": "Tailor",
+    "modern": "szabó",
+    "notes": "Modern loan: Hu szabó. Craft professions"
+  },
+  {
+    "english": "weaver",
+    "ancient": "Weaveror",
+    "modern": "takács",
+    "notes": "Modern loan: Hu takács. Craft professions"
+  },
+  {
+    "english": "spinner",
+    "ancient": "Spinneror",
+    "modern": "fonó",
+    "notes": "Modern loan: Hu fonó. Craft professions"
+  },
+  {
+    "english": "carpenter",
+    "ancient": "Carpenteror",
+    "modern": "ács",
+    "notes": "Modern loan: Hu ács. Craft professions"
+  },
+  {
+    "english": "joiner",
+    "ancient": "Joineror",
+    "modern": "asztalos",
+    "notes": "Modern loan: Hu asztalos. Craft professions"
+  },
+  {
+    "english": "cooper",
+    "ancient": "Cooperor",
+    "modern": "kádár",
+    "notes": "Modern loan: Hu kádár. Craft professions"
+  },
+  {
+    "english": "mason",
+    "ancient": "Mason",
+    "modern": "kőműves",
+    "notes": "Modern loan: Hu kőműves. Craft professions"
+  },
+  {
+    "english": "stonecutter",
+    "ancient": "Stonecutteror",
+    "modern": "kőfaragó",
+    "notes": "Modern loan: Hu kőfaragó. Craft professions"
+  },
+  {
+    "english": "potter",
+    "ancient": "Potteror",
+    "modern": "fazekas",
+    "notes": "Modern loan: Hu fazekas. Craft professions"
+  },
+  {
+    "english": "glassblower",
+    "ancient": "Glassbloweror",
+    "modern": "üvegfúvó",
+    "notes": "Modern loan: Hu üvegfúvó. Craft professions"
+  },
+  {
+    "english": "jeweler",
+    "ancient": "Jeweleror",
+    "modern": "ékszerész",
+    "notes": "Modern loan: Hu ékszerész. Craft professions"
+  },
+  {
+    "english": "lapidary",
+    "ancient": "Lapidaryor",
+    "modern": "kőcsiszoló",
+    "notes": "Modern loan: Hu kőcsiszoló. Craft professions"
+  },
+  {
+    "english": "engraver",
+    "ancient": "Engraveror",
+    "modern": "vésnök",
+    "notes": "Modern loan: Hu vésnök. Craft professions"
+  },
+  {
+    "english": "smith apprentice",
+    "ancient": "Smith apprentiseor",
+    "modern": "kovácsinász",
+    "notes": "Modern loan: Hu kovácsinász. Craft professions"
+  },
+  {
+    "english": "master smith",
+    "ancient": "Master smithor",
+    "modern": "mesterkovács",
+    "notes": "Modern loan: Hu mesterkovács. Craft professions"
+  },
+  {
+    "english": "guildmaster",
+    "ancient": "Guildmasteror",
+    "modern": "céhmester",
+    "notes": "Modern loan: Hu céhmester. Craft professions"
+  },
+  {
+    "english": "foreman",
+    "ancient": "Foremanis",
+    "modern": "művezető",
+    "notes": "Modern loan: Hu művezető. Craft professions"
+  },
+  {
+    "english": "smelt",
+    "ancient": "Smeltor",
+    "modern": "olvasztani",
+    "notes": "Modern loan: Hu olvasztani. Craft processes & verbs"
+  },
+  {
+    "english": "forge (verb)",
+    "ancient": "Forge (verb)or",
+    "modern": "kovácsolni",
+    "notes": "Modern loan: Hu kovácsolni. Craft processes & verbs"
+  },
+  {
+    "english": "cast (metal)",
+    "ancient": "Cast (metal)or",
+    "modern": "önteni",
+    "notes": "Modern loan: Hu önteni. Craft processes & verbs"
+  },
+  {
+    "english": "pour (metal)",
+    "ancient": "Pour (metal)or",
+    "modern": "kiönteni",
+    "notes": "Modern loan: Hu kiönteni. Craft processes & verbs"
+  },
+  {
+    "english": "quench",
+    "ancient": "Cuenkor",
+    "modern": "edzeni",
+    "notes": "Modern loan: Hu edzeni. Craft processes & verbs"
+  },
+  {
+    "english": "temper",
+    "ancient": "Temperor",
+    "modern": "megereszteni",
+    "notes": "Modern loan: Hu megereszteni. Craft processes & verbs"
+  },
+  {
+    "english": "anneal",
+    "ancient": "Annealor",
+    "modern": "lágyítani",
+    "notes": "Modern loan: Hu lágyítani. Craft processes & verbs"
+  },
+  {
+    "english": "harden",
+    "ancient": "Hardenis",
+    "modern": "keményíteni",
+    "notes": "Modern loan: Hu keményíteni. Craft processes & verbs"
+  },
+  {
+    "english": "draw (wire)",
+    "ancient": "Draw (wire)or",
+    "modern": "húzni (huzal)",
+    "notes": "Modern loan: Hu húzni (huzal). Craft processes & verbs"
+  },
+  {
+    "english": "weld",
+    "ancient": "Weldor",
+    "modern": "hegeszteni",
+    "notes": "Modern loan: Hu hegeszteni. Craft processes & verbs"
+  },
+  {
+    "english": "braze",
+    "ancient": "Brazeor",
+    "modern": "forrasztani",
+    "notes": "Modern loan: Hu forrasztani. Craft processes & verbs"
+  },
+  {
+    "english": "solder",
+    "ancient": "Solderor",
+    "modern": "forrasztani finom",
+    "notes": "Modern loan: Hu forrasztani finom. Craft processes & verbs"
+  },
+  {
+    "english": "rivet (verb)",
+    "ancient": "Rivet (verb)or",
+    "modern": "szegecselni",
+    "notes": "Modern loan: Hu szegecselni. Craft processes & verbs"
+  },
+  {
+    "english": "grind",
+    "ancient": "Grindor",
+    "modern": "köszörülni",
+    "notes": "Modern loan: Hu köszörülni. Craft processes & verbs"
+  },
+  {
+    "english": "sharpen",
+    "ancient": "Sharpenis",
+    "modern": "élezni",
+    "notes": "Modern loan: Hu élezni. Craft processes & verbs"
+  },
+  {
+    "english": "polish",
+    "ancient": "Polishor",
+    "modern": "polírozni",
+    "notes": "Modern loan: Hu polírozni. Craft processes & verbs"
+  },
+  {
+    "english": "carve",
+    "ancient": "Carveor",
+    "modern": "faragni",
+    "notes": "Modern loan: Hu faragni. Craft processes & verbs"
+  },
+  {
+    "english": "hew",
+    "ancient": "Hewor",
+    "modern": "hasítani",
+    "notes": "Modern loan: Hu hasítani. Craft processes & verbs"
+  },
+  {
+    "english": "plane (verb)",
+    "ancient": "Plane (verb)or",
+    "modern": "gyalulni",
+    "notes": "Modern loan: Hu gyalulni. Craft processes & verbs"
+  },
+  {
+    "english": "bore",
+    "ancient": "Boreor",
+    "modern": "fúrni",
+    "notes": "Modern loan: Hu fúrni. Craft processes & verbs"
+  },
+  {
+    "english": "weave",
+    "ancient": "Weaveor",
+    "modern": "szőni",
+    "notes": "Modern loan: Hu szőni. Craft processes & verbs"
+  },
+  {
+    "english": "spin",
+    "ancient": "Spinis",
+    "modern": "fonni",
+    "notes": "Modern loan: Hu fonni. Craft processes & verbs"
+  },
+  {
+    "english": "dye (verb)",
+    "ancient": "Dye (verb)or",
+    "modern": "festeni",
+    "notes": "Modern loan: Hu festeni. Craft processes & verbs"
+  },
+  {
+    "english": "tan (leather)",
+    "ancient": "Tan (leather)or",
+    "modern": "cserzeni",
+    "notes": "Modern loan: Hu cserzeni. Craft processes & verbs"
+  },
+  {
+    "english": "cure (leather)",
+    "ancient": "Cure (leather)or",
+    "modern": "aszalni bőrt",
+    "notes": "Modern loan: Hu aszalni bőrt. Craft processes & verbs"
+  },
+  {
+    "english": "mold (clay)",
+    "ancient": "Mold (clay)or",
+    "modern": "formázni",
+    "notes": "Modern loan: Hu formázni. Craft processes & verbs"
+  },
+  {
+    "english": "throw (pot)",
+    "ancient": "Throw (pot)or",
+    "modern": "korongozni",
+    "notes": "Modern loan: Hu korongozni. Craft processes & verbs"
+  },
+  {
+    "english": "glaze (verb)",
+    "ancient": "Glaze (verb)or",
+    "modern": "mázzal bevonni",
+    "notes": "Modern loan: Hu mázzal bevonni. Craft processes & verbs"
+  },
+  {
+    "english": "enamel (verb)",
+    "ancient": "Enamel (verb)or",
+    "modern": "zománcozni",
+    "notes": "Modern loan: Hu zománcozni. Craft processes & verbs"
+  },
+  {
+    "english": "varnish (verb)",
+    "ancient": "Varnish (verb)or",
+    "modern": "lakkozni",
+    "notes": "Modern loan: Hu lakkozni. Craft processes & verbs"
+  },
+  {
+    "english": "charcoal",
+    "ancient": "Karcoalor",
+    "modern": "faszén",
+    "notes": "Modern loan: Hu faszén. Fuels & binders"
+  },
+  {
+    "english": "firewood",
+    "ancient": "Firewoodor",
+    "modern": "tűzifa",
+    "notes": "Modern loan: Hu tűzifa. Fuels & binders"
+  },
+  {
+    "english": "peat",
+    "ancient": "Peator",
+    "modern": "tőzeg",
+    "notes": "Modern loan: Hu tőzeg. Fuels & binders"
+  },
+  {
+    "english": "pitch",
+    "ancient": "Pitkor",
+    "modern": "szurok",
+    "notes": "Modern loan: Hu szurok. Fuels & binders"
+  },
+  {
+    "english": "tar",
+    "ancient": "Taror",
+    "modern": "kátrány",
+    "notes": "Modern loan: Hu kátrány. Fuels & binders"
+  },
+  {
+    "english": "resin",
+    "ancient": "Resinis",
+    "modern": "gyanta",
+    "notes": "Modern loan: Hu gyanta. Fuels & binders"
+  },
+  {
+    "english": "oil",
+    "ancient": "Oilor",
+    "modern": "olaj",
+    "notes": "Modern loan: Hu olaj. Fuels & binders"
+  },
+  {
+    "english": "wax",
+    "ancient": "Waxor",
+    "modern": "viasz",
+    "notes": "Modern loan: Hu viasz. Fuels & binders"
+  },
+  {
+    "english": "nail",
+    "ancient": "Nailor",
+    "modern": "szeg",
+    "notes": "Modern loan: Hu szeg. Hardware & parts"
+  },
+  {
+    "english": "rivet",
+    "ancient": "Rivetor",
+    "modern": "szegecs",
+    "notes": "Modern loan: Hu szegecs. Hardware & parts"
+  },
+  {
+    "english": "bolt",
+    "ancient": "Boltor",
+    "modern": "csavar",
+    "notes": "Modern loan: Hu csavar. Hardware & parts"
+  },
+  {
+    "english": "screw",
+    "ancient": "Screwor",
+    "modern": "csavar finom",
+    "notes": "Modern loan: Hu csavar finom. Hardware & parts"
+  },
+  {
+    "english": "pin",
+    "ancient": "Pinis",
+    "modern": "stift",
+    "notes": "Modern loan: Hu stift. Hardware & parts"
+  },
+  {
+    "english": "peg",
+    "ancient": "Pegor",
+    "modern": "ék",
+    "notes": "Modern loan: Hu ék. Hardware & parts"
+  },
+  {
+    "english": "rope",
+    "ancient": "Ropeor",
+    "modern": "kötél",
+    "notes": "Modern loan: Hu kötél. Hardware & parts"
+  },
+  {
+    "english": "cord",
+    "ancient": "Cordor",
+    "modern": "zsinór",
+    "notes": "Modern loan: Hu zsinór. Hardware & parts"
+  },
+  {
+    "english": "strap",
+    "ancient": "Strapor",
+    "modern": "szíj",
+    "notes": "Modern loan: Hu szíj. Hardware & parts"
+  },
+  {
+    "english": "chain",
+    "ancient": "Kainis",
+    "modern": "lánc",
+    "notes": "Modern loan: Hu lánc. Hardware & parts"
+  },
+  {
+    "english": "hinge",
+    "ancient": "Hingeor",
+    "modern": "zsanér",
+    "notes": "Modern loan: Hu zsanér. Hardware & parts"
+  },
+  {
+    "english": "buckle",
+    "ancient": "Buckleor",
+    "modern": "csat",
+    "notes": "Modern loan: Hu csat. Hardware & parts"
+  },
+  {
+    "english": "hasp",
+    "ancient": "Haspor",
+    "modern": "kapocs",
+    "notes": "Modern loan: Hu kapocs. Hardware & parts"
+  },
+  {
+    "english": "hilt",
+    "ancient": "Hiltor",
+    "modern": "markolat",
+    "notes": "Modern loan: Hu markolat. Hardware & parts"
+  },
+  {
+    "english": "pommel",
+    "ancient": "Pommelor",
+    "modern": "gomb",
+    "notes": "Modern loan: Hu gomb. Hardware & parts"
+  },
+  {
+    "english": "blade",
+    "ancient": "Bladeor",
+    "modern": "penge",
+    "notes": "Modern loan: Hu penge. Hardware & parts"
+  },
+  {
+    "english": "edge",
+    "ancient": "Edgeor",
+    "modern": "él",
+    "notes": "Modern loan: Hu él. Hardware & parts"
+  },
+  {
+    "english": "fuller",
+    "ancient": "Fulleror",
+    "modern": "váp",
+    "notes": "Modern loan: Hu váp. Hardware & parts"
+  },
+  {
+    "english": "crossguard",
+    "ancient": "Crossguardor",
+    "modern": "keresztvas",
+    "notes": "Modern loan: Hu keresztvas. Hardware & parts"
+  },
+  {
+    "english": "scabbard",
+    "ancient": "Scabbardor",
+    "modern": "hüvely",
+    "notes": "Modern loan: Hu hüvely. Hardware & parts"
+  },
+  {
+    "english": "sheath",
+    "ancient": "Sheathor",
+    "modern": "tok",
+    "notes": "Modern loan: Hu tok. Hardware & parts"
+  },
+  {
+    "english": "bowstring",
+    "ancient": "Bowstringor",
+    "modern": "ínhúr",
+    "notes": "Modern loan: Hu ínhúr. Hardware & parts"
+  },
+  {
+    "english": "fletching",
+    "ancient": "Fletkingor",
+    "modern": "tollazat",
+    "notes": "Modern loan: Hu tollazat. Hardware & parts"
+  },
+  {
+    "english": "arrowhead",
+    "ancient": "Arrowheador",
+    "modern": "nyílhegy",
+    "notes": "Modern loan: Hu nyílhegy. Hardware & parts"
+  },
+  {
+    "english": "gear",
+    "ancient": "Gearor",
+    "modern": "fogaskerék",
+    "notes": "Modern loan: Hu fogaskerék. Hardware & parts"
+  },
+  {
+    "english": "axle",
+    "ancient": "Axleor",
+    "modern": "tengely",
+    "notes": "Modern loan: Hu tengely. Hardware & parts"
+  },
+  {
+    "english": "spoke",
+    "ancient": "Spokeor",
+    "modern": "küllő",
+    "notes": "Modern loan: Hu küllő. Hardware & parts"
+  },
+  {
+    "english": "wheel",
+    "ancient": "Wheelor",
+    "modern": "kerék",
+    "notes": "Modern loan: Hu kerék. Hardware & parts"
+  },
+  {
+    "english": "handle",
+    "ancient": "Handleor",
+    "modern": "fogantyú",
+    "notes": "Modern loan: Hu fogantyú. Hardware & parts"
+  },
+  {
+    "english": "haft",
+    "ancient": "Haftor",
+    "modern": "nyél",
+    "notes": "Modern loan: Hu nyél. Hardware & parts"
+  },
+  {
+    "english": "ingot",
+    "ancient": "Ingotor",
+    "modern": "tuskó",
+    "notes": "Modern loan: Hu tuskó. Stock & measures"
+  },
+  {
+    "english": "billet",
+    "ancient": "Billetor",
+    "modern": "rúdvas",
+    "notes": "Modern loan: Hu rúdvas. Stock & measures"
+  },
+  {
+    "english": "bar (metal)",
+    "ancient": "Bar (metal)or",
+    "modern": "rúdfém",
+    "notes": "Modern loan: Hu rúdfém. Stock & measures"
+  },
+  {
+    "english": "rod",
+    "ancient": "Rodor",
+    "modern": "rúd",
+    "notes": "Modern loan: Hu rúd. Stock & measures"
+  },
+  {
+    "english": "wire",
+    "ancient": "Wireor",
+    "modern": "huzal",
+    "notes": "Modern loan: Hu huzal. Stock & measures"
+  },
+  {
+    "english": "plate (metal)",
+    "ancient": "Plate (metal)or",
+    "modern": "lemez",
+    "notes": "Modern loan: Hu lemez. Stock & measures"
+  },
+  {
+    "english": "sheet (metal)",
+    "ancient": "Sheet (metal)or",
+    "modern": "lemez vékony",
+    "notes": "Modern loan: Hu lemez vékony. Stock & measures"
+  },
+  {
+    "english": "strip (metal)",
+    "ancient": "Strip (metal)or",
+    "modern": "szalag",
+    "notes": "Modern loan: Hu szalag. Stock & measures"
+  },
+  {
+    "english": "beam (wood)",
+    "ancient": "Beam (wood)or",
+    "modern": "gerenda",
+    "notes": "Modern loan: Hu gerenda. Stock & measures"
+  },
+  {
+    "english": "plank",
+    "ancient": "Plankor",
+    "modern": "deszka",
+    "notes": "Modern loan: Hu deszka. Stock & measures"
+  },
+  {
+    "english": "board",
+    "ancient": "Boardor",
+    "modern": "deszka tábla",
+    "notes": "Modern loan: Hu deszka tábla. Stock & measures"
+  },
+  {
+    "english": "slab",
+    "ancient": "Slabor",
+    "modern": "tömb",
+    "notes": "Modern loan: Hu tömb. Stock & measures"
+  },
+  {
+    "english": "block",
+    "ancient": "Blockor",
+    "modern": "kocka tömb",
+    "notes": "Modern loan: Hu kocka tömb. Stock & measures"
+  },
+  {
+    "english": "brick",
+    "ancient": "Brickor",
+    "modern": "tégla",
+    "notes": "Modern loan: Hu tégla. Stock & measures"
+  },
+  {
+    "english": "tile",
+    "ancient": "Tileor",
+    "modern": "cserép",
+    "notes": "Modern loan: Hu cserép. Stock & measures"
+  },
+  {
+    "english": "shingle",
+    "ancient": "Shingleor",
+    "modern": "zsindely",
+    "notes": "Modern loan: Hu zsindely. Stock & measures"
+  },
+  {
+    "english": "mortar",
+    "ancient": "Mortaror",
+    "modern": "habarcs",
+    "notes": "Modern loan: Hu habarcs. Stock & measures"
+  },
+  {
+    "english": "cement",
+    "ancient": "Sementor",
+    "modern": "cement",
+    "notes": "Modern loan: Hu cement. Stock & measures"
+  }
+]
