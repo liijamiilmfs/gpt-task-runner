@@ -175,3 +175,10 @@ audit-report-*.csv
 audit-detailed-*.txt
 qa-report-*.json
 qa-report-*.csv
+# Cleanup additions
+audit-reports/
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
