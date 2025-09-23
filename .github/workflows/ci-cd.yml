@@ -17,6 +17,7 @@ permissions:
   contents: read
   checks: write
   statuses: write
+  pull-requests: write
   id-token: write
 
 env:
@@ -356,7 +357,7 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          comment: false
+          github-comment: false
 
       - name: Notify deployment success
         run: |
