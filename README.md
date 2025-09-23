@@ -25,6 +25,20 @@
 - ✅ **Compatibility**: Maintains Node.js 20.0+ compatibility while using modern dependencies
 - ✅ **Modern Stack**: Next.js 14, TypeScript 5.0+, OpenAI TTS integration
 
+### Deployment workflow behavior
+- Push deploys on `main` only when app or configuration files change.
+- Push deploys always skip PR comments (`Skipping PR comment on push.`).
+- Same-repo PRs deploy previews and post a success comment with the preview link.
+- Fork PRs deploy previews but only log that the comment was skipped.
+- Release events reuse the production deployment workflow.
+- Secrets are validated up front and fail fast if missing.
+- Concurrency `vercel-${{ github.ref }}` prevents overlapping deploys.
+- Deployments run on Node.js 20.x to mirror the Vercel runtime.
+- GitHub permissions allow PR comments without affecting other scopes.
+- Comment failures are tolerated via `continue-on-error`.
+- Workflow respects path filters to avoid unnecessary deploys.
+- Status updates remain enabled for preview reporting.
+
 ## What is Librán Voice Forge?
 
 Librán Voice Forge is a specialized translation and text-to-speech system that converts English text into the mystical language of Librán and synthesizes it into audio using OpenAI's advanced TTS models. Perfect for worldbuilding, immersive storytelling, and bringing fictional languages to life.

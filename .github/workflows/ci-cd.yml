@@ -2,22 +2,57 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main ]
+    paths:
+      - 'app/**'
+      - 'next.config.js'
+      - 'package.json'
+      - 'package-lock.json'
   pull_request:
-    branches: [ main, dev ]
+    branches: [ main ]
   release:
     types: [ published ]
 
 permissions:
   contents: read
-  checks: write
-  id-token: write
+  pull-requests: write
+  statuses: write
+
+concurrency:
+  group: vercel-${{ github.ref }}
+  cancel-in-progress: true
 
 env:
   NODE_VERSION: '20.17.0'
   PYTHON_VERSION: '3.12'
 
 jobs:
+  vercel-secrets-check:
+    name: Verify Vercel Secrets
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' || github.event_name == 'pull_request' || github.event_name == 'release'
+    steps:
+      - name: Validate required secrets
+        run: |
+          missing=0
+          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
+            echo "::error::Missing VERCEL_TOKEN secret."
+            missing=1
+          fi
+          if [ -z "${{ secrets.VERCEL_ORG_ID }}" ]; then
+            echo "::error::Missing VERCEL_ORG_ID secret."
+            missing=1
+          fi
+          if [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
+            echo "::error::Missing VERCEL_PROJECT_ID secret."
+            missing=1
+          fi
+          if [ "$missing" -ne 0 ]; then
+            echo "Required Vercel secrets are missing."
+            exit 1
+          fi
+          echo "All Vercel secrets are configured."
+
   # Lint and Type Check
   lint:
     name: Lint & Type Check
@@ -271,8 +306,10 @@ jobs:
   deploy-production:
     name: Deploy to Vercel
     runs-on: ubuntu-latest
-    needs: ci_build
-    if: (github.ref == 'refs/heads/main' && github.event_name == 'push') || github.event_name == 'release'
+    needs:
+      - ci_build
+      - vercel-secrets-check
+    if: github.event_name == 'release' || (github.event_name == 'push' && github.ref == 'refs/heads/main') || github.event_name == 'pull_request'
     environment:
       name: production
       url: https://libran-voice-forge.vercel.app
@@ -280,23 +317,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Verify Vercel secrets
-        run: |
-          if [ -z "${{ secrets.VERCEL_TOKEN }}" ]; then
-            echo "Error: VERCEL_TOKEN secret is not set"
-            exit 1
-          fi
-          if [ -z "${{ secrets.VERCEL_ORG_ID }}" ]; then
-            echo "Error: VERCEL_ORG_ID secret is not set"
-            exit 1
-          fi
-          if [ -z "${{ secrets.VERCEL_PROJECT_ID }}" ]; then
-            echo "Error: VERCEL_PROJECT_ID secret is not set"
-            exit 1
-          fi
-          echo "All Vercel secrets are configured"
-
       - name: Deploy to Vercel
+        id: vercel-deploy
         uses: amondnet/vercel-action@v25
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -304,10 +326,31 @@ jobs:
           vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
           vercel-args: '--prod'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          comment: false
 
       - name: Notify deployment success
         run: |
           echo "Deployment to Vercel successful! URL: https://libran-voice-forge.vercel.app"
+
+      - name: Skipping PR comment on push
+        if: github.event_name == 'push'
+        run: echo "Skipping PR comment on push."
+
+      - name: Skipping PR comment for forked pull request
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.fork
+        run: echo "Skipping PR comment for forked pull request."
+
+      - name: Publish deployment comment
+        if: github.event_name == 'pull_request' && !github.event.pull_request.head.repo.fork
+        continue-on-error: true
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ✅ Vercel deployment succeeded.
+
+            Preview URL: ${{ steps.vercel-deploy.outputs.preview-url }}
 
       - name: Create GitHub Release
         if: github.event_name == 'release'
