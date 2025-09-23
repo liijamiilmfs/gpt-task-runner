@@ -12,7 +12,7 @@ const fs = require('fs');
 
 // Default configuration
 const DEFAULT_CONFIG = {
-  json: 'data/UnifiedLibranDictionaryv1.6.0.json',
+  json: 'data/UnifiedLibranDictionaryv1.7.0.json',
   output: 'lib/translator/dictionaries'
 };
 
