@@ -30,7 +30,7 @@ jobs:
         with:
           script: |
             const sha = context.payload.pull_request.head.sha;
-            await github.repos.createCommitStatus({
+            await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha,
@@ -43,7 +43,7 @@ jobs:
         with:
           script: |
             const sha = context.payload.pull_request.head.sha;
-            await github.repos.createCommitStatus({
+            await github.rest.repos.createCommitStatus({
               owner: context.repo.owner,
               repo: context.repo.repo,
               sha,
