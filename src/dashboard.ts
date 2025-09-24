@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import * as path from 'path';
+import rateLimit from 'express-rate-limit';
 import { WebSocketServer } from 'ws';
 import { Database } from './database/database';
 import { Logger } from './logger';
@@ -34,6 +35,13 @@ class DashboardServer {
   }
 
   private setupRoutes(): void {
+    // Rate limiter for filesystem access (catch-all route)
+    const fileAccessLimiter = rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100,                 // max 100 requests per windowMs
+      standardHeaders: true,    // Return rate limit info in the `RateLimit-*` headers
+      legacyHeaders: false,     // Disable the `X-RateLimit-*` headers
+    });
     // API Routes
     this.app.get('/api/health', (_req, res) => {
       res.json({ status: 'healthy', timestamp: new Date().toISOString() });
@@ -125,7 +133,7 @@ class DashboardServer {
     });
 
     // Serve React app for all other routes
-    this.app.get('*', (_req, res) => {
+    this.app.get('*', fileAccessLimiter, (_req, res) => {
       res.sendFile(path.join(__dirname, '../dashboard/dist/index.html'));
     });
   }

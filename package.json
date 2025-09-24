@@ -61,7 +61,8 @@
     "openai": "^4.20.1",
     "sqlite3": "^5.1.6",
     "winston": "^3.11.0",
-    "ws": "^8.18.3"
+    "ws": "^8.18.3",
+    "express-rate-limit": "^8.1.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
