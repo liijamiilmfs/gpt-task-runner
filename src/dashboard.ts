@@ -15,6 +15,7 @@ class DashboardServer {
   private database: Database;
   private logger: Logger;
   private gptService: GPTTaskService;
+  private strictLimiter: any;
 
   constructor() {
     this.app = express();
@@ -51,7 +52,7 @@ class DashboardServer {
     });
     
     // Very strict rate limiter for sensitive operations
-    const strictLimiter = rateLimit({
+    this.strictLimiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
       max: 20,                  // max 20 requests per windowMs
       standardHeaders: true,
@@ -65,15 +66,6 @@ class DashboardServer {
   }
 
   private setupRoutes(): void {
-    // Very strict rate limiter for sensitive operations
-    const strictLimiter = rateLimit({
-      windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 20,                  // max 20 requests per windowMs
-      standardHeaders: true,
-      legacyHeaders: false,
-      message: 'Too many sensitive operations from this IP, please try again later.',
-    });
-    
     // API Routes
     this.app.get('/api/health', (_req, res) => {
       res.json({ status: 'healthy', timestamp: new Date().toISOString() });
@@ -85,6 +77,7 @@ class DashboardServer {
         const status = await this.gptService.getServiceStatus();
         res.json(status);
       } catch (error) {
+        console.error('Failed to get service status:', error);
         res.status(500).json({ error: 'Failed to get service status' });
       }
     });
@@ -97,6 +90,7 @@ class DashboardServer {
         const executions = await this.database.getTaskExecutions(limit, offset);
         res.json(executions);
       } catch (error) {
+        console.error('Failed to get task executions:', error);
         res.status(500).json({ error: 'Failed to get task executions' });
       }
     });
@@ -107,6 +101,7 @@ class DashboardServer {
         const metrics = await this.database.getTaskMetrics();
         res.json(metrics);
       } catch (error) {
+        console.error('Failed to get metrics:', error);
         res.status(500).json({ error: 'Failed to get metrics' });
       }
     });
@@ -117,24 +112,27 @@ class DashboardServer {
         const tasks = await this.database.getScheduledTasks();
         res.json(tasks);
       } catch (error) {
+        console.error('Failed to get scheduled tasks:', error);
         res.status(500).json({ error: 'Failed to get scheduled tasks' });
       }
     });
 
-    this.app.post('/api/scheduled-tasks', strictLimiter, async (req, res) => {
+    this.app.post('/api/scheduled-tasks', this.strictLimiter, async (req, res) => {
       try {
         const taskId = await this.gptService.addScheduledTask(req.body);
         res.json({ id: taskId, message: 'Scheduled task created successfully' });
       } catch (error) {
+        console.error('Failed to create scheduled task:', error);
         res.status(500).json({ error: 'Failed to create scheduled task' });
       }
     });
 
-    this.app.delete('/api/scheduled-tasks/:id', strictLimiter, async (req, res) => {
+    this.app.delete('/api/scheduled-tasks/:id', this.strictLimiter, async (req, res) => {
       try {
         await this.gptService.removeScheduledTask(req.params.id);
         res.json({ message: 'Scheduled task removed successfully' });
       } catch (error) {
+        console.error('Failed to remove scheduled task:', error);
         res.status(500).json({ error: 'Failed to remove scheduled task' });
       }
     });
@@ -146,12 +144,13 @@ class DashboardServer {
         const logs = await this.database.getServiceLogs(limit);
         res.json(logs);
       } catch (error) {
+        console.error('Failed to get service logs:', error);
         res.status(500).json({ error: 'Failed to get service logs' });
       }
     });
 
     // Manual task execution - very sensitive operation
-    this.app.post('/api/execute', strictLimiter, async (req, res) => {
+    this.app.post('/api/execute', this.strictLimiter, async (req, res) => {
       try {
         const { inputFile, outputFile, isDryRun } = req.body as any;
         console.log('Manual execution request:', { inputFile, outputFile, isDryRun });
@@ -160,6 +159,7 @@ class DashboardServer {
         // Implementation depends on your task execution logic
         res.json({ message: 'Task execution started', executionId: 'manual-exec-' + Date.now() });
       } catch (error) {
+        console.error('Failed to execute task:', error);
         res.status(500).json({ error: 'Failed to execute task' });
       }
     });

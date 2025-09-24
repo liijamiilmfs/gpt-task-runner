@@ -171,6 +171,7 @@ class GPTTaskService {
     }
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private async updateTaskLastRun(_taskId: string): Promise<void> {
     // This would update the lastRun field in the database
     // Implementation depends on your database schema

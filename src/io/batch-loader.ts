@@ -54,6 +54,7 @@ export class BatchLoader {
           const task = JSON.parse(line) as TaskRequest;
           tasks.push(task);
         } catch (error) {
+          console.error('JSONL parsing error:', error);
           throw new Error(`Invalid JSONL line: ${line}`);
         }
       }
