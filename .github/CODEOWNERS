@@ -1,0 +1,22 @@
+# Global code owners
+* @username
+
+# Core functionality
+/src/ @username
+/tests/ @username
+
+# Dashboard
+/dashboard/ @username
+
+# Documentation
+/docs/ @username
+*.md @username
+
+# Configuration files
+package.json @username
+tsconfig.json @username
+.github/ @username
+
+# Branch protection and CI/CD
+/.github/workflows/ @username
+/scripts/branch-protection/ @username
