@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as os from 'os';
 import { BatchLoader } from '../src/io/batch-loader';
-import { TaskRequest } from '../src/types';
+// import { TaskRequest } from '../src/types';
 
 describe('BatchLoader', () => {
   let batchLoader: BatchLoader;
