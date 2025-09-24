@@ -9,6 +9,9 @@ on:
   pull_request:
     branches: [ main, dev ]
 
+env:
+  NODE_VERSION: '18'
+
 jobs:
   dependency-scan:
     name: Dependency Vulnerability Scan
@@ -21,7 +24,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       
       - name: Install dependencies
@@ -31,20 +34,43 @@ jobs:
         run: npm audit --audit-level moderate
         id: npm-audit
       
-      - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: --severity-threshold=high
-        id: snyk-scan
+      - name: Run npm audit with JSON output
+        run: npm audit --json > npm-audit-results.json || true
+        id: npm-audit-json
         continue-on-error: true
       
-      - name: Upload Snyk results to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v2
-        if: always() && steps.snyk-scan.outcome == 'success'
+      - name: Check if npm audit results exist
+        id: check-npm-audit
+        run: |
+          if [ -f npm-audit-results.json ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+      
+      - name: Upload npm audit results
+        uses: actions/upload-artifact@v4
+        if: steps.check-npm-audit.outputs.exists == 'true'
         with:
-          sarif_file: snyk.sarif
+          name: npm-audit-results
+          path: npm-audit-results.json
+      
+      - name: Run OWASP Dependency Check
+        uses: dependency-check/Dependency-Check_Action@main
+        with:
+          project: 'gpt-task-runner'
+          path: '.'
+          format: 'SARIF'
+          out: 'dependency-check-report.sarif'
+        id: owasp-check
+        continue-on-error: true
+      
+      - name: Upload OWASP Dependency Check results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() && steps.owasp-check.outcome == 'success'
+        with:
+          sarif_file: 'dependency-check-report.sarif'
 
   code-scan:
     name: Code Security Analysis
@@ -57,7 +83,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       
       - name: Install dependencies
@@ -73,10 +99,13 @@ jobs:
         id: semgrep-scan
         continue-on-error: true
       
-      - name: Run CodeQL Analysis
-        uses: github/codeql-action/analyze@v2
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
         with:
           languages: javascript
+      
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
         id: codeql-scan
         continue-on-error: true
 
@@ -89,18 +118,24 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
       
-      - name: Build Docker image
+      - name: Check for Dockerfile
+        id: check-dockerfile
         run: |
           if [ -f Dockerfile ]; then
-            docker build -t gpt-task-runner:latest .
+            echo "exists=true" >> $GITHUB_OUTPUT
           else
+            echo "exists=false" >> $GITHUB_OUTPUT
             echo "No Dockerfile found, skipping container scan"
-            exit 0
           fi
+      
+      - name: Build Docker image
+        if: steps.check-dockerfile.outputs.exists == 'true'
+        run: docker build -t gpt-task-runner:latest .
         id: docker-build
         continue-on-error: true
       
       - name: Run Trivy vulnerability scanner
+        if: steps.check-dockerfile.outputs.exists == 'true'
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'gpt-task-runner:latest'
@@ -109,9 +144,19 @@ jobs:
         id: trivy-scan
         continue-on-error: true
       
+      - name: Check if Trivy SARIF file exists
+        id: check-trivy-sarif
+        run: |
+          if [ -f trivy-results.sarif ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
+      
       - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v2
-        if: always() && steps.trivy-scan.outcome == 'success'
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() && steps.check-dockerfile.outputs.exists == 'true' && steps.trivy-scan.outcome == 'success' && steps.check-trivy-sarif.outputs.exists == 'true'
         with:
           sarif_file: 'trivy-results.sarif'
 
@@ -153,23 +198,38 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
       
       - name: Install dependencies
         run: npm ci
       
+      - name: Install license-checker globally
+        run: npm install -g license-checker
+      
       - name: Run license checker
-        run: npx license-checker --onlyAllow 'MIT;Apache-2.0;BSD-2-Clause;BSD-3-Clause;ISC;Unlicense'
+        run: license-checker --onlyAllow 'MIT;Apache-2.0;BSD-2-Clause;BSD-3-Clause;ISC;Unlicense'
         id: license-check
         continue-on-error: true
       
       - name: Generate license report
-        run: npx license-checker --json > license-report.json
+        run: license-checker --json > license-report.json
         id: license-report
+        continue-on-error: true
+      
+      - name: Check if license report exists
+        id: check-license-report
+        run: |
+          if [ -f license-report.json ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+          fi
+        continue-on-error: true
       
       - name: Upload license report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
+        if: steps.check-license-report.outputs.exists == 'true'
         with:
           name: license-report
           path: license-report.json
