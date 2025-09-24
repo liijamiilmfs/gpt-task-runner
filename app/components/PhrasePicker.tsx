@@ -1,17 +1,18 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Phrase } from '@/lib/phrase-service'
+import type { Phrase, PhraseFilter, PhraseCategory, PhraseDifficulty } from '@/lib/types/phrase'
 
 interface PhrasePickerProps {
   onPhraseSelect: (phrase: Phrase, variant: 'ancient' | 'modern') => void
   onLoadingChange: (loading: boolean) => void
 }
 
-interface PhraseFilter {
-  category: string
-  difficulty: string
-  search: string
+// Local type definitions for component state
+type PhraseFilter = {
+  category?: PhraseCategory
+  difficulty?: PhraseDifficulty
+  search?: string
 }
 
 export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: PhrasePickerProps) {

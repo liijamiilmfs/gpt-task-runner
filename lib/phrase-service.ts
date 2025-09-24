@@ -1,33 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import { log } from './logger';
-
-export interface Phrase {
-  id: string;
-  english: string;
-  ancient: string;
-  modern: string;
-  category: string;
-  difficulty: 'beginner' | 'intermediate' | 'advanced';
-  context: string;
-}
-
-export interface PhraseBook {
-  metadata: {
-    version: string;
-    created_on: string;
-    description: string;
-    total_phrases: number;
-    categories: string[];
-  };
-  phrases: Phrase[];
-}
-
-export interface PhraseFilter {
-  category?: string;
-  difficulty?: 'beginner' | 'intermediate' | 'advanced';
-  search?: string;
-}
+import type { Phrase, PhraseCategory, PhraseDifficulty, PhraseFilter, PhraseBook } from './types/phrase';
 
 export class PhraseService {
   private phraseBook: PhraseBook | null = null;

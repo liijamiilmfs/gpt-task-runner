@@ -7,7 +7,7 @@ import TranslationResult from './components/TranslationResult'
 import AudioDownloadButton from './components/AudioDownloadButton'
 import PhrasePicker from './components/PhrasePicker'
 import { generateFilename } from '@/lib/clipboard-utils'
-import { Phrase } from '@/lib/phrase-service'
+import type { Phrase } from '@/lib/types/phrase'
 
 export default function Home() {
   const [inputText, setInputText] = useState('')
