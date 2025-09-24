@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.7.0",
-    "created_on": "2025-09-23T02:43:57.988Z",
+    "created_on": "2025-09-23T16:29:31.003Z",
     "files_included": [
       "Libran_Abstract_Concepts_Qualities_Tranche_v1.5.1.json",
       "Libran_Alesii_Politics_Tranche_v1.5.1.json",
@@ -24,19 +24,18 @@
       "libran_weapons_warfare_v1.json",
       "libran_weather_natural_phenomena_v1.json"
     ],
-    "total_entries": 2543,
-    "duplicates_removed": 686,
+    "total_entries": 2109,
+    "duplicates_removed": 6,
     "processing_notes": [
       "Merged from individual tranche files",
       "Removed duplicate entries based on english|ancient|modern combination",
-      "Excluded existing unified dictionaries and duplicate files"
+      "Excluded existing unified dictionaries and duplicate files",
+      "MERGE CONFLICTS RESOLVED: Kept changes from both branches",
+      "Additional duplicates removed after merge conflict resolution",
+      "Resolved on 2025-09-23T20:24:48.339Z"
     ],
     "project": "Librán Language Files",
-    "source_directory": "./data/Tranches",
-    "qa_applied": true,
-    "corrections_count": 73,
-    "original_entries": 2543,
-    "final_entries": 2030
+    "source_directory": "./data/Tranches"
   },
   "sections": {
     "Unified": {
@@ -378,11 +377,6 @@
           "notes": "Lat spiritus; Hu lélek"
         },
         {
-          "ancient": "Animor",
-          "modern": "lélkë",
-          "notes": "Lat anima + -or; Hu lélek + ë suffix; spiritual essence"
-        },
-        {
           "english": "mind",
           "ancient": "Mens",
           "modern": "elme",
@@ -399,11 +393,6 @@
           "ancient": "Nomen",
           "modern": "név-lényeg",
           "notes": "Lat nomen; Hu név + lényeg"
-        },
-        {
-          "ancient": "arnëa",
-          "modern": "arnëa",
-          "notes": "Hu árnyék; Concealment; singular arnëa, definite arnëë, plural arnëir"
         },
         {
           "english": "light",
@@ -428,11 +417,6 @@
           "ancient": "Vox",
           "modern": "hang",
           "notes": "Lat vox; Hu hang"
-        },
-        {
-          "ancient": "Memoror",
-          "modern": "memira",
-          "notes": "Lat memoria; Sacred remembrance; singular memira, definite memirë, plural memirir"
         },
         {
           "english": "dream",
@@ -495,9 +479,10 @@
           "notes": "Lat corruptio; Hu romlottság"
         },
         {
-          "ancient": "Stílibror",
-          "modern": "stílibra",
-          "notes": "Lat statera; Core sacred concept; mythic register"
+          "english": "balance",
+          "ancient": "Statera",
+          "modern": "stilibra",
+          "notes": "Lat statera; Hu mérleg elv"
         },
         {
           "english": "harmony of spheres",
@@ -674,6 +659,12 @@
           "notes": "Lat permissio; Hu engedély"
         },
         {
+          "english": "prohibition",
+          "ancient": "Prohibitio",
+          "modern": "tilalom",
+          "notes": "Lat prohibitio; Hu tilalom"
+        },
+        {
           "english": "agreement",
           "ancient": "Foedus",
           "modern": "egyezség",
@@ -782,10 +773,10 @@
           "notes": "Lat amor; Hu szeretet"
         },
         {
-          "english": "love (affection)",
-          "ancient": "Amor",
-          "modern": "szeretet",
-          "notes": "Lat amor; Hu szeretet; auto-corrected from lazy formation"
+          "english": "longing",
+          "ancient": "Desiderium",
+          "modern": "vágyódás",
+          "notes": "Lat desiderium; Hu vágyódás"
         },
         {
           "english": "fear (awe)",
@@ -794,10 +785,10 @@
           "notes": "Lat timor; Hu félelem"
         },
         {
-          "english": "fear (awe)",
-          "ancient": "Timor",
-          "modern": "félelem",
-          "notes": "Lat timor; Hu félelem; auto-corrected from lazy formation"
+          "english": "awe (sacred fear)",
+          "ancient": "Religiosus Timor",
+          "modern": "szent félelem",
+          "notes": "Lat; Hu szent félelem"
         },
         {
           "english": "shamefacedness",
@@ -1256,6 +1247,12 @@
           "notes": "Lat summus→Summor; Hu fővezír → -a.; auto-corrected from lazy formation"
         },
         {
+          "english": "tribe",
+          "ancient": "Tribor",
+          "modern": "Törzsa",
+          "notes": "Lat tribus→Tribor; Hu törzs → -a."
+        },
+        {
           "english": "clan",
           "ancient": "Clanior",
           "modern": "Nemzë",
@@ -1352,10 +1349,22 @@
           "notes": "Lat comitium; Hu gyűlés → -e."
         },
         {
+          "english": "law",
+          "ancient": "Lexor",
+          "modern": "Törvë",
+          "notes": "Lat lex; Hu törvény → truncated törvë."
+        },
+        {
           "english": "decree",
           "ancient": "Decretor",
           "modern": "Rendeleta",
           "notes": "Lat decretum→Decretor; Hu rendelet → -a."
+        },
+        {
+          "english": "oath",
+          "ancient": "Iusjuror",
+          "modern": "Esküë",
+          "notes": "Lat iusjurandum→Iusjuror; Hu eskü → ë."
         },
         {
           "english": "trial",
@@ -1380,6 +1389,24 @@
           "ancient": "Tributor",
           "modern": "Adóa",
           "notes": "Lat tributum→Tributor; Hu adó → -a."
+        },
+        {
+          "english": "tribute",
+          "ancient": "Stipendor",
+          "modern": "Hódolata",
+          "notes": "Lat stipendium; Hu hódolat → -a."
+        },
+        {
+          "english": "sanction",
+          "ancient": "Sanctor",
+          "modern": "Szankcióa",
+          "notes": "Lat sanctio→Sanctor; Hu szankció → -a."
+        },
+        {
+          "english": "exile",
+          "ancient": "Exilium",
+          "modern": "Száműzë",
+          "notes": "Lat exilium; Hu száműzés → ë."
         },
         {
           "english": "bond",
@@ -1454,6 +1481,12 @@
           "notes": "Lat sacrificium→Sacrificor; Hu áldozat → -a."
         },
         {
+          "english": "initiation",
+          "ancient": "Initior",
+          "modern": "Beavatása",
+          "notes": "Lat initium→Initior; Hu beavatás → -a."
+        },
+        {
           "english": "oath-keeper",
           "ancient": "Sacramentor",
           "modern": "Eskütartóë",
@@ -1526,6 +1559,12 @@
           "notes": "Lat scriba→Scribor; Hu írnok → -a."
         },
         {
+          "english": "herald (law)",
+          "ancient": "Praeconor",
+          "modern": "Kihirdetőë",
+          "notes": "Lat praecon→Praeconor; Hu kihirdető → ë."
+        },
+        {
           "english": "assembly hall",
           "ancient": "Basilicor",
           "modern": "Gyűlésháza",
@@ -1542,6 +1581,12 @@
           "ancient": "Munus Civicus",
           "modern": "Polgári Kötelë",
           "notes": "Lat munus civicus; Hu polgári kötelezettség → ë."
+        },
+        {
+          "english": "rebellion",
+          "ancient": "Rebellor",
+          "modern": "Lázadása",
+          "notes": "Lat rebellio→Rebellor; Hu lázadás → -a."
         },
         {
           "english": "traitor",
@@ -1652,9 +1697,16 @@
           "notes": "Modern loan: Hu jávor."
         },
         {
+          "english": "horse",
           "ancient": "Equus",
           "modern": "lóë",
           "notes": "Lat equus; Hu ló + ë suffix; noble steed"
+        },
+        {
+          "english": "bison",
+          "ancient": "Bison",
+          "modern": "bölény",
+          "notes": "Modern loan: Hu bölény."
         },
         {
           "english": "mammoth",
@@ -1891,6 +1943,12 @@
           "notes": "Modern loan: Hu kígyó."
         },
         {
+          "english": "snake",
+          "ancient": "Snakeor",
+          "modern": "kígyó",
+          "notes": "Modern loan: Hu kígyó."
+        },
+        {
           "english": "frog",
           "ancient": "Frogor",
           "modern": "béka",
@@ -1925,6 +1983,12 @@
           "ancient": "Bellum",
           "modern": "varg (lore)",
           "notes": "Modern loan: Hu varg (lore).; auto-corrected from lazy formation"
+        },
+        {
+          "english": "bee",
+          "ancient": "Beeor",
+          "modern": "méh",
+          "notes": "Modern loan: Hu méh."
         },
         {
           "english": "wasp",
@@ -2155,6 +2219,12 @@
           "notes": "Modern loan: Hu fűszer."
         },
         {
+          "english": "spice",
+          "ancient": "Spiseor",
+          "modern": "fűszer",
+          "notes": "Modern loan: Hu fűszer."
+        },
+        {
           "english": "flower",
           "ancient": "Floweror",
           "modern": "virág",
@@ -2239,6 +2309,12 @@
           "notes": "Modern loan: Hu gomba."
         },
         {
+          "english": "fungus",
+          "ancient": "Fungusor",
+          "modern": "gomba",
+          "notes": "Modern loan: Hu gomba."
+        },
+        {
           "english": "kelp",
           "ancient": "Kelpor",
           "modern": "hínár",
@@ -2279,6 +2355,12 @@
           "ancient": "Kerryor",
           "modern": "cseresznye",
           "notes": "Modern loan: Hu cseresznye."
+        },
+        {
+          "english": "grape",
+          "ancient": "Grapeor",
+          "modern": "szőlő",
+          "notes": "Modern loan: Hu szőlő."
         },
         {
           "english": "fig",
@@ -2419,6 +2501,12 @@
           "notes": "Modern loan: Hu tea.; auto-corrected from lazy formation"
         },
         {
+          "english": "swallows",
+          "ancient": "Swallowsor",
+          "modern": "svallovsa",
+          "notes": "Modern derived by Hu-leaning phonology."
+        },
+        {
           "english": "ravenous",
           "ancient": "Ravenousor",
           "modern": "ravenousa",
@@ -2441,6 +2529,12 @@
           "ancient": "Sagitta",
           "modern": "sparrova",
           "notes": "Modern derived by Hu-leaning phonology.; auto-corrected from lazy formation"
+        },
+        {
+          "english": "osprey",
+          "ancient": "Ospreyor",
+          "modern": "ospreya",
+          "notes": "Modern derived by Hu-leaning phonology."
         },
         {
           "english": "swifts",
@@ -2821,6 +2915,12 @@
           "notes": "Modern derived by Hu-leaning phonology.; auto-corrected from lazy formation"
         },
         {
+          "english": "turnip",
+          "ancient": "Turnipor",
+          "modern": "turnipa",
+          "notes": "Modern derived by Hu-leaning phonology."
+        },
+        {
           "english": "radish",
           "ancient": "Radishor",
           "modern": "radisa",
@@ -2947,6 +3047,12 @@
           "notes": "Modern derived by Hu-leaning phonology.; auto-corrected from lazy formation"
         },
         {
+          "english": "millet",
+          "ancient": "Milletor",
+          "modern": "milleta",
+          "notes": "Modern derived by Hu-leaning phonology."
+        },
+        {
           "english": "sorghum",
           "ancient": "Sorgum",
           "modern": "sorghuma",
@@ -3013,6 +3119,12 @@
           "notes": "Modern derived by Hu-leaning phonology.; auto-corrected from lazy formation"
         },
         {
+          "english": "it",
+          "ancient": "idon",
+          "modern": "ída",
+          "notes": "Donors: Lat id; Ancient -on; Modern -a."
+        },
+        {
           "english": "we",
           "ancient": "nesor",
           "modern": "níra",
@@ -3065,6 +3177,18 @@
           "ancient": "Bellator",
           "modern": "égra",
           "notes": "Donors: Is. ég + Lat ego → Ancient -or; Modern vowel shift é + -a.; auto-corrected from lazy formation"
+        },
+        {
+          "english": "us",
+          "ancient": "nosin",
+          "modern": "níra",
+          "notes": "Donors: Lat nos; -in oblique; Modern merges with we/obj."
+        },
+        {
+          "english": "you (obj, pl)",
+          "ancient": "vosin",
+          "modern": "vásra",
+          "notes": "Donors: Lat vos; -in oblique; Modern -ra."
         },
         {
           "english": "them (animate)",
@@ -3191,6 +3315,12 @@
           "ancient": "Fortitudo",
           "modern": "níae",
           "notes": "Donors: Lat noster (neo- simplified); Modern -ae plural.; auto-corrected from lazy formation"
+        },
+        {
+          "english": "when",
+          "ancient": "quandon",
+          "modern": "kandë",
+          "notes": "Donors: Lat quando; Modern de‑ending."
         },
         {
           "english": "why",
@@ -3499,6 +3629,12 @@
           "notes": "Lat mons→Montor; Hu hegy → -a.; auto-corrected from lazy formation"
         },
         {
+          "english": "river",
+          "ancient": "Fluvior",
+          "modern": "Folyóa",
+          "notes": "Lat fluvius→Fluvior; Hu folyó → -a."
+        },
+        {
           "english": "stream",
           "ancient": "Rivulor",
           "modern": "Pataka",
@@ -3517,10 +3653,22 @@
           "notes": "Lat vallis→Vallisor; Hu völgy → -a.; auto-corrected from lazy formation"
         },
         {
+          "english": "waterfall",
+          "ancient": "Cataractor",
+          "modern": "Vízesë",
+          "notes": "Lat cataracta→Cataractor; Hu vízesés → ë."
+        },
+        {
           "english": "lake",
           "ancient": "Lacor",
           "modern": "Tava",
           "notes": "Lat lacus→Lacor; Hu tó/tava → -a."
+        },
+        {
+          "english": "sea",
+          "ancient": "Mareor",
+          "modern": "Tengë",
+          "notes": "Lat mare→Mareor; Hu tenger → truncated."
         },
         {
           "english": "ocean",
@@ -3539,6 +3687,12 @@
           "ancient": "Silva",
           "modern": "Erdöa",
           "notes": "Lat silva→Silvor; Hu erdő → -a.; auto-corrected from lazy formation"
+        },
+        {
+          "english": "gulf",
+          "ancient": "Gulfus",
+          "modern": "Földköza",
+          "notes": "Lat gulfus; Hu földköz (archaic gulf) → -a."
         },
         {
           "english": "strait",
@@ -3581,6 +3735,12 @@
           "ancient": "Flumen",
           "modern": "Folyóa",
           "notes": "Lat fluvius→Fluvior; Hu folyó → -a.; auto-corrected from lazy formation"
+        },
+        {
+          "english": "island",
+          "ancient": "Insulor",
+          "modern": "Szigeta",
+          "notes": "Lat insula→Insulor; Hu sziget → -a."
         },
         {
           "english": "reef",
@@ -3697,6 +3857,12 @@
           "notes": "Lat nix→Nivor; Hu hómező → -e.; auto-corrected from lazy formation"
         },
         {
+          "english": "heath",
+          "ancient": "Brucor",
+          "modern": "Pusztaföldë",
+          "notes": "Lat brucus; Hu pusztaföld → ë."
+        },
+        {
           "english": "sky",
           "ancient": "Caelior",
           "modern": "Égë",
@@ -3719,6 +3885,12 @@
           "ancient": "Ager",
           "modern": "Hamu-meze",
           "notes": "Lat cinis; Hu hamumező → -e.; auto-corrected from lazy formation"
+        },
+        {
+          "english": "star",
+          "ancient": "Stellor",
+          "modern": "Csilla",
+          "notes": "Lat stella→Stellor; Hu csillag → -a."
         },
         {
           "english": "constellation",
@@ -3763,6 +3935,18 @@
           "notes": "Lat pluvia→Pluvior; Hu eső → ë."
         },
         {
+          "english": "snow",
+          "ancient": "Nivor",
+          "modern": "Hóë",
+          "notes": "Lat nix→Nivor; Hu hó → ë."
+        },
+        {
+          "english": "ice",
+          "ancient": "Glacior",
+          "modern": "Jégë",
+          "notes": "Lat glacies→Glacior; Hu jég → ë."
+        },
+        {
           "english": "cloud",
           "ancient": "Nubor",
           "modern": "Felhőë",
@@ -3787,19 +3971,34 @@
           "notes": "Lat ventus→Ventor; Hu szél → ë."
         },
         {
+          "english": "heaven",
           "ancient": "Caelum",
           "modern": "ég",
           "notes": "Lat caelum; Hu ég; heavens"
         },
         {
-          "ancient": "Sol",
-          "modern": "nap",
-          "notes": "Lat sol; Hu nap; life giver"
-        },
-        {
+          "english": "moon",
           "ancient": "Luna",
           "modern": "hold",
           "notes": "Lat luna; Hu hold; celestial body"
+        },
+        {
+          "english": "thunder",
+          "ancient": "Tonitror",
+          "modern": "Mennydörgë",
+          "notes": "Lat tonitrus→Tonitror; Hu mennydörgés → ë."
+        },
+        {
+          "english": "lightning",
+          "ancient": "Fulminor",
+          "modern": "Villáma",
+          "notes": "Lat fulmen→Fulminor; Hu villám → -a."
+        },
+        {
+          "english": "rainbow",
+          "ancient": "Arcusor",
+          "modern": "Szivárványa",
+          "notes": "Lat arcus; Hu szivárvány → -a."
         },
         {
           "english": "village",
@@ -3862,6 +4061,12 @@
           "notes": "Lat glacies→Glacior; Hu jég → ë.; auto-corrected from lazy formation"
         },
         {
+          "english": "market",
+          "ancient": "Forumor",
+          "modern": "Piaca",
+          "notes": "Lat forum→Forumor; Hu piac → -a."
+        },
+        {
           "english": "bazaar",
           "ancient": "Bazaror",
           "modern": "Bazára",
@@ -3904,6 +4109,12 @@
           "notes": "Lat arcus; Hu szivárvány → -a.; auto-corrected from lazy formation"
         },
         {
+          "english": "library",
+          "ancient": "Libraror",
+          "modern": "Könyvtára",
+          "notes": "Lat librarium→Libraror; Hu könyvtár → -a."
+        },
+        {
           "english": "archive",
           "ancient": "Archivor",
           "modern": "Levéltára",
@@ -3914,6 +4125,12 @@
           "ancient": "Curiar",
           "modern": "Bírósága",
           "notes": "Lat curia→Curiar; Hu bíróság → -a."
+        },
+        {
+          "english": "prison",
+          "ancient": "Carceror",
+          "modern": "Börtöna",
+          "notes": "Lat carcer→Carceror; Hu börtön → -a."
         },
         {
           "english": "barracks",
@@ -3976,6 +4193,12 @@
           "notes": "Lat pilar→Pilaror; Hu oszlop → -a."
         },
         {
+          "english": "sanctuary",
+          "ancient": "Sanctor",
+          "modern": "Menedéke",
+          "notes": "Lat sanctuarium→Sanctor; Hu menedék → -e."
+        },
+        {
           "english": "holy mountain",
           "ancient": "Mons Sacror",
           "modern": "Szent Hegya",
@@ -3998,6 +4221,72 @@
           "ancient": "Domus",
           "modern": "Raktára",
           "notes": "Lat depositum→Depositor; Hu raktár → -a.; auto-corrected from lazy formation"
+        },
+        {
+          "english": "high hall",
+          "ancient": "Aula Magna",
+          "modern": "Nagyaulaë",
+          "notes": "Lat aula magna; Hu nagy aula → ë."
+        },
+        {
+          "english": "bee",
+          "ancient": "Apira",
+          "modern": "méha",
+          "notes": "Lat apis; Ro albină; Hu méh"
+        },
+        {
+          "english": "wasp",
+          "ancient": "Vespa",
+          "modern": "darázsa",
+          "notes": "Lat vespa; Ro viespe; Hu darázs"
+        },
+        {
+          "english": "ant",
+          "ancient": "Formica",
+          "modern": "hangya",
+          "notes": "Lat formica; Ro furnică; Hu hangya"
+        },
+        {
+          "english": "butterfly",
+          "ancient": "Papilio",
+          "modern": "pillangó",
+          "notes": "Lat papilio; Ro fluture; Hu pillangó"
+        },
+        {
+          "english": "moth",
+          "ancient": "Noctua",
+          "modern": "molya",
+          "notes": "Lat noctua; Ro molie; Hu moly"
+        },
+        {
+          "english": "spider",
+          "ancient": "Aranea",
+          "modern": "póka",
+          "notes": "Lat aranea; Ro păianjen; Hu pók"
+        },
+        {
+          "english": "wolf",
+          "ancient": "Lupus",
+          "modern": "farkas",
+          "notes": "Lat lupus; Ro lup; Hu farkas"
+        },
+        {
+          "english": "bear",
+          "ancient": "Ursus",
+          "modern": "medve",
+          "notes": "Lat ursus; Ro urs; Hu medve"
+        },
+        {
+          "english": "lion",
+          "ancient": "Leo",
+          "modern": "oroszlán",
+          "notes": "Lat leo; Ro leu; Hu oroszlán"
+        },
+        {
+          "english": "eagle",
+          "ancient": "Aquila",
+          "modern": "sas",
+          "notes": "Lat aquila; Ro vultur; Hu sas"
         },
         {
           "english": "demon",
@@ -4042,6 +4331,12 @@
           "notes": "Lat pharos→Pharor; Hu világítótorony → -a.; auto-corrected from lazy formation"
         },
         {
+          "english": "elf",
+          "ancient": "Alfus",
+          "modern": "tünde",
+          "notes": "Germ alf; Hu tünde/elf"
+        },
+        {
           "english": "goblin",
           "ancient": "Gobelinus",
           "modern": "kobold",
@@ -4070,12 +4365,6 @@
           "ancient": "Dolus",
           "modern": "csaló",
           "notes": "Lat dolus; Hu csaló"
-        },
-        {
-          "english": "prophet",
-          "ancient": "Propheta",
-          "modern": "próféta",
-          "notes": "Gr prophetes; Hu próféta"
         },
         {
           "english": "warrior",
@@ -4258,12 +4547,6 @@
           "notes": "Lat socius→socius; Hu társ → -a."
         },
         {
-          "english": "warrior",
-          "ancient": "Bellator",
-          "modern": "harcos",
-          "notes": "Lat bellator; Hu harcos; auto-corrected from lazy formation"
-        },
-        {
           "english": "widow",
           "ancient": "vidua",
           "modern": "özvegya",
@@ -4280,18 +4563,6 @@
           "ancient": "orphanos",
           "modern": "árvaë",
           "notes": "Lat orphanus→orphanos; Hu árva → ë."
-        },
-        {
-          "english": "healer",
-          "ancient": "Medicus",
-          "modern": "gyógyító",
-          "notes": "Lat sanator; Hu gyógyító; auto-corrected from lazy formation"
-        },
-        {
-          "english": "hunter",
-          "ancient": "Venator",
-          "modern": "vadász",
-          "notes": "Lat venator; Hu vadász; auto-corrected from lazy formation"
         },
         {
           "english": "stepson",
@@ -4336,28 +4607,16 @@
           "notes": "Lat glos→glosor; Hu sógornő → nova."
         },
         {
-          "english": "tribal elder",
-          "ancient": "patronor",
-          "modern": "vénduka",
-          "notes": "Lat patronus→patronor; Hu vén + duka (leader suffix)."
-        },
-        {
-          "english": "family",
-          "ancient": "familia",
-          "modern": "családa",
-          "notes": "Lat familia→familia; Hu család → -a."
+          "english": "tribe",
+          "ancient": "tribor",
+          "modern": "törzsa",
+          "notes": "Lat tribus→tribor; Hu törzs → -a."
         },
         {
           "english": "kin",
           "ancient": "rudor",
           "modern": "rudae",
           "notes": "Lat rudis→rudor; Hu rokon → derived tribal rudae in lore."
-        },
-        {
-          "english": "descendant (poetic)",
-          "ancient": "progenor",
-          "modern": "ivadóra",
-          "notes": "Lat progenies→progenor; Hu ivadék → poetic -óra."
         },
         {
           "english": "head",
@@ -4436,12 +4695,6 @@
           "ancient": "cubitor",
           "modern": "könyöka",
           "notes": "Lat cubitus→cubitor; Hu könyök → -a."
-        },
-        {
-          "english": "lover",
-          "ancient": "Amor",
-          "modern": "szeretőë",
-          "notes": "Lat amator; Hu szerető → ë.; auto-corrected from lazy formation"
         },
         {
           "english": "finger",
@@ -4582,28 +4835,16 @@
           "notes": "Lat guttur→gutturor; Hu torok → -a."
         },
         {
-          "english": "breath",
-          "ancient": "spiror",
-          "modern": "lélega",
-          "notes": "Lat spiritus→spiror; Hu lélegzet → truncated."
-        },
-        {
-          "english": "shadow (body)",
-          "ancient": "umbra",
-          "modern": "árnya",
-          "notes": "Lat umbra→umbra; Hu árnyék → truncated."
+          "english": "spirit",
+          "ancient": "spiritusor",
+          "modern": "szellema",
+          "notes": "Lat spiritus→spiritusor; Hu szellem → -a."
         },
         {
           "english": "womb",
           "ancient": "uteror",
           "modern": "méhe",
           "notes": "Lat uterus→uteror; Hu méh → -e."
-        },
-        {
-          "english": "artery",
-          "ancient": "arterior",
-          "modern": "ütőera",
-          "notes": "Lat arteria→arterior; Hu ütőér → -a."
         },
         {
           "english": "pulse",
@@ -4628,18 +4869,6 @@
           "ancient": "genor",
           "modern": "orca",
           "notes": "Lat gena→genor; Hu orca/arc → -a."
-        },
-        {
-          "english": "arm",
-          "ancient": "Agricola",
-          "modern": "kara",
-          "notes": "Lat bracchium→bracor; Hu kar → -a.; auto-corrected from lazy formation"
-        },
-        {
-          "english": "elbow",
-          "ancient": "Arcus",
-          "modern": "könyöka",
-          "notes": "Lat cubitus→cubitor; Hu könyök → -a.; auto-corrected from lazy formation"
         },
         {
           "english": "eyebrow",
@@ -4670,11 +4899,6 @@
           "ancient": "lacrimor",
           "modern": "könnye",
           "notes": "Lat lacrima→lacrimor; Hu könny → -e."
-        },
-        {
-          "ancient": "Cor",
-          "modern": "szív",
-          "notes": "Lat cor; Hu szív; emotional center"
         },
         {
           "english": "urine",
@@ -4723,11 +4947,6 @@
           "ancient": "calcaneor",
           "modern": "sarka",
           "notes": "Lat calcaneus→calcaneor; Hu sarok → -a."
-        },
-        {
-          "ancient": "Sanguis",
-          "modern": "vér",
-          "notes": "Lat sanguis; Hu vér; life essence"
         },
         {
           "english": "breast",
@@ -4794,11 +5013,6 @@
           "ancient": "Mithrilor",
           "modern": "mithríl",
           "notes": "Modern loan: Hu mithríl. Materials domain"
-        },
-        {
-          "ancient": "Animor",
-          "modern": "lélkë",
-          "notes": "Lat anima + -or; Hu lélek + ë suffix; spiritual essence"
         },
         {
           "english": "obsidian",
@@ -5005,12 +5219,6 @@
           "notes": "Modern loan: Hu keményfa. Wood & carpentry"
         },
         {
-          "english": "lead",
-          "ancient": "Dux",
-          "modern": "ólom",
-          "notes": "Modern loan: Hu ólom. Materials domain; auto-corrected from lazy formation"
-        },
-        {
           "english": "oakwood",
           "ancient": "Oakwoodor",
           "modern": "tölgyfa",
@@ -5093,12 +5301,6 @@
           "ancient": "Furor",
           "modern": "prém",
           "notes": "Modern loan: Hu prém. Textiles & finishes"
-        },
-        {
-          "english": "ore",
-          "ancient": "Silva",
-          "modern": "érc",
-          "notes": "Modern loan: Hu érc. Materials domain; auto-corrected from lazy formation"
         },
         {
           "english": "gut string",
@@ -5425,12 +5627,6 @@
           "notes": "Modern loan: Hu tőr. Arms & armor"
         },
         {
-          "english": "spear",
-          "ancient": "Spearor",
-          "modern": "lándzsa",
-          "notes": "Modern loan: Hu lándzsa. Arms & armor"
-        },
-        {
           "english": "pike",
           "ancient": "Pikeor",
           "modern": "dárda",
@@ -5501,12 +5697,6 @@
           "ancient": "Helmetor",
           "modern": "sisak",
           "notes": "Modern loan: Hu sisak. Arms & armor"
-        },
-        {
-          "english": "cuirass",
-          "ancient": "Cuirassor",
-          "modern": "mellvért",
-          "notes": "Modern loan: Hu mellvért. Arms & armor"
         },
         {
           "english": "mail",
@@ -5599,18 +5789,6 @@
           "notes": "Modern loan: Hu tányér. Containers & tableware"
         },
         {
-          "english": "fork",
-          "ancient": "Forkor",
-          "modern": "villa",
-          "notes": "Modern loan: Hu villa. Containers & tableware"
-        },
-        {
-          "english": "pot",
-          "ancient": "Potor",
-          "modern": "fazék",
-          "notes": "Modern loan: Hu fazék. Containers & tableware"
-        },
-        {
           "english": "pan",
           "ancient": "Panis",
           "modern": "serpenyő",
@@ -5629,22 +5807,16 @@
           "notes": "Modern loan: Hu üst nagy. Containers & tableware"
         },
         {
-          "english": "sword",
-          "ancient": "Gladius",
-          "modern": "kard",
-          "notes": "Modern loan: Hu kard. Arms & armor; auto-corrected from lazy formation"
-        },
-        {
           "english": "longsword",
           "ancient": "Gladius",
           "modern": "hosszúkard",
           "notes": "Modern loan: Hu hosszúkard. Arms & armor; auto-corrected from lazy formation"
         },
         {
-          "english": "shortsword",
-          "ancient": "Gladius",
-          "modern": "rövidkard",
-          "notes": "Modern loan: Hu rövidkard. Arms & armor; auto-corrected from lazy formation"
+          "english": "jug",
+          "ancient": "Jugor",
+          "modern": "kancsó",
+          "notes": "Modern loan: Hu kancsó. Containers & tableware"
         },
         {
           "english": "bottle",
@@ -5695,16 +5867,10 @@
           "notes": "Modern loan: Hu kosár. Containers & tableware"
         },
         {
-          "english": "bow",
-          "ancient": "Arcus",
-          "modern": "íj",
-          "notes": "Modern loan: Hu íj. Arms & armor; auto-corrected from lazy formation"
-        },
-        {
-          "english": "arrow",
-          "ancient": "Sagitta",
-          "modern": "nyíl",
-          "notes": "Modern loan: Hu nyíl. Arms & armor; auto-corrected from lazy formation"
+          "english": "chest",
+          "ancient": "Kestor",
+          "modern": "láda nagy",
+          "notes": "Modern loan: Hu láda nagy. Containers & tableware"
         },
         {
           "english": "purse",
@@ -5713,22 +5879,10 @@
           "notes": "Modern loan: Hu erszény pénz. Containers & tableware"
         },
         {
-          "english": "crossbow",
-          "ancient": "Arcus",
-          "modern": "számszeríj",
-          "notes": "Modern loan: Hu számszeríj. Arms & armor; auto-corrected from lazy formation"
-        },
-        {
           "english": "satchel",
           "ancient": "Satkelor",
           "modern": "tarisznya",
           "notes": "Modern loan: Hu tarisznya. Containers & tableware"
-        },
-        {
-          "english": "shield",
-          "ancient": "Scutum",
-          "modern": "pajzs",
-          "notes": "Modern loan: Hu pajzs. Arms & armor; auto-corrected from lazy formation"
         },
         {
           "english": "house",
@@ -5767,12 +5921,6 @@
           "notes": "Modern loan: Hu hosszúház. Structures (crafting)"
         },
         {
-          "english": "smithy-yard",
-          "ancient": "Smithy-yardor",
-          "modern": "kovácsudvar",
-          "notes": "Modern loan: Hu kovácsudvar. Structures (crafting)"
-        },
-        {
           "english": "kiln",
           "ancient": "Kilnis",
           "modern": "kemence",
@@ -5797,16 +5945,34 @@
           "notes": "Modern loan: Hu fűrészmalom. Structures (crafting)"
         },
         {
-          "english": "workshop",
-          "ancient": "Workshopor",
-          "modern": "műhely",
-          "notes": "Modern loan: Hu műhely. Structures (crafting)"
+          "english": "bridge",
+          "ancient": "Bridgeor",
+          "modern": "híd",
+          "notes": "Modern loan: Hu híd. Structures (crafting)"
         },
         {
-          "english": "blacksmith",
-          "ancient": "Blacksmithor",
-          "modern": "kovács",
-          "notes": "Modern loan: Hu kovács. Craft professions"
+          "english": "barn",
+          "ancient": "Barnis",
+          "modern": "csűr",
+          "notes": "Modern loan: Hu csűr. Structures (crafting)"
+        },
+        {
+          "english": "granary",
+          "ancient": "Granaryor",
+          "modern": "magtár",
+          "notes": "Modern loan: Hu magtár. Structures (crafting)"
+        },
+        {
+          "english": "stable",
+          "ancient": "Stableor",
+          "modern": "istálló",
+          "notes": "Modern loan: Hu istálló. Structures (crafting)"
+        },
+        {
+          "english": "corral",
+          "ancient": "Corralor",
+          "modern": "karám",
+          "notes": "Modern loan: Hu karám. Structures (crafting)"
         },
         {
           "english": "armorer",
@@ -5825,12 +5991,6 @@
           "ancient": "Bladesmithor",
           "modern": "pengemester",
           "notes": "Modern loan: Hu pengemester. Craft professions"
-        },
-        {
-          "english": "bowl",
-          "ancient": "Arcus",
-          "modern": "tál",
-          "notes": "Modern loan: Hu tál. Containers & tableware; auto-corrected from lazy formation"
         },
         {
           "english": "bowyer",
@@ -5989,12 +6149,6 @@
           "notes": "Modern loan: Hu kiönteni. Craft processes & verbs"
         },
         {
-          "english": "house",
-          "ancient": "Domus",
-          "modern": "ház",
-          "notes": "Modern loan: Hu ház. Structures (crafting); auto-corrected from lazy formation"
-        },
-        {
           "english": "temper",
           "ancient": "Temperor",
           "modern": "megereszteni",
@@ -6017,12 +6171,6 @@
           "ancient": "Draw (wire)or",
           "modern": "húzni (huzal)",
           "notes": "Modern loan: Hu húzni (huzal). Craft processes & verbs"
-        },
-        {
-          "english": "longhouse",
-          "ancient": "Domus",
-          "modern": "hosszúház",
-          "notes": "Modern loan: Hu hosszúház. Structures (crafting); auto-corrected from lazy formation"
         },
         {
           "english": "braze",
@@ -6079,12 +6227,6 @@
           "notes": "Modern loan: Hu gyalulni. Craft processes & verbs"
         },
         {
-          "english": "warehouse",
-          "ancient": "Domus",
-          "modern": "raktár",
-          "notes": "Modern loan: Hu raktár. Structures (crafting); auto-corrected from lazy formation"
-        },
-        {
           "english": "weave",
           "ancient": "Weaveor",
           "modern": "szőni",
@@ -6133,18 +6275,6 @@
           "notes": "Modern loan: Hu mázzal bevonni. Craft processes & verbs"
         },
         {
-          "english": "arrowsmith",
-          "ancient": "Sagitta",
-          "modern": "nyílkovács",
-          "notes": "Modern loan: Hu nyílkovács. Craft professions; auto-corrected from lazy formation"
-        },
-        {
-          "english": "bowyer",
-          "ancient": "Arcus",
-          "modern": "íjkészítő",
-          "notes": "Modern loan: Hu íjkészítő. Craft professions; auto-corrected from lazy formation"
-        },
-        {
           "english": "firewood",
           "ancient": "Firewoodor",
           "modern": "tűzifa",
@@ -6161,18 +6291,6 @@
           "ancient": "Waxor",
           "modern": "viasz",
           "notes": "Modern loan: Hu viasz. Fuels & binders"
-        },
-        {
-          "english": "rivet",
-          "ancient": "Rivetor",
-          "modern": "szegecs",
-          "notes": "Modern loan: Hu szegecs. Hardware & parts"
-        },
-        {
-          "english": "screw",
-          "ancient": "Screwor",
-          "modern": "csavar finom",
-          "notes": "Modern loan: Hu csavar finom. Hardware & parts"
         },
         {
           "english": "pin",
@@ -6379,12 +6497,6 @@
           "notes": "Modern loan: Hu szalag. Stock & measures"
         },
         {
-          "english": "plank",
-          "ancient": "Plankor",
-          "modern": "deszka",
-          "notes": "Modern loan: Hu deszka. Stock & measures"
-        },
-        {
           "english": "board",
           "ancient": "Boardor",
           "modern": "deszka tábla",
@@ -6481,12 +6593,6 @@
           "notes": "Lat miscere → Hu keverni"
         },
         {
-          "english": "to pack",
-          "ancient": "Sarcinare",
-          "modern": "csomagolni",
-          "notes": "Lat sarcinare → Hu csomagolni"
-        },
-        {
           "english": "new",
           "ancient": "Novus",
           "modern": "új",
@@ -6547,10 +6653,58 @@
           "notes": "Lat portabilis → Hu hordozható"
         },
         {
-          "english": "bed",
-          "ancient": "Lectus",
-          "modern": "ágy",
-          "notes": "Lat lectus → Hu ágy"
+          "english": "fork",
+          "ancient": "Furca (mensae)",
+          "modern": "villa",
+          "notes": "Lat furca (table) → Hu villa/villa kanál (fork)"
+        },
+        {
+          "english": "plate",
+          "ancient": "Patella",
+          "modern": "tányér",
+          "notes": "Lat patella → Hu tányér"
+        },
+        {
+          "english": "bowl",
+          "ancient": "Catinus",
+          "modern": "tál",
+          "notes": "Lat catinus → Hu tál"
+        },
+        {
+          "english": "cup",
+          "ancient": "Poculum",
+          "modern": "pohár",
+          "notes": "Lat poculum → Hu pohár"
+        },
+        {
+          "english": "jug",
+          "ancient": "Urceus",
+          "modern": "korsó",
+          "notes": "Lat urceus → Hu korsó"
+        },
+        {
+          "english": "pan",
+          "ancient": "Patina",
+          "modern": "serpenyő",
+          "notes": "Lat patina → Hu serpenyő"
+        },
+        {
+          "english": "pot",
+          "ancient": "Olla",
+          "modern": "fazék",
+          "notes": "Lat olla → Hu fazék"
+        },
+        {
+          "english": "bottle",
+          "ancient": "Ampulla",
+          "modern": "palack",
+          "notes": "Lat ampulla → Hu palack"
+        },
+        {
+          "english": "bag/sack",
+          "ancient": "Saccus",
+          "modern": "zsák",
+          "notes": "Lat saccus → Hu zsák"
         },
         {
           "english": "blanket",
@@ -6595,22 +6749,16 @@
           "notes": "Lat nuntius → Hu küldönc"
         },
         {
-          "english": "bowstring",
-          "ancient": "Arcus",
-          "modern": "ínhúr",
-          "notes": "Modern loan: Hu ínhúr. Hardware & parts; auto-corrected from lazy formation"
-        },
-        {
           "english": "teacher",
           "ancient": "Magister",
           "modern": "tanító",
           "notes": "Lat magister → Hu tanító"
         },
         {
-          "english": "arrowhead",
-          "ancient": "Sagitta",
-          "modern": "nyílhegy",
-          "notes": "Modern loan: Hu nyílhegy. Hardware & parts; auto-corrected from lazy formation"
+          "english": "blacksmith",
+          "ancient": "Faber Ferrarius",
+          "modern": "kovács",
+          "notes": "Lat faber ferrarius → Hu kovács"
         },
         {
           "english": "shepherd",
@@ -6635,12 +6783,6 @@
           "ancient": "Piscator",
           "modern": "halász",
           "notes": "Lat piscator → Hu halász"
-        },
-        {
-          "english": "cook",
-          "ancient": "Coquus",
-          "modern": "szakács",
-          "notes": "Lat coquus → Hu szakács"
         },
         {
           "english": "pound",
@@ -6793,22 +6935,10 @@
           "notes": "Gmc spanna > Ancient Spanna; Hu arasz modern."
         },
         {
-          "english": "pace",
-          "ancient": "Passus",
-          "modern": "lépés",
-          "notes": "Lat passus > Ancient Passus; Hu lépés modern."
-        },
-        {
           "english": "ell",
           "ancient": "Ulna",
           "modern": "rőf",
           "notes": "Lat ulna > Ancient Ulna; Hu rőf modern."
-        },
-        {
-          "english": "furlong",
-          "ancient": "Stadium",
-          "modern": "stadion",
-          "notes": "Gr stadion > Ancient Stadium; Hu stadion modern."
         },
         {
           "english": "league",
@@ -6841,22 +6971,88 @@
           "notes": "Gr khilioi+metron > Ancient; Hu kilométer modern."
         },
         {
-          "english": "basin",
-          "ancient": "Pelvis",
-          "modern": "teknő",
-          "notes": "Lat pelvis > Ancient; Hu teknő modern."
+          "english": "goblet",
+          "ancient": "Poculum",
+          "modern": "pohár",
+          "notes": "Lat poculum > Ancient; Hu pohár modern."
         },
         {
-          "english": "trade",
-          "ancient": "Commercium",
-          "modern": "kereskedelem",
-          "notes": "Lat commercium > Ancient; Hu kereskedelem modern."
+          "english": "amphora",
+          "ancient": "Amphora",
+          "modern": "amfora",
+          "notes": "Gr amphora > Ancient; Ro amforă modern."
         },
         {
-          "english": "bargain",
-          "ancient": "Pactum",
-          "modern": "alku",
-          "notes": "Lat pactum > Ancient; Hu alku modern."
+          "english": "jar",
+          "ancient": "Urna",
+          "modern": "urna",
+          "notes": "Lat urna > Ancient; Ro urnă modern."
+        },
+        {
+          "english": "jug",
+          "ancient": "Cruzta",
+          "modern": "kancsó",
+          "notes": "Lat crater/crusta > Ancient; Hu kancsó modern."
+        },
+        {
+          "english": "flask",
+          "ancient": "Lagena",
+          "modern": "palack",
+          "notes": "Lat lagena > Ancient; Hu palack modern."
+        },
+        {
+          "english": "bottle",
+          "ancient": "Ampulla",
+          "modern": "üveg",
+          "notes": "Lat ampulla > Ancient; Hu üveg modern."
+        },
+        {
+          "english": "barrel",
+          "ancient": "Dolium",
+          "modern": "hordó",
+          "notes": "Lat dolium > Ancient; Hu hordó modern."
+        },
+        {
+          "english": "cask",
+          "ancient": "Cadus",
+          "modern": "kád",
+          "notes": "Lat cadus > Ancient; Hu kád modern."
+        },
+        {
+          "english": "tun",
+          "ancient": "Tunna",
+          "modern": "tona",
+          "notes": "Gmc tunna > Ancient; Ro tonă modern."
+        },
+        {
+          "english": "bucket",
+          "ancient": "Situla",
+          "modern": "vödör",
+          "notes": "Lat situla > Ancient; Hu vödör modern."
+        },
+        {
+          "english": "ladle",
+          "ancient": "Trulla",
+          "modern": "merő",
+          "notes": "Lat trulla > Ancient; Hu merő modern."
+        },
+        {
+          "english": "cauldron",
+          "ancient": "Caldarium",
+          "modern": "üst",
+          "notes": "Lat caldarium > Ancient; Hu üst modern."
+        },
+        {
+          "english": "bowl",
+          "ancient": "Patina",
+          "modern": "tál",
+          "notes": "Lat patina > Ancient; Hu tál modern."
+        },
+        {
+          "english": "market",
+          "ancient": "Mercatus",
+          "modern": "piac",
+          "notes": "Lat mercatus > Ancient; Hu piac modern."
         },
         {
           "english": "contract",
@@ -6871,10 +7067,10 @@
           "notes": "Lat debitum > Ancient; Hu adósság modern."
         },
         {
-          "english": "toll",
-          "ancient": "Teloneum",
-          "modern": "vám",
-          "notes": "Gr teloneion > Ancient; Hu vám modern."
+          "english": "tax",
+          "ancient": "Vectigal",
+          "modern": "adó",
+          "notes": "Lat vectigal > Ancient; Hu adó modern."
         },
         {
           "english": "guild due",
@@ -6901,12 +7097,6 @@
           "notes": "Lat talea > Ancient; Hu rovás modern."
         },
         {
-          "english": "signature",
-          "ancient": "Subscriptio",
-          "modern": "aláírás",
-          "notes": "Lat subscriptio > Ancient; Hu aláírás modern."
-        },
-        {
           "english": "contract tablet",
           "ancient": "Tabula",
           "modern": "tábla",
@@ -6919,16 +7109,10 @@
           "notes": "Lat volumen > Ancient; Hu tekercs modern."
         },
         {
-          "english": "hour",
-          "ancient": "Hora",
-          "modern": "óra",
-          "notes": "Lat hora > Ancient; Hu óra modern."
-        },
-        {
-          "english": "week",
-          "ancient": "Septimana",
-          "modern": "hét",
-          "notes": "Lat septimana > Ancient; Hu hét modern."
+          "english": "grant",
+          "ancient": "Concessio",
+          "modern": "engedély",
+          "notes": "Lat concessio > Ancient; Hu engedély modern."
         },
         {
           "english": "month",
@@ -7067,11 +7251,6 @@
           "ancient": "Minari",
           "modern": "fenyegetni",
           "notes": "Lat minari → Hu fenyegetni."
-        },
-        {
-          "ancient": "petra",
-          "modern": "petra",
-          "notes": "Lat petra; Foundation; singular petra, definite petrë, plural petrir"
         },
         {
           "english": "to obey",
@@ -7236,10 +7415,28 @@
           "notes": "Lat oscitare → Hu ásítani."
         },
         {
-          "english": "to engrave",
-          "ancient": "Incidere",
-          "modern": "vésni",
-          "notes": "Lat incidere → Hu vésni."
+          "english": "to weave",
+          "ancient": "Texere",
+          "modern": "szőni",
+          "notes": "Lat texere → Hu szőni."
+        },
+        {
+          "english": "to spin",
+          "ancient": "Nere",
+          "modern": "fonni",
+          "notes": "Lat nere → Hu fonni."
+        },
+        {
+          "english": "to paint",
+          "ancient": "Pingere",
+          "modern": "festeni",
+          "notes": "Lat pingere → Hu festeni."
+        },
+        {
+          "english": "to carve",
+          "ancient": "Scalpere",
+          "modern": "faragni",
+          "notes": "Lat scalpere → Hu faragni."
         },
         {
           "english": "to dig",
@@ -7302,10 +7499,10 @@
           "notes": "Lat tingere → Hu festeni."
         },
         {
-          "english": "to measure",
-          "ancient": "Metiri",
-          "modern": "mérni",
-          "notes": "Lat metiri → Hu mérni."
+          "english": "to sharpen",
+          "ancient": "Acuere",
+          "modern": "élezni",
+          "notes": "Lat acuere → Hu élezni."
         },
         {
           "english": "to weigh",
@@ -7500,12 +7697,6 @@
           "notes": "Lat condemnare → Hu elítélni."
         },
         {
-          "english": "to atone",
-          "ancient": "Expiare",
-          "modern": "engesztelni",
-          "notes": "Lat expiare → Hu engesztelni."
-        },
-        {
           "english": "smooth",
           "ancient": "Laevis",
           "modern": "sima",
@@ -7612,18 +7803,6 @@
           "ancient": "Vacuus",
           "modern": "üres",
           "notes": "Lat vacuus → Hu üres."
-        },
-        {
-          "english": "dirty",
-          "ancient": "Sordidus",
-          "modern": "piszkos",
-          "notes": "Lat sordidus → Hu piszkos."
-        },
-        {
-          "english": "corrupt",
-          "ancient": "Corruptus",
-          "modern": "romlott",
-          "notes": "Lat corruptus → Hu romlott."
         },
         {
           "english": "revealed",
@@ -7738,12 +7917,6 @@
           "ancient": "Stolidus",
           "modern": "ostoba",
           "notes": "Lat stolidus → Hu ostoba."
-        },
-        {
-          "english": "to have",
-          "ancient": "Habere",
-          "modern": "bírni",
-          "notes": "Lat habere; Hu bírni modern."
         },
         {
           "english": "to go",
@@ -8070,12 +8243,6 @@
           "notes": "Lat tenere; Hu tartani."
         },
         {
-          "english": "to open",
-          "ancient": "Aperire",
-          "modern": "nyitni",
-          "notes": "Lat aperire; Hu nyitni."
-        },
-        {
           "english": "to close",
           "ancient": "Claudere",
           "modern": "zárni",
@@ -8100,10 +8267,10 @@
           "notes": "Lat vincere; Hu nyerni."
         },
         {
-          "english": "to sell",
-          "ancient": "Vendere",
-          "modern": "eladni",
-          "notes": "Lat vendere; Hu eladni."
+          "english": "to buy",
+          "ancient": "Emere",
+          "modern": "venni",
+          "notes": "Lat emere; Hu venni (buy context)."
         },
         {
           "english": "to rain",
@@ -8178,12 +8345,6 @@
           "notes": "Lat altus; Hu magas."
         },
         {
-          "english": "near",
-          "ancient": "Proximus",
-          "modern": "közeli",
-          "notes": "Lat proximus; Hu közeli."
-        },
-        {
           "english": "far",
           "ancient": "Longe",
           "modern": "távoli",
@@ -8212,12 +8373,6 @@
           "ancient": "Lentus",
           "modern": "lassú",
           "notes": "Lat lentus; Hu lassú."
-        },
-        {
-          "english": "cold",
-          "ancient": "Frigidus",
-          "modern": "hideg",
-          "notes": "Lat frigidus; Hu hideg."
         },
         {
           "english": "old",
@@ -8310,18 +8465,6 @@
           "notes": "Lat brunneus; Hu barna."
         },
         {
-          "english": "silvery",
-          "ancient": "Argenteus",
-          "modern": "ezüstös",
-          "notes": "Lat argenteus; Hu ezüstös."
-        },
-        {
-          "english": "cowardly",
-          "ancient": "Ignavus",
-          "modern": "gyáva",
-          "notes": "Lat ignavus; Hu gyáva."
-        },
-        {
           "english": "kind",
           "ancient": "Benignus",
           "modern": "kedves",
@@ -8338,12 +8481,6 @@
           "ancient": "Honestus",
           "modern": "becsületes",
           "notes": "Lat honestus; Hu becsületes."
-        },
-        {
-          "english": "alive",
-          "ancient": "Vivus",
-          "modern": "élő",
-          "notes": "Lat vivus; Hu élő."
         },
         {
           "english": "dead",
@@ -8412,12 +8549,6 @@
           "notes": "Lat pascuum; Hu k-, Modern -ú"
         },
         {
-          "english": "pond",
-          "ancient": "Stagnum",
-          "modern": "stagnú",
-          "notes": "Lat stagnum; Modern -ú ending (natural water body)"
-        },
-        {
           "english": "furrow",
           "ancient": "Sulcus",
           "modern": "sulkúsh",
@@ -8428,12 +8559,6 @@
           "ancient": "Aratrum",
           "modern": "aratrú",
           "notes": "Lat aratrum; Modern -ú ending"
-        },
-        {
-          "english": "oxen",
-          "ancient": "Boves",
-          "modern": "bovésh",
-          "notes": "Lat boves; Modern é-sh"
         },
         {
           "english": "yoke",
@@ -8496,28 +8621,94 @@
           "notes": "Lat semen; Modern -é ending"
         },
         {
-          "english": "oats",
-          "ancient": "Avena",
-          "modern": "avén",
-          "notes": "Lat avena; Modern -én ending"
+          "english": "wheat",
+          "ancient": "Triticum",
+          "modern": "tritík",
+          "notes": "Lat triticum; Modern -ík ending"
         },
         {
-          "english": "corn",
-          "ancient": "Frumentum",
-          "modern": "frumé",
-          "notes": "Lat frumentum; Modern simplified, -é"
+          "english": "barley",
+          "ancient": "Hordeum",
+          "modern": "hordé",
+          "notes": "Lat hordeum; Modern -é ending"
         },
         {
-          "english": "leek",
-          "ancient": "Porrum",
-          "modern": "porú",
-          "notes": "Lat porrum; Modern -ú, single-r"
+          "english": "millet",
+          "ancient": "Milium",
+          "modern": "milí",
+          "notes": "Lat milium; Modern -í ending"
         },
         {
-          "english": "orchard",
-          "ancient": "Pomarium",
-          "modern": "pomár",
-          "notes": "Lat pomarium; Modern -ár ending"
+          "english": "bean",
+          "ancient": "Faba",
+          "modern": "fabá",
+          "notes": "Lat faba; Modern -á ending"
+        },
+        {
+          "english": "pea",
+          "ancient": "Pisum",
+          "modern": "pizú",
+          "notes": "Lat pisum; Modern z-, -ú"
+        },
+        {
+          "english": "lentil",
+          "ancient": "Lens",
+          "modern": "lénsh",
+          "notes": "Lat lens; Modern é-sh"
+        },
+        {
+          "english": "chickpea",
+          "ancient": "Cicer",
+          "modern": "tsitsér",
+          "notes": "Lat cicer; Modern ts-, -ér"
+        },
+        {
+          "english": "turnip",
+          "ancient": "Rapum",
+          "modern": "rapú",
+          "notes": "Lat rapum; Modern -ú ending"
+        },
+        {
+          "english": "carrot",
+          "ancient": "Carota",
+          "modern": "karotá",
+          "notes": "Lat carota; Hu k-, Modern -á"
+        },
+        {
+          "english": "cabbage",
+          "ancient": "Brassica",
+          "modern": "brasík",
+          "notes": "Lat brassica; Modern -ík, single-s"
+        },
+        {
+          "english": "onion",
+          "ancient": "Cepa",
+          "modern": "tsepá",
+          "notes": "Lat cepa; Modern ts-, -á"
+        },
+        {
+          "english": "garlic",
+          "ancient": "Allium",
+          "modern": "alí",
+          "notes": "Lat allium; Modern -í, single-l"
+        },
+        {
+          "english": "herb",
+          "ancient": "Herba",
+          "modern": "herbá",
+          "notes": "Lat herba; Modern -á ending"
+        },
+        {
+          "english": "vine",
+          "ancient": "Vitis",
+          "modern": "vitísh",
+          "notes": "Lat vitis; Modern í-sh"
+        },
+        {
+          "english": "grape",
+          "ancient": "Uva",
+          "modern": "uvá",
+          "notes": "Lat uva; Modern -á ending"
         },
         {
           "english": "tree",
@@ -8532,10 +8723,34 @@
           "notes": "Lat fructus; Hu k-, Modern -úsh"
         },
         {
-          "english": "nut",
-          "ancient": "Nux",
-          "modern": "nuksh",
-          "notes": "Lat nux; Hu k-, Modern -sh"
+          "english": "pear",
+          "ancient": "Pirum",
+          "modern": "pirú",
+          "notes": "Lat pirum; Modern -ú ending"
+        },
+        {
+          "english": "plum",
+          "ancient": "Prunum",
+          "modern": "prunú",
+          "notes": "Lat prunum; Modern -ú ending"
+        },
+        {
+          "english": "cherry",
+          "ancient": "Cerasum",
+          "modern": "tseráz",
+          "notes": "Lat cerasum; Modern ts-, -áz"
+        },
+        {
+          "english": "fig",
+          "ancient": "Ficus",
+          "modern": "fikúsh",
+          "notes": "Lat ficus; Hu k-, Modern -úsh"
+        },
+        {
+          "english": "olive",
+          "ancient": "Olea",
+          "modern": "oleá",
+          "notes": "Lat olea; Modern -á ending"
         },
         {
           "english": "harvest",
@@ -8544,22 +8759,10 @@
           "notes": "Lat messis; Modern í-sh, single-s"
         },
         {
-          "english": "thresh",
-          "ancient": "Terere",
-          "modern": "terér",
-          "notes": "Lat terere; Modern -ér verb ending"
-        },
-        {
           "english": "winnow",
           "ancient": "Ventilare",
           "modern": "ventilár",
           "notes": "Lat ventilare; Modern -ár verb ending"
-        },
-        {
-          "english": "plant",
-          "ancient": "Plantare",
-          "modern": "plantár",
-          "notes": "Lat plantare; Modern -ár verb ending"
         },
         {
           "english": "cultivate",
@@ -8634,10 +8837,22 @@
           "notes": "Lat limus; Modern í-úsh"
         },
         {
-          "english": "irrigation",
-          "ancient": "Aquaeductus",
-          "modern": "akvédúkt",
-          "notes": "Lat aquaeductus; Hu k-v, Modern -úkt"
+          "english": "sand",
+          "ancient": "Arena",
+          "modern": "arén",
+          "notes": "Lat arena; Modern -én ending"
+        },
+        {
+          "english": "rock",
+          "ancient": "Saxum",
+          "modern": "saksú",
+          "notes": "Lat saxum; Hu k-, Modern -ú"
+        },
+        {
+          "english": "stone",
+          "ancient": "Petra",
+          "modern": "petrá",
+          "notes": "Lat petra; Modern -á ending"
         },
         {
           "english": "well",
@@ -8664,16 +8879,16 @@
           "notes": "Lat saepum; Modern -ú ending"
         },
         {
-          "english": "silo",
-          "ancient": "Sirus",
-          "modern": "sírúsh",
-          "notes": "Lat sirus; Modern í-úsh"
+          "english": "barn",
+          "ancient": "Horreum",
+          "modern": "horé",
+          "notes": "Lat horreum; Modern -é, single-r"
         },
         {
-          "english": "millstone",
-          "ancient": "Molaris",
-          "modern": "molár",
-          "notes": "Lat molaris; Modern -ár ending"
+          "english": "granary",
+          "ancient": "Granarium",
+          "modern": "granár",
+          "notes": "Lat granarium; Modern -ár ending"
         },
         {
           "english": "flour",
@@ -8682,22 +8897,58 @@
           "notes": "Lat farina; Modern -ín ending"
         },
         {
-          "english": "cattle",
-          "ancient": "Pecus",
-          "modern": "pekúsh",
-          "notes": "Lat pecus; Hu k-, Modern -úsh"
+          "english": "bull",
+          "ancient": "Taurus",
+          "modern": "taurúsh",
+          "notes": "Lat taurus; Modern -úsh"
         },
         {
-          "english": "lamb",
-          "ancient": "Agnus",
-          "modern": "agnúsh",
-          "notes": "Lat agnus; Modern -úsh"
+          "english": "calf",
+          "ancient": "Vitulus",
+          "modern": "vitúl",
+          "notes": "Lat vitulus; Modern -úl ending"
         },
         {
-          "english": "billy goat",
-          "ancient": "Hircus",
-          "modern": "hirkúsh",
-          "notes": "Lat hircus; Hu k-, Modern -úsh"
+          "english": "horse",
+          "ancient": "Equus",
+          "modern": "ekvúsh",
+          "notes": "Lat equus; Hu k-v, Modern -úsh"
+        },
+        {
+          "english": "mare",
+          "ancient": "Equa",
+          "modern": "ekvá",
+          "notes": "Lat equa; Hu k-v, Modern -á"
+        },
+        {
+          "english": "stallion",
+          "ancient": "Admissarius",
+          "modern": "admisár",
+          "notes": "Lat admissarius; Modern -ár, single-s"
+        },
+        {
+          "english": "foal",
+          "ancient": "Pullus",
+          "modern": "pulúsh",
+          "notes": "Lat pullus; Modern -úsh, single-l"
+        },
+        {
+          "english": "sheep",
+          "ancient": "Ovis",
+          "modern": "ovísh",
+          "notes": "Lat ovis; Modern í-sh"
+        },
+        {
+          "english": "ram",
+          "ancient": "Aries",
+          "modern": "ariésh",
+          "notes": "Lat aries; Modern é-sh"
+        },
+        {
+          "english": "ewe",
+          "ancient": "Ovis femina",
+          "modern": "ovfemín",
+          "notes": "Lat compound; Modern simplified"
         },
         {
           "english": "kid",
@@ -8712,10 +8963,10 @@
           "notes": "Lat sus; Modern ú-sh"
         },
         {
-          "english": "piglet",
-          "ancient": "Porculus",
-          "modern": "porkúl",
-          "notes": "Lat porculus; Hu k-, Modern -úl"
+          "english": "sow",
+          "ancient": "Scrofa",
+          "modern": "skrofá",
+          "notes": "Lat scrofa; Hu k-, Modern -á"
         },
         {
           "english": "chicken",
@@ -8736,16 +8987,10 @@
           "notes": "Lat compound; Modern simplified"
         },
         {
-          "english": "egg",
-          "ancient": "Ovum",
-          "modern": "ovú",
-          "notes": "Lat ovum; Modern -ú ending"
-        },
-        {
-          "english": "donkey",
-          "ancient": "Asinus",
-          "modern": "azín",
-          "notes": "Lat asinus; Modern z-, -ín"
+          "english": "goose",
+          "ancient": "Anser",
+          "modern": "anzér",
+          "notes": "Lat anser; Modern z-, -ér"
         },
         {
           "english": "mule",
@@ -8754,16 +8999,16 @@
           "notes": "Lat mulus; Modern ú-úsh"
         },
         {
-          "english": "herdsman",
-          "ancient": "Armentarius",
-          "modern": "armentár",
-          "notes": "Lat armentarius; Modern -ár ending"
+          "english": "cat",
+          "ancient": "Felis",
+          "modern": "felísh",
+          "notes": "Lat felis; Modern í-sh"
         },
         {
-          "english": "pen",
-          "ancient": "Saeptum",
-          "modern": "saeptú",
-          "notes": "Lat saeptum; Modern -ú ending"
+          "english": "shepherd",
+          "ancient": "Pastor",
+          "modern": "pastór",
+          "notes": "Lat pastor; Modern -ór ending"
         },
         {
           "english": "fodder",
@@ -8814,10 +9059,10 @@
           "notes": "Lat butyrum; Modern í-ú"
         },
         {
-          "english": "meat",
-          "ancient": "Caro",
-          "modern": "karó",
-          "notes": "Lat caro; Hu k-, Modern -ó"
+          "english": "hide",
+          "ancient": "Corium",
+          "modern": "korí",
+          "notes": "Lat corium; Hu k-, Modern -í"
         },
         {
           "english": "fat",
@@ -8832,10 +9077,10 @@
           "notes": "Lat sebum; Modern -ú ending"
         },
         {
-          "english": "summer",
-          "ancient": "Aestas",
-          "modern": "aestásh",
-          "notes": "Lat aestas; Modern á-sh"
+          "english": "spring",
+          "ancient": "Ver",
+          "modern": "vér",
+          "notes": "Lat ver; Modern -ér ending"
         },
         {
           "english": "autumn",
@@ -8862,28 +9107,136 @@
           "notes": "Lat pruina; Modern -ín ending"
         },
         {
-          "english": "sunshine",
-          "ancient": "Sol",
-          "modern": "sól",
-          "notes": "Lat sol; Modern -ól ending"
-        },
-        {
           "english": "smith",
           "ancient": "Faber",
           "modern": "fabír",
           "notes": "Lat faber (craftsman); Modern -ír ending"
         },
         {
-          "english": "to hammer",
-          "ancient": "Malleolare",
-          "modern": "maleár",
-          "notes": "Lat malleus + verb suffix; Modern -ár ending"
+          "english": "forge",
+          "ancient": "Officina",
+          "modern": "ofína",
+          "notes": "Lat officina (workshop); Modern collapsed double-c, -ína ending"
         },
         {
-          "english": "thread",
-          "ancient": "Filum",
-          "modern": "fílé",
-          "notes": "Lat filum; Modern í-é vowel shift"
+          "english": "to forge",
+          "ancient": "Cudere",
+          "modern": "kudér",
+          "notes": "Lat cudere (to beat/forge); Hu k-, Modern -ér verb ending"
+        },
+        {
+          "english": "anvil",
+          "ancient": "Incus",
+          "modern": "ínkúsh",
+          "notes": "Lat incus; Hu k-, Modern í-ú-sh"
+        },
+        {
+          "english": "hammer",
+          "ancient": "Malleus",
+          "modern": "malé",
+          "notes": "Lat malleus; Modern simplified, -é ending"
+        },
+        {
+          "english": "tongs",
+          "ancient": "Forceps",
+          "modern": "fortsép",
+          "notes": "Lat forceps; Modern ts-shift, -ép ending"
+        },
+        {
+          "english": "metal",
+          "ancient": "Metallum",
+          "modern": "metál",
+          "notes": "Lat metallum; Modern collapsed double-l, -ál ending"
+        },
+        {
+          "english": "iron",
+          "ancient": "Ferrum",
+          "modern": "ferú",
+          "notes": "Lat ferrum; Modern collapsed double-r, -ú ending"
+        },
+        {
+          "english": "bronze",
+          "ancient": "Aes",
+          "modern": "áesh",
+          "notes": "Lat aes; Modern diphthong -áesh"
+        },
+        {
+          "english": "copper",
+          "ancient": "Cuprum",
+          "modern": "kupró",
+          "notes": "Lat cuprum; Hu k-, Modern -ró ending"
+        },
+        {
+          "english": "silver",
+          "ancient": "Argentum",
+          "modern": "argé",
+          "notes": "Lat argentum; Modern simplified, -é ending"
+        },
+        {
+          "english": "gold",
+          "ancient": "Aurum",
+          "modern": "auró",
+          "notes": "Lat aurum; Modern diphthong au-, -ó ending"
+        },
+        {
+          "english": "steel",
+          "ancient": "Chalybs",
+          "modern": "kalí",
+          "notes": "Lat chalybs; Hu k-, Modern simplified, -í ending"
+        },
+        {
+          "english": "blade",
+          "ancient": "Lamina",
+          "modern": "lamé",
+          "notes": "Lat lamina; Modern simplified, -é ending"
+        },
+        {
+          "english": "sword",
+          "ancient": "Gladius",
+          "modern": "gladé",
+          "notes": "Lat gladius; Modern simplified, -é ending"
+        },
+        {
+          "english": "knife",
+          "ancient": "Culter",
+          "modern": "kultér",
+          "notes": "Lat culter; Hu k-, Modern -ér ending"
+        },
+        {
+          "english": "spear",
+          "ancient": "Hasta",
+          "modern": "hastá",
+          "notes": "Lat hasta; Modern -á ending"
+        },
+        {
+          "english": "arrowhead",
+          "ancient": "Sagitta",
+          "modern": "sagíta",
+          "notes": "Lat sagitta; Modern í-shift, single-t"
+        },
+        {
+          "english": "shield",
+          "ancient": "Scutum",
+          "modern": "skutó",
+          "notes": "Lat scutum; Hu k-, Modern -ó ending"
+        },
+        {
+          "english": "weaver",
+          "ancient": "Textor",
+          "modern": "tekstór",
+          "notes": "Lat textor; Modern -ór agent suffix"
+        },
+        {
+          "english": "loom",
+          "ancient": "Textrina",
+          "modern": "tekstína",
+          "notes": "Lat textrina; Modern í-shift, -ína ending"
+        },
+        {
+          "english": "to weave",
+          "ancient": "Texere",
+          "modern": "teksér",
+          "notes": "Lat texere; Hu k-, Modern -ér verb ending"
         },
         {
           "english": "yarn",
@@ -8892,10 +9245,10 @@
           "notes": "Lat stamina; Modern simplified, -é ending"
         },
         {
-          "english": "cloth",
-          "ancient": "Textum",
-          "modern": "tekstó",
-          "notes": "Lat textum; Modern -ó ending"
+          "english": "linen",
+          "ancient": "Linum",
+          "modern": "línú",
+          "notes": "Lat linum; Modern í-ú vowel shift"
         },
         {
           "english": "fabric",
@@ -8904,10 +9257,34 @@
           "notes": "Lat textilis; Modern í-shift"
         },
         {
-          "english": "to shape",
-          "ancient": "Fingere",
-          "modern": "fíngér",
-          "notes": "Lat fingere (to shape/mold); Modern í-ér"
+          "english": "to dye",
+          "ancient": "Tingere",
+          "modern": "tíngér",
+          "notes": "Lat tingere; Modern í-vowel, -ér verb"
+        },
+        {
+          "english": "needle",
+          "ancient": "Acus",
+          "modern": "akúsh",
+          "notes": "Lat acus; Hu k-, Modern ú-sh"
+        },
+        {
+          "english": "spindle",
+          "ancient": "Fusus",
+          "modern": "fúsé",
+          "notes": "Lat fusus; Modern ú-é vowel shift"
+        },
+        {
+          "english": "potter",
+          "ancient": "Figulus",
+          "modern": "figúl",
+          "notes": "Lat figulus; Modern ú-ending"
+        },
+        {
+          "english": "clay",
+          "ancient": "Argilla",
+          "modern": "argíla",
+          "notes": "Lat argilla; Modern í-shift, single-l"
         },
         {
           "english": "wheel (pottery)",
@@ -8916,28 +9293,52 @@
           "notes": "Lat rota; Modern -á ending"
         },
         {
-          "english": "vessel",
-          "ancient": "Vas",
-          "modern": "vásh",
-          "notes": "Lat vas; Modern á-sh"
+          "english": "to fire",
+          "ancient": "Coquere",
+          "modern": "kokér",
+          "notes": "Lat coquere (to bake/fire); Hu k-, Modern -ér"
         },
         {
-          "english": "beam",
-          "ancient": "Trabs",
-          "modern": "trábsh",
-          "notes": "Lat trabs; Modern á-sh"
+          "english": "cup",
+          "ancient": "Poculum",
+          "modern": "pokúl",
+          "notes": "Lat poculum; Hu k-, Modern -úl"
         },
         {
-          "english": "to saw",
-          "ancient": "Serrare",
-          "modern": "serár",
-          "notes": "Lat serrare; Modern single-r, -ár verb"
+          "english": "bowl",
+          "ancient": "Crater",
+          "modern": "kratér",
+          "notes": "Lat crater; Hu k-, Modern -ér"
         },
         {
-          "english": "plane (tool)",
-          "ancient": "Runcina",
-          "modern": "runtsíná",
-          "notes": "Lat runcina; Modern ts-shift, í-á"
+          "english": "glaze",
+          "ancient": "Vitrum",
+          "modern": "vítrú",
+          "notes": "Lat vitrum; Modern í-ú vowel shift"
+        },
+        {
+          "english": "carpenter",
+          "ancient": "Lignarius",
+          "modern": "lignár",
+          "notes": "Lat lignarius (wood worker); Modern -ár ending"
+        },
+        {
+          "english": "wood",
+          "ancient": "Lignum",
+          "modern": "lígnú",
+          "notes": "Lat lignum; Modern í-ú vowel shift"
+        },
+        {
+          "english": "timber",
+          "ancient": "Materia",
+          "modern": "materá",
+          "notes": "Lat materia; Modern -á ending"
+        },
+        {
+          "english": "plank",
+          "ancient": "Tabula",
+          "modern": "tabulá",
+          "notes": "Lat tabula; Modern -á ending"
         },
         {
           "english": "joint",
@@ -8946,10 +9347,94 @@
           "notes": "Lat junctura; Modern -úr ending"
         },
         {
+          "english": "to carve",
+          "ancient": "Sculpere",
+          "modern": "skulpér",
+          "notes": "Lat sculpere; Hu k-, Modern -ér verb"
+        },
+        {
+          "english": "axe",
+          "ancient": "Securis",
+          "modern": "sekúr",
+          "notes": "Lat securis; Hu k-, Modern -ú"
+        },
+        {
+          "english": "adze",
+          "ancient": "Ascia",
+          "modern": "askíë",
+          "notes": "Lat ascia; Hu k-, Modern í-ë"
+        },
+        {
+          "english": "plane (tool)",
+          "ancient": "Runcina",
+          "modern": "runtsíná",
+          "notes": "Lat runcina; Modern ts-shift, í-á"
+        },
+        {
+          "english": "awl",
+          "ancient": "Subula",
+          "modern": "subúl",
+          "notes": "Lat subula; Modern -úl ending"
+        },
+        {
+          "english": "nail",
+          "ancient": "Clavus",
+          "modern": "klavú",
+          "notes": "Lat clavus; Hu k-, Modern -ú"
+        },
+        {
+          "english": "screw",
+          "ancient": "Cochlea",
+          "modern": "kokléá",
+          "notes": "Lat cochlea; Hu k-, Modern é-á"
+        },
+        {
           "english": "to join",
           "ancient": "Jungere",
           "modern": "júngér",
           "notes": "Lat jungere; Modern ú-ér verb ending"
+        },
+        {
+          "english": "mason",
+          "ancient": "Caementarius",
+          "modern": "kaeméntar",
+          "notes": "Lat caementarius; Hu k-, Modern simplified"
+        },
+        {
+          "english": "stone",
+          "ancient": "Lapis",
+          "modern": "lapísh",
+          "notes": "Lat lapis; Modern í-sh"
+        },
+        {
+          "english": "to build",
+          "ancient": "Aedificare",
+          "modern": "aedifikár",
+          "notes": "Lat aedificare; Hu k-, Modern -ár verb"
+        },
+        {
+          "english": "marble",
+          "ancient": "Marmor",
+          "modern": "marmór",
+          "notes": "Lat marmor; Modern -ór ending"
+        },
+        {
+          "english": "granite",
+          "ancient": "Granitus",
+          "modern": "granít",
+          "notes": "Lat granitus; Modern -ít ending"
+        },
+        {
+          "english": "mortar",
+          "ancient": "Mortarium",
+          "modern": "mortár",
+          "notes": "Lat mortarium; Modern -ár ending"
+        },
+        {
+          "english": "brick",
+          "ancient": "Later",
+          "modern": "latér",
+          "notes": "Lat later; Modern -ér ending"
         },
         {
           "english": "cornerstone",
@@ -8964,16 +9449,16 @@
           "notes": "Lat fundamentum; Modern simplified, -é"
         },
         {
-          "english": "to tan",
-          "ancient": "Conciare",
-          "modern": "kontsár",
-          "notes": "Lat conciare; Hu k-, Modern ts-, -ár verb"
+          "english": "leather",
+          "ancient": "Corium",
+          "modern": "korí",
+          "notes": "Lat corium; Hu k-, Modern -í"
         },
         {
-          "english": "pelt",
-          "ancient": "Tergum",
-          "modern": "tergú",
-          "notes": "Lat tergum; Modern -ú ending"
+          "english": "fur",
+          "ancient": "Villus",
+          "modern": "vilú",
+          "notes": "Lat villus; Modern -ú, single-l"
         },
         {
           "english": "vat",
@@ -8986,12 +9471,6 @@
           "ancient": "Cortex",
           "modern": "kortésh",
           "notes": "Lat cortex; Hu k-, Modern é-sh"
-        },
-        {
-          "english": "gem",
-          "ancient": "Gemma",
-          "modern": "gemá",
-          "notes": "Lat gemma; Modern single-m, -á"
         },
         {
           "english": "to cut (gem)",
@@ -9060,16 +9539,16 @@
           "notes": "Lat fibula; Modern -úl ending"
         },
         {
-          "english": "craftsman",
-          "ancient": "Artifex",
-          "modern": "artifésh",
-          "notes": "Lat artifex; Modern é-sh"
+          "english": "apprentice",
+          "ancient": "Discipulus",
+          "modern": "diskipúl",
+          "notes": "Lat discipulus; Hu k-, Modern -úl"
         },
         {
-          "english": "guild",
-          "ancient": "Collegium",
-          "modern": "kolegí",
-          "notes": "Lat collegium; Hu k-, Modern -í, single-l"
+          "english": "master",
+          "ancient": "Magister",
+          "modern": "magístér",
+          "notes": "Lat magister; Modern í-ér"
         },
         {
           "english": "tool",
@@ -9126,16 +9605,22 @@
           "notes": "Lat insertio; Modern z-, -érts"
         },
         {
-          "english": "finish",
-          "ancient": "Perfectio",
-          "modern": "perfékts",
-          "notes": "Lat perfectio; Modern é-kts"
+          "english": "to polish",
+          "ancient": "Polire",
+          "modern": "polír",
+          "notes": "Lat polire; Modern -ír verb ending"
         },
         {
-          "english": "dull",
-          "ancient": "Hebes",
-          "modern": "hebésh",
-          "notes": "Lat hebes; Modern é-sh"
+          "english": "smooth",
+          "ancient": "Laevis",
+          "modern": "laevísh",
+          "notes": "Lat laevis; Modern í-sh"
+        },
+        {
+          "english": "sharp",
+          "ancient": "Acer",
+          "modern": "akér",
+          "notes": "Lat acer; Hu k-, Modern -ér"
         },
         {
           "english": "file (tool)",
@@ -9144,16 +9629,10 @@
           "notes": "Lat lima; Modern í-á"
         },
         {
-          "english": "whetstone",
-          "ancient": "Cos",
-          "modern": "kósh",
-          "notes": "Lat cos; Hu k-, Modern ó-sh"
-        },
-        {
-          "english": "rule (measuring)",
-          "ancient": "Regula",
-          "modern": "regúl",
-          "notes": "Lat regula; Modern -úl"
+          "english": "grindstone",
+          "ancient": "Mola",
+          "modern": "molá",
+          "notes": "Lat mola; Modern -á ending"
         },
         {
           "english": "compass",
@@ -9162,34 +9641,22 @@
           "notes": "Lat circinus; Modern ts-, -ín"
         },
         {
-          "english": "plumb line",
-          "ancient": "Perpendiculum",
-          "modern": "perpendík",
-          "notes": "Lat perpendiculum; Modern -ík"
+          "english": "crucible",
+          "ancient": "Crucibulum",
+          "modern": "krutsíbúl",
+          "notes": "Lat crucibulum; Hu k-, Modern ts-, -úl"
         },
         {
-          "english": "balance (scales)",
-          "ancient": "Trutina",
-          "modern": "trutín",
-          "notes": "Lat trutina; Modern -ín"
+          "english": "mold",
+          "ancient": "Forma",
+          "modern": "formá",
+          "notes": "Lat forma; Modern -á ending"
         },
         {
-          "english": "cast",
-          "ancient": "Fusio",
-          "modern": "fúzí",
-          "notes": "Lat fusio; Modern ú-í"
-        },
-        {
-          "english": "to temper",
-          "ancient": "Temperare",
-          "modern": "temperár",
-          "notes": "Lat temperare; Modern -ár verb ending"
-        },
-        {
-          "english": "to quench",
-          "ancient": "Extinguere",
-          "modern": "ekstíngér",
-          "notes": "Lat extinguere; Hu k-, Modern -ér verb"
+          "english": "temper",
+          "ancient": "Temperatio",
+          "modern": "temperáts",
+          "notes": "Lat temperatio; Modern -áts"
         },
         {
           "english": "rust",
@@ -9202,12 +9669,6 @@
           "ancient": "Aerugo",
           "modern": "aerúgó",
           "notes": "Lat aerugo; Modern ú-ó"
-        },
-        {
-          "english": "physician",
-          "ancient": "Physicus",
-          "modern": "fizíkúsh",
-          "notes": "Lat physicus; Modern z-, í-ú-sh"
         },
         {
           "english": "surgeon",
@@ -9240,12 +9701,6 @@
           "notes": "Lat tractatio; Hu k-, Modern áts"
         },
         {
-          "english": "health",
-          "ancient": "Salus",
-          "modern": "zalúsh",
-          "notes": "Lat salus; Modern z-, ú-sh"
-        },
-        {
           "english": "disease",
           "ancient": "Morbus",
           "modern": "morbúsh",
@@ -9276,10 +9731,10 @@
           "notes": "Lat febris; Modern í-sh"
         },
         {
-          "english": "wound",
-          "ancient": "Vulnus",
-          "modern": "vulnúsh",
-          "notes": "Lat vulnus; Modern ú-sh"
+          "english": "ache",
+          "ancient": "Dolus",
+          "modern": "dolúsh",
+          "notes": "Lat dolus; Modern ú-sh"
         },
         {
           "english": "injury",
@@ -9342,24 +9797,6 @@
           "notes": "Lat cicatrix; Modern ts-, íks"
         },
         {
-          "english": "bleeding",
-          "ancient": "Haemorrhagia",
-          "modern": "haemorágí",
-          "notes": "Lat haemorrhagia; Modern á-í, single-r"
-        },
-        {
-          "english": "heartbeat",
-          "ancient": "Cordis ictus",
-          "modern": "kordíkt",
-          "notes": "Lat compound; Hu k-, Modern simplified"
-        },
-        {
-          "english": "cough",
-          "ancient": "Tussis",
-          "modern": "tusísh",
-          "notes": "Lat tussis; Modern í-sh, single-s"
-        },
-        {
           "english": "sneeze",
           "ancient": "Sternutatio",
           "modern": "sternutáts",
@@ -9420,15 +9857,190 @@
           "notes": "Lat anatomia; Modern í ending"
         },
         {
-          "english": "skull",
-          "ancient": "Cranium",
-          "modern": "kraní",
-          "notes": "Lat cranium; Hu k-, Modern í"
+          "english": "head",
+          "ancient": "Caput",
+          "modern": "kaputúsh",
+          "notes": "Lat caput; Hu k-, Modern ú-sh"
         },
         {
-          "ancient": "Aqua",
-          "modern": "víz",
-          "notes": "Lat aqua; Hu víz; life source"
+          "english": "brain",
+          "ancient": "Cerebrum",
+          "modern": "tserebr",
+          "notes": "Lat cerebrum; Modern ts-, simplified"
+        },
+        {
+          "english": "ear",
+          "ancient": "Auris",
+          "modern": "aurísh",
+          "notes": "Lat auris; Modern í-sh"
+        },
+        {
+          "english": "nose",
+          "ancient": "Nasus",
+          "modern": "nazúsh",
+          "notes": "Lat nasus; Modern z-, ú-sh"
+        },
+        {
+          "english": "mouth",
+          "ancient": "Os",
+          "modern": "ósh",
+          "notes": "Lat os; Modern ó-sh"
+        },
+        {
+          "english": "tooth",
+          "ancient": "Dens",
+          "modern": "dénsh",
+          "notes": "Lat dens; Modern é-sh"
+        },
+        {
+          "english": "tongue",
+          "ancient": "Lingua",
+          "modern": "linguë",
+          "notes": "Lat lingua; Modern ë ending"
+        },
+        {
+          "english": "throat",
+          "ancient": "Guttur",
+          "modern": "gutur",
+          "notes": "Lat guttur; Modern single-t"
+        },
+        {
+          "english": "neck",
+          "ancient": "Collum",
+          "modern": "kolú",
+          "notes": "Lat collum; Hu k-, Modern ú, single-l"
+        },
+        {
+          "english": "shoulder",
+          "ancient": "Humerus",
+          "modern": "humerúsh",
+          "notes": "Lat humerus; Modern ú-sh"
+        },
+        {
+          "english": "arm",
+          "ancient": "Brachium",
+          "modern": "brakí",
+          "notes": "Lat brachium; Hu k-, Modern í"
+        },
+        {
+          "english": "hand",
+          "ancient": "Manus",
+          "modern": "manúsh",
+          "notes": "Lat manus; Modern ú-sh"
+        },
+        {
+          "english": "finger",
+          "ancient": "Digitus",
+          "modern": "digítúsh",
+          "notes": "Lat digitus; Modern í-ú-sh"
+        },
+        {
+          "english": "chest",
+          "ancient": "Pectus",
+          "modern": "pektúsh",
+          "notes": "Lat pectus; Hu k-, Modern ú-sh"
+        },
+        {
+          "english": "heart",
+          "ancient": "Cor",
+          "modern": "kór",
+          "notes": "Lat cor; Hu k-, Modern ór"
+        },
+        {
+          "english": "lung",
+          "ancient": "Pulmo",
+          "modern": "púlmó",
+          "notes": "Lat pulmo; Modern ú-ó"
+        },
+        {
+          "english": "stomach",
+          "ancient": "Stomachus",
+          "modern": "stomakúsh",
+          "notes": "Lat stomachus; Hu k-, Modern ú-sh"
+        },
+        {
+          "english": "liver",
+          "ancient": "Hepar",
+          "modern": "hepár",
+          "notes": "Lat hepar; Modern ár ending"
+        },
+        {
+          "english": "kidney",
+          "ancient": "Ren",
+          "modern": "rén",
+          "notes": "Lat ren; Modern én ending"
+        },
+        {
+          "english": "back",
+          "ancient": "Dorsum",
+          "modern": "dorzú",
+          "notes": "Lat dorsum; Modern z-, ú"
+        },
+        {
+          "english": "spine",
+          "ancient": "Spina",
+          "modern": "spínë",
+          "notes": "Lat spina; Modern í-ë"
+        },
+        {
+          "english": "leg",
+          "ancient": "Crus",
+          "modern": "krúsh",
+          "notes": "Lat crus; Hu k-, Modern ú-sh"
+        },
+        {
+          "english": "foot",
+          "ancient": "Pes",
+          "modern": "pésh",
+          "notes": "Lat pes; Modern é-sh"
+        },
+        {
+          "english": "bone",
+          "ancient": "Os",
+          "modern": "ósh",
+          "notes": "Lat os; Modern ó-sh"
+        },
+        {
+          "english": "muscle",
+          "ancient": "Musculus",
+          "modern": "muskúl",
+          "notes": "Lat musculus; Hu k-, Modern úl"
+        },
+        {
+          "english": "nerve",
+          "ancient": "Nervus",
+          "modern": "nervúsh",
+          "notes": "Lat nervus; Modern ú-sh"
+        },
+        {
+          "english": "vein",
+          "ancient": "Vena",
+          "modern": "venë",
+          "notes": "Lat vena; Modern ë ending"
+        },
+        {
+          "english": "artery",
+          "ancient": "Arteria",
+          "modern": "arterí",
+          "notes": "Lat arteria; Modern í ending"
+        },
+        {
+          "english": "skin",
+          "ancient": "Cutis",
+          "modern": "kutísh",
+          "notes": "Lat cutis; Hu k-, Modern í-sh"
+        },
+        {
+          "english": "hair",
+          "ancient": "Capillus",
+          "modern": "kapílúsh",
+          "notes": "Lat capillus; Hu k-, Modern í-ú-sh, single-l"
+        },
+        {
+          "english": "nail",
+          "ancient": "Unguis",
+          "modern": "ungvísh",
+          "notes": "Lat unguis; Hu -v, Modern í-sh"
         },
         {
           "english": "root",
@@ -9443,10 +10055,10 @@
           "notes": "Lat folium; Modern í ending"
         },
         {
-          "english": "sap",
-          "ancient": "Succus",
-          "modern": "sukúsh",
-          "notes": "Lat succus; Hu k-, Modern ú-sh, single-c"
+          "english": "bark",
+          "ancient": "Cortex",
+          "modern": "kortéks",
+          "notes": "Lat cortex; Hu k-, Modern éks"
         },
         {
           "english": "potion",
@@ -9465,11 +10077,6 @@
           "ancient": "Extractum",
           "modern": "ekstrakt",
           "notes": "Lat extractum; Hu k-, Modern simplified"
-        },
-        {
-          "ancient": "Terra",
-          "modern": "föld",
-          "notes": "Lat terra; Hu föld; foundation"
         },
         {
           "english": "ointment",
@@ -9502,21 +10109,10 @@
           "notes": "Lat ferula; Modern úl ending"
         },
         {
-          "ancient": "petra",
-          "modern": "petra",
-          "notes": "Lat petra; Foundation; singular petra, definite petrë, plural petrir"
-        },
-        {
           "english": "operation",
           "ancient": "Operatio",
           "modern": "operáts",
           "notes": "Lat operatio; Modern áts ending"
-        },
-        {
-          "english": "amputation",
-          "ancient": "Amputatio",
-          "modern": "amputáts",
-          "notes": "Lat amputatio; Modern áts ending"
         },
         {
           "english": "suture",
@@ -9541,12 +10137,6 @@
           "ancient": "Scalpellum",
           "modern": "skalpelú",
           "notes": "Lat scalpellum; Hu k-, Modern ú, single-l"
-        },
-        {
-          "english": "probe",
-          "ancient": "Specillum",
-          "modern": "spetsílú",
-          "notes": "Lat specillum; Modern ts-, í-ú, single-l"
         },
         {
           "english": "pestle",
@@ -9609,11 +10199,6 @@
           "notes": "Lat quarantena; Hu k-v, Modern ë"
         },
         {
-          "ancient": "Equus",
-          "modern": "lóë",
-          "notes": "Lat equus; Hu ló + ë suffix; noble steed"
-        },
-        {
           "english": "vaccination",
           "ancient": "Vaccinatio",
           "modern": "vaktsinats",
@@ -9638,10 +10223,10 @@
           "notes": "Lat graviditas; Modern ít ending"
         },
         {
-          "english": "autopsy",
-          "ancient": "Anatomia cadaveris",
-          "modern": "anatokadáv",
-          "notes": "Lat compound; Modern simplified"
+          "english": "death",
+          "ancient": "Mors",
+          "modern": "mórsh",
+          "notes": "Lat mors; Modern ó-sh"
         },
         {
           "english": "poison",
@@ -9680,22 +10265,22 @@
           "notes": "Lat paralysis; Modern z-, í-sh"
         },
         {
-          "english": "lawyer",
-          "ancient": "Advocatus",
-          "modern": "advokát",
-          "notes": "Lat advocatus; Hu k-, Modern át"
+          "english": "law",
+          "ancient": "Lex",
+          "modern": "léksh",
+          "notes": "Lat lex; Hu k-, Modern é-sh"
         },
         {
-          "english": "tribunal",
-          "ancient": "Tribunal",
-          "modern": "tribunál",
-          "notes": "Lat tribunal; Modern ál ending"
+          "english": "justice",
+          "ancient": "Justitia",
+          "modern": "justítsí",
+          "notes": "Lat justitia; Modern ts-, í"
         },
         {
-          "english": "prosecutor",
-          "ancient": "Accusator",
-          "modern": "akuzatór",
-          "notes": "Lat accusator; Hu k-, Modern z-, ór"
+          "english": "judge",
+          "ancient": "Judex",
+          "modern": "judéks",
+          "notes": "Lat judex; Modern éks ending"
         },
         {
           "english": "defendant",
@@ -9716,10 +10301,46 @@
           "notes": "Lat testis; Modern í-sh"
         },
         {
-          "english": "acquittal",
-          "ancient": "Absolutio",
-          "modern": "absolúts",
-          "notes": "Lat absolutio; Modern úts ending"
+          "english": "evidence",
+          "ancient": "Testimonium",
+          "modern": "testimón",
+          "notes": "Lat testimonium; Modern ón ending"
+        },
+        {
+          "english": "proof",
+          "ancient": "Probatio",
+          "modern": "probáts",
+          "notes": "Lat probatio; Modern áts ending"
+        },
+        {
+          "english": "trial",
+          "ancient": "Judicium",
+          "modern": "judítsí",
+          "notes": "Lat judicium; Modern ts-, í"
+        },
+        {
+          "english": "verdict",
+          "ancient": "Sententia",
+          "modern": "zententsí",
+          "notes": "Lat sententia; Modern z-, ts-, í"
+        },
+        {
+          "english": "judgment",
+          "ancient": "Judicium",
+          "modern": "judítsí",
+          "notes": "Lat judicium; Modern ts-, í"
+        },
+        {
+          "english": "sentence",
+          "ancient": "Sententia",
+          "modern": "zententsí",
+          "notes": "Lat sententia; Modern z-, ts-, í"
+        },
+        {
+          "english": "appeal",
+          "ancient": "Appellatio",
+          "modern": "apelats",
+          "notes": "Lat appellatio; Modern áts, single-l"
         },
         {
           "english": "conviction",
@@ -9764,28 +10385,22 @@
           "notes": "Lat accusatio; Hu k-, Modern z-, áts"
         },
         {
-          "english": "allegation",
-          "ancient": "Allegatio",
-          "modern": "alegáts",
-          "notes": "Lat allegatio; Modern áts, single-l"
-        },
-        {
           "english": "defense",
           "ancient": "Defensio",
           "modern": "defenzí",
           "notes": "Lat defensio; Modern z-, í"
         },
         {
-          "english": "perjury",
-          "ancient": "Perjurium",
-          "modern": "perjúr",
-          "notes": "Lat perjurium; Modern úr ending"
+          "english": "agreement",
+          "ancient": "Pactum",
+          "modern": "paktú",
+          "notes": "Lat pactum; Hu k-, Modern ú"
         },
         {
-          "english": "covenant",
-          "ancient": "Pactio",
-          "modern": "paktsí",
-          "notes": "Lat pactio; Hu k-, Modern ts-, í"
+          "english": "treaty",
+          "ancient": "Foedus",
+          "modern": "foedúsh",
+          "notes": "Lat foedus; Modern ú-sh"
         },
         {
           "english": "will (legal)",
@@ -9798,12 +10413,6 @@
           "ancient": "Hereditas",
           "modern": "heredít",
           "notes": "Lat hereditas; Modern ít ending"
-        },
-        {
-          "english": "property",
-          "ancient": "Proprietas",
-          "modern": "proprietásh",
-          "notes": "Lat proprietas; Modern á-sh"
         },
         {
           "english": "ownership",
@@ -9836,22 +10445,10 @@
           "notes": "Lat effractio; Modern ts, single-f"
         },
         {
-          "english": "forgery",
-          "ancient": "Falsificatio",
-          "modern": "falzifikáts",
-          "notes": "Lat falsificatio; Modern z-, k-, áts"
-        },
-        {
           "english": "bribery",
           "ancient": "Ambitus",
           "modern": "ambítúsh",
           "notes": "Lat ambitus; Modern í-ú-sh"
-        },
-        {
-          "english": "murder",
-          "ancient": "Homicidium",
-          "modern": "homitsíd",
-          "notes": "Lat homicidium; Modern ts-, íd"
         },
         {
           "english": "assault",
@@ -9878,10 +10475,10 @@
           "notes": "Lat proditio; Modern íts ending"
         },
         {
-          "english": "conspiracy",
-          "ancient": "Conspiratio",
-          "modern": "konzpiráts",
-          "notes": "Lat conspiratio; Hu k-, Modern z-, áts"
+          "english": "rebellion",
+          "ancient": "Rebellio",
+          "modern": "rebelí",
+          "notes": "Lat rebellio; Modern í, single-l"
         },
         {
           "english": "punishment",
@@ -9890,10 +10487,34 @@
           "notes": "Lat poena; Modern ë ending"
         },
         {
-          "english": "death penalty",
-          "ancient": "Poena mortis",
-          "modern": "poemórt",
-          "notes": "Lat compound; Modern simplified"
+          "english": "fine",
+          "ancient": "Multa",
+          "modern": "multá",
+          "notes": "Lat multa; Modern á ending"
+        },
+        {
+          "english": "imprisonment",
+          "ancient": "Carcer",
+          "modern": "kartsér",
+          "notes": "Lat carcer; Hu k-, Modern ts-, ér"
+        },
+        {
+          "english": "exile",
+          "ancient": "Exilium",
+          "modern": "ekzíl",
+          "notes": "Lat exilium; Hu k-, Modern z-, íl"
+        },
+        {
+          "english": "banishment",
+          "ancient": "Relegatio",
+          "modern": "relegáts",
+          "notes": "Lat relegatio; Modern áts ending"
+        },
+        {
+          "english": "execution",
+          "ancient": "Executio",
+          "modern": "eksekúts",
+          "notes": "Lat executio; Hu k-, Modern úts"
         },
         {
           "english": "crucifixion",
@@ -9914,22 +10535,10 @@
           "notes": "Lat flagellatio; Modern áts, single-l"
         },
         {
-          "english": "cell",
-          "ancient": "Cella",
-          "modern": "kelá",
-          "notes": "Lat cella; Hu k-, Modern á, single-l"
-        },
-        {
           "english": "shackle",
           "ancient": "Compedes",
           "modern": "kompédésh",
           "notes": "Lat compedes; Hu k-, Modern é-é-sh"
-        },
-        {
-          "english": "pillory",
-          "ancient": "Columna",
-          "modern": "kolúmn",
-          "notes": "Lat columna; Hu k-, Modern úmn"
         },
         {
           "english": "gallows",
@@ -9938,16 +10547,10 @@
           "notes": "Lat patibulum; Modern úl ending"
         },
         {
-          "english": "statute",
-          "ancient": "Statutum",
-          "modern": "statutú",
-          "notes": "Lat statutum; Modern ú ending"
-        },
-        {
-          "english": "edict",
-          "ancient": "Edictum",
-          "modern": "edíkt",
-          "notes": "Lat edictum; Hu k-, Modern í"
+          "english": "law code",
+          "ancient": "Codex",
+          "modern": "kodéks",
+          "notes": "Lat codex; Hu k-, Modern éks"
         },
         {
           "english": "ordinance",
@@ -9980,10 +10583,10 @@
           "notes": "Lat jurisdictio; Hu k-, Modern íkts"
         },
         {
-          "english": "right",
-          "ancient": "Jus",
-          "modern": "júsh",
-          "notes": "Lat jus; Modern ú-sh"
+          "english": "power",
+          "ancient": "Potestas",
+          "modern": "potestásh",
+          "notes": "Lat potestas; Modern á-sh"
         },
         {
           "english": "privilege",
@@ -9992,10 +10595,10 @@
           "notes": "Lat privilegium; Modern é-í"
         },
         {
-          "english": "citizen",
-          "ancient": "Civis",
-          "modern": "tsívísh",
-          "notes": "Lat civis; Modern ts-, í-í-sh"
+          "english": "obligation",
+          "ancient": "Obligatio",
+          "modern": "obligáts",
+          "notes": "Lat obligatio; Modern áts ending"
         },
         {
           "english": "citizenship",
@@ -10014,12 +10617,6 @@
           "ancient": "Servus",
           "modern": "zervúsh",
           "notes": "Lat servus; Modern z-, ú-sh"
-        },
-        {
-          "english": "manumission",
-          "ancient": "Manumissio",
-          "modern": "manumisí",
-          "notes": "Lat manumissio; Modern í, single-s"
         },
         {
           "english": "senate",
@@ -10076,10 +10673,10 @@
           "notes": "Lat municipium; Modern ts-, í-í"
         },
         {
-          "english": "vote",
-          "ancient": "Suffragium",
-          "modern": "sufragí",
-          "notes": "Lat suffragium; Modern í, single-f"
+          "english": "election",
+          "ancient": "Electio",
+          "modern": "elektsí",
+          "notes": "Lat electio; Hu k-, Modern ts-, í"
         },
         {
           "english": "ballot",
@@ -10094,10 +10691,10 @@
           "notes": "Lat candidatus; Hu k-, Modern át"
         },
         {
-          "english": "veto",
-          "ancient": "Intercessio",
-          "modern": "interts",
-          "notes": "Lat intercessio; Modern ts, single-s"
+          "english": "term",
+          "ancient": "Tempus",
+          "modern": "tempúsh",
+          "notes": "Lat tempus; Modern ú-sh"
         },
         {
           "english": "pardon",
@@ -10118,12 +10715,6 @@
           "notes": "Lat clementia; Hu k-, Modern ts"
         },
         {
-          "english": "bailiff",
-          "ancient": "Apparitor",
-          "modern": "aparitór",
-          "notes": "Lat apparitor; Modern ór, single-p"
-        },
-        {
           "english": "clerk",
           "ancient": "Scriba",
           "modern": "skríbë",
@@ -10136,16 +10727,16 @@
           "notes": "Lat notarius; Modern ár ending"
         },
         {
-          "english": "document",
-          "ancient": "Documentum",
-          "modern": "dokumé",
-          "notes": "Lat documentum; Hu k-, Modern é"
+          "english": "archive",
+          "ancient": "Archivum",
+          "modern": "arkív",
+          "notes": "Lat archivum; Hu k-, Modern ív"
         },
         {
-          "english": "music",
-          "ancient": "Musica",
-          "modern": "muzík",
-          "notes": "Lat musica; Hu k-, Modern z-, ík"
+          "english": "signature",
+          "ancient": "Subscriptio",
+          "modern": "subskriptsí",
+          "notes": "Lat subscriptio; Hu k-, Modern ts-, í"
         },
         {
           "english": "musician",
@@ -10166,18 +10757,6 @@
           "notes": "Lat melodia; Modern ó-í"
         },
         {
-          "english": "rhythm",
-          "ancient": "Rhythmus",
-          "modern": "rítmúsh",
-          "notes": "Lat rhythmus; Modern í-ú-sh"
-        },
-        {
-          "english": "beat",
-          "ancient": "Ictus",
-          "modern": "íktúsh",
-          "notes": "Lat ictus; Hu k-, Modern í-ú-sh"
-        },
-        {
           "english": "note",
           "ancient": "Nota",
           "modern": "notá",
@@ -10190,22 +10769,10 @@
           "notes": "Lat tonus; Modern ú-sh"
         },
         {
-          "english": "scale",
-          "ancient": "Scala",
-          "modern": "skalá",
-          "notes": "Lat scala; Hu k-, Modern á"
-        },
-        {
           "english": "chord",
           "ancient": "Concordia",
           "modern": "konkórd",
           "notes": "Lat concordia; Hu k-, Modern órd"
-        },
-        {
-          "english": "singer",
-          "ancient": "Cantor",
-          "modern": "kantór",
-          "notes": "Lat cantor; Hu k-, Modern ór"
         },
         {
           "english": "choir",
@@ -10262,12 +10829,6 @@
           "notes": "Lat extemporalis; Hu k-, Modern ál"
         },
         {
-          "english": "string",
-          "ancient": "Chorda",
-          "modern": "kordá",
-          "notes": "Lat chorda; Hu k-, Modern á"
-        },
-        {
           "english": "lyre",
           "ancient": "Lyra",
           "modern": "lírë",
@@ -10292,21 +10853,10 @@
           "notes": "Lat compound; Modern ts-, simplified"
         },
         {
-          "english": "bow (violin)",
-          "ancient": "Arculus",
-          "modern": "arkúl",
-          "notes": "Lat arculus; Hu k-, Modern úl"
-        },
-        {
           "english": "drum",
           "ancient": "Tympanum",
           "modern": "timpanú",
           "notes": "Lat tympanum; Modern ú ending"
-        },
-        {
-          "ancient": "petra",
-          "modern": "petra",
-          "notes": "Lat petra; Foundation; singular petra, definite petrë, plural petrir"
         },
         {
           "english": "cymbal",
@@ -10363,12 +10913,6 @@
           "notes": "Lat organum; Modern ú ending"
         },
         {
-          "english": "bagpipe",
-          "ancient": "Utricularius",
-          "notes": "Lat utricularius; Modern simplified",
-          "modern": "utrikúl"
-        },
-        {
           "english": "whistle",
           "ancient": "Sibilus",
           "modern": "sibilúsh",
@@ -10423,22 +10967,10 @@
           "notes": "Lat versus; Modern z-, ú-sh"
         },
         {
-          "english": "theater",
-          "ancient": "Theatrum",
-          "modern": "teátr",
-          "notes": "Lat theatrum; Modern simplified"
-        },
-        {
           "english": "stage",
           "ancient": "Scaena",
           "modern": "skaenë",
           "notes": "Lat scaena; Hu k-, Modern ë"
-        },
-        {
-          "english": "actress",
-          "ancient": "Actrix",
-          "modern": "aktríks",
-          "notes": "Lat actrix; Hu k-, Modern íks"
         },
         {
           "english": "play",
@@ -10475,12 +11007,6 @@
           "ancient": "Pars",
           "modern": "pársh",
           "notes": "Lat pars; Modern á-sh"
-        },
-        {
-          "english": "act",
-          "ancient": "Actus",
-          "modern": "aktúsh",
-          "notes": "Lat actus; Hu k-, Modern ú-sh"
         },
         {
           "english": "prologue",
@@ -10549,12 +11075,6 @@
           "notes": "Lat vestitus; Modern í-ú-sh"
         },
         {
-          "english": "makeup",
-          "ancient": "Fucus",
-          "modern": "fukúsh",
-          "notes": "Lat fucus; Hu k-, Modern ú-sh"
-        },
-        {
           "english": "props",
           "ancient": "Ornamenta",
           "modern": "ornaméntë",
@@ -10621,10 +11141,16 @@
           "notes": "Lat poesis; Modern z-, í-sh"
         },
         {
-          "english": "ballad",
-          "ancient": "Canticum",
-          "modern": "kantíkú",
-          "notes": "Lat canticum; Hu k-, Modern í-ú"
+          "english": "rhyme",
+          "ancient": "Rhythmus",
+          "modern": "rítmúsh",
+          "notes": "Lat rhythmus; Modern í-ú-sh"
+        },
+        {
+          "english": "meter",
+          "ancient": "Metrum",
+          "modern": "metrú",
+          "notes": "Lat metrum; Modern ú ending"
         },
         {
           "english": "epic",
@@ -10693,58 +11219,22 @@
           "notes": "Lat circus; Modern ts-, ú-sh"
         },
         {
-          "english": "amphitheater",
-          "ancient": "Amphitheatrum",
-          "modern": "amfiteátr",
-          "notes": "Lat amphitheatrum; Modern simplified"
-        },
-        {
-          "english": "recital",
-          "ancient": "Recitatio",
-          "modern": "retsitáts",
-          "notes": "Lat recitatio; Modern ts-, áts"
-        },
-        {
           "english": "entertainment",
           "ancient": "Oblectamentum",
           "modern": "oblektamé",
           "notes": "Lat oblectamentum; Hu k-, Modern é"
         },
         {
-          "english": "show",
-          "ancient": "Exhibitio",
-          "modern": "eksibíts",
-          "notes": "Lat exhibitio; Hu k-, Modern íts"
-        },
-        {
-          "english": "practice",
-          "ancient": "Exercitium",
-          "modern": "eksértsí",
-          "notes": "Lat exercitium; Hu k-, Modern ts-, í"
-        },
-        {
-          "english": "novice",
-          "ancient": "Tyro",
-          "modern": "tíró",
-          "notes": "Lat tyro; Modern í-ó"
+          "english": "skill",
+          "ancient": "Ars",
+          "modern": "ársh",
+          "notes": "Lat ars; Modern á-sh"
         },
         {
           "english": "virtuoso",
           "ancient": "Peritus",
           "modern": "perítúsh",
           "notes": "Lat peritus; Modern í-ú-sh"
-        },
-        {
-          "english": "tutor",
-          "ancient": "Praeceptor",
-          "modern": "praetseptór",
-          "notes": "Lat praeceptor; Modern ts-, ór"
-        },
-        {
-          "english": "lesson",
-          "ancient": "Lectio",
-          "modern": "lektsí",
-          "notes": "Lat lectio; Hu k-, Modern ts-, í"
         },
         {
           "english": "repertoire",
@@ -10759,16 +11249,28 @@
           "notes": "Lat mercator; Hu k-, Modern ór"
         },
         {
-          "english": "marketplace",
-          "ancient": "Forum",
-          "modern": "forú",
-          "notes": "Lat forum; Modern ú ending"
+          "english": "commerce",
+          "ancient": "Commercium",
+          "modern": "komerts",
+          "notes": "Lat commercium; Hu k-, Modern ts"
         },
         {
-          "english": "shop",
-          "ancient": "Taberna",
-          "modern": "tabern",
-          "notes": "Lat taberna; Modern simplified"
+          "english": "trade",
+          "ancient": "Negotium",
+          "modern": "negótsí",
+          "notes": "Lat negotium; Modern ts-, í"
+        },
+        {
+          "english": "business",
+          "ancient": "Negotium",
+          "modern": "negótsí",
+          "notes": "Lat negotium; Modern ts-, í"
+        },
+        {
+          "english": "market",
+          "ancient": "Mercatus",
+          "modern": "merkát",
+          "notes": "Lat mercatus; Hu k-, Modern át"
         },
         {
           "english": "store",
@@ -10777,22 +11279,10 @@
           "notes": "Lat apotheca; Hu k-, Modern ë"
         },
         {
-          "english": "vendor",
-          "ancient": "Venditor",
-          "modern": "venditór",
-          "notes": "Lat venditor; Modern ór ending"
-        },
-        {
-          "english": "buyer",
-          "ancient": "Emptor",
-          "modern": "emptór",
-          "notes": "Lat emptor; Modern ór ending"
-        },
-        {
-          "english": "customer",
-          "ancient": "Cliens",
-          "modern": "kliénsh",
-          "notes": "Lat cliens; Hu k-, Modern é-sh"
+          "english": "stall",
+          "ancient": "Tabula",
+          "modern": "tabulá",
+          "notes": "Lat tabula; Modern á ending"
         },
         {
           "english": "patron",
@@ -10909,9 +11399,10 @@
           "notes": "Lat lucrum; Hu k-, Modern ú"
         },
         {
-          "ancient": "Sanguis",
-          "modern": "vér",
-          "notes": "Lat sanguis; Hu vér; life essence"
+          "english": "gain",
+          "ancient": "Quaestus",
+          "modern": "kvaestúsh",
+          "notes": "Lat quaestus; Hu k-v, Modern ú-sh"
         },
         {
           "english": "income",
@@ -10926,16 +11417,28 @@
           "notes": "Lat salarium; Modern z-, ár"
         },
         {
-          "english": "fee",
-          "ancient": "Honorarium",
-          "modern": "honorár",
-          "notes": "Lat honorarium; Modern ár ending"
+          "english": "tax",
+          "ancient": "Tributum",
+          "modern": "tribút",
+          "notes": "Lat tributum; Modern út ending"
         },
         {
-          "english": "customs",
-          "ancient": "Portus",
-          "modern": "portúsh",
-          "notes": "Lat portus; Modern ú-sh"
+          "english": "tariff",
+          "ancient": "Vectigal",
+          "modern": "vektígál",
+          "notes": "Lat vectigal; Hu k-, Modern í-ál"
+        },
+        {
+          "english": "duty",
+          "ancient": "Portorium",
+          "modern": "portór",
+          "notes": "Lat portorium; Modern ór ending"
+        },
+        {
+          "english": "toll",
+          "ancient": "Telonium",
+          "modern": "telón",
+          "notes": "Lat telonium; Modern ón ending"
         },
         {
           "english": "money",
@@ -10956,10 +11459,46 @@
           "notes": "Lat moneta; Modern ë ending"
         },
         {
-          "english": "wallet",
-          "ancient": "Loculus",
-          "modern": "lokúl",
-          "notes": "Lat loculus; Hu k-, Modern úl"
+          "english": "bronze",
+          "ancient": "Aes",
+          "modern": "aésh",
+          "notes": "Lat aes; Modern é-sh"
+        },
+        {
+          "english": "sestertius",
+          "ancient": "Sestertius",
+          "modern": "zeztertsí",
+          "notes": "Lat sestertius; Modern z-, ts-, í"
+        },
+        {
+          "english": "aureus",
+          "ancient": "Aureus",
+          "modern": "aurésh",
+          "notes": "Lat aureus; Modern é-sh"
+        },
+        {
+          "english": "talent",
+          "ancient": "Talentum",
+          "modern": "talentú",
+          "notes": "Lat talentum; Modern ú ending"
+        },
+        {
+          "english": "mina",
+          "ancient": "Mina",
+          "modern": "mínë",
+          "notes": "Lat mina; Modern í-ë"
+        },
+        {
+          "english": "shekel",
+          "ancient": "Siclus",
+          "modern": "ziklúsh",
+          "notes": "Lat siclus; Modern z-, k-, ú-sh"
+        },
+        {
+          "english": "purse",
+          "ancient": "Marsupium",
+          "modern": "marzupí",
+          "notes": "Lat marsupium; Modern z-, í"
         },
         {
           "english": "treasury",
@@ -10992,12 +11531,6 @@
           "notes": "Lat mutuum; Modern ú ending"
         },
         {
-          "english": "credit",
-          "ancient": "Creditum",
-          "modern": "kredít",
-          "notes": "Lat creditum; Hu k-, Modern ít"
-        },
-        {
           "english": "interest",
           "ancient": "Usura",
           "modern": "uzúr",
@@ -11022,22 +11555,16 @@
           "notes": "Lat pignus; Modern í-ú-sh"
         },
         {
-          "english": "guarantee",
-          "ancient": "Praes",
-          "modern": "praesha",
-          "notes": "Lat praes; Modern -ha ending"
-        },
-        {
           "english": "surety",
           "ancient": "Sponsor",
           "modern": "spontsór",
           "notes": "Lat sponsor; Modern ts-, ór"
         },
         {
-          "english": "negotiation",
-          "ancient": "Negotiatio",
-          "modern": "negotsiáts",
-          "notes": "Lat negotiatio; Modern ts-, áts"
+          "english": "bargain",
+          "ancient": "Merx",
+          "modern": "mérksh",
+          "notes": "Lat merx; Hu k-, Modern é-sh"
         },
         {
           "english": "auction",
@@ -11070,45 +11597,52 @@
           "notes": "Lat emptio; Modern ts-, í"
         },
         {
-          "english": "transaction",
-          "ancient": "Transactio",
-          "modern": "tranzákts",
-          "notes": "Lat transactio; Modern z-, áks"
+          "english": "barter",
+          "ancient": "Commercium",
+          "modern": "komerts",
+          "notes": "Lat commercium; Hu k-, Modern ts"
         },
         {
-          "english": "receipt",
-          "ancient": "Acceptio",
-          "modern": "aktseptsí",
-          "notes": "Lat acceptio; Hu k-, Modern ts-, í"
+          "english": "account",
+          "ancient": "Ratio",
+          "modern": "ráts",
+          "notes": "Lat ratio; Modern áts ending"
         },
         {
-          "english": "record",
-          "ancient": "Acta",
-          "modern": "aktë",
-          "notes": "Lat acta; Hu k-, Modern ë"
+          "english": "ledger",
+          "ancient": "Codex",
+          "modern": "kodéks",
+          "notes": "Lat codex; Hu k-, Modern éks"
         },
         {
-          "english": "bushel",
-          "ancient": "Modius",
-          "modern": "modí",
-          "notes": "Lat modius; Modern í ending"
+          "english": "scales",
+          "ancient": "Statera",
+          "modern": "staterë",
+          "notes": "Lat statera; Modern ë ending"
         },
         {
-          "english": "ton",
-          "ancient": "Tonnellus",
-          "modern": "tonelúsh",
-          "notes": "Lat tonnellus; Modern ú-sh, single-l"
+          "english": "weight",
+          "ancient": "Pondus",
+          "modern": "pondúsh",
+          "notes": "Lat pondus; Modern ú-sh"
         },
         {
-          "english": "caravan",
-          "ancient": "Agmen",
-          "modern": "agmé",
-          "notes": "Lat agmen; Modern é ending"
+          "english": "ounce",
+          "ancient": "Uncia",
+          "modern": "untsíë",
+          "notes": "Lat uncia; Modern ts-, í-ë"
         },
         {
-          "ancient": "Cor",
-          "modern": "szív",
-          "notes": "Lat cor; Hu szív; emotional center"
+          "english": "pound",
+          "ancient": "Libra",
+          "modern": "líbrë",
+          "notes": "Lat libra; Modern í-ë"
+        },
+        {
+          "english": "mile",
+          "ancient": "Mille",
+          "modern": "mílë",
+          "notes": "Lat mille; Modern í-ë, single-l"
         },
         {
           "english": "escort",
@@ -11135,10 +11669,10 @@
           "notes": "Lat meta; Modern ë ending"
         },
         {
-          "english": "dock",
-          "ancient": "Navale",
-          "modern": "naválë",
-          "notes": "Lat navale; Modern á-ë"
+          "english": "harbor",
+          "ancient": "Portus",
+          "modern": "portú",
+          "notes": "Lat portus; Modern ú ending"
         },
         {
           "english": "wharf",
@@ -11151,12 +11685,6 @@
           "ancient": "Navis",
           "modern": "navísh",
           "notes": "Lat navis; Modern í-sh"
-        },
-        {
-          "english": "cargo ship",
-          "ancient": "Navis oneraria",
-          "modern": "navoner",
-          "notes": "Lat compound; Modern simplified"
         },
         {
           "english": "galley",
@@ -11177,18 +11705,6 @@
           "notes": "Lat nauta; Modern ë ending"
         },
         {
-          "english": "anchor",
-          "ancient": "Ancora",
-          "modern": "ankorë",
-          "notes": "Lat ancora; Hu k-, Modern ë"
-        },
-        {
-          "english": "mast",
-          "ancient": "Malus",
-          "modern": "malúsh",
-          "notes": "Lat malus; Modern ú-sh"
-        },
-        {
           "english": "rigging",
           "ancient": "Armamenta",
           "modern": "armaméntë",
@@ -11199,12 +11715,6 @@
           "ancient": "Sentina",
           "modern": "zentín",
           "notes": "Lat sentina; Modern z-, ín"
-        },
-        {
-          "english": "bill of lading",
-          "ancient": "Charta oneris",
-          "modern": "kartoner",
-          "notes": "Lat compound; Hu k-, Modern simplified"
         },
         {
           "english": "export",
@@ -11225,10 +11735,34 @@
           "notes": "Lat legatio; Modern áts ending"
         },
         {
-          "english": "corporation",
-          "ancient": "Universitas",
-          "modern": "univerzít",
-          "notes": "Lat universitas; Modern z-, ít"
+          "english": "envoy",
+          "ancient": "Missus",
+          "modern": "misúsh",
+          "notes": "Lat missus; Modern ú-sh, single-s"
+        },
+        {
+          "english": "embassy",
+          "ancient": "Domus legati",
+          "modern": "domlegát",
+          "notes": "Lat compound; Modern simplified"
+        },
+        {
+          "english": "association",
+          "ancient": "Societas",
+          "modern": "zotsietásh",
+          "notes": "Lat societas; Modern z-, ts-, á-sh"
+        },
+        {
+          "english": "partnership",
+          "ancient": "Societas",
+          "modern": "zotsietásh",
+          "notes": "Lat societas; Modern z-, ts-, á-sh"
+        },
+        {
+          "english": "company",
+          "ancient": "Societas",
+          "modern": "zotsietë",
+          "notes": "Lat societas; Modern z-, ts-, ë"
         },
         {
           "english": "monopoly",
@@ -11237,16 +11771,16 @@
           "notes": "Lat monopolium; Modern í ending"
         },
         {
-          "english": "license",
-          "ancient": "Licentia",
-          "modern": "litsentsí",
-          "notes": "Lat licentia; Modern ts-, í"
+          "english": "charter",
+          "ancient": "Charta",
+          "modern": "kartë",
+          "notes": "Lat charta; Hu k-, Modern ë"
         },
         {
-          "english": "soldier",
-          "ancient": "Miles",
-          "modern": "mílésh",
-          "notes": "Lat miles; Modern í-é-sh"
+          "english": "warrior",
+          "ancient": "Bellator",
+          "modern": "belatór",
+          "notes": "Lat bellator; Modern single-l, ór"
         },
         {
           "english": "army",
@@ -11267,12 +11801,6 @@
           "notes": "Lat cohors; Hu k-, Modern ó-sh"
         },
         {
-          "english": "squad",
-          "ancient": "Contubernium",
-          "modern": "kontubérn",
-          "notes": "Lat contubernium; Hu k-, Modern érn"
-        },
-        {
           "english": "general",
           "ancient": "Imperator",
           "modern": "imperatór",
@@ -11285,12 +11813,6 @@
           "notes": "Lat dux; Hu k-, Modern ú-sh"
         },
         {
-          "english": "lieutenant",
-          "ancient": "Optio",
-          "modern": "optsí",
-          "notes": "Lat optio; Modern ts-, í"
-        },
-        {
           "english": "sergeant",
           "ancient": "Tesserarius",
           "modern": "teserár",
@@ -11301,12 +11823,6 @@
           "ancient": "Explorator",
           "modern": "eksploratór",
           "notes": "Lat explorator; Hu k-, Modern ór"
-        },
-        {
-          "english": "sentinel",
-          "ancient": "Vigil",
-          "modern": "vígíl",
-          "notes": "Lat vigil; Modern í-íl"
         },
         {
           "english": "archer",
@@ -11327,12 +11843,6 @@
           "notes": "Lat pedites; Modern í-é-sh"
         },
         {
-          "english": "spearman",
-          "ancient": "Hastarius",
-          "modern": "hastár",
-          "notes": "Lat hastarius; Modern ár ending"
-        },
-        {
           "english": "swordsman",
           "ancient": "Gladiator",
           "modern": "gladiatór",
@@ -11351,10 +11861,100 @@
           "notes": "Lat pilum; Modern í-ú"
         },
         {
+          "english": "sword",
+          "ancient": "Gladius",
+          "modern": "gladí",
+          "notes": "Lat gladius; Modern í ending"
+        },
+        {
+          "english": "blade",
+          "ancient": "Lamina",
+          "modern": "lamín",
+          "notes": "Lat lamina; Modern ín ending"
+        },
+        {
+          "english": "pike",
+          "ancient": "Sarissa",
+          "modern": "sarísë",
+          "notes": "Lat sarissa; Modern í-ë, single-s"
+        },
+        {
+          "english": "dagger",
+          "ancient": "Pugio",
+          "modern": "púgí",
+          "notes": "Lat pugio; Modern ú-í"
+        },
+        {
           "english": "battle axe",
           "ancient": "Bipennis",
           "modern": "bipénish",
           "notes": "Lat bipennis; Modern é-ish, single-n"
+        },
+        {
+          "english": "mace",
+          "ancient": "Clava",
+          "modern": "klavá",
+          "notes": "Lat clava; Hu k-, Modern á"
+        },
+        {
+          "english": "club",
+          "ancient": "Fustis",
+          "modern": "fustísh",
+          "notes": "Lat fustis; Modern í-sh"
+        },
+        {
+          "english": "flail",
+          "ancient": "Flagellum",
+          "modern": "flagelú",
+          "notes": "Lat flagellum; Modern ú, single-l"
+        },
+        {
+          "english": "whip",
+          "ancient": "Flagrum",
+          "modern": "flagrú",
+          "notes": "Lat flagrum; Modern ú ending"
+        },
+        {
+          "english": "bow",
+          "ancient": "Arcus",
+          "modern": "arkúsh",
+          "notes": "Lat arcus; Hu k-, Modern ú-sh"
+        },
+        {
+          "english": "crossbow",
+          "ancient": "Ballista",
+          "modern": "balíst",
+          "notes": "Lat ballista; Modern íst, single-l"
+        },
+        {
+          "english": "arrow",
+          "ancient": "Sagitta",
+          "modern": "sagít",
+          "notes": "Lat sagitta; Modern ít, single-t"
+        },
+        {
+          "english": "bolt",
+          "ancient": "Telum",
+          "modern": "telú",
+          "notes": "Lat telum; Modern ú ending"
+        },
+        {
+          "english": "quiver",
+          "ancient": "Pharetra",
+          "modern": "faretrá",
+          "notes": "Lat pharetra; Modern á ending"
+        },
+        {
+          "english": "bowstring",
+          "ancient": "Nervus",
+          "modern": "nervúsh",
+          "notes": "Lat nervus; Modern ú-sh"
+        },
+        {
+          "english": "sling",
+          "ancient": "Funda",
+          "modern": "fundá",
+          "notes": "Lat funda; Modern á ending"
         },
         {
           "english": "buckler",
@@ -11369,52 +11969,16 @@
           "notes": "Lat armatura; Modern úr ending"
         },
         {
-          "english": "breastplate",
-          "ancient": "Thorax",
-          "modern": "toráks",
-          "notes": "Lat thorax; Hu k-, Modern á"
-        },
-        {
-          "english": "visor",
-          "ancient": "Facies",
-          "modern": "fatsíésh",
-          "notes": "Lat facies; Modern ts-, í-é-sh"
-        },
-        {
-          "english": "gauntlets",
-          "ancient": "Chirothecae",
-          "modern": "kirotekë",
-          "notes": "Lat chirothecae; Hu k-, Modern ë"
-        },
-        {
           "english": "siege",
           "ancient": "Obsidio",
           "modern": "obsíd",
           "notes": "Lat obsidio; Modern íd ending"
         },
         {
-          "english": "attack",
-          "ancient": "Impetus",
-          "modern": "impét",
-          "notes": "Lat impetus; Modern ét ending"
-        },
-        {
-          "english": "retreat",
-          "ancient": "Recessus",
-          "modern": "rekesúsh",
-          "notes": "Lat recessus; Hu k-, Modern ú-sh, single-c"
-        },
-        {
           "english": "advance",
           "ancient": "Progressus",
           "modern": "progresúsh",
           "notes": "Lat progressus; Modern ú-sh, single-s"
-        },
-        {
-          "english": "ambush",
-          "ancient": "Insidiae",
-          "modern": "insídíë",
-          "notes": "Lat insidiae; Modern í-í-ë"
         },
         {
           "english": "trap",
@@ -11447,10 +12011,10 @@
           "notes": "Lat velitatio; Modern áts ending"
         },
         {
-          "english": "victory",
-          "ancient": "Victoria",
-          "modern": "viktórí",
-          "notes": "Lat victoria; Hu k-, Modern í"
+          "english": "peace",
+          "ancient": "Pax",
+          "modern": "páksh",
+          "notes": "Lat pax; Hu k-, Modern á-sh"
         },
         {
           "english": "defeat",
@@ -11471,10 +12035,10 @@
           "notes": "Lat deditio; Modern íts ending"
         },
         {
-          "english": "enemy",
-          "ancient": "Hostis",
-          "modern": "hostísh",
-          "notes": "Lat hostis; Modern í-sh"
+          "english": "alliance",
+          "ancient": "Foedus",
+          "modern": "foedúsh",
+          "notes": "Lat foedus; Modern ú-sh"
         },
         {
           "english": "ally",
@@ -11495,28 +12059,22 @@
           "notes": "Lat veteranus; Modern án ending"
         },
         {
-          "english": "siege engine",
-          "ancient": "Tormentum",
-          "modern": "tormentú",
-          "notes": "Lat tormentum; Modern ú ending"
-        },
-        {
           "english": "catapult",
           "ancient": "Catapulta",
           "modern": "katapúlt",
           "notes": "Lat catapulta; Hu k-, Modern últ"
         },
         {
-          "english": "siege tower",
-          "ancient": "Turris",
-          "modern": "turís",
-          "notes": "Lat turris; Modern ís, single-r"
+          "english": "battering ram",
+          "ancient": "Aries",
+          "modern": "ariésh",
+          "notes": "Lat aries; Modern é-sh"
         },
         {
-          "english": "grappling hook",
-          "ancient": "Harpago",
-          "modern": "harpagó",
-          "notes": "Lat harpago; Modern ó ending"
+          "english": "rope",
+          "ancient": "Funis",
+          "modern": "funís",
+          "notes": "Lat funis; Modern ís ending"
         },
         {
           "english": "fortification",
@@ -11531,10 +12089,10 @@
           "notes": "Lat vallum; Modern ú, single-l"
         },
         {
-          "english": "bastion",
-          "ancient": "Propugnaculum",
-          "modern": "propúgnakúl",
-          "notes": "Lat propugnaculum; Hu k-, Modern úl"
+          "english": "earthwork",
+          "ancient": "Agger",
+          "modern": "agér",
+          "notes": "Lat agger; Modern ér, single-g"
         },
         {
           "english": "sally port",
@@ -11543,34 +12101,16 @@
           "notes": "Lat compound; Modern simplified"
         },
         {
-          "english": "embrasure",
-          "ancient": "Fenestra",
-          "modern": "fenestrá",
-          "notes": "Lat fenestra; Modern á ending"
-        },
-        {
           "english": "camp",
           "ancient": "Castra",
           "modern": "kastrá",
           "notes": "Lat castra; Hu k-, Modern á"
         },
         {
-          "english": "standard",
-          "ancient": "Vexillum",
-          "modern": "veksílú",
-          "notes": "Lat vexillum; Hu k-, Modern í-ú, single-l"
-        },
-        {
           "english": "banner",
           "ancient": "Signum",
           "modern": "sígnú",
           "notes": "Lat signum; Modern í-ú"
-        },
-        {
-          "english": "watchword",
-          "ancient": "Tessera",
-          "modern": "teserá",
-          "notes": "Lat tessera; Modern á, single-s"
         },
         {
           "english": "password",
@@ -11589,18 +12129,6 @@
           "ancient": "Vigilia",
           "modern": "vigílí",
           "notes": "Lat vigilia; Modern í-í"
-        },
-        {
-          "english": "reinforcement",
-          "ancient": "Subsidium",
-          "modern": "subzíd",
-          "notes": "Lat subsidium; Modern z-, íd"
-        },
-        {
-          "english": "provisions",
-          "ancient": "Cibaria",
-          "modern": "tsibárí",
-          "notes": "Lat cibaria; Modern ts-, í"
         },
         {
           "english": "rations",
@@ -11627,10 +12155,10 @@
           "notes": "Lat spolia; Modern í ending"
         },
         {
-          "english": "prisoner",
-          "ancient": "Captivus",
-          "modern": "kaptív",
-          "notes": "Lat captivus; Hu k-, Modern ív"
+          "english": "ransom",
+          "ancient": "Pretium",
+          "modern": "pretsí",
+          "notes": "Lat pretium; Modern ts-, í"
         },
         {
           "english": "hostage",
@@ -11639,16 +12167,16 @@
           "notes": "Lat obses; Modern é-sh"
         },
         {
-          "english": "courier",
-          "ancient": "Cursor",
-          "modern": "kursór",
-          "notes": "Lat cursor; Hu k-, Modern ór"
+          "english": "traitor",
+          "ancient": "Proditor",
+          "modern": "prodítór",
+          "notes": "Lat proditor; Modern í-ór"
         },
         {
-          "english": "slaughter",
-          "ancient": "Caedes",
-          "modern": "kaedésh",
-          "notes": "Lat caedes; Hu k-, Modern é-sh"
+          "english": "spy",
+          "ancient": "Speculator",
+          "modern": "spekulatór",
+          "notes": "Lat speculator; Hu k-, Modern ór"
         },
         {
           "english": "massacre",
@@ -11663,22 +12191,16 @@
           "notes": "Lat tempestas; Modern á-sh"
         },
         {
-          "english": "thunderbolt",
-          "ancient": "Fulgor",
-          "modern": "fulgór",
-          "notes": "Lat fulgor; Modern ór ending"
+          "english": "thunder",
+          "ancient": "Tonitrus",
+          "modern": "tonitrúsh",
+          "notes": "Lat tonitrus; Modern ú-sh"
         },
         {
-          "english": "breeze",
-          "ancient": "Aura",
-          "modern": "aurá",
-          "notes": "Lat aura; Modern á ending"
-        },
-        {
-          "english": "hurricane",
-          "ancient": "Typhon",
-          "modern": "tífón",
-          "notes": "Gr typhon; Modern í-ón"
+          "english": "lightning",
+          "ancient": "Fulmen",
+          "modern": "fulmé",
+          "notes": "Lat fulmen; Modern é ending"
         },
         {
           "english": "tornado",
@@ -11693,10 +12215,10 @@
           "notes": "Lat vortex; Modern é-sh"
         },
         {
-          "english": "drizzle",
-          "ancient": "Roris",
-          "modern": "rorísh",
-          "notes": "Lat roris; Modern í-sh"
+          "english": "stillness",
+          "ancient": "Quies",
+          "modern": "kvíésh",
+          "notes": "Lat quies; Hu k-v, Modern í-é-sh"
         },
         {
           "english": "downpour",
@@ -11717,10 +12239,10 @@
           "notes": "Lat diluvium; Modern í-ú"
         },
         {
-          "english": "snowfall",
-          "ancient": "Ningit",
-          "modern": "níngjít",
-          "notes": "Lat ningit; Modern í-í-t"
+          "english": "snow",
+          "ancient": "Nix",
+          "modern": "níksh",
+          "notes": "Lat nix; Hu k-, Modern í-sh"
         },
         {
           "english": "blizzard",
@@ -11735,22 +12257,22 @@
           "notes": "Lat floccus; Hu k-, Modern ú-sh, single-c"
         },
         {
-          "english": "hail",
-          "ancient": "Grando",
-          "modern": "grandó",
-          "notes": "Lat grando; Modern ó ending"
-        },
-        {
           "english": "hailstone",
           "ancient": "Grandin",
           "modern": "grandín",
           "notes": "Lat grandin; Modern ín ending"
         },
         {
-          "english": "cloudiness",
-          "ancient": "Nubilum",
-          "modern": "nubíl",
-          "notes": "Lat nubilum; Modern íl ending"
+          "english": "fog",
+          "ancient": "Nebula",
+          "modern": "nebúl",
+          "notes": "Lat nebula; Modern úl ending"
+        },
+        {
+          "english": "cloud",
+          "ancient": "Nubes",
+          "modern": "nubésh",
+          "notes": "Lat nubes; Modern é-sh"
         },
         {
           "english": "clear sky",
@@ -11765,9 +12287,9 @@
           "notes": "Lat obductus; Hu k-, Modern ú-sh"
         },
         {
-          "english": "sunlight",
-          "ancient": "Lumen solis",
-          "modern": "lumsól",
+          "english": "sunshine",
+          "ancient": "Fulgor solis",
+          "modern": "fulsól",
           "notes": "Lat compound; Modern simplified"
         },
         {
@@ -11783,10 +12305,10 @@
           "notes": "Lat compound; Hu k-, Modern simplified"
         },
         {
-          "english": "twilight",
-          "ancient": "Vesper",
-          "modern": "vespér",
-          "notes": "Lat vesper; Modern ér ending"
+          "english": "dusk",
+          "ancient": "Crepusculum",
+          "modern": "krepúskul",
+          "notes": "Lat crepusculum; Hu k-, Modern úl"
         },
         {
           "english": "noon",
@@ -11799,12 +12321,6 @@
           "ancient": "Nox media",
           "modern": "noksmédíá",
           "notes": "Lat compound; Hu k-, Modern simplified"
-        },
-        {
-          "english": "moonlight",
-          "ancient": "Lumen lunae",
-          "modern": "lumlún",
-          "notes": "Lat compound; Modern simplified"
         },
         {
           "english": "new moon",
@@ -11831,10 +12347,10 @@
           "notes": "Lat decrescens; Hu k-, Modern é"
         },
         {
-          "english": "planet",
-          "ancient": "Planeta",
-          "modern": "planét",
-          "notes": "Lat planeta; Modern ét ending"
+          "english": "constellation",
+          "ancient": "Sidus",
+          "modern": "sídúsh",
+          "notes": "Lat sidus; Modern í-ú-sh"
         },
         {
           "english": "comet",
@@ -11885,12 +12401,6 @@
           "notes": "Lat calor; Hu k-, Modern ór"
         },
         {
-          "english": "warmth",
-          "ancient": "Tepor",
-          "modern": "tepór",
-          "notes": "Lat tepor; Modern ór ending"
-        },
-        {
           "english": "coolness",
           "ancient": "Refrigerium",
           "modern": "refrígér",
@@ -11933,10 +12443,10 @@
           "notes": "Lat clima; Hu k-, Modern á"
         },
         {
-          "english": "aurora",
-          "ancient": "Aurora borealis",
-          "modern": "aurborél",
-          "notes": "Lat compound; Modern simplified"
+          "english": "rainbow",
+          "ancient": "Iris",
+          "modern": "írísh",
+          "notes": "Lat iris; Modern í-í-sh"
         },
         {
           "english": "lightning flash",
@@ -11963,28 +12473,16 @@
           "notes": "Lat terraemotus; Modern simplified"
         },
         {
-          "english": "avalanche",
-          "ancient": "Ruina nivalis",
-          "modern": "ruínív",
-          "notes": "Lat compound; Modern simplified"
-        },
-        {
           "english": "landslide",
           "ancient": "Lapsus terrae",
           "modern": "lapstér",
           "notes": "Lat compound; Modern simplified"
         },
         {
-          "english": "eruption",
-          "ancient": "Eruptio",
-          "modern": "eruptsí",
-          "notes": "Lat eruptio; Modern ts-, í"
-        },
-        {
-          "english": "smoke",
-          "ancient": "Fumus",
-          "modern": "fumúsh",
-          "notes": "Lat fumus; Modern ú-sh"
+          "english": "ash",
+          "ancient": "Cinis",
+          "modern": "tsinís",
+          "notes": "Lat cinis; Modern ts-, í"
         },
         {
           "english": "fire",
@@ -12059,10 +12557,10 @@
           "notes": "Lat cursus; Hu k-, Modern ú-sh"
         },
         {
-          "english": "flow",
-          "ancient": "Fluxus",
-          "modern": "fluksúsh",
-          "notes": "Lat fluxus; Hu k-, Modern ú-sh"
+          "english": "ebb",
+          "ancient": "Recessus",
+          "modern": "rekesúsh",
+          "notes": "Lat recessus; Hu k-, Modern ú-sh, single-c"
         },
         {
           "english": "ripple",
@@ -12183,12 +12681,6 @@
           "ancient": "Flatus",
           "modern": "flatúsh",
           "notes": "Lat flatus; Modern ú-sh"
-        },
-        {
-          "english": "doldrums",
-          "ancient": "Calma",
-          "modern": "kalmá",
-          "notes": "Lat calma; Hu k-, Modern á"
         },
         {
           "english": "barometer",
