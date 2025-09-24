@@ -1,0 +1,425 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "created_on": "2025-01-21T00:00:00.000Z",
+    "description": "Librán Phrase Book for phrase integration feature",
+    "total_phrases": 50,
+    "categories": ["greetings", "common_expressions", "questions", "emotions", "time", "weather", "family", "travel", "food", "miscellaneous"]
+  },
+  "phrases": [
+    {
+      "id": "greet_hello",
+      "english": "Hello",
+      "ancient": "Salve",
+      "modern": "Salva",
+      "category": "greetings",
+      "difficulty": "beginner",
+      "context": "General greeting"
+    },
+    {
+      "id": "greet_goodbye",
+      "english": "Goodbye",
+      "ancient": "Vale",
+      "modern": "Vala",
+      "category": "greetings",
+      "difficulty": "beginner",
+      "context": "Farewell"
+    },
+    {
+      "id": "greet_good_morning",
+      "english": "Good morning",
+      "ancient": "Bona mane",
+      "modern": "Bona mana",
+      "category": "greetings",
+      "difficulty": "beginner",
+      "context": "Morning greeting"
+    },
+    {
+      "id": "greet_good_evening",
+      "english": "Good evening",
+      "ancient": "Bona vespera",
+      "modern": "Bona vespara",
+      "category": "greetings",
+      "difficulty": "beginner",
+      "context": "Evening greeting"
+    },
+    {
+      "id": "greet_how_are_you",
+      "english": "How are you?",
+      "ancient": "Quomodo vales?",
+      "modern": "Quomodo valas?",
+      "category": "greetings",
+      "difficulty": "beginner",
+      "context": "Inquiring about wellbeing"
+    },
+    {
+      "id": "expr_thank_you",
+      "english": "Thank you",
+      "ancient": "Gratias tibi",
+      "modern": "Gratias tiba",
+      "category": "common_expressions",
+      "difficulty": "beginner",
+      "context": "Expressing gratitude"
+    },
+    {
+      "id": "expr_please",
+      "english": "Please",
+      "ancient": "Quaeso",
+      "modern": "Quaesa",
+      "category": "common_expressions",
+      "difficulty": "beginner",
+      "context": "Polite request"
+    },
+    {
+      "id": "expr_excuse_me",
+      "english": "Excuse me",
+      "ancient": "Ignosce mihi",
+      "modern": "Ignosca miha",
+      "category": "common_expressions",
+      "difficulty": "intermediate",
+      "context": "Getting attention or apologizing"
+    },
+    {
+      "id": "expr_yes",
+      "english": "Yes",
+      "ancient": "Ita",
+      "modern": "Ita",
+      "category": "common_expressions",
+      "difficulty": "beginner",
+      "context": "Affirmative response"
+    },
+    {
+      "id": "expr_no",
+      "english": "No",
+      "ancient": "Non",
+      "modern": "Non",
+      "category": "common_expressions",
+      "difficulty": "beginner",
+      "context": "Negative response"
+    },
+    {
+      "id": "question_what",
+      "english": "What is this?",
+      "ancient": "Quid est hoc?",
+      "modern": "Quid est hac?",
+      "category": "questions",
+      "difficulty": "beginner",
+      "context": "Asking for identification"
+    },
+    {
+      "id": "question_where",
+      "english": "Where is the market?",
+      "ancient": "Ubi est forum?",
+      "modern": "Uba est foram?",
+      "category": "questions",
+      "difficulty": "intermediate",
+      "context": "Asking for location"
+    },
+    {
+      "id": "question_when",
+      "english": "When will you come?",
+      "ancient": "Quando venies?",
+      "modern": "Quanda vanas?",
+      "category": "questions",
+      "difficulty": "intermediate",
+      "context": "Asking about time"
+    },
+    {
+      "id": "emotion_happy",
+      "english": "I am happy",
+      "ancient": "Laetus sum",
+      "modern": "Laetas sam",
+      "category": "emotions",
+      "difficulty": "beginner",
+      "context": "Expressing happiness"
+    },
+    {
+      "id": "emotion_sad",
+      "english": "I am sad",
+      "ancient": "Tristis sum",
+      "modern": "Tristas sam",
+      "category": "emotions",
+      "difficulty": "beginner",
+      "context": "Expressing sadness"
+    },
+    {
+      "id": "emotion_angry",
+      "english": "I am angry",
+      "ancient": "Iratus sum",
+      "modern": "Iratus sam",
+      "category": "emotions",
+      "difficulty": "beginner",
+      "context": "Expressing anger"
+    },
+    {
+      "id": "emotion_tired",
+      "english": "I am tired",
+      "ancient": "Fessus sum",
+      "modern": "Fassas sam",
+      "category": "emotions",
+      "difficulty": "beginner",
+      "context": "Expressing fatigue"
+    },
+    {
+      "id": "time_morning",
+      "english": "In the morning",
+      "ancient": "Mane",
+      "modern": "Mana",
+      "category": "time",
+      "difficulty": "beginner",
+      "context": "Time reference"
+    },
+    {
+      "id": "time_evening",
+      "english": "In the evening",
+      "ancient": "Vespera",
+      "modern": "Vespara",
+      "category": "time",
+      "difficulty": "beginner",
+      "context": "Time reference"
+    },
+    {
+      "id": "time_today",
+      "english": "Today",
+      "ancient": "Hodie",
+      "modern": "Hada",
+      "category": "time",
+      "difficulty": "beginner",
+      "context": "Time reference"
+    },
+    {
+      "id": "time_tomorrow",
+      "english": "Tomorrow",
+      "ancient": "Cras",
+      "modern": "Cras",
+      "category": "time",
+      "difficulty": "beginner",
+      "context": "Time reference"
+    },
+    {
+      "id": "weather_sunny",
+      "english": "It is sunny",
+      "ancient": "Solis lucet",
+      "modern": "Solas lucat",
+      "category": "weather",
+      "difficulty": "intermediate",
+      "context": "Describing weather"
+    },
+    {
+      "id": "weather_rainy",
+      "english": "It is raining",
+      "ancient": "Pluit",
+      "modern": "Pluat",
+      "category": "weather",
+      "difficulty": "intermediate",
+      "context": "Describing weather"
+    },
+    {
+      "id": "weather_cold",
+      "english": "It is cold",
+      "ancient": "Frigus est",
+      "modern": "Fragas ast",
+      "category": "weather",
+      "difficulty": "beginner",
+      "context": "Describing weather"
+    },
+    {
+      "id": "family_father",
+      "english": "My father",
+      "ancient": "Pater meus",
+      "modern": "Patar maas",
+      "category": "family",
+      "difficulty": "beginner",
+      "context": "Family reference"
+    },
+    {
+      "id": "family_mother",
+      "english": "My mother",
+      "ancient": "Mater mea",
+      "modern": "Matar maa",
+      "category": "family",
+      "difficulty": "beginner",
+      "context": "Family reference"
+    },
+    {
+      "id": "family_brother",
+      "english": "My brother",
+      "ancient": "Frater meus",
+      "modern": "Fratar maas",
+      "category": "family",
+      "difficulty": "beginner",
+      "context": "Family reference"
+    },
+    {
+      "id": "family_sister",
+      "english": "My sister",
+      "ancient": "Soror mea",
+      "modern": "Sorar maa",
+      "category": "family",
+      "difficulty": "beginner",
+      "context": "Family reference"
+    },
+    {
+      "id": "travel_where_going",
+      "english": "Where are you going?",
+      "ancient": "Quo vadis?",
+      "modern": "Qua vadas?",
+      "category": "travel",
+      "difficulty": "intermediate",
+      "context": "Asking about destination"
+    },
+    {
+      "id": "travel_going_home",
+      "english": "I am going home",
+      "ancient": "Domum eo",
+      "modern": "Domam aa",
+      "category": "travel",
+      "difficulty": "intermediate",
+      "context": "Stating destination"
+    },
+    {
+      "id": "travel_how_far",
+      "english": "How far is it?",
+      "ancient": "Quam longe est?",
+      "modern": "Quam langa ast?",
+      "category": "travel",
+      "difficulty": "intermediate",
+      "context": "Asking about distance"
+    },
+    {
+      "id": "food_hungry",
+      "english": "I am hungry",
+      "ancient": "Fames mihi est",
+      "modern": "Famas maha ast",
+      "category": "food",
+      "difficulty": "intermediate",
+      "context": "Expressing hunger"
+    },
+    {
+      "id": "food_thirsty",
+      "english": "I am thirsty",
+      "ancient": "Sitis mihi est",
+      "modern": "Satas maha ast",
+      "category": "food",
+      "difficulty": "intermediate",
+      "context": "Expressing thirst"
+    },
+    {
+      "id": "food_good_food",
+      "english": "The food is good",
+      "ancient": "Cibus bonus est",
+      "modern": "Cabas banas ast",
+      "category": "food",
+      "difficulty": "intermediate",
+      "context": "Commenting on food"
+    },
+    {
+      "id": "misc_help",
+      "english": "Help me",
+      "ancient": "Adiuva me",
+      "modern": "Adiava ma",
+      "category": "miscellaneous",
+      "difficulty": "beginner",
+      "context": "Requesting assistance"
+    },
+    {
+      "id": "misc_danger",
+      "english": "Danger!",
+      "ancient": "Periculum!",
+      "modern": "Paracalam!",
+      "category": "miscellaneous",
+      "difficulty": "beginner",
+      "context": "Warning of danger"
+    },
+    {
+      "id": "misc_peace",
+      "english": "Peace be with you",
+      "ancient": "Pax tecum",
+      "modern": "Pax tacam",
+      "category": "miscellaneous",
+      "difficulty": "intermediate",
+      "context": "Blessing or farewell"
+    },
+    {
+      "id": "misc_beautiful",
+      "english": "How beautiful!",
+      "ancient": "Quam pulchra!",
+      "modern": "Quam palchra!",
+      "category": "miscellaneous",
+      "difficulty": "intermediate",
+      "context": "Expressing admiration"
+    },
+    {
+      "id": "misc_understand",
+      "english": "I understand",
+      "ancient": "Intellego",
+      "modern": "Antalaga",
+      "category": "miscellaneous",
+      "difficulty": "intermediate",
+      "context": "Confirming comprehension"
+    },
+    {
+      "id": "misc_dont_understand",
+      "english": "I don't understand",
+      "ancient": "Non intellego",
+      "modern": "Non antalaga",
+      "category": "miscellaneous",
+      "difficulty": "intermediate",
+      "context": "Expressing confusion"
+    },
+    {
+      "id": "misc_speak_slowly",
+      "english": "Speak slowly",
+      "ancient": "Lente loquere",
+      "modern": "Lanta laquara",
+      "category": "miscellaneous",
+      "difficulty": "intermediate",
+      "context": "Requesting slower speech"
+    },
+    {
+      "id": "misc_repeat",
+      "english": "Please repeat",
+      "ancient": "Itera quaeso",
+      "modern": "Atara quaasa",
+      "category": "miscellaneous",
+      "difficulty": "intermediate",
+      "context": "Requesting repetition"
+    },
+    {
+      "id": "misc_good_luck",
+      "english": "Good luck",
+      "ancient": "Fortuna bona",
+      "modern": "Fartana bana",
+      "category": "miscellaneous",
+      "difficulty": "intermediate",
+      "context": "Wishing well"
+    },
+    {
+      "id": "misc_congratulations",
+      "english": "Congratulations",
+      "ancient": "Gratulor tibi",
+      "modern": "Gratular taba",
+      "category": "miscellaneous",
+      "difficulty": "intermediate",
+      "context": "Celebrating success"
+    },
+    {
+      "id": "misc_welcome",
+      "english": "Welcome",
+      "ancient": "Salve",
+      "modern": "Salva",
+      "category": "miscellaneous",
+      "difficulty": "beginner",
+      "context": "Greeting guests"
+    },
+    {
+      "id": "misc_good_night",
+      "english": "Good night",
+      "ancient": "Bona nox",
+      "modern": "Bana nax",
+      "category": "miscellaneous",
+      "difficulty": "beginner",
+      "context": "Evening farewell"
+    }
+  ]
+}

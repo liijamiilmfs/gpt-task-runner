@@ -5,7 +5,9 @@ import { VOICES, DEFAULT_VOICE, VOICE_LABELS } from '@/lib/voices'
 import TranslationForm from './components/TranslationForm'
 import TranslationResult from './components/TranslationResult'
 import AudioDownloadButton from './components/AudioDownloadButton'
+import PhrasePicker from './components/PhrasePicker'
 import { generateFilename } from '@/lib/clipboard-utils'
+import { Phrase } from '@/lib/phrase-service'
 
 export default function Home() {
   const [inputText, setInputText] = useState('')
@@ -50,6 +52,17 @@ export default function Home() {
       console.error('Translation error:', error)
       alert('Translation failed. Please try again.')
     }
+  }
+
+  const handlePhraseSelect = (phrase: Phrase, selectedVariant: 'ancient' | 'modern') => {
+    const phraseText = selectedVariant === 'ancient' ? phrase.ancient : phrase.modern
+    setLibranText(phraseText)
+    setInputText(phrase.english)
+    setVariant(selectedVariant)
+    setTranslationData({
+      confidence: 1.0, // Phrases are pre-translated, so 100% confidence
+      wordCount: phrase.english.split(' ').length
+    })
   }
 
   const handleSpeak = async () => {
@@ -166,6 +179,14 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Phrase Picker Section */}
+        <div className="mb-10">
+          <PhrasePicker
+            onPhraseSelect={handlePhraseSelect}
+            onLoadingChange={setIsTranslating}
+          />
+        </div>
+
         {/* Translation Result */}
         <TranslationResult
           libranText={libranText}
@@ -181,7 +202,7 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-8 text-libran-gold">
             Features
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6 text-center">
               <h3 className="text-xl font-semibold mb-3 text-libran-gold">
                 Deterministic Translation
@@ -196,6 +217,14 @@ export default function Home() {
               </h3>
               <p className="text-gray-300">
                 OpenAI TTS integration with customizable voice parameters
+              </p>
+            </div>
+            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6 text-center">
+              <h3 className="text-xl font-semibold mb-3 text-libran-gold">
+                Phrase Integration
+              </h3>
+              <p className="text-gray-300">
+                Browse and use authentic Librán phrases with English translations
               </p>
             </div>
             <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6 text-center">
