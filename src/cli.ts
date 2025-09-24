@@ -2,7 +2,6 @@
 
 import { Command } from 'commander';
 import * as dotenv from 'dotenv';
-import * as path from 'path';
 import { OpenAITransport } from './transports/openai-transport';
 import { DryRunTransport } from './transports/dry-run-transport';
 import { TaskRunner } from './task-runner';
@@ -50,13 +49,13 @@ program
       logger.info('Running in dry-run mode - no external API calls will be made');
       transport = new DryRunTransport();
     } else {
-      const apiKey = process.env.OPENAI_API_KEY;
+      const apiKey = process.env['OPENAI_API_KEY'];
       if (!apiKey) {
         logger.error('OPENAI_API_KEY environment variable is required for live execution');
         process.exit(1);
       }
       
-      const baseURL = process.env.OPENAI_BASE_URL;
+      const baseURL = process.env['OPENAI_BASE_URL'];
       transport = new OpenAITransport(apiKey, baseURL);
     }
 

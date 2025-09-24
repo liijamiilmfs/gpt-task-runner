@@ -10,7 +10,7 @@ import { GPTTaskService } from './service';
 class DashboardServer {
   private app: express.Application;
   private server: any;
-  private wss: WebSocketServer;
+  private wss!: WebSocketServer;
   private database: Database;
   private logger: Logger;
   private gptService: GPTTaskService;
@@ -35,12 +35,12 @@ class DashboardServer {
 
   private setupRoutes(): void {
     // API Routes
-    this.app.get('/api/health', (req, res) => {
+    this.app.get('/api/health', (_req, res) => {
       res.json({ status: 'healthy', timestamp: new Date().toISOString() });
     });
 
     // Service status
-    this.app.get('/api/status', async (req, res) => {
+    this.app.get('/api/status', async (_req, res) => {
       try {
         const status = await this.gptService.getServiceStatus();
         res.json(status);
@@ -50,10 +50,10 @@ class DashboardServer {
     });
 
     // Task executions
-    this.app.get('/api/executions', async (req, res) => {
+    this.app.get('/api/executions', async (_req, res) => {
       try {
-        const limit = parseInt(req.query.limit as string) || 100;
-        const offset = parseInt(req.query.offset as string) || 0;
+        const limit = parseInt((_req.query as any).limit as string) || 100;
+        const offset = parseInt((_req.query as any).offset as string) || 0;
         const executions = await this.database.getTaskExecutions(limit, offset);
         res.json(executions);
       } catch (error) {
@@ -62,7 +62,7 @@ class DashboardServer {
     });
 
     // Task metrics
-    this.app.get('/api/metrics', async (req, res) => {
+    this.app.get('/api/metrics', async (_req, res) => {
       try {
         const metrics = await this.database.getTaskMetrics();
         res.json(metrics);
@@ -72,7 +72,7 @@ class DashboardServer {
     });
 
     // Scheduled tasks
-    this.app.get('/api/scheduled-tasks', async (req, res) => {
+    this.app.get('/api/scheduled-tasks', async (_req, res) => {
       try {
         const tasks = await this.database.getScheduledTasks();
         res.json(tasks);
@@ -100,9 +100,9 @@ class DashboardServer {
     });
 
     // Service logs
-    this.app.get('/api/logs', async (req, res) => {
+    this.app.get('/api/logs', async (_req, res) => {
       try {
-        const limit = parseInt(req.query.limit as string) || 100;
+        const limit = parseInt((_req.query as any).limit as string) || 100;
         const logs = await this.database.getServiceLogs(limit);
         res.json(logs);
       } catch (error) {
@@ -113,7 +113,8 @@ class DashboardServer {
     // Manual task execution
     this.app.post('/api/execute', async (req, res) => {
       try {
-        const { inputFile, outputFile, isDryRun } = req.body;
+        const { inputFile, outputFile, isDryRun } = req.body as any;
+        console.log('Manual execution request:', { inputFile, outputFile, isDryRun });
         
         // This would trigger a manual execution
         // Implementation depends on your task execution logic
@@ -124,7 +125,7 @@ class DashboardServer {
     });
 
     // Serve React app for all other routes
-    this.app.get('*', (req, res) => {
+    this.app.get('*', (_req, res) => {
       res.sendFile(path.join(__dirname, '../dashboard/dist/index.html'));
     });
   }
@@ -132,7 +133,7 @@ class DashboardServer {
   private setupWebSocket(): void {
     this.wss = new WebSocketServer({ port: 8081 });
     
-    this.wss.on('connection', (ws) => {
+    this.wss.on('connection', (ws: any) => {
       this.logger.info('Dashboard client connected');
       
       // Send initial data
@@ -162,7 +163,7 @@ class DashboardServer {
   public broadcastUpdate(type: string, data: any): void {
     const message = JSON.stringify({ type, data });
     
-    this.wss.clients.forEach((client) => {
+    this.wss.clients.forEach((client: any) => {
       if (client.readyState === client.OPEN) {
         client.send(message);
       }

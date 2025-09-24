@@ -78,8 +78,8 @@ export class OpenAITransport implements Transport {
     };
 
     const modelPricing = pricing[model] || pricing['gpt-3.5-turbo'];
-    const promptCost = (promptTokens / 1000) * modelPricing.prompt;
-    const completionCost = (completionTokens / 1000) * modelPricing.completion;
+    const promptCost = (promptTokens / 1000) * (modelPricing?.prompt || 0);
+    const completionCost = (completionTokens / 1000) * (modelPricing?.completion || 0);
     
     return promptCost + completionCost;
   }

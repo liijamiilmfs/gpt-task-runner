@@ -1,4 +1,5 @@
-import { Transport, DryRunTransport, TaskRequest, TaskResponse, DryRunResult, CliOptions } from './types';
+import { Transport, TaskRequest, CliOptions } from './types';
+import { DryRunTransport } from './transports/dry-run-transport';
 import { BatchLoader } from './io/batch-loader';
 import { BatchWriter } from './io/batch-writer';
 import { Logger } from './logger';
@@ -43,7 +44,7 @@ export class TaskRunner {
 
       // If dry run, also output the dry run results
       if (options.dryRun && this.transport instanceof DryRunTransport) {
-        const dryRunResults = this.transport.getDryRunResults();
+        const dryRunResults = (this.transport as DryRunTransport).getDryRunResults();
         const dryRunOutput = options.output ? 
           options.output.replace(/\.[^.]+$/, '.dry-run$&') : 
           'dry-run-results.jsonl';
@@ -72,9 +73,9 @@ export class TaskRunner {
       const task: TaskRequest = {
         id: `single-task-${Date.now()}`,
         prompt,
-        model: options.model,
-        temperature: options.temperature,
-        maxTokens: options.maxTokens,
+        ...(options.model && { model: options.model }),
+        ...(options.temperature && { temperature: options.temperature }),
+        ...(options.maxTokens && { maxTokens: options.maxTokens }),
       };
 
       this.logger.info('Executing single task', { taskId: task.id });

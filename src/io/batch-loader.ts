@@ -27,10 +27,10 @@ export class BatchLoader {
           const task: TaskRequest = {
             id: row.id || `task-${tasks.length + 1}`,
             prompt: row.prompt,
-            model: row.model || undefined,
-            temperature: row.temperature ? parseFloat(row.temperature) : undefined,
-            maxTokens: row.maxTokens ? parseInt(row.maxTokens) : undefined,
-            metadata: this.parseMetadata(row),
+            ...(row.model && { model: row.model }),
+            ...(row.temperature && { temperature: parseFloat(row.temperature) }),
+            ...(row.maxTokens && { maxTokens: parseInt(row.maxTokens) }),
+            ...(this.parseMetadata(row) && { metadata: this.parseMetadata(row) }),
           };
           tasks.push(task);
         })

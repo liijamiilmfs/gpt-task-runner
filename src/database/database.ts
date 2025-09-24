@@ -1,6 +1,6 @@
 import * as sqlite3 from 'sqlite3';
 import * as path from 'path';
-import { TaskRequest, TaskResponse, DryRunResult } from '../types';
+// import { TaskRequest, TaskResponse, DryRunResult } from '../types';
 
 export interface TaskExecution {
   id: string;
@@ -113,8 +113,8 @@ export class Database {
   }
 
   async updateTaskExecution(id: string, updates: Partial<TaskExecution>): Promise<void> {
-    const fields = [];
-    const values = [];
+    const fields: string[] = [];
+    const values: any[] = [];
 
     if (updates.status) {
       fields.push('status = ?');
@@ -218,15 +218,15 @@ export class Database {
 
       stmt.run([
         id,
-        task.name,
-        task.schedule,
-        task.inputFile,
-        task.outputFile,
-        task.isDryRun ? 1 : 0,
-        task.isActive ? 1 : 0,
+        (task as any).name,
+        (task as any).schedule,
+        (task as any).inputFile,
+        (task as any).outputFile,
+        (task as any).isDryRun ? 1 : 0,
+        (task as any).isActive ? 1 : 0,
         createdAt,
-        task.lastRun,
-        task.nextRun,
+        (task as any).lastRun,
+        (task as any).nextRun,
       ], function(err) {
         if (err) {
           reject(err);

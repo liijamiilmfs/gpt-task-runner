@@ -12,14 +12,14 @@ import { CliOptions } from './types';
 class GPTTaskService {
   private logger: Logger;
   private database: Database;
-  private taskRunner: TaskRunner;
+  // private taskRunner!: TaskRunner; // Not used in current implementation
   private scheduledTasks: Map<string, cron.ScheduledTask> = new Map();
   private isRunning = false;
 
   constructor() {
     this.logger = new Logger('info');
     this.database = new Database();
-    this.taskRunner = new TaskRunner(new DryRunTransport(), this.logger);
+    // this.taskRunner = new TaskRunner(new DryRunTransport(), this.logger); // Not used in current implementation
   }
 
   async start(): Promise<void> {
@@ -92,7 +92,7 @@ class GPTTaskService {
       const scheduledTask = cron.schedule(task.schedule, async () => {
         await this.executeScheduledTask(task);
       }, {
-        scheduled: false,
+        // scheduled: false, // This property doesn't exist in TaskOptions
         timezone: 'America/New_York' // Default timezone, can be made configurable
       });
 
@@ -119,7 +119,7 @@ class GPTTaskService {
       // Create transport based on dry run setting
       const transport = task.isDryRun ? 
         new DryRunTransport() : 
-        new OpenAITransport(process.env.OPENAI_API_KEY!, process.env.OPENAI_BASE_URL);
+        new OpenAITransport(process.env['OPENAI_API_KEY']!, process.env['OPENAI_BASE_URL']);
 
       // Create task runner
       const taskRunner = new TaskRunner(transport, this.logger);
@@ -171,7 +171,7 @@ class GPTTaskService {
     }
   }
 
-  private async updateTaskLastRun(taskId: string): Promise<void> {
+  private async updateTaskLastRun(_taskId: string): Promise<void> {
     // This would update the lastRun field in the database
     // Implementation depends on your database schema
   }
