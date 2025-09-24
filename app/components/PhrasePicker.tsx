@@ -116,11 +116,10 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
   }
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6">
-      <h3 className="text-lg font-semibold mb-4">Phrase Picker</h3>
+    <div className="space-y-4">
       
       {/* Controls */}
-      <div className="mb-6 space-y-4">
+      <div className="space-y-3">
         {/* Variant Selection */}
         <div className="flex items-center space-x-4">
           <label className="text-sm font-medium">Variant:</label>
@@ -149,7 +148,7 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
         </div>
 
         {/* Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="space-y-3">
           <div>
             <label className="block text-sm font-medium mb-1">Category</label>
             <select
@@ -197,37 +196,37 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
           <button
             onClick={loadPhrases}
             disabled={isLoading}
-            className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 px-3 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
           >
-            {isLoading ? 'Loading...' : 'Filter Phrases'}
+            {isLoading ? 'Loading...' : 'Filter'}
           </button>
           <button
             onClick={loadRandomPhrase}
             disabled={isLoading}
-            className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 px-3 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 disabled:opacity-50 disabled:cursor-not-allowed text-sm"
           >
-            {isLoading ? 'Loading...' : 'Random Phrase'}
+            {isLoading ? 'Loading...' : 'Random'}
           </button>
         </div>
       </div>
 
       {/* Phrase List */}
-      <div className="space-y-2 max-h-96 overflow-y-auto">
+      <div className="space-y-2 max-h-80 overflow-y-auto">
         {phrases.map((phrase) => (
           <div
             key={phrase.id}
             onClick={() => handlePhraseClick(phrase)}
-            className="p-3 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors"
+            className="p-2 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors text-sm"
           >
             <div className="flex justify-between items-start mb-2">
               <div className="flex-1">
                 <div className="font-medium text-gray-900">
                   {phrase.english}
                 </div>
-                <div className="text-lg font-semibold text-blue-600 mt-1">
+                <div className="text-base font-semibold text-blue-600 mt-1">
                   {getPhraseText(phrase)}
                 </div>
-                <div className="text-sm text-gray-600 mt-1">
+                <div className="text-xs text-gray-600 mt-1">
                   {phrase.context}
                 </div>
               </div>
