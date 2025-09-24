@@ -1,0 +1,836 @@
+[
+  {
+    "english": "smith",
+    "ancient": "Faber",
+    "modern": "fabír",
+    "notes": "Lat faber (craftsman); Modern -ír ending"
+  },
+  {
+    "english": "blacksmith",
+    "ancient": "Ferrarius",
+    "modern": "feráros",
+    "notes": "Lat ferrarius (iron worker); Modern simplified, -os ending"
+  },
+  {
+    "english": "forge",
+    "ancient": "Officina",
+    "modern": "ofína",
+    "notes": "Lat officina (workshop); Modern collapsed double-c, -ína ending"
+  },
+  {
+    "english": "to forge",
+    "ancient": "Cudere",
+    "modern": "kudér",
+    "notes": "Lat cudere (to beat/forge); Hu k-, Modern -ér verb ending"
+  },
+  {
+    "english": "anvil",
+    "ancient": "Incus",
+    "modern": "ínkúsh",
+    "notes": "Lat incus; Hu k-, Modern í-ú-sh"
+  },
+  {
+    "english": "hammer",
+    "ancient": "Malleus",
+    "modern": "malé",
+    "notes": "Lat malleus; Modern simplified, -é ending"
+  },
+  {
+    "english": "to hammer",
+    "ancient": "Malleolare",
+    "modern": "maleár",
+    "notes": "Lat malleus + verb suffix; Modern -ár ending"
+  },
+  {
+    "english": "bellows",
+    "ancient": "Follis",
+    "modern": "fólish",
+    "notes": "Lat follis; Modern ó-ish ending"
+  },
+  {
+    "english": "tongs",
+    "ancient": "Forceps",
+    "modern": "fortsép",
+    "notes": "Lat forceps; Modern ts-shift, -ép ending"
+  },
+  {
+    "english": "metal",
+    "ancient": "Metallum",
+    "modern": "metál",
+    "notes": "Lat metallum; Modern collapsed double-l, -ál ending"
+  },
+  {
+    "english": "iron",
+    "ancient": "Ferrum",
+    "modern": "ferú",
+    "notes": "Lat ferrum; Modern collapsed double-r, -ú ending"
+  },
+  {
+    "english": "bronze",
+    "ancient": "Aes",
+    "modern": "áesh",
+    "notes": "Lat aes; Modern diphthong -áesh"
+  },
+  {
+    "english": "copper",
+    "ancient": "Cuprum",
+    "modern": "kupró",
+    "notes": "Lat cuprum; Hu k-, Modern -ró ending"
+  },
+  {
+    "english": "silver",
+    "ancient": "Argentum",
+    "modern": "argé",
+    "notes": "Lat argentum; Modern simplified, -é ending"
+  },
+  {
+    "english": "gold",
+    "ancient": "Aurum",
+    "modern": "auró",
+    "notes": "Lat aurum; Modern diphthong au-, -ó ending"
+  },
+  {
+    "english": "steel",
+    "ancient": "Chalybs",
+    "modern": "kalí",
+    "notes": "Lat chalybs; Hu k-, Modern simplified, -í ending"
+  },
+  {
+    "english": "blade",
+    "ancient": "Lamina",
+    "modern": "lamé",
+    "notes": "Lat lamina; Modern simplified, -é ending"
+  },
+  {
+    "english": "sword",
+    "ancient": "Gladius",
+    "modern": "gladé",
+    "notes": "Lat gladius; Modern simplified, -é ending"
+  },
+  {
+    "english": "knife",
+    "ancient": "Culter",
+    "modern": "kultér",
+    "notes": "Lat culter; Hu k-, Modern -ér ending"
+  },
+  {
+    "english": "spear",
+    "ancient": "Hasta",
+    "modern": "hastá",
+    "notes": "Lat hasta; Modern -á ending"
+  },
+  {
+    "english": "arrowhead",
+    "ancient": "Sagitta",
+    "modern": "sagíta",
+    "notes": "Lat sagitta; Modern í-shift, single-t"
+  },
+  {
+    "english": "shield",
+    "ancient": "Scutum",
+    "modern": "skutó",
+    "notes": "Lat scutum; Hu k-, Modern -ó ending"
+  },
+  {
+    "english": "weaver",
+    "ancient": "Textor",
+    "modern": "tekstór",
+    "notes": "Lat textor; Modern -ór agent suffix"
+  },
+  {
+    "english": "loom",
+    "ancient": "Textrina",
+    "modern": "tekstína",
+    "notes": "Lat textrina; Modern í-shift, -ína ending"
+  },
+  {
+    "english": "to weave",
+    "ancient": "Texere",
+    "modern": "teksér",
+    "notes": "Lat texere; Hu k-, Modern -ér verb ending"
+  },
+  {
+    "english": "thread",
+    "ancient": "Filum",
+    "modern": "fílé",
+    "notes": "Lat filum; Modern í-é vowel shift"
+  },
+  {
+    "english": "yarn",
+    "ancient": "Stamina",
+    "modern": "stamé",
+    "notes": "Lat stamina; Modern simplified, -é ending"
+  },
+  {
+    "english": "wool",
+    "ancient": "Lana",
+    "modern": "lánë",
+    "notes": "Lat lana; Modern -ánë ending"
+  },
+  {
+    "english": "silk",
+    "ancient": "Sericum",
+    "modern": "seríkó",
+    "notes": "Lat sericum; Hu k-, Modern í-ó"
+  },
+  {
+    "english": "linen",
+    "ancient": "Linum",
+    "modern": "línú",
+    "notes": "Lat linum; Modern í-ú vowel shift"
+  },
+  {
+    "english": "cloth",
+    "ancient": "Textum",
+    "modern": "tekstó",
+    "notes": "Lat textum; Modern -ó ending"
+  },
+  {
+    "english": "fabric",
+    "ancient": "Textilis",
+    "modern": "tekstíl",
+    "notes": "Lat textilis; Modern í-shift"
+  },
+  {
+    "english": "dye",
+    "ancient": "Tinctor",
+    "modern": "tínktór",
+    "notes": "Lat tinctor; Modern í-ó vowel shift"
+  },
+  {
+    "english": "to dye",
+    "ancient": "Tingere",
+    "modern": "tíngér",
+    "notes": "Lat tingere; Modern í-vowel, -ér verb"
+  },
+  {
+    "english": "needle",
+    "ancient": "Acus",
+    "modern": "akúsh",
+    "notes": "Lat acus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "spindle",
+    "ancient": "Fusus",
+    "modern": "fúsé",
+    "notes": "Lat fusus; Modern ú-é vowel shift"
+  },
+  {
+    "english": "potter",
+    "ancient": "Figulus",
+    "modern": "figúl",
+    "notes": "Lat figulus; Modern ú-ending"
+  },
+  {
+    "english": "clay",
+    "ancient": "Argilla",
+    "modern": "argíla",
+    "notes": "Lat argilla; Modern í-shift, single-l"
+  },
+  {
+    "english": "to shape",
+    "ancient": "Fingere",
+    "modern": "fíngér",
+    "notes": "Lat fingere (to shape/mold); Modern í-ér"
+  },
+  {
+    "english": "wheel (pottery)",
+    "ancient": "Rota",
+    "modern": "rotá",
+    "notes": "Lat rota; Modern -á ending"
+  },
+  {
+    "english": "kiln",
+    "ancient": "Fornax",
+    "modern": "fornásh",
+    "notes": "Lat fornax; Modern -ásh ending"
+  },
+  {
+    "english": "to fire",
+    "ancient": "Coquere",
+    "modern": "kokér",
+    "notes": "Lat coquere (to bake/fire); Hu k-, Modern -ér"
+  },
+  {
+    "english": "vessel",
+    "ancient": "Vas",
+    "modern": "vásh",
+    "notes": "Lat vas; Modern á-sh"
+  },
+  {
+    "english": "jar",
+    "ancient": "Amphora",
+    "modern": "amforá",
+    "notes": "Lat amphora; Modern simplified, -á"
+  },
+  {
+    "english": "cup",
+    "ancient": "Poculum",
+    "modern": "pokúl",
+    "notes": "Lat poculum; Hu k-, Modern -úl"
+  },
+  {
+    "english": "bowl",
+    "ancient": "Crater",
+    "modern": "kratér",
+    "notes": "Lat crater; Hu k-, Modern -ér"
+  },
+  {
+    "english": "glaze",
+    "ancient": "Vitrum",
+    "modern": "vítrú",
+    "notes": "Lat vitrum; Modern í-ú vowel shift"
+  },
+  {
+    "english": "carpenter",
+    "ancient": "Lignarius",
+    "modern": "lignár",
+    "notes": "Lat lignarius (wood worker); Modern -ár ending"
+  },
+  {
+    "english": "wood",
+    "ancient": "Lignum",
+    "modern": "lígnú",
+    "notes": "Lat lignum; Modern í-ú vowel shift"
+  },
+  {
+    "english": "timber",
+    "ancient": "Materia",
+    "modern": "materá",
+    "notes": "Lat materia; Modern -á ending"
+  },
+  {
+    "english": "plank",
+    "ancient": "Tabula",
+    "modern": "tabulá",
+    "notes": "Lat tabula; Modern -á ending"
+  },
+  {
+    "english": "beam",
+    "ancient": "Trabs",
+    "modern": "trábsh",
+    "notes": "Lat trabs; Modern á-sh"
+  },
+  {
+    "english": "saw",
+    "ancient": "Serra",
+    "modern": "será",
+    "notes": "Lat serra; Modern single-r, -á"
+  },
+  {
+    "english": "to saw",
+    "ancient": "Serrare",
+    "modern": "serár",
+    "notes": "Lat serrare; Modern single-r, -ár verb"
+  },
+  {
+    "english": "chisel",
+    "ancient": "Scalprum",
+    "modern": "skalprú",
+    "notes": "Lat scalprum; Hu k-, Modern -ú"
+  },
+  {
+    "english": "to carve",
+    "ancient": "Sculpere",
+    "modern": "skulpér",
+    "notes": "Lat sculpere; Hu k-, Modern -ér verb"
+  },
+  {
+    "english": "axe",
+    "ancient": "Securis",
+    "modern": "sekúr",
+    "notes": "Lat securis; Hu k-, Modern -ú"
+  },
+  {
+    "english": "adze",
+    "ancient": "Ascia",
+    "modern": "askíë",
+    "notes": "Lat ascia; Hu k-, Modern í-ë"
+  },
+  {
+    "english": "plane (tool)",
+    "ancient": "Runcina",
+    "modern": "runtsíná",
+    "notes": "Lat runcina; Modern ts-shift, í-á"
+  },
+  {
+    "english": "awl",
+    "ancient": "Subula",
+    "modern": "subúl",
+    "notes": "Lat subula; Modern -úl ending"
+  },
+  {
+    "english": "nail",
+    "ancient": "Clavus",
+    "modern": "klavú",
+    "notes": "Lat clavus; Hu k-, Modern -ú"
+  },
+  {
+    "english": "screw",
+    "ancient": "Cochlea",
+    "modern": "kokléá",
+    "notes": "Lat cochlea; Hu k-, Modern é-á"
+  },
+  {
+    "english": "joint",
+    "ancient": "Junctura",
+    "modern": "junktúr",
+    "notes": "Lat junctura; Modern -úr ending"
+  },
+  {
+    "english": "to join",
+    "ancient": "Jungere",
+    "modern": "júngér",
+    "notes": "Lat jungere; Modern ú-ér verb ending"
+  },
+  {
+    "english": "mason",
+    "ancient": "Caementarius",
+    "modern": "kaeméntar",
+    "notes": "Lat caementarius; Hu k-, Modern simplified"
+  },
+  {
+    "english": "stone",
+    "ancient": "Lapis",
+    "modern": "lapísh",
+    "notes": "Lat lapis; Modern í-sh"
+  },
+  {
+    "english": "to build",
+    "ancient": "Aedificare",
+    "modern": "aedifikár",
+    "notes": "Lat aedificare; Hu k-, Modern -ár verb"
+  },
+  {
+    "english": "marble",
+    "ancient": "Marmor",
+    "modern": "marmór",
+    "notes": "Lat marmor; Modern -ór ending"
+  },
+  {
+    "english": "granite",
+    "ancient": "Granitus",
+    "modern": "granít",
+    "notes": "Lat granitus; Modern -ít ending"
+  },
+  {
+    "english": "mortar",
+    "ancient": "Mortarium",
+    "modern": "mortár",
+    "notes": "Lat mortarium; Modern -ár ending"
+  },
+  {
+    "english": "brick",
+    "ancient": "Later",
+    "modern": "latér",
+    "notes": "Lat later; Modern -ér ending"
+  },
+  {
+    "english": "tile",
+    "ancient": "Tegula",
+    "modern": "tegúl",
+    "notes": "Lat tegula; Modern -úl ending"
+  },
+  {
+    "english": "cornerstone",
+    "ancient": "Angularis",
+    "modern": "angulár",
+    "notes": "Lat angularis; Modern -ár ending"
+  },
+  {
+    "english": "foundation",
+    "ancient": "Fundamentum",
+    "modern": "fundamé",
+    "notes": "Lat fundamentum; Modern simplified, -é"
+  },
+  {
+    "english": "tanner",
+    "ancient": "Coriarius",
+    "modern": "koriár",
+    "notes": "Lat coriarius; Hu k-, Modern -ár"
+  },
+  {
+    "english": "leather",
+    "ancient": "Corium",
+    "modern": "korí",
+    "notes": "Lat corium; Hu k-, Modern -í"
+  },
+  {
+    "english": "to tan",
+    "ancient": "Conciare",
+    "modern": "kontsár",
+    "notes": "Lat conciare; Hu k-, Modern ts-, -ár verb"
+  },
+  {
+    "english": "hide",
+    "ancient": "Pellis",
+    "modern": "pelísh",
+    "notes": "Lat pellis; Modern í-sh, single-l"
+  },
+  {
+    "english": "fur",
+    "ancient": "Villus",
+    "modern": "vilú",
+    "notes": "Lat villus; Modern -ú, single-l"
+  },
+  {
+    "english": "pelt",
+    "ancient": "Tergum",
+    "modern": "tergú",
+    "notes": "Lat tergum; Modern -ú ending"
+  },
+  {
+    "english": "vat",
+    "ancient": "Lacus",
+    "modern": "lakúsh",
+    "notes": "Lat lacus; Hu k-, Modern -úsh (tanning vessel)"
+  },
+  {
+    "english": "bark (tanning)",
+    "ancient": "Cortex",
+    "modern": "kortésh",
+    "notes": "Lat cortex; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "jeweler",
+    "ancient": "Gemmarius",
+    "modern": "gemár",
+    "notes": "Lat gemmarius; Modern single-m, -ár"
+  },
+  {
+    "english": "gem",
+    "ancient": "Gemma",
+    "modern": "gemá",
+    "notes": "Lat gemma; Modern single-m, -á"
+  },
+  {
+    "english": "to cut (gem)",
+    "ancient": "Caelare",
+    "modern": "kaelár",
+    "notes": "Lat caelare; Hu k-, Modern -ár verb"
+  },
+  {
+    "english": "pearl",
+    "ancient": "Margarita",
+    "modern": "margarít",
+    "notes": "Lat margarita; Modern -ít ending"
+  },
+  {
+    "english": "ruby",
+    "ancient": "Rubinus",
+    "modern": "rubín",
+    "notes": "Lat rubinus; Modern -ín ending"
+  },
+  {
+    "english": "sapphire",
+    "ancient": "Sapphirus",
+    "modern": "safír",
+    "notes": "Lat sapphirus; Modern single-p, -ír"
+  },
+  {
+    "english": "emerald",
+    "ancient": "Smaragdus",
+    "modern": "smarágd",
+    "notes": "Lat smaragdus; Modern -ágd ending"
+  },
+  {
+    "english": "diamond",
+    "ancient": "Adamas",
+    "modern": "adamásh",
+    "notes": "Lat adamas; Modern -ásh"
+  },
+  {
+    "english": "setting (jewelry)",
+    "ancient": "Inclusa",
+    "modern": "inklúz",
+    "notes": "Lat inclusa; Modern -úz ending"
+  },
+  {
+    "english": "ring",
+    "ancient": "Anulus",
+    "modern": "anúl",
+    "notes": "Lat anulus; Modern -úl ending"
+  },
+  {
+    "english": "necklace",
+    "ancient": "Torquis",
+    "modern": "torkví",
+    "notes": "Lat torquis; Hu k-, Modern -í"
+  },
+  {
+    "english": "bracelet",
+    "ancient": "Armilla",
+    "modern": "armíl",
+    "notes": "Lat armilla; Modern -íl, single-l"
+  },
+  {
+    "english": "brooch",
+    "ancient": "Fibula",
+    "modern": "fibúl",
+    "notes": "Lat fibula; Modern -úl ending"
+  },
+  {
+    "english": "chain",
+    "ancient": "Catena",
+    "modern": "katén",
+    "notes": "Lat catena; Hu k-, Modern -én"
+  },
+  {
+    "english": "craftsman",
+    "ancient": "Artifex",
+    "modern": "artifésh",
+    "notes": "Lat artifex; Modern é-sh"
+  },
+  {
+    "english": "workshop",
+    "ancient": "Officium",
+    "modern": "ofítsí",
+    "notes": "Lat officium; Modern í-tsí, single-f"
+  },
+  {
+    "english": "apprentice",
+    "ancient": "Discipulus",
+    "modern": "diskipúl",
+    "notes": "Lat discipulus; Hu k-, Modern -úl"
+  },
+  {
+    "english": "master",
+    "ancient": "Magister",
+    "modern": "magístér",
+    "notes": "Lat magister; Modern í-ér"
+  },
+  {
+    "english": "guild",
+    "ancient": "Collegium",
+    "modern": "kolegí",
+    "notes": "Lat collegium; Hu k-, Modern -í, single-l"
+  },
+  {
+    "english": "tool",
+    "ancient": "Instrumentum",
+    "modern": "instrumé",
+    "notes": "Lat instrumentum; Modern simplified, -é"
+  },
+  {
+    "english": "craft",
+    "ancient": "Ars",
+    "modern": "ársh",
+    "notes": "Lat ars; Modern á-sh"
+  },
+  {
+    "english": "skill",
+    "ancient": "Peritia",
+    "modern": "perítí",
+    "notes": "Lat peritia; Modern í-í"
+  },
+  {
+    "english": "technique",
+    "ancient": "Techne",
+    "modern": "tekné",
+    "notes": "Gr techne; Hu k-, Modern -é"
+  },
+  {
+    "english": "pattern",
+    "ancient": "Exemplar",
+    "modern": "eksemplár",
+    "notes": "Lat exemplar; Hu k-, Modern -ár"
+  },
+  {
+    "english": "design",
+    "ancient": "Designatio",
+    "modern": "designáts",
+    "notes": "Lat designatio; Modern -áts"
+  },
+  {
+    "english": "carving",
+    "ancient": "Sculptura",
+    "modern": "skulptúr",
+    "notes": "Lat sculptura; Hu k-, Modern -úr"
+  },
+  {
+    "english": "engraving",
+    "ancient": "Caelatura",
+    "modern": "kaelatúr",
+    "notes": "Lat caelatura; Hu k-, Modern -úr"
+  },
+  {
+    "english": "inlay",
+    "ancient": "Insertio",
+    "modern": "inzérts",
+    "notes": "Lat insertio; Modern z-, -érts"
+  },
+  {
+    "english": "polish",
+    "ancient": "Politus",
+    "modern": "polít",
+    "notes": "Lat politus; Modern -ít ending"
+  },
+  {
+    "english": "to polish",
+    "ancient": "Polire",
+    "modern": "polír",
+    "notes": "Lat polire; Modern -ír verb ending"
+  },
+  {
+    "english": "finish",
+    "ancient": "Perfectio",
+    "modern": "perfékts",
+    "notes": "Lat perfectio; Modern é-kts"
+  },
+  {
+    "english": "rough",
+    "ancient": "Rudis",
+    "modern": "rudísh",
+    "notes": "Lat rudis; Modern í-sh"
+  },
+  {
+    "english": "smooth",
+    "ancient": "Laevis",
+    "modern": "laevísh",
+    "notes": "Lat laevis; Modern í-sh"
+  },
+  {
+    "english": "sharp",
+    "ancient": "Acer",
+    "modern": "akér",
+    "notes": "Lat acer; Hu k-, Modern -ér"
+  },
+  {
+    "english": "dull",
+    "ancient": "Hebes",
+    "modern": "hebésh",
+    "notes": "Lat hebes; Modern é-sh"
+  },
+  {
+    "english": "file (tool)",
+    "ancient": "Lima",
+    "modern": "límá",
+    "notes": "Lat lima; Modern í-á"
+  },
+  {
+    "english": "rasp",
+    "ancient": "Radula",
+    "modern": "radúl",
+    "notes": "Lat radula; Modern -úl"
+  },
+  {
+    "english": "grindstone",
+    "ancient": "Mola",
+    "modern": "molá",
+    "notes": "Lat mola; Modern -á ending"
+  },
+  {
+    "english": "whetstone",
+    "ancient": "Cos",
+    "modern": "kósh",
+    "notes": "Lat cos; Hu k-, Modern ó-sh"
+  },
+  {
+    "english": "measure",
+    "ancient": "Mensura",
+    "modern": "menzúr",
+    "notes": "Lat mensura; Modern z-, -úr"
+  },
+  {
+    "english": "rule (measuring)",
+    "ancient": "Regula",
+    "modern": "regúl",
+    "notes": "Lat regula; Modern -úl"
+  },
+  {
+    "english": "compass",
+    "ancient": "Circinus",
+    "modern": "tsirkín",
+    "notes": "Lat circinus; Modern ts-, -ín"
+  },
+  {
+    "english": "square (tool)",
+    "ancient": "Norma",
+    "modern": "normá",
+    "notes": "Lat norma; Modern -á ending"
+  },
+  {
+    "english": "plumb line",
+    "ancient": "Perpendiculum",
+    "modern": "perpendík",
+    "notes": "Lat perpendiculum; Modern -ík"
+  },
+  {
+    "english": "level",
+    "ancient": "Libra",
+    "modern": "líbrá",
+    "notes": "Lat libra; Modern í-á"
+  },
+  {
+    "english": "balance (scales)",
+    "ancient": "Trutina",
+    "modern": "trutín",
+    "notes": "Lat trutina; Modern -ín"
+  },
+  {
+    "english": "weight (for scales)",
+    "ancient": "Pondus",
+    "modern": "pondúsh",
+    "notes": "Lat pondus; Modern -úsh"
+  },
+  {
+    "english": "crucible",
+    "ancient": "Crucibulum",
+    "modern": "krutsíbúl",
+    "notes": "Lat crucibulum; Hu k-, Modern ts-, -úl"
+  },
+  {
+    "english": "mold",
+    "ancient": "Forma",
+    "modern": "formá",
+    "notes": "Lat forma; Modern -á ending"
+  },
+  {
+    "english": "cast",
+    "ancient": "Fusio",
+    "modern": "fúzí",
+    "notes": "Lat fusio; Modern ú-í"
+  },
+  {
+    "english": "alloy",
+    "ancient": "Mixtura",
+    "modern": "mikstúr",
+    "notes": "Lat mixtura; Hu k-, Modern -úr"
+  },
+  {
+    "english": "temper",
+    "ancient": "Temperatio",
+    "modern": "temperáts",
+    "notes": "Lat temperatio; Modern -áts"
+  },
+  {
+    "english": "to temper",
+    "ancient": "Temperare",
+    "modern": "temperár",
+    "notes": "Lat temperare; Modern -ár verb ending"
+  },
+  {
+    "english": "quench",
+    "ancient": "Extinctio",
+    "modern": "ekstínkts",
+    "notes": "Lat extinctio; Hu k-, Modern -ínkts"
+  },
+  {
+    "english": "to quench",
+    "ancient": "Extinguere",
+    "modern": "ekstíngér",
+    "notes": "Lat extinguere; Hu k-, Modern -ér verb"
+  },
+  {
+    "english": "rust",
+    "ancient": "Rubigo",
+    "modern": "rubígó",
+    "notes": "Lat rubigo; Modern í-ó"
+  },
+  {
+    "english": "patina",
+    "ancient": "Aerugo",
+    "modern": "aerúgó",
+    "notes": "Lat aerugo; Modern ú-ó"
+  }
+]

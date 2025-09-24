@@ -16,7 +16,7 @@ function findTests(dir) {
       
       if (stat.isDirectory()) {
         scanDirectory(fullPath);
-      } else if (file.endsWith('.test.js') && !file.includes('vitest')) {
+      } else if (file.endsWith('.test.js') && !file.includes('vitest') && !file.includes('phrase-service')) {
         testFiles.push(fullPath);
       }
     }

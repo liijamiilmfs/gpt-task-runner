@@ -1,0 +1,884 @@
+[
+  {
+    "english": "to envy",
+    "ancient": "Invidere",
+    "modern": "irigyelni",
+    "notes": "Lat invidere → Hu irigyelni."
+  },
+  {
+    "english": "to rejoice",
+    "ancient": "Gaudere",
+    "modern": "örülni",
+    "notes": "Lat gaudere → Hu örülni."
+  },
+  {
+    "english": "to mourn",
+    "ancient": "Lugere",
+    "modern": "gyászolni",
+    "notes": "Lat lugere → Hu gyászolni."
+  },
+  {
+    "english": "to laugh",
+    "ancient": "Ridere",
+    "modern": "nevetni",
+    "notes": "Lat ridere → Hu nevetni."
+  },
+  {
+    "english": "to cry (weep)",
+    "ancient": "Plorare",
+    "modern": "sírni",
+    "notes": "Lat plorare → Hu sírni."
+  },
+  {
+    "english": "to desire",
+    "ancient": "Cupere",
+    "modern": "kívánni",
+    "notes": "Lat cupere → Hu kívánni."
+  },
+  {
+    "english": "to despair",
+    "ancient": "Desperare",
+    "modern": "kétségbe esni",
+    "notes": "Lat desperare → Hu kétségbe esik."
+  },
+  {
+    "english": "to trust",
+    "ancient": "Fidere",
+    "modern": "bízni",
+    "notes": "Lat fidere → Hu bízni."
+  },
+  {
+    "english": "to doubt",
+    "ancient": "Dubitare",
+    "modern": "kételkedni",
+    "notes": "Lat dubitare → Hu kételkedni."
+  },
+  {
+    "english": "to pity",
+    "ancient": "Misereri",
+    "modern": "megsajnálni",
+    "notes": "Lat misereri (dep.) → Hu megsajnálni."
+  },
+  {
+    "english": "to forgive",
+    "ancient": "Ignoscere",
+    "modern": "megbocsátani",
+    "notes": "Lat ignoscere → Hu megbocsátani."
+  },
+  {
+    "english": "to blame/accuse",
+    "ancient": "Accusare",
+    "modern": "vádolni",
+    "notes": "Lat accusare → Hu vádolni."
+  },
+  {
+    "english": "to praise",
+    "ancient": "Laudare",
+    "modern": "dicsérni",
+    "notes": "Lat laudare → Hu dicsérni."
+  },
+  {
+    "english": "to thank",
+    "ancient": "Gratias agere",
+    "modern": "megköszönni",
+    "notes": "Lat phrase → Hu megköszönni."
+  },
+  {
+    "english": "to greet",
+    "ancient": "Salutare",
+    "modern": "köszönteni",
+    "notes": "Lat salutare → Hu köszönteni."
+  },
+  {
+    "english": "to invite",
+    "ancient": "Invitare",
+    "modern": "meghívni",
+    "notes": "Lat invitare → Hu meghívni."
+  },
+  {
+    "english": "to promise",
+    "ancient": "Promittere",
+    "modern": "ígérni",
+    "notes": "Lat promittere → Hu ígérni."
+  },
+  {
+    "english": "to threaten",
+    "ancient": "Minari",
+    "modern": "fenyegetni",
+    "notes": "Lat minari → Hu fenyegetni."
+  },
+  {
+    "english": "to command",
+    "ancient": "Imperare",
+    "modern": "parancsolni",
+    "notes": "Lat imperare → Hu parancsolni."
+  },
+  {
+    "english": "to obey",
+    "ancient": "Oboedire",
+    "modern": "engedelmeskedni",
+    "notes": "Lat oboedire → Hu engedelmeskedni."
+  },
+  {
+    "english": "to betray",
+    "ancient": "Prodere",
+    "modern": "elárulni",
+    "notes": "Lat prodere → Hu elárulni."
+  },
+  {
+    "english": "to protect",
+    "ancient": "Protegere",
+    "modern": "megóvni",
+    "notes": "Lat protegere → Hu megóvni."
+  },
+  {
+    "english": "to free/release",
+    "ancient": "Liberare",
+    "modern": "szabadítani",
+    "notes": "Lat liberare → Hu szabadítani."
+  },
+  {
+    "english": "to bind",
+    "ancient": "Ligare",
+    "modern": "kötni",
+    "notes": "Lat ligare → Hu kötni."
+  },
+  {
+    "english": "to judge",
+    "ancient": "Iudicare",
+    "modern": "ítélni",
+    "notes": "Lat iudicare → Hu ítélni."
+  },
+  {
+    "english": "to testify",
+    "ancient": "Testificari",
+    "modern": "tanúskodni",
+    "notes": "Lat testificari → Hu tanúskodni."
+  },
+  {
+    "english": "to negotiate",
+    "ancient": "Negotiari",
+    "modern": "tárgyalni",
+    "notes": "Lat negotiari → Hu tárgyalni."
+  },
+  {
+    "english": "to reconcile",
+    "ancient": "Reconciliare",
+    "modern": "kibékíteni",
+    "notes": "Lat reconciliare → Hu kibékíteni."
+  },
+  {
+    "english": "to mediate",
+    "ancient": "Intercedere",
+    "modern": "közvetíteni",
+    "notes": "Lat intercedere → Hu közvetíteni."
+  },
+  {
+    "english": "to smell",
+    "ancient": "Olfacere",
+    "modern": "szagolni",
+    "notes": "Lat olfacere → Hu szagolni."
+  },
+  {
+    "english": "to smell (emit)",
+    "ancient": "Olere",
+    "modern": "szaglik",
+    "notes": "Lat olere → Hu szaglik."
+  },
+  {
+    "english": "to taste",
+    "ancient": "Gustare",
+    "modern": "ízlelni",
+    "notes": "Lat gustare → Hu ízlelni."
+  },
+  {
+    "english": "to touch",
+    "ancient": "Tangere",
+    "modern": "érinteni",
+    "notes": "Lat tangere → Hu érinteni."
+  },
+  {
+    "english": "to breathe",
+    "ancient": "Spirare",
+    "modern": "lélegezni",
+    "notes": "Lat spirare → Hu lélegezni."
+  },
+  {
+    "english": "to sweat",
+    "ancient": "Sudare",
+    "modern": "izzadni",
+    "notes": "Lat sudare → Hu izzadni."
+  },
+  {
+    "english": "to bleed",
+    "ancient": "Sanguinare",
+    "modern": "vérezni",
+    "notes": "Med Lat sanguinare → Hu vérezni."
+  },
+  {
+    "english": "to heal (intrans.)",
+    "ancient": "Convalescere",
+    "modern": "gyógyulni",
+    "notes": "Lat convalescere → Hu gyógyulni."
+  },
+  {
+    "english": "to heal (trans.)",
+    "ancient": "Sanare",
+    "modern": "gyógyítani",
+    "notes": "Lat sanare → Hu gyógyítani."
+  },
+  {
+    "english": "to wound",
+    "ancient": "Vulnerare",
+    "modern": "megsebezni",
+    "notes": "Lat vulnerare → Hu megsebezni."
+  },
+  {
+    "english": "to hurt/offend",
+    "ancient": "Laedere",
+    "modern": "megbántani",
+    "notes": "Lat laedere → Hu megbántani."
+  },
+  {
+    "english": "to cough",
+    "ancient": "Tussire",
+    "modern": "köhögni",
+    "notes": "Lat tussire → Hu köhögni."
+  },
+  {
+    "english": "to sneeze",
+    "ancient": "Sternuere",
+    "modern": "tüsszenteni",
+    "notes": "Lat sternuere → Hu tüsszenteni."
+  },
+  {
+    "english": "to vomit",
+    "ancient": "Vomere",
+    "modern": "hányni",
+    "notes": "Lat vomere → Hu hányni."
+  },
+  {
+    "english": "to faint",
+    "ancient": "Deficere",
+    "modern": "elájulni",
+    "notes": "Lat deficere → Hu elájulni."
+  },
+  {
+    "english": "to wake",
+    "ancient": "Expergiscor",
+    "modern": "felébredni",
+    "notes": "Lat expergisci → Hu felébredni."
+  },
+  {
+    "english": "to yawn",
+    "ancient": "Oscitare",
+    "modern": "ásítani",
+    "notes": "Lat oscitare → Hu ásítani."
+  },
+  {
+    "english": "to forge",
+    "ancient": "Fabricare",
+    "modern": "kovácsolni",
+    "notes": "Lat fabricare → Hu kovácsolni."
+  },
+  {
+    "english": "to weave",
+    "ancient": "Texere",
+    "modern": "szőni",
+    "notes": "Lat texere → Hu szőni."
+  },
+  {
+    "english": "to spin",
+    "ancient": "Nere",
+    "modern": "fonni",
+    "notes": "Lat nere → Hu fonni."
+  },
+  {
+    "english": "to paint",
+    "ancient": "Pingere",
+    "modern": "festeni",
+    "notes": "Lat pingere → Hu festeni."
+  },
+  {
+    "english": "to carve",
+    "ancient": "Scalpere",
+    "modern": "faragni",
+    "notes": "Lat scalpere → Hu faragni."
+  },
+  {
+    "english": "to engrave",
+    "ancient": "Incidere",
+    "modern": "vésni",
+    "notes": "Lat incidere → Hu vésni."
+  },
+  {
+    "english": "to dig",
+    "ancient": "Fodere",
+    "modern": "ásni",
+    "notes": "Lat fodere → Hu ásni."
+  },
+  {
+    "english": "to plow",
+    "ancient": "Arare",
+    "modern": "szántani",
+    "notes": "Lat arare → Hu szántani."
+  },
+  {
+    "english": "to sow",
+    "ancient": "Serere",
+    "modern": "vetni",
+    "notes": "Lat serere → Hu vetni."
+  },
+  {
+    "english": "to reap",
+    "ancient": "Metere",
+    "modern": "aratni",
+    "notes": "Lat metere → Hu aratni."
+  },
+  {
+    "english": "to harvest",
+    "ancient": "Colligere",
+    "modern": "betakarítani",
+    "notes": "Lat colligere → Hu betakarítani."
+  },
+  {
+    "english": "to grind",
+    "ancient": "Molere",
+    "modern": "őrölni",
+    "notes": "Lat molere → Hu őrölni."
+  },
+  {
+    "english": "to bake",
+    "ancient": "Coquere",
+    "modern": "sütni",
+    "notes": "Lat coquere → Hu sütni."
+  },
+  {
+    "english": "to brew",
+    "ancient": "Brasare",
+    "modern": "főzni (sört)",
+    "notes": "Med Lat brasare → Hu sört főzni."
+  },
+  {
+    "english": "to tan (leather)",
+    "ancient": "Coriare",
+    "modern": "cserezni",
+    "notes": "Lat corium→coriare → Hu cserzeni."
+  },
+  {
+    "english": "to dye",
+    "ancient": "Tingere",
+    "modern": "festeni (anyag)",
+    "notes": "Lat tingere → Hu festeni."
+  },
+  {
+    "english": "to polish",
+    "ancient": "Polire",
+    "modern": "polírozni",
+    "notes": "Lat polire → Hu polírozni."
+  },
+  {
+    "english": "to sharpen",
+    "ancient": "Acuere",
+    "modern": "élezni",
+    "notes": "Lat acuere → Hu élezni."
+  },
+  {
+    "english": "to measure",
+    "ancient": "Metiri",
+    "modern": "mérni",
+    "notes": "Lat metiri → Hu mérni."
+  },
+  {
+    "english": "to weigh",
+    "ancient": "Pendere",
+    "modern": "mérlegelni",
+    "notes": "Lat pendere → Hu mérlegelni."
+  },
+  {
+    "english": "to count",
+    "ancient": "Computare",
+    "modern": "számolni",
+    "notes": "Lat computare → Hu számolni."
+  },
+  {
+    "english": "to record/write down",
+    "ancient": "Conscribere",
+    "modern": "feljegyezni",
+    "notes": "Lat conscribere → Hu feljegyezni."
+  },
+  {
+    "english": "to draw (water)",
+    "ancient": "Haurire",
+    "modern": "meríteni",
+    "notes": "Lat haurire → Hu meríteni."
+  },
+  {
+    "english": "to load",
+    "ancient": "Onerare",
+    "modern": "megrakni",
+    "notes": "Lat onerare → Hu megrakni."
+  },
+  {
+    "english": "to unload",
+    "ancient": "Exonerare",
+    "modern": "lerakni",
+    "notes": "Lat exonerare → Hu lerakni."
+  },
+  {
+    "english": "to sail",
+    "ancient": "Navigare",
+    "modern": "hajózni",
+    "notes": "Lat navigare → Hu hajózni."
+  },
+  {
+    "english": "to row",
+    "ancient": "Remigare",
+    "modern": "evezni",
+    "notes": "Lat remigare → Hu evezni."
+  },
+  {
+    "english": "to march",
+    "ancient": "Miliare",
+    "modern": "masírozni",
+    "notes": "Med Lat marchiare→miliare (usage) → Hu masírozni."
+  },
+  {
+    "english": "to advance",
+    "ancient": "Progredi",
+    "modern": "előrenyomulni",
+    "notes": "Lat progredi → Hu előrenyomulni."
+  },
+  {
+    "english": "to retreat",
+    "ancient": "Recedere",
+    "modern": "visszavonulni",
+    "notes": "Lat recedere → Hu visszavonulni."
+  },
+  {
+    "english": "to scout",
+    "ancient": "Explorare",
+    "modern": "felderíteni",
+    "notes": "Lat explorare → Hu felderíteni."
+  },
+  {
+    "english": "to guard",
+    "ancient": "Custodire",
+    "modern": "őrizni",
+    "notes": "Lat custodire → Hu őrizni."
+  },
+  {
+    "english": "to patrol",
+    "ancient": "Circumire",
+    "modern": "járőrözni",
+    "notes": "Lat circumire → Hu járőrözni."
+  },
+  {
+    "english": "to ambush",
+    "ancient": "Insidiare",
+    "modern": "lesbe csalni",
+    "notes": "Lat insidiare → Hu lesbe csalni."
+  },
+  {
+    "english": "to attack",
+    "ancient": "Oppugnare",
+    "modern": "támadni",
+    "notes": "Lat oppugnare → Hu támadni."
+  },
+  {
+    "english": "to defend",
+    "ancient": "Defendere",
+    "modern": "védeni",
+    "notes": "Lat defendere → Hu védeni."
+  },
+  {
+    "english": "to conquer",
+    "ancient": "Expugnare",
+    "modern": "meghódítani",
+    "notes": "Lat expugnare → Hu meghódítani."
+  },
+  {
+    "english": "to surrender",
+    "ancient": "Dedere",
+    "modern": "megadni magát",
+    "notes": "Lat dedere → Hu megadja magát."
+  },
+  {
+    "english": "to flee",
+    "ancient": "Fugere",
+    "modern": "menekülni",
+    "notes": "Lat fugere → Hu menekülni."
+  },
+  {
+    "english": "to camp",
+    "ancient": "Castrametari",
+    "modern": "tábort verni",
+    "notes": "Lat castrametari → Hu tábort verni."
+  },
+  {
+    "english": "to siege",
+    "ancient": "Obsessere",
+    "modern": "ostromolni",
+    "notes": "Lat obsidere/obsessio → Hu ostromolni."
+  },
+  {
+    "english": "to plunder",
+    "ancient": "Diripere",
+    "modern": "fosztogatni",
+    "notes": "Lat diripere → Hu fosztogatni."
+  },
+  {
+    "english": "to burn (town)",
+    "ancient": "Incendere",
+    "modern": "felgyújtani",
+    "notes": "Lat incendere → Hu felgyújtani."
+  },
+  {
+    "english": "to pray",
+    "ancient": "Orari",
+    "modern": "imádkozni",
+    "notes": "Lat orare → Hu imádkozni."
+  },
+  {
+    "english": "to bless",
+    "ancient": "Benedicere",
+    "modern": "megáldani",
+    "notes": "Lat benedicere → Hu megáldani."
+  },
+  {
+    "english": "to curse",
+    "ancient": "Maledicere",
+    "modern": "megátkozni",
+    "notes": "Lat maledicere → Hu megátkozni."
+  },
+  {
+    "english": "to sacrifice",
+    "ancient": "Sacrificare",
+    "modern": "áldozni",
+    "notes": "Lat sacrificare → Hu áldozni."
+  },
+  {
+    "english": "to anoint",
+    "ancient": "Ungere",
+    "modern": "felkenni",
+    "notes": "Lat ungere → Hu felkenni."
+  },
+  {
+    "english": "to baptize",
+    "ancient": "Baptizare",
+    "modern": "megkeresztelni",
+    "notes": "Gr baptizein → Hu megkeresztelni."
+  },
+  {
+    "english": "to absolve",
+    "ancient": "Absolvere",
+    "modern": "feloldozni",
+    "notes": "Lat absolvere → Hu feloldozni."
+  },
+  {
+    "english": "to condemn",
+    "ancient": "Condemnare",
+    "modern": "elítélni",
+    "notes": "Lat condemnare → Hu elítélni."
+  },
+  {
+    "english": "to pardon",
+    "ancient": "Ignoscere",
+    "modern": "kegyelmezni",
+    "notes": "Lat ignoscere → Hu kegyelmezni."
+  },
+  {
+    "english": "to atone",
+    "ancient": "Expiare",
+    "modern": "engesztelni",
+    "notes": "Lat expiare → Hu engesztelni."
+  },
+  {
+    "english": "smooth",
+    "ancient": "Laevis",
+    "modern": "sima",
+    "notes": "Lat laevis → Hu sima."
+  },
+  {
+    "english": "rough",
+    "ancient": "Asper",
+    "modern": "durva",
+    "notes": "Lat asper → Hu durva."
+  },
+  {
+    "english": "sharp",
+    "ancient": "Acutus",
+    "modern": "éles",
+    "notes": "Lat acutus → Hu éles."
+  },
+  {
+    "english": "blunt",
+    "ancient": "Obtusus",
+    "modern": "tompa",
+    "notes": "Lat obtusus → Hu tompa."
+  },
+  {
+    "english": "soft",
+    "ancient": "Mollis",
+    "modern": "puha",
+    "notes": "Lat mollis → Hu puha."
+  },
+  {
+    "english": "hard",
+    "ancient": "Durus",
+    "modern": "kemény",
+    "notes": "Lat durus → Hu kemény."
+  },
+  {
+    "english": "warm",
+    "ancient": "Calidus",
+    "modern": "meleg",
+    "notes": "Lat calidus → Hu meleg."
+  },
+  {
+    "english": "cool",
+    "ancient": "Gelidus",
+    "modern": "hűvös",
+    "notes": "Lat gelidus → Hu hűvös."
+  },
+  {
+    "english": "wet",
+    "ancient": "Umidus",
+    "modern": "nedves",
+    "notes": "Lat umidus → Hu nedves."
+  },
+  {
+    "english": "dry",
+    "ancient": "Siccus",
+    "modern": "száraz",
+    "notes": "Lat siccus → Hu száraz."
+  },
+  {
+    "english": "wide",
+    "ancient": "Latus",
+    "modern": "széles",
+    "notes": "Lat latus → Hu széles."
+  },
+  {
+    "english": "narrow",
+    "ancient": "Angustus",
+    "modern": "keskeny",
+    "notes": "Lat angustus → Hu keskeny."
+  },
+  {
+    "english": "deep",
+    "ancient": "Profundus",
+    "modern": "mély",
+    "notes": "Lat profundus → Hu mély."
+  },
+  {
+    "english": "shallow",
+    "ancient": "Vadosus",
+    "modern": "sekély",
+    "notes": "Lat vadosus → Hu sekély."
+  },
+  {
+    "english": "thick",
+    "ancient": "Crassus",
+    "modern": "vastag",
+    "notes": "Lat crassus → Hu vastag."
+  },
+  {
+    "english": "thin",
+    "ancient": "Tenuis",
+    "modern": "vékony",
+    "notes": "Lat tenuis → Hu vékony."
+  },
+  {
+    "english": "full",
+    "ancient": "Plenus",
+    "modern": "teli",
+    "notes": "Lat plenus → Hu teli."
+  },
+  {
+    "english": "empty",
+    "ancient": "Vacuus",
+    "modern": "üres",
+    "notes": "Lat vacuus → Hu üres."
+  },
+  {
+    "english": "clean",
+    "ancient": "Purus",
+    "modern": "tiszta",
+    "notes": "Lat purus → Hu tiszta."
+  },
+  {
+    "english": "dirty",
+    "ancient": "Sordidus",
+    "modern": "piszkos",
+    "notes": "Lat sordidus → Hu piszkos."
+  },
+  {
+    "english": "sacred",
+    "ancient": "Sacer",
+    "modern": "szent",
+    "notes": "Lat sacer → Hu szent."
+  },
+  {
+    "english": "profane",
+    "ancient": "Profanus",
+    "modern": "profán",
+    "notes": "Lat profanus → Hu profán."
+  },
+  {
+    "english": "pure",
+    "ancient": "Castus",
+    "modern": "tiszta (erk.)",
+    "notes": "Lat castus → Hu tiszta (erkölcsi)."
+  },
+  {
+    "english": "corrupt",
+    "ancient": "Corruptus",
+    "modern": "romlott",
+    "notes": "Lat corruptus → Hu romlott."
+  },
+  {
+    "english": "eternal",
+    "ancient": "Aeternus",
+    "modern": "örök",
+    "notes": "Lat aeternus → Hu örök."
+  },
+  {
+    "english": "fleeting",
+    "ancient": "Caducus",
+    "modern": "mulandó",
+    "notes": "Lat caducus → Hu mulandó."
+  },
+  {
+    "english": "hidden",
+    "ancient": "Occultus",
+    "modern": "rejtett",
+    "notes": "Lat occultus → Hu rejtett."
+  },
+  {
+    "english": "revealed",
+    "ancient": "Manifestus",
+    "modern": "nyilvánvaló",
+    "notes": "Lat manifestus → Hu nyilvánvaló."
+  },
+  {
+    "english": "proud",
+    "ancient": "Superbus",
+    "modern": "büszke",
+    "notes": "Lat superbus → Hu büszke."
+  },
+  {
+    "english": "humble",
+    "ancient": "Humilis",
+    "modern": "alázatos",
+    "notes": "Lat humilis → Hu alázatos."
+  },
+  {
+    "english": "greedy",
+    "ancient": "Avarus",
+    "modern": "kapzsi",
+    "notes": "Lat avarus → Hu kapzsi."
+  },
+  {
+    "english": "generous",
+    "ancient": "Liberalus",
+    "modern": "nagylelkű",
+    "notes": "Lat liberalis → Hu nagylelkű."
+  },
+  {
+    "english": "loyal",
+    "ancient": "Fidelis",
+    "modern": "hűséges",
+    "notes": "Lat fidelis → Hu hűséges."
+  },
+  {
+    "english": "treacherous",
+    "ancient": "Perfidus",
+    "modern": "áruló",
+    "notes": "Lat perfidus → Hu áruló."
+  },
+  {
+    "english": "just",
+    "ancient": "Iustus",
+    "modern": "igazságos",
+    "notes": "Lat iustus → Hu igazságos."
+  },
+  {
+    "english": "unjust",
+    "ancient": "Iniustus",
+    "modern": "igazságtalan",
+    "notes": "Lat iniustus → Hu igazságtalan."
+  },
+  {
+    "english": "pious",
+    "ancient": "Pius",
+    "modern": "jámbor",
+    "notes": "Lat pius → Hu jámbor."
+  },
+  {
+    "english": "impious",
+    "ancient": "Impius",
+    "modern": "istentelen",
+    "notes": "Lat impius → Hu istentelen."
+  },
+  {
+    "english": "angry",
+    "ancient": "Iratus",
+    "modern": "haragos",
+    "notes": "Lat iratus → Hu haragos."
+  },
+  {
+    "english": "joyful",
+    "ancient": "Laetus",
+    "modern": "vidám",
+    "notes": "Lat laetus → Hu vidám."
+  },
+  {
+    "english": "sad",
+    "ancient": "Tristis",
+    "modern": "szomorú",
+    "notes": "Lat tristis → Hu szomorú."
+  },
+  {
+    "english": "calm",
+    "ancient": "Placidus",
+    "modern": "higgadt",
+    "notes": "Lat placidus → Hu higgadt."
+  },
+  {
+    "english": "furious",
+    "ancient": "Furiosus",
+    "modern": "dühöngő",
+    "notes": "Lat furiosus → Hu dühöngő."
+  },
+  {
+    "english": "quiet",
+    "ancient": "Quietus",
+    "modern": "csendes",
+    "notes": "Lat quietus → Hu csendes."
+  },
+  {
+    "english": "noisy",
+    "ancient": "Clamosus",
+    "modern": "zajos",
+    "notes": "Lat clamosus → Hu zajos."
+  },
+  {
+    "english": "timid",
+    "ancient": "Timidus",
+    "modern": "félénk",
+    "notes": "Lat timidus → Hu félénk."
+  },
+  {
+    "english": "clever",
+    "ancient": "Callidus",
+    "modern": "ravasz",
+    "notes": "Lat callidus → Hu ravasz."
+  },
+  {
+    "english": "stupid",
+    "ancient": "Stolidus",
+    "modern": "ostoba",
+    "notes": "Lat stolidus → Hu ostoba."
+  }
+]

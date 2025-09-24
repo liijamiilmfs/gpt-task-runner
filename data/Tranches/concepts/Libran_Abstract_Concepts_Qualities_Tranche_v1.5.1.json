@@ -1,0 +1,1202 @@
+[
+  {
+    "english": "virtue",
+    "ancient": "Virtus",
+    "modern": "erény",
+    "notes": "Lat virtus; Hu erény"
+  },
+  {
+    "english": "vice",
+    "ancient": "Vitium",
+    "modern": "hiba",
+    "notes": "Lat vitium; Hu hiba"
+  },
+  {
+    "english": "honor",
+    "ancient": "Honos",
+    "modern": "becsület",
+    "notes": "Lat honor/honos; Hu becsület"
+  },
+  {
+    "english": "shame",
+    "ancient": "Pudor",
+    "modern": "szégyen",
+    "notes": "Lat pudor; Hu szégyen"
+  },
+  {
+    "english": "glory",
+    "ancient": "Gloria",
+    "modern": "dicsőség",
+    "notes": "Lat gloria; Hu dicsőség"
+  },
+  {
+    "english": "fame",
+    "ancient": "Fama",
+    "modern": "hírnév",
+    "notes": "Lat fama; Hu hírnév"
+  },
+  {
+    "english": "loyalty",
+    "ancient": "Fides",
+    "modern": "hűség",
+    "notes": "Lat fides; Hu hűség"
+  },
+  {
+    "english": "betrayal",
+    "ancient": "Perfidia",
+    "modern": "árulás",
+    "notes": "Lat perfidia; Hu árulás"
+  },
+  {
+    "english": "courage",
+    "ancient": "Fortitudo",
+    "modern": "bátorság",
+    "notes": "Lat fortitudo; Hu bátorság"
+  },
+  {
+    "english": "cowardice",
+    "ancient": "Ignavia",
+    "modern": "gyávaság",
+    "notes": "Lat ignavia; Hu gyávaság"
+  },
+  {
+    "english": "pride",
+    "ancient": "Superbia",
+    "modern": "büszkeség",
+    "notes": "Lat superbia; Hu büszkeség"
+  },
+  {
+    "english": "humility",
+    "ancient": "Humilitas",
+    "modern": "alázat",
+    "notes": "Lat humilitas; Hu alázat"
+  },
+  {
+    "english": "mercy",
+    "ancient": "Misericordia",
+    "modern": "irgalom",
+    "notes": "Lat misericordia; Hu irgalom"
+  },
+  {
+    "english": "cruelty",
+    "ancient": "Crudelitas",
+    "modern": "kegyetlenség",
+    "notes": "Lat crudelitas; Hu kegyetlenség"
+  },
+  {
+    "english": "justice",
+    "ancient": "Iustitia",
+    "modern": "igazságosság",
+    "notes": "Lat iustitia; Hu igazságosság"
+  },
+  {
+    "english": "equity/balance",
+    "ancient": "Aequitas",
+    "modern": "méltányosság",
+    "notes": "Lat aequitas; Hu méltányosság"
+  },
+  {
+    "english": "harmony",
+    "ancient": "Harmonia",
+    "modern": "harmónia",
+    "notes": "Gr harmonia; Ro armonie"
+  },
+  {
+    "english": "discord",
+    "ancient": "Discordia",
+    "modern": "viszály",
+    "notes": "Lat discordia; Hu viszály"
+  },
+  {
+    "english": "truth",
+    "ancient": "Veritas",
+    "modern": "igazság",
+    "notes": "Lat veritas; Hu igazság"
+  },
+  {
+    "english": "falsehood",
+    "ancient": "Mendacium",
+    "modern": "hazugság",
+    "notes": "Lat mendacium; Hu hazugság"
+  },
+  {
+    "english": "freedom",
+    "ancient": "Libertas",
+    "modern": "szabadság",
+    "notes": "Lat libertas; Hu szabadság"
+  },
+  {
+    "english": "bondage",
+    "ancient": "Servitus",
+    "modern": "szolgaság",
+    "notes": "Lat servitus; Hu szolgaság"
+  },
+  {
+    "english": "law",
+    "ancient": "Lex",
+    "modern": "törvény",
+    "notes": "Lat lex; Hu törvény"
+  },
+  {
+    "english": "custom",
+    "ancient": "Mos",
+    "modern": "szokás",
+    "notes": "Lat mos; Hu szokás"
+  },
+  {
+    "english": "duty",
+    "ancient": "Officium",
+    "modern": "kötelesség",
+    "notes": "Lat officium; Hu kötelesség"
+  },
+  {
+    "english": "oath",
+    "ancient": "Iusiurandum",
+    "modern": "eskü",
+    "notes": "Lat iusiurandum; Hu eskü"
+  },
+  {
+    "english": "taboo",
+    "ancient": "Interdictum",
+    "modern": "tilalom",
+    "notes": "Lat interdictum; Hu tilalom"
+  },
+  {
+    "english": "honesty",
+    "ancient": "Sinceritas",
+    "modern": "őszinteség",
+    "notes": "Lat sinceritas; Hu őszinteség"
+  },
+  {
+    "english": "deceit",
+    "ancient": "Fraus",
+    "modern": "csalás",
+    "notes": "Lat fraus; Hu csalás"
+  },
+  {
+    "english": "wisdom",
+    "ancient": "Sapientia",
+    "modern": "bölcsesség",
+    "notes": "Lat sapientia; Hu bölcsesség"
+  },
+  {
+    "english": "folly",
+    "ancient": "Stultitia",
+    "modern": "ostobaság",
+    "notes": "Lat stultitia; Hu ostobaság"
+  },
+  {
+    "english": "prudence",
+    "ancient": "Prudentia",
+    "modern": "okosság",
+    "notes": "Lat prudentia; Hu okosság"
+  },
+  {
+    "english": "greed",
+    "ancient": "Avaritia",
+    "modern": "kapzsiság",
+    "notes": "Lat avaritia; Hu kapzsiság"
+  },
+  {
+    "english": "generosity",
+    "ancient": "Liberalitas",
+    "modern": "nagylelkűség",
+    "notes": "Lat liberalitas; Hu nagylelkűség"
+  },
+  {
+    "english": "envy",
+    "ancient": "Invidia",
+    "modern": "irigység",
+    "notes": "Lat invidia; Hu irigység"
+  },
+  {
+    "english": "wrath",
+    "ancient": "Ira",
+    "modern": "harag",
+    "notes": "Lat ira; Hu harag"
+  },
+  {
+    "english": "patience",
+    "ancient": "Patientia",
+    "modern": "türelem",
+    "notes": "Lat patientia; Hu türelem"
+  },
+  {
+    "english": "hope",
+    "ancient": "Spes",
+    "modern": "remény",
+    "notes": "Lat spes; Hu remény"
+  },
+  {
+    "english": "despair",
+    "ancient": "Desperatio",
+    "modern": "kétségbeesés",
+    "notes": "Lat desperatio; Hu kétségbeesés"
+  },
+  {
+    "english": "faith",
+    "ancient": "Fides (sacra)",
+    "modern": "hit",
+    "notes": "Lat fides; Hu hit"
+  },
+  {
+    "english": "piety",
+    "ancient": "Pietas",
+    "modern": "jámborság",
+    "notes": "Lat pietas; Hu jámborság"
+  },
+  {
+    "english": "impiety",
+    "ancient": "Impietas",
+    "modern": "istentelenség",
+    "notes": "Lat impietas; Hu istentelenség"
+  },
+  {
+    "english": "fate",
+    "ancient": "Fatum",
+    "modern": "sors",
+    "notes": "Lat fatum; Hu sors"
+  },
+  {
+    "english": "fortune",
+    "ancient": "Fortuna",
+    "modern": "szerencse",
+    "notes": "Lat fortuna; Hu szerencse"
+  },
+  {
+    "english": "destiny (woven)",
+    "ancient": "Parcae Telum",
+    "modern": "végzet-szövés",
+    "notes": "Lat Parcae; Hu szövés calque"
+  },
+  {
+    "english": "chance",
+    "ancient": "Casus",
+    "modern": "véletlen",
+    "notes": "Lat casus; Hu véletlen"
+  },
+  {
+    "english": "order",
+    "ancient": "Ordo",
+    "modern": "rend",
+    "notes": "Lat ordo; Hu rend"
+  },
+  {
+    "english": "chaos",
+    "ancient": "Chaos",
+    "modern": "káosz",
+    "notes": "Gr chaos; Hu káosz"
+  },
+  {
+    "english": "time",
+    "ancient": "Tempus",
+    "modern": "idő",
+    "notes": "Lat tempus; Hu idő"
+  },
+  {
+    "english": "eternity",
+    "ancient": "Aeternitas",
+    "modern": "örökkévalóság",
+    "notes": "Lat aeternitas; Hu örökkévalóság"
+  },
+  {
+    "english": "instant",
+    "ancient": "Momentum",
+    "modern": "pillanat",
+    "notes": "Lat momentum; Hu pillanat"
+  },
+  {
+    "english": "space",
+    "ancient": "Spatium",
+    "modern": "tér",
+    "notes": "Lat spatium; Hu tér"
+  },
+  {
+    "english": "emptiness",
+    "ancient": "Vacuitas",
+    "modern": "üresség",
+    "notes": "Lat vacuitas; Hu üresség"
+  },
+  {
+    "english": "being/existence",
+    "ancient": "Esse",
+    "modern": "létezés",
+    "notes": "Lat esse; Hu létezés"
+  },
+  {
+    "english": "nonbeing",
+    "ancient": "Non-Esse",
+    "modern": "nemlét",
+    "notes": "Lat non-esse; Hu nemlét"
+  },
+  {
+    "english": "spirit",
+    "ancient": "Spiritus",
+    "modern": "lélek",
+    "notes": "Lat spiritus; Hu lélek"
+  },
+  {
+    "english": "soul",
+    "ancient": "Anima",
+    "modern": "lélek-mag",
+    "notes": "Lat anima; Hu lélek (poet.)"
+  },
+  {
+    "english": "mind",
+    "ancient": "Mens",
+    "modern": "elme",
+    "notes": "Lat mens; Hu elme"
+  },
+  {
+    "english": "body",
+    "ancient": "Corpus",
+    "modern": "test",
+    "notes": "Lat corpus; Hu test"
+  },
+  {
+    "english": "name (essence)",
+    "ancient": "Nomen",
+    "modern": "név-lényeg",
+    "notes": "Lat nomen; Hu név + lényeg"
+  },
+  {
+    "english": "shadow",
+    "ancient": "Umbra",
+    "modern": "árnyék",
+    "notes": "Lat umbra; Hu árnyék"
+  },
+  {
+    "english": "light",
+    "ancient": "Lux",
+    "modern": "fény",
+    "notes": "Lat lux; Hu fény"
+  },
+  {
+    "english": "darkness",
+    "ancient": "Tenebrae",
+    "modern": "sötétség",
+    "notes": "Lat tenebrae; Hu sötétség"
+  },
+  {
+    "english": "silence",
+    "ancient": "Silentium",
+    "modern": "csend",
+    "notes": "Lat silentium; Hu csend"
+  },
+  {
+    "english": "voice",
+    "ancient": "Vox",
+    "modern": "hang",
+    "notes": "Lat vox; Hu hang"
+  },
+  {
+    "english": "memory",
+    "ancient": "Memoria",
+    "modern": "emlékezet",
+    "notes": "Lat memoria; Hu emlékezet"
+  },
+  {
+    "english": "dream",
+    "ancient": "Somnium",
+    "modern": "álom",
+    "notes": "Lat somnium; Hu álom"
+  },
+  {
+    "english": "forgetting",
+    "ancient": "Oblivio",
+    "modern": "feledés",
+    "notes": "Lat oblivio; Hu feledés"
+  },
+  {
+    "english": "secret",
+    "ancient": "Arcanum",
+    "modern": "titok",
+    "notes": "Lat arcanum; Hu titok"
+  },
+  {
+    "english": "revelation",
+    "ancient": "Revelatio",
+    "modern": "kinyilatkoztatás",
+    "notes": "Lat revelatio; Hu kinyilatkoztatás"
+  },
+  {
+    "english": "mystery",
+    "ancient": "Mysterium",
+    "modern": "misztérium",
+    "notes": "Gr mysterion; Hu misztérium"
+  },
+  {
+    "english": "ritual power",
+    "ancient": "Numen",
+    "modern": "szent-erő",
+    "notes": "Lat numen; Hu szent erő"
+  },
+  {
+    "english": "sacredness",
+    "ancient": "Sanctitas",
+    "modern": "szentség",
+    "notes": "Lat sanctitas; Hu szentség"
+  },
+  {
+    "english": "profane state",
+    "ancient": "Profanitas",
+    "modern": "profánság",
+    "notes": "Lat profanitas; Hu profánság"
+  },
+  {
+    "english": "purity",
+    "ancient": "Castitas",
+    "modern": "tisztaság",
+    "notes": "Lat castitas; Hu tisztaság"
+  },
+  {
+    "english": "corruption",
+    "ancient": "Corruptio",
+    "modern": "romlottság",
+    "notes": "Lat corruptio; Hu romlottság"
+  },
+  {
+    "english": "balance",
+    "ancient": "Statera",
+    "modern": "mérleg-elv",
+    "notes": "Lat statera; Hu mérleg elv"
+  },
+  {
+    "english": "harmony of spheres",
+    "ancient": "Harmonia Sphaerarum",
+    "modern": "szférák harmóniája",
+    "notes": "Gr/Lat; Hu calque"
+  },
+  {
+    "english": "knowledge",
+    "ancient": "Scientia",
+    "modern": "tudás",
+    "notes": "Lat scientia; Hu tudás"
+  },
+  {
+    "english": "understanding",
+    "ancient": "Intellegentia",
+    "modern": "értés",
+    "notes": "Lat intelligentia; Hu értés"
+  },
+  {
+    "english": "wisdom (practical)",
+    "ancient": "Phronesis",
+    "modern": "okosság (gyak.)",
+    "notes": "Gr phronesis; Hu okosság"
+  },
+  {
+    "english": "reason",
+    "ancient": "Ratio",
+    "modern": "ész",
+    "notes": "Lat ratio; Hu ész"
+  },
+  {
+    "english": "will",
+    "ancient": "Voluntas",
+    "modern": "akarat",
+    "notes": "Lat voluntas; Hu akarat"
+  },
+  {
+    "english": "intention",
+    "ancient": "Intentio",
+    "modern": "szándék",
+    "notes": "Lat intentio; Hu szándék"
+  },
+  {
+    "english": "plan",
+    "ancient": "Consilium",
+    "modern": "terv",
+    "notes": "Lat consilium; Hu terv"
+  },
+  {
+    "english": "purpose",
+    "ancient": "Propositum",
+    "modern": "cél",
+    "notes": "Lat propositum; Hu cél"
+  },
+  {
+    "english": "cause",
+    "ancient": "Causa",
+    "modern": "ok",
+    "notes": "Lat causa; Hu ok"
+  },
+  {
+    "english": "effect",
+    "ancient": "Effectus",
+    "modern": "hatás",
+    "notes": "Lat effectus; Hu hatás"
+  },
+  {
+    "english": "means",
+    "ancient": "Medium",
+    "modern": "eszköz",
+    "notes": "Lat medium; Hu eszköz"
+  },
+  {
+    "english": "end (goal)",
+    "ancient": "Finis",
+    "modern": "vég-cél",
+    "notes": "Lat finis; Hu végcél"
+  },
+  {
+    "english": "truthfulness",
+    "ancient": "Veracitas",
+    "modern": "igazmondás",
+    "notes": "Lat veracitas; Hu igazmondás"
+  },
+  {
+    "english": "falsehood (quality)",
+    "ancient": "Fallacia",
+    "modern": "megtévesztés",
+    "notes": "Lat fallacia; Hu megtévesztés"
+  },
+  {
+    "english": "evidence",
+    "ancient": "Testimonium",
+    "modern": "bizonyíték",
+    "notes": "Lat testimonium; Hu bizonyíték"
+  },
+  {
+    "english": "argument",
+    "ancient": "Argumentum",
+    "modern": "érv",
+    "notes": "Lat argumentum; Hu érv"
+  },
+  {
+    "english": "proof",
+    "ancient": "Probatio",
+    "modern": "bizonyítás",
+    "notes": "Lat probatio; Hu bizonyítás"
+  },
+  {
+    "english": "doubt",
+    "ancient": "Dubium",
+    "modern": "kétely",
+    "notes": "Lat dubium; Hu kétely"
+  },
+  {
+    "english": "belief",
+    "ancient": "Credentia",
+    "modern": "hit-állapot",
+    "notes": "Lat credentia; Hu hit állapot"
+  },
+  {
+    "english": "hypothesis",
+    "ancient": "Suppositio",
+    "modern": "feltevés",
+    "notes": "Lat suppositio; Hu feltevés"
+  },
+  {
+    "english": "judgment",
+    "ancient": "Iudicium",
+    "modern": "ítélet",
+    "notes": "Lat iudicium; Hu ítélet"
+  },
+  {
+    "english": "choice",
+    "ancient": "Electio",
+    "modern": "választás",
+    "notes": "Lat electio; Hu választás"
+  },
+  {
+    "english": "freedom of choice",
+    "ancient": "Liberum Arbitrium",
+    "modern": "szabad akarat",
+    "notes": "Lat; Hu szabad akarat"
+  },
+  {
+    "english": "power",
+    "ancient": "Potestas",
+    "modern": "hatalom",
+    "notes": "Lat potestas; Hu hatalom"
+  },
+  {
+    "english": "authority",
+    "ancient": "Auctoritas",
+    "modern": "tekintély",
+    "notes": "Lat auctoritas; Hu tekintély"
+  },
+  {
+    "english": "right (claim)",
+    "ancient": "Ius",
+    "modern": "jog",
+    "notes": "Lat ius; Hu jog"
+  },
+  {
+    "english": "obligation",
+    "ancient": "Obligatio",
+    "modern": "kötelezettség",
+    "notes": "Lat obligatio; Hu kötelezettség"
+  },
+  {
+    "english": "permission",
+    "ancient": "Permissio",
+    "modern": "engedély",
+    "notes": "Lat permissio; Hu engedély"
+  },
+  {
+    "english": "prohibition",
+    "ancient": "Prohibitio",
+    "modern": "tilalom",
+    "notes": "Lat prohibitio; Hu tilalom"
+  },
+  {
+    "english": "agreement",
+    "ancient": "Foedus",
+    "modern": "egyezség",
+    "notes": "Lat foedus; Hu egyezség"
+  },
+  {
+    "english": "dispute",
+    "ancient": "Lis",
+    "modern": "per",
+    "notes": "Lat lis; Hu per/vita"
+  },
+  {
+    "english": "peace (social)",
+    "ancient": "Pax",
+    "modern": "béke",
+    "notes": "Lat pax; Hu béke"
+  },
+  {
+    "english": "war (state)",
+    "ancient": "Bellum",
+    "modern": "háború",
+    "notes": "Lat bellum; Hu háború"
+  },
+  {
+    "english": "truce",
+    "ancient": "Indutiae",
+    "modern": "fegyverszünet",
+    "notes": "Lat induciae; Hu fegyverszünet"
+  },
+  {
+    "english": "alliance",
+    "ancient": "Societas",
+    "modern": "szövetség",
+    "notes": "Lat societas; Hu szövetség"
+  },
+  {
+    "english": "rebellion",
+    "ancient": "Seditio",
+    "modern": "lázadás",
+    "notes": "Lat seditio; Hu lázadás"
+  },
+  {
+    "english": "lawfulness",
+    "ancient": "Legitimitas",
+    "modern": "jogosság",
+    "notes": "Lat legitimitas; Hu jogosság"
+  },
+  {
+    "english": "illegality",
+    "ancient": "Illicitum",
+    "modern": "jogtalanság",
+    "notes": "Lat illicitum; Hu jogtalanság"
+  },
+  {
+    "english": "taxation",
+    "ancient": "Vectigalia",
+    "modern": "adóztatás",
+    "notes": "Lat vectigalia; Hu adóztatás"
+  },
+  {
+    "english": "tribute",
+    "ancient": "Tributum",
+    "modern": "adó",
+    "notes": "Lat tributum; Hu adó"
+  },
+  {
+    "english": "tithe",
+    "ancient": "Decima",
+    "modern": "tized",
+    "notes": "Lat decima; Hu tized"
+  },
+  {
+    "english": "sanction",
+    "ancient": "Sanctio",
+    "modern": "szankció",
+    "notes": "Lat sanctio; Hu szankció"
+  },
+  {
+    "english": "fine (penalty)",
+    "ancient": "Multa",
+    "modern": "bírság",
+    "notes": "Lat multa; Hu bírság"
+  },
+  {
+    "english": "customary law",
+    "ancient": "Mos Maiorum",
+    "modern": "szokásjog",
+    "notes": "Lat; Hu szokásjog"
+  },
+  {
+    "english": "joy",
+    "ancient": "Gaudium",
+    "modern": "öröm",
+    "notes": "Lat gaudium; Hu öröm"
+  },
+  {
+    "english": "sorrow",
+    "ancient": "Dolor",
+    "modern": "bánat",
+    "notes": "Lat dolor; Hu bánat"
+  },
+  {
+    "english": "love (affection)",
+    "ancient": "Amor",
+    "modern": "szeretet",
+    "notes": "Lat amor; Hu szeretet"
+  },
+  {
+    "english": "longing",
+    "ancient": "Desiderium",
+    "modern": "vágyódás",
+    "notes": "Lat desiderium; Hu vágyódás"
+  },
+  {
+    "english": "fear (awe)",
+    "ancient": "Timor",
+    "modern": "félelem",
+    "notes": "Lat timor; Hu félelem"
+  },
+  {
+    "english": "awe (sacred fear)",
+    "ancient": "Religiosus Timor",
+    "modern": "szent félelem",
+    "notes": "Lat; Hu szent félelem"
+  },
+  {
+    "english": "shamefacedness",
+    "ancient": "Rubor",
+    "modern": "pirulás",
+    "notes": "Lat rubor; Hu pirulás"
+  },
+  {
+    "english": "compassion",
+    "ancient": "Compassio",
+    "modern": "együttérzés",
+    "notes": "Lat compassio; Hu együttérzés"
+  },
+  {
+    "english": "malice",
+    "ancient": "Malevolentia",
+    "modern": "rosszindulat",
+    "notes": "Lat malevolentia; Hu rosszindulat"
+  },
+  {
+    "english": "jealousy",
+    "ancient": "Zelotypia",
+    "modern": "féltékenység",
+    "notes": "Gr zelotypia; Hu féltékenység"
+  },
+  {
+    "english": "tranquility",
+    "ancient": "Quies",
+    "modern": "nyugalom",
+    "notes": "Lat quies; Hu nyugalom"
+  },
+  {
+    "english": "anxiety",
+    "ancient": "Anxietas",
+    "modern": "szorongás",
+    "notes": "Lat anxietas; Hu szorongás"
+  },
+  {
+    "english": "curiosity",
+    "ancient": "Curiositas",
+    "modern": "kíváncsiság",
+    "notes": "Lat curiositas; Hu kíváncsiság"
+  },
+  {
+    "english": "boredom",
+    "ancient": "Taedium",
+    "modern": "unalom",
+    "notes": "Lat taedium; Hu unalom"
+  },
+  {
+    "english": "surprise",
+    "ancient": "Admiratio",
+    "modern": "meglepetés",
+    "notes": "Lat admiratio; Hu meglepetés"
+  },
+  {
+    "english": "trust",
+    "ancient": "Fiducia",
+    "modern": "bizalom",
+    "notes": "Lat fiducia; Hu bizalom"
+  },
+  {
+    "english": "distrust",
+    "ancient": "Diffidentia",
+    "modern": "bizalmatlanság",
+    "notes": "Lat; Hu bizalmatlanság"
+  },
+  {
+    "english": "birth",
+    "ancient": "Nativitas",
+    "modern": "születés",
+    "notes": "Lat nativitas; Hu születés"
+  },
+  {
+    "english": "death",
+    "ancient": "Mors",
+    "modern": "halál",
+    "notes": "Lat mors; Hu halál"
+  },
+  {
+    "english": "growth",
+    "ancient": "Crescimentum",
+    "modern": "növekedés",
+    "notes": "Lat crescere; Hu növekedés"
+  },
+  {
+    "english": "decay",
+    "ancient": "Putredo",
+    "modern": "rothadás",
+    "notes": "Lat putredo; Hu rothadás"
+  },
+  {
+    "english": "healing",
+    "ancient": "Sanatio",
+    "modern": "gyógyulás",
+    "notes": "Lat sanatio; Hu gyógyulás"
+  },
+  {
+    "english": "wounding",
+    "ancient": "Vulneratio",
+    "modern": "sebzés",
+    "notes": "Lat vulneratio; Hu sebzés"
+  },
+  {
+    "english": "binding",
+    "ancient": "Ligatio",
+    "modern": "kötés",
+    "notes": "Lat ligatio; Hu kötés"
+  },
+  {
+    "english": "unbinding",
+    "ancient": "Solutio",
+    "modern": "oldás",
+    "notes": "Lat solutio; Hu oldás"
+  },
+  {
+    "english": "creation",
+    "ancient": "Creatio",
+    "modern": "teremtés",
+    "notes": "Lat creatio; Hu teremtés"
+  },
+  {
+    "english": "destruction",
+    "ancient": "Destructio",
+    "modern": "pusztítás",
+    "notes": "Lat destructio; Hu pusztítás"
+  },
+  {
+    "english": "transformation",
+    "ancient": "Transmutatio",
+    "modern": "átváltozás",
+    "notes": "Lat transmutatio; Hu átváltozás"
+  },
+  {
+    "english": "purification",
+    "ancient": "Purificatio",
+    "modern": "tisztítás",
+    "notes": "Lat purificatio; Hu tisztítás"
+  },
+  {
+    "english": "pollution",
+    "ancient": "Pollutio",
+    "modern": "szennyezés",
+    "notes": "Lat pollutio; Hu szennyezés"
+  },
+  {
+    "english": "initiation",
+    "ancient": "Initiatio",
+    "modern": "beavatás",
+    "notes": "Lat initiatio; Hu beavatás"
+  },
+  {
+    "english": "exile",
+    "ancient": "Exilium",
+    "modern": "száműzetés",
+    "notes": "Lat exilium; Hu száműzetés"
+  },
+  {
+    "english": "return",
+    "ancient": "Reditus",
+    "modern": "visszatérés",
+    "notes": "Lat reditus; Hu visszatérés"
+  },
+  {
+    "english": "ascension",
+    "ancient": "Ascensio",
+    "modern": "felemelkedés",
+    "notes": "Lat ascensio; Hu felemelkedés"
+  },
+  {
+    "english": "fall",
+    "ancient": "Lapsus",
+    "modern": "bukás",
+    "notes": "Lat lapsus; Hu bukás"
+  },
+  {
+    "english": "exchange",
+    "ancient": "Commutatio",
+    "modern": "csere",
+    "notes": "Lat commutatio; Hu csere"
+  },
+  {
+    "english": "sacrifice (loss)",
+    "ancient": "Damnum",
+    "modern": "veszteség",
+    "notes": "Lat damnum; Hu veszteség"
+  },
+  {
+    "english": "sacred",
+    "ancient": "Sacer",
+    "modern": "szent",
+    "notes": "Lat sacer; Hu szent"
+  },
+  {
+    "english": "profane",
+    "ancient": "Profanus",
+    "modern": "profán",
+    "notes": "Lat profanus; Hu profán"
+  },
+  {
+    "english": "pure",
+    "ancient": "Castus",
+    "modern": "tiszta",
+    "notes": "Lat castus; Hu tiszta"
+  },
+  {
+    "english": "impure",
+    "ancient": "Impurus",
+    "modern": "tisztátalan",
+    "notes": "Lat impurus; Hu tisztátalan"
+  },
+  {
+    "english": "eternal",
+    "ancient": "Aeternus",
+    "modern": "örök",
+    "notes": "Lat aeternus; Hu örök"
+  },
+  {
+    "english": "fleeting",
+    "ancient": "Caducus",
+    "modern": "mulandó",
+    "notes": "Lat caducus; Hu mulandó"
+  },
+  {
+    "english": "visible",
+    "ancient": "Visibilis",
+    "modern": "látható",
+    "notes": "Lat visibilis; Hu látható"
+  },
+  {
+    "english": "hidden",
+    "ancient": "Occultus",
+    "modern": "rejtett",
+    "notes": "Lat occultus; Hu rejtett"
+  },
+  {
+    "english": "possible",
+    "ancient": "Possibilis",
+    "modern": "lehetséges",
+    "notes": "Lat possibilis; Hu lehetséges"
+  },
+  {
+    "english": "impossible",
+    "ancient": "Impossibilis",
+    "modern": "lehetetlen",
+    "notes": "Lat impossibilis; Hu lehetetlen"
+  },
+  {
+    "english": "necessary",
+    "ancient": "Necessarius",
+    "modern": "szükséges",
+    "notes": "Lat necessarius; Hu szükséges"
+  },
+  {
+    "english": "contingent",
+    "ancient": "Contingens",
+    "modern": "esetleges",
+    "notes": "Lat contingens; Hu esetleges"
+  },
+  {
+    "english": "infinite",
+    "ancient": "Infinitus",
+    "modern": "végtelen",
+    "notes": "Lat infinitus; Hu végtelen"
+  },
+  {
+    "english": "finite",
+    "ancient": "Finitus",
+    "modern": "véges",
+    "notes": "Lat finitus; Hu véges"
+  },
+  {
+    "english": "mortal",
+    "ancient": "Mortalis",
+    "modern": "halandó",
+    "notes": "Lat mortalis; Hu halandó"
+  },
+  {
+    "english": "immortal",
+    "ancient": "Immortalis",
+    "modern": "halhatatlan",
+    "notes": "Lat immortalis; Hu halhatatlan"
+  },
+  {
+    "english": "true",
+    "ancient": "Verus",
+    "modern": "igaz",
+    "notes": "Lat verus; Hu igaz"
+  },
+  {
+    "english": "false",
+    "ancient": "Falsus",
+    "modern": "hamis",
+    "notes": "Lat falsus; Hu hamis"
+  },
+  {
+    "english": "just",
+    "ancient": "Iustus",
+    "modern": "igazságos",
+    "notes": "Lat iustus; Hu igazságos"
+  },
+  {
+    "english": "unjust",
+    "ancient": "Iniustus",
+    "modern": "igazságtalan",
+    "notes": "Lat iniustus; Hu igazságtalan"
+  },
+  {
+    "english": "holy",
+    "ancient": "Sanctus",
+    "modern": "szentelt",
+    "notes": "Lat sanctus; Hu szentelt"
+  },
+  {
+    "english": "accursed",
+    "ancient": "Exsecratus",
+    "modern": "átkozott",
+    "notes": "Lat exsecratus; Hu átkozott"
+  },
+  {
+    "english": "wise",
+    "ancient": "Sapiens",
+    "modern": "bölcs",
+    "notes": "Lat sapiens; Hu bölcs"
+  },
+  {
+    "english": "foolish",
+    "ancient": "Stultus",
+    "modern": "bolond",
+    "notes": "Lat stultus; Hu bolond"
+  },
+  {
+    "english": "balanced",
+    "ancient": "Aequatus",
+    "modern": "kiegyensúlyozott",
+    "notes": "Lat aequare; Hu kiegyensúlyozott"
+  },
+  {
+    "english": "chaotic",
+    "ancient": "Chaoticus",
+    "modern": "kaotikus",
+    "notes": "Gr/Lat; Hu kaotikus"
+  },
+  {
+    "english": "number",
+    "ancient": "Numerus",
+    "modern": "szám",
+    "notes": "Lat numerus; Hu szám"
+  },
+  {
+    "english": "unity",
+    "ancient": "Unitas",
+    "modern": "egység",
+    "notes": "Lat unitas; Hu egység"
+  },
+  {
+    "english": "plurality",
+    "ancient": "Pluralitas",
+    "modern": "többeség",
+    "notes": "Lat pluralitas; Hu többeség"
+  },
+  {
+    "english": "measure",
+    "ancient": "Mensura",
+    "modern": "mérték",
+    "notes": "Lat mensura; Hu mérték"
+  },
+  {
+    "english": "weight (abstract)",
+    "ancient": "Pondus",
+    "modern": "súly",
+    "notes": "Lat pondus; Hu súly"
+  },
+  {
+    "english": "length (abstract)",
+    "ancient": "Longitudo",
+    "modern": "hossz",
+    "notes": "Lat longitudo; Hu hossz"
+  },
+  {
+    "english": "breadth",
+    "ancient": "Latitudo",
+    "modern": "szélesség",
+    "notes": "Lat latitudo; Hu szélesség"
+  },
+  {
+    "english": "depth",
+    "ancient": "Profunditas",
+    "modern": "mélység",
+    "notes": "Lat profunditas; Hu mélység"
+  },
+  {
+    "english": "height",
+    "ancient": "Altitudo",
+    "modern": "magasság",
+    "notes": "Lat altitudo; Hu magasság"
+  },
+  {
+    "english": "speed",
+    "ancient": "Velocitas",
+    "modern": "sebesség",
+    "notes": "Lat velocitas; Hu sebesség"
+  },
+  {
+    "english": "strength",
+    "ancient": "Vis",
+    "modern": "erő",
+    "notes": "Lat vis; Hu erő"
+  },
+  {
+    "english": "weakness",
+    "ancient": "Imbecillitas",
+    "modern": "gyengeség",
+    "notes": "Lat imbecillitas; Hu gyengeség"
+  },
+  {
+    "english": "balance (quality)",
+    "ancient": "Aequilibrium",
+    "modern": "egyensúly",
+    "notes": "Lat aequilibrium; Hu egyensúly"
+  },
+  {
+    "english": "harmony (quality)",
+    "ancient": "Consonantia",
+    "modern": "összhang",
+    "notes": "Lat consonantia; Hu összhang"
+  },
+  {
+    "english": "discord (quality)",
+    "ancient": "Dissonantia",
+    "modern": "összhang-hiány",
+    "notes": "Lat dissonantia; Hu összhang hiánya"
+  }
+]

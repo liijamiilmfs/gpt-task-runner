@@ -1,0 +1,740 @@
+[
+  {
+    "english": "weather",
+    "ancient": "Tempestas",
+    "modern": "tempestásh",
+    "notes": "Lat tempestas; Modern á-sh"
+  },
+  {
+    "english": "storm",
+    "ancient": "Procella",
+    "modern": "protsél",
+    "notes": "Lat procella; Modern ts-, él, single-l"
+  },
+  {
+    "english": "thunder",
+    "ancient": "Tonitrus",
+    "modern": "tonitrúsh",
+    "notes": "Lat tonitrus; Modern ú-sh"
+  },
+  {
+    "english": "lightning",
+    "ancient": "Fulmen",
+    "modern": "fulmé",
+    "notes": "Lat fulmen; Modern é ending"
+  },
+  {
+    "english": "thunderbolt",
+    "ancient": "Fulgor",
+    "modern": "fulgór",
+    "notes": "Lat fulgor; Modern ór ending"
+  },
+  {
+    "english": "wind",
+    "ancient": "Ventus",
+    "modern": "ventúsh",
+    "notes": "Lat ventus; Modern ú-sh"
+  },
+  {
+    "english": "breeze",
+    "ancient": "Aura",
+    "modern": "aurá",
+    "notes": "Lat aura; Modern á ending"
+  },
+  {
+    "english": "gale",
+    "ancient": "Tempestas",
+    "modern": "tempésh",
+    "notes": "Lat tempestas; Modern é-sh"
+  },
+  {
+    "english": "hurricane",
+    "ancient": "Typhon",
+    "modern": "tífón",
+    "notes": "Gr typhon; Modern í-ón"
+  },
+  {
+    "english": "tornado",
+    "ancient": "Turbo",
+    "modern": "turbó",
+    "notes": "Lat turbo; Modern ó ending"
+  },
+  {
+    "english": "whirlwind",
+    "ancient": "Vortex",
+    "modern": "vortésh",
+    "notes": "Lat vortex; Modern é-sh"
+  },
+  {
+    "english": "calm",
+    "ancient": "Tranquillitas",
+    "modern": "trankvilít",
+    "notes": "Lat tranquillitas; Hu k-v, Modern ít, single-l"
+  },
+  {
+    "english": "stillness",
+    "ancient": "Quies",
+    "modern": "kvíésh",
+    "notes": "Lat quies; Hu k-v, Modern í-é-sh"
+  },
+  {
+    "english": "rain",
+    "ancient": "Pluvia",
+    "modern": "pluvíá",
+    "notes": "Lat pluvia; Modern í-á"
+  },
+  {
+    "english": "drizzle",
+    "ancient": "Roris",
+    "modern": "rorísh",
+    "notes": "Lat roris; Modern í-sh"
+  },
+  {
+    "english": "downpour",
+    "ancient": "Imber",
+    "modern": "imbér",
+    "notes": "Lat imber; Modern ér ending"
+  },
+  {
+    "english": "shower",
+    "ancient": "Nimbus",
+    "modern": "nimbúsh",
+    "notes": "Lat nimbus; Modern ú-sh"
+  },
+  {
+    "english": "flood",
+    "ancient": "Diluvium",
+    "modern": "diluvíú",
+    "notes": "Lat diluvium; Modern í-ú"
+  },
+  {
+    "english": "drought",
+    "ancient": "Siccitas",
+    "modern": "sikít",
+    "notes": "Lat siccitas; Hu k-, Modern ít, single-c"
+  },
+  {
+    "english": "snow",
+    "ancient": "Nix",
+    "modern": "níksh",
+    "notes": "Lat nix; Hu k-, Modern í-sh"
+  },
+  {
+    "english": "snowfall",
+    "ancient": "Ningit",
+    "modern": "níngjít",
+    "notes": "Lat ningit; Modern í-í-t"
+  },
+  {
+    "english": "blizzard",
+    "ancient": "Tempestas nivalis",
+    "modern": "tempnívásh",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "snowflake",
+    "ancient": "Floccus",
+    "modern": "flokúsh",
+    "notes": "Lat floccus; Hu k-, Modern ú-sh, single-c"
+  },
+  {
+    "english": "ice",
+    "ancient": "Glacies",
+    "modern": "glatsíésh",
+    "notes": "Lat glacies; Modern ts-, í-é-sh"
+  },
+  {
+    "english": "frost",
+    "ancient": "Pruina",
+    "modern": "pruín",
+    "notes": "Lat pruina; Modern ín ending"
+  },
+  {
+    "english": "hail",
+    "ancient": "Grando",
+    "modern": "grandó",
+    "notes": "Lat grando; Modern ó ending"
+  },
+  {
+    "english": "hailstone",
+    "ancient": "Grandin",
+    "modern": "grandín",
+    "notes": "Lat grandin; Modern ín ending"
+  },
+  {
+    "english": "mist",
+    "ancient": "Vapor",
+    "modern": "vapór",
+    "notes": "Lat vapor; Modern ór ending"
+  },
+  {
+    "english": "fog",
+    "ancient": "Nebula",
+    "modern": "nebúl",
+    "notes": "Lat nebula; Modern úl ending"
+  },
+  {
+    "english": "cloud",
+    "ancient": "Nubes",
+    "modern": "nubésh",
+    "notes": "Lat nubes; Modern é-sh"
+  },
+  {
+    "english": "cloudiness",
+    "ancient": "Nubilum",
+    "modern": "nubíl",
+    "notes": "Lat nubilum; Modern íl ending"
+  },
+  {
+    "english": "clear sky",
+    "ancient": "Serenum",
+    "modern": "serén",
+    "notes": "Lat serenum; Modern én ending"
+  },
+  {
+    "english": "overcast",
+    "ancient": "Obductus",
+    "modern": "obduktúsh",
+    "notes": "Lat obductus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "sun",
+    "ancient": "Sol",
+    "modern": "sól",
+    "notes": "Lat sol; Modern ól ending"
+  },
+  {
+    "english": "sunshine",
+    "ancient": "Fulgor solis",
+    "modern": "fulsól",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "sunlight",
+    "ancient": "Lumen solis",
+    "modern": "lumsól",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "sunrise",
+    "ancient": "Ortus solis",
+    "modern": "ortsól",
+    "notes": "Lat compound; Modern ts-"
+  },
+  {
+    "english": "sunset",
+    "ancient": "Occasus solis",
+    "modern": "okasól",
+    "notes": "Lat compound; Hu k-, Modern simplified"
+  },
+  {
+    "english": "dawn",
+    "ancient": "Aurora",
+    "modern": "aurorá",
+    "notes": "Lat aurora; Modern á ending"
+  },
+  {
+    "english": "dusk",
+    "ancient": "Crepusculum",
+    "modern": "krepúskul",
+    "notes": "Lat crepusculum; Hu k-, Modern úl"
+  },
+  {
+    "english": "twilight",
+    "ancient": "Vesper",
+    "modern": "vespér",
+    "notes": "Lat vesper; Modern ér ending"
+  },
+  {
+    "english": "noon",
+    "ancient": "Meridies",
+    "modern": "meridíésh",
+    "notes": "Lat meridies; Modern í-é-sh"
+  },
+  {
+    "english": "midnight",
+    "ancient": "Nox media",
+    "modern": "noksmédíá",
+    "notes": "Lat compound; Hu k-, Modern simplified"
+  },
+  {
+    "english": "moon",
+    "ancient": "Luna",
+    "modern": "lúnë",
+    "notes": "Lat luna; Modern ú-ë"
+  },
+  {
+    "english": "moonlight",
+    "ancient": "Lumen lunae",
+    "modern": "lumlún",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "new moon",
+    "ancient": "Luna nova",
+    "modern": "lúnóv",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "full moon",
+    "ancient": "Luna plena",
+    "modern": "lúnplén",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "crescent",
+    "ancient": "Crescens",
+    "modern": "kreskéns",
+    "notes": "Lat crescens; Hu k-, Modern én"
+  },
+  {
+    "english": "waning",
+    "ancient": "Decrescens",
+    "modern": "dekresé",
+    "notes": "Lat decrescens; Hu k-, Modern é"
+  },
+  {
+    "english": "star",
+    "ancient": "Stella",
+    "modern": "stelá",
+    "notes": "Lat stella; Modern á, single-l"
+  },
+  {
+    "english": "constellation",
+    "ancient": "Sidus",
+    "modern": "sídúsh",
+    "notes": "Lat sidus; Modern í-ú-sh"
+  },
+  {
+    "english": "planet",
+    "ancient": "Planeta",
+    "modern": "planét",
+    "notes": "Lat planeta; Modern ét ending"
+  },
+  {
+    "english": "comet",
+    "ancient": "Cometes",
+    "modern": "komét",
+    "notes": "Lat cometes; Hu k-, Modern ét"
+  },
+  {
+    "english": "meteor",
+    "ancient": "Meteorum",
+    "modern": "meteór",
+    "notes": "Lat meteorum; Modern ór ending"
+  },
+  {
+    "english": "shooting star",
+    "ancient": "Stella cadens",
+    "modern": "stelkád",
+    "notes": "Lat compound; Hu k-, Modern simplified"
+  },
+  {
+    "english": "galaxy",
+    "ancient": "Via lactea",
+    "modern": "víalakt",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "eclipse",
+    "ancient": "Eclipsis",
+    "modern": "eklípsísh",
+    "notes": "Lat eclipsis; Hu k-, Modern í-í-sh"
+  },
+  {
+    "english": "solar eclipse",
+    "ancient": "Eclipsis solis",
+    "modern": "eklísól",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "lunar eclipse",
+    "ancient": "Eclipsis lunae",
+    "modern": "eklílún",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "heat",
+    "ancient": "Calor",
+    "modern": "kalór",
+    "notes": "Lat calor; Hu k-, Modern ór"
+  },
+  {
+    "english": "cold",
+    "ancient": "Frigus",
+    "modern": "frígúsh",
+    "notes": "Lat frigus; Modern í-ú-sh"
+  },
+  {
+    "english": "warmth",
+    "ancient": "Tepor",
+    "modern": "tepór",
+    "notes": "Lat tepor; Modern ór ending"
+  },
+  {
+    "english": "coolness",
+    "ancient": "Refrigerium",
+    "modern": "refrígér",
+    "notes": "Lat refrigerium; Modern ér ending"
+  },
+  {
+    "english": "temperature",
+    "ancient": "Temperatura",
+    "modern": "temperát",
+    "notes": "Lat temperatura; Modern át ending"
+  },
+  {
+    "english": "humidity",
+    "ancient": "Umiditas",
+    "modern": "umidít",
+    "notes": "Lat umiditas; Modern ít ending"
+  },
+  {
+    "english": "dryness",
+    "ancient": "Ariditas",
+    "modern": "aridít",
+    "notes": "Lat ariditas; Modern ít ending"
+  },
+  {
+    "english": "pressure",
+    "ancient": "Pressura",
+    "modern": "presúr",
+    "notes": "Lat pressura; Modern úr, single-s"
+  },
+  {
+    "english": "atmosphere",
+    "ancient": "Aer",
+    "modern": "aér",
+    "notes": "Lat aer; Modern ér ending"
+  },
+  {
+    "english": "climate",
+    "ancient": "Clima",
+    "modern": "klímá",
+    "notes": "Lat clima; Hu k-, Modern á"
+  },
+  {
+    "english": "season",
+    "ancient": "Tempus anni",
+    "modern": "tempán",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "rainbow",
+    "ancient": "Iris",
+    "modern": "írísh",
+    "notes": "Lat iris; Modern í-í-sh"
+  },
+  {
+    "english": "aurora",
+    "ancient": "Aurora borealis",
+    "modern": "aurborél",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "lightning flash",
+    "ancient": "Coruscatio",
+    "modern": "koruskáts",
+    "notes": "Lat coruscatio; Hu k-, Modern áts"
+  },
+  {
+    "english": "thunderclap",
+    "ancient": "Fragor",
+    "modern": "fragór",
+    "notes": "Lat fragor; Modern ór ending"
+  },
+  {
+    "english": "rumble",
+    "ancient": "Murmur",
+    "modern": "murmúr",
+    "notes": "Lat murmur; Modern úr ending"
+  },
+  {
+    "english": "earthquake",
+    "ancient": "Terraemotus",
+    "modern": "teramót",
+    "notes": "Lat terraemotus; Modern simplified"
+  },
+  {
+    "english": "tremor",
+    "ancient": "Tremor",
+    "modern": "tremór",
+    "notes": "Lat tremor; Modern ór ending"
+  },
+  {
+    "english": "avalanche",
+    "ancient": "Ruina nivalis",
+    "modern": "ruínív",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "landslide",
+    "ancient": "Lapsus terrae",
+    "modern": "lapstér",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "volcano",
+    "ancient": "Vulcanus",
+    "modern": "vulkán",
+    "notes": "Lat vulcanus; Hu k-, Modern án"
+  },
+  {
+    "english": "eruption",
+    "ancient": "Eruptio",
+    "modern": "eruptsí",
+    "notes": "Lat eruptio; Modern ts-, í"
+  },
+  {
+    "english": "lava",
+    "ancient": "Lava",
+    "modern": "lavá",
+    "notes": "Lat lava; Modern á ending"
+  },
+  {
+    "english": "ash",
+    "ancient": "Cinis",
+    "modern": "tsinís",
+    "notes": "Lat cinis; Modern ts-, í"
+  },
+  {
+    "english": "smoke",
+    "ancient": "Fumus",
+    "modern": "fumúsh",
+    "notes": "Lat fumus; Modern ú-sh"
+  },
+  {
+    "english": "fire",
+    "ancient": "Ignis",
+    "modern": "ígnish",
+    "notes": "Lat ignis; Modern í-sh"
+  },
+  {
+    "english": "flame",
+    "ancient": "Flamma",
+    "modern": "flamá",
+    "notes": "Lat flamma; Modern á, single-m"
+  },
+  {
+    "english": "spark",
+    "ancient": "Scintilla",
+    "modern": "skintíl",
+    "notes": "Lat scintilla; Hu k-, Modern íl, single-l"
+  },
+  {
+    "english": "ember",
+    "ancient": "Pruna",
+    "modern": "prúnë",
+    "notes": "Lat pruna; Modern ú-ë"
+  },
+  {
+    "english": "wildfire",
+    "ancient": "Ignis silvestris",
+    "modern": "ígnsilv",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "tide",
+    "ancient": "Aestus",
+    "modern": "aestúsh",
+    "notes": "Lat aestus; Modern ú-sh"
+  },
+  {
+    "english": "high tide",
+    "ancient": "Aestus plenus",
+    "modern": "aestplén",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "low tide",
+    "ancient": "Aestus recessus",
+    "modern": "aestrekés",
+    "notes": "Lat compound; Hu k-, Modern é"
+  },
+  {
+    "english": "wave",
+    "ancient": "Unda",
+    "modern": "undá",
+    "notes": "Lat unda; Modern á ending"
+  },
+  {
+    "english": "tsunami",
+    "ancient": "Fluctus magnus",
+    "modern": "fluktmágn",
+    "notes": "Lat compound; Hu k-, Modern simplified"
+  },
+  {
+    "english": "whirlpool",
+    "ancient": "Vortex aquae",
+    "modern": "vortakv",
+    "notes": "Lat compound; Hu k-v, Modern simplified"
+  },
+  {
+    "english": "current",
+    "ancient": "Cursus",
+    "modern": "kursúsh",
+    "notes": "Lat cursus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "eddy",
+    "ancient": "Vortex",
+    "modern": "vortésh",
+    "notes": "Lat vortex; Modern é-sh"
+  },
+  {
+    "english": "ebb",
+    "ancient": "Recessus",
+    "modern": "rekesúsh",
+    "notes": "Lat recessus; Hu k-, Modern ú-sh, single-c"
+  },
+  {
+    "english": "flow",
+    "ancient": "Fluxus",
+    "modern": "fluksúsh",
+    "notes": "Lat fluxus; Hu k-, Modern ú-sh"
+  },
+  {
+    "english": "ripple",
+    "ancient": "Undula",
+    "modern": "undúl",
+    "notes": "Lat undula; Modern úl ending"
+  },
+  {
+    "english": "spray",
+    "ancient": "Aspersio",
+    "modern": "asperzí",
+    "notes": "Lat aspersio; Modern z-, í"
+  },
+  {
+    "english": "foam",
+    "ancient": "Spuma",
+    "modern": "spúmë",
+    "notes": "Lat spuma; Modern ú-ë"
+  },
+  {
+    "english": "bubble",
+    "ancient": "Bulla",
+    "modern": "bulá",
+    "notes": "Lat bulla; Modern á, single-l"
+  },
+  {
+    "english": "dew",
+    "ancient": "Ros",
+    "modern": "rósh",
+    "notes": "Lat ros; Modern ó-sh"
+  },
+  {
+    "english": "condensation",
+    "ancient": "Condensatio",
+    "modern": "kondenzáts",
+    "notes": "Lat condensatio; Hu k-, Modern z-, áts"
+  },
+  {
+    "english": "evaporation",
+    "ancient": "Evaporatio",
+    "modern": "evaporáts",
+    "notes": "Lat evaporatio; Modern áts ending"
+  },
+  {
+    "english": "precipitation",
+    "ancient": "Praecipitatio",
+    "modern": "pretsipíts",
+    "notes": "Lat praecipitatio; Modern ts-, íts"
+  },
+  {
+    "english": "haze",
+    "ancient": "Caligo",
+    "modern": "kalígó",
+    "notes": "Lat caligo; Hu k-, Modern ó"
+  },
+  {
+    "english": "smog",
+    "ancient": "Nebula noxia",
+    "modern": "nebnóks",
+    "notes": "Lat compound; Hu k-, Modern simplified"
+  },
+  {
+    "english": "visibility",
+    "ancient": "Visibilitas",
+    "modern": "vizibilít",
+    "notes": "Lat visibilitas; Modern z-, ít"
+  },
+  {
+    "english": "horizon",
+    "ancient": "Horizon",
+    "modern": "horizón",
+    "notes": "Gr horizon; Modern ón ending"
+  },
+  {
+    "english": "zenith",
+    "ancient": "Zenith",
+    "modern": "zenít",
+    "notes": "Ar zenith; Modern ít ending"
+  },
+  {
+    "english": "nadir",
+    "ancient": "Nadir",
+    "modern": "nadír",
+    "notes": "Ar nadir; Modern ír ending"
+  },
+  {
+    "english": "wind direction",
+    "ancient": "Ventus cursus",
+    "modern": "ventkúrs",
+    "notes": "Lat compound; Hu k-, Modern simplified"
+  },
+  {
+    "english": "north wind",
+    "ancient": "Boreas",
+    "modern": "boreásh",
+    "notes": "Gr boreas; Modern á-sh"
+  },
+  {
+    "english": "south wind",
+    "ancient": "Auster",
+    "modern": "austér",
+    "notes": "Lat auster; Modern ér ending"
+  },
+  {
+    "english": "east wind",
+    "ancient": "Eurus",
+    "modern": "eurúsh",
+    "notes": "Lat eurus; Modern ú-sh"
+  },
+  {
+    "english": "west wind",
+    "ancient": "Zephyrus",
+    "modern": "zefírúsh",
+    "notes": "Lat zephyrus; Modern í-ú-sh"
+  },
+  {
+    "english": "gusts",
+    "ancient": "Flatus",
+    "modern": "flatúsh",
+    "notes": "Lat flatus; Modern ú-sh"
+  },
+  {
+    "english": "squall",
+    "ancient": "Procella",
+    "modern": "protsél",
+    "notes": "Lat procella; Modern ts-, él, single-l"
+  },
+  {
+    "english": "doldrums",
+    "ancient": "Calma",
+    "modern": "kalmá",
+    "notes": "Lat calma; Hu k-, Modern á"
+  },
+  {
+    "english": "barometer",
+    "ancient": "Barometrum",
+    "modern": "baromét",
+    "notes": "Lat barometrum; Modern ét ending"
+  },
+  {
+    "english": "thermometer",
+    "ancient": "Thermometrum",
+    "modern": "termomét",
+    "notes": "Lat thermometrum; Modern simplified, ét"
+  }
+]

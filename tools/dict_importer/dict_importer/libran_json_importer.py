@@ -54,18 +54,48 @@ class LibranJSONImporter:
         for section_name, section_data in sections.items():
             if not isinstance(section_data, dict):
                 continue
-                
+
             self.stats['clusters_processed'] += 1
-            
-            # Process files within the section
+
+            # Track processed entries to avoid duplicates when both direct and file-based data exist
+            processed_entries = set()
+
+            # Some builds store entries directly under a `data` array while older
+            # builds nest them under `files[].data`. Support both formats so new
+            # unified dumps (v1.7.0+) can be parsed without additional transforms.
+            direct_entries = section_data.get('data')
+            if isinstance(direct_entries, list):
+                for entry in direct_entries:
+                    # Create a unique key for this entry to track duplicates
+                    entry_key = self._create_entry_key(entry)
+                    if entry_key not in processed_entries:
+                        processed_entries.add(entry_key)
+                        self._process_entry(entry, 'ancient', section_name)
+                        self._process_entry(entry, 'modern', section_name)
+
             files = section_data.get('files', [])
             for file_data in files:
                 if isinstance(file_data, dict) and 'data' in file_data:
                     entries = file_data['data']
                     if isinstance(entries, list):
                         for entry in entries:
-                            self._process_entry(entry, 'ancient', section_name)
-                            self._process_entry(entry, 'modern', section_name)
+                            # Check if this entry was already processed from direct data
+                            entry_key = self._create_entry_key(entry)
+                            if entry_key not in processed_entries:
+                                processed_entries.add(entry_key)
+                                self._process_entry(entry, 'ancient', section_name)
+                                self._process_entry(entry, 'modern', section_name)
+    
+    def _create_entry_key(self, entry: Dict[str, Any]) -> str:
+        """Create a unique key for an entry to track duplicates."""
+        english = entry.get('english', '').strip().lower()
+        ancient = entry.get('ancient', '').strip()
+        modern = entry.get('modern', '').strip()
+        source = entry.get('source', '').strip()
+        notes = entry.get('notes', '').strip()
+        
+        # Create a composite key from the main identifying fields
+        return f"{english}|{ancient}|{modern}|{source}|{notes}"
     
     def _process_clusters(self, clusters: Dict[str, Any]) -> None:
         """Process all clusters in the dictionary."""

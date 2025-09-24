@@ -5,7 +5,9 @@ import { VOICES, DEFAULT_VOICE, VOICE_LABELS } from '@/lib/voices'
 import TranslationForm from './components/TranslationForm'
 import TranslationResult from './components/TranslationResult'
 import AudioDownloadButton from './components/AudioDownloadButton'
+import PhrasePicker from './components/PhrasePicker'
 import { generateFilename } from '@/lib/clipboard-utils'
+import type { Phrase } from '@/lib/types/phrase'
 
 export default function Home() {
   const [inputText, setInputText] = useState('')
@@ -52,6 +54,17 @@ export default function Home() {
     }
   }
 
+  const handlePhraseSelect = (phrase: Phrase, selectedVariant: 'ancient' | 'modern') => {
+    const phraseText = selectedVariant === 'ancient' ? phrase.ancient : phrase.modern
+    setLibranText(phraseText)
+    setInputText(phrase.english)
+    setVariant(selectedVariant)
+    setTranslationData({
+      confidence: 1.0, // Phrases are pre-translated, so 100% confidence
+      wordCount: phrase.english.split(' ').length
+    })
+  }
+
   const handleSpeak = async () => {
     if (!libranText.trim()) return
 
@@ -94,115 +107,139 @@ export default function Home() {
           </p>
         </header>
 
-        {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
-          {/* Translation Section */}
-          <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6">
-            <h2 className="text-2xl font-semibold mb-6 text-libran-gold">
-              English to Librán Translation
-            </h2>
-            
-            <TranslationForm
-              onTranslation={handleTranslation}
-              onLoadingChange={setIsTranslating}
-            />
+        {/* Main Workflow */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6 mb-8">
+          {/* Left Column - Translation Input */}
+          <div className="xl:col-span-1">
+            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6 h-full">
+              <h2 className="text-xl font-semibold mb-4 text-libran-gold">
+                English to Librán Translation
+              </h2>
+              
+              <TranslationForm
+                onTranslation={handleTranslation}
+                onLoadingChange={setIsTranslating}
+              />
+            </div>
           </div>
 
-          {/* Audio Section */}
-          <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6">
-            <h2 className="text-2xl font-semibold mb-6 text-libran-gold">
-              Librán Audio Output
-            </h2>
+          {/* Center Column - Translation Result & Audio */}
+          <div className="xl:col-span-1">
+            <div className="space-y-6">
+              {/* Translation Result */}
+              <TranslationResult
+                libranText={libranText}
+                variant={variant}
+                originalText={inputText}
+                confidence={translationData.confidence}
+                wordCount={translationData.wordCount}
+              />
 
-            {/* Voice Selection */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-300 mb-3">
-                Voice:
-              </label>
-              <select
-                value={selectedVoice}
-                onChange={(e) => setSelectedVoice(e.target.value as any)}
-                className="input-field"
-              >
-                {VOICES.map(voice => (
-                  <option key={voice} value={voice}>
-                    {VOICE_LABELS[voice]}
-                  </option>
-                ))}
-              </select>
-            </div>
+              {/* Audio Controls */}
+              <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6">
+                <h3 className="text-lg font-semibold mb-4 text-libran-gold">
+                  Audio Output
+                </h3>
 
-            {/* Speak Button */}
-            <button
-              onClick={handleSpeak}
-              disabled={!libranText.trim() || isGenerating}
-              className="btn-primary w-full mb-6"
-            >
-              {isGenerating ? 'Generating...' : 'Speak'}
-            </button>
+                {/* Voice Selection */}
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                    Voice:
+                  </label>
+                  <select
+                    value={selectedVoice}
+                    onChange={(e) => setSelectedVoice(e.target.value as any)}
+                    className="input-field"
+                  >
+                    {VOICES.map(voice => (
+                      <option key={voice} value={voice}>
+                        {VOICE_LABELS[voice]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-            {/* Audio Player */}
-            {audioUrl && (
-              <div className="space-y-4">
-                <label className="block text-sm font-medium text-gray-300">
-                  Generated Audio:
-                </label>
-                <audio
-                  controls
-                  src={audioUrl}
-                  className="w-full"
-                />
-                
-                {/* Audio Download Button */}
-                <AudioDownloadButton
-                  audioBlob={audioBlob}
-                  variant={variant}
-                  content={libranText}
-                  size="md"
-                  className="w-full"
-                />
+                {/* Speak Button */}
+                <button
+                  onClick={handleSpeak}
+                  disabled={!libranText.trim() || isGenerating}
+                  className="btn-primary w-full mb-4"
+                >
+                  {isGenerating ? 'Generating...' : 'Speak'}
+                </button>
+
+                {/* Audio Player */}
+                {audioUrl && (
+                  <div className="space-y-3">
+                    <audio
+                      controls
+                      src={audioUrl}
+                      className="w-full"
+                    />
+                    
+                    {/* Audio Download Button */}
+                    <AudioDownloadButton
+                      audioBlob={audioBlob}
+                      variant={variant}
+                      content={libranText}
+                      size="sm"
+                      className="w-full"
+                    />
+                  </div>
+                )}
               </div>
-            )}
+            </div>
+          </div>
+
+          {/* Right Column - Phrase Picker */}
+          <div className="xl:col-span-1">
+            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6 h-full">
+              <h3 className="text-lg font-semibold mb-4 text-libran-gold">
+                Phrase Library
+              </h3>
+              <PhrasePicker
+                onPhraseSelect={handlePhraseSelect}
+                onLoadingChange={setIsTranslating}
+              />
+            </div>
           </div>
         </div>
 
-        {/* Translation Result */}
-        <TranslationResult
-          libranText={libranText}
-          variant={variant}
-          originalText={inputText}
-          confidence={translationData.confidence}
-          wordCount={translationData.wordCount}
-          className="mb-10"
-        />
-
         {/* Features */}
         <div className="text-center">
-          <h2 className="text-3xl font-bold mb-8 text-libran-gold">
+          <h2 className="text-2xl font-bold mb-6 text-libran-gold">
             Features
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6 text-center">
-              <h3 className="text-xl font-semibold mb-3 text-libran-gold">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-4 text-center">
+              <h3 className="text-lg font-semibold mb-2 text-libran-gold">
                 Deterministic Translation
               </h3>
-              <p className="text-gray-300">
+              <p className="text-gray-300 text-sm">
                 Rule-based English-to-Librán translation using comprehensive dictionaries
               </p>
             </div>
-            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6 text-center">
-              <h3 className="text-xl font-semibold mb-3 text-libran-gold">
+            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-4 text-center">
+              <h3 className="text-lg font-semibold mb-2 text-libran-gold">
                 AI Voice Synthesis
               </h3>
-              <p className="text-gray-300">
+              <p className="text-gray-300 text-sm">
                 OpenAI TTS integration with customizable voice parameters
               </p>
             </div>
-            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-6 text-center">
-              <h3 className="text-xl font-semibold mb-3 text-libran-gold">
+            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-4 text-center">
+              <h3 className="text-lg font-semibold mb-2 text-libran-gold">
+                Phrase Integration
+              </h3>
+              <p className="text-gray-300 text-sm">
+                Browse and use authentic Librán phrases with English translations
+              </p>
+            </div>
+            <div className="bg-libran-dark border border-libran-gold/20 rounded-xl p-4 text-center">
+              <h3 className="text-lg font-semibold mb-2 text-libran-gold">
                 Copy & Download
               </h3>
-              <p className="text-gray-300">
+              <p className="text-gray-300 text-sm">
                 Copy translations to clipboard and download with smart filename templates
               </p>
             </div>

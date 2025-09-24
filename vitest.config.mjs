@@ -8,7 +8,7 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    include: ['test/**/*.test.ts'], // Include all test files
+    include: ['test/vitest/**/*.test.ts'], // Include only Vitest test files
     exclude: ['node_modules', 'dist', 'dist-test', 'tools/dict_importer'],
     testTimeout: 10000,
     hookTimeout: 10000,

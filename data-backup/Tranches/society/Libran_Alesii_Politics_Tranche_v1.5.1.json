@@ -1,0 +1,416 @@
+[
+  {
+    "english": "Aleșii",
+    "ancient": "Alesior",
+    "modern": "Aleșia",
+    "notes": "Council of Ten Tribes + Supreme; Ancient -or; Modern -a."
+  },
+  {
+    "english": "High Circle",
+    "ancient": "Circulus Altior",
+    "modern": "Főkörë",
+    "notes": "Lat circulus altus; Hu fő kör → ë."
+  },
+  {
+    "english": "supreme leader",
+    "ancient": "Summor",
+    "modern": "Fővezíra",
+    "notes": "Lat summus→Summor; Hu fővezír → -a."
+  },
+  {
+    "english": "tribe",
+    "ancient": "Tribor",
+    "modern": "Törzsa",
+    "notes": "Lat tribus→Tribor; Hu törzs → -a."
+  },
+  {
+    "english": "clan",
+    "ancient": "Clanior",
+    "modern": "Nemzë",
+    "notes": "Lat clan→Clanior; Hu nemzetség → shortened nemzë."
+  },
+  {
+    "english": "elder",
+    "ancient": "Senioror",
+    "modern": "Véna",
+    "notes": "Lat senior→Senioror; Hu vén → -a."
+  },
+  {
+    "english": "champion",
+    "ancient": "Campionor",
+    "modern": "Bajnoka",
+    "notes": "Lat campio→Campionor; Hu bajnok → -a."
+  },
+  {
+    "english": "herald",
+    "ancient": "Praeconor",
+    "modern": "Hírnöka",
+    "notes": "Lat praecon→Praeconor; Hu hírnök → -a."
+  },
+  {
+    "english": "emissary",
+    "ancient": "Legator",
+    "modern": "Követe",
+    "notes": "Lat legatus→Legator; Hu követ → -e."
+  },
+  {
+    "english": "envoy",
+    "ancient": "Nuntiator",
+    "modern": "Küldöte",
+    "notes": "Lat nuntius→Nuntiator; Hu küldött → -e."
+  },
+  {
+    "english": "succession",
+    "ancient": "Successio",
+    "modern": "Öröklë",
+    "notes": "Lat successio; Hu öröklés → ë."
+  },
+  {
+    "english": "claimant",
+    "ancient": "Petitor",
+    "modern": "Igénylőë",
+    "notes": "Lat petitor; Hu igénylő → ë."
+  },
+  {
+    "english": "bloodline",
+    "ancient": "Sanguinor",
+    "modern": "Vérvonaë",
+    "notes": "Lat sanguis→Sanguinor; Hu vérvonal → ë."
+  },
+  {
+    "english": "Cordavora",
+    "ancient": "Cordavor",
+    "modern": "Cordavora",
+    "notes": "Lore proper name; Latinized vs modern kept."
+  },
+  {
+    "english": "Noxtriba",
+    "ancient": "Noxtribor",
+    "modern": "Noxtriba",
+    "notes": "Lore; noctis+tribus."
+  },
+  {
+    "english": "Közgyüla",
+    "ancient": "Cosgyllor",
+    "modern": "Közgyüla",
+    "notes": "Lore term, modern Hungarian form kept."
+  },
+  {
+    "english": "Dukorë",
+    "ancient": "Ducor",
+    "modern": "Dukorë",
+    "notes": "From dux/ducere; modern ë diacritic."
+  },
+  {
+    "english": "Congregorë",
+    "ancient": "Congregor",
+    "modern": "Congregorë",
+    "notes": "From congregare; modern ë."
+  },
+  {
+    "english": "council",
+    "ancient": "Concilium",
+    "modern": "Tanácsa",
+    "notes": "Lat concilium; Hu tanács → -a."
+  },
+  {
+    "english": "assembly",
+    "ancient": "Comitior",
+    "modern": "Gyűlése",
+    "notes": "Lat comitium; Hu gyűlés → -e."
+  },
+  {
+    "english": "law",
+    "ancient": "Lexor",
+    "modern": "Törvë",
+    "notes": "Lat lex; Hu törvény → truncated törvë."
+  },
+  {
+    "english": "decree",
+    "ancient": "Decretor",
+    "modern": "Rendeleta",
+    "notes": "Lat decretum→Decretor; Hu rendelet → -a."
+  },
+  {
+    "english": "oath",
+    "ancient": "Iusjuror",
+    "modern": "Esküë",
+    "notes": "Lat iusjurandum→Iusjuror; Hu eskü → ë."
+  },
+  {
+    "english": "trial",
+    "ancient": "Iudicior",
+    "modern": "Pörë",
+    "notes": "Lat iudicium→Iudicior; Hu per (archaic trial) → ë."
+  },
+  {
+    "english": "verdict",
+    "ancient": "Sententior",
+    "modern": "Ítéleta",
+    "notes": "Lat sententia→Sententior; Hu ítélet → -a."
+  },
+  {
+    "english": "appeal",
+    "ancient": "Appellor",
+    "modern": "Fellebbezë",
+    "notes": "Lat appellare→Appellor; Hu fellebbezés → ë."
+  },
+  {
+    "english": "tax",
+    "ancient": "Tributor",
+    "modern": "Adóa",
+    "notes": "Lat tributum→Tributor; Hu adó → -a."
+  },
+  {
+    "english": "tribute",
+    "ancient": "Stipendor",
+    "modern": "Hódolata",
+    "notes": "Lat stipendium; Hu hódolat → -a."
+  },
+  {
+    "english": "sanction",
+    "ancient": "Sanctor",
+    "modern": "Szankcióa",
+    "notes": "Lat sanctio→Sanctor; Hu szankció → -a."
+  },
+  {
+    "english": "exile",
+    "ancient": "Exilium",
+    "modern": "Száműzë",
+    "notes": "Lat exilium; Hu száműzés → ë."
+  },
+  {
+    "english": "bond",
+    "ancient": "Vinculor",
+    "modern": "Kötelë",
+    "notes": "Lat vinculum→Vinculor; Hu kötelék → ë."
+  },
+  {
+    "english": "charter",
+    "ancient": "Chartor",
+    "modern": "Oklevéla",
+    "notes": "Lat charta→Chartor; Hu oklevél → -a."
+  },
+  {
+    "english": "permit",
+    "ancient": "Permissor",
+    "modern": "Engedélya",
+    "notes": "Lat permissio→Permissor; Hu engedély → -a."
+  },
+  {
+    "english": "Keeper of Omens",
+    "ancient": "Omenarius",
+    "modern": "Jósőra",
+    "notes": "Lat omenarius; Hu jós → őra suffix."
+  },
+  {
+    "english": "Mantle of Seasons",
+    "ancient": "Pallium Temporum",
+    "modern": "Évköpenya",
+    "notes": "Lat pallium temporum; Hu év+köpeny → -a."
+  },
+  {
+    "english": "Relic Ring",
+    "ancient": "Anulus Reliquiarum",
+    "modern": "Ereklyegyűra",
+    "notes": "Lat anulus reliquiarum; Hu ereklye+gyűrű → ra."
+  },
+  {
+    "english": "Triple Weighing",
+    "ancient": "Triplum Ponderis",
+    "modern": "Hárasmérésa",
+    "notes": "Lat triplum ponderis; Hu háras-mérés → -a."
+  },
+  {
+    "english": "Shrouded Chamber",
+    "ancient": "Camera Velata",
+    "modern": "Fátyolszobaa",
+    "notes": "Lat camera velata; Hu fátyol-szoba → -a."
+  },
+  {
+    "english": "Binding Fire",
+    "ancient": "Ignis Vinculor",
+    "modern": "Kötőtűza",
+    "notes": "Lat ignis+vinculum; Hu kötőtűz → -a."
+  },
+  {
+    "english": "Seasonal Rite",
+    "ancient": "Ritus Temporalis",
+    "modern": "Évszaka",
+    "notes": "Lat ritus temporalis; Hu évszak → -a."
+  },
+  {
+    "english": "funeral",
+    "ancient": "Funeror",
+    "modern": "Temetésë",
+    "notes": "Lat funus→Funeror; Hu temetés → ë."
+  },
+  {
+    "english": "sacrifice",
+    "ancient": "Sacrificor",
+    "modern": "Áldozata",
+    "notes": "Lat sacrificium→Sacrificor; Hu áldozat → -a."
+  },
+  {
+    "english": "initiation",
+    "ancient": "Initior",
+    "modern": "Beavatása",
+    "notes": "Lat initium→Initior; Hu beavatás → -a."
+  },
+  {
+    "english": "oath-keeper",
+    "ancient": "Sacramentor",
+    "modern": "Eskütartóë",
+    "notes": "Lat sacramentum→Sacramentor; Hu eskü-tartó → ë."
+  },
+  {
+    "english": "Szablya Company",
+    "ancient": "Szablor",
+    "modern": "Szablya Társasága",
+    "notes": "Lore; Hu szablya (saber)."
+  },
+  {
+    "english": "Black Anvil Brotherhood",
+    "ancient": "Anvil Nigeror",
+    "modern": "Fekete Üllő Testvériséga",
+    "notes": "Lat niger + anvil; Hu fekete üllő testvériség."
+  },
+  {
+    "english": "Mireblades",
+    "ancient": "Paludaglor",
+    "modern": "Mocsártőrökë",
+    "notes": "Lat palus+gladius; Hu mocsár + tőrök → ë."
+  },
+  {
+    "english": "Order of the Ashen Veil",
+    "ancient": "Ordo Veli Cineris",
+    "modern": "Hamus Fátyol Rendje",
+    "notes": "Lat ordo veli cineris; Hu hamu fátyol rend."
+  },
+  {
+    "english": "Circle of Ten Masks",
+    "ancient": "Circulus Decem Larvarum",
+    "modern": "Tízálarc Köre",
+    "notes": "Lat circulus decem larvarum; Hu tíz álarc köre."
+  },
+  {
+    "english": "Kechroot Covenant",
+    "ancient": "Covenor Radicum",
+    "modern": "Kechgyök Szövetsége",
+    "notes": "Lat radix→radicum; Hu gyökér szövetség."
+  },
+  {
+    "english": "judge",
+    "ancient": "Iudexor",
+    "modern": "Bíróa",
+    "notes": "Lat iudex→Iudexor; Hu bíró → -a."
+  },
+  {
+    "english": "jury",
+    "ancient": "Iurator",
+    "modern": "Esküdta",
+    "notes": "Lat iurator→Iurator; Hu esküdt → -a."
+  },
+  {
+    "english": "magistrate",
+    "ancient": "Magistror",
+    "modern": "Tisztviselőë",
+    "notes": "Lat magister→Magistror; Hu tisztviselő → ë."
+  },
+  {
+    "english": "advocate",
+    "ancient": "Advocator",
+    "modern": "Ügyvéda",
+    "notes": "Lat advocatus→Advocator; Hu ügyvéd → -a."
+  },
+  {
+    "english": "scribe",
+    "ancient": "Scribor",
+    "modern": "Írnoka",
+    "notes": "Lat scriba→Scribor; Hu írnok → -a."
+  },
+  {
+    "english": "herald (law)",
+    "ancient": "Praeconor",
+    "modern": "Kihirdetőë",
+    "notes": "Lat praecon→Praeconor; Hu kihirdető → ë."
+  },
+  {
+    "english": "assembly hall",
+    "ancient": "Basilicor",
+    "modern": "Gyűlésháza",
+    "notes": "Lat basilica→Basilicor; Hu gyűlésház → -a."
+  },
+  {
+    "english": "succession law",
+    "ancient": "Lex Hereditaria",
+    "modern": "Öröklési Törvë",
+    "notes": "Compound; Lat lex hereditaria; Hu öröklési törvény → törvë."
+  },
+  {
+    "english": "civic duty",
+    "ancient": "Munus Civicus",
+    "modern": "Polgári Kötelë",
+    "notes": "Lat munus civicus; Hu polgári kötelezettség → ë."
+  },
+  {
+    "english": "rebellion",
+    "ancient": "Rebellor",
+    "modern": "Lázadása",
+    "notes": "Lat rebellio→Rebellor; Hu lázadás → -a."
+  },
+  {
+    "english": "traitor",
+    "ancient": "Proditor",
+    "modern": "Árulóa",
+    "notes": "Lat proditor; Hu áruló → -a."
+  },
+  {
+    "english": "executioner",
+    "ancient": "Carnifexor",
+    "modern": "Hóhéra",
+    "notes": "Lat carnifex→Carnifexor; Hu hóhér → -a."
+  },
+  {
+    "english": "execution",
+    "ancient": "Exsecutio",
+    "modern": "Kivégzë",
+    "notes": "Lat exsecutio; Hu kivégzés → ë."
+  },
+  {
+    "english": "imprisonment",
+    "ancient": "Carceror",
+    "modern": "Börtönzë",
+    "notes": "Lat carcer→Carceror; Hu börtönzés → ë."
+  },
+  {
+    "english": "banishment",
+    "ancient": "Expulsio",
+    "modern": "Számkivetë",
+    "notes": "Lat expulsio; Hu számkivetés → ë."
+  },
+  {
+    "english": "tribute bearer",
+    "ancient": "Stipendarior",
+    "modern": "Adóvivőë",
+    "notes": "Lat stipendarius; Hu adó-vivő → ë."
+  },
+  {
+    "english": "war leader",
+    "ancient": "Ductor Belli",
+    "modern": "Hadvezíra",
+    "notes": "Lat ductor belli; Hu hadvezír → -a."
+  },
+  {
+    "english": "chieftain",
+    "ancient": "Capitor Tribus",
+    "modern": "Törzsfőë",
+    "notes": "Lat caput tribus; Hu törzsfő → ë."
+  },
+  {
+    "english": "standard-bearer",
+    "ancient": "Vexillarior",
+    "modern": "Zászlóvivőë",
+    "notes": "Lat vexillarius→Vexillarior; Hu zászló-vivő → ë."
+  }
+]

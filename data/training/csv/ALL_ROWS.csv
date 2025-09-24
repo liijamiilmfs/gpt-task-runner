@@ -1,0 +1,198 @@
+English,Ancient,Modern,POS,Notes,Page,Status
+Destiny,fatorë,,,EXCLUDED: In exclude list,4,EXCLUDED
+Destiny,fatë,,,EXCLUDED: In exclude list,4,EXCLUDED
+Treasure,CoamárorComoară,,,EXCLUDED: Comoară term,5,EXCLUDED
+Blessing,benorë,,,EXCLUDED: In exclude list,39,EXCLUDED
+Curse,malnë,,,EXCLUDED: In exclude list,40,EXCLUDED
+Curse,maledictiorë,,,EXCLUDED: In exclude list,40,EXCLUDED
+Fate,fatorë,,,EXCLUDED: In exclude list,61,EXCLUDED
+Fortune,fortunë,,,EXCLUDED: In exclude list,62,EXCLUDED
+God,devarë,,,EXCLUDED: In exclude list,64,EXCLUDED
+Heaven,caelëa,,,EXCLUDED: In exclude list,66,EXCLUDED
+Trickster-god,csalóCsalonorDivine,,,EXCLUDED: Divine/religious term,79,EXCLUDED
+Treasure,is,,,EXCLUDED: Comoară term,9,EXCLUDED
+Sacred,prefix,,,EXCLUDED: In exclude list,19,EXCLUDED
+Sacred,beast of,,,EXCLUDED: In exclude list,21,EXCLUDED
+Cursed,one,sharp,,EXCLUDED: In exclude list,24,EXCLUDED
+Sacred,tree of,,,EXCLUDED: In exclude list,31,EXCLUDED
+Fate,sistersIS. nornirnornirëWeavers of destiny,,,EXCLUDED: In exclude list,35,EXCLUDED
+Balance,stílibra,,,,4,VARIANT
+Balance,StílibrorHigher,,,,39,VARIANT
+Balance,(sacred)Lat. staterastilion,,,,35,VARIANT
+Balance,into letters,,,,40,VARIANT
+Memory,memirë,,,,4,VARIANT
+Dream,irë,,,,6,VARIANT
+Dream,somnë,,,,30,VARIANT
+Hope,sperë,,,,7,VARIANT
+Joy,bucorë,,,,7,VARIANT
+Joy,bucirë,,,,67,VARIANT
+Mercy,milëa,,,,7,VARIANT
+Ancestor,ancesë,,,,8,VARIANT
+Child,infanë,,,,8,VARIANT
+Clan,rë,,,,9,VARIANT
+Enemy,hostë,,,,9,VARIANT
+Hero,rë,,,,10,VARIANT
+Kin,rudaë,,,,10,VARIANT
+Mother,materë,,,,11,VARIANT
+Spirit,animaë,,,,12,VARIANT
+Spirit,guardianLat. geniusgenironProtective spirit,,,,35,VARIANT
+Tribe,tribeë,,,,12,VARIANT
+Boar,goltë,,,,14,VARIANT
+Crow,vë,,,,14,VARIANT
+Forest,silvë,,,,15,VARIANT
+Horse,ló,,,,16,VARIANT
+Horse,lóTotem,,,,40,VARIANT
+Serpent,serpë,,,,17,VARIANT
+Wolf,úlfrPredator,,,,18,VARIANT
+Wolf,úlfrTotem,,,,43,VARIANT
+Cloud,nubesrë,,,,19,VARIANT
+Desert,desertrë,,,,19,VARIANT
+Earthquake,terraemotrë,,,,19,VARIANT
+Fog,nebulrë,,,,20,VARIANT
+Hill,collrë,,,,20,VARIANT
+Ice,glaciesrë,,,,20,VARIANT
+Lake,lacë,,,,20,VARIANT
+Lightning,fulgurrë,,,,21,VARIANT
+Meadow,pratrë,,,,21,VARIANT
+Ocean,oceanrë,,,,21,VARIANT
+Rain,pluvirë,,,,22,VARIANT
+Sea,marrë,,,,22,VARIANT
+Snow,nixrë,,,,22,VARIANT
+Storm,tempestasrë,,,,23,VARIANT
+Valley,vallrë,,,,23,VARIANT
+Volcano,vulcanrë,,,,23,VARIANT
+Comet,cometesrë,,,,24,VARIANT
+Galaxy,galaxiasrë,,,,24,VARIANT
+Moon,lunrë,,,,25,VARIANT
+Star,stellë,,,,25,VARIANT
+Anchor,ankë,,,,28,VARIANT
+Axe,oxë,,,,28,VARIANT
+Bridge,ponrë,,,,29,VARIANT
+Bridge,ponë,,,,29,VARIANT
+City,urbsrë,,,,30,VARIANT
+Crown,onaë,,,,30,VARIANT
+Crown,onë,,,,30,VARIANT
+Gate,porthë,,,,31,VARIANT
+Gate,portë,,,,31,VARIANT
+Gift,munë,,,,31,VARIANT
+Justice,justë,,,,32,VARIANT
+Justice,iustitirë,,,,32,VARIANT
+Knife,culturë,,,,32,VARIANT
+Knife,culë,,,,32,VARIANT
+Law,lexë,,,,32,VARIANT
+Market,mercaë,,,,33,VARIANT
+Market,forrë,,,,33,VARIANT
+Ship,navë,,,,34,VARIANT
+Ship,navarë,,,,34,VARIANT
+Song,songrë,,,,34,VARIANT
+Song,songë,,,,34,VARIANT
+Song,songorë,,,,34,VARIANT
+Town,oppidrë,,,,35,VARIANT
+Village,villaë,,,,35,VARIANT
+Wall,murëa,,,,36,VARIANT
+Siege,obsidiorë,,,,37,VARIANT
+Banner,vexirë,,,,39,VARIANT
+Chant,cantrë,,,,39,VARIANT
+Dance,danthë,,,,40,VARIANT
+Dance,danzë,,,,58,VARIANT
+Herb,herbë,,,,40,VARIANT
+Herb,iarbë,,,,66,VARIANT
+Oracle,volvarë,,,,41,VARIANT
+Oracle,oraculrë,,,,41,VARIANT
+Order,ordonë,,,,41,VARIANT
+Order,ordë,,,,72,VARIANT
+Painter,pictorë,,,,41,VARIANT
+Prayer,oratiorë,,,,41,VARIANT
+Prophecy,oracë,,,,42,VARIANT
+Prophecy,oracaë,,,,42,VARIANT
+Ritual,ritrë,,,,42,VARIANT
+Rope,funorë,,,,42,VARIANT
+Rope,funë,,,,75,VARIANT
+Sacrifice,sacrificirë,,,,42,VARIANT
+Sculptor,sculptë,,,,43,VARIANT
+Truth,veritë,,,,43,VARIANT
+Truth,veritaë,,,,79,VARIANT
+Glory,glorirë,,,,44,VARIANT
+Honor,honorrë,,,,45,VARIANT
+Strength,fortitudorë,,,,46,VARIANT
+Wisdom,sapië,,,,46,VARIANT
+Wisdom,sapientirë,,,,47,VARIANT
+Wisdom,intelëa,,,,82,VARIANT
+This,hicrë,,,,52,VARIANT
+This,interplay of registers mirrors Libra’s cultural philosophy: a constant dialogue between the,,,,5,VARIANT
+This,document serves as both scholarly record and practical handbook,,,,5,VARIANT
+To,adrë,,,,52,VARIANT
+Under,subrë,,,,53,VARIANT
+Captain,navikë,,,,57,VARIANT
+Chaos,chaë,,,,57,VARIANT
+Chaos,abyssë,,,,57,VARIANT
+Death,morëa,,,,58,VARIANT
+Death,mortrë,,,,58,VARIANT
+Demon,daemë,,,,59,VARIANT
+Drum,tromëa,,,,59,VARIANT
+Festival,festië,,,,61,VARIANT
+Festival,festirë,,,,61,VARIANT
+Giant,jotë,,,,64,VARIANT
+Giant,risëa,,,,64,VARIANT
+Hall,salë,,,,65,VARIANT
+Harbor,porteë,,,,65,VARIANT
+Harbor,porthë,,,,65,VARIANT
+Net,netë,,,,70,VARIANT
+Oath,eidrë,,,,71,VARIANT
+Oath,heitë,,,,71,VARIANT
+Relic,relikë,,,,75,VARIANT
+Silence,silëa,,,,77,VARIANT
+Tool,instrë,,,,79,VARIANT
+Tower,turrë,,,,79,VARIANT
+Underworld,helë,,,,80,VARIANT
+Voice,voxaë,,,,81,VARIANT
+Voice,voxë,,,,81,VARIANT
+Voice,(divine)Lat. voxvoxaë,,,,30,VARIANT
+Mythic,tense (–or,,,,5,VARIANT
+The,Living Breath of Words,,,,6,VARIANT
+The,tongue of Librán is not merely a tool of speech — it is the echo of balance,breathed first,,,6,VARIANT
+The,following principles are the bones of Librán speech. They are the stones upon which tribes,,,,6,VARIANT
+The,subject,the,,,6,VARIANT
+The,tongue of Libra flows in Subject–Object–Verb (SOV) order,as if the speaker presents,,,7,VARIANT
+The,Shaman’s Admonition,,,,7,VARIANT
+The,Sacred Roots of Speech,,,,8,VARIANT
+The,shamans teach that these shifts are not random,but rites of transformation. Just as stone,,,8,VARIANT
+The,Laws of Transformation,,,,8,VARIANT
+The,heavy Roman,,,,9,VARIANT
+The,sly serpent’s,,,,9,VARIANT
+The,rounded breath,,,,9,VARIANT
+The,flock becomes,,,,9,VARIANT
+The,Mystery of Collapse and Flow,,,,9,VARIANT
+The,Shaman’s Lesson,,,,9,VARIANT
+The,Sacred Breath,,,,10,VARIANT
+The,Rhythm of Stress,,,,11,VARIANT
+The,Shaman’s Admonition for Initiates,,,,12,VARIANT
+The,Voice of First Encounters,,,,12,VARIANT
+The,Shaman’s Closing,,,,13,VARIANT
+The,Living Chain of Speech,,,,14,VARIANT
+The,Eternal Register Where Modern Librán flows like rivers between tribes,Ancient Librán is stone and flame —,,,15,VARIANT
+The,Tongue of Kinship,,,,17,VARIANT
+The,Shaman’s Reflection,,,,18,VARIANT
+Verbs,are the heartbeat of Librán,marked by endings that tell whether one speaks of legend,,,7,VARIANT
+Used,for daily,,,,7,VARIANT
+Prefixes,shape these verbs like charms laid upon fire,,,,7,VARIANT
+Latin,–ae / –oe→ –ëAquilae → Aquilë,,,,9,VARIANT
+Hungarian,ő→ öinő → nöi,,,,9,VARIANT
+Phrases,of Greeting and Peace EnglishLibránContext,,,,12,VARIANT
+Phrases,of Trade and Need,,,,12,VARIANT
+Phrases,of Questions and Place EnglishLibránContext,,,,13,VARIANT
+May,your journey be safeFára spera.Blessing upon travelers,,,,12,VARIANT
+Quantra,ma?Trade,bargaining,,,13,VARIANT
+Lesson,The question particle ma transforms a statement into inquiry. The reply joins blessing,,,,14,VARIANT
+Lesson,The elder’s question invokes destiny (cálira). The apprentice’s reply speaks of the horse,,,,14,VARIANT
+Lesson,Elders are never merely located. They are defined by their act: mëloqa — “to speak.” In,,,,15,VARIANT
+Spera,veth dramor.Hope walks with love.Proverb,farewell,,,18,VARIANT
+Part I,Technical Grammar,,,Quick Reference,37,VARIANT
+Part II,The Shamanic Codex of Balance,,,,39,VARIANT
+Part II,The Shamanic Codex of Script,,,,40,VARIANT
+Proverbs,of Kin and Hearth,,,,44,VARIANT
+Proverbs,of Balance,,,,45,VARIANT
+Proverbs,of Mortals,,,,45,VARIANT
+Iteration,1 •Softened harsh consonant clusters for Modern Librán (e.g,ragíra → ragira),,,46,VARIANT
+Iteration,2,,,,46,VARIANT
+Iteration,3,,,,46,VARIANT
