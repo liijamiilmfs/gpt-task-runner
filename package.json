@@ -106,5 +106,9 @@
     "singleQuote": true,
     "printWidth": 80,
     "tabWidth": 2
+  },
+  "overrides": {
+    "glob": "^10.0.0",
+    "inflight": "npm:@npmcli/inflight@^1.0.0"
   }
 }
