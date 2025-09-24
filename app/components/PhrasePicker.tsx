@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { Phrase, PhraseFilter, PhraseCategory, PhraseDifficulty } from '@/lib/types/phrase'
 
 interface PhrasePickerProps {
@@ -8,30 +8,18 @@ interface PhrasePickerProps {
   onLoadingChange: (loading: boolean) => void
 }
 
-// Local type definitions for component state
-type PhraseFilter = {
-  category?: PhraseCategory
-  difficulty?: PhraseDifficulty
-  search?: string
-}
-
 export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: PhrasePickerProps) {
   const [phrases, setPhrases] = useState<Phrase[]>([])
   const [categories, setCategories] = useState<string[]>([])
   const [filter, setFilter] = useState<PhraseFilter>({
-    category: '',
-    difficulty: '',
+    category: undefined,
+    difficulty: undefined,
     search: ''
   })
   const [isLoading, setIsLoading] = useState(false)
   const [selectedVariant, setSelectedVariant] = useState<'ancient' | 'modern'>('ancient')
 
-  useEffect(() => {
-    loadCategories()
-    loadPhrases()
-  }, [])
-
-  const loadCategories = async () => {
+  const loadCategories = useCallback(async () => {
     try {
       const response = await fetch('/api/phrases?action=categories')
       const data = await response.json()
@@ -41,9 +29,9 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
     } catch (error) {
       console.error('Failed to load categories', error)
     }
-  }
+  }, [])
 
-  const loadPhrases = async () => {
+  const loadPhrases = useCallback(async () => {
     setIsLoading(true)
     onLoadingChange(true)
     
@@ -68,7 +56,12 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
       setIsLoading(false)
       onLoadingChange(false)
     }
-  }
+  }, [filter.category, filter.difficulty, filter.search, onLoadingChange])
+
+  useEffect(() => {
+    loadCategories()
+    loadPhrases()
+  }, [loadCategories, loadPhrases])
 
   const loadRandomPhrase = async () => {
     setIsLoading(true)

@@ -3,6 +3,9 @@ import path from 'path';
 import { log } from './logger';
 import type { Phrase, PhraseCategory, PhraseDifficulty, PhraseFilter, PhraseBook } from './types/phrase';
 
+// Re-export types for API usage
+export type { PhraseFilter, PhraseCategory, PhraseDifficulty } from './types/phrase';
+
 export class PhraseService {
   private phraseBook: PhraseBook | null = null;
   private phraseBookPath: string;
@@ -79,7 +82,7 @@ export class PhraseService {
   }
 
   async getPhrasesByCategory(category: string): Promise<Phrase[]> {
-    return this.getPhrases({ category });
+    return this.getPhrases({ category: category as PhraseCategory });
   }
 
   async searchPhrases(query: string): Promise<Phrase[]> {

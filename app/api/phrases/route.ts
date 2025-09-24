@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { phraseService, PhraseFilter } from '@/lib/phrase-service'
+import { phraseService, PhraseFilter, PhraseCategory } from '@/lib/phrase-service'
 import { log, generateCorrelationId, LogEvents } from '@/lib/logger'
 import { withGuardrails } from '@/lib/api-guardrails'
 import { ErrorCode, createErrorResponse } from '@/lib/error-taxonomy'
@@ -12,7 +12,7 @@ async function handlePhrasesRequest(request: NextRequest) {
 
   try {
     const action = searchParams.get('action') || 'random'
-    const category = searchParams.get('category') || undefined
+    const category = searchParams.get('category') as PhraseCategory | undefined
     const difficulty = searchParams.get('difficulty') as 'beginner' | 'intermediate' | 'advanced' || undefined
     const search = searchParams.get('search') || undefined
     const limit = searchParams.get('limit') ? parseInt(searchParams.get('limit')!) : undefined
