@@ -10,7 +10,8 @@ interface PhrasePickerProps {
 
 export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: PhrasePickerProps) {
   const [phrases, setPhrases] = useState<Phrase[]>([])
-  const [categories, setCategories] = useState<string[]>([])
+  const [categories, setCategories] = useState<PhraseCategory[]>([])
+  const [difficulties] = useState<PhraseDifficulty[]>(['beginner', 'intermediate', 'advanced'])
   const [filter, setFilter] = useState<PhraseFilter>({
     category: undefined,
     difficulty: undefined,
@@ -18,6 +19,14 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
   })
   const [isLoading, setIsLoading] = useState(false)
   const [selectedVariant, setSelectedVariant] = useState<'ancient' | 'modern'>('ancient')
+  const [selectedPhrase, setSelectedPhrase] = useState<Phrase | null>(null)
+
+  // Update selected phrase when variant changes
+  useEffect(() => {
+    if (selectedPhrase) {
+      onPhraseSelect(selectedPhrase, selectedVariant)
+    }
+  }, [selectedVariant, selectedPhrase, onPhraseSelect])
 
   const loadCategories = useCallback(async () => {
     try {
@@ -78,6 +87,7 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
       const data = await response.json()
       
       if (data.success && data.data) {
+        setSelectedPhrase(data.data)
         onPhraseSelect(data.data, selectedVariant)
       }
     } catch (error) {
@@ -93,11 +103,16 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
   }
 
   const handlePhraseClick = (phrase: Phrase) => {
+    setSelectedPhrase(phrase)
     onPhraseSelect(phrase, selectedVariant)
   }
 
   const getPhraseText = (phrase: Phrase) => {
     return selectedVariant === 'ancient' ? phrase.ancient : phrase.modern
+  }
+
+  const formatCategoryName = (category: string) => {
+    return category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')
   }
 
   const getDifficultyColor = (difficulty: string) => {
@@ -148,12 +163,12 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
             <select
               value={filter.category}
               onChange={(e) => handleFilterChange('category', e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
             >
               <option value="">All Categories</option>
               {categories.map(category => (
                 <option key={category} value={category}>
-                  {category.charAt(0).toUpperCase() + category.slice(1).replace('_', ' ')}
+                  {formatCategoryName(category)}
                 </option>
               ))}
             </select>
@@ -162,14 +177,16 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
           <div>
             <label className="block text-sm font-medium mb-1">Difficulty</label>
             <select
-              value={filter.difficulty}
+              value={filter.difficulty || ''}
               onChange={(e) => handleFilterChange('difficulty', e.target.value)}
-              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-900 bg-white"
             >
               <option value="">All Levels</option>
-              <option value="beginner">Beginner</option>
-              <option value="intermediate">Intermediate</option>
-              <option value="advanced">Advanced</option>
+              {difficulties.map(difficulty => (
+                <option key={difficulty} value={difficulty}>
+                  {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -204,13 +221,47 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
         </div>
       </div>
 
+      {/* Selected Phrase Display */}
+      {selectedPhrase && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+          <div className="flex items-center justify-between mb-2">
+            <h3 className="text-lg font-semibold text-blue-900">Selected Phrase</h3>
+            <div className="flex space-x-2">
+              <span className={`px-2 py-1 rounded-full text-xs font-medium ${getDifficultyColor(selectedPhrase.difficulty)}`}>
+                {selectedPhrase.difficulty}
+              </span>
+              <span className="px-2 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-700">
+                {formatCategoryName(selectedPhrase.category)}
+              </span>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <div className="text-gray-700">
+              <span className="font-medium">English:</span> {selectedPhrase.english}
+            </div>
+            <div className="text-blue-800 font-semibold text-lg">
+              <span className="font-medium">{selectedVariant === 'ancient' ? 'Ancient' : 'Modern'}:</span> {getPhraseText(selectedPhrase)}
+            </div>
+            {selectedPhrase.context && (
+              <div className="text-sm text-gray-600 italic">
+                &ldquo;{selectedPhrase.context}&rdquo;
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Phrase List */}
       <div className="space-y-2 max-h-80 overflow-y-auto">
         {phrases.map((phrase) => (
           <div
             key={phrase.id}
             onClick={() => handlePhraseClick(phrase)}
-            className="p-2 border border-gray-200 rounded-md hover:bg-gray-50 cursor-pointer transition-colors text-sm"
+            className={`p-2 border rounded-md cursor-pointer transition-colors text-sm ${
+              selectedPhrase?.id === phrase.id
+                ? 'border-blue-500 bg-blue-50'
+                : 'border-gray-200 hover:bg-gray-50'
+            }`}
           >
             <div className="flex justify-between items-start mb-2">
               <div className="flex-1">
@@ -229,7 +280,7 @@ export default function PhrasePicker({ onPhraseSelect, onLoadingChange }: Phrase
                   {phrase.difficulty}
                 </span>
                 <span className="px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-700">
-                  {phrase.category}
+                  {formatCategoryName(phrase.category)}
                 </span>
               </div>
             </div>
