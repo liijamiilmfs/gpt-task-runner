@@ -42,8 +42,12 @@ class GPTTaskService {
       // Keep the service running
       this.keepAlive();
     } catch (error) {
-      this.logger.error('Failed to start service', { error: error instanceof Error ? error.message : error });
-      await this.database.logServiceEvent('error', 'Service failed to start', { error });
+      this.logger.error('Failed to start service', {
+        error: error instanceof Error ? error.message : error,
+      });
+      await this.database.logServiceEvent('error', 'Service failed to start', {
+        error,
+      });
       throw error;
     }
   }
@@ -69,7 +73,9 @@ class GPTTaskService {
       this.database.close();
       this.logger.info('GPT Task Runner Service stopped successfully');
     } catch (error) {
-      this.logger.error('Error stopping service', { error: error instanceof Error ? error.message : error });
+      this.logger.error('Error stopping service', {
+        error: error instanceof Error ? error.message : error,
+      });
       throw error;
     }
   }
@@ -83,43 +89,64 @@ class GPTTaskService {
         await this.scheduleTask(task);
       }
     } catch (error) {
-      this.logger.error('Failed to load scheduled tasks', { error: error instanceof Error ? error.message : error });
+      this.logger.error('Failed to load scheduled tasks', {
+        error: error instanceof Error ? error.message : error,
+      });
     }
   }
 
   private async scheduleTask(task: any): Promise<void> {
     try {
-      const scheduledTask = cron.schedule(task.schedule, async () => {
-        await this.executeScheduledTask(task);
-      }, {
-        // scheduled: false, // This property doesn't exist in TaskOptions
-        timezone: 'America/New_York' // Default timezone, can be made configurable
-      });
+      const scheduledTask = cron.schedule(
+        task.schedule,
+        async () => {
+          await this.executeScheduledTask(task);
+        },
+        {
+          // scheduled: false, // This property doesn't exist in TaskOptions
+          timezone: 'America/New_York', // Default timezone, can be made configurable
+        }
+      );
 
       this.scheduledTasks.set(task.id, scheduledTask);
       scheduledTask.start();
 
-      this.logger.info(`Scheduled task '${task.name}' with schedule '${task.schedule}'`);
-      await this.database.logServiceEvent('info', `Scheduled task '${task.name}' started`, { taskId: task.id });
+      this.logger.info(
+        `Scheduled task '${task.name}' with schedule '${task.schedule}'`
+      );
+      await this.database.logServiceEvent(
+        'info',
+        `Scheduled task '${task.name}' started`,
+        { taskId: task.id }
+      );
     } catch (error) {
-      this.logger.error(`Failed to schedule task '${task.name}'`, { error: error instanceof Error ? error.message : error });
+      this.logger.error(`Failed to schedule task '${task.name}'`, {
+        error: error instanceof Error ? error.message : error,
+      });
     }
   }
 
   private async executeScheduledTask(task: any): Promise<void> {
     const executionId = `exec-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-    
+
     try {
       this.logger.info(`Executing scheduled task: ${task.name}`);
-      await this.database.logServiceEvent('info', `Executing scheduled task '${task.name}'`, { taskId: task.id, executionId });
+      await this.database.logServiceEvent(
+        'info',
+        `Executing scheduled task '${task.name}'`,
+        { taskId: task.id, executionId }
+      );
 
       // Update last run time
       await this.updateTaskLastRun(task.id);
 
       // Create transport based on dry run setting
-      const transport = task.isDryRun ? 
-        new DryRunTransport() : 
-        new OpenAITransport(process.env['OPENAI_API_KEY']!, process.env['OPENAI_BASE_URL']);
+      const transport = task.isDryRun
+        ? new DryRunTransport()
+        : new OpenAITransport(
+            process.env['OPENAI_API_KEY']!,
+            process.env['OPENAI_BASE_URL']
+          );
 
       // Create task runner
       const taskRunner = new TaskRunner(transport, this.logger);
@@ -152,22 +179,31 @@ class GPTTaskService {
       });
 
       this.logger.info(`Completed scheduled task: ${task.name}`);
-      await this.database.logServiceEvent('info', `Completed scheduled task '${task.name}'`, { taskId: task.id, executionId });
-
+      await this.database.logServiceEvent(
+        'info',
+        `Completed scheduled task '${task.name}'`,
+        { taskId: task.id, executionId }
+      );
     } catch (error) {
-      this.logger.error(`Failed to execute scheduled task '${task.name}'`, { error: error instanceof Error ? error.message : error });
-      
+      this.logger.error(`Failed to execute scheduled task '${task.name}'`, {
+        error: error instanceof Error ? error.message : error,
+      });
+
       await this.database.updateTaskExecution(executionId, {
         status: 'failed',
         error: error instanceof Error ? error.message : 'Unknown error',
         completedAt: new Date().toISOString(),
       });
 
-      await this.database.logServiceEvent('error', `Failed scheduled task '${task.name}'`, { 
-        taskId: task.id, 
-        executionId, 
-        error: error instanceof Error ? error.message : error 
-      });
+      await this.database.logServiceEvent(
+        'error',
+        `Failed scheduled task '${task.name}'`,
+        {
+          taskId: task.id,
+          executionId,
+          error: error instanceof Error ? error.message : error,
+        }
+      );
     }
   }
 
@@ -217,9 +253,7 @@ const service = new Service.Service({
   name: 'GPT Task Runner',
   description: 'GPT-powered task runner and automation service',
   script: path.join(__dirname, 'service.js'),
-  nodeOptions: [
-    '--max_old_space_size=4096'
-  ]
+  nodeOptions: ['--max_old_space_size=4096'],
 });
 
 // Service event handlers
@@ -245,7 +279,7 @@ service.on('stop', () => {
 // If this file is run directly, start the service
 if (require.main === module) {
   const gptService = new GPTTaskService();
-  
+
   // Handle graceful shutdown
   process.on('SIGINT', async () => {
     console.log('Received SIGINT, shutting down gracefully...');

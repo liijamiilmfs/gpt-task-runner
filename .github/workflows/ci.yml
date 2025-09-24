@@ -7,7 +7,7 @@ on:
     branches: [ main, dev ]
 
 env:
-  NODE_VERSION: '18'
+  NODE_VERSION: "18"
   COVERAGE_THRESHOLD: 80
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
       
       - name: Install dependencies
         run: npm ci
@@ -58,7 +58,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
       
       - name: Install dependencies
         run: npm ci
@@ -83,7 +83,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
       
       - name: Install dependencies
         run: npm ci
@@ -105,7 +105,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
           cache-dependency-path: |
             package-lock.json
             dashboard/package-lock.json
@@ -144,7 +144,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
       
       - name: Install dependencies
         run: npm ci
@@ -161,18 +161,18 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
-          format: 'sarif'
-          output: 'trivy-results.sarif'
+          scan-type: "fs"
+          scan-ref: "."
+          format: "sarif"
+          output: "trivy-results.sarif"
         id: trivy-scan
         continue-on-error: true
       
       - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v2
-        if: always() && steps.trivy-scan.outcome == 'success'
+        uses: github/codeql-action/upload-sarif@v3
+        if: always() && steps.trivy-scan.outcome == "success"
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: "trivy-results.sarif"
 
   coverage:
     name: Coverage Report
@@ -187,7 +187,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
       
       - name: Install dependencies
         run: npm ci
@@ -201,7 +201,7 @@ jobs:
         id: coverage-report
       
       - name: Comment coverage on PR
-        if: github.event_name == 'pull_request'
+        if: github.event_name == "pull_request"
         uses: romeovs/lcov-reporter-action@v0.3.1
         with:
           lcov-file: ./coverage/lcov.info
@@ -220,7 +220,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
       
       - name: Install dependencies
         run: npm ci
@@ -249,7 +249,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+          cache: "npm"
       
       - name: Install dependencies
         run: npm ci
@@ -269,7 +269,7 @@ jobs:
     name: Deploy Preview
     runs-on: ubuntu-latest
     needs: [build, test, lint, type-check, security]
-    if: github.event_name == 'pull_request'
+    if: github.event_name == "pull_request"
     
     steps:
       - name: Checkout code
@@ -292,9 +292,9 @@ jobs:
     
     steps:
       - name: Notify on success
-        if: ${{ needs.test.result == 'success' && needs.lint.result == 'success' && needs.type-check.result == 'success' && needs.build.result == 'success' && needs.security.result == 'success' && needs.coverage.result == 'success' }}
+        if: ${{ needs.test.result == "success" && needs.lint.result == "success" && needs.type-check.result == "success" && needs.build.result == "success" && needs.security.result == "success" && needs.coverage.result == "success" }}
         run: echo "All checks passed! ✅"
       
       - name: Notify on failure
-        if: ${{ needs.test.result == 'failure' || needs.lint.result == 'failure' || needs.type-check.result == 'failure' || needs.build.result == 'failure' || needs.security.result == 'failure' || needs.coverage.result == 'failure' }}
+        if: ${{ needs.test.result == "failure" || needs.lint.result == "failure" || needs.type-check.result == "failure" || needs.build.result == "failure" || needs.security.result == "failure" || needs.coverage.result == "failure" }}
         run: echo "Some checks failed! ❌"

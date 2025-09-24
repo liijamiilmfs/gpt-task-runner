@@ -4,31 +4,44 @@ import { createObjectCsvWriter } from 'csv-writer';
 import { TaskResponse, DryRunResult } from '../types';
 
 export class BatchWriter {
-  async writeResults(results: TaskResponse[], outputPath: string): Promise<void> {
+  async writeResults(
+    results: TaskResponse[],
+    outputPath: string
+  ): Promise<void> {
     const ext = path.extname(outputPath).toLowerCase();
-    
+
     if (ext === '.csv') {
       await this.writeToCSV(results, outputPath);
     } else if (ext === '.jsonl') {
       await this.writeToJSONL(results, outputPath);
     } else {
-      throw new Error(`Unsupported output format: ${ext}. Supported formats: .csv, .jsonl`);
+      throw new Error(
+        `Unsupported output format: ${ext}. Supported formats: .csv, .jsonl`
+      );
     }
   }
 
-  async writeDryRunResults(results: DryRunResult[], outputPath: string): Promise<void> {
+  async writeDryRunResults(
+    results: DryRunResult[],
+    outputPath: string
+  ): Promise<void> {
     const ext = path.extname(outputPath).toLowerCase();
-    
+
     if (ext === '.csv') {
       await this.writeDryRunToCSV(results, outputPath);
     } else if (ext === '.jsonl') {
       await this.writeDryRunToJSONL(results, outputPath);
     } else {
-      throw new Error(`Unsupported output format: ${ext}. Supported formats: .csv, .jsonl`);
+      throw new Error(
+        `Unsupported output format: ${ext}. Supported formats: .csv, .jsonl`
+      );
     }
   }
 
-  private async writeToCSV(results: TaskResponse[], outputPath: string): Promise<void> {
+  private async writeToCSV(
+    results: TaskResponse[],
+    outputPath: string
+  ): Promise<void> {
     const csvWriter = createObjectCsvWriter({
       path: outputPath,
       header: [
@@ -48,7 +61,7 @@ export class BatchWriter {
       ],
     });
 
-    const csvData = results.map(result => ({
+    const csvData = results.map((result) => ({
       id: result.id,
       success: result.success,
       response: result.response || '',
@@ -67,12 +80,18 @@ export class BatchWriter {
     await csvWriter.writeRecords(csvData);
   }
 
-  private async writeToJSONL(results: TaskResponse[], outputPath: string): Promise<void> {
-    const lines = results.map(result => JSON.stringify(result));
+  private async writeToJSONL(
+    results: TaskResponse[],
+    outputPath: string
+  ): Promise<void> {
+    const lines = results.map((result) => JSON.stringify(result));
     fs.writeFileSync(outputPath, lines.join('\n') + '\n');
   }
 
-  private async writeDryRunToCSV(results: DryRunResult[], outputPath: string): Promise<void> {
+  private async writeDryRunToCSV(
+    results: DryRunResult[],
+    outputPath: string
+  ): Promise<void> {
     const csvWriter = createObjectCsvWriter({
       path: outputPath,
       header: [
@@ -91,7 +110,7 @@ export class BatchWriter {
       ],
     });
 
-    const csvData = results.map(result => ({
+    const csvData = results.map((result) => ({
       id: result.id,
       success: result.success,
       simulatedResponse: result.simulatedResponse,
@@ -109,8 +128,11 @@ export class BatchWriter {
     await csvWriter.writeRecords(csvData);
   }
 
-  private async writeDryRunToJSONL(results: DryRunResult[], outputPath: string): Promise<void> {
-    const lines = results.map(result => JSON.stringify(result));
+  private async writeDryRunToJSONL(
+    results: DryRunResult[],
+    outputPath: string
+  ): Promise<void> {
+    const lines = results.map((result) => JSON.stringify(result));
     fs.writeFileSync(outputPath, lines.join('\n') + '\n');
   }
 }

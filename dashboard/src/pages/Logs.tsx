@@ -51,15 +51,18 @@ const Logs: React.FC = () => {
     return new Date(dateString).toLocaleString();
   };
 
-  const filteredLogs = logs.filter(log => 
-    filter === 'all' || log.level.toLowerCase() === filter.toLowerCase()
+  const filteredLogs = logs.filter(
+    (log) =>
+      filter === 'all' || log.level.toLowerCase() === filter.toLowerCase()
   );
 
   return (
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Service Logs</h1>
-        <p className="mt-2 text-gray-600">Monitor service activity and debug issues</p>
+        <p className="mt-2 text-gray-600">
+          Monitor service activity and debug issues
+        </p>
       </div>
 
       {/* Controls */}
@@ -109,14 +112,18 @@ const Logs: React.FC = () => {
               <div key={log.id} className="px-6 py-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(log.level)}`}>
+                    <span
+                      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(log.level)}`}
+                    >
                       {log.level.toUpperCase()}
                     </span>
                   </div>
                   <div className="ml-4 flex-1">
                     <div className="flex items-center justify-between">
                       <p className="text-sm text-gray-900">{log.message}</p>
-                      <p className="text-xs text-gray-500">{formatDate(log.timestamp)}</p>
+                      <p className="text-xs text-gray-500">
+                        {formatDate(log.timestamp)}
+                      </p>
                     </div>
                     {log.metadata && (
                       <pre className="mt-2 text-xs text-gray-600 bg-gray-50 p-2 rounded overflow-auto">

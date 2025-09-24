@@ -16,7 +16,8 @@ interface TaskExecution {
 const Tasks: React.FC = () => {
   const [executions, setExecutions] = useState<TaskExecution[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedExecution, setSelectedExecution] = useState<TaskExecution | null>(null);
+  const [selectedExecution, setSelectedExecution] =
+    useState<TaskExecution | null>(null);
 
   useEffect(() => {
     fetchExecutions();
@@ -80,7 +81,9 @@ const Tasks: React.FC = () => {
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Task Executions</h1>
-        <p className="mt-2 text-gray-600">View and manage your task execution history</p>
+        <p className="mt-2 text-gray-600">
+          View and manage your task execution history
+        </p>
       </div>
 
       {/* Action Bar */}
@@ -118,7 +121,9 @@ const Tasks: React.FC = () => {
                         <p className="text-sm font-medium text-gray-900">
                           {execution.id}
                         </p>
-                        <span className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(execution.status)}`}>
+                        <span
+                          className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(execution.status)}`}
+                        >
                           {execution.status}
                         </span>
                         {execution.isDryRun && (
@@ -128,7 +133,8 @@ const Tasks: React.FC = () => {
                         )}
                       </div>
                       <p className="text-sm text-gray-500">
-                        {request.tasks?.length || 1} task(s) • {formatDate(execution.createdAt)}
+                        {request.tasks?.length || 1} task(s) •{' '}
+                        {formatDate(execution.createdAt)}
                       </p>
                     </div>
                   </div>
@@ -153,7 +159,9 @@ const Tasks: React.FC = () => {
           <div className="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white">
             <div className="mt-3">
               <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-medium text-gray-900">Execution Details</h3>
+                <h3 className="text-lg font-medium text-gray-900">
+                  Execution Details
+                </h3>
                 <button
                   onClick={() => setSelectedExecution(null)}
                   className="text-gray-400 hover:text-gray-600"
@@ -161,49 +169,77 @@ const Tasks: React.FC = () => {
                   <XCircle className="h-6 w-6" />
                 </button>
               </div>
-              
+
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Status</label>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Status
+                  </label>
                   <div className="mt-1 flex items-center">
                     {getStatusIcon(selectedExecution.status)}
-                    <span className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(selectedExecution.status)}`}>
+                    <span
+                      className={`ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(selectedExecution.status)}`}
+                    >
                       {selectedExecution.status}
                     </span>
                   </div>
                 </div>
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Created At</label>
-                  <p className="mt-1 text-sm text-gray-900">{formatDate(selectedExecution.createdAt)}</p>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Created At
+                  </label>
+                  <p className="mt-1 text-sm text-gray-900">
+                    {formatDate(selectedExecution.createdAt)}
+                  </p>
                 </div>
-                
+
                 {selectedExecution.completedAt && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Completed At</label>
-                    <p className="mt-1 text-sm text-gray-900">{formatDate(selectedExecution.completedAt)}</p>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Completed At
+                    </label>
+                    <p className="mt-1 text-sm text-gray-900">
+                      {formatDate(selectedExecution.completedAt)}
+                    </p>
                   </div>
                 )}
-                
+
                 {selectedExecution.error && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Error</label>
-                    <p className="mt-1 text-sm text-red-600">{selectedExecution.error}</p>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Error
+                    </label>
+                    <p className="mt-1 text-sm text-red-600">
+                      {selectedExecution.error}
+                    </p>
                   </div>
                 )}
-                
+
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Request</label>
+                  <label className="block text-sm font-medium text-gray-700">
+                    Request
+                  </label>
                   <pre className="mt-1 text-xs bg-gray-100 p-3 rounded overflow-auto max-h-40">
-                    {JSON.stringify(JSON.parse(selectedExecution.request), null, 2)}
+                    {JSON.stringify(
+                      JSON.parse(selectedExecution.request),
+                      null,
+                      2
+                    )}
                   </pre>
                 </div>
-                
+
                 {selectedExecution.response && (
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Response</label>
+                    <label className="block text-sm font-medium text-gray-700">
+                      Response
+                    </label>
                     <pre className="mt-1 text-xs bg-gray-100 p-3 rounded overflow-auto max-h-40">
-                      {JSON.stringify(JSON.parse(selectedExecution.response), null, 2)}
+                      {JSON.stringify(
+                        JSON.parse(selectedExecution.response),
+                        null,
+                        2
+                      )}
                     </pre>
                   </div>
                 )}

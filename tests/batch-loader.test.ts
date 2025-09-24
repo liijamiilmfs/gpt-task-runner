@@ -167,9 +167,9 @@ task-2,"Explain AI",gpt-4,production,low`;
       const txtPath = path.join(tempDir, 'test.txt');
       fs.writeFileSync(txtPath, 'Some content');
 
-      await expect(batchLoader.loadFromFile(txtPath))
-        .rejects
-        .toThrow('Unsupported file format: .txt. Supported formats: .csv, .jsonl');
+      await expect(batchLoader.loadFromFile(txtPath)).rejects.toThrow(
+        'Unsupported file format: .txt. Supported formats: .csv, .jsonl'
+      );
     });
 
     it('should throw error for invalid JSONL', async () => {
@@ -179,17 +179,15 @@ task-2,"Explain AI",gpt-4,production,low`;
       const jsonlPath = path.join(tempDir, 'invalid.jsonl');
       fs.writeFileSync(jsonlPath, jsonlContent);
 
-      await expect(batchLoader.loadFromFile(jsonlPath))
-        .rejects
-        .toThrow(/Invalid JSONL line/);
+      await expect(batchLoader.loadFromFile(jsonlPath)).rejects.toThrow(
+        /Invalid JSONL line/
+      );
     });
 
     it.skip('should throw error for non-existent files', async () => {
       const nonExistentPath = path.join(tempDir, 'non-existent.csv');
 
-      await expect(batchLoader.loadFromFile(nonExistentPath))
-        .rejects
-        .toThrow();
+      await expect(batchLoader.loadFromFile(nonExistentPath)).rejects.toThrow();
     }, 15000);
 
     it('should handle CSV files with different delimiters and quotes', async () => {

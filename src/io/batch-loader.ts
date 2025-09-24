@@ -6,20 +6,22 @@ import { TaskRequest, BatchInput } from '../types';
 export class BatchLoader {
   async loadFromFile(filePath: string): Promise<BatchInput> {
     const ext = path.extname(filePath).toLowerCase();
-    
+
     if (ext === '.csv') {
       return this.loadFromCSV(filePath);
     } else if (ext === '.jsonl') {
       return this.loadFromJSONL(filePath);
     } else {
-      throw new Error(`Unsupported file format: ${ext}. Supported formats: .csv, .jsonl`);
+      throw new Error(
+        `Unsupported file format: ${ext}. Supported formats: .csv, .jsonl`
+      );
     }
   }
 
   private async loadFromCSV(filePath: string): Promise<BatchInput> {
     return new Promise((resolve, reject) => {
       const tasks: TaskRequest[] = [];
-      
+
       fs.createReadStream(filePath)
         .pipe(csv())
         .on('data', (row) => {
@@ -28,9 +30,13 @@ export class BatchLoader {
             id: row.id || `task-${tasks.length + 1}`,
             prompt: row.prompt,
             ...(row.model && { model: row.model }),
-            ...(row.temperature && { temperature: parseFloat(row.temperature) }),
+            ...(row.temperature && {
+              temperature: parseFloat(row.temperature),
+            }),
             ...(row.maxTokens && { maxTokens: parseInt(row.maxTokens) }),
-            ...(this.parseMetadata(row) && { metadata: this.parseMetadata(row) }),
+            ...(this.parseMetadata(row) && {
+              metadata: this.parseMetadata(row),
+            }),
           };
           tasks.push(task);
         })
@@ -68,7 +74,9 @@ export class BatchLoader {
     let hasMetadata = false;
 
     for (const [key, value] of Object.entries(row)) {
-      if (!['id', 'prompt', 'model', 'temperature', 'maxTokens'].includes(key)) {
+      if (
+        !['id', 'prompt', 'model', 'temperature', 'maxTokens'].includes(key)
+      ) {
         metadata[key] = value;
         hasMetadata = true;
       }

@@ -22,7 +22,7 @@ class DashboardServer {
     this.database = new Database();
     this.logger = new Logger('info');
     this.gptService = new GPTTaskService();
-    
+
     this.setupMiddleware();
     this.setupRoutes();
     this.setupWebSocket();
@@ -32,34 +32,35 @@ class DashboardServer {
     this.app.use(helmet());
     this.app.use(cors());
     this.app.use(express.json());
-    
+
     // Global rate limiter for all requests
     const globalLimiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 1000,                // max 1000 requests per windowMs
-      standardHeaders: true,    // Return rate limit info in the `RateLimit-*` headers
-      legacyHeaders: false,     // Disable the `X-RateLimit-*` headers
+      max: 1000, // max 1000 requests per windowMs
+      standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+      legacyHeaders: false, // Disable the `X-RateLimit-*` headers
       message: 'Too many requests from this IP, please try again later.',
     });
-    
+
     // Strict rate limiter for API endpoints
     const apiLimiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100,                 // max 100 requests per windowMs
+      max: 100, // max 100 requests per windowMs
       standardHeaders: true,
       legacyHeaders: false,
       message: 'Too many API requests from this IP, please try again later.',
     });
-    
+
     // Very strict rate limiter for sensitive operations
     this.strictLimiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 20,                  // max 20 requests per windowMs
+      max: 20, // max 20 requests per windowMs
       standardHeaders: true,
       legacyHeaders: false,
-      message: 'Too many sensitive operations from this IP, please try again later.',
+      message:
+        'Too many sensitive operations from this IP, please try again later.',
     });
-    
+
     this.app.use(globalLimiter);
     this.app.use('/api', apiLimiter);
     this.app.use(express.static(path.join(__dirname, '../dashboard/dist')));
@@ -117,25 +118,36 @@ class DashboardServer {
       }
     });
 
-    this.app.post('/api/scheduled-tasks', this.strictLimiter, async (req, res) => {
-      try {
-        const taskId = await this.gptService.addScheduledTask(req.body);
-        res.json({ id: taskId, message: 'Scheduled task created successfully' });
-      } catch (error) {
-        console.error('Failed to create scheduled task:', error);
-        res.status(500).json({ error: 'Failed to create scheduled task' });
+    this.app.post(
+      '/api/scheduled-tasks',
+      this.strictLimiter,
+      async (req, res) => {
+        try {
+          const taskId = await this.gptService.addScheduledTask(req.body);
+          res.json({
+            id: taskId,
+            message: 'Scheduled task created successfully',
+          });
+        } catch (error) {
+          console.error('Failed to create scheduled task:', error);
+          res.status(500).json({ error: 'Failed to create scheduled task' });
+        }
       }
-    });
+    );
 
-    this.app.delete('/api/scheduled-tasks/:id', this.strictLimiter, async (req, res) => {
-      try {
-        await this.gptService.removeScheduledTask(req.params.id);
-        res.json({ message: 'Scheduled task removed successfully' });
-      } catch (error) {
-        console.error('Failed to remove scheduled task:', error);
-        res.status(500).json({ error: 'Failed to remove scheduled task' });
+    this.app.delete(
+      '/api/scheduled-tasks/:id',
+      this.strictLimiter,
+      async (req, res) => {
+        try {
+          await this.gptService.removeScheduledTask(req.params.id);
+          res.json({ message: 'Scheduled task removed successfully' });
+        } catch (error) {
+          console.error('Failed to remove scheduled task:', error);
+          res.status(500).json({ error: 'Failed to remove scheduled task' });
+        }
       }
-    });
+    );
 
     // Service logs
     this.app.get('/api/logs', async (_req, res) => {
@@ -153,11 +165,18 @@ class DashboardServer {
     this.app.post('/api/execute', this.strictLimiter, async (req, res) => {
       try {
         const { inputFile, outputFile, isDryRun } = req.body as any;
-        console.log('Manual execution request:', { inputFile, outputFile, isDryRun });
-        
+        console.log('Manual execution request:', {
+          inputFile,
+          outputFile,
+          isDryRun,
+        });
+
         // This would trigger a manual execution
         // Implementation depends on your task execution logic
-        res.json({ message: 'Task execution started', executionId: 'manual-exec-' + Date.now() });
+        res.json({
+          message: 'Task execution started',
+          executionId: 'manual-exec-' + Date.now(),
+        });
       } catch (error) {
         console.error('Failed to execute task:', error);
         res.status(500).json({ error: 'Failed to execute task' });
@@ -172,13 +191,13 @@ class DashboardServer {
 
   private setupWebSocket(): void {
     this.wss = new WebSocketServer({ port: 8081 });
-    
+
     this.wss.on('connection', (ws: any) => {
       this.logger.info('Dashboard client connected');
-      
+
       // Send initial data
       this.sendInitialData(ws);
-      
+
       ws.on('close', () => {
         this.logger.info('Dashboard client disconnected');
       });
@@ -190,11 +209,13 @@ class DashboardServer {
       const status = await this.gptService.getServiceStatus();
       const metrics = await this.database.getTaskMetrics();
       const executions = await this.database.getTaskExecutions(10);
-      
-      ws.send(JSON.stringify({
-        type: 'initial_data',
-        data: { status, metrics, executions }
-      }));
+
+      ws.send(
+        JSON.stringify({
+          type: 'initial_data',
+          data: { status, metrics, executions },
+        })
+      );
     } catch (error) {
       this.logger.error('Failed to send initial data', { error });
     }
@@ -202,7 +223,7 @@ class DashboardServer {
 
   public broadcastUpdate(type: string, data: any): void {
     const message = JSON.stringify({ type, data });
-    
+
     this.wss.clients.forEach((client: any) => {
       if (client.readyState === client.OPEN) {
         client.send(message);
@@ -231,7 +252,7 @@ class DashboardServer {
 // If this file is run directly, start the dashboard
 if (require.main === module) {
   const dashboard = new DashboardServer();
-  
+
   // Handle graceful shutdown
   process.on('SIGINT', () => {
     console.log('Received SIGINT, shutting down dashboard...');

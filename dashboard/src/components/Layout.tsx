@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  BarChart3, 
-  Play, 
-  Clock, 
-  FileText, 
+import {
+  BarChart3,
+  Play,
+  Clock,
+  FileText,
   Settings,
-  Activity
+  Activity,
 } from 'lucide-react';
 
 interface LayoutProps {
@@ -30,9 +30,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="fixed inset-y-0 left-0 z-50 w-64 bg-white shadow-lg">
         <div className="flex h-16 items-center px-6 border-b border-gray-200">
           <Activity className="h-8 w-8 text-blue-600" />
-          <span className="ml-2 text-xl font-bold text-gray-900">GPT Task Runner</span>
+          <span className="ml-2 text-xl font-bold text-gray-900">
+            GPT Task Runner
+          </span>
         </div>
-        
+
         <nav className="mt-6 px-3">
           {navigation.map((item) => {
             const isActive = location.pathname === item.href;
@@ -48,7 +50,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               >
                 <item.icon
                   className={`${
-                    isActive ? 'text-blue-700' : 'text-gray-400 group-hover:text-gray-500'
+                    isActive
+                      ? 'text-blue-700'
+                      : 'text-gray-400 group-hover:text-gray-500'
                   } mr-3 h-5 w-5`}
                 />
                 {item.name}

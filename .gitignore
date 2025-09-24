@@ -181,3 +181,6 @@ user-settings/
 # Local development files
 .local/
 local/
+
+# Build Logs
+docs/build_logs/

@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "commonjs",
-    "lib": ["ES2022"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "outDir": "./dist",
     "rootDir": "./",
     "strict": true,
@@ -28,16 +32,40 @@
     "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "@/types": ["src/types"],
-      "@/utils": ["src/utils"],
-      "@/transports": ["src/transports"],
-      "@/io": ["src/io"]
-    }
+      "@/*": [
+        "src/*"
+      ],
+      "@/types": [
+        "src/types"
+      ],
+      "@/utils": [
+        "src/utils"
+      ],
+      "@/transports": [
+        "src/transports"
+      ],
+      "@/io": [
+        "src/io"
+      ]
+    },
+    "allowJs": true,
+    "noEmit": true,
+    "incremental": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "types": [
+      "node"
+    ]
   },
   "include": [
     "src/**/*",
-    "tests/**/*"
+    "tests/**/*",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",

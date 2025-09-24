@@ -1,5 +1,6 @@
 import { DryRunTransport } from '../src/transports/dry-run-transport';
 import { TaskRequest } from '../src/types';
+import { vi } from 'vitest';
 
 describe('DryRunTransport', () => {
   let transport: DryRunTransport;
@@ -33,7 +34,7 @@ describe('DryRunTransport', () => {
 
       // Mock fetch to ensure no external calls
       const originalFetch = global.fetch;
-      global.fetch = jest.fn();
+      global.fetch = vi.fn();
 
       await transport.execute(request);
 
@@ -55,7 +56,8 @@ describe('DryRunTransport', () => {
       expect(result.usage?.promptTokens).toBeGreaterThan(0);
       expect(result.usage?.completionTokens).toBeGreaterThan(0);
       expect(result.usage?.totalTokens).toBe(
-        (result.usage?.promptTokens || 0) + (result.usage?.completionTokens || 0)
+        (result.usage?.promptTokens || 0) +
+          (result.usage?.completionTokens || 0)
       );
     });
 
@@ -125,7 +127,7 @@ describe('DryRunTransport', () => {
       const results = await transport.executeBatch(requests);
 
       expect(results).toHaveLength(3);
-      expect(results.every(r => r.success)).toBe(true);
+      expect(results.every((r) => r.success)).toBe(true);
       expect(transport.getDryRunResults()).toHaveLength(3);
     });
 
@@ -247,13 +249,16 @@ describe('DryRunTransport', () => {
       };
       const longRequest: TaskRequest = {
         id: 'long',
-        prompt: 'This is a much longer prompt that should generate more prompt tokens because it has more content and should result in higher token usage overall',
+        prompt:
+          'This is a much longer prompt that should generate more prompt tokens because it has more content and should result in higher token usage overall',
       };
 
       const shortResult = await transport.execute(shortRequest);
       const longResult = await transport.execute(longRequest);
 
-      expect(longResult.usage?.promptTokens).toBeGreaterThan(shortResult.usage?.promptTokens || 0);
+      expect(longResult.usage?.promptTokens).toBeGreaterThan(
+        shortResult.usage?.promptTokens || 0
+      );
     });
 
     it('should generate reasonable token counts', async () => {

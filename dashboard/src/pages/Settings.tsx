@@ -26,7 +26,10 @@ const Settings: React.FC = () => {
     dataRetentionDays: 30,
   });
   const [saving, setSaving] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{
+    type: 'success' | 'error';
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
     // Load settings from localStorage or API
@@ -40,8 +43,11 @@ const Settings: React.FC = () => {
     setSaving(true);
     try {
       // Save to localStorage (in a real app, this would be saved to the backend)
-      localStorage.setItem('gpt-task-runner-settings', JSON.stringify(settings));
-      
+      localStorage.setItem(
+        'gpt-task-runner-settings',
+        JSON.stringify(settings)
+      );
+
       setMessage({ type: 'success', text: 'Settings saved successfully!' });
       setTimeout(() => setMessage(null), 3000);
     } catch (error) {
@@ -51,21 +57,30 @@ const Settings: React.FC = () => {
     }
   };
 
-  const handleInputChange = (field: keyof Settings, value: string | number | boolean) => {
-    setSettings(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (
+    field: keyof Settings,
+    value: string | number | boolean
+  ) => {
+    setSettings((prev) => ({ ...prev, [field]: value }));
   };
 
   return (
     <div>
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-gray-900">Settings</h1>
-        <p className="mt-2 text-gray-600">Configure your GPT Task Runner service</p>
+        <p className="mt-2 text-gray-600">
+          Configure your GPT Task Runner service
+        </p>
       </div>
 
       {message && (
-        <div className={`mb-6 p-4 rounded-md ${
-          message.type === 'success' ? 'bg-green-50 text-green-700' : 'bg-red-50 text-red-700'
-        }`}>
+        <div
+          className={`mb-6 p-4 rounded-md ${
+            message.type === 'success'
+              ? 'bg-green-50 text-green-700'
+              : 'bg-red-50 text-red-700'
+          }`}
+        >
           {message.text}
         </div>
       )}
@@ -75,27 +90,37 @@ const Settings: React.FC = () => {
         <div className="bg-white shadow rounded-lg p-6">
           <div className="flex items-center mb-4">
             <Key className="h-5 w-5 text-gray-400 mr-2" />
-            <h2 className="text-lg font-medium text-gray-900">API Configuration</h2>
+            <h2 className="text-lg font-medium text-gray-900">
+              API Configuration
+            </h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">OpenAI API Key</label>
+              <label className="block text-sm font-medium text-gray-700">
+                OpenAI API Key
+              </label>
               <input
                 type="password"
                 value={settings.openaiApiKey}
-                onChange={(e) => handleInputChange('openaiApiKey', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange('openaiApiKey', e.target.value)
+                }
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 placeholder="sk-..."
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700">Base URL (optional)</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Base URL (optional)
+              </label>
               <input
                 type="url"
                 value={settings.openaiBaseUrl}
-                onChange={(e) => handleInputChange('openaiBaseUrl', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange('openaiBaseUrl', e.target.value)
+                }
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 placeholder="https://api.openai.com/v1"
               />
@@ -107,15 +132,21 @@ const Settings: React.FC = () => {
         <div className="bg-white shadow rounded-lg p-6">
           <div className="flex items-center mb-4">
             <Database className="h-5 w-5 text-gray-400 mr-2" />
-            <h2 className="text-lg font-medium text-gray-900">Task Configuration</h2>
+            <h2 className="text-lg font-medium text-gray-900">
+              Task Configuration
+            </h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Default Model</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Default Model
+              </label>
               <select
                 value={settings.defaultModel}
-                onChange={(e) => handleInputChange('defaultModel', e.target.value)}
+                onChange={(e) =>
+                  handleInputChange('defaultModel', e.target.value)
+                }
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="gpt-3.5-turbo">GPT-3.5 Turbo</option>
@@ -123,40 +154,61 @@ const Settings: React.FC = () => {
                 <option value="gpt-4-turbo">GPT-4 Turbo</option>
               </select>
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700">Max Concurrent Tasks</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Max Concurrent Tasks
+              </label>
               <input
                 type="number"
                 min="1"
                 max="20"
                 value={settings.maxConcurrentTasks}
-                onChange={(e) => handleInputChange('maxConcurrentTasks', parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleInputChange(
+                    'maxConcurrentTasks',
+                    parseInt(e.target.value)
+                  )
+                }
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700">Default Temperature</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Default Temperature
+              </label>
               <input
                 type="number"
                 min="0"
                 max="2"
                 step="0.1"
                 value={settings.defaultTemperature}
-                onChange={(e) => handleInputChange('defaultTemperature', parseFloat(e.target.value))}
+                onChange={(e) =>
+                  handleInputChange(
+                    'defaultTemperature',
+                    parseFloat(e.target.value)
+                  )
+                }
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700">Default Max Tokens</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Default Max Tokens
+              </label>
               <input
                 type="number"
                 min="1"
                 max="4000"
                 value={settings.defaultMaxTokens}
-                onChange={(e) => handleInputChange('defaultMaxTokens', parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleInputChange(
+                    'defaultMaxTokens',
+                    parseInt(e.target.value)
+                  )
+                }
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
@@ -167,12 +219,16 @@ const Settings: React.FC = () => {
         <div className="bg-white shadow rounded-lg p-6">
           <div className="flex items-center mb-4">
             <Shield className="h-5 w-5 text-gray-400 mr-2" />
-            <h2 className="text-lg font-medium text-gray-900">System Configuration</h2>
+            <h2 className="text-lg font-medium text-gray-900">
+              System Configuration
+            </h2>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Log Level</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Log Level
+              </label>
               <select
                 value={settings.logLevel}
                 onChange={(e) => handleInputChange('logLevel', e.target.value)}
@@ -184,30 +240,42 @@ const Settings: React.FC = () => {
                 <option value="debug">Debug</option>
               </select>
             </div>
-            
+
             <div>
-              <label className="block text-sm font-medium text-gray-700">Data Retention (days)</label>
+              <label className="block text-sm font-medium text-gray-700">
+                Data Retention (days)
+              </label>
               <input
                 type="number"
                 min="1"
                 max="365"
                 value={settings.dataRetentionDays}
-                onChange={(e) => handleInputChange('dataRetentionDays', parseInt(e.target.value))}
+                onChange={(e) =>
+                  handleInputChange(
+                    'dataRetentionDays',
+                    parseInt(e.target.value)
+                  )
+                }
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
           </div>
-          
+
           <div className="mt-6">
             <div className="flex items-center">
               <input
                 type="checkbox"
                 id="enableNotifications"
                 checked={settings.enableNotifications}
-                onChange={(e) => handleInputChange('enableNotifications', e.target.checked)}
+                onChange={(e) =>
+                  handleInputChange('enableNotifications', e.target.checked)
+                }
                 className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
               />
-              <label htmlFor="enableNotifications" className="ml-2 block text-sm text-gray-900">
+              <label
+                htmlFor="enableNotifications"
+                className="ml-2 block text-sm text-gray-900"
+              >
                 Enable desktop notifications
               </label>
             </div>
@@ -220,12 +288,13 @@ const Settings: React.FC = () => {
             <Bell className="h-5 w-5 text-gray-400 mr-2" />
             <h2 className="text-lg font-medium text-gray-900">Notifications</h2>
           </div>
-          
+
           <div className="space-y-4">
             <div className="text-sm text-gray-600">
-              Configure how you want to be notified about task executions and service events.
+              Configure how you want to be notified about task executions and
+              service events.
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="flex items-center">
                 <input
@@ -233,40 +302,52 @@ const Settings: React.FC = () => {
                   id="notifyOnSuccess"
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <label htmlFor="notifyOnSuccess" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="notifyOnSuccess"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   Notify on successful task completion
                 </label>
               </div>
-              
+
               <div className="flex items-center">
                 <input
                   type="checkbox"
                   id="notifyOnFailure"
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <label htmlFor="notifyOnFailure" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="notifyOnFailure"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   Notify on task failure
                 </label>
               </div>
-              
+
               <div className="flex items-center">
                 <input
                   type="checkbox"
                   id="notifyOnServiceStart"
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <label htmlFor="notifyOnServiceStart" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="notifyOnServiceStart"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   Notify on service start/stop
                 </label>
               </div>
-              
+
               <div className="flex items-center">
                 <input
                   type="checkbox"
                   id="notifyOnSchedule"
                   className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <label htmlFor="notifyOnSchedule" className="ml-2 block text-sm text-gray-900">
+                <label
+                  htmlFor="notifyOnSchedule"
+                  className="ml-2 block text-sm text-gray-900"
+                >
                   Notify on scheduled task execution
                 </label>
               </div>

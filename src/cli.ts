@@ -31,7 +31,7 @@ program
   .option('--max-tokens <number>', 'Maximum tokens to generate', '1000')
   .action(async (options) => {
     const logger = new Logger(options.verbose ? 'debug' : 'info');
-    
+
     // Validate options
     if (!options.input && !options.prompt) {
       logger.error('Either --input or --prompt must be specified');
@@ -46,15 +46,19 @@ program
     // Create transport
     let transport;
     if (options.dryRun) {
-      logger.info('Running in dry-run mode - no external API calls will be made');
+      logger.info(
+        'Running in dry-run mode - no external API calls will be made'
+      );
       transport = new DryRunTransport();
     } else {
       const apiKey = process.env['OPENAI_API_KEY'];
       if (!apiKey) {
-        logger.error('OPENAI_API_KEY environment variable is required for live execution');
+        logger.error(
+          'OPENAI_API_KEY environment variable is required for live execution'
+        );
         process.exit(1);
       }
-      
+
       const baseURL = process.env['OPENAI_BASE_URL'];
       transport = new OpenAITransport(apiKey, baseURL);
     }
@@ -88,7 +92,7 @@ program
   .option('-v, --verbose', 'Enable verbose logging')
   .action(async (options) => {
     const logger = new Logger(options.verbose ? 'debug' : 'info');
-    
+
     if (!options.input) {
       logger.error('--input is required for validation');
       process.exit(1);
@@ -97,22 +101,24 @@ program
     try {
       const { BatchLoader } = await import('./io/batch-loader');
       const batchLoader = new BatchLoader();
-      
+
       logger.info(`Validating ${options.input}`);
       const batchInput = await batchLoader.loadFromFile(options.input);
-      
+
       logger.info(`✓ File is valid`);
       logger.info(`✓ Format: ${batchInput.format}`);
       logger.info(`✓ Tasks: ${batchInput.tasks.length}`);
-      
+
       // Show sample task
       if (batchInput.tasks.length > 0) {
         logger.info('Sample task:', batchInput.tasks[0]);
       }
-      
+
       process.exit(0);
     } catch (error) {
-      logger.error('Validation failed', { error: error instanceof Error ? error.message : error });
+      logger.error('Validation failed', {
+        error: error instanceof Error ? error.message : error,
+      });
       process.exit(1);
     }
   });

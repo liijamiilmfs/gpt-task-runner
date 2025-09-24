@@ -1,5 +1,5 @@
 // Test setup file
-import 'jest';
+import { vi, beforeAll, afterAll } from 'vitest';
 
 // Mock console methods to reduce noise in tests
 const originalConsole = global.console;
@@ -7,11 +7,11 @@ const originalConsole = global.console;
 beforeAll(() => {
   global.console = {
     ...originalConsole,
-    log: jest.fn(),
-    info: jest.fn(),
-    warn: jest.fn(),
-    error: jest.fn(),
-    debug: jest.fn(),
+    log: vi.fn(),
+    info: vi.fn(),
+    warn: vi.fn(),
+    error: vi.fn(),
+    debug: vi.fn(),
   };
 });
 
@@ -20,12 +20,12 @@ afterAll(() => {
 });
 
 // Mock fetch globally to prevent external API calls
-global.fetch = jest.fn();
+global.fetch = vi.fn();
 
 // Mock process.exit to prevent tests from actually exiting
 const originalExit = process.exit;
 beforeAll(() => {
-  process.exit = jest.fn() as any;
+  process.exit = vi.fn() as any;
 });
 
 afterAll(() => {

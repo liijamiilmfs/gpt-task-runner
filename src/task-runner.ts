@@ -21,11 +21,13 @@ export class TaskRunner {
     try {
       this.logger.info(`Loading tasks from ${inputPath}`);
       const batchInput = await this.batchLoader.loadFromFile(inputPath);
-      
-      this.logger.info(`Found ${batchInput.tasks.length} tasks in ${batchInput.format} format`);
-      
+
+      this.logger.info(
+        `Found ${batchInput.tasks.length} tasks in ${batchInput.format} format`
+      );
+
       // Apply global options to tasks that don't have them set
-      const tasks = batchInput.tasks.map(task => ({
+      const tasks = batchInput.tasks.map((task) => ({
         ...task,
         model: task.model || options.model,
         temperature: task.temperature ?? options.temperature,
@@ -33,10 +35,12 @@ export class TaskRunner {
       }));
 
       const results = await this.transport.executeBatch(tasks);
-      
+
       this.logger.info(`Completed ${results.length} tasks`);
-      this.logger.info(`Success: ${results.filter(r => r.success).length}, Failed: ${results.filter(r => !r.success).length}`);
-      
+      this.logger.info(
+        `Success: ${results.filter((r) => r.success).length}, Failed: ${results.filter((r) => !r.success).length}`
+      );
+
       if (options.output) {
         await this.batchWriter.writeResults(results, options.output);
         this.logger.info(`Results written to ${options.output}`);
@@ -44,17 +48,19 @@ export class TaskRunner {
 
       // If dry run, also output the dry run results
       if (options.dryRun && this.transport instanceof DryRunTransport) {
-        const dryRunResults = (this.transport as DryRunTransport).getDryRunResults();
-        const dryRunOutput = options.output ? 
-          options.output.replace(/\.[^.]+$/, '.dry-run$&') : 
-          'dry-run-results.jsonl';
-        
+        const dryRunResults = (
+          this.transport as DryRunTransport
+        ).getDryRunResults();
+        const dryRunOutput = options.output
+          ? options.output.replace(/\.[^.]+$/, '.dry-run$&')
+          : 'dry-run-results.jsonl';
+
         await this.batchWriter.writeDryRunResults(dryRunResults, dryRunOutput);
         this.logger.info(`Dry run results written to ${dryRunOutput}`);
       }
 
       // Exit with appropriate code
-      const hasFailures = results.some(r => !r.success);
+      const hasFailures = results.some((r) => !r.success);
       if (hasFailures) {
         this.logger.warn('Some tasks failed');
         process.exit(1);
@@ -63,7 +69,9 @@ export class TaskRunner {
         process.exit(0);
       }
     } catch (error) {
-      this.logger.error('Task execution failed', { error: error instanceof Error ? error.message : error });
+      this.logger.error('Task execution failed', {
+        error: error instanceof Error ? error.message : error,
+      });
       process.exit(1);
     }
   }
@@ -80,7 +88,7 @@ export class TaskRunner {
 
       this.logger.info('Executing single task', { taskId: task.id });
       const result = await this.transport.execute(task);
-      
+
       if (result.success) {
         this.logger.info('Task completed successfully');
         console.log('\n--- Response ---');
@@ -95,7 +103,9 @@ export class TaskRunner {
         process.exit(1);
       }
     } catch (error) {
-      this.logger.error('Task execution failed', { error: error instanceof Error ? error.message : error });
+      this.logger.error('Task execution failed', {
+        error: error instanceof Error ? error.message : error,
+      });
       process.exit(1);
     }
   }

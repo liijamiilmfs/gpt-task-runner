@@ -58,16 +58,20 @@ export class OpenAITransport implements Transport {
 
   async executeBatch(requests: TaskRequest[]): Promise<TaskResponse[]> {
     const results: TaskResponse[] = [];
-    
+
     for (const request of requests) {
       const result = await this.execute(request);
       results.push(result);
     }
-    
+
     return results;
   }
 
-  private calculateCost(model: string, promptTokens: number, completionTokens: number): number {
+  private calculateCost(
+    model: string,
+    promptTokens: number,
+    completionTokens: number
+  ): number {
     // Pricing as of 2024 (per 1K tokens)
     const pricing: Record<string, { prompt: number; completion: number }> = {
       'gpt-3.5-turbo': { prompt: 0.0015, completion: 0.002 },
@@ -79,8 +83,9 @@ export class OpenAITransport implements Transport {
 
     const modelPricing = pricing[model] || pricing['gpt-3.5-turbo'];
     const promptCost = (promptTokens / 1000) * (modelPricing?.prompt || 0);
-    const completionCost = (completionTokens / 1000) * (modelPricing?.completion || 0);
-    
+    const completionCost =
+      (completionTokens / 1000) * (modelPricing?.completion || 0);
+
     return promptCost + completionCost;
   }
 }
