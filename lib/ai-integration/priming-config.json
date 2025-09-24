@@ -1,0 +1,164 @@
+{
+  "priming_strategies": {
+    "word_generation": {
+      "description": "Context for generating new Librán words",
+      "max_context_size": 6000,
+      "preferred_categories": ["dictionaries", "tranches.core", "tranches.concepts"],
+      "compression_ratio": 0.8,
+      "focus_fields": ["word", "translation", "morphology", "examples"]
+    },
+    "translation": {
+      "description": "Context for translating between English and Librán",
+      "max_context_size": 8000,
+      "preferred_categories": ["dictionaries", "tranches.core", "specialized"],
+      "compression_ratio": 0.7,
+      "focus_fields": ["word", "translation", "context", "usage"]
+    },
+    "etymology": {
+      "description": "Context for etymological analysis",
+      "max_context_size": 5000,
+      "preferred_categories": ["dictionaries", "tranches.core", "tranches.concepts", "tranches.living"],
+      "compression_ratio": 0.9,
+      "focus_fields": ["word", "etymology", "root", "origin"]
+    },
+    "qa_analysis": {
+      "description": "Context for quality assurance analysis",
+      "max_context_size": 4000,
+      "preferred_categories": ["dictionaries", "specialized"],
+      "compression_ratio": 0.6,
+      "focus_fields": ["word", "quality_flags", "exclusions", "issues"]
+    },
+    "pattern_analysis": {
+      "description": "Context for linguistic pattern analysis",
+      "max_context_size": 7000,
+      "preferred_categories": ["dictionaries", "tranches.core", "tranches.concepts", "tranches.living", "tranches.society"],
+      "compression_ratio": 0.8,
+      "focus_fields": ["word", "morphology", "grammar", "structure"]
+    },
+    "comprehensive": {
+      "description": "Full context for complex analysis tasks",
+      "max_context_size": 10000,
+      "preferred_categories": ["all"],
+      "compression_ratio": 0.5,
+      "focus_fields": ["all"]
+    }
+  },
+  "file_categories": {
+    "dictionaries": {
+      "description": "Main dictionary files",
+      "files": [
+        "UnifiedLibranDictionaryv1.7.0.json",
+        "UnifiedLibranDictionaryv1.6.3.json",
+        "UnifiedLibranDictionaryv1.3Baseline.json"
+      ],
+      "priority": "high",
+      "max_files": 2
+    },
+    "tranches.core": {
+      "description": "Core grammar and nature terms",
+      "files": [
+        "Libran_Core_Grammar_Pack_v1.5.1.json",
+        "Libran_Core_Nature_Places_Tranche_v1.5.1.json"
+      ],
+      "priority": "high",
+      "max_files": 3
+    },
+    "tranches.concepts": {
+      "description": "Abstract concepts and qualities",
+      "files": [
+        "Libran_Abstract_Concepts_Qualities_Tranche_v1.5.1.json",
+        "Libran_MiniPack_EverydayAdditionsII_v1.5.1.json"
+      ],
+      "priority": "medium",
+      "max_files": 2
+    },
+    "tranches.living": {
+      "description": "Living things and beings",
+      "files": [
+        "Libran_Animals_Plants_Tranche_v1.5.1.json",
+        "Libran_Creatures_Mythic_Beings_Tranche_v1.5.1.json",
+        "Libran_Kinship_Body_Tranche_v1.5.1.json"
+      ],
+      "priority": "medium",
+      "max_files": 2
+    },
+    "tranches.society": {
+      "description": "Social and political terms",
+      "files": [
+        "Libran_Alesii_Politics_Tranche_v1.5.1.json",
+        "libran_law_justice_v1.json",
+        "libran_trade_commerce_v1.json"
+      ],
+      "priority": "medium",
+      "max_files": 2
+    },
+    "tranches.craft": {
+      "description": "Crafting and materials",
+      "files": [
+        "Libran_Materials_Crafting_Tranche_v1.5.1.json",
+        "libran_craftwork_corrected_v1_6_1.json",
+        "libran_agriculture_fixed_v1_6_1.json"
+      ],
+      "priority": "low",
+      "max_files": 1
+    },
+    "tranches.culture": {
+      "description": "Cultural and specialized terms",
+      "files": [
+        "libran_music_performance_v1.json",
+        "libran_healing_medicine_v1.json",
+        "libran_weapons_warfare_v1.json",
+        "libran_weather_natural_phenomena_v1.json"
+      ],
+      "priority": "low",
+      "max_files": 1
+    },
+    "specialized": {
+      "description": "Specialized reference files",
+      "files": [
+        "phrasebook-v1.2.json",
+        "audit-exclusions.json",
+        "sample_ancient.json",
+        "sample_modern.json"
+      ],
+      "priority": "medium",
+      "max_files": 2
+    }
+  },
+  "compression_settings": {
+    "max_context_size": 8000,
+    "default_compression_ratio": 0.7,
+    "min_entry_count": 5,
+    "max_entry_count": 50,
+    "pattern_extraction_limit": 100,
+    "etymology_extraction_limit": 30
+  },
+  "model_settings": {
+    "context_windows": {
+      "llama-2-7b-chat": 4096,
+      "mistral-7b-instruct": 8192,
+      "codellama-7b-instruct": 4096,
+      "gpt-3.5-turbo": 4096,
+      "gpt-4": 8192,
+      "claude-3-sonnet": 200000
+    },
+    "recommended_models": {
+      "local": ["llama-2-7b-chat", "mistral-7b-instruct"],
+      "cloud": ["gpt-4", "claude-3-sonnet"]
+    }
+  },
+  "prompt_templates": {
+    "word_analysis": {
+      "template": "# Librán Word Analysis\n\n## Context:\n{context}\n\n## Word: {word}\n\nAnalyze this word for {task_type}:\n- Morphological breakdown\n- Etymology and roots\n- Cultural context\n- Phonetic patterns\n- Quality assessment\n\nFormat as JSON with confidence scores.",
+      "max_context_tokens": 4000
+    },
+    "word_generation": {
+      "template": "# Librán Word Generation\n\n## Context:\n{context}\n\n## Generate: {english_word}\n## Category: {category}\n\nCreate a Librán word following:\n- Established patterns from context\n- Cultural authenticity\n- Phonetic harmony\n- Etymological coherence\n\nFormat as JSON with alternatives and reasoning.",
+      "max_context_tokens": 5000
+    },
+    "translation": {
+      "template": "# Librán Translation\n\n## Context:\n{context}\n\n## Translate: {text}\n## Direction: {direction}\n\nProvide accurate translation using:\n- Context vocabulary\n- Cultural nuances\n- Grammatical correctness\n- Idiomatic expressions\n\nFormat as JSON with confidence and alternatives.",
+      "max_context_tokens": 6000
+    }
+  }
+}

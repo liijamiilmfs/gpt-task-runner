@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npm run build:workers && next dev",
     "build": "npm run build:workers && next build",
+    "export": "next build && next export",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",

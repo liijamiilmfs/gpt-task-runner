@@ -7,8 +7,18 @@ describe('translate with custom dictionary', () => {
   it('uses the provided dictionary when supplied', async () => {
     const result = await translate('Hello friend', 'ancient', {
       dictionary: {
-        hello: 'salaam',
-        friend: 'sadiq'
+        version: '1.0.0',
+        language: 'ancient-libran',
+        metadata: {
+          description: 'Test dictionary',
+          lastUpdated: new Date().toISOString(),
+          wordCount: 2
+        },
+        entries: {
+          hello: 'salaam',
+          friend: 'sadiq'
+        },
+        rules: {}
       }
     })
 
@@ -20,7 +30,17 @@ describe('translate with custom dictionary', () => {
   it('falls back to stemmed forms for simple suffixes', async () => {
     const result = await translate('Walks', 'ancient', {
       dictionary: {
-        walk: 'tor'
+        version: '1.0.0',
+        language: 'ancient-libran',
+        metadata: {
+          description: 'Test dictionary',
+          lastUpdated: new Date().toISOString(),
+          wordCount: 1
+        },
+        entries: {
+          walk: 'tor'
+        },
+        rules: {}
       }
     })
 
@@ -31,7 +51,17 @@ describe('translate with custom dictionary', () => {
   it('applies modern sound shifts to -or endings', async () => {
     const result = await translate('Valor', 'modern', {
       dictionary: {
-        valor: 'valor'
+        version: '1.0.0',
+        language: 'modern-libran',
+        metadata: {
+          description: 'Test dictionary',
+          lastUpdated: new Date().toISOString(),
+          wordCount: 1
+        },
+        entries: {
+          valor: 'valor'
+        },
+        rules: {}
       }
     })
 

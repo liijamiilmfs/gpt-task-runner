@@ -12,16 +12,8 @@ export interface TranslationResult {
 
 export type Variant = 'ancient' | 'modern';
 
-interface Dictionary {
-  [key: string]: string | {
-    base?: string
-    plural?: string
-    possessive?: string
-    present?: string
-    past?: string
-    future?: string
-  };
-}
+// Use the Dictionary interface from dictionary-loader
+import type { Dictionary } from './dictionary-loader'
 
 export interface TranslateOptions {
   dictionary?: Dictionary;
@@ -32,9 +24,8 @@ async function loadDictionary(variant: Variant): Promise<Dictionary> {
   log.debug('Loading dictionary', { variant });
   
   try {
-    const dictionaryData = await loadDictionaryFromLoader(variant);
-    const dictionary = dictionaryData.entries;
-    log.info('Dictionary loaded successfully', { variant, entryCount: Object.keys(dictionary).length });
+    const dictionary = await loadDictionaryFromLoader(variant);
+    log.info('Dictionary loaded successfully', { variant, entryCount: Object.keys(dictionary.entries).length });
     return dictionary;
   } catch (error) {
     log.errorWithContext(error as Error, 'DICTIONARY_LOAD_ERROR', generateCorrelationId(), { variant });
@@ -140,7 +131,7 @@ export async function translate(text: string, variant: Variant, options: Transla
   const startTime = Date.now();
   log.debug('Starting translation', { textLength: text.length, variant, hasCustomDictionary: !!options.dictionary });
   
-  const dictionary = options.dictionary ?? await loadDictionary(variant);
+  const dictionary = options.dictionary ?? await loadDictionaryFromLoader(variant);
   const tokens = tokenize(text);
   const translatedTokens = [];
   let translatedWordCount = 0;
@@ -150,18 +141,17 @@ export async function translate(text: string, variant: Variant, options: Transla
   for (const token of tokens) {
     if (token.type === 'word') {
       totalWordCount++;
-      let translated = dictionary[token.value];
+      let translated = getDictionaryEntry(dictionary, token.value);
       
       if (!translated) {
         // Try stemmed version
         const stemmed = stemWord(token.value);
-        translated = dictionary[stemmed];
+        translated = getDictionaryEntry(dictionary, stemmed);
       }
       
       if (translated) {
-        // Extract string value from dictionary entry
-        const translatedString = typeof translated === 'string' ? translated : (translated.base || '');
-        translated = applySoundShifts(translatedString, variant);
+        // Apply sound shifts and preserve case
+        translated = applySoundShifts(translated, variant);
         translated = preserveCase(token.original, translated);
         translatedWordCount++;
         log.debug('Word translated', { original: token.value, translated, variant });

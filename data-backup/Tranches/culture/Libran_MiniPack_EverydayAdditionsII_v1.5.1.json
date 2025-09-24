@@ -1,0 +1,302 @@
+[
+  {
+    "english": "to borrow",
+    "ancient": "Mutuari",
+    "modern": "kölcsönkérni",
+    "notes": "Lat mutuari → Hu kölcsönkérni"
+  },
+  {
+    "english": "to lend",
+    "ancient": "Mutuare",
+    "modern": "kölcsönadni",
+    "notes": "Lat mutuare → Hu kölcsönadni"
+  },
+  {
+    "english": "to wash",
+    "ancient": "Lavare",
+    "modern": "mosni",
+    "notes": "Lat lavare → Hu mosni"
+  },
+  {
+    "english": "to clean (tidy)",
+    "ancient": "Purgare",
+    "modern": "takarítani",
+    "notes": "Lat purgare → Hu takarítani"
+  },
+  {
+    "english": "to repair",
+    "ancient": "Reparare",
+    "modern": "megjavítani",
+    "notes": "Lat reparare → Hu megjavítani"
+  },
+  {
+    "english": "to sweep",
+    "ancient": "Everrere",
+    "modern": "felsöpörni",
+    "notes": "Lat everrere → Hu felsöpörni"
+  },
+  {
+    "english": "to peel",
+    "ancient": "Excutere (cibum)",
+    "modern": "hámozni",
+    "notes": "Lat excutere (food) → Hu hámozni"
+  },
+  {
+    "english": "to stir",
+    "ancient": "Miscere",
+    "modern": "keverni",
+    "notes": "Lat miscere → Hu keverni"
+  },
+  {
+    "english": "to pour",
+    "ancient": "Fundere",
+    "modern": "önteni",
+    "notes": "Lat fundere → Hu önteni"
+  },
+  {
+    "english": "to pack",
+    "ancient": "Sarcinare",
+    "modern": "csomagolni",
+    "notes": "Lat sarcinare → Hu csomagolni"
+  },
+  {
+    "english": "new",
+    "ancient": "Novus",
+    "modern": "új",
+    "notes": "Lat novus → Hu új"
+  },
+  {
+    "english": "worn",
+    "ancient": "Vetustus",
+    "modern": "elnyűtt",
+    "notes": "Lat vetustus → Hu elnyűtt"
+  },
+  {
+    "english": "fragile",
+    "ancient": "Fragilis",
+    "modern": "törékeny",
+    "notes": "Lat fragilis → Hu törékeny"
+  },
+  {
+    "english": "sturdy",
+    "ancient": "Robustus",
+    "modern": "masszív",
+    "notes": "Lat robustus → Hu masszív"
+  },
+  {
+    "english": "comfortable",
+    "ancient": "Commodus",
+    "modern": "kényelmes",
+    "notes": "Lat commodus → Hu kényelmes"
+  },
+  {
+    "english": "useful",
+    "ancient": "Utilis",
+    "modern": "hasznos",
+    "notes": "Lat utilis → Hu hasznos"
+  },
+  {
+    "english": "useless",
+    "ancient": "Inutilis",
+    "modern": "haszontalan",
+    "notes": "Lat inutilis → Hu haszontalan"
+  },
+  {
+    "english": "safe",
+    "ancient": "Tutus",
+    "modern": "biztonságos",
+    "notes": "Lat tutus → Hu biztonságos"
+  },
+  {
+    "english": "risky",
+    "ancient": "Periculosus",
+    "modern": "kockázatos",
+    "notes": "Lat periculosus → Hu kockázatos"
+  },
+  {
+    "english": "portable",
+    "ancient": "Portabilis",
+    "modern": "hordozható",
+    "notes": "Lat portabilis → Hu hordozható"
+  },
+  {
+    "english": "spoon",
+    "ancient": "Cochlear",
+    "modern": "kanál",
+    "notes": "Lat cochlear → Hu kanál"
+  },
+  {
+    "english": "fork",
+    "ancient": "Furca (mensae)",
+    "modern": "villa",
+    "notes": "Lat furca (table) → Hu villa/villa kanál (fork)"
+  },
+  {
+    "english": "plate",
+    "ancient": "Patella",
+    "modern": "tányér",
+    "notes": "Lat patella → Hu tányér"
+  },
+  {
+    "english": "bowl",
+    "ancient": "Catinus",
+    "modern": "tál",
+    "notes": "Lat catinus → Hu tál"
+  },
+  {
+    "english": "cup",
+    "ancient": "Poculum",
+    "modern": "pohár",
+    "notes": "Lat poculum → Hu pohár"
+  },
+  {
+    "english": "jug",
+    "ancient": "Urceus",
+    "modern": "korsó",
+    "notes": "Lat urceus → Hu korsó"
+  },
+  {
+    "english": "pan",
+    "ancient": "Patina",
+    "modern": "serpenyő",
+    "notes": "Lat patina → Hu serpenyő"
+  },
+  {
+    "english": "pot",
+    "ancient": "Olla",
+    "modern": "fazék",
+    "notes": "Lat olla → Hu fazék"
+  },
+  {
+    "english": "bottle",
+    "ancient": "Ampulla",
+    "modern": "palack",
+    "notes": "Lat ampulla → Hu palack"
+  },
+  {
+    "english": "bag/sack",
+    "ancient": "Saccus",
+    "modern": "zsák",
+    "notes": "Lat saccus → Hu zsák"
+  },
+  {
+    "english": "bed",
+    "ancient": "Lectus",
+    "modern": "ágy",
+    "notes": "Lat lectus → Hu ágy"
+  },
+  {
+    "english": "blanket",
+    "ancient": "Stragulum",
+    "modern": "takaró",
+    "notes": "Lat stragulum → Hu takaró"
+  },
+  {
+    "english": "neighbor",
+    "ancient": "Vicinus",
+    "modern": "szomszéd",
+    "notes": "Lat vicinus → Hu szomszéd"
+  },
+  {
+    "english": "guest",
+    "ancient": "Hospes",
+    "modern": "vendég",
+    "notes": "Lat hospes → Hu vendég"
+  },
+  {
+    "english": "host (inn)",
+    "ancient": "Hospes (dominus)",
+    "modern": "házigazda",
+    "notes": "Lat hospes/dominus hospitii → Hu házigazda"
+  },
+  {
+    "english": "innkeeper",
+    "ancient": "Caupo",
+    "modern": "fogadós",
+    "notes": "Lat caupo → Hu fogadós"
+  },
+  {
+    "english": "porter",
+    "ancient": "Portitor",
+    "modern": "hordár",
+    "notes": "Lat portitor → Hu hordár"
+  },
+  {
+    "english": "messenger",
+    "ancient": "Nuntius",
+    "modern": "küldönc",
+    "notes": "Lat nuntius → Hu küldönc"
+  },
+  {
+    "english": "trader",
+    "ancient": "Negotiator",
+    "modern": "kereskedő",
+    "notes": "Lat negotiator → Hu kereskedő"
+  },
+  {
+    "english": "guard",
+    "ancient": "Custos",
+    "modern": "őr",
+    "notes": "Lat custos → Hu őr"
+  },
+  {
+    "english": "teacher",
+    "ancient": "Magister",
+    "modern": "tanító",
+    "notes": "Lat magister → Hu tanító"
+  },
+  {
+    "english": "student",
+    "ancient": "Discipulus",
+    "modern": "tanítvány",
+    "notes": "Lat discipulus → Hu tanítvány"
+  },
+  {
+    "english": "blacksmith",
+    "ancient": "Faber Ferrarius",
+    "modern": "kovács",
+    "notes": "Lat faber ferrarius → Hu kovács"
+  },
+  {
+    "english": "weaver",
+    "ancient": "Textor",
+    "modern": "szövő",
+    "notes": "Lat textor → Hu szövő"
+  },
+  {
+    "english": "shepherd",
+    "ancient": "Pastor",
+    "modern": "pásztor",
+    "notes": "Lat pastor → Hu pásztor"
+  },
+  {
+    "english": "miller",
+    "ancient": "Molinarius",
+    "modern": "molnár",
+    "notes": "Med Lat molinarius → Hu molnár"
+  },
+  {
+    "english": "baker",
+    "ancient": "Pistor",
+    "modern": "pék",
+    "notes": "Lat pistor → Hu pék"
+  },
+  {
+    "english": "fisher",
+    "ancient": "Piscator",
+    "modern": "halász",
+    "notes": "Lat piscator → Hu halász"
+  },
+  {
+    "english": "carpenter",
+    "ancient": "Faber Lignarius",
+    "modern": "ács",
+    "notes": "Lat faber lignarius → Hu ács"
+  },
+  {
+    "english": "cook",
+    "ancient": "Coquus",
+    "modern": "szakács",
+    "notes": "Lat coquus → Hu szakács"
+  }
+]

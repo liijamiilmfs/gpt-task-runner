@@ -1,0 +1,434 @@
+[
+  {
+    "english": "I",
+    "ancient": "egor",
+    "modern": "égra",
+    "notes": "Donors: Is. ég + Lat ego → Ancient -or; Modern vowel shift é + -a."
+  },
+  {
+    "english": "you (singular)",
+    "ancient": "tisor",
+    "modern": "tía",
+    "notes": "Donors: Ro tu, Lat tibi; s→ Ancient -or; Modern palatal iá."
+  },
+  {
+    "english": "he",
+    "ancient": "isorn",
+    "modern": "ísa",
+    "notes": "Donors: Lat is + Hu ő; Ancient nasal -n variant; Modern long í."
+  },
+  {
+    "english": "she",
+    "ancient": "easun",
+    "modern": "éva",
+    "notes": "Donors: Ro ea + Hu ő; Modern v-epenthesis to separate vowels."
+  },
+  {
+    "english": "it",
+    "ancient": "idon",
+    "modern": "ída",
+    "notes": "Donors: Lat id; Ancient -on; Modern -a."
+  },
+  {
+    "english": "we",
+    "ancient": "nesor",
+    "modern": "níra",
+    "notes": "Donors: Ro noi + Is við (collective), normalized; Modern -ra plural shade."
+  },
+  {
+    "english": "you (plural)",
+    "ancient": "vosor",
+    "modern": "vása",
+    "notes": "Donors: Lat vos + Hu ti(pl) influence; Modern á."
+  },
+  {
+    "english": "they (animate)",
+    "ancient": "illor",
+    "modern": "íla",
+    "notes": "Donors: Lat illi + Hu ők; animate set."
+  },
+  {
+    "english": "they (inanimate)",
+    "ancient": "eonon",
+    "modern": "óna",
+    "notes": "Donors: Lat ea (pl), Is þau; neutral/inanimate."
+  },
+  {
+    "english": "me",
+    "ancient": "meis",
+    "modern": "míra",
+    "notes": "Donors: Ro mie; Ancient -is oblique; Modern -ra oblique marker."
+  },
+  {
+    "english": "you (obj, sg)",
+    "ancient": "teis",
+    "modern": "tíra",
+    "notes": "Donors: Lat te; Modern -ra."
+  },
+  {
+    "english": "him",
+    "ancient": "eius",
+    "modern": "íra",
+    "notes": "Donors: Lat ei/illum merged; Modern clipped with -ra."
+  },
+  {
+    "english": "her",
+    "ancient": "eas",
+    "modern": "évra",
+    "notes": "Donors: Lat eam/ei; Modern v‑bridge + -ra."
+  },
+  {
+    "english": "us",
+    "ancient": "nosin",
+    "modern": "níra",
+    "notes": "Donors: Lat nos; -in oblique; Modern merges with we/obj."
+  },
+  {
+    "english": "you (obj, pl)",
+    "ancient": "vosin",
+    "modern": "vásra",
+    "notes": "Donors: Lat vos; -in oblique; Modern -ra."
+  },
+  {
+    "english": "them (animate)",
+    "ancient": "illis",
+    "modern": "ílra",
+    "notes": "Donors: Lat illos; Modern animate -l- + -ra."
+  },
+  {
+    "english": "them (inanimate)",
+    "ancient": "eonis",
+    "modern": "ónra",
+    "notes": "Donors: neutral; Modern on→ ón + -ra."
+  },
+  {
+    "english": "my",
+    "ancient": "meon",
+    "modern": "mía",
+    "notes": "Donors: Ro meu; Ancient -on determiner; Modern -a."
+  },
+  {
+    "english": "your (sg)",
+    "ancient": "teon",
+    "modern": "túa",
+    "notes": "Donors: Lat tuus/Ro tău; Modern ú diphthong."
+  },
+  {
+    "english": "his",
+    "ancient": "eion",
+    "modern": "ísae",
+    "notes": "Donors: Lat eius; Modern -ae possessive tint."
+  },
+  {
+    "english": "her (possessive)",
+    "ancient": "eonæ",
+    "modern": "évae",
+    "notes": "Donors: Lat eius/ea; æ preserved in Ancient; ae in Modern."
+  },
+  {
+    "english": "our",
+    "ancient": "neon",
+    "modern": "níae",
+    "notes": "Donors: Lat noster (neo- simplified); Modern -ae plural."
+  },
+  {
+    "english": "your (pl)",
+    "ancient": "veon",
+    "modern": "váe",
+    "notes": "Donors: Lat vester>ve-; Modern -ae."
+  },
+  {
+    "english": "their (animate)",
+    "ancient": "illon",
+    "modern": "ílae",
+    "notes": "Donors: Lat illorum; Modern animate set -ae."
+  },
+  {
+    "english": "their (inanimate)",
+    "ancient": "eononæ",
+    "modern": "ónae",
+    "notes": "Donors: neutral set; Ancient doubled -on + æ."
+  },
+  {
+    "english": "this",
+    "ancient": "hicor",
+    "modern": "ísza",
+    "notes": "Donors: Lat hic + Hu ez (sz); Modern sz insertion."
+  },
+  {
+    "english": "that",
+    "ancient": "istor",
+    "modern": "óta",
+    "notes": "Donors: Lat iste/ille; Modern ó."
+  },
+  {
+    "english": "these",
+    "ancient": "hicon",
+    "modern": "íszek",
+    "notes": "Donors: pluralized with -ek (Hu plural echo) in Modern."
+  },
+  {
+    "english": "those",
+    "ancient": "iston",
+    "modern": "ótek",
+    "notes": "Donors: Modern -ek plural echo again."
+  },
+  {
+    "english": "the (definite)",
+    "ancient": "el",
+    "modern": "ël",
+    "notes": "Definite clitic; diaeresis marks light vowel in Modern."
+  },
+  {
+    "english": "a/an (indefinite)",
+    "ancient": "un",
+    "modern": "ën",
+    "notes": "Indefinite nasal; Modern fronted ë."
+  },
+  {
+    "english": "who",
+    "ancient": "quisor",
+    "modern": "kíva",
+    "notes": "Donors: Lat quis + Hu ki; Modern k + í."
+  },
+  {
+    "english": "what",
+    "ancient": "quidon",
+    "modern": "kódë",
+    "notes": "Donors: Lat quid + Is hvað; Modern ó + ë end."
+  },
+  {
+    "english": "which",
+    "ancient": "quælor",
+    "modern": "kále",
+    "notes": "Donors: Lat quae; Modern k- + -le selector."
+  },
+  {
+    "english": "where",
+    "ancient": "ubion",
+    "modern": "únde",
+    "notes": "Donors: Lat ubi + Ro unde; Modern preserves unde."
+  },
+  {
+    "english": "when",
+    "ancient": "quandon",
+    "modern": "kandë",
+    "notes": "Donors: Lat quando; Modern de‑ending."
+  },
+  {
+    "english": "why",
+    "ancient": "curis",
+    "modern": "kórë",
+    "notes": "Donors: Lat cur; Modern ó + ë."
+  },
+  {
+    "english": "how",
+    "ancient": "quomor",
+    "modern": "kómë",
+    "notes": "Donors: Lat quomodo; Modern compressed."
+  },
+  {
+    "english": "whose",
+    "ancient": "cuison",
+    "modern": "kívae",
+    "notes": "Genitival interrogative; aligns with possessive -ae."
+  },
+  {
+    "english": "and",
+    "ancient": "et",
+    "modern": "és",
+    "notes": "Donors: Lat et + Hu és."
+  },
+  {
+    "english": "or",
+    "ancient": "vel",
+    "modern": "vagy",
+    "notes": "Donors: Lat vel + Hu vagy."
+  },
+  {
+    "english": "but",
+    "ancient": "sed",
+    "modern": "de",
+    "notes": "Donors: Lat sed; Modern lenites to de."
+  },
+  {
+    "english": "nor",
+    "ancient": "nec",
+    "modern": "se",
+    "notes": "Donors: Lat nec; Modern s‑e clipped."
+  },
+  {
+    "english": "if",
+    "ancient": "si",
+    "modern": "ha",
+    "notes": "Donors: Lat si + Hu ha."
+  },
+  {
+    "english": "then",
+    "ancient": "tum",
+    "modern": "akkor",
+    "notes": "Donors: Lat tum + Hu akkor; keeps Hu form as loan."
+  },
+  {
+    "english": "else",
+    "ancient": "aliori",
+    "modern": "másra",
+    "notes": "Donors: Ro altfel/Hu más; Modern -ra adverbializer."
+  },
+  {
+    "english": "because",
+    "ancient": "quoniam",
+    "modern": "mertë",
+    "notes": "Donors: Lat quoniam + Hu mert; Modern ë suffix."
+  },
+  {
+    "english": "although",
+    "ancient": "quamvis",
+    "modern": "habárë",
+    "notes": "Donors: Lat quamvis + Hu habár."
+  },
+  {
+    "english": "while",
+    "ancient": "dum",
+    "modern": "mígë",
+    "notes": "Donors: Lat dum + Hu míg."
+  },
+  {
+    "english": "so (therefore)",
+    "ancient": "ergo",
+    "modern": "ezértë",
+    "notes": "Donors: Lat ergo + Hu ezért."
+  },
+  {
+    "english": "therefore",
+    "ancient": "igitur",
+    "modern": "akképpë",
+    "notes": "Donors: Lat igitur + Hu akképp."
+  },
+  {
+    "english": "yes",
+    "ancient": "ita",
+    "modern": "így",
+    "notes": "Donors: Lat ita + Hu így."
+  },
+  {
+    "english": "no",
+    "ancient": "non",
+    "modern": "nem",
+    "notes": "Donors: Lat non + Hu nem."
+  },
+  {
+    "english": "not",
+    "ancient": "ne",
+    "modern": "ne",
+    "notes": "Shared negator in both registers; enclitic with verbs in Ancient."
+  },
+  {
+    "english": "also",
+    "ancient": "etiam",
+    "modern": "is",
+    "notes": "Donors: Lat etiam + Hu is (also)."
+  },
+  {
+    "english": "only",
+    "ancient": "tantum",
+    "modern": "csak",
+    "notes": "Donors: Lat tantum + Hu csak."
+  },
+  {
+    "english": "even",
+    "ancient": "etiamque",
+    "modern": "még",
+    "notes": "Donors: Lat etiam + -que; Modern Hu még."
+  },
+  {
+    "english": "already",
+    "ancient": "iam",
+    "modern": "már",
+    "notes": "Donors: Lat iam + Hu már."
+  },
+  {
+    "english": "still",
+    "ancient": "adhuc",
+    "modern": "mégis",
+    "notes": "Donors: Lat adhuc + Hu mégis."
+  },
+  {
+    "english": "yet (contrast)",
+    "ancient": "tamen",
+    "modern": "ámde",
+    "notes": "Donors: Lat tamen + Hu ámde."
+  },
+  {
+    "english": "very",
+    "ancient": "valde",
+    "modern": "nagyon",
+    "notes": "Donors: Lat valde + Hu nagyon."
+  },
+  {
+    "english": "more",
+    "ancient": "plus",
+    "modern": "többë",
+    "notes": "Donors: Lat plus + Hu több."
+  },
+  {
+    "english": "most",
+    "ancient": "plurimum",
+    "modern": "legtöbbë",
+    "notes": "Donors: Lat plurimum + Hu legtöbb."
+  },
+  {
+    "english": "less",
+    "ancient": "minus",
+    "modern": "kevesë",
+    "notes": "Donors: Lat minus + Hu kevés."
+  },
+  {
+    "english": "least",
+    "ancient": "minime",
+    "modern": "legkevesë",
+    "notes": "Donors: Lat minime + Hu leg+kevés."
+  },
+  {
+    "english": "maybe",
+    "ancient": "fortasse",
+    "modern": "talán",
+    "notes": "Donors: Lat fortasse + Hu talán."
+  },
+  {
+    "english": "must (particle)",
+    "ancient": "oportet",
+    "modern": "kellë",
+    "notes": "Donors: Lat oportet + Hu kell."
+  },
+  {
+    "english": "can (particle)",
+    "ancient": "licet",
+    "modern": "lehetë",
+    "notes": "Donors: Lat licet + Hu lehet."
+  },
+  {
+    "english": "cannot (particle)",
+    "ancient": "non licet",
+    "modern": "nem lehetë",
+    "notes": "Composite negation."
+  },
+  {
+    "english": "will (future particle)",
+    "ancient": "volo",
+    "modern": "fogë",
+    "notes": "Donors: Lat volo (aux) + Hu fog (future aux)."
+  },
+  {
+    "english": "would (conditional)",
+    "ancient": "vellem",
+    "modern": "volna",
+    "notes": "Donors: Lat vellem + Hu volna."
+  },
+  {
+    "english": "question marker (polar)",
+    "ancient": "-ne",
+    "modern": "ë?",
+    "notes": "Ancient enclitic -ne; Modern sentence-final ë rising tone."
+  }
+]

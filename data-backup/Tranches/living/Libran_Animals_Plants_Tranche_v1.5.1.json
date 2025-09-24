@@ -1,0 +1,1412 @@
+[
+  {
+    "english": "horse",
+    "ancient": "Horseor",
+    "modern": "ló",
+    "notes": "Modern loan: Hu ló."
+  },
+  {
+    "english": "mare",
+    "ancient": "Mareor",
+    "modern": "kanca",
+    "notes": "Modern loan: Hu kanca."
+  },
+  {
+    "english": "stallion",
+    "ancient": "Stallion",
+    "modern": "mén",
+    "notes": "Modern loan: Hu mén."
+  },
+  {
+    "english": "foal",
+    "ancient": "Foalor",
+    "modern": "csikó",
+    "notes": "Modern loan: Hu csikó."
+  },
+  {
+    "english": "wolf",
+    "ancient": "Wolfor",
+    "modern": "farkas",
+    "notes": "Modern loan: Hu farkas."
+  },
+  {
+    "english": "bear",
+    "ancient": "Bearor",
+    "modern": "medve",
+    "notes": "Modern loan: Hu medve."
+  },
+  {
+    "english": "boar",
+    "ancient": "Boaror",
+    "modern": "vaddisznó",
+    "notes": "Modern loan: Hu vaddisznó."
+  },
+  {
+    "english": "deer",
+    "ancient": "Deeror",
+    "modern": "szarvas",
+    "notes": "Modern loan: Hu szarvas."
+  },
+  {
+    "english": "elk",
+    "ancient": "Elkor",
+    "modern": "jávor",
+    "notes": "Modern loan: Hu jávor."
+  },
+  {
+    "english": "bison",
+    "ancient": "Bison",
+    "modern": "bölény",
+    "notes": "Modern loan: Hu bölény."
+  },
+  {
+    "english": "mammoth",
+    "ancient": "Mammothor",
+    "modern": "mamut",
+    "notes": "Modern loan: Hu mamut."
+  },
+  {
+    "english": "lion",
+    "ancient": "Lion",
+    "modern": "oroszlán",
+    "notes": "Modern loan: Hu oroszlán."
+  },
+  {
+    "english": "tiger",
+    "ancient": "Tigeror",
+    "modern": "tigris",
+    "notes": "Modern loan: Hu tigris."
+  },
+  {
+    "english": "leopard",
+    "ancient": "Leopardor",
+    "modern": "leopárd",
+    "notes": "Modern loan: Hu leopárd."
+  },
+  {
+    "english": "lynx",
+    "ancient": "Lynxor",
+    "modern": "hiúz",
+    "notes": "Modern loan: Hu hiúz."
+  },
+  {
+    "english": "fox",
+    "ancient": "Foxor",
+    "modern": "róka",
+    "notes": "Modern loan: Hu róka."
+  },
+  {
+    "english": "hare",
+    "ancient": "Hareor",
+    "modern": "nyúl",
+    "notes": "Modern loan: Hu nyúl."
+  },
+  {
+    "english": "goat",
+    "ancient": "Goator",
+    "modern": "kecske",
+    "notes": "Modern loan: Hu kecske."
+  },
+  {
+    "english": "sheep",
+    "ancient": "Sheepor",
+    "modern": "birka",
+    "notes": "Modern loan: Hu birka."
+  },
+  {
+    "english": "ram",
+    "ancient": "Ramis",
+    "modern": "kos",
+    "notes": "Modern loan: Hu kos."
+  },
+  {
+    "english": "ewe",
+    "ancient": "Eweor",
+    "modern": "anya juh",
+    "notes": "Modern loan: Hu anya juh."
+  },
+  {
+    "english": "cow",
+    "ancient": "Cowor",
+    "modern": "tehén",
+    "notes": "Modern loan: Hu tehén."
+  },
+  {
+    "english": "bull",
+    "ancient": "Bullor",
+    "modern": "bika",
+    "notes": "Modern loan: Hu bika."
+  },
+  {
+    "english": "calf",
+    "ancient": "Calfor",
+    "modern": "borjú",
+    "notes": "Modern loan: Hu borjú."
+  },
+  {
+    "english": "dog",
+    "ancient": "Dogor",
+    "modern": "kutya",
+    "notes": "Modern loan: Hu kutya."
+  },
+  {
+    "english": "hound",
+    "ancient": "Houndor",
+    "modern": "vadászeb",
+    "notes": "Modern loan: Hu vadászeb."
+  },
+  {
+    "english": "cat",
+    "ancient": "Cator",
+    "modern": "macska",
+    "notes": "Modern loan: Hu macska."
+  },
+  {
+    "english": "raven",
+    "ancient": "Ravenis",
+    "modern": "holló",
+    "notes": "Modern loan: Hu holló."
+  },
+  {
+    "english": "crow",
+    "ancient": "Crowor",
+    "modern": "varjú",
+    "notes": "Modern loan: Hu varjú."
+  },
+  {
+    "english": "eagle",
+    "ancient": "Eagleor",
+    "modern": "sas",
+    "notes": "Modern loan: Hu sas."
+  },
+  {
+    "english": "hawk",
+    "ancient": "Hawkor",
+    "modern": "ölyv",
+    "notes": "Modern loan: Hu ölyv."
+  },
+  {
+    "english": "falcon",
+    "ancient": "Falcon",
+    "modern": "sólyom",
+    "notes": "Modern loan: Hu sólyom."
+  },
+  {
+    "english": "owl",
+    "ancient": "Owlor",
+    "modern": "bagoly",
+    "notes": "Modern loan: Hu bagoly."
+  },
+  {
+    "english": "swan",
+    "ancient": "Swanis",
+    "modern": "hattyú",
+    "notes": "Modern loan: Hu hattyú."
+  },
+  {
+    "english": "crane",
+    "ancient": "Craneor",
+    "modern": "daru",
+    "notes": "Modern loan: Hu daru."
+  },
+  {
+    "english": "goose",
+    "ancient": "Gooseor",
+    "modern": "lúd",
+    "notes": "Modern loan: Hu lúd."
+  },
+  {
+    "english": "duck",
+    "ancient": "Duckor",
+    "modern": "kacsa",
+    "notes": "Modern loan: Hu kacsa."
+  },
+  {
+    "english": "fish",
+    "ancient": "Fishor",
+    "modern": "hal",
+    "notes": "Modern loan: Hu hal."
+  },
+  {
+    "english": "salmon",
+    "ancient": "Salmon",
+    "modern": "lazac",
+    "notes": "Modern loan: Hu lazac."
+  },
+  {
+    "english": "sturgeon",
+    "ancient": "Sturgeon",
+    "modern": "tokhal",
+    "notes": "Modern loan: Hu tokhal."
+  },
+  {
+    "english": "eel",
+    "ancient": "Eelor",
+    "modern": "angolna",
+    "notes": "Modern loan: Hu angolna."
+  },
+  {
+    "english": "whale",
+    "ancient": "Whaleor",
+    "modern": "bálna",
+    "notes": "Modern loan: Hu bálna."
+  },
+  {
+    "english": "seal",
+    "ancient": "Sealor",
+    "modern": "fóka",
+    "notes": "Modern loan: Hu fóka."
+  },
+  {
+    "english": "walrus",
+    "ancient": "Walrusor",
+    "modern": "rozmár",
+    "notes": "Modern loan: Hu rozmár."
+  },
+  {
+    "english": "sabertooth",
+    "ancient": "Sabertoothor",
+    "modern": "kardszárnyú tigris",
+    "notes": "Modern loan: Hu kardszárnyú tigris."
+  },
+  {
+    "english": "warg",
+    "ancient": "Wargor",
+    "modern": "varg (lore)",
+    "notes": "Modern loan: Hu varg (lore)."
+  },
+  {
+    "english": "camel",
+    "ancient": "Camelor",
+    "modern": "teve",
+    "notes": "Modern loan: Hu teve."
+  },
+  {
+    "english": "lizard",
+    "ancient": "Lizardor",
+    "modern": "gyík",
+    "notes": "Modern loan: Hu gyík."
+  },
+  {
+    "english": "serpent",
+    "ancient": "Serpentor",
+    "modern": "kígyó",
+    "notes": "Modern loan: Hu kígyó."
+  },
+  {
+    "english": "snake",
+    "ancient": "Snakeor",
+    "modern": "kígyó",
+    "notes": "Modern loan: Hu kígyó."
+  },
+  {
+    "english": "frog",
+    "ancient": "Frogor",
+    "modern": "béka",
+    "notes": "Modern loan: Hu béka."
+  },
+  {
+    "english": "toad",
+    "ancient": "Toador",
+    "modern": "varangy",
+    "notes": "Modern loan: Hu varangy."
+  },
+  {
+    "english": "spider",
+    "ancient": "Spideror",
+    "modern": "pók",
+    "notes": "Modern loan: Hu pók."
+  },
+  {
+    "english": "beetle",
+    "ancient": "Beetleor",
+    "modern": "bogár",
+    "notes": "Modern loan: Hu bogár."
+  },
+  {
+    "english": "ant",
+    "ancient": "Antor",
+    "modern": "hangya",
+    "notes": "Modern loan: Hu hangya."
+  },
+  {
+    "english": "bee",
+    "ancient": "Beeor",
+    "modern": "méh",
+    "notes": "Modern loan: Hu méh."
+  },
+  {
+    "english": "wasp",
+    "ancient": "Waspor",
+    "modern": "darázs",
+    "notes": "Modern loan: Hu darázs."
+  },
+  {
+    "english": "butterfly",
+    "ancient": "Butterflyor",
+    "modern": "pillangó",
+    "notes": "Modern loan: Hu pillangó."
+  },
+  {
+    "english": "moth",
+    "ancient": "Mothor",
+    "modern": "moly",
+    "notes": "Modern loan: Hu moly."
+  },
+  {
+    "english": "bat",
+    "ancient": "Bator",
+    "modern": "denevér",
+    "notes": "Modern loan: Hu denevér."
+  },
+  {
+    "english": "shark",
+    "ancient": "Sharkor",
+    "modern": "cápa",
+    "notes": "Modern loan: Hu cápa."
+  },
+  {
+    "english": "ray",
+    "ancient": "Rayor",
+    "modern": "rája",
+    "notes": "Modern loan: Hu rája."
+  },
+  {
+    "english": "squid",
+    "ancient": "Scuidor",
+    "modern": "tintahal",
+    "notes": "Modern loan: Hu tintahal."
+  },
+  {
+    "english": "octopus",
+    "ancient": "Octopusor",
+    "modern": "polip",
+    "notes": "Modern loan: Hu polip."
+  },
+  {
+    "english": "crab",
+    "ancient": "Crabor",
+    "modern": "rák",
+    "notes": "Modern loan: Hu rák."
+  },
+  {
+    "english": "lobster",
+    "ancient": "Lobsteror",
+    "modern": "homár",
+    "notes": "Modern loan: Hu homár."
+  },
+  {
+    "english": "turtle",
+    "ancient": "Turtleor",
+    "modern": "teknős",
+    "notes": "Modern loan: Hu teknős."
+  },
+  {
+    "english": "tortoise",
+    "ancient": "Tortoiseor",
+    "modern": "szárazföldi teknős",
+    "notes": "Modern loan: Hu szárazföldi teknős."
+  },
+  {
+    "english": "dolphin",
+    "ancient": "Dolfinis",
+    "modern": "delfin",
+    "notes": "Modern loan: Hu delfin."
+  },
+  {
+    "english": "narwhal",
+    "ancient": "Narwhalor",
+    "modern": "narvál",
+    "notes": "Modern loan: Hu narvál."
+  },
+  {
+    "english": "gull",
+    "ancient": "Gullor",
+    "modern": "sirály",
+    "notes": "Modern loan: Hu sirály."
+  },
+  {
+    "english": "vulture",
+    "ancient": "Vultureor",
+    "modern": "keselyű",
+    "notes": "Modern loan: Hu keselyű."
+  },
+  {
+    "english": "condor",
+    "ancient": "Condor",
+    "modern": "kondor",
+    "notes": "Modern loan: Hu kondor."
+  },
+  {
+    "english": "muskox",
+    "ancient": "Muskoxor",
+    "modern": "pézsmatulok",
+    "notes": "Modern loan: Hu pézsmatulok."
+  },
+  {
+    "english": "reindeer",
+    "ancient": "Reindeeror",
+    "modern": "rénszarvas",
+    "notes": "Modern loan: Hu rénszarvas."
+  },
+  {
+    "english": "caribou",
+    "ancient": "Caribouor",
+    "modern": "karibú",
+    "notes": "Modern loan: Hu karibú."
+  },
+  {
+    "english": "yak",
+    "ancient": "Yakor",
+    "modern": "jak",
+    "notes": "Modern loan: Hu jak."
+  },
+  {
+    "english": "ibex",
+    "ancient": "Ibexor",
+    "modern": "kőszáli kecske",
+    "notes": "Modern loan: Hu kőszáli kecske."
+  },
+  {
+    "english": "aurochs",
+    "ancient": "Auroksor",
+    "modern": "őstulok",
+    "notes": "Modern loan: Hu őstulok."
+  },
+  {
+    "english": "oak",
+    "ancient": "Oakor",
+    "modern": "tölgy",
+    "notes": "Modern loan: Hu tölgy."
+  },
+  {
+    "english": "pine",
+    "ancient": "Pineor",
+    "modern": "fenyő",
+    "notes": "Modern loan: Hu fenyő."
+  },
+  {
+    "english": "birch",
+    "ancient": "Birkor",
+    "modern": "nyír",
+    "notes": "Modern loan: Hu nyír."
+  },
+  {
+    "english": "willow",
+    "ancient": "Willowor",
+    "modern": "fűz",
+    "notes": "Modern loan: Hu fűz."
+  },
+  {
+    "english": "reed",
+    "ancient": "Reedor",
+    "modern": "nád",
+    "notes": "Modern loan: Hu nád."
+  },
+  {
+    "english": "vine",
+    "ancient": "Vineor",
+    "modern": "szőlő",
+    "notes": "Modern loan: Hu szőlő."
+  },
+  {
+    "english": "moss",
+    "ancient": "Mossor",
+    "modern": "moha",
+    "notes": "Modern loan: Hu moha."
+  },
+  {
+    "english": "fern",
+    "ancient": "Fernis",
+    "modern": "páfrány",
+    "notes": "Modern loan: Hu páfrány."
+  },
+  {
+    "english": "grass",
+    "ancient": "Grassor",
+    "modern": "fű",
+    "notes": "Modern loan: Hu fű."
+  },
+  {
+    "english": "wheat",
+    "ancient": "Wheator",
+    "modern": "búza",
+    "notes": "Modern loan: Hu búza."
+  },
+  {
+    "english": "barley",
+    "ancient": "Barleyor",
+    "modern": "árpa",
+    "notes": "Modern loan: Hu árpa."
+  },
+  {
+    "english": "rye",
+    "ancient": "Ryeor",
+    "modern": "rozs",
+    "notes": "Modern loan: Hu rozs."
+  },
+  {
+    "english": "maize",
+    "ancient": "Maizeor",
+    "modern": "kukorica",
+    "notes": "Modern loan: Hu kukorica."
+  },
+  {
+    "english": "rice",
+    "ancient": "Riseor",
+    "modern": "rizs",
+    "notes": "Modern loan: Hu rizs."
+  },
+  {
+    "english": "herb",
+    "ancient": "Herbor",
+    "modern": "fűszer",
+    "notes": "Modern loan: Hu fűszer."
+  },
+  {
+    "english": "spice",
+    "ancient": "Spiseor",
+    "modern": "fűszer",
+    "notes": "Modern loan: Hu fűszer."
+  },
+  {
+    "english": "flower",
+    "ancient": "Floweror",
+    "modern": "virág",
+    "notes": "Modern loan: Hu virág."
+  },
+  {
+    "english": "lily",
+    "ancient": "Lilyor",
+    "modern": "liliom",
+    "notes": "Modern loan: Hu liliom."
+  },
+  {
+    "english": "rose",
+    "ancient": "Roseor",
+    "modern": "rózsa",
+    "notes": "Modern loan: Hu rózsa."
+  },
+  {
+    "english": "iris",
+    "ancient": "Iris",
+    "modern": "írisz",
+    "notes": "Modern loan: Hu írisz."
+  },
+  {
+    "english": "lotus",
+    "ancient": "Lotusor",
+    "modern": "lótusz",
+    "notes": "Modern loan: Hu lótusz."
+  },
+  {
+    "english": "nettle",
+    "ancient": "Nettleor",
+    "modern": "csalán",
+    "notes": "Modern loan: Hu csalán."
+  },
+  {
+    "english": "thistle",
+    "ancient": "Thistleor",
+    "modern": "bogáncs",
+    "notes": "Modern loan: Hu bogáncs."
+  },
+  {
+    "english": "cedar",
+    "ancient": "Sedaror",
+    "modern": "cédrus",
+    "notes": "Modern loan: Hu cédrus."
+  },
+  {
+    "english": "spruce",
+    "ancient": "Spruseor",
+    "modern": "lucfenyő",
+    "notes": "Modern loan: Hu lucfenyő."
+  },
+  {
+    "english": "fir",
+    "ancient": "Firor",
+    "modern": "jegenyefenyő",
+    "notes": "Modern loan: Hu jegenyefenyő."
+  },
+  {
+    "english": "palm",
+    "ancient": "Palmis",
+    "modern": "pálma",
+    "notes": "Modern loan: Hu pálma."
+  },
+  {
+    "english": "cactus",
+    "ancient": "Cactusor",
+    "modern": "kaktusz",
+    "notes": "Modern loan: Hu kaktusz."
+  },
+  {
+    "english": "aloe",
+    "ancient": "Aloeor",
+    "modern": "aloe",
+    "notes": "Modern loan: Hu aloe."
+  },
+  {
+    "english": "mushroom",
+    "ancient": "Mushroomis",
+    "modern": "gomba",
+    "notes": "Modern loan: Hu gomba."
+  },
+  {
+    "english": "fungus",
+    "ancient": "Fungusor",
+    "modern": "gomba",
+    "notes": "Modern loan: Hu gomba."
+  },
+  {
+    "english": "kelp",
+    "ancient": "Kelpor",
+    "modern": "hínár",
+    "notes": "Modern loan: Hu hínár."
+  },
+  {
+    "english": "seaweed",
+    "ancient": "Seaweedor",
+    "modern": "tengeri hínár",
+    "notes": "Modern loan: Hu tengeri hínár."
+  },
+  {
+    "english": "berry",
+    "ancient": "Berryor",
+    "modern": "bogyó",
+    "notes": "Modern loan: Hu bogyó."
+  },
+  {
+    "english": "apple",
+    "ancient": "Appleor",
+    "modern": "alma",
+    "notes": "Modern loan: Hu alma."
+  },
+  {
+    "english": "pear",
+    "ancient": "Pearor",
+    "modern": "körte",
+    "notes": "Modern loan: Hu körte."
+  },
+  {
+    "english": "plum",
+    "ancient": "Plum",
+    "modern": "szilva",
+    "notes": "Modern loan: Hu szilva."
+  },
+  {
+    "english": "cherry",
+    "ancient": "Kerryor",
+    "modern": "cseresznye",
+    "notes": "Modern loan: Hu cseresznye."
+  },
+  {
+    "english": "grape",
+    "ancient": "Grapeor",
+    "modern": "szőlő",
+    "notes": "Modern loan: Hu szőlő."
+  },
+  {
+    "english": "fig",
+    "ancient": "Figor",
+    "modern": "füge",
+    "notes": "Modern loan: Hu füge."
+  },
+  {
+    "english": "date",
+    "ancient": "Dateor",
+    "modern": "datolya",
+    "notes": "Modern loan: Hu datolya."
+  },
+  {
+    "english": "olive",
+    "ancient": "Oliveor",
+    "modern": "olíva",
+    "notes": "Modern loan: Hu olíva."
+  },
+  {
+    "english": "orange",
+    "ancient": "Orangeor",
+    "modern": "narancs",
+    "notes": "Modern loan: Hu narancs."
+  },
+  {
+    "english": "lemon",
+    "ancient": "Lemon",
+    "modern": "citrom",
+    "notes": "Modern loan: Hu citrom."
+  },
+  {
+    "english": "lime",
+    "ancient": "Limeor",
+    "modern": "lime",
+    "notes": "Modern loan: Hu lime."
+  },
+  {
+    "english": "pepper",
+    "ancient": "Pepperor",
+    "modern": "bors",
+    "notes": "Modern loan: Hu bors."
+  },
+  {
+    "english": "cocoa",
+    "ancient": "Cocoaor",
+    "modern": "kakaó",
+    "notes": "Modern loan: Hu kakaó."
+  },
+  {
+    "english": "coffee",
+    "ancient": "Coffeeor",
+    "modern": "kávé",
+    "notes": "Modern loan: Hu kávé."
+  },
+  {
+    "english": "tea",
+    "ancient": "Teaor",
+    "modern": "tea",
+    "notes": "Modern loan: Hu tea."
+  },
+  {
+    "english": "flax",
+    "ancient": "Flaxor",
+    "modern": "len",
+    "notes": "Modern loan: Hu len."
+  },
+  {
+    "english": "hemp",
+    "ancient": "Hempor",
+    "modern": "kender",
+    "notes": "Modern loan: Hu kender."
+  },
+  {
+    "english": "cotton",
+    "ancient": "Cotton",
+    "modern": "pamut",
+    "notes": "Modern loan: Hu pamut."
+  },
+  {
+    "english": "sparrow",
+    "ancient": "Sparrowor",
+    "modern": "sparrova",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "robin",
+    "ancient": "Robinis",
+    "modern": "robina",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "nightingale",
+    "ancient": "Nigtingaleor",
+    "modern": "nightingale",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "heron",
+    "ancient": "Heron",
+    "modern": "herona",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "stork",
+    "ancient": "Storkor",
+    "modern": "storka",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "peacock",
+    "ancient": "Peacockor",
+    "modern": "peakokka",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "partridge",
+    "ancient": "Partridgeor",
+    "modern": "partridge",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "quail",
+    "ancient": "Cuailor",
+    "modern": "kvaila",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "pheasant",
+    "ancient": "Feasantor",
+    "modern": "feasanta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "swallows",
+    "ancient": "Swallowsor",
+    "modern": "svallovsa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "ravenous",
+    "ancient": "Ravenousor",
+    "modern": "ravenousa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "crowling",
+    "ancient": "Crowlingor",
+    "modern": "krovlinga",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "kestrel",
+    "ancient": "Kestrelor",
+    "modern": "kestrela",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "osprey",
+    "ancient": "Ospreyor",
+    "modern": "ospreya",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "swifts",
+    "ancient": "Swiftsor",
+    "modern": "sviftsa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "woodpecker",
+    "ancient": "Woodpeckeror",
+    "modern": "voodpekkera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "jay",
+    "ancient": "Jayor",
+    "modern": "jaya",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "magpie",
+    "ancient": "Magpieor",
+    "modern": "magpie",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "gooseander",
+    "ancient": "Gooseanderor",
+    "modern": "gooseandera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "cormorant",
+    "ancient": "Cormorantor",
+    "modern": "kormoranta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "pelican",
+    "ancient": "Pelicanis",
+    "modern": "pelikana",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "puffin",
+    "ancient": "Puffinis",
+    "modern": "puffina",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "auk",
+    "ancient": "Aukor",
+    "modern": "auka",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "albatross",
+    "ancient": "Albatrossor",
+    "modern": "albatrossa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "flamingo",
+    "ancient": "Flamingoor",
+    "modern": "flamingoa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "ibis",
+    "ancient": "Ibis",
+    "modern": "ibisa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "egret",
+    "ancient": "Egretor",
+    "modern": "egreta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "loon",
+    "ancient": "Loon",
+    "modern": "loona",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "kingfisher",
+    "ancient": "Kingfisheror",
+    "modern": "kingfisera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "heronlet",
+    "ancient": "Heronletor",
+    "modern": "heronleta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "ash",
+    "ancient": "Ashor",
+    "modern": "asa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "aspen",
+    "ancient": "Aspenis",
+    "modern": "aspena",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "maple",
+    "ancient": "Mapleor",
+    "modern": "maple",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "beech",
+    "ancient": "Beekor",
+    "modern": "beekha",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "walnut",
+    "ancient": "Walnutor",
+    "modern": "valnuta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "chestnut",
+    "ancient": "Kestnutor",
+    "modern": "khestnuta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "hazel",
+    "ancient": "Hazelor",
+    "modern": "hazela",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "elm",
+    "ancient": "Elmis",
+    "modern": "elma",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "alder",
+    "ancient": "Alderor",
+    "modern": "aldera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "poplar",
+    "ancient": "Poplaror",
+    "modern": "poplara",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "yew",
+    "ancient": "Yewor",
+    "modern": "yeva",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "larch",
+    "ancient": "Larkor",
+    "modern": "larkha",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "juniper",
+    "ancient": "Juniperor",
+    "modern": "junipera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "heather",
+    "ancient": "Heatheror",
+    "modern": "heatera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "gorse",
+    "ancient": "Gorseor",
+    "modern": "gorse",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "broom",
+    "ancient": "Broomis",
+    "modern": "brooma",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "ivy",
+    "ancient": "Ivyor",
+    "modern": "ivya",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "holly",
+    "ancient": "Hollyor",
+    "modern": "hollya",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "laurel",
+    "ancient": "Laurelor",
+    "modern": "laurela",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "myrtle",
+    "ancient": "Myrtleor",
+    "modern": "myrtle",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "rosemary",
+    "ancient": "Rosemaryor",
+    "modern": "rosemarya",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "thyme",
+    "ancient": "Thymeor",
+    "modern": "tyme",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "sage",
+    "ancient": "Sageor",
+    "modern": "sage",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "basil",
+    "ancient": "Basilor",
+    "modern": "basila",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "mint",
+    "ancient": "Mintor",
+    "modern": "minta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "oregano",
+    "ancient": "Oreganoor",
+    "modern": "oreganoa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "cumin",
+    "ancient": "Cuminis",
+    "modern": "kumina",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "coriander",
+    "ancient": "Corianderor",
+    "modern": "koriandera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "dill",
+    "ancient": "Dillor",
+    "modern": "dilla",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "anise",
+    "ancient": "Aniseor",
+    "modern": "anise",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "caraway",
+    "ancient": "Carawayor",
+    "modern": "karavaya",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "saffron",
+    "ancient": "Saffron",
+    "modern": "saffrona",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "cinnamon",
+    "ancient": "Sinnamon",
+    "modern": "ksinnamona",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "clove",
+    "ancient": "Cloveor",
+    "modern": "klove",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "nutmeg",
+    "ancient": "Nutmegor",
+    "modern": "nutmega",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "ginger",
+    "ancient": "Gingeror",
+    "modern": "gingera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "turmeric",
+    "ancient": "Turmericor",
+    "modern": "turmerika",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "cardamom",
+    "ancient": "Cardamomis",
+    "modern": "kardamoma",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "chili",
+    "ancient": "Kilior",
+    "modern": "khilia",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "paprika",
+    "ancient": "Paprikaor",
+    "modern": "paprika",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "tomato",
+    "ancient": "Tomatoor",
+    "modern": "tomatoa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "potato",
+    "ancient": "Potatoor",
+    "modern": "potatoa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "onion",
+    "ancient": "Onion",
+    "modern": "oniona",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "garlic",
+    "ancient": "Garlicor",
+    "modern": "garlika",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "carrot",
+    "ancient": "Carrotor",
+    "modern": "karrota",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "beet",
+    "ancient": "Beetor",
+    "modern": "beeta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "turnip",
+    "ancient": "Turnipor",
+    "modern": "turnipa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "radish",
+    "ancient": "Radishor",
+    "modern": "radisa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "cabbage",
+    "ancient": "Cabbageor",
+    "modern": "kabbage",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "lettuce",
+    "ancient": "Lettuseor",
+    "modern": "lettukse",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "spinach",
+    "ancient": "Spinakor",
+    "modern": "spinakha",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "kale",
+    "ancient": "Kaleor",
+    "modern": "kale",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "broccoli",
+    "ancient": "Broccolior",
+    "modern": "brokkolia",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "cauliflower",
+    "ancient": "Caulifloweror",
+    "modern": "kauliflovera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "pea",
+    "ancient": "Peaor",
+    "modern": "pë",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "bean",
+    "ancient": "Beanis",
+    "modern": "beana",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "chickpea",
+    "ancient": "Kickpeaor",
+    "modern": "khikkpë",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "lentil",
+    "ancient": "Lentilor",
+    "modern": "lentila",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "soybean",
+    "ancient": "Soybeanis",
+    "modern": "soybeana",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "sunflower",
+    "ancient": "Sunfloweror",
+    "modern": "sunflovera",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "canola",
+    "ancient": "Canolaor",
+    "modern": "kanola",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "rapeseed",
+    "ancient": "Rapeseedor",
+    "modern": "rapeseeda",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "sugarcane",
+    "ancient": "Sugarcaneor",
+    "modern": "sugarkane",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "sugar beet",
+    "ancient": "Sugar beetor",
+    "modern": "sugar beeta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "tobacco",
+    "ancient": "Tobaccoor",
+    "modern": "tobakkoa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "hop",
+    "ancient": "Hopor",
+    "modern": "hopa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "barleycorn",
+    "ancient": "Barleycornis",
+    "modern": "barleykorna",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "millet",
+    "ancient": "Milletor",
+    "modern": "milleta",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "sorghum",
+    "ancient": "Sorgum",
+    "modern": "sorghuma",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "bambusa",
+    "ancient": "Bambusaor",
+    "modern": "bambusa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "bamboo",
+    "ancient": "Bambooor",
+    "modern": "bambooa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "lotusroot",
+    "ancient": "Lotusrootor",
+    "modern": "lotusroota",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "lotus seed",
+    "ancient": "Lotus seedor",
+    "modern": "lotus seeda",
+    "notes": "Modern derived by Hu-leaning phonology."
+  },
+  {
+    "english": "lotus leaf",
+    "ancient": "Lotus leafor",
+    "modern": "lotus leafa",
+    "notes": "Modern derived by Hu-leaning phonology."
+  }
+]

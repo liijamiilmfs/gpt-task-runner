@@ -1,0 +1,764 @@
+[
+  {
+    "english": "law",
+    "ancient": "Lex",
+    "modern": "léksh",
+    "notes": "Lat lex; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "justice",
+    "ancient": "Justitia",
+    "modern": "justítsí",
+    "notes": "Lat justitia; Modern ts-, í"
+  },
+  {
+    "english": "judge",
+    "ancient": "Judex",
+    "modern": "judéks",
+    "notes": "Lat judex; Modern éks ending"
+  },
+  {
+    "english": "lawyer",
+    "ancient": "Advocatus",
+    "modern": "advokát",
+    "notes": "Lat advocatus; Hu k-, Modern át"
+  },
+  {
+    "english": "court",
+    "ancient": "Curia",
+    "modern": "kurí",
+    "notes": "Lat curia; Hu k-, Modern í"
+  },
+  {
+    "english": "tribunal",
+    "ancient": "Tribunal",
+    "modern": "tribunál",
+    "notes": "Lat tribunal; Modern ál ending"
+  },
+  {
+    "english": "magistrate",
+    "ancient": "Magistratus",
+    "modern": "magistrát",
+    "notes": "Lat magistratus; Modern át ending"
+  },
+  {
+    "english": "prosecutor",
+    "ancient": "Accusator",
+    "modern": "akuzatór",
+    "notes": "Lat accusator; Hu k-, Modern z-, ór"
+  },
+  {
+    "english": "defendant",
+    "ancient": "Reus",
+    "modern": "reúsh",
+    "notes": "Lat reus; Modern ú-sh"
+  },
+  {
+    "english": "plaintiff",
+    "ancient": "Actor",
+    "modern": "aktór",
+    "notes": "Lat actor; Hu k-, Modern ór"
+  },
+  {
+    "english": "witness",
+    "ancient": "Testis",
+    "modern": "testísh",
+    "notes": "Lat testis; Modern í-sh"
+  },
+  {
+    "english": "testimony",
+    "ancient": "Testimonium",
+    "modern": "testimón",
+    "notes": "Lat testimonium; Modern ón ending"
+  },
+  {
+    "english": "evidence",
+    "ancient": "Testimonium",
+    "modern": "testimón",
+    "notes": "Lat testimonium; Modern ón ending"
+  },
+  {
+    "english": "proof",
+    "ancient": "Probatio",
+    "modern": "probáts",
+    "notes": "Lat probatio; Modern áts ending"
+  },
+  {
+    "english": "trial",
+    "ancient": "Judicium",
+    "modern": "judítsí",
+    "notes": "Lat judicium; Modern ts-, í"
+  },
+  {
+    "english": "verdict",
+    "ancient": "Sententia",
+    "modern": "zententsí",
+    "notes": "Lat sententia; Modern z-, ts-, í"
+  },
+  {
+    "english": "judgment",
+    "ancient": "Judicium",
+    "modern": "judítsí",
+    "notes": "Lat judicium; Modern ts-, í"
+  },
+  {
+    "english": "sentence",
+    "ancient": "Sententia",
+    "modern": "zententsí",
+    "notes": "Lat sententia; Modern z-, ts-, í"
+  },
+  {
+    "english": "appeal",
+    "ancient": "Appellatio",
+    "modern": "apelats",
+    "notes": "Lat appellatio; Modern áts, single-l"
+  },
+  {
+    "english": "acquittal",
+    "ancient": "Absolutio",
+    "modern": "absolúts",
+    "notes": "Lat absolutio; Modern úts ending"
+  },
+  {
+    "english": "conviction",
+    "ancient": "Damnatio",
+    "modern": "damáts",
+    "notes": "Lat damnatio; Modern áts ending"
+  },
+  {
+    "english": "crime",
+    "ancient": "Crimen",
+    "modern": "krímen",
+    "notes": "Lat crimen; Hu k-, Modern í"
+  },
+  {
+    "english": "offense",
+    "ancient": "Delictum",
+    "modern": "delíkt",
+    "notes": "Lat delictum; Hu k-, Modern í"
+  },
+  {
+    "english": "sin",
+    "ancient": "Peccatum",
+    "modern": "pekát",
+    "notes": "Lat peccatum; Hu k-, Modern át, single-c"
+  },
+  {
+    "english": "guilt",
+    "ancient": "Culpa",
+    "modern": "kulpá",
+    "notes": "Lat culpa; Hu k-, Modern á"
+  },
+  {
+    "english": "innocence",
+    "ancient": "Innocentia",
+    "modern": "inotsentś",
+    "notes": "Lat innocentia; Modern ts-, single-n"
+  },
+  {
+    "english": "accusation",
+    "ancient": "Accusatio",
+    "modern": "akuzáts",
+    "notes": "Lat accusatio; Hu k-, Modern z-, áts"
+  },
+  {
+    "english": "charge",
+    "ancient": "Crimen",
+    "modern": "krímen",
+    "notes": "Lat crimen; Hu k-, Modern í"
+  },
+  {
+    "english": "allegation",
+    "ancient": "Allegatio",
+    "modern": "alegáts",
+    "notes": "Lat allegatio; Modern áts, single-l"
+  },
+  {
+    "english": "defense",
+    "ancient": "Defensio",
+    "modern": "defenzí",
+    "notes": "Lat defensio; Modern z-, í"
+  },
+  {
+    "english": "oath",
+    "ancient": "Juramentum",
+    "modern": "juraméntú",
+    "notes": "Lat juramentum; Modern é-ú"
+  },
+  {
+    "english": "perjury",
+    "ancient": "Perjurium",
+    "modern": "perjúr",
+    "notes": "Lat perjurium; Modern úr ending"
+  },
+  {
+    "english": "contract",
+    "ancient": "Contractus",
+    "modern": "kontrákt",
+    "notes": "Lat contractus; Hu k-, Modern ákt"
+  },
+  {
+    "english": "agreement",
+    "ancient": "Pactum",
+    "modern": "paktú",
+    "notes": "Lat pactum; Hu k-, Modern ú"
+  },
+  {
+    "english": "treaty",
+    "ancient": "Foedus",
+    "modern": "foedúsh",
+    "notes": "Lat foedus; Modern ú-sh"
+  },
+  {
+    "english": "covenant",
+    "ancient": "Pactio",
+    "modern": "paktsí",
+    "notes": "Lat pactio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "will (legal)",
+    "ancient": "Testamentum",
+    "modern": "testaméntú",
+    "notes": "Lat testamentum; Modern é-ú"
+  },
+  {
+    "english": "inheritance",
+    "ancient": "Hereditas",
+    "modern": "heredít",
+    "notes": "Lat hereditas; Modern ít ending"
+  },
+  {
+    "english": "heir",
+    "ancient": "Heres",
+    "modern": "herésh",
+    "notes": "Lat heres; Modern é-sh"
+  },
+  {
+    "english": "property",
+    "ancient": "Proprietas",
+    "modern": "proprietásh",
+    "notes": "Lat proprietas; Modern á-sh"
+  },
+  {
+    "english": "ownership",
+    "ancient": "Dominium",
+    "modern": "dominí",
+    "notes": "Lat dominium; Modern í ending"
+  },
+  {
+    "english": "possession",
+    "ancient": "Possessio",
+    "modern": "posesí",
+    "notes": "Lat possessio; Modern í, single-s"
+  },
+  {
+    "english": "theft",
+    "ancient": "Furtum",
+    "modern": "furtú",
+    "notes": "Lat furtum; Modern ú ending"
+  },
+  {
+    "english": "robbery",
+    "ancient": "Rapina",
+    "modern": "rapín",
+    "notes": "Lat rapina; Modern ín ending"
+  },
+  {
+    "english": "burglary",
+    "ancient": "Effractio",
+    "modern": "efrakts",
+    "notes": "Lat effractio; Modern ts, single-f"
+  },
+  {
+    "english": "fraud",
+    "ancient": "Fraus",
+    "modern": "fraush",
+    "notes": "Lat fraus; Modern au-sh"
+  },
+  {
+    "english": "forgery",
+    "ancient": "Falsificatio",
+    "modern": "falzifikáts",
+    "notes": "Lat falsificatio; Modern z-, k-, áts"
+  },
+  {
+    "english": "bribery",
+    "ancient": "Ambitus",
+    "modern": "ambítúsh",
+    "notes": "Lat ambitus; Modern í-ú-sh"
+  },
+  {
+    "english": "corruption",
+    "ancient": "Corruptio",
+    "modern": "koruptsí",
+    "notes": "Lat corruptio; Hu k-, Modern ts-, í, single-r"
+  },
+  {
+    "english": "murder",
+    "ancient": "Homicidium",
+    "modern": "homitsíd",
+    "notes": "Lat homicidium; Modern ts-, íd"
+  },
+  {
+    "english": "assault",
+    "ancient": "Injuria",
+    "modern": "injúr",
+    "notes": "Lat injuria; Modern úr ending"
+  },
+  {
+    "english": "battery",
+    "ancient": "Percussio",
+    "modern": "perkusí",
+    "notes": "Lat percussio; Hu k-, Modern í, single-s"
+  },
+  {
+    "english": "kidnapping",
+    "ancient": "Raptus",
+    "modern": "raptúsh",
+    "notes": "Lat raptus; Modern ú-sh"
+  },
+  {
+    "english": "treason",
+    "ancient": "Proditio",
+    "modern": "prodíts",
+    "notes": "Lat proditio; Modern íts ending"
+  },
+  {
+    "english": "sedition",
+    "ancient": "Seditio",
+    "modern": "zedíts",
+    "notes": "Lat seditio; Modern z-, íts"
+  },
+  {
+    "english": "rebellion",
+    "ancient": "Rebellio",
+    "modern": "rebelí",
+    "notes": "Lat rebellio; Modern í, single-l"
+  },
+  {
+    "english": "conspiracy",
+    "ancient": "Conspiratio",
+    "modern": "konzpiráts",
+    "notes": "Lat conspiratio; Hu k-, Modern z-, áts"
+  },
+  {
+    "english": "punishment",
+    "ancient": "Poena",
+    "modern": "poenë",
+    "notes": "Lat poena; Modern ë ending"
+  },
+  {
+    "english": "penalty",
+    "ancient": "Multa",
+    "modern": "multá",
+    "notes": "Lat multa; Modern á ending"
+  },
+  {
+    "english": "fine",
+    "ancient": "Multa",
+    "modern": "multá",
+    "notes": "Lat multa; Modern á ending"
+  },
+  {
+    "english": "imprisonment",
+    "ancient": "Carcer",
+    "modern": "kartsér",
+    "notes": "Lat carcer; Hu k-, Modern ts-, ér"
+  },
+  {
+    "english": "exile",
+    "ancient": "Exilium",
+    "modern": "ekzíl",
+    "notes": "Lat exilium; Hu k-, Modern z-, íl"
+  },
+  {
+    "english": "banishment",
+    "ancient": "Relegatio",
+    "modern": "relegáts",
+    "notes": "Lat relegatio; Modern áts ending"
+  },
+  {
+    "english": "execution",
+    "ancient": "Executio",
+    "modern": "eksekúts",
+    "notes": "Lat executio; Hu k-, Modern úts"
+  },
+  {
+    "english": "death penalty",
+    "ancient": "Poena mortis",
+    "modern": "poemórt",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "crucifixion",
+    "ancient": "Crucifixio",
+    "modern": "krutsifiksí",
+    "notes": "Lat crucifixio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "beheading",
+    "ancient": "Decapitatio",
+    "modern": "dekapitáts",
+    "notes": "Lat decapitatio; Hu k-, Modern áts"
+  },
+  {
+    "english": "flogging",
+    "ancient": "Flagellatio",
+    "modern": "flagelats",
+    "notes": "Lat flagellatio; Modern áts, single-l"
+  },
+  {
+    "english": "prison",
+    "ancient": "Carcer",
+    "modern": "kartsér",
+    "notes": "Lat carcer; Hu k-, Modern ts-, ér"
+  },
+  {
+    "english": "cell",
+    "ancient": "Cella",
+    "modern": "kelá",
+    "notes": "Lat cella; Hu k-, Modern á, single-l"
+  },
+  {
+    "english": "chain",
+    "ancient": "Catena",
+    "modern": "katén",
+    "notes": "Lat catena; Hu k-, Modern én"
+  },
+  {
+    "english": "shackle",
+    "ancient": "Compedes",
+    "modern": "kompédésh",
+    "notes": "Lat compedes; Hu k-, Modern é-é-sh"
+  },
+  {
+    "english": "stocks",
+    "ancient": "Nervus",
+    "modern": "nervúsh",
+    "notes": "Lat nervus; Modern ú-sh"
+  },
+  {
+    "english": "pillory",
+    "ancient": "Columna",
+    "modern": "kolúmn",
+    "notes": "Lat columna; Hu k-, Modern úmn"
+  },
+  {
+    "english": "gallows",
+    "ancient": "Patibulum",
+    "modern": "patibúl",
+    "notes": "Lat patibulum; Modern úl ending"
+  },
+  {
+    "english": "block",
+    "ancient": "Cippus",
+    "modern": "tsipúsh",
+    "notes": "Lat cippus; Modern ts-, ú-sh, single-p"
+  },
+  {
+    "english": "law code",
+    "ancient": "Codex",
+    "modern": "kodéks",
+    "notes": "Lat codex; Hu k-, Modern éks"
+  },
+  {
+    "english": "statute",
+    "ancient": "Statutum",
+    "modern": "statutú",
+    "notes": "Lat statutum; Modern ú ending"
+  },
+  {
+    "english": "decree",
+    "ancient": "Decretum",
+    "modern": "dekretú",
+    "notes": "Lat decretum; Hu k-, Modern ú"
+  },
+  {
+    "english": "edict",
+    "ancient": "Edictum",
+    "modern": "edíkt",
+    "notes": "Lat edictum; Hu k-, Modern í"
+  },
+  {
+    "english": "ordinance",
+    "ancient": "Ordinatio",
+    "modern": "ordináts",
+    "notes": "Lat ordinatio; Modern áts ending"
+  },
+  {
+    "english": "constitution",
+    "ancient": "Constitutio",
+    "modern": "konstitúts",
+    "notes": "Lat constitutio; Hu k-, Modern úts"
+  },
+  {
+    "english": "amendment",
+    "ancient": "Emendatio",
+    "modern": "emendáts",
+    "notes": "Lat emendatio; Modern áts ending"
+  },
+  {
+    "english": "precedent",
+    "ancient": "Exemplum",
+    "modern": "eksemplú",
+    "notes": "Lat exemplum; Hu k-, Modern ú"
+  },
+  {
+    "english": "jurisdiction",
+    "ancient": "Jurisdictio",
+    "modern": "jurisdíkts",
+    "notes": "Lat jurisdictio; Hu k-, Modern íkts"
+  },
+  {
+    "english": "authority",
+    "ancient": "Auctoritas",
+    "modern": "auktorít",
+    "notes": "Lat auctoritas; Hu k-, Modern ít"
+  },
+  {
+    "english": "power",
+    "ancient": "Potestas",
+    "modern": "potestásh",
+    "notes": "Lat potestas; Modern á-sh"
+  },
+  {
+    "english": "right",
+    "ancient": "Jus",
+    "modern": "júsh",
+    "notes": "Lat jus; Modern ú-sh"
+  },
+  {
+    "english": "privilege",
+    "ancient": "Privilegium",
+    "modern": "privilégí",
+    "notes": "Lat privilegium; Modern é-í"
+  },
+  {
+    "english": "duty",
+    "ancient": "Officium",
+    "modern": "ofíts",
+    "notes": "Lat officium; Modern íts, single-f"
+  },
+  {
+    "english": "obligation",
+    "ancient": "Obligatio",
+    "modern": "obligáts",
+    "notes": "Lat obligatio; Modern áts ending"
+  },
+  {
+    "english": "citizen",
+    "ancient": "Civis",
+    "modern": "tsívísh",
+    "notes": "Lat civis; Modern ts-, í-í-sh"
+  },
+  {
+    "english": "citizenship",
+    "ancient": "Civitas",
+    "modern": "tsivít",
+    "notes": "Lat civitas; Modern ts-, ít"
+  },
+  {
+    "english": "alien",
+    "ancient": "Peregrinus",
+    "modern": "peregrín",
+    "notes": "Lat peregrinus; Modern ín ending"
+  },
+  {
+    "english": "slave",
+    "ancient": "Servus",
+    "modern": "zervúsh",
+    "notes": "Lat servus; Modern z-, ú-sh"
+  },
+  {
+    "english": "freedom",
+    "ancient": "Libertas",
+    "modern": "libertásh",
+    "notes": "Lat libertas; Modern á-sh"
+  },
+  {
+    "english": "manumission",
+    "ancient": "Manumissio",
+    "modern": "manumisí",
+    "notes": "Lat manumissio; Modern í, single-s"
+  },
+  {
+    "english": "senate",
+    "ancient": "Senatus",
+    "modern": "zenatúsh",
+    "notes": "Lat senatus; Modern z-, ú-sh"
+  },
+  {
+    "english": "consul",
+    "ancient": "Consul",
+    "modern": "konzúl",
+    "notes": "Lat consul; Hu k-, Modern z-, úl"
+  },
+  {
+    "english": "praetor",
+    "ancient": "Praetor",
+    "modern": "praetór",
+    "notes": "Lat praetor; Modern ór ending"
+  },
+  {
+    "english": "quaestor",
+    "ancient": "Quaestor",
+    "modern": "kvaestór",
+    "notes": "Lat quaestor; Hu k-v, Modern ór"
+  },
+  {
+    "english": "aedile",
+    "ancient": "Aedilis",
+    "modern": "aedílísh",
+    "notes": "Lat aedilis; Modern í-í-sh"
+  },
+  {
+    "english": "legate",
+    "ancient": "Legatus",
+    "modern": "legatúsh",
+    "notes": "Lat legatus; Modern ú-sh"
+  },
+  {
+    "english": "governor",
+    "ancient": "Praeses",
+    "modern": "praezésh",
+    "notes": "Lat praeses; Modern z-, é-sh"
+  },
+  {
+    "english": "province",
+    "ancient": "Provincia",
+    "modern": "províntsí",
+    "notes": "Lat provincia; Modern ts-, í"
+  },
+  {
+    "english": "municipality",
+    "ancient": "Municipium",
+    "modern": "munitsípí",
+    "notes": "Lat municipium; Modern ts-, í-í"
+  },
+  {
+    "english": "assembly",
+    "ancient": "Comitia",
+    "modern": "komitsí",
+    "notes": "Lat comitia; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "election",
+    "ancient": "Electio",
+    "modern": "elektsí",
+    "notes": "Lat electio; Hu k-, Modern ts-, í"
+  },
+  {
+    "english": "vote",
+    "ancient": "Suffragium",
+    "modern": "sufragí",
+    "notes": "Lat suffragium; Modern í, single-f"
+  },
+  {
+    "english": "ballot",
+    "ancient": "Tabella",
+    "modern": "tabelá",
+    "notes": "Lat tabella; Modern á, single-l"
+  },
+  {
+    "english": "candidate",
+    "ancient": "Candidatus",
+    "modern": "kandidát",
+    "notes": "Lat candidatus; Hu k-, Modern át"
+  },
+  {
+    "english": "office",
+    "ancient": "Magistratus",
+    "modern": "magistrát",
+    "notes": "Lat magistratus; Modern át ending"
+  },
+  {
+    "english": "term",
+    "ancient": "Tempus",
+    "modern": "tempúsh",
+    "notes": "Lat tempus; Modern ú-sh"
+  },
+  {
+    "english": "veto",
+    "ancient": "Intercessio",
+    "modern": "interts",
+    "notes": "Lat intercessio; Modern ts, single-s"
+  },
+  {
+    "english": "immunity",
+    "ancient": "Immunitas",
+    "modern": "imunít",
+    "notes": "Lat immunitas; Modern ít, single-m"
+  },
+  {
+    "english": "pardon",
+    "ancient": "Venia",
+    "modern": "venrí",
+    "notes": "Lat venia; Modern í ending"
+  },
+  {
+    "english": "amnesty",
+    "ancient": "Amnestia",
+    "modern": "amnestí",
+    "notes": "Lat amnestia; Modern í ending"
+  },
+  {
+    "english": "clemency",
+    "ancient": "Clementia",
+    "modern": "klements",
+    "notes": "Lat clementia; Hu k-, Modern ts"
+  },
+  {
+    "english": "mercy",
+    "ancient": "Misericordia",
+    "modern": "mizerkórd",
+    "notes": "Lat misericordia; Modern z-, simplified"
+  },
+  {
+    "english": "bailiff",
+    "ancient": "Apparitor",
+    "modern": "aparitór",
+    "notes": "Lat apparitor; Modern ór, single-p"
+  },
+  {
+    "english": "clerk",
+    "ancient": "Scriba",
+    "modern": "skríbë",
+    "notes": "Lat scriba; Hu k-, Modern í-ë"
+  },
+  {
+    "english": "notary",
+    "ancient": "Notarius",
+    "modern": "notár",
+    "notes": "Lat notarius; Modern ár ending"
+  },
+  {
+    "english": "scribe",
+    "ancient": "Librarius",
+    "modern": "librár",
+    "notes": "Lat librarius; Modern ár ending"
+  },
+  {
+    "english": "archive",
+    "ancient": "Archivum",
+    "modern": "arkív",
+    "notes": "Lat archivum; Hu k-, Modern ív"
+  },
+  {
+    "english": "document",
+    "ancient": "Documentum",
+    "modern": "dokumé",
+    "notes": "Lat documentum; Hu k-, Modern é"
+  },
+  {
+    "english": "seal",
+    "ancient": "Sigillum",
+    "modern": "sigílú",
+    "notes": "Lat sigillum; Modern í-ú, single-l"
+  },
+  {
+    "english": "signature",
+    "ancient": "Subscriptio",
+    "modern": "subskriptsí",
+    "notes": "Lat subscriptio; Hu k-, Modern ts-, í"
+  }
+]

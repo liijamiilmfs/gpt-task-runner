@@ -1,0 +1,860 @@
+[
+  {
+    "english": "farmer",
+    "ancient": "Agricola",
+    "modern": "agrikól",
+    "notes": "Lat agricola; Hu k-, Modern -ól ending"
+  },
+  {
+    "english": "farm",
+    "ancient": "Fundus",
+    "modern": "fundúsh",
+    "notes": "Lat fundus; Modern -úsh"
+  },
+  {
+    "english": "field",
+    "ancient": "Ager",
+    "modern": "agér",
+    "notes": "Lat ager; Modern -ér ending"
+  },
+  {
+    "english": "pasture",
+    "ancient": "Pascuum",
+    "modern": "paskú",
+    "notes": "Lat pascuum; Hu k-, Modern -ú"
+  },
+  {
+    "english": "meadow",
+    "ancient": "Pratum",
+    "modern": "pratú",
+    "notes": "Lat pratum; Modern -ú ending"
+  },
+  {
+    "english": "pond",
+    "ancient": "Stagnum",
+    "modern": "stagnú",
+    "notes": "Lat stagnum; Modern -ú ending (natural water body)"
+  },
+  {
+    "english": "furrow",
+    "ancient": "Sulcus",
+    "modern": "sulkúsh",
+    "notes": "Lat sulcus; Hu k-, Modern -úsh"
+  },
+  {
+    "english": "plow",
+    "ancient": "Aratrum",
+    "modern": "aratrú",
+    "notes": "Lat aratrum; Modern -ú ending"
+  },
+  {
+    "english": "to plow",
+    "ancient": "Arare",
+    "modern": "arár",
+    "notes": "Lat arare; Modern -ár verb ending"
+  },
+  {
+    "english": "oxen",
+    "ancient": "Boves",
+    "modern": "bovésh",
+    "notes": "Lat boves; Modern é-sh"
+  },
+  {
+    "english": "yoke",
+    "ancient": "Jugum",
+    "modern": "jugú",
+    "notes": "Lat jugum; Modern -ú ending"
+  },
+  {
+    "english": "harrow",
+    "ancient": "Irpex",
+    "modern": "irpésh",
+    "notes": "Lat irpex; Modern é-sh"
+  },
+  {
+    "english": "hoe",
+    "ancient": "Sarculum",
+    "modern": "sarkúl",
+    "notes": "Lat sarculum; Hu k-, Modern -úl"
+  },
+  {
+    "english": "rake",
+    "ancient": "Rastrum",
+    "modern": "rastrú",
+    "notes": "Lat rastrum; Modern -ú ending"
+  },
+  {
+    "english": "scythe",
+    "ancient": "Falx",
+    "modern": "falsh",
+    "notes": "Lat falx; Modern -sh ending"
+  },
+  {
+    "english": "sickle",
+    "ancient": "Secula",
+    "modern": "sekúl",
+    "notes": "Lat secula; Hu k-, Modern -úl"
+  },
+  {
+    "english": "spade",
+    "ancient": "Pala",
+    "modern": "palá",
+    "notes": "Lat pala; Modern -á ending"
+  },
+  {
+    "english": "shovel",
+    "ancient": "Rutrum",
+    "modern": "rutrú",
+    "notes": "Lat rutrum; Modern -ú ending"
+  },
+  {
+    "english": "pitchfork",
+    "ancient": "Fuscina",
+    "modern": "fustsín",
+    "notes": "Lat fuscina; Modern ts-, -ín"
+  },
+  {
+    "english": "seed",
+    "ancient": "Semen",
+    "modern": "semé",
+    "notes": "Lat semen; Modern -é ending"
+  },
+  {
+    "english": "grain",
+    "ancient": "Granum",
+    "modern": "granú",
+    "notes": "Lat granum; Modern -ú ending"
+  },
+  {
+    "english": "wheat",
+    "ancient": "Triticum",
+    "modern": "tritík",
+    "notes": "Lat triticum; Modern -ík ending"
+  },
+  {
+    "english": "barley",
+    "ancient": "Hordeum",
+    "modern": "hordé",
+    "notes": "Lat hordeum; Modern -é ending"
+  },
+  {
+    "english": "oats",
+    "ancient": "Avena",
+    "modern": "avén",
+    "notes": "Lat avena; Modern -én ending"
+  },
+  {
+    "english": "rye",
+    "ancient": "Secale",
+    "modern": "sekalé",
+    "notes": "Lat secale; Hu k-, Modern -é"
+  },
+  {
+    "english": "millet",
+    "ancient": "Milium",
+    "modern": "milí",
+    "notes": "Lat milium; Modern -í ending"
+  },
+  {
+    "english": "corn",
+    "ancient": "Frumentum",
+    "modern": "frumé",
+    "notes": "Lat frumentum; Modern simplified, -é"
+  },
+  {
+    "english": "rice",
+    "ancient": "Oryza",
+    "modern": "oríz",
+    "notes": "Lat oryza; Modern í-z"
+  },
+  {
+    "english": "bean",
+    "ancient": "Faba",
+    "modern": "fabá",
+    "notes": "Lat faba; Modern -á ending"
+  },
+  {
+    "english": "pea",
+    "ancient": "Pisum",
+    "modern": "pizú",
+    "notes": "Lat pisum; Modern z-, -ú"
+  },
+  {
+    "english": "lentil",
+    "ancient": "Lens",
+    "modern": "lénsh",
+    "notes": "Lat lens; Modern é-sh"
+  },
+  {
+    "english": "chickpea",
+    "ancient": "Cicer",
+    "modern": "tsitsér",
+    "notes": "Lat cicer; Modern ts-, -ér"
+  },
+  {
+    "english": "turnip",
+    "ancient": "Rapum",
+    "modern": "rapú",
+    "notes": "Lat rapum; Modern -ú ending"
+  },
+  {
+    "english": "carrot",
+    "ancient": "Carota",
+    "modern": "karotá",
+    "notes": "Lat carota; Hu k-, Modern -á"
+  },
+  {
+    "english": "cabbage",
+    "ancient": "Brassica",
+    "modern": "brasík",
+    "notes": "Lat brassica; Modern -ík, single-s"
+  },
+  {
+    "english": "onion",
+    "ancient": "Cepa",
+    "modern": "tsepá",
+    "notes": "Lat cepa; Modern ts-, -á"
+  },
+  {
+    "english": "garlic",
+    "ancient": "Allium",
+    "modern": "alí",
+    "notes": "Lat allium; Modern -í, single-l"
+  },
+  {
+    "english": "leek",
+    "ancient": "Porrum",
+    "modern": "porú",
+    "notes": "Lat porrum; Modern -ú, single-r"
+  },
+  {
+    "english": "lettuce",
+    "ancient": "Lactuca",
+    "modern": "laktúk",
+    "notes": "Lat lactuca; Hu k-, Modern -úk"
+  },
+  {
+    "english": "herb",
+    "ancient": "Herba",
+    "modern": "herbá",
+    "notes": "Lat herba; Modern -á ending"
+  },
+  {
+    "english": "vine",
+    "ancient": "Vitis",
+    "modern": "vitísh",
+    "notes": "Lat vitis; Modern í-sh"
+  },
+  {
+    "english": "grape",
+    "ancient": "Uva",
+    "modern": "uvá",
+    "notes": "Lat uva; Modern -á ending"
+  },
+  {
+    "english": "orchard",
+    "ancient": "Pomarium",
+    "modern": "pomár",
+    "notes": "Lat pomarium; Modern -ár ending"
+  },
+  {
+    "english": "tree",
+    "ancient": "Arbor",
+    "modern": "arbór",
+    "notes": "Lat arbor; Modern -ór ending"
+  },
+  {
+    "english": "fruit",
+    "ancient": "Fructus",
+    "modern": "fruktúsh",
+    "notes": "Lat fructus; Hu k-, Modern -úsh"
+  },
+  {
+    "english": "apple",
+    "ancient": "Malum",
+    "modern": "malú",
+    "notes": "Lat malum; Modern -ú ending"
+  },
+  {
+    "english": "pear",
+    "ancient": "Pirum",
+    "modern": "pirú",
+    "notes": "Lat pirum; Modern -ú ending"
+  },
+  {
+    "english": "plum",
+    "ancient": "Prunum",
+    "modern": "prunú",
+    "notes": "Lat prunum; Modern -ú ending"
+  },
+  {
+    "english": "cherry",
+    "ancient": "Cerasum",
+    "modern": "tseráz",
+    "notes": "Lat cerasum; Modern ts-, -áz"
+  },
+  {
+    "english": "fig",
+    "ancient": "Ficus",
+    "modern": "fikúsh",
+    "notes": "Lat ficus; Hu k-, Modern -úsh"
+  },
+  {
+    "english": "olive",
+    "ancient": "Olea",
+    "modern": "oleá",
+    "notes": "Lat olea; Modern -á ending"
+  },
+  {
+    "english": "nut",
+    "ancient": "Nux",
+    "modern": "nuksh",
+    "notes": "Lat nux; Hu k-, Modern -sh"
+  },
+  {
+    "english": "harvest",
+    "ancient": "Messis",
+    "modern": "mesísh",
+    "notes": "Lat messis; Modern í-sh, single-s"
+  },
+  {
+    "english": "reap",
+    "ancient": "Metere",
+    "modern": "metér",
+    "notes": "Lat metere; Modern -ér verb ending"
+  },
+  {
+    "english": "thresh",
+    "ancient": "Terere",
+    "modern": "terér",
+    "notes": "Lat terere; Modern -ér verb ending"
+  },
+  {
+    "english": "winnow",
+    "ancient": "Ventilare",
+    "modern": "ventilár",
+    "notes": "Lat ventilare; Modern -ár verb ending"
+  },
+  {
+    "english": "sow",
+    "ancient": "Serere",
+    "modern": "serér",
+    "notes": "Lat serere; Modern -ér verb ending"
+  },
+  {
+    "english": "plant",
+    "ancient": "Plantare",
+    "modern": "plantár",
+    "notes": "Lat plantare; Modern -ár verb ending"
+  },
+  {
+    "english": "cultivate",
+    "ancient": "Colere",
+    "modern": "kolér",
+    "notes": "Lat colere; Hu k-, Modern -ér verb"
+  },
+  {
+    "english": "tend",
+    "ancient": "Curare",
+    "modern": "kurár",
+    "notes": "Lat curare; Hu k-, Modern -ár verb"
+  },
+  {
+    "english": "water",
+    "ancient": "Irrigare",
+    "modern": "irigár",
+    "notes": "Lat irrigare; Modern -ár verb, single-r"
+  },
+  {
+    "english": "fertilize",
+    "ancient": "Fecundare",
+    "modern": "fekúndár",
+    "notes": "Lat fecundare; Hu k-, Modern -ár verb"
+  },
+  {
+    "english": "prune",
+    "ancient": "Putare",
+    "modern": "putár",
+    "notes": "Lat putare; Modern -ár verb ending"
+  },
+  {
+    "english": "graft",
+    "ancient": "Inserere",
+    "modern": "inzérér",
+    "notes": "Lat inserere; Modern z-, -ér verb"
+  },
+  {
+    "english": "manure",
+    "ancient": "Stercus",
+    "modern": "sterkúsh",
+    "notes": "Lat stercus; Hu k-, Modern -úsh"
+  },
+  {
+    "english": "compost",
+    "ancient": "Putamen",
+    "modern": "putamé",
+    "notes": "Lat putamen; Modern -é ending"
+  },
+  {
+    "english": "soil",
+    "ancient": "Solum",
+    "modern": "solú",
+    "notes": "Lat solum; Modern -ú ending"
+  },
+  {
+    "english": "earth",
+    "ancient": "Terra",
+    "modern": "terá",
+    "notes": "Lat terra; Modern -á, single-r"
+  },
+  {
+    "english": "dirt",
+    "ancient": "Humus",
+    "modern": "humúsh",
+    "notes": "Lat humus; Modern -úsh"
+  },
+  {
+    "english": "loam",
+    "ancient": "Limus",
+    "modern": "límúsh",
+    "notes": "Lat limus; Modern í-úsh"
+  },
+  {
+    "english": "clay",
+    "ancient": "Argilla",
+    "modern": "argíl",
+    "notes": "Lat argilla; Modern -íl, single-l"
+  },
+  {
+    "english": "sand",
+    "ancient": "Arena",
+    "modern": "arén",
+    "notes": "Lat arena; Modern -én ending"
+  },
+  {
+    "english": "rock",
+    "ancient": "Saxum",
+    "modern": "saksú",
+    "notes": "Lat saxum; Hu k-, Modern -ú"
+  },
+  {
+    "english": "stone",
+    "ancient": "Petra",
+    "modern": "petrá",
+    "notes": "Lat petra; Modern -á ending"
+  },
+  {
+    "english": "irrigation",
+    "ancient": "Aquaeductus",
+    "modern": "akvédúkt",
+    "notes": "Lat aquaeductus; Hu k-v, Modern -úkt"
+  },
+  {
+    "english": "well",
+    "ancient": "Puteus",
+    "modern": "puté",
+    "notes": "Lat puteus; Modern -é ending"
+  },
+  {
+    "english": "channel",
+    "ancient": "Canalis",
+    "modern": "kanalísh",
+    "notes": "Lat canalis; Hu k-, Modern í-sh"
+  },
+  {
+    "english": "ditch",
+    "ancient": "Fossa",
+    "modern": "fosá",
+    "notes": "Lat fossa; Modern -á, single-s"
+  },
+  {
+    "english": "fence",
+    "ancient": "Saepum",
+    "modern": "saepú",
+    "notes": "Lat saepum; Modern -ú ending"
+  },
+  {
+    "english": "gate",
+    "ancient": "Porta",
+    "modern": "portá",
+    "notes": "Lat porta; Modern -á ending (field gate)"
+  },
+  {
+    "english": "barn",
+    "ancient": "Horreum",
+    "modern": "horé",
+    "notes": "Lat horreum; Modern -é, single-r"
+  },
+  {
+    "english": "granary",
+    "ancient": "Granarium",
+    "modern": "granár",
+    "notes": "Lat granarium; Modern -ár ending"
+  },
+  {
+    "english": "silo",
+    "ancient": "Sirus",
+    "modern": "sírúsh",
+    "notes": "Lat sirus; Modern í-úsh"
+  },
+  {
+    "english": "mill",
+    "ancient": "Mola",
+    "modern": "molá",
+    "notes": "Lat mola; Modern -á ending"
+  },
+  {
+    "english": "millstone",
+    "ancient": "Molaris",
+    "modern": "molár",
+    "notes": "Lat molaris; Modern -ár ending"
+  },
+  {
+    "english": "flour",
+    "ancient": "Farina",
+    "modern": "farín",
+    "notes": "Lat farina; Modern -ín ending"
+  },
+  {
+    "english": "bread",
+    "ancient": "Panis",
+    "modern": "panísh",
+    "notes": "Lat panis; Modern í-sh"
+  },
+  {
+    "english": "cattle",
+    "ancient": "Pecus",
+    "modern": "pekúsh",
+    "notes": "Lat pecus; Hu k-, Modern -úsh"
+  },
+  {
+    "english": "cow",
+    "ancient": "Vacca",
+    "modern": "vakár",
+    "notes": "Lat vacca; Hu k-, Modern -ár, single-c"
+  },
+  {
+    "english": "bull",
+    "ancient": "Taurus",
+    "modern": "taurúsh",
+    "notes": "Lat taurus; Modern -úsh"
+  },
+  {
+    "english": "calf",
+    "ancient": "Vitulus",
+    "modern": "vitúl",
+    "notes": "Lat vitulus; Modern -úl ending"
+  },
+  {
+    "english": "horse",
+    "ancient": "Equus",
+    "modern": "ekvúsh",
+    "notes": "Lat equus; Hu k-v, Modern -úsh"
+  },
+  {
+    "english": "mare",
+    "ancient": "Equa",
+    "modern": "ekvá",
+    "notes": "Lat equa; Hu k-v, Modern -á"
+  },
+  {
+    "english": "stallion",
+    "ancient": "Admissarius",
+    "modern": "admisár",
+    "notes": "Lat admissarius; Modern -ár, single-s"
+  },
+  {
+    "english": "foal",
+    "ancient": "Pullus",
+    "modern": "pulúsh",
+    "notes": "Lat pullus; Modern -úsh, single-l"
+  },
+  {
+    "english": "sheep",
+    "ancient": "Ovis",
+    "modern": "ovísh",
+    "notes": "Lat ovis; Modern í-sh"
+  },
+  {
+    "english": "ram",
+    "ancient": "Aries",
+    "modern": "ariésh",
+    "notes": "Lat aries; Modern é-sh"
+  },
+  {
+    "english": "ewe",
+    "ancient": "Ovis femina",
+    "modern": "ovfemín",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "lamb",
+    "ancient": "Agnus",
+    "modern": "agnúsh",
+    "notes": "Lat agnus; Modern -úsh"
+  },
+  {
+    "english": "goat",
+    "ancient": "Capra",
+    "modern": "kaprá",
+    "notes": "Lat capra; Hu k-, Modern -á"
+  },
+  {
+    "english": "billy goat",
+    "ancient": "Hircus",
+    "modern": "hirkúsh",
+    "notes": "Lat hircus; Hu k-, Modern -úsh"
+  },
+  {
+    "english": "kid",
+    "ancient": "Haedus",
+    "modern": "haedúsh",
+    "notes": "Lat haedus; Modern -úsh"
+  },
+  {
+    "english": "pig",
+    "ancient": "Sus",
+    "modern": "súsh",
+    "notes": "Lat sus; Modern ú-sh"
+  },
+  {
+    "english": "boar",
+    "ancient": "Verres",
+    "modern": "verésh",
+    "notes": "Lat verres; Modern é-sh, single-r"
+  },
+  {
+    "english": "sow",
+    "ancient": "Scrofa",
+    "modern": "skrofá",
+    "notes": "Lat scrofa; Hu k-, Modern -á"
+  },
+  {
+    "english": "piglet",
+    "ancient": "Porculus",
+    "modern": "porkúl",
+    "notes": "Lat porculus; Hu k-, Modern -úl"
+  },
+  {
+    "english": "chicken",
+    "ancient": "Gallus",
+    "modern": "galúsh",
+    "notes": "Lat gallus; Modern -úsh, single-l"
+  },
+  {
+    "english": "hen",
+    "ancient": "Gallina",
+    "modern": "galín",
+    "notes": "Lat gallina; Modern -ín, single-l"
+  },
+  {
+    "english": "rooster",
+    "ancient": "Gallus masculus",
+    "modern": "galmaské",
+    "notes": "Lat compound; Modern simplified"
+  },
+  {
+    "english": "chick",
+    "ancient": "Pullus",
+    "modern": "púlúsh",
+    "notes": "Lat pullus; Modern ú-úsh, single-l"
+  },
+  {
+    "english": "egg",
+    "ancient": "Ovum",
+    "modern": "ovú",
+    "notes": "Lat ovum; Modern -ú ending"
+  },
+  {
+    "english": "duck",
+    "ancient": "Anas",
+    "modern": "anásh",
+    "notes": "Lat anas; Modern á-sh"
+  },
+  {
+    "english": "goose",
+    "ancient": "Anser",
+    "modern": "anzér",
+    "notes": "Lat anser; Modern z-, -ér"
+  },
+  {
+    "english": "donkey",
+    "ancient": "Asinus",
+    "modern": "azín",
+    "notes": "Lat asinus; Modern z-, -ín"
+  },
+  {
+    "english": "mule",
+    "ancient": "Mulus",
+    "modern": "múlúsh",
+    "notes": "Lat mulus; Modern ú-úsh"
+  },
+  {
+    "english": "dog",
+    "ancient": "Canis",
+    "modern": "kanísh",
+    "notes": "Lat canis; Hu k-, Modern í-sh"
+  },
+  {
+    "english": "cat",
+    "ancient": "Felis",
+    "modern": "felísh",
+    "notes": "Lat felis; Modern í-sh"
+  },
+  {
+    "english": "shepherd",
+    "ancient": "Pastor",
+    "modern": "pastór",
+    "notes": "Lat pastor; Modern -ór ending"
+  },
+  {
+    "english": "herdsman",
+    "ancient": "Armentarius",
+    "modern": "armentár",
+    "notes": "Lat armentarius; Modern -ár ending"
+  },
+  {
+    "english": "stable",
+    "ancient": "Stabulum",
+    "modern": "stabúl",
+    "notes": "Lat stabulum; Modern -úl ending"
+  },
+  {
+    "english": "pen",
+    "ancient": "Saeptum",
+    "modern": "saeptú",
+    "notes": "Lat saeptum; Modern -ú ending"
+  },
+  {
+    "english": "fodder",
+    "ancient": "Pabulum",
+    "modern": "pabúl",
+    "notes": "Lat pabulum; Modern -úl ending"
+  },
+  {
+    "english": "hay",
+    "ancient": "Faenum",
+    "modern": "faenú",
+    "notes": "Lat faenum; Modern -ú ending"
+  },
+  {
+    "english": "straw",
+    "ancient": "Stramen",
+    "modern": "stramé",
+    "notes": "Lat stramen; Modern -é ending"
+  },
+  {
+    "english": "graze",
+    "ancient": "Pascere",
+    "modern": "paskér",
+    "notes": "Lat pascere; Hu k-, Modern -ér verb"
+  },
+  {
+    "english": "milk",
+    "ancient": "Lac",
+    "modern": "laksh",
+    "notes": "Lat lac; Hu k-, Modern -sh"
+  },
+  {
+    "english": "to milk",
+    "ancient": "Mulgere",
+    "modern": "mulgér",
+    "notes": "Lat mulgere; Modern -ér verb ending"
+  },
+  {
+    "english": "cheese",
+    "ancient": "Caseus",
+    "modern": "kasésh",
+    "notes": "Lat caseus; Hu k-, Modern é-sh"
+  },
+  {
+    "english": "butter",
+    "ancient": "Butyrum",
+    "modern": "butírú",
+    "notes": "Lat butyrum; Modern í-ú"
+  },
+  {
+    "english": "wool",
+    "ancient": "Lana",
+    "modern": "lánë",
+    "notes": "Lat lana; Modern -ë ending"
+  },
+  {
+    "english": "hide",
+    "ancient": "Corium",
+    "modern": "korí",
+    "notes": "Lat corium; Hu k-, Modern -í"
+  },
+  {
+    "english": "meat",
+    "ancient": "Caro",
+    "modern": "karó",
+    "notes": "Lat caro; Hu k-, Modern -ó"
+  },
+  {
+    "english": "fat",
+    "ancient": "Adeps",
+    "modern": "adépsh",
+    "notes": "Lat adeps; Modern é-sh"
+  },
+  {
+    "english": "tallow",
+    "ancient": "Sebum",
+    "modern": "sebú",
+    "notes": "Lat sebum; Modern -ú ending"
+  },
+  {
+    "english": "season",
+    "ancient": "Tempus",
+    "modern": "tempúsh",
+    "notes": "Lat tempus; Modern -úsh"
+  },
+  {
+    "english": "spring",
+    "ancient": "Ver",
+    "modern": "vér",
+    "notes": "Lat ver; Modern -ér ending"
+  },
+  {
+    "english": "summer",
+    "ancient": "Aestas",
+    "modern": "aestásh",
+    "notes": "Lat aestas; Modern á-sh"
+  },
+  {
+    "english": "autumn",
+    "ancient": "Autumnus",
+    "modern": "autúmn",
+    "notes": "Lat autumnus; Modern -ún ending"
+  },
+  {
+    "english": "winter",
+    "ancient": "Hiems",
+    "modern": "hiémsh",
+    "notes": "Lat hiems; Modern é-sh"
+  },
+  {
+    "english": "drought",
+    "ancient": "Siccitas",
+    "modern": "sikításh",
+    "notes": "Lat siccitas; Hu k-, Modern í-á-sh, single-c"
+  },
+  {
+    "english": "frost",
+    "ancient": "Pruina",
+    "modern": "pruín",
+    "notes": "Lat pruina; Modern -ín ending"
+  },
+  {
+    "english": "rain",
+    "ancient": "Pluvia",
+    "modern": "pluvíá",
+    "notes": "Lat pluvia; Modern í-á"
+  },
+  {
+    "english": "sunshine",
+    "ancient": "Sol",
+    "modern": "sól",
+    "notes": "Lat sol; Modern -ól ending"
+  }
+]

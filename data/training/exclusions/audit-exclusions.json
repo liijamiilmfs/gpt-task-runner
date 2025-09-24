@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "version": "2025-09-22",
+    "notes": "Exclusion list for the Unified Librán Dictionary auditor. Keep names/terms that intentionally break or bend core Librán morphology/phonotactics."
+  },
+  "normalization": {
+    "ignore_case": false,
+    "normalize_diacritics": false,
+    "treat_hyphen_dash_equal": true
+  },
+  "categories": {
+    "world_core": [
+      {"name": "Libra", "aliases": ["Libră"]},
+      {"name": "Librán", "aliases": ["Libran", "Librān"]},
+      {"name": "Esőerdő", "aliases": ["Esoerdo", "Esöerdö"]},
+      {"name": "Cordavora"},
+      {"name": "High Circle"},
+      {"name": "Aleșii", "aliases": ["Alesii"]},
+      {"name": "Comoară", "aliases": ["Comoăra", "Comoră", "Comoara"]},
+      {"name": "Comoară_Hiems", "aliases": ["Comoară Hiems", "Hiems"]}
+    ],
+    "continents_regions": [
+      {"name": "Uszo"},
+      {"name": "Arborias", "aliases": ["Aborias"]},
+      {"name": "Vizesesek"},
+      {"name": "Sicco Terra"},
+      {"name": "Az Ures", "aliases": ["Az Üres"]},
+      {"name": "Steppe"},
+      {"name": "Vulkanikus"},
+      {"name": "Esodero"},
+      {"name": "Mocsar", "aliases": ["Mocsár"]}
+    ],
+    "tribes_clans_orders": [
+      {"name": "Oameni Cai"},
+      {"name": "Rekettae"},
+      {"name": "Viatorii"},
+      {"name": "Grevanar"},
+      {"name": "Telvadar"},
+      {"name": "Uzsori", "aliases": ["Úszóri", "Úszori", "Uzsóri"]},
+      {"name": "Fulger (clan)"},
+      {"name": "Venarë"},
+      {"name": "Sangrivaë"},
+      {"name": "Harcra Készen"},
+      {"name": "Sky-Steps"},
+      {"name": "Cristal Cerea"},
+      {"name": "Szablya Company"},
+      {"name": "Black Anvil Brotherhood"},
+      {"name": "Mireblades"},
+      {"name": "Order of the Ashen Veil"},
+      {"name": "Ember Assembly"}
+    ],
+    "pantheon_mythic": [
+      {"name": "Fény", "aliases": ["Feny"]},
+      {"name": "Sötét", "aliases": ["Sotet", "Sötet"]},
+      {"name": "Hajnal"},
+      {"name": "Csaló", "aliases": ["Csalo"]},
+      {"name": "Égi", "aliases": ["Egi"]},
+      {"name": "Ravasz"},
+      {"name": "Hrossa"},
+      {"name": "Noapte"},
+      {"name": "Lótűz", "aliases": ["Lotuz", "Lótuz"]},
+      {"name": "Üllővir", "aliases": ["Ullovir"]},
+      {"name": "Saxum"},
+      {"name": "Vreme Rea"},
+      {"name": "Archascendant"},
+      {"name": "Aelion Saevax", "aliases": ["The Mirrorbound"]}
+    ],
+    "factions_symbols": [
+      {"name": "Shadow Guild Council", "aliases": ["SGC"]},
+      {"name": "Ascendancy"},
+      {"name": "The Following"},
+      {"name": "The Devoted"},
+      {"name": "The Ascended"},
+      {"name": "Chant of the Undercity"},
+      {"name": "Razorkin Zealots"},
+      {"name": "Razorkin Shards"}
+    ],
+    "places_sites": [
+      {"name": "Council Chamber of the High Circle"},
+      {"name": "The Grove That Remembers"},
+      {"name": "Boilerbilges"},
+      {"name": "Floodpits"},
+      {"name": "Brokh Orzh"},
+      {"name": "Orzhova"},
+      {"name": "Vizkopa Bank"},
+      {"name": "New Prahv"},
+      {"name": "Tenth District Plaza"},
+      {"name": "Tin Street"},
+      {"name": "Plaza West", "aliases": ["Plaza East", "Plaza South"]},
+      {"name": "Millstone Tavern"},
+      {"name": "Shadow Sanctum"}
+    ],
+    "npcs_original": [
+      {"name": "Valkora", "aliases": ["Ghosteye"]},
+      {"name": "Rókavar"},
+      {"name": "Revar Hrafna", "aliases": ["Rotwing", "The Raven King"]},
+      {"name": "Nissa Kung"},
+      {"name": "Keyleth Drachedandion"},
+      {"name": "Scandal Zashir"},
+      {"name": "Skellendyre Mott"},
+      {"name": "Flint Holg"},
+      {"name": "Renara Caelwyn"},
+      {"name": "Malix Oruun"},
+      {"name": "Axus Valtyr"},
+      {"name": "Jhessail"},
+      {"name": "Rhogar Ungart"},
+      {"name": "Xinli Stormriver"},
+      {"name": "Nadir Valtasa"},
+      {"name": "Arranis Endryss"},
+      {"name": "Hokrun Bruska"},
+      {"name": "Henk Drog"},
+      {"name": "Rahesh Vhat"},
+      {"name": "Khet Zalfen"},
+      {"name": "Tev Luna"},
+      {"name": "Duskwoken"},
+      {"name": "Scorchgutter"},
+      {"name": "Overlord of the Boilerbilges"},
+      {"name": "Falish"},
+      {"name": "Mr. Taz"},
+      {"name": "Narbulg Nine Fingers"},
+      {"name": "Ghrok Telen"},
+      {"name": "Wyroon"},
+      {"name": "Tharnok"},
+      {"name": "Oba"}
+    ],
+    "npcs_ravnica_canon_refs": [
+      {"name": "Teysa Karlov"},
+      {"name": "Izoni"},
+      {"name": "Vannifar"},
+      {"name": "Kaya"},
+      {"name": "Niv-Mizzet", "aliases": ["Niv"]},
+      {"name": "Krenko"},
+      {"name": "Aurelia"},
+      {"name": "Lavinia"},
+      {"name": "Jarad", "note": "Referenced historically; replaced by Izoni in your timeline"},
+      {"name": "Zegana", "note": "Replaced in your timeline"}
+    ],
+    "creatures_monsters_titles": [
+      {"name": "Soul Siphoner Arcanist"},
+      {"name": "Helmed Horror"},
+      {"name": "Deathlock", "aliases": ["Deathlocke", "Deathlock Warlock"]},
+      {"name": "Specter", "aliases": ["Specters"]},
+      {"name": "Cacklers"},
+      {"name": "Mind Flayer Arcanist"},
+      {"name": "The Gallowseer"}
+    ],
+    "artifacts_concepts": [
+      {"name": "Living Relics"},
+      {"name": "Ascension Crisis"},
+      {"name": "The Stitching"},
+      {"name": "Silent Infiltration"},
+      {"name": "Temporal Distortions"},
+      {"name": "Omenpath", "aliases": ["Omenpaths"]},
+      {"name": "A glyph", "aliases": ["Ascendancy glyph", "A-brand"]}
+    ],
+    "terminology_house_style": [
+      {"name": "soul-lamp", "aliases": ["soul-lamp", "soullamp"]},
+      {"name": "soulflame"},
+      {"name": "boiler-trap", "aliases": ["boiler-trap"]},
+      {"name": "memory-flame", "aliases": ["memory-flame"]}
+    ]
+  }
+}

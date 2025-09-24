@@ -167,3 +167,18 @@ tools/dict_importer/*.csv
 tools/dict_importer/*.txt
 # Note: README.md is tracked, only exclude generated .md files
 tools/dict_importer/REPORT.md
+
+# Audit and QA reports (generated files)
+audit-reports/
+audit-report-*.json
+audit-report-*.csv
+audit-detailed-*.txt
+qa-report-*.json
+qa-report-*.csv
+# Cleanup additions
+audit-reports/
+*.log
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
