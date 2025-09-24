@@ -31,17 +31,49 @@ class DashboardServer {
     this.app.use(helmet());
     this.app.use(cors());
     this.app.use(express.json());
+    
+    // Global rate limiter for all requests
+    const globalLimiter = rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 1000,                // max 1000 requests per windowMs
+      standardHeaders: true,    // Return rate limit info in the `RateLimit-*` headers
+      legacyHeaders: false,     // Disable the `X-RateLimit-*` headers
+      message: 'Too many requests from this IP, please try again later.',
+    });
+    
+    // Strict rate limiter for API endpoints
+    const apiLimiter = rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 100,                 // max 100 requests per windowMs
+      standardHeaders: true,
+      legacyHeaders: false,
+      message: 'Too many API requests from this IP, please try again later.',
+    });
+    
+    // Very strict rate limiter for sensitive operations
+    const strictLimiter = rateLimit({
+      windowMs: 15 * 60 * 1000, // 15 minutes
+      max: 20,                  // max 20 requests per windowMs
+      standardHeaders: true,
+      legacyHeaders: false,
+      message: 'Too many sensitive operations from this IP, please try again later.',
+    });
+    
+    this.app.use(globalLimiter);
+    this.app.use('/api', apiLimiter);
     this.app.use(express.static(path.join(__dirname, '../dashboard/dist')));
   }
 
   private setupRoutes(): void {
-    // Rate limiter for filesystem access (catch-all route)
-    const fileAccessLimiter = rateLimit({
+    // Very strict rate limiter for sensitive operations
+    const strictLimiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 100,                 // max 100 requests per windowMs
-      standardHeaders: true,    // Return rate limit info in the `RateLimit-*` headers
-      legacyHeaders: false,     // Disable the `X-RateLimit-*` headers
+      max: 20,                  // max 20 requests per windowMs
+      standardHeaders: true,
+      legacyHeaders: false,
+      message: 'Too many sensitive operations from this IP, please try again later.',
     });
+    
     // API Routes
     this.app.get('/api/health', (_req, res) => {
       res.json({ status: 'healthy', timestamp: new Date().toISOString() });
@@ -89,7 +121,7 @@ class DashboardServer {
       }
     });
 
-    this.app.post('/api/scheduled-tasks', async (req, res) => {
+    this.app.post('/api/scheduled-tasks', strictLimiter, async (req, res) => {
       try {
         const taskId = await this.gptService.addScheduledTask(req.body);
         res.json({ id: taskId, message: 'Scheduled task created successfully' });
@@ -98,7 +130,7 @@ class DashboardServer {
       }
     });
 
-    this.app.delete('/api/scheduled-tasks/:id', async (req, res) => {
+    this.app.delete('/api/scheduled-tasks/:id', strictLimiter, async (req, res) => {
       try {
         await this.gptService.removeScheduledTask(req.params.id);
         res.json({ message: 'Scheduled task removed successfully' });
@@ -118,8 +150,8 @@ class DashboardServer {
       }
     });
 
-    // Manual task execution
-    this.app.post('/api/execute', async (req, res) => {
+    // Manual task execution - very sensitive operation
+    this.app.post('/api/execute', strictLimiter, async (req, res) => {
       try {
         const { inputFile, outputFile, isDryRun } = req.body as any;
         console.log('Manual execution request:', { inputFile, outputFile, isDryRun });
@@ -132,8 +164,8 @@ class DashboardServer {
       }
     });
 
-    // Serve React app for all other routes
-    this.app.get('*', fileAccessLimiter, (_req, res) => {
+    // Serve React app for all other routes - use global limiter
+    this.app.get('*', (_req, res) => {
       res.sendFile(path.join(__dirname, '../dashboard/dist/index.html'));
     });
   }
