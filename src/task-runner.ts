@@ -37,9 +37,9 @@ export class TaskRunner {
       // Apply global options to tasks that don't have them set
       const allTasks = batchInput.tasks.map((task) => ({
         ...task,
-        model: task.model || options.model,
-        temperature: task.temperature ?? options.temperature,
-        maxTokens: task.maxTokens ?? options.maxTokens,
+        model: task.model || options.model || 'gpt-3.5-turbo',
+        temperature: task.temperature ?? options.temperature ?? 0.7,
+        maxTokens: task.maxTokens ?? options.maxTokens ?? 1000,
       }));
 
       // Handle resume functionality
@@ -48,12 +48,18 @@ export class TaskRunner {
 
       if (options.resume) {
         try {
-          const checkpointData = await import('fs').then(fs => 
-            JSON.parse(fs.readFileSync(options.resume, 'utf-8'))
+          const checkpointData = await import('fs').then((fs) =>
+            JSON.parse(fs.readFileSync(options.resume!, 'utf-8'))
           );
           checkpoint = checkpointData;
-          tasksToProcess = this.getTasksToProcess(allTasks, checkpoint, options.onlyFailed || false);
-          this.logger.info(`Resuming from checkpoint: ${tasksToProcess.length} tasks to process`);
+          tasksToProcess = this.getTasksToProcess(
+            allTasks,
+            checkpoint,
+            options.onlyFailed || false
+          );
+          this.logger.info(
+            `Resuming from checkpoint: ${tasksToProcess.length} tasks to process`
+          );
         } catch (error) {
           this.logger.warn('Failed to load checkpoint, processing all tasks', {
             error: error instanceof Error ? error.message : error,
@@ -78,13 +84,15 @@ export class TaskRunner {
       // Process tasks in batches for checkpointing
       for (let i = 0; i < tasksToProcess.length; i += checkpointInterval) {
         const batch = tasksToProcess.slice(i, i + checkpointInterval);
-        this.logger.info(`Processing batch ${Math.floor(i / checkpointInterval) + 1}/${Math.ceil(tasksToProcess.length / checkpointInterval)}`);
+        this.logger.info(
+          `Processing batch ${Math.floor(i / checkpointInterval) + 1}/${Math.ceil(tasksToProcess.length / checkpointInterval)}`
+        );
 
         const batchResults = await this.transport.executeBatch(batch, batchId);
         results.push(...batchResults);
 
         // Update checkpoint
-        batchResults.forEach(result => {
+        batchResults.forEach((result) => {
           if (result.success) {
             checkpoint.completedTasks.push(result.id);
           } else {
@@ -96,7 +104,7 @@ export class TaskRunner {
 
         // Save checkpoint
         const checkpointFile = options.resume || 'checkpoint.json';
-        await import('fs').then(fs => 
+        await import('fs').then((fs) =>
           fs.writeFileSync(checkpointFile, JSON.stringify(checkpoint, null, 2))
         );
       }
@@ -110,12 +118,12 @@ export class TaskRunner {
       // Write output files
       if (options.output) {
         // Write only successful results to main output file
-        const successfulResults = results.filter(r => r.success);
+        const successfulResults = results.filter((r) => r.success);
         await this.batchWriter.writeResults(successfulResults, options.output);
         this.logger.info(`Results written to ${options.output}`);
 
         // Write failed tasks to separate file
-        const failedResults = results.filter(r => !r.success);
+        const failedResults = results.filter((r) => !r.success);
         if (failedResults.length > 0) {
           const failedFile = options.output.replace(/\.[^.]+$/, '.failed$&');
           await this.batchWriter.writeResults(failedResults, failedFile);
@@ -137,10 +145,13 @@ export class TaskRunner {
       }
 
       // Clean up checkpoint file if all tasks completed successfully
-      if (checkpoint.completedTasks.length + checkpoint.failedTasks.length === checkpoint.totalTasks) {
+      if (
+        checkpoint.completedTasks.length + checkpoint.failedTasks.length ===
+        checkpoint.totalTasks
+      ) {
         const checkpointFile = options.resume || 'checkpoint.json';
         try {
-          await import('fs').then(fs => fs.unlinkSync(checkpointFile));
+          await import('fs').then((fs) => fs.unlinkSync(checkpointFile));
           this.logger.info('Checkpoint file cleaned up');
         } catch {
           // Ignore cleanup errors
@@ -218,20 +229,26 @@ export class TaskRunner {
    * Get tasks to process based on checkpoint and resume options
    */
   getTasksToProcess(
-    allTasks: TaskRequest[],
+    allTasks: Array<
+      TaskRequest & { model: string; temperature: number; maxTokens: number }
+    >,
     checkpoint: any,
     onlyFailed: boolean
-  ): TaskRequest[] {
+  ): Array<
+    TaskRequest & { model: string; temperature: number; maxTokens: number }
+  > {
     if (onlyFailed) {
       // Process only failed tasks
-      return allTasks.filter(task => checkpoint.failedTasks?.includes(task.id));
+      return allTasks.filter((task) =>
+        checkpoint.failedTasks?.includes(task.id)
+      );
     } else {
       // Process remaining tasks (not completed and not failed)
       const completedTasks = new Set(checkpoint.completedTasks || []);
       const failedTasks = new Set(checkpoint.failedTasks || []);
-      
-      return allTasks.filter(task => 
-        !completedTasks.has(task.id) && !failedTasks.has(task.id)
+
+      return allTasks.filter(
+        (task) => !completedTasks.has(task.id) && !failedTasks.has(task.id)
       );
     }
   }

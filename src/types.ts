@@ -83,6 +83,9 @@ export interface CliOptions {
   maxRetries?: number;
   retryDelay?: number;
   timeout?: number;
+  resume?: string;
+  onlyFailed?: boolean;
+  checkpointInterval?: number;
 }
 
 export interface RetryConfig {
