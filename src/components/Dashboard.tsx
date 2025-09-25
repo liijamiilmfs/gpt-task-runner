@@ -1,19 +1,8 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
-import {
-  Play,
-  Clock,
-  DollarSign,
-  Activity,
-} from 'lucide-react';
-import {
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from 'recharts';
+import { Play, Clock, DollarSign, Activity } from 'lucide-react';
+import { Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 
 interface Metrics {
   totalTasks: number;

@@ -27,12 +27,23 @@ export class Logger {
 
   constructor(level: string = 'info', jsonMode: boolean = false) {
     this.jsonMode = jsonMode;
-    
+
     // Common sensitive keys to sanitize
     this.sensitiveKeys = new Set([
-      'api_key', 'apiKey', 'token', 'password', 'secret', 'key',
-      'authorization', 'auth', 'credential', 'openai_api_key',
-      'OPENAI_API_KEY', 'prompt', 'response', 'content'
+      'api_key',
+      'apiKey',
+      'token',
+      'password',
+      'secret',
+      'key',
+      'authorization',
+      'auth',
+      'credential',
+      'openai_api_key',
+      'OPENAI_API_KEY',
+      'prompt',
+      'response',
+      'content',
     ]);
 
     this.logger = winston.createLogger({
@@ -56,8 +67,17 @@ export class Logger {
   private formatLogEntry = (info: any) => {
     // Extract the structured log entry from the second parameter
     const logEntry = info[1] || info;
-    const { timestamp, level, message, batch_id, task_id, corr_id, phase, details } = logEntry;
-    
+    const {
+      timestamp,
+      level,
+      message,
+      batch_id,
+      task_id,
+      corr_id,
+      phase,
+      details,
+    } = logEntry;
+
     if (this.jsonMode) {
       // JSON mode - return structured JSON
       const structuredEntry = {
@@ -68,24 +88,24 @@ export class Logger {
         task_id,
         corr_id,
         phase,
-        details: details ? this.sanitizeData(details) : undefined
+        details: details ? this.sanitizeData(details) : undefined,
       };
       return JSON.stringify(structuredEntry);
     } else {
       // Pretty mode - return human-readable format
       let logLine = `${timestamp} [${level}]`;
-      
+
       if (corr_id) logLine += ` [${corr_id}]`;
       if (batch_id) logLine += ` [batch:${batch_id}]`;
       if (task_id) logLine += ` [task:${task_id}]`;
       if (phase) logLine += ` [${phase}]`;
-      
+
       logLine += ` ${message}`;
-      
+
       if (details && Object.keys(details).length > 0) {
         logLine += ` ${JSON.stringify(this.sanitizeData(details))}`;
       }
-      
+
       return logLine;
     }
   };
@@ -96,21 +116,24 @@ export class Logger {
     }
 
     if (Array.isArray(data)) {
-      return data.map(item => this.sanitizeData(item));
+      return data.map((item) => this.sanitizeData(item));
     }
 
     const sanitized: any = {};
     for (const [key, value] of Object.entries(data)) {
       const lowerKey = key.toLowerCase();
-      
+
       // Check if key contains sensitive information
-      const isSensitive = Array.from(this.sensitiveKeys).some(sensitiveKey => 
+      const isSensitive = Array.from(this.sensitiveKeys).some((sensitiveKey) =>
         lowerKey.includes(sensitiveKey.toLowerCase())
       );
 
       if (isSensitive) {
         sanitized[key] = '[REDACTED]';
-      } else if (typeof value === 'string' && this.containsSensitiveContent(value)) {
+      } else if (
+        typeof value === 'string' &&
+        this.containsSensitiveContent(value)
+      ) {
         sanitized[key] = this.sanitizeString(value);
       } else if (typeof value === 'object') {
         sanitized[key] = this.sanitizeData(value);
@@ -126,11 +149,11 @@ export class Logger {
     // Check for API key patterns, tokens, etc.
     const sensitivePatterns = [
       /sk-[a-zA-Z0-9]{20,}/, // OpenAI API key pattern
-      /[a-zA-Z0-9]{32,}/,    // Generic long tokens
+      /[a-zA-Z0-9]{32,}/, // Generic long tokens
       /Bearer\s+[a-zA-Z0-9]+/, // Bearer tokens
     ];
-    
-    return sensitivePatterns.some(pattern => pattern.test(str));
+
+    return sensitivePatterns.some((pattern) => pattern.test(str));
   }
 
   private sanitizeString(str: string): string {
@@ -141,7 +164,12 @@ export class Logger {
       .replace(/[a-zA-Z0-9]{32,}/g, '[REDACTED_TOKEN]');
   }
 
-  private createLogEntry(level: string, message: string, context?: LogContext, details?: any): StructuredLogEntry {
+  private createLogEntry(
+    level: string,
+    message: string,
+    context?: LogContext,
+    details?: any
+  ): StructuredLogEntry {
     return {
       timestamp: new Date().toISOString(),
       level,
@@ -185,23 +213,63 @@ export class Logger {
   }
 
   // Convenience methods for common logging patterns
-  taskStart(taskId: string, batchId?: string, corrId?: string, details?: any): void {
-    this.info('Task started', { task_id: taskId, batch_id: batchId, corr_id: corrId, phase: 'start' }, details);
+  taskStart(
+    taskId: string,
+    batchId?: string,
+    corrId?: string,
+    details?: any
+  ): void {
+    this.info(
+      'Task started',
+      { task_id: taskId, batch_id: batchId, corr_id: corrId, phase: 'start' },
+      details
+    );
   }
 
-  taskComplete(taskId: string, batchId?: string, corrId?: string, details?: any): void {
-    this.info('Task completed', { task_id: taskId, batch_id: batchId, corr_id: corrId, phase: 'complete' }, details);
+  taskComplete(
+    taskId: string,
+    batchId?: string,
+    corrId?: string,
+    details?: any
+  ): void {
+    this.info(
+      'Task completed',
+      {
+        task_id: taskId,
+        batch_id: batchId,
+        corr_id: corrId,
+        phase: 'complete',
+      },
+      details
+    );
   }
 
-  taskError(taskId: string, batchId?: string, corrId?: string, details?: any): void {
-    this.error('Task failed', { task_id: taskId, batch_id: batchId, corr_id: corrId, phase: 'error' }, details);
+  taskError(
+    taskId: string,
+    batchId?: string,
+    corrId?: string,
+    details?: any
+  ): void {
+    this.error(
+      'Task failed',
+      { task_id: taskId, batch_id: batchId, corr_id: corrId, phase: 'error' },
+      details
+    );
   }
 
   batchStart(batchId: string, corrId?: string, details?: any): void {
-    this.info('Batch started', { batch_id: batchId, corr_id: corrId, phase: 'batch_start' }, details);
+    this.info(
+      'Batch started',
+      { batch_id: batchId, corr_id: corrId, phase: 'batch_start' },
+      details
+    );
   }
 
   batchComplete(batchId: string, corrId?: string, details?: any): void {
-    this.info('Batch completed', { batch_id: batchId, corr_id: corrId, phase: 'batch_complete' }, details);
+    this.info(
+      'Batch completed',
+      { batch_id: batchId, corr_id: corrId, phase: 'batch_complete' },
+      details
+    );
   }
 }

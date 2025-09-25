@@ -1,5 +1,9 @@
 # GPT Task Runner
 
+[![CI/CD Pipeline](https://github.com/liijamiilmfs/gpt-task-runner/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/liijamiilmfs/gpt-task-runner/actions)
+[![Security Scans](https://github.com/liijamiilmfs/gpt-task-runner/workflows/Security%20Scans/badge.svg)](https://github.com/liijamiilmfs/gpt-task-runner/actions)
+[![Coverage](https://codecov.io/gh/liijamiilmfs/gpt-task-runner/branch/dev/graph/badge.svg)](https://codecov.io/gh/liijamiilmfs/gpt-task-runner)
+
 A powerful task runner and automation tool designed to work with GPT models for intelligent task execution and workflow management.
 
 ## Features
@@ -21,17 +25,20 @@ A powerful task runner and automation tool designed to work with GPT models for 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/gpt-task-runner.git
 cd gpt-task-runner
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp .env.example .env
 # Edit .env with your API keys and configuration

@@ -1,12 +1,17 @@
 export interface TaskRequest {
   id: string;
-  prompt: string;
+  prompt?: string;
+  messages?: Array<{
+    role: 'system' | 'user' | 'assistant';
+    content: string;
+  }>;
   model?: string;
   temperature?: number;
   maxTokens?: number;
   metadata?: Record<string, any>;
   batch_id?: string;
   corr_id?: string;
+  idempotency_key?: string;
 }
 
 export interface TaskResponse {
@@ -48,7 +53,10 @@ export interface DryRunResult {
 
 export interface Transport {
   execute(request: TaskRequest): Promise<TaskResponse>;
-  executeBatch(requests: TaskRequest[], batchId?: string): Promise<TaskResponse[]>;
+  executeBatch(
+    requests: TaskRequest[],
+    batchId?: string
+  ): Promise<TaskResponse[]>;
 }
 
 export interface DryRunTransport extends Transport {
