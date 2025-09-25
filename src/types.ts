@@ -86,6 +86,8 @@ export interface CliOptions {
   resume?: string;
   onlyFailed?: boolean;
   checkpointInterval?: number;
+  batchSize?: number;
+  maxInflight?: number;
 }
 
 export interface RetryConfig {

@@ -377,10 +377,10 @@ describe('Idempotency and Resume Functionality', () => {
             verbose: false,
           });
         } catch (error) {
-          // Expected process.exit call
+          // Expected error when some tasks fail
           if (
             error instanceof Error &&
-            error.message.includes('process.exit')
+            error.message.includes('Some tasks failed')
           ) {
             // This is expected, continue with test
           } else {
