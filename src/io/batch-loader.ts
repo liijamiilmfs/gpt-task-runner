@@ -101,40 +101,77 @@ export class BatchLoader {
   }
 
   private async loadFromJSONL(filePath: string): Promise<BatchInput> {
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const lines = content.trim().split('\n');
-    const tasks: TaskRequest[] = [];
-    const validationErrors: ValidationError[] = [];
+    return new Promise((resolve, reject) => {
+      const tasks: TaskRequest[] = [];
+      const validationErrors: ValidationError[] = [];
+      let lineNumber = 0;
 
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      if (line.trim()) {
-        try {
-          const task = JSON.parse(line) as TaskRequest;
+      const stream = fs.createReadStream(filePath, { encoding: 'utf-8' });
+      let buffer = '';
 
-          // Validate the task
-          const validation = TaskValidator.validateTask(task, i + 1);
-          validationErrors.push(...validation.errors);
+      stream
+        .on('data', (chunk: string | Buffer) => {
+          buffer += chunk;
+          const lines = buffer.split('\n');
 
-          tasks.push(task);
-        } catch (error) {
-          validationErrors.push({
-            field: 'json',
-            message: `Invalid JSON format: ${error instanceof Error ? error.message : 'Unknown error'}`,
-            value: line,
-          });
-        }
-      }
-    }
+          // Keep the last line in buffer (might be incomplete)
+          buffer = lines.pop() || '';
 
-    if (validationErrors.length > 0) {
-      const errorMessages = validationErrors
-        .map((err) => err.message)
-        .join('\n');
-      throw new Error(`Validation errors found:\n${errorMessages}`);
-    }
+          for (const line of lines) {
+            lineNumber++;
+            if (line.trim()) {
+              try {
+                const task = JSON.parse(line) as TaskRequest;
 
-    return { tasks, format: 'jsonl' };
+                // Validate the task
+                const validation = TaskValidator.validateTask(task, lineNumber);
+                validationErrors.push(...validation.errors);
+
+                tasks.push(task);
+              } catch (error) {
+                validationErrors.push({
+                  field: 'json',
+                  message: `Invalid JSON format: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                  value: line,
+                });
+              }
+            }
+          }
+        })
+        .on('end', () => {
+          // Process the last line if it exists
+          if (buffer.trim()) {
+            lineNumber++;
+            try {
+              const task = JSON.parse(buffer) as TaskRequest;
+
+              // Validate the task
+              const validation = TaskValidator.validateTask(task, lineNumber);
+              validationErrors.push(...validation.errors);
+
+              tasks.push(task);
+            } catch (error) {
+              validationErrors.push({
+                field: 'json',
+                message: `Invalid JSON format: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                value: buffer,
+              });
+            }
+          }
+
+          if (validationErrors.length > 0) {
+            const errorMessages = validationErrors
+              .map((err) => err.message)
+              .join('\n');
+            reject(new Error(`Validation errors found:\n${errorMessages}`));
+          } else {
+            resolve({ tasks, format: 'jsonl' });
+          }
+        })
+        .on('error', (error) => {
+          reject(error);
+        });
+    });
   }
 
   private parseMetadata(row: any): Record<string, any> | undefined {
