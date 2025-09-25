@@ -92,11 +92,9 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
     }
 
     // Check if we can add the task (queue + active workers)
-    if (
-      this.queue.length + this.activeWorkers.size >=
-      this.config.maxQueueSize
-    ) {
-      throw new Error(`Queue is full (${this.config.maxQueueSize} tasks)`);
+    const totalCapacity = this.config.maxConcurrency + this.config.maxQueueSize;
+    if (this.queue.length + this.activeWorkers.size >= totalCapacity) {
+      throw new Error(`Queue is full (${totalCapacity} total tasks)`);
     }
 
     // Add to queue with priority handling
@@ -166,30 +164,28 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
    * Process the next task in the queue
    */
   private processNext(): void {
-    if (
-      this.activeWorkers.size >= this.config.maxConcurrency ||
-      this.queue.length === 0
+    while (
+      this.activeWorkers.size < this.config.maxConcurrency &&
+      this.queue.length > 0
     ) {
-      return;
-    }
+      const task = this.queue.shift();
+      if (!task) break;
 
-    const task = this.queue.shift();
-    if (!task) return;
+      // Create a promise that will be resolved when the task completes
+      const workerPromise = this.processTask(task);
+      this.activeWorkers.set(task.id, workerPromise);
 
-    // Create a promise that will be resolved when the task completes
-    const workerPromise = this.processTask(task);
-    this.activeWorkers.set(task.id, workerPromise);
+      // Don't wait for the promise to complete - just add it to active workers
+      // The promise will be cleaned up when it completes
+      workerPromise.finally(() => {
+        this.activeWorkers.delete(task.id);
+        this.updateMetrics();
+        // Try to process more tasks
+        this.processNext();
+      });
 
-    // Don't wait for the promise to complete - just add it to active workers
-    // The promise will be cleaned up when it completes
-    workerPromise.finally(() => {
-      this.activeWorkers.delete(task.id);
       this.updateMetrics();
-      // Try to process more tasks
-      this.processNext();
-    });
-
-    this.updateMetrics();
+    }
   }
 
   /**
