@@ -9,6 +9,15 @@ import { Database } from './database/database';
 import { Logger } from './logger';
 import { CliOptions } from './types';
 
+interface ScheduledTask {
+  id?: string;
+  name: string;
+  schedule: string;
+  isDryRun: boolean;
+  inputFile: string;
+  outputFile: string;
+}
+
 class GPTTaskService {
   private logger: Logger;
   private database: Database;
@@ -95,7 +104,7 @@ class GPTTaskService {
     }
   }
 
-  private async scheduleTask(task: any): Promise<void> {
+  private async scheduleTask(task: ScheduledTask): Promise<void> {
     try {
       const scheduledTask = cron.schedule(
         task.schedule,
@@ -126,7 +135,7 @@ class GPTTaskService {
     }
   }
 
-  private async executeScheduledTask(task: any): Promise<void> {
+  private async executeScheduledTask(task: ScheduledTask): Promise<void> {
     const executionId = `exec-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
     try {
@@ -223,7 +232,7 @@ class GPTTaskService {
   }
 
   // Public methods for service management
-  async addScheduledTask(task: any): Promise<string> {
+  async addScheduledTask(task: ScheduledTask): Promise<string> {
     const taskId = await this.database.saveScheduledTask(task);
     await this.scheduleTask({ ...task, id: taskId });
     return taskId;
@@ -238,7 +247,11 @@ class GPTTaskService {
     // Also remove from database
   }
 
-  async getServiceStatus(): Promise<any> {
+  async getServiceStatus(): Promise<{
+    isRunning: boolean;
+    scheduledTasks: number;
+    metrics: Record<string, unknown>;
+  }> {
     const metrics = await this.database.getTaskMetrics();
     return {
       isRunning: this.isRunning,

@@ -132,7 +132,7 @@ describe('Round-trip Tests', () => {
 
   describe('CSV Round-trip', () => {
     it('should preserve all fields in CSV round-trip', async () => {
-      const originalTasks: TaskRequest[] = [
+      const tasks: TaskRequest[] = [
         {
           id: 'task-1',
           prompt: 'Write a haiku',
@@ -170,23 +170,8 @@ describe('Round-trip Tests', () => {
 
       // Verify loaded tasks match original
       expect(loaded.tasks).toHaveLength(2);
-      expect(loaded.tasks[0].id).toBe('task-1');
-      expect(loaded.tasks[0].prompt).toBe('Write a haiku');
-      expect(loaded.tasks[0].model).toBe('gpt-3.5-turbo');
-      expect(loaded.tasks[0].temperature).toBe(0.7);
-      expect(loaded.tasks[0].maxTokens).toBe(100);
-      expect(loaded.tasks[0].batch_id).toBe('batch-001');
-      expect(loaded.tasks[0].idempotency_key).toBe('key-123');
-      expect(loaded.tasks[0].metadata).toEqual({ category: 'creative' });
-
-      expect(loaded.tasks[1].id).toBe('task-2');
-      expect(loaded.tasks[1].prompt).toBe('Write a poem');
-      expect(loaded.tasks[1].model).toBe('gpt-4');
-      expect(loaded.tasks[1].temperature).toBe(0.5);
-      expect(loaded.tasks[1].maxTokens).toBe(200);
-      expect(loaded.tasks[1].batch_id).toBe('batch-001');
-      expect(loaded.tasks[1].idempotency_key).toBe('key-456');
-      expect(loaded.tasks[1].metadata).toEqual({ category: 'educational' });
+      expect(loaded.tasks[0]).toEqual(tasks[0]);
+      expect(loaded.tasks[1]).toEqual(tasks[1]);
     });
 
     it('should handle CSV with minimal required fields', async () => {

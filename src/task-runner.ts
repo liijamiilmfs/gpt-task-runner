@@ -44,7 +44,7 @@ export class TaskRunner {
 
       // Handle resume functionality
       let tasksToProcess = allTasks;
-      let checkpoint: any = null;
+      let checkpoint: Record<string, unknown> | null = null;
 
       if (options.resume) {
         try {
@@ -78,7 +78,7 @@ export class TaskRunner {
         };
       }
 
-      const results: any[] = [];
+      const results: TaskResponse[] = [];
       const checkpointInterval = options.checkpointInterval || 10;
 
       // Process tasks in batches for checkpointing
@@ -232,7 +232,7 @@ export class TaskRunner {
     allTasks: Array<
       TaskRequest & { model: string; temperature: number; maxTokens: number }
     >,
-    checkpoint: any,
+    checkpoint: Record<string, unknown> | null,
     onlyFailed: boolean
   ): Array<
     TaskRequest & { model: string; temperature: number; maxTokens: number }
