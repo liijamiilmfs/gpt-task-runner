@@ -22,11 +22,11 @@ describe('OpenAITransport with Retry', () => {
 
   beforeEach(async () => {
     vi.clearAllMocks();
-    
+
     // Create a fresh mock for each test
     const { default: OpenAI } = await import('openai');
     mockOpenAI = new OpenAI();
-    
+
     transport = new OpenAITransport(mockApiKey);
   });
 
@@ -240,7 +240,11 @@ describe('OpenAITransport with Retry', () => {
         timeoutMs: 30000,
       };
 
-      const customTransport = new OpenAITransport(mockApiKey, undefined, customConfig);
+      const customTransport = new OpenAITransport(
+        mockApiKey,
+        undefined,
+        customConfig
+      );
       expect(customTransport).toBeDefined();
     });
   });
@@ -286,7 +290,9 @@ describe('OpenAITransport with Retry', () => {
       const result = await transport.execute(request);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('Either prompt or messages must be provided');
+      expect(result.error).toContain(
+        'Either prompt or messages must be provided'
+      );
       expect(result.errorCode).toBe('E_INPUT');
     });
   });

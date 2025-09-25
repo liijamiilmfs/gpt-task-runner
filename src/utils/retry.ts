@@ -12,7 +12,10 @@ export class RetryError extends Error {
 }
 
 export class CircuitBreakerError extends Error {
-  constructor(message: string, public readonly failureCount: number) {
+  constructor(
+    message: string,
+    public readonly failureCount: number
+  ) {
     super(message);
     this.name = 'CircuitBreakerError';
   }
@@ -123,7 +126,7 @@ export class RetryManager {
 
         // Calculate delay with exponential backoff and jitter
         const delay = this.calculateDelay(attempt);
-        
+
         console.warn(
           `Attempt ${attempt + 1}/${this.config.maxRetries + 1} failed for ${operationId}: ${errorInfo.message}. Retrying in ${delay}ms...`
         );
@@ -195,7 +198,9 @@ export class RetryManager {
         code: ErrorCodes.SERVER_ERROR,
         message: 'Server error',
         isRetryable: true,
-        httpStatus: parseInt(message.match(/\b(500|502|503|504)\b/)?.[1] || '500'),
+        httpStatus: parseInt(
+          message.match(/\b(500|502|503|504)\b/)?.[1] || '500'
+        ),
         originalError: error,
       };
     }

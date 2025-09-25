@@ -27,13 +27,10 @@ export class OpenAITransport implements Transport {
     let retryCount = 0;
 
     try {
-      const result = await this.retryManager.executeWithRetry(
-        async () => {
-          retryCount++;
-          return await this.executeSingle(request);
-        },
-        `task-${request.id}`
-      );
+      const result = await this.retryManager.executeWithRetry(async () => {
+        retryCount++;
+        return await this.executeSingle(request);
+      }, `task-${request.id}`);
 
       timing.end();
       return {
@@ -102,8 +99,9 @@ export class OpenAITransport implements Transport {
     timing: TimingTracker,
     retryCount: number
   ): TaskResponse {
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown error';
+
     return {
       id: request.id,
       request,
@@ -132,7 +130,11 @@ export class OpenAITransport implements Transport {
       if (message.includes('quota') || message.includes('billing')) {
         return 'E_QUOTA';
       }
-      if (message.includes('500') || message.includes('502') || message.includes('503')) {
+      if (
+        message.includes('500') ||
+        message.includes('502') ||
+        message.includes('503')
+      ) {
         return 'E_SERVER_ERROR';
       }
       if (message.includes('network') || message.includes('econnreset')) {
@@ -157,7 +159,7 @@ export class OpenAITransport implements Transport {
     for (let i = 0; i < requests.length; i++) {
       const request = requests[i];
       console.log(`Processing task ${i + 1}/${requests.length}: ${request.id}`);
-      
+
       const result = await this.execute(request);
       results.push(result);
 
@@ -170,10 +172,12 @@ export class OpenAITransport implements Transport {
     }
 
     const batchDuration = Date.now() - batchStartTime;
-    const successCount = results.filter(r => r.success).length;
+    const successCount = results.filter((r) => r.success).length;
     const failureCount = results.length - successCount;
 
-    console.log(`Batch completed in ${batchDuration}ms: ${successCount} successful, ${failureCount} failed`);
+    console.log(
+      `Batch completed in ${batchDuration}ms: ${successCount} successful, ${failureCount} failed`
+    );
 
     return results;
   }

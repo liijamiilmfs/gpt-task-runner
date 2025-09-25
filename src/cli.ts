@@ -30,8 +30,16 @@ program
   .option('--model <model>', 'OpenAI model to use', 'gpt-3.5-turbo')
   .option('--temperature <number>', 'Temperature for generation', '0.7')
   .option('--max-tokens <number>', 'Maximum tokens to generate', '1000')
-  .option('--max-retries <number>', 'Maximum number of retries for failed requests', '3')
-  .option('--retry-delay <number>', 'Base delay between retries in milliseconds', '1000')
+  .option(
+    '--max-retries <number>',
+    'Maximum number of retries for failed requests',
+    '3'
+  )
+  .option(
+    '--retry-delay <number>',
+    'Base delay between retries in milliseconds',
+    '1000'
+  )
   .option('--timeout <number>', 'Request timeout in milliseconds', '60000')
   .action(async (options) => {
     const logger = new Logger(options.verbose ? 'debug' : 'info', options.json);
@@ -64,7 +72,7 @@ program
       }
 
       const baseURL = process.env['OPENAI_BASE_URL'];
-      
+
       // Create retry configuration from CLI options
       const retryConfig = {
         maxRetries: parseInt(options.maxRetries) || 3,
@@ -73,9 +81,11 @@ program
       };
 
       transport = new OpenAITransport(apiKey, baseURL, retryConfig);
-      
+
       if (options.verbose) {
-        logger.info(`Configured retry settings: maxRetries=${retryConfig.maxRetries}, baseDelay=${retryConfig.baseDelayMs}ms, timeout=${retryConfig.timeoutMs}ms`);
+        logger.info(
+          `Configured retry settings: maxRetries=${retryConfig.maxRetries}, baseDelay=${retryConfig.baseDelayMs}ms, timeout=${retryConfig.timeoutMs}ms`
+        );
       }
     }
 
