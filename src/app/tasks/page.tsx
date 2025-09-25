@@ -225,9 +225,7 @@ const TasksPage: React.FC = () => {
                     <div className="flex items-center">
                       {getStatusIcon(task.status)}
                       <span
-                        className={`ml-2 inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(
-                          task.status
-                        )}`}
+                        className={`ml-2 inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(task.status)}`}
                       >
                         {task.status}
                       </span>

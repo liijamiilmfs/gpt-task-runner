@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: 'GPT Task Runner',
   description:
     'A task runner for executing GPT-based tasks with batch processing and monitoring',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+  },
 };
 
 export default function RootLayout({
