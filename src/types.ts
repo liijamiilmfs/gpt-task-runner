@@ -48,7 +48,10 @@ export interface DryRunResult {
 
 export interface Transport {
   execute(request: TaskRequest): Promise<TaskResponse>;
-  executeBatch(requests: TaskRequest[], batchId?: string): Promise<TaskResponse[]>;
+  executeBatch(
+    requests: TaskRequest[],
+    batchId?: string
+  ): Promise<TaskResponse[]>;
 }
 
 export interface DryRunTransport extends Transport {
