@@ -14,8 +14,11 @@ export class OpenAITransport implements Transport {
   async execute(request: TaskRequest): Promise<TaskResponse> {
     try {
       // Convert request to OpenAI message format
-      let messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>;
-      
+      let messages: Array<{
+        role: 'system' | 'user' | 'assistant';
+        content: string;
+      }>;
+
       if (request.messages && request.messages.length > 0) {
         messages = request.messages;
       } else if (request.prompt) {

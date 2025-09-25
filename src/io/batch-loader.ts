@@ -29,7 +29,7 @@ export class BatchLoader {
         .pipe(csv())
         .on('data', (row) => {
           rowNumber++;
-          
+
           // Parse messages if present
           let messages;
           if (row.messages) {
@@ -70,7 +70,9 @@ export class BatchLoader {
             ...(metadata && { metadata }),
             ...(row.batch_id && { batch_id: row.batch_id }),
             ...(row.corr_id && { corr_id: row.corr_id }),
-            ...(row.idempotency_key && { idempotency_key: row.idempotency_key }),
+            ...(row.idempotency_key && {
+              idempotency_key: row.idempotency_key,
+            }),
             ...(this.parseMetadata(row) && {
               metadata: { ...metadata, ...this.parseMetadata(row) },
             }),
@@ -84,7 +86,9 @@ export class BatchLoader {
         })
         .on('end', () => {
           if (validationErrors.length > 0) {
-            const errorMessages = validationErrors.map(err => err.message).join('\n');
+            const errorMessages = validationErrors
+              .map((err) => err.message)
+              .join('\n');
             reject(new Error(`Validation errors found:\n${errorMessages}`));
           } else {
             resolve({ tasks, format: 'csv' });
@@ -107,11 +111,11 @@ export class BatchLoader {
       if (line.trim()) {
         try {
           const task = JSON.parse(line) as TaskRequest;
-          
+
           // Validate the task
           const validation = TaskValidator.validateTask(task, i + 1);
           validationErrors.push(...validation.errors);
-          
+
           tasks.push(task);
         } catch (error) {
           validationErrors.push({
@@ -124,7 +128,9 @@ export class BatchLoader {
     }
 
     if (validationErrors.length > 0) {
-      const errorMessages = validationErrors.map(err => err.message).join('\n');
+      const errorMessages = validationErrors
+        .map((err) => err.message)
+        .join('\n');
       throw new Error(`Validation errors found:\n${errorMessages}`);
     }
 
@@ -137,7 +143,18 @@ export class BatchLoader {
 
     for (const [key, value] of Object.entries(row)) {
       if (
-        !['id', 'prompt', 'messages', 'model', 'temperature', 'maxTokens', 'metadata', 'batch_id', 'corr_id', 'idempotency_key'].includes(key)
+        ![
+          'id',
+          'prompt',
+          'messages',
+          'model',
+          'temperature',
+          'maxTokens',
+          'metadata',
+          'batch_id',
+          'corr_id',
+          'idempotency_key',
+        ].includes(key)
       ) {
         metadata[key] = value;
         hasMetadata = true;

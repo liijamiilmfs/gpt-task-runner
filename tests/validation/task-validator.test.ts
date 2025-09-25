@@ -64,7 +64,9 @@ describe('TaskValidator', () => {
       expect(result.isValid).toBe(false);
       expect(result.errors).toHaveLength(1);
       expect(result.errors[0].field).toBe('content');
-      expect(result.errors[0].message).toContain('Either "prompt" or "messages"');
+      expect(result.errors[0].message).toContain(
+        'Either "prompt" or "messages"'
+      );
     });
 
     it('should reject invalid temperature', () => {
@@ -100,9 +102,7 @@ describe('TaskValidator', () => {
     it('should reject invalid messages format', () => {
       const task = {
         id: 'task-1',
-        messages: [
-          { role: 'invalid', content: 'Hello' },
-        ],
+        messages: [{ role: 'invalid', content: 'Hello' }],
       };
 
       const result = TaskValidator.validateTask(task);
@@ -110,7 +110,9 @@ describe('TaskValidator', () => {
       expect(result.isValid).toBe(false);
       expect(result.errors).toHaveLength(1);
       expect(result.errors[0].field).toBe('messages[0].role');
-      expect(result.errors[0].message).toContain('"system", "user", or "assistant"');
+      expect(result.errors[0].message).toContain(
+        '"system", "user", or "assistant"'
+      );
     });
 
     it('should warn about unknown model', () => {

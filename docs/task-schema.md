@@ -6,18 +6,19 @@ This document describes the portable task schema used by the GPT Task Runner for
 
 ### Required Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `id` | string | Unique identifier for the task (max 100 chars, alphanumeric + hyphens/underscores) |
+| Field | Type   | Description                                                                        |
+| ----- | ------ | ---------------------------------------------------------------------------------- |
+| `id`  | string | Unique identifier for the task (max 100 chars, alphanumeric + hyphens/underscores) |
 
 ### Content Fields (At least one required)
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `prompt` | string | Single prompt text for the task |
-| `messages` | Array | Conversation-style messages (alternative to prompt) |
+| Field      | Type   | Description                                         |
+| ---------- | ------ | --------------------------------------------------- |
+| `prompt`   | string | Single prompt text for the task                     |
+| `messages` | Array  | Conversation-style messages (alternative to prompt) |
 
 #### Messages Format
+
 ```json
 {
   "messages": [
@@ -26,7 +27,7 @@ This document describes the portable task schema used by the GPT Task Runner for
       "content": "You are a helpful assistant."
     },
     {
-      "role": "user", 
+      "role": "user",
       "content": "Write a haiku about programming"
     }
   ]
@@ -35,15 +36,15 @@ This document describes the portable task schema used by the GPT Task Runner for
 
 ### Optional Fields
 
-| Field | Type | Description | Default |
-|-------|------|-------------|---------|
-| `model` | string | OpenAI model to use | `gpt-3.5-turbo` |
-| `temperature` | number | Sampling temperature (0-2) | `0.7` |
-| `maxTokens` | number | Maximum tokens to generate (1-4096) | `100` |
-| `metadata` | object | Additional metadata for the task | `{}` |
-| `batch_id` | string | Identifier for the batch this task belongs to | - |
-| `corr_id` | string | Correlation ID for tracking | - |
-| `idempotency_key` | string | Key for idempotent operations (max 100 chars) | - |
+| Field             | Type   | Description                                   | Default         |
+| ----------------- | ------ | --------------------------------------------- | --------------- |
+| `model`           | string | OpenAI model to use                           | `gpt-3.5-turbo` |
+| `temperature`     | number | Sampling temperature (0-2)                    | `0.7`           |
+| `maxTokens`       | number | Maximum tokens to generate (1-4096)           | `100`           |
+| `metadata`        | object | Additional metadata for the task              | `{}`            |
+| `batch_id`        | string | Identifier for the batch this task belongs to | -               |
+| `corr_id`         | string | Correlation ID for tracking                   | -               |
+| `idempotency_key` | string | Key for idempotent operations (max 100 chars) | -               |
 
 ## Supported Models
 
@@ -69,10 +70,12 @@ Each line contains a complete JSON object representing a single task:
 ### CSV Format
 
 #### Required Headers
+
 - `id` - Task identifier
 - `prompt` - Task prompt (or use `messages` column with JSON)
 
 #### Optional Headers
+
 - `messages` - JSON array of message objects
 - `model` - OpenAI model name
 - `temperature` - Sampling temperature
@@ -83,6 +86,7 @@ Each line contains a complete JSON object representing a single task:
 - `idempotency_key` - Idempotency key
 
 #### Example CSV
+
 ```csv
 id,prompt,model,temperature,maxTokens,batch_id,idempotency_key,metadata
 task-1,"Write a haiku about programming",gpt-3.5-turbo,0.7,100,batch-001,task-1-hash,"{""category"":""creative""}"
@@ -92,6 +96,7 @@ task-2,"Explain quantum computing",gpt-4,0.5,500,batch-001,task-2-hash,"{""categ
 ## Validation Rules
 
 ### Field Validation
+
 - **id**: Required, max 100 chars, alphanumeric + hyphens/underscores only
 - **prompt**: String, non-empty if provided
 - **messages**: Array of objects with `role` and `content` fields
@@ -102,18 +107,21 @@ task-2,"Explain quantum computing",gpt-4,0.5,500,batch-001,task-2-hash,"{""categ
 - **idempotency_key**: String, max 100 chars
 
 ### Content Validation
+
 - At least one of `prompt` or `messages` must be provided
 - If `messages` is provided, each message must have valid `role` and `content`
 
 ## Error Handling
 
 Invalid rows are rejected with clear error messages indicating:
+
 - Row number (for CSV/JSONL files)
 - Field name with the error
 - Specific validation failure reason
 - Invalid value (when helpful)
 
 ### Example Error Messages
+
 ```
 Row 2: Required field 'id' is missing or empty
 Row 3: Temperature must be between 0 and 2
@@ -123,6 +131,7 @@ Row 4: Message role must be "system", "user", or "assistant"
 ## Examples
 
 ### Basic Task with Prompt
+
 ```json
 {
   "id": "task-1",
@@ -134,6 +143,7 @@ Row 4: Message role must be "system", "user", or "assistant"
 ```
 
 ### Advanced Task with Messages
+
 ```json
 {
   "id": "task-2",
@@ -161,6 +171,7 @@ Row 4: Message role must be "system", "user", or "assistant"
 ```
 
 ### Minimal Task
+
 ```json
 {
   "id": "task-3",
@@ -171,12 +182,14 @@ Row 4: Message role must be "system", "user", or "assistant"
 ## Round-trip Compatibility
 
 The schema supports full round-trip compatibility:
+
 - JSONL → Object → JSONL
-- CSV → Object → CSV  
+- CSV → Object → CSV
 - JSONL → Object → CSV
 - CSV → Object → JSONL
 
 All field data is preserved during format conversions, with proper handling of:
+
 - JSON serialization/deserialization for complex fields
 - CSV escaping for special characters
 - Metadata preservation across formats

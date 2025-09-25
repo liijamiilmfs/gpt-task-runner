@@ -7,7 +7,9 @@ export class DryRunTransport implements Transport {
     if (task.prompt) {
       return task.prompt;
     } else if (task.messages && task.messages.length > 0) {
-      return task.messages.map(msg => `${msg.role}: ${msg.content}`).join('\n');
+      return task.messages
+        .map((msg) => `${msg.role}: ${msg.content}`)
+        .join('\n');
     } else {
       return 'No content provided';
     }

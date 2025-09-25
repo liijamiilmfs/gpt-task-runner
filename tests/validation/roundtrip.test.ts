@@ -51,7 +51,7 @@ describe('Round-trip Tests', () => {
 
       // Write original tasks to JSONL
       const inputPath = path.join(tempDir, 'input.jsonl');
-      const lines = originalTasks.map(task => JSON.stringify(task));
+      const lines = originalTasks.map((task) => JSON.stringify(task));
       fs.writeFileSync(inputPath, lines.join('\n') + '\n');
 
       // Load tasks from JSONL
@@ -88,7 +88,7 @@ describe('Round-trip Tests', () => {
       const outputContent = fs.readFileSync(outputPath, 'utf-8');
       const outputLines = outputContent.trim().split('\n');
       expect(outputLines).toHaveLength(2);
-      
+
       // Parse the first response to verify structure
       const firstResponse = JSON.parse(outputLines[0]);
       expect(firstResponse.id).toBe('task-1');
@@ -234,7 +234,7 @@ describe('Round-trip Tests', () => {
 
       // Start with JSONL
       const jsonlPath = path.join(tempDir, 'input.jsonl');
-      const lines = originalTasks.map(task => JSON.stringify(task));
+      const lines = originalTasks.map((task) => JSON.stringify(task));
       fs.writeFileSync(jsonlPath, lines.join('\n') + '\n');
 
       // Load from JSONL

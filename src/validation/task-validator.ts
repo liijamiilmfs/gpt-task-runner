@@ -35,7 +35,10 @@ export class TaskValidator {
 
     // Validate required fields
     for (const field of this.REQUIRED_FIELDS) {
-      if (!task[field] || (typeof task[field] === 'string' && task[field].trim() === '')) {
+      if (
+        !task[field] ||
+        (typeof task[field] === 'string' && task[field].trim() === '')
+      ) {
         errors.push({
           field,
           message: `Required field '${field}' is missing or empty`,
@@ -45,9 +48,13 @@ export class TaskValidator {
     }
 
     // Validate that at least one content field is present
-    const hasPrompt = task.prompt && typeof task.prompt === 'string' && task.prompt.trim() !== '';
-    const hasMessages = task.messages && Array.isArray(task.messages) && task.messages.length > 0;
-    
+    const hasPrompt =
+      task.prompt &&
+      typeof task.prompt === 'string' &&
+      task.prompt.trim() !== '';
+    const hasMessages =
+      task.messages && Array.isArray(task.messages) && task.messages.length > 0;
+
     if (!hasPrompt && !hasMessages) {
       errors.push({
         field: 'content',
@@ -68,7 +75,8 @@ export class TaskValidator {
       if (!/^[a-zA-Z0-9_-]+$/.test(task.id)) {
         errors.push({
           field: 'id',
-          message: 'Task ID must contain only alphanumeric characters, hyphens, and underscores',
+          message:
+            'Task ID must contain only alphanumeric characters, hyphens, and underscores',
           value: task.id,
         });
       }
@@ -140,7 +148,10 @@ export class TaskValidator {
           continue;
         }
 
-        if (!message.role || !['system', 'user', 'assistant'].includes(message.role)) {
+        if (
+          !message.role ||
+          !['system', 'user', 'assistant'].includes(message.role)
+        ) {
           errors.push({
             field: `messages[${i}].role`,
             message: 'Message role must be "system", "user", or "assistant"',
@@ -148,7 +159,11 @@ export class TaskValidator {
           });
         }
 
-        if (!message.content || typeof message.content !== 'string' || message.content.trim() === '') {
+        if (
+          !message.content ||
+          typeof message.content !== 'string' ||
+          message.content.trim() === ''
+        ) {
           errors.push({
             field: `messages[${i}].content`,
             message: 'Message content must be a non-empty string',
@@ -160,7 +175,11 @@ export class TaskValidator {
 
     // Validate metadata
     if (task.metadata !== undefined) {
-      if (typeof task.metadata !== 'object' || task.metadata === null || Array.isArray(task.metadata)) {
+      if (
+        typeof task.metadata !== 'object' ||
+        task.metadata === null ||
+        Array.isArray(task.metadata)
+      ) {
         errors.push({
           field: 'metadata',
           message: 'Metadata must be an object',
@@ -188,10 +207,10 @@ export class TaskValidator {
 
     // Add row number context to errors if provided
     if (rowNumber !== undefined) {
-      errors.forEach(error => {
+      errors.forEach((error) => {
         error.message = `Row ${rowNumber}: ${error.message}`;
       });
-      warnings.forEach(warning => {
+      warnings.forEach((warning) => {
         warning.message = `Row ${rowNumber}: ${warning.message}`;
       });
     }
