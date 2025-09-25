@@ -135,7 +135,6 @@ Thumbs.db
 # Logs
 logs
 *.log
-
 # Database files
 *.db
 *.sqlite
@@ -144,6 +143,8 @@ logs
 # Temporary files
 tmp/
 temp/
+*.tmp
+*.temp
 
 # Test results
 test-results/
@@ -184,3 +185,10 @@ local/
 
 # Build Logs
 docs/build_logs/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Gpt-runner-scripts
+scripts/gpt_runner_*.ps1
