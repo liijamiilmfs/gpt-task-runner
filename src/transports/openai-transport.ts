@@ -105,7 +105,7 @@ export class OpenAITransport implements Transport {
 
     if (error instanceof Error) {
       errorMessage = error.message;
-      
+
       // Check if it's a RetryError with error info
       if (error.name === 'RetryError' && 'errorInfo' in error) {
         const retryError = error as any;
@@ -114,7 +114,7 @@ export class OpenAITransport implements Transport {
       } else {
         errorCode = this.extractErrorCode(error);
         isRetryable = this.isRetryableError(error);
-        
+
         // Provide user-friendly error messages for common error codes
         if (errorCode === 'E_INPUT') {
           errorMessage = 'Invalid input or bad request';
@@ -156,7 +156,11 @@ export class OpenAITransport implements Transport {
       if (message.includes('quota') || message.includes('billing')) {
         return 'E_QUOTA';
       }
-      if (message.includes('invalid') || message.includes('bad request') || message.includes('must be provided')) {
+      if (
+        message.includes('invalid') ||
+        message.includes('bad request') ||
+        message.includes('must be provided')
+      ) {
         return 'E_INPUT';
       }
       if (

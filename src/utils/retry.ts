@@ -108,20 +108,12 @@ export class RetryManager {
 
         // Don't retry if error is not retryable
         if (!errorInfo.isRetryable) {
-          throw new RetryError(
-            errorInfo.message,
-            errorInfo,
-            attempt + 1
-          );
+          throw new RetryError(errorInfo.message, errorInfo, attempt + 1);
         }
 
         // Don't retry if we've exhausted attempts
         if (attempt === this.config.maxRetries) {
-          throw new RetryError(
-            errorInfo.message,
-            errorInfo,
-            attempt + 1
-          );
+          throw new RetryError(errorInfo.message, errorInfo, attempt + 1);
         }
 
         // Calculate delay with exponential backoff and jitter
@@ -136,7 +128,9 @@ export class RetryManager {
     }
 
     // This should never be reached due to the logic above, but just in case
-    const errorInfo = this.classifyError(lastError || new Error('Unknown error occurred'));
+    const errorInfo = this.classifyError(
+      lastError || new Error('Unknown error occurred')
+    );
     throw new RetryError(
       errorInfo.message,
       errorInfo,
@@ -148,7 +142,10 @@ export class RetryManager {
     const message = error.message.toLowerCase();
 
     // Handle circuit breaker errors - these should be retryable
-    if (error.name === 'CircuitBreakerError' || message.includes('circuit breaker')) {
+    if (
+      error.name === 'CircuitBreakerError' ||
+      message.includes('circuit breaker')
+    ) {
       return {
         code: ErrorCodes.SERVER_ERROR,
         message: 'Circuit breaker is open',
@@ -234,7 +231,11 @@ export class RetryManager {
       };
     }
 
-    if (message.includes('invalid') || message.includes('bad request') || message.includes('must be provided')) {
+    if (
+      message.includes('invalid') ||
+      message.includes('bad request') ||
+      message.includes('must be provided')
+    ) {
       return {
         code: ErrorCodes.INPUT,
         message: 'Invalid input or bad request',

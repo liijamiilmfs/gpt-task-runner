@@ -126,7 +126,7 @@ describe('RetryManager', () => {
           jitterMs: 50,
           timeoutMs: 5000,
         });
-        
+
         const mockOperation = vi.fn().mockRejectedValue(testCase.error);
 
         try {

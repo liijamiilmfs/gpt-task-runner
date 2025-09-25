@@ -25,7 +25,7 @@ describe('OpenAITransport with Retry', () => {
   beforeEach(async () => {
     // Reset modules to ensure fresh imports
     vi.resetModules();
-    
+
     // Clear mock state but keep the spy instance
     mockCreate.mockClear();
     mockCreate.mockReset();
@@ -39,7 +39,7 @@ describe('OpenAITransport with Retry', () => {
   describe('execute with retry', () => {
     it('should succeed on first attempt', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const mockResponse = {
         choices: [{ message: { content: 'Test response' } }],
         usage: {
@@ -66,10 +66,9 @@ describe('OpenAITransport with Retry', () => {
       expect(mockCreate).toHaveBeenCalledTimes(1);
     });
 
-
     it('should retry on rate limit errors', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const mockResponse = {
         choices: [{ message: { content: 'Success after retry' } }],
         usage: {
@@ -101,7 +100,7 @@ describe('OpenAITransport with Retry', () => {
 
     it('should not retry on authentication errors', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const authError = new Error('unauthorized');
       mockCreate.mockRejectedValue(authError);
 
@@ -122,7 +121,7 @@ describe('OpenAITransport with Retry', () => {
 
     it('should handle quota exceeded errors', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const quotaError = new Error('quota exceeded');
       mockCreate.mockRejectedValue(quotaError);
 
@@ -142,7 +141,7 @@ describe('OpenAITransport with Retry', () => {
 
     it('should include timing information', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const mockResponse = {
         choices: [{ message: { content: 'Test response' } }],
         usage: {
@@ -155,7 +154,7 @@ describe('OpenAITransport with Retry', () => {
 
       // Add a small delay to ensure timing is measurable
       mockCreate.mockImplementation(async () => {
-        await new Promise(resolve => setTimeout(resolve, 10));
+        await new Promise((resolve) => setTimeout(resolve, 10));
         return mockResponse;
       });
 
@@ -174,7 +173,7 @@ describe('OpenAITransport with Retry', () => {
 
     it('should calculate cost correctly', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const mockResponse = {
         choices: [{ message: { content: 'Test response' } }],
         usage: {
@@ -204,7 +203,7 @@ describe('OpenAITransport with Retry', () => {
   describe('executeBatch', () => {
     it('should process multiple requests with individual retry logic', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const mockResponse = {
         choices: [{ message: { content: 'Test response' } }],
         usage: {
@@ -275,7 +274,7 @@ describe('OpenAITransport with Retry', () => {
   describe('error handling', () => {
     it('should handle messages format correctly', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const mockResponse = {
         choices: [{ message: { content: 'Test response' } }],
         usage: {
@@ -308,7 +307,7 @@ describe('OpenAITransport with Retry', () => {
 
     it('should throw error when neither prompt nor messages provided', async () => {
       const transport = new OpenAITransport(mockApiKey);
-      
+
       const request: TaskRequest = {
         id: 'test-8',
         // No prompt or messages
@@ -317,9 +316,7 @@ describe('OpenAITransport with Retry', () => {
       const result = await transport.execute(request);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain(
-        'Invalid input or bad request'
-      );
+      expect(result.error).toContain('Invalid input or bad request');
       expect(result.errorCode).toBe('E_INPUT');
     });
   });

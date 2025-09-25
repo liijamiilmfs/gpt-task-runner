@@ -18,8 +18,13 @@ describe('Idempotency and Resume Functionality', () => {
     }
 
     // Clean up any existing test files
-    const files = ['test-tasks.jsonl', 'result.jsonl', 'failed.jsonl', 'checkpoint.json'];
-    files.forEach(file => {
+    const files = [
+      'test-tasks.jsonl',
+      'result.jsonl',
+      'failed.jsonl',
+      'checkpoint.json',
+    ];
+    files.forEach((file) => {
       const filePath = path.join(testDir, file);
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
@@ -40,7 +45,7 @@ describe('Idempotency and Resume Functionality', () => {
     // Clean up test files
     if (fs.existsSync(testDir)) {
       const files = fs.readdirSync(testDir);
-      files.forEach(file => {
+      files.forEach((file) => {
         fs.unlinkSync(path.join(testDir, file));
       });
       fs.rmdirSync(testDir);
@@ -106,7 +111,7 @@ describe('Idempotency and Resume Functionality', () => {
       };
 
       const key1 = taskRunner.generateIdempotencyKey(task);
-      
+
       // Change a field and verify key changes
       const task2 = { ...task, temperature: 0.8 };
       const key2 = taskRunner.generateIdempotencyKey(task2);
@@ -128,7 +133,7 @@ describe('Idempotency and Resume Functionality', () => {
       const checkpointFile = path.join(testDir, 'checkpoint.json');
 
       // Write test tasks to file
-      const taskLines = tasks.map(task => JSON.stringify(task)).join('\n');
+      const taskLines = tasks.map((task) => JSON.stringify(task)).join('\n');
       fs.writeFileSync(inputFile, taskLines);
 
       // Run with checkpoint interval of 2
@@ -153,7 +158,9 @@ describe('Idempotency and Resume Functionality', () => {
       const checkpointExists = fs.existsSync(checkpointFile);
       if (checkpointExists) {
         // Verify checkpoint content
-        const checkpointContent = JSON.parse(fs.readFileSync(checkpointFile, 'utf-8'));
+        const checkpointContent = JSON.parse(
+          fs.readFileSync(checkpointFile, 'utf-8')
+        );
         expect(checkpointContent).toHaveProperty('batchId');
         expect(checkpointContent).toHaveProperty('completedTasks');
         expect(checkpointContent).toHaveProperty('failedTasks');
@@ -177,7 +184,7 @@ describe('Idempotency and Resume Functionality', () => {
       const checkpointFile = path.join(testDir, 'checkpoint.json');
 
       // Write test tasks to file
-      const taskLines = tasks.map(task => JSON.stringify(task)).join('\n');
+      const taskLines = tasks.map((task) => JSON.stringify(task)).join('\n');
       fs.writeFileSync(inputFile, taskLines);
 
       // Create a mock checkpoint
@@ -226,7 +233,7 @@ describe('Idempotency and Resume Functionality', () => {
       const checkpointFile = path.join(testDir, 'checkpoint.json');
 
       // Write test tasks to file
-      const taskLines = tasks.map(task => JSON.stringify(task)).join('\n');
+      const taskLines = tasks.map((task) => JSON.stringify(task)).join('\n');
       fs.writeFileSync(inputFile, taskLines);
 
       // Create a mock checkpoint with failed tasks
@@ -277,7 +284,7 @@ describe('Idempotency and Resume Functionality', () => {
       const failedFile = path.join(testDir, 'failed.jsonl');
 
       // Write test tasks to file
-      const taskLines = tasks.map(task => JSON.stringify(task)).join('\n');
+      const taskLines = tasks.map((task) => JSON.stringify(task)).join('\n');
       fs.writeFileSync(inputFile, taskLines);
 
       // Run tasks
@@ -309,7 +316,7 @@ describe('Idempotency and Resume Functionality', () => {
       expect(resultLines).toHaveLength(2);
 
       // Verify each result is valid JSON
-      resultLines.forEach(line => {
+      resultLines.forEach((line) => {
         const result = JSON.parse(line);
         expect(result).toHaveProperty('id');
         expect(result).toHaveProperty('success');
@@ -328,35 +335,37 @@ describe('Idempotency and Resume Functionality', () => {
       const failedFile = path.join(testDir, 'result.failed.jsonl');
 
       // Write test tasks to file
-      const taskLines = tasks.map(task => JSON.stringify(task)).join('\n');
+      const taskLines = tasks.map((task) => JSON.stringify(task)).join('\n');
       fs.writeFileSync(inputFile, taskLines);
 
       // Mock the transport to fail on specific tasks
       const originalExecuteBatch = transport.executeBatch;
-      transport.executeBatch = vi.fn().mockImplementation(async (requests: TaskRequest[]) => {
-        const results = [];
-        for (const request of requests) {
-          if (request.id === 'task-2') {
-            results.push({
-              id: request.id,
-              request,
-              error: 'Simulated failure',
-              timestamp: new Date().toISOString(),
-              success: false,
-            });
-          } else {
-            // Success for other tasks
-            results.push({
-              id: request.id,
-              request,
-              response: `Mock response for ${request.id}`,
-              timestamp: new Date().toISOString(),
-              success: true,
-            });
+      transport.executeBatch = vi
+        .fn()
+        .mockImplementation(async (requests: TaskRequest[]) => {
+          const results = [];
+          for (const request of requests) {
+            if (request.id === 'task-2') {
+              results.push({
+                id: request.id,
+                request,
+                error: 'Simulated failure',
+                timestamp: new Date().toISOString(),
+                success: false,
+              });
+            } else {
+              // Success for other tasks
+              results.push({
+                id: request.id,
+                request,
+                response: `Mock response for ${request.id}`,
+                timestamp: new Date().toISOString(),
+                success: true,
+              });
+            }
           }
-        }
-        return results;
-      });
+          return results;
+        });
 
       try {
         // Run tasks
@@ -369,7 +378,10 @@ describe('Idempotency and Resume Functionality', () => {
           });
         } catch (error) {
           // Expected process.exit call
-          if (error instanceof Error && error.message.includes('process.exit')) {
+          if (
+            error instanceof Error &&
+            error.message.includes('process.exit')
+          ) {
             // This is expected, continue with test
           } else {
             throw error;
@@ -416,12 +428,20 @@ describe('Idempotency and Resume Functionality', () => {
       };
 
       // Test normal resume (should process remaining tasks)
-      const tasksToProcess = taskRunner.getTasksToProcess(allTasks, checkpoint, false);
+      const tasksToProcess = taskRunner.getTasksToProcess(
+        allTasks,
+        checkpoint,
+        false
+      );
       expect(tasksToProcess).toHaveLength(1);
       expect(tasksToProcess[0].id).toBe('task-4');
 
       // Test only-failed resume (should process only failed tasks)
-      const failedTasksToProcess = taskRunner.getTasksToProcess(allTasks, checkpoint, true);
+      const failedTasksToProcess = taskRunner.getTasksToProcess(
+        allTasks,
+        checkpoint,
+        true
+      );
       expect(failedTasksToProcess).toHaveLength(1);
       expect(failedTasksToProcess[0].id).toBe('task-2');
     });
@@ -440,9 +460,13 @@ describe('Idempotency and Resume Functionality', () => {
         totalTasks: 2,
       };
 
-      const tasksToProcess = taskRunner.getTasksToProcess(allTasks, checkpoint, false);
+      const tasksToProcess = taskRunner.getTasksToProcess(
+        allTasks,
+        checkpoint,
+        false
+      );
       expect(tasksToProcess).toHaveLength(2);
-      expect(tasksToProcess.map(t => t.id)).toEqual(['task-1', 'task-2']);
+      expect(tasksToProcess.map((t) => t.id)).toEqual(['task-1', 'task-2']);
     });
   });
 });
