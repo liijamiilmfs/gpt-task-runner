@@ -1,0 +1,18 @@
+# Global code owners
+* @liijamiilmfs
+
+# Core functionality
+/src/ @liijamiilmfs
+/tests/ @liijamiilmfs
+
+# Dashboard
+/dashboard/ @liijamiilmfs
+
+# Documentation
+/docs/ @liijamiilmfs
+*.md @liijamiilmfs
+
+# Configuration files
+package.json @liijamiilmfs
+tsconfig.json @liijamiilmfs
+.github/ @liijamiilmfs
