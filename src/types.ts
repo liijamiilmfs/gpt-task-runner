@@ -77,4 +77,11 @@ export interface CliOptions {
   model?: string;
   temperature?: number;
   maxTokens?: number;
+  maxRetries?: number;
+  retryDelay?: number;
+  timeout?: number;
+  resume?: string;
+  onlyFailed?: boolean;
+  checkpointInterval?: number;
+  idempotencyDb?: string;
 }

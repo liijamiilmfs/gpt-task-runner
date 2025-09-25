@@ -30,6 +30,13 @@ program
   .option('--model <model>', 'OpenAI model to use', 'gpt-3.5-turbo')
   .option('--temperature <number>', 'Temperature for generation', '0.7')
   .option('--max-tokens <number>', 'Maximum tokens to generate', '1000')
+  .option('--max-retries <number>', 'Maximum number of retries for failed requests', '3')
+  .option('--retry-delay <number>', 'Base delay between retries in milliseconds', '1000')
+  .option('--timeout <number>', 'Request timeout in milliseconds', '60000')
+  .option('--resume <checkpoint-file>', 'Resume from checkpoint file')
+  .option('--only-failed', 'Process only failed tasks from previous run')
+  .option('--checkpoint-interval <number>', 'Create checkpoint every N tasks', '10')
+  .option('--idempotency-db <path>', 'Path to idempotency database file')
   .action(async (options) => {
     const logger = new Logger(options.verbose ? 'debug' : 'info', options.json);
 
@@ -76,6 +83,13 @@ program
       model: options.model,
       temperature: parseFloat(options.temperature),
       maxTokens: parseInt(options.maxTokens),
+      maxRetries: parseInt(options.maxRetries) || 3,
+      retryDelay: parseInt(options.retryDelay) || 1000,
+      timeout: parseInt(options.timeout) || 60000,
+      resume: options.resume,
+      onlyFailed: options.onlyFailed || false,
+      checkpointInterval: parseInt(options.checkpointInterval) || 10,
+      idempotencyDb: options.idempotencyDb,
     };
 
     // Execute tasks
