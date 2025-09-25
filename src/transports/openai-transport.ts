@@ -13,14 +13,25 @@ export class OpenAITransport implements Transport {
 
   async execute(request: TaskRequest): Promise<TaskResponse> {
     try {
-      const response = await this.client.chat.completions.create({
-        model: request.model || 'gpt-3.5-turbo',
-        messages: [
+      // Convert request to OpenAI message format
+      let messages: Array<{ role: 'system' | 'user' | 'assistant'; content: string }>;
+      
+      if (request.messages && request.messages.length > 0) {
+        messages = request.messages;
+      } else if (request.prompt) {
+        messages = [
           {
             role: 'user',
             content: request.prompt,
           },
-        ],
+        ];
+      } else {
+        throw new Error('Either prompt or messages must be provided');
+      }
+
+      const response = await this.client.chat.completions.create({
+        model: request.model || 'gpt-3.5-turbo',
+        messages,
         temperature: request.temperature || 0.7,
         max_tokens: request.maxTokens || 1000,
       });

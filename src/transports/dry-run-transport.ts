@@ -3,6 +3,16 @@ import { Transport, TaskRequest, TaskResponse, DryRunResult } from '../types';
 export class DryRunTransport implements Transport {
   private dryRunResults: DryRunResult[] = [];
 
+  private getTaskContent(task: TaskRequest): string {
+    if (task.prompt) {
+      return task.prompt;
+    } else if (task.messages && task.messages.length > 0) {
+      return task.messages.map(msg => `${msg.role}: ${msg.content}`).join('\n');
+    } else {
+      return 'No content provided';
+    }
+  }
+
   async execute(request: TaskRequest): Promise<TaskResponse> {
     return this.executeBatch([request]).then((results) => results[0]);
   }
@@ -13,15 +23,16 @@ export class DryRunTransport implements Transport {
     const responses: TaskResponse[] = [];
 
     for (const task of tasks) {
+      const content = this.getTaskContent(task);
       const dryRunResult: DryRunResult = {
         id: task.id,
         request: task,
-        simulatedResponse: `[DRY RUN] Would process task ${task.id}: ${task.prompt.substring(0, 50)}...`,
+        simulatedResponse: `[DRY RUN] Would process task ${task.id}: ${content.substring(0, 50)}...`,
         simulatedUsage: {
-          promptTokens: Math.floor(task.prompt.length / 4), // Rough estimate
+          promptTokens: Math.floor(content.length / 4), // Rough estimate
           completionTokens: Math.floor((task.maxTokens || 1000) * 0.7), // Rough estimate
           totalTokens:
-            Math.floor(task.prompt.length / 4) +
+            Math.floor(content.length / 4) +
             Math.floor((task.maxTokens || 1000) * 0.7),
         },
         simulatedCost: this.calculateEstimatedCost(task),
@@ -34,12 +45,12 @@ export class DryRunTransport implements Transport {
       const response: TaskResponse = {
         id: task.id,
         request: task,
-        response: `[DRY RUN] Would process task ${task.id}: ${task.prompt.substring(0, 50)}...`,
+        response: `[DRY RUN] Would process task ${task.id}: ${content.substring(0, 50)}...`,
         usage: {
-          promptTokens: Math.floor(task.prompt.length / 4), // Rough estimate
+          promptTokens: Math.floor(content.length / 4), // Rough estimate
           completionTokens: Math.floor((task.maxTokens || 1000) * 0.7), // Rough estimate
           totalTokens:
-            Math.floor(task.prompt.length / 4) +
+            Math.floor(content.length / 4) +
             Math.floor((task.maxTokens || 1000) * 0.7),
         },
         cost: dryRunResult.simulatedCost,
@@ -72,7 +83,8 @@ export class DryRunTransport implements Transport {
 
     const model = task.model || 'gpt-3.5-turbo';
     const pricing = modelPricing[model] || modelPricing['gpt-3.5-turbo'];
-    const promptTokens = Math.floor(task.prompt.length / 4);
+    const content = this.getTaskContent(task);
+    const promptTokens = Math.floor(content.length / 4);
     const completionTokens = Math.floor((task.maxTokens || 1000) * 0.7);
 
     const promptCost = (promptTokens / 1000) * pricing.prompt;

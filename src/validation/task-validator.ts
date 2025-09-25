@@ -1,4 +1,4 @@
-import { TaskRequest } from '../types';
+// import { TaskRequest } from '../types'; // Used in type annotations
 
 export interface ValidationError {
   field: string;
@@ -14,7 +14,7 @@ export interface ValidationResult {
 
 export class TaskValidator {
   private static readonly REQUIRED_FIELDS = ['id'];
-  private static readonly REQUIRED_CONTENT_FIELDS = ['prompt', 'messages']; // At least one required
+  // private static readonly REQUIRED_CONTENT_FIELDS = ['prompt', 'messages']; // At least one required
   private static readonly VALID_MODELS = [
     'gpt-3.5-turbo',
     'gpt-3.5-turbo-16k',
