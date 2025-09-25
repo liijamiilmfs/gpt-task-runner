@@ -108,29 +108,22 @@ jobs:
           cache: "npm"
           cache-dependency-path: |
             package-lock.json
-            dashboard/package-lock.json
       
       - name: Install dependencies
         run: npm ci
       
-      - name: Install dashboard dependencies
-        run: cd dashboard && npm ci
       
       - name: Build application
         run: npm run build
         id: build
       
-      - name: Build dashboard
-        run: npm run build:dashboard
-        id: build-dashboard
       
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
           path: |
-            dist/
-            dashboard/build/
+            .next/
 
   security:
     name: Security Scans

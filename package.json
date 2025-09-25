@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:dashboard": "cd dashboard && npm run build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
