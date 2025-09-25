@@ -1,7 +1,16 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Play, Plus, Edit, Trash2, Eye, Clock, CheckCircle, XCircle } from 'lucide-react';
+import {
+  Play,
+  Plus,
+  Edit,
+  Trash2,
+  Eye,
+  Clock,
+  CheckCircle,
+  XCircle,
+} from 'lucide-react';
 
 interface Task {
   id: string;
@@ -27,7 +36,7 @@ const TasksPage: React.FC = () => {
       // TODO: Replace with actual API call
       // const response = await fetch('/api/tasks');
       // const data = await response.json();
-      
+
       // Mock data for now
       const mockTasks: Task[] = [
         {
@@ -56,7 +65,7 @@ const TasksPage: React.FC = () => {
           isDryRun: false,
         },
       ];
-      
+
       setTasks(mockTasks);
     } catch (error) {
       console.error('Failed to fetch tasks:', error);
@@ -129,7 +138,7 @@ const TasksPage: React.FC = () => {
             </div>
           </div>
         </div>
-        
+
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="flex items-center">
             <div className="p-2 bg-green-100 rounded-lg">
@@ -138,12 +147,12 @@ const TasksPage: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Completed</p>
               <p className="text-2xl font-bold text-gray-900">
-                {tasks.filter(t => t.status === 'completed').length}
+                {tasks.filter((t) => t.status === 'completed').length}
               </p>
             </div>
           </div>
         </div>
-        
+
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="flex items-center">
             <div className="p-2 bg-blue-100 rounded-lg">
@@ -152,12 +161,12 @@ const TasksPage: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Running</p>
               <p className="text-2xl font-bold text-gray-900">
-                {tasks.filter(t => t.status === 'running').length}
+                {tasks.filter((t) => t.status === 'running').length}
               </p>
             </div>
           </div>
         </div>
-        
+
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="flex items-center">
             <div className="p-2 bg-red-100 rounded-lg">
@@ -166,7 +175,7 @@ const TasksPage: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Failed</p>
               <p className="text-2xl font-bold text-gray-900">
-                {tasks.filter(t => t.status === 'failed').length}
+                {tasks.filter((t) => t.status === 'failed').length}
               </p>
             </div>
           </div>
@@ -204,22 +213,32 @@ const TasksPage: React.FC = () => {
                 <tr key={task.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div>
-                      <div className="text-sm font-medium text-gray-900">{task.name}</div>
-                      <div className="text-sm text-gray-500">{task.description}</div>
+                      <div className="text-sm font-medium text-gray-900">
+                        {task.name}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {task.description}
+                      </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       {getStatusIcon(task.status)}
-                      <span className={`ml-2 inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(task.status)}`}>
+                      <span
+                        className={`ml-2 inline-flex px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(task.status)}`}
+                      >
                         {task.status}
                       </span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
-                    <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                      task.isDryRun ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800'
-                    }`}>
+                    <span
+                      className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                        task.isDryRun
+                          ? 'bg-yellow-100 text-yellow-800'
+                          : 'bg-blue-100 text-blue-800'
+                      }`}
+                    >
                       {task.isDryRun ? 'Dry Run' : 'Live'}
                     </span>
                   </td>
@@ -251,8 +270,12 @@ const TasksPage: React.FC = () => {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
           <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div className="mt-3">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Create New Task</h3>
-              <p className="text-gray-600">Task creation form will be implemented here.</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">
+                Create New Task
+              </h3>
+              <p className="text-gray-600">
+                Task creation form will be implemented here.
+              </p>
               <div className="mt-4 flex justify-end space-x-2">
                 <button
                   onClick={() => setShowCreateModal(false)}

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect } from 'react';
 import { Clock, Plus, Edit, Trash2, Play, Pause, Calendar } from 'lucide-react';
@@ -31,7 +31,7 @@ const SchedulerPage: React.FC = () => {
       // TODO: Replace with actual API call
       // const response = await fetch('/api/scheduled-tasks');
       // const data = await response.json();
-      
+
       // Mock data for now
       const mockTasks: ScheduledTask[] = [
         {
@@ -73,7 +73,7 @@ const SchedulerPage: React.FC = () => {
           nextRun: '2024-02-01T00:00:00Z',
         },
       ];
-      
+
       setScheduledTasks(mockTasks);
     } catch (error) {
       console.error('Failed to fetch scheduled tasks:', error);
@@ -135,12 +135,16 @@ const SchedulerPage: React.FC = () => {
               <Clock className="h-6 w-6 text-blue-600" />
             </div>
             <div className="ml-4">
-              <p className="text-sm font-medium text-gray-600">Total Scheduled</p>
-              <p className="text-2xl font-bold text-gray-900">{scheduledTasks.length}</p>
+              <p className="text-sm font-medium text-gray-600">
+                Total Scheduled
+              </p>
+              <p className="text-2xl font-bold text-gray-900">
+                {scheduledTasks.length}
+              </p>
             </div>
           </div>
         </div>
-        
+
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="flex items-center">
             <div className="p-2 bg-green-100 rounded-lg">
@@ -149,12 +153,12 @@ const SchedulerPage: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Active</p>
               <p className="text-2xl font-bold text-gray-900">
-                {scheduledTasks.filter(t => t.isActive).length}
+                {scheduledTasks.filter((t) => t.isActive).length}
               </p>
             </div>
           </div>
         </div>
-        
+
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="flex items-center">
             <div className="p-2 bg-yellow-100 rounded-lg">
@@ -163,12 +167,12 @@ const SchedulerPage: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Paused</p>
               <p className="text-2xl font-bold text-gray-900">
-                {scheduledTasks.filter(t => !t.isActive).length}
+                {scheduledTasks.filter((t) => !t.isActive).length}
               </p>
             </div>
           </div>
         </div>
-        
+
         <div className="bg-white p-6 rounded-lg shadow">
           <div className="flex items-center">
             <div className="p-2 bg-purple-100 rounded-lg">
@@ -177,10 +181,10 @@ const SchedulerPage: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-600">Next Run</p>
               <p className="text-sm font-bold text-gray-900">
-                {scheduledTasks.filter(t => t.isActive && t.nextRun).length > 0 
-                  ? 'Scheduled' 
-                  : 'None'
-                }
+                {scheduledTasks.filter((t) => t.isActive && t.nextRun).length >
+                0
+                  ? 'Scheduled'
+                  : 'None'}
               </p>
             </div>
           </div>
@@ -221,29 +225,44 @@ const SchedulerPage: React.FC = () => {
                 <tr key={task.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div>
-                      <div className="text-sm font-medium text-gray-900">{task.name}</div>
-                      <div className="text-sm text-gray-500">{task.description}</div>
+                      <div className="text-sm font-medium text-gray-900">
+                        {task.name}
+                      </div>
+                      <div className="text-sm text-gray-500">
+                        {task.description}
+                      </div>
                       <div className="text-xs text-gray-400 mt-1">
-                        Input: {task.inputFile} {task.outputFile && `→ ${task.outputFile}`}
+                        Input: {task.inputFile}{' '}
+                        {task.outputFile && `→ ${task.outputFile}`}
                       </div>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center">
                       <Clock className="h-4 w-4 text-gray-400 mr-2" />
-                      <span className="text-sm text-gray-900">{formatSchedule(task.schedule)}</span>
+                      <span className="text-sm text-gray-900">
+                        {formatSchedule(task.schedule)}
+                      </span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-2">
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        task.isActive ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
-                      }`}>
+                      <span
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          task.isActive
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-gray-100 text-gray-800'
+                        }`}
+                      >
                         {task.isActive ? 'Active' : 'Paused'}
                       </span>
-                      <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                        task.isDryRun ? 'bg-yellow-100 text-yellow-800' : 'bg-blue-100 text-blue-800'
-                      }`}>
+                      <span
+                        className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
+                          task.isDryRun
+                            ? 'bg-yellow-100 text-yellow-800'
+                            : 'bg-blue-100 text-blue-800'
+                        }`}
+                      >
                         {task.isDryRun ? 'Dry Run' : 'Live'}
                       </span>
                     </div>
@@ -282,8 +301,12 @@ const SchedulerPage: React.FC = () => {
         <div className="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full z-50">
           <div className="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
             <div className="mt-3">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Schedule New Task</h3>
-              <p className="text-gray-600">Scheduled task creation form will be implemented here.</p>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">
+                Schedule New Task
+              </h3>
+              <p className="text-gray-600">
+                Scheduled task creation form will be implemented here.
+              </p>
               <div className="mt-4 flex justify-end space-x-2">
                 <button
                   onClick={() => setShowCreateModal(false)}

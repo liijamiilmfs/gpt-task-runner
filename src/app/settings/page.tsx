@@ -1,7 +1,15 @@
-'use client'
+'use client';
 
 import React, { useState, useEffect, useCallback } from 'react';
-import { Save, Key, Database, Bell, Shield, Globe, RefreshCw } from 'lucide-react';
+import {
+  Save,
+  Key,
+  Database,
+  Bell,
+  Shield,
+  Globe,
+  RefreshCw,
+} from 'lucide-react';
 
 interface SettingsData {
   apiKeys: {
@@ -66,9 +74,9 @@ const SettingsPage: React.FC = () => {
       // TODO: Replace with actual API call
       // const response = await fetch('/api/settings');
       // const data = await response.json();
-      
+
       // Mock data for now - in real app, this would come from the API
-      setSettings(s => s);
+      setSettings((s) => s);
     } catch (error) {
       console.error('Failed to fetch settings:', error);
     } finally {
@@ -89,9 +97,9 @@ const SettingsPage: React.FC = () => {
       //   headers: { 'Content-Type': 'application/json' },
       //   body: JSON.stringify(settings),
       // });
-      
+
       // Mock save delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
       alert('Settings saved successfully!');
     } catch (error) {
       console.error('Failed to save settings:', error);
@@ -101,8 +109,12 @@ const SettingsPage: React.FC = () => {
     }
   };
 
-  const updateSetting = (section: keyof SettingsData, key: string, value: any) => {
-    setSettings(prev => ({
+  const updateSetting = (
+    section: keyof SettingsData,
+    key: string,
+    value: any
+  ) => {
+    setSettings((prev) => ({
       ...prev,
       [section]: {
         ...prev[section],
@@ -133,7 +145,9 @@ const SettingsPage: React.FC = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-          <p className="text-gray-600">Configure your GPT Task Runner application</p>
+          <p className="text-gray-600">
+            Configure your GPT Task Runner application
+          </p>
         </div>
         <button
           onClick={handleSave}
@@ -178,7 +192,7 @@ const SettingsPage: React.FC = () => {
           <div className="bg-white shadow rounded-lg">
             <div className="px-6 py-4 border-b border-gray-200">
               <h3 className="text-lg font-medium text-gray-900">
-                {tabs.find(t => t.id === activeTab)?.name} Settings
+                {tabs.find((t) => t.id === activeTab)?.name} Settings
               </h3>
             </div>
             <div className="p-6">
@@ -192,7 +206,9 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="password"
                       value={settings.apiKeys.openai}
-                      onChange={(e) => updateSetting('apiKeys', 'openai', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting('apiKeys', 'openai', e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="sk-..."
                     />
@@ -207,7 +223,9 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="password"
                       value={settings.apiKeys.anthropic || ''}
-                      onChange={(e) => updateSetting('apiKeys', 'anthropic', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting('apiKeys', 'anthropic', e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="sk-ant-..."
                     />
@@ -228,7 +246,9 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="text"
                       value={settings.database.path}
-                      onChange={(e) => updateSetting('database', 'path', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting('database', 'path', e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     />
                     <p className="mt-1 text-sm text-gray-500">
@@ -239,7 +259,13 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="checkbox"
                       checked={settings.database.backupEnabled}
-                      onChange={(e) => updateSetting('database', 'backupEnabled', e.target.checked)}
+                      onChange={(e) =>
+                        updateSetting(
+                          'database',
+                          'backupEnabled',
+                          e.target.checked
+                        )
+                      }
                       className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                     />
                     <label className="ml-2 block text-sm text-gray-700">
@@ -252,7 +278,13 @@ const SettingsPage: React.FC = () => {
                     </label>
                     <select
                       value={settings.database.backupInterval}
-                      onChange={(e) => updateSetting('database', 'backupInterval', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting(
+                          'database',
+                          'backupInterval',
+                          e.target.value
+                        )
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="hourly">Hourly</option>
@@ -270,7 +302,13 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="checkbox"
                       checked={settings.notifications.enabled}
-                      onChange={(e) => updateSetting('notifications', 'enabled', e.target.checked)}
+                      onChange={(e) =>
+                        updateSetting(
+                          'notifications',
+                          'enabled',
+                          e.target.checked
+                        )
+                      }
                       className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                     />
                     <label className="ml-2 block text-sm text-gray-700">
@@ -284,7 +322,9 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="email"
                       value={settings.notifications.email}
-                      onChange={(e) => updateSetting('notifications', 'email', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting('notifications', 'email', e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="admin@example.com"
                     />
@@ -296,7 +336,13 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="url"
                       value={settings.notifications.webhook}
-                      onChange={(e) => updateSetting('notifications', 'webhook', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting(
+                          'notifications',
+                          'webhook',
+                          e.target.value
+                        )
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="https://hooks.slack.com/..."
                     />
@@ -313,7 +359,9 @@ const SettingsPage: React.FC = () => {
                     </label>
                     <select
                       value={settings.general.timezone}
-                      onChange={(e) => updateSetting('general', 'timezone', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting('general', 'timezone', e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="UTC">UTC</option>
@@ -329,7 +377,9 @@ const SettingsPage: React.FC = () => {
                     </label>
                     <select
                       value={settings.general.language}
-                      onChange={(e) => updateSetting('general', 'language', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting('general', 'language', e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="en">English</option>
@@ -344,7 +394,9 @@ const SettingsPage: React.FC = () => {
                     </label>
                     <select
                       value={settings.general.theme}
-                      onChange={(e) => updateSetting('general', 'theme', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting('general', 'theme', e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="light">Light</option>
@@ -365,7 +417,13 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="number"
                       value={settings.security.sessionTimeout}
-                      onChange={(e) => updateSetting('security', 'sessionTimeout', parseInt(e.target.value))}
+                      onChange={(e) =>
+                        updateSetting(
+                          'security',
+                          'sessionTimeout',
+                          parseInt(e.target.value)
+                        )
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                       min="5"
                       max="1440"
@@ -375,7 +433,13 @@ const SettingsPage: React.FC = () => {
                     <input
                       type="checkbox"
                       checked={settings.security.requireAuth}
-                      onChange={(e) => updateSetting('security', 'requireAuth', e.target.checked)}
+                      onChange={(e) =>
+                        updateSetting(
+                          'security',
+                          'requireAuth',
+                          e.target.checked
+                        )
+                      }
                       className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                     />
                     <label className="ml-2 block text-sm text-gray-700">
@@ -388,7 +452,9 @@ const SettingsPage: React.FC = () => {
                     </label>
                     <select
                       value={settings.security.logLevel}
-                      onChange={(e) => updateSetting('security', 'logLevel', e.target.value)}
+                      onChange={(e) =>
+                        updateSetting('security', 'logLevel', e.target.value)
+                      }
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                     >
                       <option value="debug">Debug</option>
