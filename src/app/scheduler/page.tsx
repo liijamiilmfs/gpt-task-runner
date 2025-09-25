@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState, useEffect } from 'react';
-import { Clock, Plus, Edit, Trash2, Play, Pause, Calendar, Settings } from 'lucide-react';
+import { Clock, Plus, Edit, Trash2, Play, Pause, Calendar } from 'lucide-react';
 
 interface ScheduledTask {
   id: string;
@@ -86,7 +86,7 @@ const SchedulerPage: React.FC = () => {
     // Simple cron format display - in a real app, you'd want a proper cron parser
     const parts = schedule.split(' ');
     if (parts.length === 5) {
-      const [minute, hour, day, month, weekday] = parts;
+      const [minute, hour, day] = parts;
       return `${hour}:${minute.padStart(2, '0')} ${day === '*' ? 'every day' : `day ${day}`}`;
     }
     return schedule;

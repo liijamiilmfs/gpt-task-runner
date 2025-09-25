@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import { Settings, Save, Key, Database, Bell, Shield, Globe, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Save, Key, Database, Bell, Shield, Globe, RefreshCw } from 'lucide-react';
 
 interface SettingsData {
   apiKeys: {
@@ -61,24 +61,24 @@ const SettingsPage: React.FC = () => {
   const [saving, setSaving] = useState(false);
   const [activeTab, setActiveTab] = useState('api-keys');
 
-  useEffect(() => {
-    fetchSettings();
-  }, []);
-
-  const fetchSettings = async () => {
+  const fetchSettings = useCallback(async () => {
     try {
       // TODO: Replace with actual API call
       // const response = await fetch('/api/settings');
       // const data = await response.json();
       
       // Mock data for now - in real app, this would come from the API
-      setSettings(settings);
+      setSettings(s => s);
     } catch (error) {
       console.error('Failed to fetch settings:', error);
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchSettings();
+  }, [fetchSettings]);
 
   const handleSave = async () => {
     setSaving(true);
