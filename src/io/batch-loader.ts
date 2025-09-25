@@ -25,6 +25,14 @@ export class BatchLoader {
       const validationErrors: ValidationError[] = [];
       let rowNumber = 0;
 
+      // Check if file exists first
+      if (!fs.existsSync(filePath)) {
+        reject(
+          new Error(`ENOENT: no such file or directory, open '${filePath}'`)
+        );
+        return;
+      }
+
       fs.createReadStream(filePath)
         .pipe(csv())
         .on('data', (row) => {
@@ -101,6 +109,11 @@ export class BatchLoader {
   }
 
   private async loadFromJSONL(filePath: string): Promise<BatchInput> {
+    // Check if file exists first
+    if (!fs.existsSync(filePath)) {
+      throw new Error(`ENOENT: no such file or directory, open '${filePath}'`);
+    }
+
     const content = fs.readFileSync(filePath, 'utf-8');
     const lines = content.trim().split('\n');
     const tasks: TaskRequest[] = [];
