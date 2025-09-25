@@ -123,6 +123,9 @@ build/
 *.swo
 *~
 
+# Cursor IDE rules (team-specific processes)
+.cursor/rules/*.mdc
+
 # OS generated files
 .DS_Store
 .DS_Store?
