@@ -8,7 +8,7 @@ export interface TaskRequest {
   model?: string;
   temperature?: number;
   maxTokens?: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   batch_id?: string;
   corr_id?: string;
   idempotency_key?: string;

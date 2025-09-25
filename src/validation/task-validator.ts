@@ -3,7 +3,7 @@
 export interface ValidationError {
   field: string;
   message: string;
-  value?: any;
+  value?: unknown;
 }
 
 export interface ValidationResult {
@@ -29,7 +29,7 @@ export class TaskValidator {
   private static readonly MIN_MAX_TOKENS = 1;
   private static readonly MAX_MAX_TOKENS = 4096;
 
-  static validateTask(task: any, rowNumber?: number): ValidationResult {
+  static validateTask(task: Record<string, unknown>, rowNumber?: number): ValidationResult {
     const errors: ValidationError[] = [];
     const warnings: ValidationError[] = [];
 
@@ -222,7 +222,7 @@ export class TaskValidator {
     };
   }
 
-  static validateBatch(tasks: any[]): ValidationResult {
+  static validateBatch(tasks: Record<string, unknown>[]): ValidationResult {
     const allErrors: ValidationError[] = [];
     const allWarnings: ValidationError[] = [];
 

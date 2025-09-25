@@ -185,8 +185,8 @@ export class BatchLoader {
     });
   }
 
-  private parseMetadata(row: any): Record<string, any> | undefined {
-    const metadata: Record<string, any> = {};
+  private parseMetadata(row: Record<string, unknown>): Record<string, unknown> | undefined {
+    const metadata: Record<string, unknown> = {};
     let hasMetadata = false;
 
     for (const [key, value] of Object.entries(row)) {
