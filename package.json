@@ -31,7 +31,8 @@
     "test:dry-run": "node scripts/test-dry-run.js",
     "check": "npm run lint && npm run format:check && npm run type-check && npm test",
     "check:fix": "npm run format && npm run lint:fix && npm run type-check && npm test",
-    "pre-commit": "npm run check"
+    "pre-commit": "npm run check",
+    "pre-commit:ps1": "pwsh -File scripts/pre-commit.ps1"
   },
   "keywords": [
     "gpt",
