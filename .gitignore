@@ -189,3 +189,6 @@ local/
 
 # Build Logs
 docs/build_logs/
+
+# Cursor IDE rules (team-specific processes)
+.cursor/rules/*.mdc
