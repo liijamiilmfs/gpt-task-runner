@@ -66,7 +66,7 @@ export class Logger {
 
   private formatLogEntry = (info: Record<string, unknown>) => {
     // Extract the structured log entry from the second parameter
-    const logEntry = info[1] || info;
+    const logEntry = (info[1] || info) as Record<string, unknown>;
     const {
       timestamp,
       level,
@@ -82,7 +82,7 @@ export class Logger {
       // JSON mode - return structured JSON
       const structuredEntry = {
         timestamp,
-        level: level.replace(/\x1b\[[0-9;]*m/g, ''), // Remove color codes
+        level: (level as string).replace(/\x1b\[[0-9;]*m/g, ''), // Remove color codes
         message,
         batch_id,
         task_id,
@@ -110,7 +110,7 @@ export class Logger {
     }
   };
 
-  private sanitizeData(data: unknown): Record<string, unknown> {
+  private sanitizeData(data: unknown): unknown {
     if (typeof data !== 'object' || data === null) {
       return data;
     }

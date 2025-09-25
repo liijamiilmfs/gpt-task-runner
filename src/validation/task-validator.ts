@@ -29,7 +29,10 @@ export class TaskValidator {
   private static readonly MIN_MAX_TOKENS = 1;
   private static readonly MAX_MAX_TOKENS = 4096;
 
-  static validateTask(task: Record<string, unknown>, rowNumber?: number): ValidationResult {
+  static validateTask(
+    task: Record<string, unknown>,
+    rowNumber?: number
+  ): ValidationResult {
     const errors: ValidationError[] = [];
     const warnings: ValidationError[] = [];
 
@@ -101,7 +104,7 @@ export class TaskValidator {
 
     // Validate temperature
     if (task.temperature !== undefined) {
-      const temp = parseFloat(task.temperature);
+      const temp = parseFloat(task.temperature as string);
       if (isNaN(temp)) {
         errors.push({
           field: 'temperature',
@@ -119,7 +122,7 @@ export class TaskValidator {
 
     // Validate maxTokens
     if (task.maxTokens !== undefined) {
-      const tokens = parseInt(task.maxTokens);
+      const tokens = parseInt(task.maxTokens as string);
       if (isNaN(tokens) || !Number.isInteger(tokens)) {
         errors.push({
           field: 'maxTokens',

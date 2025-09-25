@@ -95,7 +95,7 @@ class GPTTaskService {
       this.logger.info(`Loading ${tasks.length} scheduled tasks`);
 
       for (const task of tasks) {
-        await this.scheduleTask(task);
+        await this.scheduleTask(task as unknown as ScheduledTask);
       }
     } catch (error) {
       this.logger.error('Failed to load scheduled tasks', {
@@ -117,7 +117,7 @@ class GPTTaskService {
         }
       );
 
-      this.scheduledTasks.set(task.id, scheduledTask);
+      this.scheduledTasks.set(task.id!, scheduledTask);
       scheduledTask.start();
 
       this.logger.info(
@@ -147,7 +147,7 @@ class GPTTaskService {
       );
 
       // Update last run time
-      await this.updateTaskLastRun(task.id);
+      await this.updateTaskLastRun(task.id!);
 
       // Create transport based on dry run setting
       const transport = task.isDryRun
@@ -233,7 +233,9 @@ class GPTTaskService {
 
   // Public methods for service management
   async addScheduledTask(task: ScheduledTask): Promise<string> {
-    const taskId = await this.database.saveScheduledTask(task);
+    const taskId = await this.database.saveScheduledTask(
+      task as unknown as Record<string, unknown>
+    );
     await this.scheduleTask({ ...task, id: taskId });
     return taskId;
   }
@@ -256,7 +258,7 @@ class GPTTaskService {
     return {
       isRunning: this.isRunning,
       scheduledTasks: this.scheduledTasks.size,
-      metrics,
+      metrics: metrics as unknown as Record<string, unknown>,
     };
   }
 }
