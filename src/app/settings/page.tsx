@@ -112,7 +112,7 @@ const SettingsPage: React.FC = () => {
   const updateSetting = (
     section: keyof SettingsData,
     key: string,
-    value: any
+    value: unknown
   ) => {
     setSettings((prev) => ({
       ...prev,
