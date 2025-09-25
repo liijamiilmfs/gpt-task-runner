@@ -12,6 +12,12 @@ on:
 env:
   NODE_VERSION: '18'
 
+permissions:
+  contents: read
+  security-events: write
+  actions: read
+  pull-requests: read
+
 jobs:
   dependency-scan:
     name: Dependency Vulnerability Scan
