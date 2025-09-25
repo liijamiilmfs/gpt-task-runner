@@ -55,8 +55,9 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
   private config: Required<WorkerConfig>;
   private taskProcessor: TaskProcessor<T, R>;
   private processingTimes: number[] = [];
-  private lastThroughputUpdate = Date.now();
   private throughputWindow: number[] = [];
+  private isProcessingQueue = false;
+  private queueProcessingScheduled = false;
 
   constructor(
     taskProcessor: TaskProcessor<T, R>,
@@ -92,22 +93,23 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
       throw new Error('ConcurrencyController is shutting down');
     }
 
-    if (this.queue.length >= this.config.maxQueueSize) {
+    if (this.queue.length + this.workers.size >= this.config.maxQueueSize) {
       throw new Error(`Queue is full (${this.config.maxQueueSize} tasks)`);
     }
 
-    // Add to queue with priority handling
-    if (this.config.enablePriority && task.priority !== undefined) {
-      this.insertByPriority(task);
-    } else {
-      this.queue.push(task);
-    }
+    this.enqueueTask(task);
 
     this.updateMetrics();
     this.emit('taskQueued', task);
 
     // Start processing if we have available workers
-    this.processNext();
+    // Process immediately if we have capacity, otherwise schedule
+    if (
+      this.workers.size < this.config.maxConcurrency &&
+      this.queue.length > 0
+    ) {
+      void this.processQueue();
+    }
   }
 
   /**
@@ -144,14 +146,24 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
     this.isShuttingDown = true;
     this.emit('shutdownStarted');
 
-    // Wait for all workers to complete
     const startTime = Date.now();
-    while (this.workers.size > 0 && Date.now() - startTime < timeoutMs) {
-      await Promise.race(Array.from(this.workers));
+    while (
+      (this.queue.length > 0 || this.workers.size > 0) &&
+      Date.now() - startTime < timeoutMs
+    ) {
+      if (this.queue.length > 0) {
+        await this.processQueue();
+      }
+
+      if (this.workers.size > 0) {
+        await Promise.race(Array.from(this.workers));
+      } else {
+        await Promise.resolve();
+      }
     }
 
     // Force shutdown if timeout reached
-    if (this.workers.size > 0) {
+    if (this.workers.size > 0 || this.queue.length > 0) {
       this.emit('shutdownTimeout');
     }
 
@@ -161,26 +173,46 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
   /**
    * Process the next task in the queue
    */
-  private async processNext(): Promise<void> {
-    if (
-      this.workers.size >= this.config.maxConcurrency ||
-      this.queue.length === 0
-    ) {
+  private async processQueue(): Promise<void> {
+    if (this.isProcessingQueue) {
       return;
     }
 
-    const task = this.queue.shift();
-    if (!task) return;
+    this.isProcessingQueue = true;
 
-    const workerPromise = this.processTask(task);
-    this.workers.add(workerPromise);
+    try {
+      // Process only one task at a time to respect concurrency limits
+      if (
+        this.queue.length > 0 &&
+        this.workers.size < this.config.maxConcurrency
+      ) {
+        const task = this.queue.shift();
+        if (!task) return;
 
-    workerPromise.finally(() => {
-      this.workers.delete(workerPromise);
-      this.updateMetrics();
-      // Try to process more tasks
-      this.processNext();
-    });
+        const workerPromise = this.processTask(task)
+          .catch((error) => {
+            // Errors are handled inside processTask but we need to ensure
+            // unhandled rejections are swallowed for the promise stored in the set
+            this.emit('workerError', error);
+          })
+          .finally(() => {
+            this.workers.delete(workerPromise);
+            this.updateMetrics();
+            // Process next task if available
+            if (
+              this.queue.length > 0 &&
+              this.workers.size < this.config.maxConcurrency
+            ) {
+              void this.processQueue();
+            }
+          });
+
+        this.workers.add(workerPromise);
+        this.updateMetrics();
+      }
+    } finally {
+      this.isProcessingQueue = false;
+    }
   }
 
   /**
@@ -201,9 +233,9 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
         if (!rateLimitStatus.allowed) {
           // Re-queue the task with a delay
           setTimeout(() => {
-            this.queue.unshift(task);
+            this.enqueueTask(task, { front: true, bypassLimit: true });
             this.updateMetrics();
-            this.processNext();
+            this.scheduleQueueProcessing();
           }, rateLimitStatus.retryAfter || 1000);
           return;
         }
@@ -212,16 +244,21 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
       this.emit('taskStarted', task);
 
       // Process the task with timeout
-      const result = await Promise.race([
-        this.taskProcessor(task),
-        this.createTimeoutPromise(task.id),
-      ]);
+      const timeoutController = this.createTimeoutController(task.id);
+      try {
+        const result = await Promise.race([
+          this.taskProcessor(task),
+          timeoutController.promise,
+        ]);
 
-      const processingTime = Date.now() - startTime;
-      this.recordProcessingTime(processingTime);
+        const processingTime = Date.now() - startTime;
+        this.recordProcessingTime(processingTime);
 
-      this.metrics.totalProcessed++;
-      this.emit('taskCompleted', { task, result, processingTime });
+        this.metrics.totalProcessed++;
+        this.emit('taskCompleted', { task, result, processingTime });
+      } finally {
+        timeoutController.cancel();
+      }
     } catch (error) {
       const processingTime = Date.now() - startTime;
       this.recordProcessingTime(processingTime);
@@ -235,8 +272,10 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
 
       if (task.retryCount < task.maxRetries) {
         task.retryCount++;
-        this.queue.unshift(task); // Re-queue for retry
+        this.enqueueTask(task, { front: true, bypassLimit: true });
         this.emit('taskRetry', { task, retryCount: task.retryCount });
+        this.updateMetrics();
+        this.scheduleQueueProcessing();
       }
     }
   }
@@ -244,9 +283,13 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
   /**
    * Create a timeout promise for task processing
    */
-  private createTimeoutPromise(taskId: string): Promise<never> {
-    return new Promise((_, reject) => {
-      setTimeout(() => {
+  private createTimeoutController(taskId: string): {
+    promise: Promise<never>;
+    cancel: () => void;
+  } {
+    let timeoutId: ReturnType<typeof globalThis.setTimeout> | undefined;
+    const promise = new Promise<never>((_, reject) => {
+      timeoutId = globalThis.setTimeout(() => {
         reject(
           new Error(
             `Task ${taskId} timed out after ${this.config.taskTimeout}ms`
@@ -254,6 +297,15 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
         );
       }, this.config.taskTimeout);
     });
+
+    return {
+      promise,
+      cancel: () => {
+        if (timeoutId !== undefined) {
+          globalThis.clearTimeout(timeoutId);
+        }
+      },
+    };
   }
 
   /**
@@ -274,6 +326,50 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
   }
 
   /**
+   * Add a task back to the queue with optional configuration
+   */
+  private enqueueTask(
+    task: Task<T>,
+    options: { front?: boolean; bypassLimit?: boolean } = {}
+  ): void {
+    const { front = false, bypassLimit = false } = options;
+
+    if (
+      !bypassLimit &&
+      this.queue.length + this.workers.size >= this.config.maxQueueSize
+    ) {
+      throw new Error(`Queue is full (${this.config.maxQueueSize} tasks)`);
+    }
+
+    if (this.config.enablePriority && task.priority !== undefined && !front) {
+      this.insertByPriority(task);
+      return;
+    }
+
+    if (front) {
+      this.queue.unshift(task);
+    } else {
+      this.queue.push(task);
+    }
+  }
+
+  /**
+   * Schedule queue processing on the next tick
+   */
+  private scheduleQueueProcessing(): void {
+    if (this.queueProcessingScheduled || this.queue.length === 0) {
+      return;
+    }
+
+    this.queueProcessingScheduled = true;
+    // Use Promise.resolve().then() for microtask scheduling
+    Promise.resolve().then(() => {
+      this.queueProcessingScheduled = false;
+      void this.processQueue();
+    });
+  }
+
+  /**
    * Record processing time for metrics
    */
   private recordProcessingTime(time: number): void {
@@ -283,6 +379,15 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
     if (this.processingTimes.length > 100) {
       this.processingTimes = this.processingTimes.slice(-100);
     }
+
+    const now = Date.now();
+    this.throughputWindow.push(now);
+
+    // Keep only last 10 seconds of data for throughput calculation
+    const tenSecondsAgo = now - 10000;
+    this.throughputWindow = this.throughputWindow.filter(
+      (timeEntry) => timeEntry > tenSecondsAgo
+    );
   }
 
   /**
@@ -301,18 +406,22 @@ export class ConcurrencyController<T = any, R = any> extends EventEmitter {
 
     // Calculate current throughput (tasks per second)
     const now = Date.now();
-    this.throughputWindow.push(now);
-
-    // Keep only last 10 seconds of data
     const tenSecondsAgo = now - 10000;
     this.throughputWindow = this.throughputWindow.filter(
-      (time) => time > tenSecondsAgo
+      (timeEntry) => timeEntry > tenSecondsAgo
     );
 
-    if (now - this.lastThroughputUpdate > 1000) {
-      // Update every second
-      this.metrics.currentThroughput = this.throughputWindow.length / 10;
-      this.lastThroughputUpdate = now;
+    if (this.throughputWindow.length > 0) {
+      const windowStart = this.throughputWindow[0];
+      const windowDurationSeconds = Math.min(
+        Math.max((now - windowStart) / 1000, 0),
+        10
+      );
+      const effectiveSeconds = Math.max(windowDurationSeconds, 1);
+      this.metrics.currentThroughput =
+        this.throughputWindow.length / effectiveSeconds;
+    } else {
+      this.metrics.currentThroughput = 0;
     }
 
     // Update rate limit status

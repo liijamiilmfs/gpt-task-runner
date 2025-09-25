@@ -46,38 +46,75 @@ describe('ConcurrencyController', () => {
     });
 
     it.skip('should respect max concurrency limit', async () => {
+      // Create a controller with maxConcurrency = 1
+      const limitedController = new ConcurrencyController(mockProcessor, {
+        maxConcurrency: 1,
+      });
+
       let resolveFirst: () => void;
+      let resolveSecond: () => void;
+      let resolveThird: () => void;
       const firstPromise = new Promise<void>((resolve) => {
         resolveFirst = resolve;
       });
+      const secondPromise = new Promise<void>((resolve) => {
+        resolveSecond = resolve;
+      });
+      const thirdPromise = new Promise<void>((resolve) => {
+        resolveThird = resolve;
+      });
 
+      // Reset mock to ensure clean state
+      mockProcessor.mockReset();
       mockProcessor
         .mockImplementationOnce(() => firstPromise)
-        .mockResolvedValue('result');
+        .mockImplementationOnce(() => secondPromise)
+        .mockImplementationOnce(() => thirdPromise);
 
-      const task1: Task<string> = { id: '1', data: 'task1' };
-      const task2: Task<string> = { id: '2', data: 'task2' };
-      const task3: Task<string> = { id: '3', data: 'task3' };
+      const task1: Task<string> = { id: 'task1', data: 'task1' };
+      const task2: Task<string> = { id: 'task2', data: 'task2' };
+      const task3: Task<string> = { id: 'task3', data: 'task3' };
 
-      // Add tasks one by one to control processing
-      await controller.addTask(task1);
-      await controller.addTask(task2);
-
-      // Wait for first two tasks to start processing
+      // Add first task - it should start processing immediately
+      await limitedController.addTask(task1);
       await vi.runAllTimersAsync();
 
-      // First two tasks should start processing immediately
-      expect(mockProcessor).toHaveBeenCalledTimes(2);
+      // First task should start processing immediately
+      expect(mockProcessor).toHaveBeenCalledTimes(1);
 
-      // Add third task
-      await controller.addTask(task3);
+      // Add second task - it should be queued since maxConcurrency is 1
+      await limitedController.addTask(task2);
+      await vi.runAllTimersAsync();
+
+      // Second task should not start yet (still queued)
+      expect(mockProcessor).toHaveBeenCalledTimes(1);
+
+      // Add third task - it should also be queued
+      await limitedController.addTask(task3);
+      await vi.runAllTimersAsync();
+
+      // Third task should not start yet (still queued)
+      expect(mockProcessor).toHaveBeenCalledTimes(1);
 
       // Resolve first task to free up a worker
       resolveFirst!();
       await vi.runAllTimersAsync();
 
+      // Second task should now start
+      expect(mockProcessor).toHaveBeenCalledTimes(2);
+
+      // Resolve second task
+      resolveSecond!();
+      await vi.runAllTimersAsync();
+
       // Third task should now start
       expect(mockProcessor).toHaveBeenCalledTimes(3);
+
+      // Resolve third task
+      resolveThird!();
+      await vi.runAllTimersAsync();
+
+      await limitedController.shutdown();
     });
 
     it('should handle task failures and retries', async () => {
@@ -117,6 +154,12 @@ describe('ConcurrencyController', () => {
 
   describe('Priority Queue', () => {
     it.skip('should process higher priority tasks first', async () => {
+      // Create a controller with priority enabled and maxConcurrency = 1
+      const priorityController = new ConcurrencyController(mockProcessor, {
+        maxConcurrency: 1,
+        enablePriority: true,
+      });
+
       // Mock processor to delay completion so we can test queueing
       let resolveTasks: (() => void)[] = [];
       const taskPromises = [1, 2, 3].map(
@@ -141,7 +184,11 @@ describe('ConcurrencyController', () => {
       };
 
       // Add all tasks at once to test priority queueing
-      await controller.addTasks([lowPriority, highPriority, mediumPriority]);
+      await priorityController.addTasks([
+        lowPriority,
+        highPriority,
+        mediumPriority,
+      ]);
 
       // Wait for tasks to be queued and processed
       await vi.runAllTimersAsync();
@@ -154,6 +201,8 @@ describe('ConcurrencyController', () => {
       // Resolve all tasks
       resolveTasks.forEach((resolve) => resolve());
       await vi.runAllTimersAsync();
+
+      await priorityController.shutdown();
     });
   });
 
@@ -188,33 +237,45 @@ describe('ConcurrencyController', () => {
 
   describe('Metrics and Monitoring', () => {
     it.skip('should track processing metrics', async () => {
+      // Create a controller with maxConcurrency = 1 to force queueing
+      const metricsController = new ConcurrencyController(mockProcessor, {
+        maxConcurrency: 1,
+      });
+
       // Mock processor to delay completion
       let resolveTask: () => void;
       const taskPromise = new Promise<void>(
         (resolve) => (resolveTask = resolve)
       );
-      mockProcessor.mockImplementationOnce(() => taskPromise);
+      mockProcessor.mockImplementation(() => taskPromise);
 
-      const task: Task<string> = { id: '1', data: 'task1' };
-      await controller.addTask(task);
+      const task1: Task<string> = { id: '1', data: 'task1' };
+      const task2: Task<string> = { id: '2', data: 'task2' };
 
-      // Wait for task to start processing
+      // Add first task - it should start processing immediately
+      await metricsController.addTask(task1);
       await vi.runAllTimersAsync();
 
-      const metrics = controller.getMetrics();
-      expect(metrics.queueLength).toBe(0); // Task is being processed, not queued
-      expect(metrics.activeWorkers).toBe(1); // One task is being processed
+      // Add second task - it should be queued
+      await metricsController.addTask(task2);
+      await vi.runAllTimersAsync();
+
+      const metrics = metricsController.getMetrics();
+      expect(metrics.queueLength).toBe(1); // One task in queue
+      expect(metrics.activeWorkers).toBe(1); // One task being processed
       expect(metrics.totalProcessed).toBe(0); // Not completed yet
 
-      // Complete the task
+      // Complete the first task
       resolveTask!();
       await vi.runAllTimersAsync();
 
-      const finalMetrics = controller.getMetrics();
-      expect(finalMetrics.queueLength).toBe(0);
-      expect(finalMetrics.activeWorkers).toBe(0);
-      expect(finalMetrics.totalProcessed).toBe(1);
+      const finalMetrics = metricsController.getMetrics();
+      expect(finalMetrics.queueLength).toBe(0); // Queue should be empty
+      expect(finalMetrics.activeWorkers).toBe(1); // Second task now processing
+      expect(finalMetrics.totalProcessed).toBe(1); // First task completed
       expect(finalMetrics.averageProcessingTime).toBeGreaterThan(0);
+
+      await metricsController.shutdown();
     });
 
     it('should track failed tasks', async () => {
@@ -257,13 +318,21 @@ describe('ConcurrencyController', () => {
       );
       mockProcessor.mockImplementation(() => taskPromise);
 
-      // Fill the queue
+      // Add first task - it starts processing immediately
       await controller.addTask({ id: '1', data: 'task1' });
-      await controller.addTask({ id: '2', data: 'task2' });
+      await vi.runAllTimersAsync();
 
-      // This should be rejected
+      // Add second task - it gets queued
+      await controller.addTask({ id: '2', data: 'task2' });
+      await vi.runAllTimersAsync();
+
+      // Add third task - it gets queued (queue now has 1 task)
+      await controller.addTask({ id: '3', data: 'task3' });
+      await vi.runAllTimersAsync();
+
+      // This should be rejected (queue is now full with 2 tasks)
       await expect(
-        controller.addTask({ id: '3', data: 'task3' })
+        controller.addTask({ id: '4', data: 'task4' })
       ).rejects.toThrow('Queue is full');
 
       // Clean up
@@ -272,6 +341,11 @@ describe('ConcurrencyController', () => {
     });
 
     it.skip('should return queue status', async () => {
+      // Create a controller with maxConcurrency = 1 to force queueing
+      const statusController = new ConcurrencyController(mockProcessor, {
+        maxConcurrency: 1,
+      });
+
       // Mock processor to delay completion so tasks stay in queue
       let resolveTask: () => void;
       const taskPromise = new Promise<void>(
@@ -282,15 +356,21 @@ describe('ConcurrencyController', () => {
       const task1: Task<string> = { id: '1', data: 'task1' };
       const task2: Task<string> = { id: '2', data: 'task2' };
 
-      await controller.addTask(task1);
-      await controller.addTask(task2);
+      // Add first task - it starts processing immediately
+      await statusController.addTask(task1);
+      await vi.runAllTimersAsync();
 
-      const status = controller.getQueueStatus();
+      // Add second task - it gets queued
+      await statusController.addTask(task2);
+      await vi.runAllTimersAsync();
+
+      const status = statusController.getQueueStatus();
       expect(status.length).toBe(1); // One task in queue, one being processed
       expect(status.tasks).toContain(task2); // task2 should be in queue
 
       // Clean up
       resolveTask!();
+      await statusController.shutdown();
     });
   });
 
