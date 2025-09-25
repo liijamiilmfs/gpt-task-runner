@@ -7,27 +7,33 @@ This guide will help you manage dependencies safely and avoid the dependency hel
 ## 🛡️ Safe Update Commands
 
 ### 1. **Security Updates (Recommended)**
+
 ```bash
 npm run security:audit-fix
 ```
+
 - Runs `npm audit fix` safely
 - Creates backups before making changes
 - Tests everything after updates
 - Rolls back automatically if anything breaks
 
 ### 2. **Force Security Updates (Use with extreme caution)**
+
 ```bash
 npm run security:audit-fix-force
 ```
+
 - Runs `npm audit fix --force` but with safety nets
 - Creates backups before making changes
 - Tests everything after updates
 - Rolls back automatically if anything breaks
 
 ### 3. **Regular Package Updates**
+
 ```bash
 npm run deps:update
 ```
+
 - Runs `npm update` safely
 - Creates backups before making changes
 - Tests everything after updates
@@ -38,12 +44,14 @@ npm run deps:update
 If you need to update dependencies manually:
 
 1. **Create a backup first:**
+
    ```bash
    cp package.json package.json.backup
    cp package-lock.json package-lock.json.backup
    ```
 
 2. **Update one package at a time:**
+
    ```bash
    npm install package-name@latest
    npm run type-check
