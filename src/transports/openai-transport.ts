@@ -108,7 +108,9 @@ export class OpenAITransport implements Transport {
 
       // Check if it's a RetryError with error info
       if (error.name === 'RetryError' && 'errorInfo' in error) {
-        const retryError = error as { errorInfo: { code: string; isRetryable: boolean } };
+        const retryError = error as {
+          errorInfo: { code: string; isRetryable: boolean };
+        };
         errorCode = retryError.errorInfo.code;
         isRetryable = retryError.errorInfo.isRetryable;
       } else {

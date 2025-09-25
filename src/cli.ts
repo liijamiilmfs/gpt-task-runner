@@ -150,7 +150,7 @@ program
 
       // Show sample task
       if (batchInput.tasks.length > 0) {
-        logger.info('Sample task:', batchInput.tasks[0]);
+        logger.info('Sample task:', { task: batchInput.tasks[0] });
       }
 
       process.exit(0);
