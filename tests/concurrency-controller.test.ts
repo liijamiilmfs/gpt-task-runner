@@ -108,7 +108,7 @@ describe('ConcurrencyController', () => {
       await firstDeferred.promise;
 
       // Wait a bit for the async processing to complete
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Second task should now start
       expect(mockProcessor).toHaveBeenCalledTimes(2);
@@ -118,7 +118,7 @@ describe('ConcurrencyController', () => {
       await secondDeferred.promise;
 
       // Wait a bit for the async processing to complete
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Third task should now start
       expect(mockProcessor).toHaveBeenCalledTimes(3);
@@ -214,7 +214,7 @@ describe('ConcurrencyController', () => {
       await firstDeferred.promise;
 
       // Wait a bit for the async processing to complete
-      await new Promise(resolve => setTimeout(resolve, 50));
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
       // Next task should be highest priority among queued (high priority)
       expect(mockProcessor).toHaveBeenCalledTimes(2);
@@ -225,7 +225,7 @@ describe('ConcurrencyController', () => {
       await secondDeferred.promise;
 
       // Wait a bit for the async processing to complete
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Next task should be medium priority
       expect(mockProcessor).toHaveBeenCalledTimes(3);
@@ -303,7 +303,7 @@ describe('ConcurrencyController', () => {
       await firstDeferred.promise;
 
       // Wait a bit for the async processing to complete
-      await new Promise(resolve => setTimeout(resolve, 50));
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
       // Assert after first completion: 1 active, 0 queued
       const afterFirstMetrics = metricsController.getMetrics();
@@ -317,7 +317,7 @@ describe('ConcurrencyController', () => {
       await secondDeferred.promise;
 
       // Wait a bit for the async processing to complete
-      await new Promise(resolve => setTimeout(resolve, 50));
+      await new Promise((resolve) => setTimeout(resolve, 50));
 
       // Assert final counters
       const finalMetrics = metricsController.getMetrics();
