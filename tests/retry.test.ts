@@ -117,10 +117,20 @@ describe('RetryManager', () => {
       ];
 
       for (const testCase of testCases) {
+        // Create a fresh RetryManager for each test case to avoid circuit breaker interference
+        const freshRetryManager = new RetryManager({
+          maxRetries: 2,
+          baseDelayMs: 100,
+          maxDelayMs: 1000,
+          backoffMultiplier: 2,
+          jitterMs: 50,
+          timeoutMs: 5000,
+        });
+        
         const mockOperation = vi.fn().mockRejectedValue(testCase.error);
 
         try {
-          await retryManager.executeWithRetry(mockOperation);
+          await freshRetryManager.executeWithRetry(mockOperation);
         } catch (error) {
           if (error instanceof RetryError) {
             expect(error.errorInfo.code).toBe(testCase.expectedCode);

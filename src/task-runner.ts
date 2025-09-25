@@ -3,6 +3,7 @@ import { DryRunTransport } from './transports/dry-run-transport';
 import { BatchLoader } from './io/batch-loader';
 import { BatchWriter } from './io/batch-writer';
 import { Logger } from './logger';
+import * as crypto from 'crypto';
 
 export class TaskRunner {
   private transport: Transport;
@@ -34,14 +35,71 @@ export class TaskRunner {
       });
 
       // Apply global options to tasks that don't have them set
-      const tasks = batchInput.tasks.map((task) => ({
+      const allTasks = batchInput.tasks.map((task) => ({
         ...task,
         model: task.model || options.model,
         temperature: task.temperature ?? options.temperature,
         maxTokens: task.maxTokens ?? options.maxTokens,
       }));
 
-      const results = await this.transport.executeBatch(tasks, batchId);
+      // Handle resume functionality
+      let tasksToProcess = allTasks;
+      let checkpoint: any = null;
+
+      if (options.resume) {
+        try {
+          const checkpointData = await import('fs').then(fs => 
+            JSON.parse(fs.readFileSync(options.resume, 'utf-8'))
+          );
+          checkpoint = checkpointData;
+          tasksToProcess = this.getTasksToProcess(allTasks, checkpoint, options.onlyFailed || false);
+          this.logger.info(`Resuming from checkpoint: ${tasksToProcess.length} tasks to process`);
+        } catch (error) {
+          this.logger.warn('Failed to load checkpoint, processing all tasks', {
+            error: error instanceof Error ? error.message : error,
+          });
+        }
+      }
+
+      // Initialize checkpoint if not resuming
+      if (!checkpoint) {
+        checkpoint = {
+          batchId,
+          completedTasks: [],
+          failedTasks: [],
+          lastCheckpoint: new Date().toISOString(),
+          totalTasks: allTasks.length,
+        };
+      }
+
+      const results: any[] = [];
+      const checkpointInterval = options.checkpointInterval || 10;
+
+      // Process tasks in batches for checkpointing
+      for (let i = 0; i < tasksToProcess.length; i += checkpointInterval) {
+        const batch = tasksToProcess.slice(i, i + checkpointInterval);
+        this.logger.info(`Processing batch ${Math.floor(i / checkpointInterval) + 1}/${Math.ceil(tasksToProcess.length / checkpointInterval)}`);
+
+        const batchResults = await this.transport.executeBatch(batch, batchId);
+        results.push(...batchResults);
+
+        // Update checkpoint
+        batchResults.forEach(result => {
+          if (result.success) {
+            checkpoint.completedTasks.push(result.id);
+          } else {
+            checkpoint.failedTasks.push(result.id);
+          }
+        });
+
+        checkpoint.lastCheckpoint = new Date().toISOString();
+
+        // Save checkpoint
+        const checkpointFile = options.resume || 'checkpoint.json';
+        await import('fs').then(fs => 
+          fs.writeFileSync(checkpointFile, JSON.stringify(checkpoint, null, 2))
+        );
+      }
 
       this.logger.batchComplete(batchId, batchId, {
         totalTasks: results.length,
@@ -49,9 +107,20 @@ export class TaskRunner {
         failed: results.filter((r) => !r.success).length,
       });
 
+      // Write output files
       if (options.output) {
-        await this.batchWriter.writeResults(results, options.output);
+        // Write only successful results to main output file
+        const successfulResults = results.filter(r => r.success);
+        await this.batchWriter.writeResults(successfulResults, options.output);
         this.logger.info(`Results written to ${options.output}`);
+
+        // Write failed tasks to separate file
+        const failedResults = results.filter(r => !r.success);
+        if (failedResults.length > 0) {
+          const failedFile = options.output.replace(/\.[^.]+$/, '.failed$&');
+          await this.batchWriter.writeResults(failedResults, failedFile);
+          this.logger.info(`Failed tasks written to ${failedFile}`);
+        }
       }
 
       // If dry run, also output the dry run results
@@ -65,6 +134,17 @@ export class TaskRunner {
 
         await this.batchWriter.writeDryRunResults(dryRunResults, dryRunOutput);
         this.logger.info(`Dry run results written to ${dryRunOutput}`);
+      }
+
+      // Clean up checkpoint file if all tasks completed successfully
+      if (checkpoint.completedTasks.length + checkpoint.failedTasks.length === checkpoint.totalTasks) {
+        const checkpointFile = options.resume || 'checkpoint.json';
+        try {
+          await import('fs').then(fs => fs.unlinkSync(checkpointFile));
+          this.logger.info('Checkpoint file cleaned up');
+        } catch {
+          // Ignore cleanup errors
+        }
       }
 
       // Exit with appropriate code
@@ -115,6 +195,44 @@ export class TaskRunner {
         error: error instanceof Error ? error.message : error,
       });
       process.exit(1);
+    }
+  }
+
+  /**
+   * Generate a stable idempotency key for a task
+   */
+  generateIdempotencyKey(task: TaskRequest): string {
+    const content = {
+      prompt: task.prompt,
+      messages: task.messages,
+      model: task.model,
+      temperature: task.temperature,
+      maxTokens: task.maxTokens,
+    };
+
+    const contentString = JSON.stringify(content, Object.keys(content).sort());
+    return crypto.createHash('sha256').update(contentString).digest('hex');
+  }
+
+  /**
+   * Get tasks to process based on checkpoint and resume options
+   */
+  getTasksToProcess(
+    allTasks: TaskRequest[],
+    checkpoint: any,
+    onlyFailed: boolean
+  ): TaskRequest[] {
+    if (onlyFailed) {
+      // Process only failed tasks
+      return allTasks.filter(task => checkpoint.failedTasks?.includes(task.id));
+    } else {
+      // Process remaining tasks (not completed and not failed)
+      const completedTasks = new Set(checkpoint.completedTasks || []);
+      const failedTasks = new Set(checkpoint.failedTasks || []);
+      
+      return allTasks.filter(task => 
+        !completedTasks.has(task.id) && !failedTasks.has(task.id)
+      );
     }
   }
 }

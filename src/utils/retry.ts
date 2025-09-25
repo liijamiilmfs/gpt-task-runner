@@ -109,7 +109,7 @@ export class RetryManager {
         // Don't retry if error is not retryable
         if (!errorInfo.isRetryable) {
           throw new RetryError(
-            `Non-retryable error: ${errorInfo.message}`,
+            errorInfo.message,
             errorInfo,
             attempt + 1
           );
@@ -118,7 +118,7 @@ export class RetryManager {
         // Don't retry if we've exhausted attempts
         if (attempt === this.config.maxRetries) {
           throw new RetryError(
-            `Max retries (${this.config.maxRetries}) exceeded: ${errorInfo.message}`,
+            errorInfo.message,
             errorInfo,
             attempt + 1
           );
@@ -135,11 +135,27 @@ export class RetryManager {
       }
     }
 
-    throw lastError || new Error('Unknown error occurred');
+    // This should never be reached due to the logic above, but just in case
+    const errorInfo = this.classifyError(lastError || new Error('Unknown error occurred'));
+    throw new RetryError(
+      errorInfo.message,
+      errorInfo,
+      this.config.maxRetries + 1
+    );
   }
 
   private classifyError(error: Error): ErrorInfo {
     const message = error.message.toLowerCase();
+
+    // Handle circuit breaker errors - these should be retryable
+    if (error.name === 'CircuitBreakerError' || message.includes('circuit breaker')) {
+      return {
+        code: ErrorCodes.SERVER_ERROR,
+        message: 'Circuit breaker is open',
+        isRetryable: true,
+        originalError: error,
+      };
+    }
 
     // OpenAI API specific error patterns
     if (message.includes('rate limit') || message.includes('429')) {
@@ -218,7 +234,7 @@ export class RetryManager {
       };
     }
 
-    if (message.includes('invalid') || message.includes('bad request')) {
+    if (message.includes('invalid') || message.includes('bad request') || message.includes('must be provided')) {
       return {
         code: ErrorCodes.INPUT,
         message: 'Invalid input or bad request',
@@ -257,6 +273,16 @@ export class RetryManager {
 
   getCircuitBreakerState() {
     return this.circuitBreaker.getState();
+  }
+
+  /**
+   * Reset the retry manager state (useful for testing)
+   */
+  reset() {
+    this.circuitBreaker = new CircuitBreaker(
+      this.config.maxRetries,
+      this.config.timeoutMs
+    );
   }
 }
 

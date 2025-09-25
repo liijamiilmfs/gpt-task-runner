@@ -99,8 +99,34 @@ export class OpenAITransport implements Transport {
     timing: TimingTracker,
     retryCount: number
   ): TaskResponse {
-    const errorMessage =
-      error instanceof Error ? error.message : 'Unknown error';
+    let errorMessage = 'Unknown error';
+    let errorCode = 'E_UNKNOWN';
+    let isRetryable = true;
+
+    if (error instanceof Error) {
+      errorMessage = error.message;
+      
+      // Check if it's a RetryError with error info
+      if (error.name === 'RetryError' && 'errorInfo' in error) {
+        const retryError = error as any;
+        errorCode = retryError.errorInfo.code;
+        isRetryable = retryError.errorInfo.isRetryable;
+      } else {
+        errorCode = this.extractErrorCode(error);
+        isRetryable = this.isRetryableError(error);
+        
+        // Provide user-friendly error messages for common error codes
+        if (errorCode === 'E_INPUT') {
+          errorMessage = 'Invalid input or bad request';
+        } else if (errorCode === 'E_AUTH') {
+          errorMessage = 'Authentication failed';
+        } else if (errorCode === 'E_QUOTA') {
+          errorMessage = 'Quota exceeded or billing issue';
+        } else if (errorCode === 'E_RATE_LIMIT') {
+          errorMessage = 'Rate limit exceeded';
+        }
+      }
+    }
 
     return {
       id: request.id,
@@ -110,8 +136,8 @@ export class OpenAITransport implements Transport {
       success: false,
       timings: timing.getTimings(),
       retryCount,
-      errorCode: this.extractErrorCode(error),
-      isRetryable: this.isRetryableError(error),
+      errorCode,
+      isRetryable,
     };
   }
 
@@ -129,6 +155,9 @@ export class OpenAITransport implements Transport {
       }
       if (message.includes('quota') || message.includes('billing')) {
         return 'E_QUOTA';
+      }
+      if (message.includes('invalid') || message.includes('bad request') || message.includes('must be provided')) {
+        return 'E_INPUT';
       }
       if (
         message.includes('500') ||
@@ -196,6 +225,13 @@ export class OpenAITransport implements Transport {
     // Create a new retry manager to reset circuit breaker
     const config = this.retryManager['config'];
     this.retryManager = new RetryManager(config);
+  }
+
+  /**
+   * Reset the transport state (useful for testing)
+   */
+  reset() {
+    this.retryManager.reset();
   }
 
   private calculateCost(
