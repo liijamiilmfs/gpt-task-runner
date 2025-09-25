@@ -10,12 +10,12 @@ import { GPTTaskService } from './service';
 
 class DashboardServer {
   private app: express.Application;
-  private server: any;
+  private server: unknown;
   private wss!: WebSocketServer;
   private database: Database;
   private logger: Logger;
   private gptService: GPTTaskService;
-  private strictLimiter: any;
+  private strictLimiter: unknown;
 
   constructor() {
     this.app = express();
@@ -86,8 +86,8 @@ class DashboardServer {
     // Task executions
     this.app.get('/api/executions', async (_req, res) => {
       try {
-        const limit = parseInt((_req.query as any).limit as string) || 100;
-        const offset = parseInt((_req.query as any).offset as string) || 0;
+        const limit = parseInt((_req.query as Record<string, unknown>).limit as string) || 100;
+        const offset = parseInt((_req.query as Record<string, unknown>).offset as string) || 0;
         const executions = await this.database.getTaskExecutions(limit, offset);
         res.json(executions);
       } catch (error) {
@@ -152,7 +152,7 @@ class DashboardServer {
     // Service logs
     this.app.get('/api/logs', async (_req, res) => {
       try {
-        const limit = parseInt((_req.query as any).limit as string) || 100;
+        const limit = parseInt((_req.query as Record<string, unknown>).limit as string) || 100;
         const logs = await this.database.getServiceLogs(limit);
         res.json(logs);
       } catch (error) {
@@ -164,7 +164,7 @@ class DashboardServer {
     // Manual task execution - very sensitive operation
     this.app.post('/api/execute', this.strictLimiter, async (req, res) => {
       try {
-        const { inputFile, outputFile, isDryRun } = req.body as any;
+        const { inputFile, outputFile, isDryRun } = req.body as Record<string, unknown>;
         console.log('Manual execution request:', {
           inputFile,
           outputFile,
@@ -192,7 +192,7 @@ class DashboardServer {
   private setupWebSocket(): void {
     this.wss = new WebSocketServer({ port: 8081 });
 
-    this.wss.on('connection', (ws: any) => {
+    this.wss.on('connection', (ws: unknown) => {
       this.logger.info('Dashboard client connected');
 
       // Send initial data
@@ -204,7 +204,7 @@ class DashboardServer {
     });
   }
 
-  private async sendInitialData(ws: any): Promise<void> {
+  private async sendInitialData(ws: unknown): Promise<void> {
     try {
       const status = await this.gptService.getServiceStatus();
       const metrics = await this.database.getTaskMetrics();
@@ -221,10 +221,10 @@ class DashboardServer {
     }
   }
 
-  public broadcastUpdate(type: string, data: any): void {
+  public broadcastUpdate(type: string, data: unknown): void {
     const message = JSON.stringify({ type, data });
 
-    this.wss.clients.forEach((client: any) => {
+    this.wss.clients.forEach((client: unknown) => {
       if (client.readyState === client.OPEN) {
         client.send(message);
       }
