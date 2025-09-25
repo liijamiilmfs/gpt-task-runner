@@ -1,4 +1,4 @@
-id,prompt,model,temperature,maxTokens
-task-1,"Write a haiku about programming",gpt-3.5-turbo,0.7,100
-task-2,"Explain quantum computing in simple terms",gpt-4,0.5,500
-task-3,"Generate a creative story about a robot",gpt-3.5-turbo,0.9,300
+id,prompt,model,temperature,maxTokens,batch_id,idempotency_key,metadata
+task-1,"Write a haiku about programming",gpt-3.5-turbo,0.7,100,batch-001,task-1-hash,"{""category"":""creative"",""difficulty"":""easy""}"
+task-2,"Explain quantum computing in simple terms",gpt-4,0.5,500,batch-001,task-2-hash,"{""category"":""educational"",""difficulty"":""hard""}"
+task-3,"Generate a creative story about a robot",gpt-3.5-turbo,0.9,300,batch-001,task-3-hash,"{""category"":""creative"",""difficulty"":""medium""}"

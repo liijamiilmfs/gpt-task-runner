@@ -1,3 +1,3 @@
-{"id":"task-1","prompt":"Write a haiku about programming","model":"gpt-3.5-turbo","temperature":0.7,"maxTokens":100}
-{"id":"task-2","prompt":"Explain quantum computing in simple terms","model":"gpt-4","temperature":0.5,"maxTokens":500}
-{"id":"task-3","prompt":"Generate a creative story about a robot","model":"gpt-3.5-turbo","temperature":0.9,"maxTokens":300}
+{"id":"task-1","prompt":"Write a haiku about programming","model":"gpt-3.5-turbo","temperature":0.7,"maxTokens":100,"batch_id":"batch-001","idempotency_key":"task-1-hash","metadata":{"category":"creative","difficulty":"easy"}}
+{"id":"task-2","prompt":"Explain quantum computing in simple terms","model":"gpt-4","temperature":0.5,"maxTokens":500,"batch_id":"batch-001","idempotency_key":"task-2-hash","metadata":{"category":"educational","difficulty":"hard"}}
+{"id":"task-3","prompt":"Generate a creative story about a robot","model":"gpt-3.5-turbo","temperature":0.9,"maxTokens":300,"batch_id":"batch-001","idempotency_key":"task-3-hash","metadata":{"category":"creative","difficulty":"medium"}}

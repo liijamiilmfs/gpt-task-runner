@@ -180,7 +180,7 @@ task-2,"Explain AI",gpt-4,production,low`;
       fs.writeFileSync(jsonlPath, jsonlContent);
 
       await expect(batchLoader.loadFromFile(jsonlPath)).rejects.toThrow(
-        /Invalid JSONL line/
+        /Validation errors found/
       );
     });
 

@@ -2,10 +2,10 @@
 
 /**
  * Branch Protection Setup Script
- * 
+ *
  * This script automatically configures branch protection rules for the repository
  * using the GitHub CLI. It sets up protection for both main and dev branches.
- * 
+ *
  * Prerequisites:
  * - GitHub CLI (gh) must be installed and authenticated
  * - Repository must be accessible via GitHub CLI
@@ -21,11 +21,11 @@ const CONFIG = {
   branches: ['main', 'dev'],
   requiredStatusChecks: [
     'ci/tests',
-    'ci/lint', 
+    'ci/lint',
     'ci/type-check',
     'ci/build',
     'ci/security',
-    'ci/coverage'
+    'ci/coverage',
   ],
   requiredApprovals: 1,
   dismissStaleReviews: true,
@@ -33,13 +33,14 @@ const CONFIG = {
   requireUpToDateBranches: true,
   enforceAdmins: true,
   allowForcePushes: false,
-  allowDeletions: false
+  allowDeletions: false,
 };
 
 class BranchProtectionSetup {
   constructor() {
     this.repository = this.getRepositoryName();
-    this.verbose = process.argv.includes('--verbose') || process.argv.includes('-v');
+    this.verbose =
+      process.argv.includes('--verbose') || process.argv.includes('-v');
   }
 
   log(message, level = 'info') {
@@ -50,25 +51,36 @@ class BranchProtectionSetup {
 
   getRepositoryName() {
     try {
-      const result = execSync('gh repo view --json nameWithOwner', { encoding: 'utf8' });
+      const result = execSync('gh repo view --json nameWithOwner', {
+        encoding: 'utf8',
+      });
       const repo = JSON.parse(result);
       return repo.nameWithOwner;
     } catch (error) {
-      this.log('Failed to get repository name. Make sure you are in a git repository with GitHub remote.', 'error');
-      this.log('You can also set the GITHUB_REPOSITORY environment variable.', 'error');
+      this.log(
+        'Failed to get repository name. Make sure you are in a git repository with GitHub remote.',
+        'error'
+      );
+      this.log(
+        'You can also set the GITHUB_REPOSITORY environment variable.',
+        'error'
+      );
       process.exit(1);
     }
   }
 
   async checkPrerequisites() {
     this.log('Checking prerequisites...');
-    
+
     // Check if GitHub CLI is installed
     try {
       execSync('gh --version', { stdio: 'pipe' });
       this.log('✓ GitHub CLI is installed');
     } catch (error) {
-      this.log('✗ GitHub CLI is not installed. Please install it first.', 'error');
+      this.log(
+        '✗ GitHub CLI is not installed. Please install it first.',
+        'error'
+      );
       this.log('Visit: https://cli.github.com/', 'error');
       process.exit(1);
     }
@@ -78,7 +90,10 @@ class BranchProtectionSetup {
       execSync('gh auth status', { stdio: 'pipe' });
       this.log('✓ GitHub CLI is authenticated');
     } catch (error) {
-      this.log('✗ GitHub CLI is not authenticated. Please run: gh auth login', 'error');
+      this.log(
+        '✗ GitHub CLI is not authenticated. Please run: gh auth login',
+        'error'
+      );
       process.exit(1);
     }
 
@@ -88,28 +103,31 @@ class BranchProtectionSetup {
       this.log(`✓ Repository access confirmed: ${this.repository}`);
     } catch (error) {
       this.log(`✗ Cannot access repository: ${this.repository}`, 'error');
-      this.log('Make sure you have admin permissions on this repository.', 'error');
+      this.log(
+        'Make sure you have admin permissions on this repository.',
+        'error'
+      );
       process.exit(1);
     }
   }
 
   async createBranchProtectionRule(branch) {
     this.log(`Setting up branch protection for: ${branch}`);
-    
+
     const ruleConfig = {
       required_status_checks: {
         strict: CONFIG.requireUpToDateBranches,
-        contexts: CONFIG.requiredStatusChecks
+        contexts: CONFIG.requiredStatusChecks,
       },
       enforce_admins: CONFIG.enforceAdmins,
       required_pull_request_reviews: {
         required_approving_review_count: CONFIG.requiredApprovals,
         dismiss_stale_reviews: CONFIG.dismissStaleReviews,
-        require_code_owner_reviews: CONFIG.requireCodeOwnerReviews
+        require_code_owner_reviews: CONFIG.requireCodeOwnerReviews,
       },
       restrictions: null, // No branch restrictions
       allow_force_pushes: CONFIG.allowForcePushes,
-      allow_deletions: CONFIG.allowDeletions
+      allow_deletions: CONFIG.allowDeletions,
     };
 
     try {
@@ -129,9 +147,11 @@ class BranchProtectionSetup {
 
       execSync(command, { stdio: 'pipe' });
       this.log(`✓ Branch protection configured for: ${branch}`);
-      
     } catch (error) {
-      this.log(`✗ Failed to configure branch protection for: ${branch}`, 'error');
+      this.log(
+        `✗ Failed to configure branch protection for: ${branch}`,
+        'error'
+      );
       if (this.verbose) {
         this.log(`Error details: ${error.message}`, 'error');
       }
@@ -141,7 +161,7 @@ class BranchProtectionSetup {
 
   async createCodeOwnersFile() {
     this.log('Creating CODEOWNERS file...');
-    
+
     const codeOwnersContent = `# Global code owners
 * @${this.getCurrentUser()}
 
@@ -163,7 +183,7 @@ tsconfig.json @${this.getCurrentUser()}
 `;
 
     const codeOwnersPath = path.join(process.cwd(), '.github', 'CODEOWNERS');
-    
+
     // Create .github directory if it doesn't exist
     const githubDir = path.dirname(codeOwnersPath);
     if (!fs.existsSync(githubDir)) {
@@ -187,19 +207,25 @@ tsconfig.json @${this.getCurrentUser()}
 
   async verifyBranchProtection(branch) {
     this.log(`Verifying branch protection for: ${branch}`);
-    
+
     try {
-      const result = execSync(`gh api repos/${this.repository}/branches/${branch}/protection`, { encoding: 'utf8' });
+      const result = execSync(
+        `gh api repos/${this.repository}/branches/${branch}/protection`,
+        { encoding: 'utf8' }
+      );
       const protection = JSON.parse(result);
-      
+
       this.log(`✓ Branch protection verified for: ${branch}`);
       if (this.verbose) {
         this.log(`Protection details: ${JSON.stringify(protection, null, 2)}`);
       }
-      
+
       return true;
     } catch (error) {
-      this.log(`✗ Branch protection verification failed for: ${branch}`, 'error');
+      this.log(
+        `✗ Branch protection verification failed for: ${branch}`,
+        'error'
+      );
       return false;
     }
   }
@@ -208,18 +234,18 @@ tsconfig.json @${this.getCurrentUser()}
     try {
       this.log('Starting branch protection setup...');
       this.log(`Repository: ${this.repository}`);
-      
+
       await this.checkPrerequisites();
-      
+
       // Create CODEOWNERS file
       await this.createCodeOwnersFile();
-      
+
       // Set up protection for each branch
       for (const branch of CONFIG.branches) {
         await this.createBranchProtectionRule(branch);
         await this.verifyBranchProtection(branch);
       }
-      
+
       this.log('✓ Branch protection setup completed successfully!');
       this.log('');
       this.log('Next steps:');
@@ -227,7 +253,6 @@ tsconfig.json @${this.getCurrentUser()}
       this.log('2. Review and update CODEOWNERS file');
       this.log('3. Test the protection rules with a test PR');
       this.log('4. Configure security scanning tools (Snyk, etc.)');
-      
     } catch (error) {
       this.log('Branch protection setup failed!', 'error');
       if (this.verbose) {

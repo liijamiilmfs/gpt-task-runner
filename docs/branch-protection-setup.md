@@ -1,6 +1,7 @@
 # Branch Protection Setup Guide
 
 ## Prerequisites
+
 - GitHub repository with admin access
 - GitHub CLI installed (`gh` command)
 - Node.js and npm installed for local scripts
@@ -8,6 +9,7 @@
 ## Automated Setup
 
 ### Using GitHub CLI Script
+
 ```bash
 # Navigate to the scripts directory
 cd scripts/branch-protection
@@ -23,6 +25,7 @@ node setup-branch-protection.js
 ```
 
 ### Using PowerShell (Windows)
+
 ```powershell
 # Navigate to the scripts directory
 cd scripts/branch-protection
@@ -34,16 +37,19 @@ cd scripts/branch-protection
 ## Manual Setup
 
 ### 1. Navigate to Repository Settings
+
 1. Go to your GitHub repository
 2. Click on "Settings" tab
 3. Click on "Branches" in the left sidebar
 
 ### 2. Configure Main Branch Protection
+
 1. Click "Add rule" next to "Branch protection rules"
 2. In "Branch name pattern", enter: `main`
 3. Configure the following settings:
 
 #### Required Status Checks
+
 - ✅ Require status checks to pass before merging
 - ✅ Require branches to be up to date before merging
 - Select the following required status checks:
@@ -55,22 +61,26 @@ cd scripts/branch-protection
   - `ci/coverage` (Coverage reports)
 
 #### Pull Request Reviews
+
 - ✅ Require a pull request before merging
 - ✅ Require approvals: `1`
 - ✅ Dismiss stale PR approvals when new commits are pushed
 - ✅ Require review from code owners
 
 #### Restrictions
+
 - ✅ Restrict pushes that create files larger than 100MB
 - ✅ Do not allow bypassing the above settings
 - ✅ Include administrators
 
 ### 3. Configure Dev Branch Protection
+
 1. Click "Add rule" again
 2. In "Branch name pattern", enter: `dev`
 3. Apply the same settings as the main branch
 
 ### 4. Configure Code Owners
+
 1. Go to "Code owners" in the left sidebar
 2. Create or update `.github/CODEOWNERS` file:
 
@@ -93,11 +103,13 @@ cd scripts/branch-protection
 ## GitHub Actions Workflow Setup
 
 ### 1. Create Workflow Directory
+
 ```bash
 mkdir -p .github/workflows
 ```
 
 ### 2. Create CI Workflow
+
 Create `.github/workflows/ci.yml`:
 
 ```yaml
@@ -105,9 +117,9 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [main, dev]
   pull_request:
-    branches: [ main, dev ]
+    branches: [main, dev]
 
 jobs:
   test:
@@ -118,14 +130,14 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Run tests
         run: npm test
         id: test
-      
+
       - name: Upload coverage reports
         uses: codecov/codecov-action@v3
         with:
@@ -139,10 +151,10 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Run ESLint
         run: npm run lint
         id: lint
@@ -155,10 +167,10 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Run TypeScript type check
         run: npm run type-check
         id: type-check
@@ -171,10 +183,10 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build application
         run: npm run build
         id: build
@@ -187,14 +199,14 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Run security audit
         run: npm audit --audit-level moderate
         id: security-audit
-      
+
       - name: Run Snyk security scan
         uses: snyk/actions/node@master
         env:
@@ -211,19 +223,20 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Run tests with coverage
         run: npm run test:coverage
         id: coverage
-      
+
       - name: Check coverage threshold
         run: npm run coverage:check
 ```
 
 ### 3. Create Package.json Scripts
+
 Add these scripts to your `package.json`:
 
 ```json
@@ -246,6 +259,7 @@ Add these scripts to your `package.json`:
 ## Verification
 
 ### 1. Test Branch Protection
+
 1. Create a test branch: `git checkout -b test-protection`
 2. Make a small change and commit
 3. Push the branch: `git push origin test-protection`
@@ -256,11 +270,13 @@ Add these scripts to your `package.json`:
    - You cannot merge without approval
 
 ### 2. Test Status Checks
+
 1. Create a PR with failing tests
 2. Verify the PR cannot be merged
 3. Fix the tests and verify the PR can be merged
 
 ### 3. Test Admin Override
+
 1. As an admin, try to push directly to main
 2. Verify the push is blocked
 3. Test emergency override procedures
@@ -270,21 +286,25 @@ Add these scripts to your `package.json`:
 ### Common Issues
 
 #### Status Checks Not Appearing
+
 - Ensure GitHub Actions workflows are properly configured
 - Check that workflow files are in `.github/workflows/`
 - Verify workflow syntax is correct
 
 #### Reviews Not Required
+
 - Check that "Require a pull request before merging" is enabled
 - Verify the number of required approvals is set correctly
 - Ensure code owners are properly configured
 
 #### Admin Override Not Working
+
 - Check "Include administrators" is enabled
 - Verify admin permissions in repository settings
 - Test with a non-admin account first
 
 ### Getting Help
+
 - Check GitHub's documentation on branch protection
 - Review the repository's GitHub Actions logs
 - Contact repository administrators
@@ -293,12 +313,14 @@ Add these scripts to your `package.json`:
 ## Maintenance
 
 ### Regular Tasks
+
 - Review and update protection rules quarterly
 - Monitor status check performance
 - Update security scanning tools
 - Review and update code owners
 
 ### Monitoring
+
 - Set up notifications for failed status checks
 - Monitor PR review times
 - Track security scan results

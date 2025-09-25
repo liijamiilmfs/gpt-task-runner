@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:dashboard": "cd dashboard && npm run build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
@@ -29,7 +28,11 @@
     "security:scan": "snyk test",
     "service:install": "node scripts/install-service.js",
     "service:uninstall": "node scripts/uninstall-service.js",
-    "test:dry-run": "node scripts/test-dry-run.js"
+    "test:dry-run": "node scripts/test-dry-run.js",
+    "check": "npm run lint && npm run format:check && npm run type-check && npm test",
+    "check:fix": "npm run format && npm run lint:fix && npm run type-check && npm test",
+    "pre-commit": "npm run check",
+    "pre-commit:ps1": "pwsh -File scripts/pre-commit.ps1"
   },
   "keywords": [
     "gpt",
@@ -78,6 +81,7 @@
     "@types/node": "^24.5.2",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
+    "@types/uuid": "^10.0.0",
     "@typescript-eslint/eslint-plugin": "^8.44.1",
     "@typescript-eslint/parser": "^8.44.1",
     "@vitest/coverage-v8": "^3.2.4",
@@ -94,6 +98,7 @@
     "tailwindcss": "^3.4.14",
     "ts-node": "^10.9.1",
     "typescript": "^5.7.2",
+    "uuid": "^10.0.0",
     "vitest": "^3.2.4"
   },
   "eslintConfig": {

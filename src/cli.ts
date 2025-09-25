@@ -26,11 +26,12 @@ program
   .option('-o, --output <path>', 'Output file path (CSV or JSONL)')
   .option('--dry-run', 'Simulate execution without making API calls')
   .option('-v, --verbose', 'Enable verbose logging')
+  .option('--json', 'Output logs in JSON format')
   .option('--model <model>', 'OpenAI model to use', 'gpt-3.5-turbo')
   .option('--temperature <number>', 'Temperature for generation', '0.7')
   .option('--max-tokens <number>', 'Maximum tokens to generate', '1000')
   .action(async (options) => {
-    const logger = new Logger(options.verbose ? 'debug' : 'info');
+    const logger = new Logger(options.verbose ? 'debug' : 'info', options.json);
 
     // Validate options
     if (!options.input && !options.prompt) {
@@ -91,7 +92,7 @@ program
   .option('-i, --input <path>', 'Input file path to validate')
   .option('-v, --verbose', 'Enable verbose logging')
   .action(async (options) => {
-    const logger = new Logger(options.verbose ? 'debug' : 'info');
+    const logger = new Logger(options.verbose ? 'debug' : 'info', options.json);
 
     if (!options.input) {
       logger.error('--input is required for validation');

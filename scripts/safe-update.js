@@ -18,18 +18,21 @@ const TIMESTAMP = new Date().toISOString().replace(/[:.]/g, '-');
 
 function createBackup() {
   console.log('📦 Creating backup of current dependencies...');
-  
+
   if (!fs.existsSync(BACKUP_DIR)) {
     fs.mkdirSync(BACKUP_DIR, { recursive: true });
   }
-  
+
   const backupPath = path.join(BACKUP_DIR, TIMESTAMP);
   fs.mkdirSync(backupPath, { recursive: true });
-  
+
   // Backup package files
   fs.copyFileSync('package.json', path.join(backupPath, 'package.json'));
-  fs.copyFileSync('package-lock.json', path.join(backupPath, 'package-lock.json'));
-  
+  fs.copyFileSync(
+    'package-lock.json',
+    path.join(backupPath, 'package-lock.json')
+  );
+
   console.log(`✅ Backup created at: ${backupPath}`);
   return backupPath;
 }
@@ -65,7 +68,10 @@ function restoreBackup(backupPath) {
   console.log('\n🔄 Restoring from backup...');
   try {
     fs.copyFileSync(path.join(backupPath, 'package.json'), 'package.json');
-    fs.copyFileSync(path.join(backupPath, 'package-lock.json'), 'package-lock.json');
+    fs.copyFileSync(
+      path.join(backupPath, 'package-lock.json'),
+      'package-lock.json'
+    );
     execSync('npm install', { stdio: 'inherit' });
     console.log('✅ Backup restored successfully');
   } catch (error) {
@@ -76,48 +82,53 @@ function restoreBackup(backupPath) {
 function main() {
   const args = process.argv.slice(2);
   const updateType = args[0] || 'audit';
-  
+
   console.log('🚀 Safe Dependency Update Tool');
   console.log('================================');
-  
+
   // Create backup
   const backupPath = createBackup();
-  
+
   let success = false;
-  
+
   try {
     switch (updateType) {
       case 'audit':
         console.log('\n🔒 Running npm audit fix (non-breaking only)...');
         success = runCommand('npm audit fix', 'Security audit fix');
         break;
-        
+
       case 'audit-force':
-        console.log('\n⚠️  WARNING: Running npm audit fix --force (may break things!)');
-        success = runCommand('npm audit fix --force', 'Force security audit fix');
+        console.log(
+          '\n⚠️  WARNING: Running npm audit fix --force (may break things!)'
+        );
+        success = runCommand(
+          'npm audit fix --force',
+          'Force security audit fix'
+        );
         break;
-        
+
       case 'update':
         console.log('\n📈 Running npm update...');
         success = runCommand('npm update', 'Package updates');
         break;
-        
+
       default:
         console.log('Usage: node safe-update.js [audit|audit-force|update]');
         process.exit(1);
     }
-    
+
     if (!success) {
       console.log('\n❌ Update failed. Restoring backup...');
       restoreBackup(backupPath);
       process.exit(1);
     }
-    
+
     // Test everything still works
     const testsPass = runTests();
     const typesPass = runTypeCheck();
     const buildPass = runBuild();
-    
+
     if (testsPass && typesPass && buildPass) {
       console.log('\n🎉 SUCCESS! All updates completed and verified.');
       console.log(`💾 Backup available at: ${backupPath}`);
@@ -127,7 +138,6 @@ function main() {
       restoreBackup(backupPath);
       process.exit(1);
     }
-    
   } catch (error) {
     console.error('\n💥 Unexpected error:', error.message);
     restoreBackup(backupPath);
@@ -139,4 +149,11 @@ if (require.main === module) {
   main();
 }
 
-module.exports = { createBackup, runCommand, runTests, runTypeCheck, runBuild, restoreBackup };
+module.exports = {
+  createBackup,
+  runCommand,
+  runTests,
+  runTypeCheck,
+  runBuild,
+  restoreBackup,
+};

@@ -18,13 +18,20 @@ export class TaskRunner {
   }
 
   async runFromFile(inputPath: string, options: CliOptions): Promise<void> {
+    const batchId = this.logger.generateCorrelationId();
+
     try {
-      this.logger.info(`Loading tasks from ${inputPath}`);
+      this.logger.info(`Loading tasks from ${inputPath}`, {
+        batch_id: batchId,
+        phase: 'load',
+      });
       const batchInput = await this.batchLoader.loadFromFile(inputPath);
 
-      this.logger.info(
-        `Found ${batchInput.tasks.length} tasks in ${batchInput.format} format`
-      );
+      this.logger.batchStart(batchId, batchId, {
+        taskCount: batchInput.tasks.length,
+        format: batchInput.format,
+        inputPath,
+      });
 
       // Apply global options to tasks that don't have them set
       const tasks = batchInput.tasks.map((task) => ({
@@ -34,12 +41,13 @@ export class TaskRunner {
         maxTokens: task.maxTokens ?? options.maxTokens,
       }));
 
-      const results = await this.transport.executeBatch(tasks);
+      const results = await this.transport.executeBatch(tasks, batchId);
 
-      this.logger.info(`Completed ${results.length} tasks`);
-      this.logger.info(
-        `Success: ${results.filter((r) => r.success).length}, Failed: ${results.filter((r) => !r.success).length}`
-      );
+      this.logger.batchComplete(batchId, batchId, {
+        totalTasks: results.length,
+        successful: results.filter((r) => r.success).length,
+        failed: results.filter((r) => !r.success).length,
+      });
 
       if (options.output) {
         await this.batchWriter.writeResults(results, options.output);
