@@ -1,5 +1,9 @@
 # GPT Task Runner
 
+[![CI/CD Pipeline](https://github.com/liijamiilmfs/gpt-task-runner/workflows/CI/CD%20Pipeline/badge.svg)](https://github.com/liijamiilmfs/gpt-task-runner/actions)
+[![Security Scans](https://github.com/liijamiilmfs/gpt-task-runner/workflows/Security%20Scans/badge.svg)](https://github.com/liijamiilmfs/gpt-task-runner/actions)
+[![Coverage](https://codecov.io/gh/liijamiilmfs/gpt-task-runner/branch/dev/graph/badge.svg)](https://codecov.io/gh/liijamiilmfs/gpt-task-runner)
+
 A powerful task runner and automation tool designed to work with GPT models for intelligent task execution and workflow management.
 
 ## Features
