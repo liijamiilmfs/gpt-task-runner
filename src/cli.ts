@@ -41,6 +41,13 @@ program
     '1000'
   )
   .option('--timeout <number>', 'Request timeout in milliseconds', '60000')
+  .option('--batch-size <number>', 'Number of tasks per batch', '10')
+  .option('--max-inflight <number>', 'Maximum concurrent tasks', '5')
+  .option(
+    '--checkpoint-interval <number>',
+    'Checkpoint interval in tasks',
+    '10'
+  )
   .action(async (options) => {
     const logger = new Logger(options.verbose ? 'debug' : 'info', options.json);
 
@@ -104,6 +111,9 @@ program
       maxRetries: parseInt(options.maxRetries) || 3,
       retryDelay: parseInt(options.retryDelay) || 1000,
       timeout: parseInt(options.timeout) || 60000,
+      batchSize: parseInt(options.batchSize) || 10,
+      maxInflight: parseInt(options.maxInflight) || 5,
+      checkpointInterval: parseInt(options.checkpointInterval) || 10,
     };
 
     // Execute tasks

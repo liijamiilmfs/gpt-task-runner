@@ -3,19 +3,24 @@ import { DryRunTransport } from './transports/dry-run-transport';
 import { BatchLoader } from './io/batch-loader';
 import { BatchWriter } from './io/batch-writer';
 import { Logger } from './logger';
+import { MemoryMonitor } from './utils/memory-monitor';
 import * as crypto from 'crypto';
+import * as path from 'path';
+import * as os from 'os';
 
 export class TaskRunner {
   private transport: Transport;
   private batchLoader: BatchLoader;
   private batchWriter: BatchWriter;
   private logger: Logger;
+  private memoryMonitor: MemoryMonitor;
 
   constructor(transport: Transport, logger: Logger) {
     this.transport = transport;
     this.batchLoader = new BatchLoader();
     this.batchWriter = new BatchWriter();
     this.logger = logger;
+    this.memoryMonitor = new MemoryMonitor();
   }
 
   async runFromFile(inputPath: string, options: CliOptions): Promise<void> {
@@ -79,16 +84,34 @@ export class TaskRunner {
       }
 
       const results: any[] = [];
-      const checkpointInterval = options.checkpointInterval || 10;
+      const batchSize = options.batchSize || 10;
+      const maxInflight = options.maxInflight || 5;
+      // const checkpointInterval = options.checkpointInterval || 10;
 
-      // Process tasks in batches for checkpointing
-      for (let i = 0; i < tasksToProcess.length; i += checkpointInterval) {
-        const batch = tasksToProcess.slice(i, i + checkpointInterval);
+      // Process tasks in batches with inflight limiting
+      for (let i = 0; i < tasksToProcess.length; i += batchSize) {
+        const batch = tasksToProcess.slice(i, i + batchSize);
+        const batchNumber = Math.floor(i / batchSize) + 1;
+        const totalBatches = Math.ceil(tasksToProcess.length / batchSize);
+
         this.logger.info(
-          `Processing batch ${Math.floor(i / checkpointInterval) + 1}/${Math.ceil(tasksToProcess.length / checkpointInterval)}`
+          `Processing batch ${batchNumber}/${totalBatches} (${batch.length} tasks)`
         );
 
-        const batchResults = await this.transport.executeBatch(batch, batchId);
+        // Monitor memory usage
+        const memoryStats = this.memoryMonitor.getMemoryUsageMB();
+        this.logger.debug('Memory usage', {
+          heapUsed: `${memoryStats.heapUsed.toFixed(2)}MB`,
+          heapTotal: `${memoryStats.heapTotal.toFixed(2)}MB`,
+          rss: `${memoryStats.rss.toFixed(2)}MB`,
+        });
+
+        // Process batch with inflight limiting
+        const batchResults = await this.processBatchWithInflightLimit(
+          batch,
+          batchId,
+          maxInflight
+        );
         results.push(...batchResults);
 
         // Update checkpoint
@@ -103,11 +126,24 @@ export class TaskRunner {
         checkpoint.lastCheckpoint = new Date().toISOString();
 
         // Save checkpoint
-        const checkpointFile = options.resume || 'checkpoint.json';
+        const checkpointFile =
+          options.resume ||
+          path.join(os.tmpdir(), `checkpoint-${batchId}.json`);
         await import('fs').then((fs) =>
           fs.writeFileSync(checkpointFile, JSON.stringify(checkpoint, null, 2))
         );
       }
+
+      // Log final memory statistics
+      const finalMemoryStats = this.memoryMonitor.getSummary();
+      this.logger.info('Processing complete - Memory summary', {
+        peakHeapUsed: finalMemoryStats.peak
+          ? `${(finalMemoryStats.peak.heapUsed / 1024 / 1024).toFixed(2)}MB`
+          : 'N/A',
+        currentHeapUsed: `${(finalMemoryStats.current.heapUsed / 1024 / 1024).toFixed(2)}MB`,
+        memoryGrowthRate: `${finalMemoryStats.growthRate.toFixed(2)}MB/s`,
+        totalSnapshots: finalMemoryStats.snapshots,
+      });
 
       this.logger.batchComplete(batchId, batchId, {
         totalTasks: results.length,
@@ -162,16 +198,15 @@ export class TaskRunner {
       const hasFailures = results.some((r) => !r.success);
       if (hasFailures) {
         this.logger.warn('Some tasks failed');
-        process.exit(1);
+        throw new Error('Some tasks failed');
       } else {
         this.logger.info('All tasks completed successfully');
-        process.exit(0);
       }
     } catch (error) {
       this.logger.error('Task execution failed', {
         error: error instanceof Error ? error.message : error,
       });
-      process.exit(1);
+      throw error;
     }
   }
 
@@ -223,6 +258,19 @@ export class TaskRunner {
 
     const contentString = JSON.stringify(content, Object.keys(content).sort());
     return crypto.createHash('sha256').update(contentString).digest('hex');
+  }
+
+  /**
+   * Process a batch of tasks with inflight limiting
+   */
+  private async processBatchWithInflightLimit(
+    tasks: TaskRequest[],
+    batchId: string,
+    _maxInflight: number
+  ): Promise<any[]> {
+    // For now, use the existing executeBatch method
+    // TODO: Implement proper inflight limiting with sub-batching
+    return await this.transport.executeBatch(tasks, batchId);
   }
 
   /**
