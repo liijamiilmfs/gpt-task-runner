@@ -6,6 +6,20 @@ import {
 } from '../src/utils/concurrency-controller';
 import { MultiModelRateLimiter } from '../src/utils/rate-limiter';
 
+// Helper for controlled promises (latches)
+class Deferred<T = void> {
+  promise: Promise<T>;
+  resolve: (value: T) => void;
+  reject: (reason?: any) => void;
+
+  constructor() {
+    this.promise = new Promise<T>((resolve, reject) => {
+      this.resolve = resolve;
+      this.reject = reject;
+    });
+  }
+}
+
 describe('ConcurrencyController', () => {
   let controller: ConcurrencyController<string, string>;
   let mockProcessor: vi.MockedFunction<(task: Task<string>) => Promise<string>>;
@@ -45,31 +59,23 @@ describe('ConcurrencyController', () => {
       expect(mockProcessor).toHaveBeenCalledWith(task3);
     });
 
-    it.skip('should respect max concurrency limit', async () => {
+    it('should respect max concurrency limit', async () => {
       // Create a controller with maxConcurrency = 1
       const limitedController = new ConcurrencyController(mockProcessor, {
         maxConcurrency: 1,
       });
 
-      let resolveFirst: () => void;
-      let resolveSecond: () => void;
-      let resolveThird: () => void;
-      const firstPromise = new Promise<void>((resolve) => {
-        resolveFirst = resolve;
-      });
-      const secondPromise = new Promise<void>((resolve) => {
-        resolveSecond = resolve;
-      });
-      const thirdPromise = new Promise<void>((resolve) => {
-        resolveThird = resolve;
-      });
+      // Create controlled promises (latches)
+      const firstDeferred = new Deferred<string>();
+      const secondDeferred = new Deferred<string>();
+      const thirdDeferred = new Deferred<string>();
 
       // Reset mock to ensure clean state
       mockProcessor.mockReset();
       mockProcessor
-        .mockImplementationOnce(() => firstPromise)
-        .mockImplementationOnce(() => secondPromise)
-        .mockImplementationOnce(() => thirdPromise);
+        .mockImplementationOnce(() => firstDeferred.promise)
+        .mockImplementationOnce(() => secondDeferred.promise)
+        .mockImplementationOnce(() => thirdDeferred.promise);
 
       const task1: Task<string> = { id: 'task1', data: 'task1' };
       const task2: Task<string> = { id: 'task2', data: 'task2' };
@@ -77,42 +83,39 @@ describe('ConcurrencyController', () => {
 
       // Add first task - it should start processing immediately
       await limitedController.addTask(task1);
-      await vi.runAllTimersAsync();
 
       // First task should start processing immediately
       expect(mockProcessor).toHaveBeenCalledTimes(1);
 
       // Add second task - it should be queued since maxConcurrency is 1
       await limitedController.addTask(task2);
-      await vi.runAllTimersAsync();
 
       // Second task should not start yet (still queued)
       expect(mockProcessor).toHaveBeenCalledTimes(1);
 
       // Add third task - it should also be queued
       await limitedController.addTask(task3);
-      await vi.runAllTimersAsync();
 
       // Third task should not start yet (still queued)
       expect(mockProcessor).toHaveBeenCalledTimes(1);
 
       // Resolve first task to free up a worker
-      resolveFirst!();
-      await vi.runAllTimersAsync();
+      firstDeferred.resolve('result1');
+      await firstDeferred.promise;
 
       // Second task should now start
       expect(mockProcessor).toHaveBeenCalledTimes(2);
 
       // Resolve second task
-      resolveSecond!();
-      await vi.runAllTimersAsync();
+      secondDeferred.resolve('result2');
+      await secondDeferred.promise;
 
       // Third task should now start
       expect(mockProcessor).toHaveBeenCalledTimes(3);
 
       // Resolve third task
-      resolveThird!();
-      await vi.runAllTimersAsync();
+      thirdDeferred.resolve('result3');
+      await thirdDeferred.promise;
 
       await limitedController.shutdown();
     });
@@ -153,23 +156,22 @@ describe('ConcurrencyController', () => {
   });
 
   describe('Priority Queue', () => {
-    it.skip('should process higher priority tasks first', async () => {
+    it('should process higher priority tasks first', async () => {
       // Create a controller with priority enabled and maxConcurrency = 1
       const priorityController = new ConcurrencyController(mockProcessor, {
         maxConcurrency: 1,
         enablePriority: true,
       });
 
-      // Mock processor to delay completion so we can test queueing
-      let resolveTasks: (() => void)[] = [];
-      const taskPromises = [1, 2, 3].map(
-        () => new Promise<void>((resolve) => resolveTasks.push(resolve))
-      );
+      // Create controlled promises (latches)
+      const firstDeferred = new Deferred<string>();
+      const secondDeferred = new Deferred<string>();
+      const thirdDeferred = new Deferred<string>();
 
       mockProcessor
-        .mockImplementationOnce(() => taskPromises[0])
-        .mockImplementationOnce(() => taskPromises[1])
-        .mockImplementationOnce(() => taskPromises[2]);
+        .mockImplementationOnce(() => firstDeferred.promise)
+        .mockImplementationOnce(() => secondDeferred.promise)
+        .mockImplementationOnce(() => thirdDeferred.promise);
 
       const lowPriority: Task<string> = { id: '1', data: 'low', priority: 1 };
       const highPriority: Task<string> = {
@@ -190,17 +192,15 @@ describe('ConcurrencyController', () => {
         mediumPriority,
       ]);
 
-      // Wait for tasks to be queued and processed
-      await vi.runAllTimersAsync();
-
       // Should be called in priority order: high, medium, low
       expect(mockProcessor).toHaveBeenNthCalledWith(1, highPriority);
       expect(mockProcessor).toHaveBeenNthCalledWith(2, mediumPriority);
       expect(mockProcessor).toHaveBeenNthCalledWith(3, lowPriority);
 
       // Resolve all tasks
-      resolveTasks.forEach((resolve) => resolve());
-      await vi.runAllTimersAsync();
+      firstDeferred.resolve('high-result');
+      secondDeferred.resolve('medium-result');
+      thirdDeferred.resolve('low-result');
 
       await priorityController.shutdown();
     });
@@ -236,29 +236,28 @@ describe('ConcurrencyController', () => {
   });
 
   describe('Metrics and Monitoring', () => {
-    it.skip('should track processing metrics', async () => {
+    it('should track processing metrics', async () => {
       // Create a controller with maxConcurrency = 1 to force queueing
       const metricsController = new ConcurrencyController(mockProcessor, {
         maxConcurrency: 1,
       });
 
-      // Mock processor to delay completion
-      let resolveTask: () => void;
-      const taskPromise = new Promise<void>(
-        (resolve) => (resolveTask = resolve)
-      );
-      mockProcessor.mockImplementation(() => taskPromise);
+      // Create controlled promises (latches)
+      const firstDeferred = new Deferred<string>();
+      const secondDeferred = new Deferred<string>();
+
+      mockProcessor
+        .mockImplementationOnce(() => firstDeferred.promise)
+        .mockImplementationOnce(() => secondDeferred.promise);
 
       const task1: Task<string> = { id: '1', data: 'task1' };
       const task2: Task<string> = { id: '2', data: 'task2' };
 
       // Add first task - it should start processing immediately
       await metricsController.addTask(task1);
-      await vi.runAllTimersAsync();
 
       // Add second task - it should be queued
       await metricsController.addTask(task2);
-      await vi.runAllTimersAsync();
 
       const metrics = metricsController.getMetrics();
       expect(metrics.queueLength).toBe(1); // One task in queue
@@ -266,14 +265,18 @@ describe('ConcurrencyController', () => {
       expect(metrics.totalProcessed).toBe(0); // Not completed yet
 
       // Complete the first task
-      resolveTask!();
-      await vi.runAllTimersAsync();
+      firstDeferred.resolve('result1');
+      await firstDeferred.promise;
 
       const finalMetrics = metricsController.getMetrics();
       expect(finalMetrics.queueLength).toBe(0); // Queue should be empty
       expect(finalMetrics.activeWorkers).toBe(1); // Second task now processing
       expect(finalMetrics.totalProcessed).toBe(1); // First task completed
       expect(finalMetrics.averageProcessingTime).toBeGreaterThan(0);
+
+      // Complete the second task
+      secondDeferred.resolve('result2');
+      await secondDeferred.promise;
 
       await metricsController.shutdown();
     });
@@ -305,30 +308,24 @@ describe('ConcurrencyController', () => {
   });
 
   describe('Queue Management', () => {
-    it.skip('should reject tasks when queue is full', async () => {
+    it('should reject tasks when queue is full', async () => {
       const controller = new ConcurrencyController(mockProcessor, {
         maxConcurrency: 1,
         maxQueueSize: 2,
       });
 
-      // Mock processor to delay completion so tasks stay in queue
-      let resolveTask: () => void;
-      const taskPromise = new Promise<void>(
-        (resolve) => (resolveTask = resolve)
-      );
-      mockProcessor.mockImplementation(() => taskPromise);
+      // Create controlled promise (latch)
+      const taskDeferred = new Deferred<string>();
+      mockProcessor.mockImplementation(() => taskDeferred.promise);
 
       // Add first task - it starts processing immediately
       await controller.addTask({ id: '1', data: 'task1' });
-      await vi.runAllTimersAsync();
 
       // Add second task - it gets queued
       await controller.addTask({ id: '2', data: 'task2' });
-      await vi.runAllTimersAsync();
 
       // Add third task - it gets queued (queue now has 1 task)
       await controller.addTask({ id: '3', data: 'task3' });
-      await vi.runAllTimersAsync();
 
       // This should be rejected (queue is now full with 2 tasks)
       await expect(
@@ -336,40 +333,35 @@ describe('ConcurrencyController', () => {
       ).rejects.toThrow('Queue is full');
 
       // Clean up
-      resolveTask!();
+      taskDeferred.resolve('result');
       await controller.shutdown();
     });
 
-    it.skip('should return queue status', async () => {
+    it('should return queue status', async () => {
       // Create a controller with maxConcurrency = 1 to force queueing
       const statusController = new ConcurrencyController(mockProcessor, {
         maxConcurrency: 1,
       });
 
-      // Mock processor to delay completion so tasks stay in queue
-      let resolveTask: () => void;
-      const taskPromise = new Promise<void>(
-        (resolve) => (resolveTask = resolve)
-      );
-      mockProcessor.mockImplementation(() => taskPromise);
+      // Create controlled promise (latch)
+      const taskDeferred = new Deferred<string>();
+      mockProcessor.mockImplementation(() => taskDeferred.promise);
 
       const task1: Task<string> = { id: '1', data: 'task1' };
       const task2: Task<string> = { id: '2', data: 'task2' };
 
       // Add first task - it starts processing immediately
       await statusController.addTask(task1);
-      await vi.runAllTimersAsync();
 
       // Add second task - it gets queued
       await statusController.addTask(task2);
-      await vi.runAllTimersAsync();
 
       const status = statusController.getQueueStatus();
       expect(status.length).toBe(1); // One task in queue, one being processed
       expect(status.tasks).toContain(task2); // task2 should be in queue
 
       // Clean up
-      resolveTask!();
+      taskDeferred.resolve('result');
       await statusController.shutdown();
     });
   });
