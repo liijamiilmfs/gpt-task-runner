@@ -137,7 +137,7 @@ export class Database {
     updates: Partial<TaskExecution>
   ): Promise<void> {
     const fields: string[] = [];
-    const values: any[] = [];
+    const values: unknown[] = [];
 
     if (updates.status) {
       fields.push('status = ?');
@@ -218,7 +218,7 @@ export class Database {
           MAX(createdAt) as lastExecution
         FROM task_executions
       `,
-        (err, row: any) => {
+        (err, row: Record<string, unknown>) => {
           if (err) {
             reject(err);
           } else {
@@ -239,7 +239,7 @@ export class Database {
   }
 
   async saveScheduledTask(
-    task: Omit<any, 'id' | 'createdAt'>
+    task: Record<string, unknown>
   ): Promise<string> {
     const id = `sched-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     const createdAt = new Date().toISOString();
@@ -254,15 +254,15 @@ export class Database {
       stmt.run(
         [
           id,
-          (task as any).name,
-          (task as any).schedule,
-          (task as any).inputFile,
-          (task as any).outputFile,
-          (task as any).isDryRun ? 1 : 0,
-          (task as any).isActive ? 1 : 0,
+          task.name as string,
+          task.schedule as string,
+          task.inputFile as string,
+          task.outputFile as string,
+          (task.isDryRun as boolean) ? 1 : 0,
+          (task.isActive as boolean) ? 1 : 0,
           createdAt,
-          (task as any).lastRun,
-          (task as any).nextRun,
+          task.lastRun as string,
+          task.nextRun as string,
         ],
         function (err) {
           if (err) {
@@ -277,7 +277,7 @@ export class Database {
     });
   }
 
-  async getScheduledTasks(): Promise<any[]> {
+  async getScheduledTasks(): Promise<Record<string, unknown>[]> {
     return new Promise((resolve, reject) => {
       this.db.all(
         `
@@ -299,7 +299,7 @@ export class Database {
   async logServiceEvent(
     level: string,
     message: string,
-    metadata?: any
+    metadata?: Record<string, unknown>
   ): Promise<void> {
     return new Promise((resolve, reject) => {
       const stmt = this.db.prepare(`
@@ -327,7 +327,7 @@ export class Database {
     });
   }
 
-  async getServiceLogs(limit: number = 100): Promise<any[]> {
+  async getServiceLogs(limit: number = 100): Promise<Record<string, unknown>[]> {
     return new Promise((resolve, reject) => {
       this.db.all(
         `
