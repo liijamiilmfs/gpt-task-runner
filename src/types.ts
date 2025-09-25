@@ -35,6 +35,9 @@ export interface TaskResponse {
   };
   batch_id?: string;
   corr_id?: string;
+  retryCount?: number;
+  errorCode?: string;
+  isRetryable?: boolean;
 }
 
 export interface DryRunResult {
@@ -77,4 +80,38 @@ export interface CliOptions {
   model?: string;
   temperature?: number;
   maxTokens?: number;
+  maxRetries?: number;
+  retryDelay?: number;
+  timeout?: number;
+  resume?: string;
+  onlyFailed?: boolean;
+  checkpointInterval?: number;
+}
+
+export interface RetryConfig {
+  maxRetries: number;
+  baseDelayMs: number;
+  maxDelayMs: number;
+  backoffMultiplier: number;
+  jitterMs: number;
+  timeoutMs: number;
+}
+
+export interface ErrorInfo {
+  code: string;
+  message: string;
+  isRetryable: boolean;
+  httpStatus?: number;
+  originalError?: Error;
+}
+
+export enum ErrorCodes {
+  RATE_LIMIT = 'E_RATE_LIMIT',
+  TIMEOUT = 'E_TIMEOUT',
+  AUTH = 'E_AUTH',
+  INPUT = 'E_INPUT',
+  QUOTA = 'E_QUOTA',
+  SERVER_ERROR = 'E_SERVER_ERROR',
+  NETWORK = 'E_NETWORK',
+  UNKNOWN = 'E_UNKNOWN',
 }

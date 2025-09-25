@@ -150,6 +150,11 @@ test-results/
 playwright-report/
 test-results.xml
 
+# Task runner output files
+*-results.jsonl
+dry-run-results.jsonl
+*.dry-run.jsonl
+
 # Security scan results
 security-reports/
 *.sarif

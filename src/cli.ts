@@ -30,6 +30,17 @@ program
   .option('--model <model>', 'OpenAI model to use', 'gpt-3.5-turbo')
   .option('--temperature <number>', 'Temperature for generation', '0.7')
   .option('--max-tokens <number>', 'Maximum tokens to generate', '1000')
+  .option(
+    '--max-retries <number>',
+    'Maximum number of retries for failed requests',
+    '3'
+  )
+  .option(
+    '--retry-delay <number>',
+    'Base delay between retries in milliseconds',
+    '1000'
+  )
+  .option('--timeout <number>', 'Request timeout in milliseconds', '60000')
   .action(async (options) => {
     const logger = new Logger(options.verbose ? 'debug' : 'info', options.json);
 
@@ -61,7 +72,21 @@ program
       }
 
       const baseURL = process.env['OPENAI_BASE_URL'];
-      transport = new OpenAITransport(apiKey, baseURL);
+
+      // Create retry configuration from CLI options
+      const retryConfig = {
+        maxRetries: parseInt(options.maxRetries) || 3,
+        baseDelayMs: parseInt(options.retryDelay) || 1000,
+        timeoutMs: parseInt(options.timeout) || 60000,
+      };
+
+      transport = new OpenAITransport(apiKey, baseURL, retryConfig);
+
+      if (options.verbose) {
+        logger.info(
+          `Configured retry settings: maxRetries=${retryConfig.maxRetries}, baseDelay=${retryConfig.baseDelayMs}ms, timeout=${retryConfig.timeoutMs}ms`
+        );
+      }
     }
 
     // Create task runner
@@ -76,6 +101,9 @@ program
       model: options.model,
       temperature: parseFloat(options.temperature),
       maxTokens: parseInt(options.maxTokens),
+      maxRetries: parseInt(options.maxRetries) || 3,
+      retryDelay: parseInt(options.retryDelay) || 1000,
+      timeout: parseInt(options.timeout) || 60000,
     };
 
     // Execute tasks
