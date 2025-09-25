@@ -80,7 +80,7 @@ export class RetryManager {
 
   constructor(
     private readonly config: RetryConfig,
-    private readonly circuitBreakerThreshold: number = 5
+    circuitBreakerThreshold: number = 5
   ) {
     this.circuitBreaker = new CircuitBreaker(
       circuitBreakerThreshold,
