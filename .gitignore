@@ -182,3 +182,6 @@ audit-reports/
 *.temp
 .DS_Store
 Thumbs.db
+
+# Gpt-runner-scripts
+scripts/gpt_runner_*.ps1

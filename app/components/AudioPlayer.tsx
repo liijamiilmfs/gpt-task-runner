@@ -66,10 +66,10 @@ export default function AudioPlayer({ text, onAudioGenerated, onLoadingChange }:
 
   // Cleanup on component unmount
   useEffect(() => {
+    const audioElement = audioRef.current
     return () => {
       log.debug('AudioPlayer unmounting - cleaning up')
-      // Capture the ref value to avoid stale closure warning
-      const audioElement = audioRef.current
+      // Use the captured ref value to avoid stale closure warning
       if (audioElement) {
         audioElement.pause()
         audioElement.src = '' // Only safe to do on component destruction
