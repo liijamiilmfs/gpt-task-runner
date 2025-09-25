@@ -109,45 +109,80 @@ export class BatchLoader {
   }
 
   private async loadFromJSONL(filePath: string): Promise<BatchInput> {
-    // Check if file exists first
-    if (!fs.existsSync(filePath)) {
-      throw new Error(`ENOENT: no such file or directory, open '${filePath}'`);
-    }
-
-    const content = fs.readFileSync(filePath, 'utf-8');
-    const lines = content.trim().split('\n');
-    const tasks: TaskRequest[] = [];
-    const validationErrors: ValidationError[] = [];
-
-    for (let i = 0; i < lines.length; i++) {
-      const line = lines[i];
-      if (line.trim()) {
-        try {
-          const task = JSON.parse(line) as TaskRequest;
-
-          // Validate the task
-          const validation = TaskValidator.validateTask(task, i + 1);
-          validationErrors.push(...validation.errors);
-
-          tasks.push(task);
-        } catch (error) {
-          validationErrors.push({
-            field: 'json',
-            message: `Invalid JSON format: ${error instanceof Error ? error.message : 'Unknown error'}`,
-            value: line,
-          });
-        }
+    return new Promise((resolve, reject) => {
+      // Check if file exists first
+      if (!fs.existsSync(filePath)) {
+        reject(new Error(`ENOENT: no such file or directory, open '${filePath}'`));
+        return;
       }
-    }
 
-    if (validationErrors.length > 0) {
-      const errorMessages = validationErrors
-        .map((err) => err.message)
-        .join('\n');
-      throw new Error(`Validation errors found:\n${errorMessages}`);
-    }
+      const tasks: TaskRequest[] = [];
+      const validationErrors: ValidationError[] = [];
+      let lineNumber = 0;
 
-    return { tasks, format: 'jsonl' };
+      const stream = fs.createReadStream(filePath, { encoding: 'utf-8' });
+      let buffer = '';
+
+      stream
+        .on('data', (chunk: string | Buffer) => {
+          buffer += chunk;
+          const lines = buffer.split('\n');
+
+          // Keep the last line in buffer (might be incomplete)
+          buffer = lines.pop() || '';
+
+          for (const line of lines) {
+            lineNumber++;
+            if (line.trim()) {
+              try {
+                const task = JSON.parse(line) as TaskRequest;
+
+                // Validate the task
+                const validation = TaskValidator.validateTask(task, lineNumber);
+                validationErrors.push(...validation.errors);
+
+                tasks.push(task);
+              } catch (error) {
+                validationErrors.push({
+                  field: 'json',
+                  message: `Invalid JSON format: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                  value: line,
+                });
+              }
+            }
+          }
+        })
+        .on('end', () => {
+          // Process the last line if it exists
+          if (buffer.trim()) {
+            lineNumber++;
+            try {
+              const task = JSON.parse(buffer) as TaskRequest;
+              const validation = TaskValidator.validateTask(task, lineNumber);
+              validationErrors.push(...validation.errors);
+              tasks.push(task);
+            } catch (error) {
+              validationErrors.push({
+                field: 'json',
+                message: `Invalid JSON format: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                value: buffer,
+              });
+            }
+          }
+
+          if (validationErrors.length > 0) {
+            const errorMessages = validationErrors
+              .map((err) => err.message)
+              .join('\n');
+            reject(new Error(`Validation errors found:\n${errorMessages}`));
+          } else {
+            resolve({ tasks, format: 'jsonl' });
+          }
+        })
+        .on('error', (error) => {
+          reject(error);
+        });
+    });
   }
 
   private parseMetadata(row: any): Record<string, any> | undefined {
