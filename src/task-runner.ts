@@ -19,15 +19,18 @@ export class TaskRunner {
 
   async runFromFile(inputPath: string, options: CliOptions): Promise<void> {
     const batchId = this.logger.generateCorrelationId();
-    
+
     try {
-      this.logger.info(`Loading tasks from ${inputPath}`, { batch_id: batchId, phase: 'load' });
+      this.logger.info(`Loading tasks from ${inputPath}`, {
+        batch_id: batchId,
+        phase: 'load',
+      });
       const batchInput = await this.batchLoader.loadFromFile(inputPath);
 
       this.logger.batchStart(batchId, batchId, {
         taskCount: batchInput.tasks.length,
         format: batchInput.format,
-        inputPath
+        inputPath,
       });
 
       // Apply global options to tasks that don't have them set
@@ -43,7 +46,7 @@ export class TaskRunner {
       this.logger.batchComplete(batchId, batchId, {
         totalTasks: results.length,
         successful: results.filter((r) => r.success).length,
-        failed: results.filter((r) => !r.success).length
+        failed: results.filter((r) => !r.success).length,
       });
 
       if (options.output) {

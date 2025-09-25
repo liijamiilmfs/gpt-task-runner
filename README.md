@@ -21,17 +21,20 @@ A powerful task runner and automation tool designed to work with GPT models for 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/gpt-task-runner.git
 cd gpt-task-runner
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Set up environment variables:
+
 ```bash
 cp .env.example .env
 # Edit .env with your API keys and configuration
