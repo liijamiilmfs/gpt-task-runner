@@ -1,5 +1,6 @@
 import * as sqlite3 from 'sqlite3';
 import * as path from 'path';
+import * as fs from 'fs';
 // import { TaskRequest, TaskResponse, DryRunResult } from '../types';
 
 export interface TaskExecution {
@@ -30,7 +31,21 @@ export class Database {
 
   constructor(dbPath?: string) {
     const defaultPath = path.join(process.cwd(), 'data', 'gpt-task-runner.db');
-    this.db = new sqlite3.Database(dbPath || defaultPath);
+    const finalPath = dbPath || defaultPath;
+    
+    // Ensure the directory exists
+    const dbDir = path.dirname(finalPath);
+    if (!fs.existsSync(dbDir)) {
+      fs.mkdirSync(dbDir, { recursive: true });
+    }
+    
+    this.db = new sqlite3.Database(finalPath, (err) => {
+      if (err) {
+        console.error('SQLite database connection error:', err);
+        throw new Error(`Failed to connect to database: ${err.message}`);
+      }
+    });
+    
     this.initializeTables();
   }
 
