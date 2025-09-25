@@ -223,14 +223,14 @@ export class Database {
             reject(err);
           } else {
             resolve({
-              totalTasks: row.totalTasks || 0,
-              successfulTasks: row.successfulTasks || 0,
-              failedTasks: row.failedTasks || 0,
-              dryRunTasks: row.dryRunTasks || 0,
+              totalTasks: (row.totalTasks as number) || 0,
+              successfulTasks: (row.successfulTasks as number) || 0,
+              failedTasks: (row.failedTasks as number) || 0,
+              dryRunTasks: (row.dryRunTasks as number) || 0,
               totalCost: 0, // Will be calculated from response data
               totalTokens: 0, // Will be calculated from response data
               averageResponseTime: 0, // Will be calculated from timestamps
-              lastExecution: row.lastExecution,
+              lastExecution: row.lastExecution as string | undefined,
             });
           }
         }
@@ -238,9 +238,7 @@ export class Database {
     });
   }
 
-  async saveScheduledTask(
-    task: Record<string, unknown>
-  ): Promise<string> {
+  async saveScheduledTask(task: Record<string, unknown>): Promise<string> {
     const id = `sched-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
     const createdAt = new Date().toISOString();
 
@@ -289,7 +287,7 @@ export class Database {
           if (err) {
             reject(err);
           } else {
-            resolve(rows);
+            resolve(rows as Record<string, unknown>[]);
           }
         }
       );
@@ -327,7 +325,9 @@ export class Database {
     });
   }
 
-  async getServiceLogs(limit: number = 100): Promise<Record<string, unknown>[]> {
+  async getServiceLogs(
+    limit: number = 100
+  ): Promise<Record<string, unknown>[]> {
     return new Promise((resolve, reject) => {
       this.db.all(
         `
@@ -340,7 +340,7 @@ export class Database {
           if (err) {
             reject(err);
           } else {
-            resolve(rows);
+            resolve(rows as Record<string, unknown>[]);
           }
         }
       );

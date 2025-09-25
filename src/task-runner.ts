@@ -1,4 +1,4 @@
-import { Transport, TaskRequest, CliOptions } from './types';
+import { Transport, TaskRequest, TaskResponse, CliOptions } from './types';
 import { DryRunTransport } from './transports/dry-run-transport';
 import { BatchLoader } from './io/batch-loader';
 import { BatchWriter } from './io/batch-writer';
@@ -86,7 +86,6 @@ export class TaskRunner {
       const results: TaskResponse[] = [];
       const batchSize = options.batchSize || 10;
       const maxInflight = options.maxInflight || 5;
-      const checkpointInterval = options.checkpointInterval || 10;
 
       // Process tasks in batches with inflight limiting
       for (let i = 0; i < tasksToProcess.length; i += batchSize) {
@@ -117,9 +116,9 @@ export class TaskRunner {
         // Update checkpoint
         batchResults.forEach((result) => {
           if (result.success) {
-            checkpoint.completedTasks.push(result.id);
+            (checkpoint.completedTasks as string[]).push(result.id);
           } else {
-            checkpoint.failedTasks.push(result.id);
+            (checkpoint.failedTasks as string[]).push(result.id);
           }
         });
 
@@ -182,7 +181,8 @@ export class TaskRunner {
 
       // Clean up checkpoint file if all tasks completed successfully
       if (
-        checkpoint.completedTasks.length + checkpoint.failedTasks.length ===
+        (checkpoint.completedTasks as string[]).length +
+          (checkpoint.failedTasks as string[]).length ===
         checkpoint.totalTasks
       ) {
         const checkpointFile = options.resume || 'checkpoint.json';
@@ -287,13 +287,16 @@ export class TaskRunner {
   > {
     if (onlyFailed) {
       // Process only failed tasks
-      return allTasks.filter((task) =>
-        checkpoint.failedTasks?.includes(task.id)
+      return allTasks.filter(
+        (task) =>
+          checkpoint && (checkpoint.failedTasks as string[])?.includes(task.id)
       );
     } else {
       // Process remaining tasks (not completed and not failed)
-      const completedTasks = new Set(checkpoint.completedTasks || []);
-      const failedTasks = new Set(checkpoint.failedTasks || []);
+      const completedTasks = new Set(
+        (checkpoint?.completedTasks as string[]) || []
+      );
+      const failedTasks = new Set((checkpoint?.failedTasks as string[]) || []);
 
       return allTasks.filter(
         (task) => !completedTasks.has(task.id) && !failedTasks.has(task.id)
