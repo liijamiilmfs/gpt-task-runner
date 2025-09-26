@@ -104,11 +104,7 @@ If you encounter any issues or have questions, please:
 
 ## Roadmap
 
-- [ ] Web-based dashboard
-- [ ] Task scheduling capabilities
-- [ ] Integration with popular CI/CD tools
-- [ ] Advanced logging and analytics
-- [ ] Multi-model support
+See `docs/roadmap.md` and `docs/milestones.md` for dated milestones and deliverables aligned with TopTier practices.
 
 ---
 
