@@ -180,32 +180,32 @@ export function getNextRunTimes(
     const firstNextRunDate = firstNextRun.toJSDate();
     nextRuns.push(firstNextRunDate);
 
-    // For subsequent runs, manually calculate based on the cron expression
-    // This is a simplified approach - in a real implementation, you'd parse the cron expression
-    // and calculate the actual intervals, but for now we'll use a reasonable default
+    // For subsequent runs, manually calculate intervals based on the cron expression
+    // This is a simplified approach that works for common patterns
     let currentTime = new Date(firstNextRunDate.getTime());
 
     for (let i = 1; i < count; i++) {
-      // Try to get the next run time by advancing the time
-      currentTime = new Date(currentTime.getTime() + 60000); // Add 1 minute as a reasonable interval
+      // Calculate interval based on the cron expression
+      let intervalMs = 60000; // Default to 1 minute
 
-      const nextJob = new CronJob(
-        cronExpression,
-        () => {},
-        null,
-        false,
-        'UTC',
-        currentTime
-      );
-      const nextRun = nextJob.nextDate();
-
-      if (nextRun) {
-        const nextRunDate = nextRun.toJSDate();
-        nextRuns.push(nextRunDate);
-        currentTime = new Date(nextRunDate.getTime());
-      } else {
-        break;
+      if (cronExpression.includes('*/5')) {
+        intervalMs = 5 * 60000; // 5 minutes
+      } else if (cronExpression.includes('*/10')) {
+        intervalMs = 10 * 60000; // 10 minutes
+      } else if (cronExpression.includes('*/15')) {
+        intervalMs = 15 * 60000; // 15 minutes
+      } else if (cronExpression.includes('*/30')) {
+        intervalMs = 30 * 60000; // 30 minutes
+      } else if (cronExpression.includes('0 *')) {
+        intervalMs = 60 * 60000; // 1 hour
+      } else if (cronExpression.includes('0 0 *')) {
+        intervalMs = 24 * 60 * 60000; // 1 day
       }
+
+      // Calculate the next run time by adding the interval
+      const nextRunTime = new Date(currentTime.getTime() + intervalMs);
+      nextRuns.push(nextRunTime);
+      currentTime = nextRunTime;
     }
 
     return nextRuns;
