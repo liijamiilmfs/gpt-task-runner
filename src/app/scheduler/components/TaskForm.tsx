@@ -43,7 +43,8 @@ const TaskForm: React.FC<TaskFormProps> = ({
         isDryRun: task.isDryRun || false,
         isActive: task.isActive || true,
         description:
-          ((task as unknown as Record<string, unknown>).description as string) || '',
+          ((task as unknown as Record<string, unknown>)
+            .description as string) || '',
       });
     } else {
       setFormData({
