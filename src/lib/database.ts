@@ -293,6 +293,25 @@ export class Database {
     });
   }
 
+  async getActiveScheduledTasks(): Promise<Record<string, unknown>[]> {
+    return new Promise((resolve, reject) => {
+      this.db.all(
+        `
+        SELECT * FROM scheduled_tasks 
+        WHERE isActive = 1
+        ORDER BY createdAt DESC
+      `,
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows as Record<string, unknown>[]);
+          }
+        }
+      );
+    });
+  }
+
   async getScheduledTask(id: string): Promise<Record<string, unknown> | null> {
     return new Promise((resolve, reject) => {
       this.db.get(

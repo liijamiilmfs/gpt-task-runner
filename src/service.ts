@@ -91,8 +91,8 @@ class GPTTaskService {
 
   private async loadScheduledTasks(): Promise<void> {
     try {
-      const tasks = await this.database.getScheduledTasks();
-      this.logger.info(`Loading ${tasks.length} scheduled tasks`);
+      const tasks = await this.database.getActiveScheduledTasks();
+      this.logger.info(`Loading ${tasks.length} active scheduled tasks`);
 
       for (const task of tasks) {
         await this.scheduleTask(task as unknown as ScheduledTask);
