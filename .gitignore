@@ -192,3 +192,17 @@ local/
 
 # Build Logs
 docs/build_logs/
+
+# Dictionary QA system generated files
+dictionary-reports/
+expanded-phrase-book.json
+sample-phrase-book.json
+
+# Coverage reports
+coverage/
+
+# Temporary build files
+temp/
+
+# Database files
+data/
