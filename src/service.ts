@@ -182,16 +182,18 @@ class GPTTaskService {
       await taskRunner.runFromFile(task.inputFile, cliOptions);
 
       // Record execution completion using the real execution ID
-      await this.database.updateTaskExecution(realExecutionId, {
-        status: 'completed',
-        completedAt: new Date().toISOString(),
-      });
+      if (realExecutionId) {
+        await this.database.updateTaskExecution(realExecutionId, {
+          status: 'completed',
+          completedAt: new Date().toISOString(),
+        });
+      }
 
       this.logger.info(`Completed scheduled task: ${task.name}`);
       await this.database.logServiceEvent(
         'info',
         `Completed scheduled task '${task.name}'`,
-        { taskId: task.id, executionId: realExecutionId }
+        { taskId: task.id, executionId: realExecutionId || undefined }
       );
     } catch (error) {
       this.logger.error(`Failed to execute scheduled task '${task.name}'`, {
