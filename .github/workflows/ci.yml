@@ -46,6 +46,62 @@ jobs:
           name: codecov-umbrella
           fail_ci_if_error: false
 
+  smoke-test:
+    name: Smoke Dry-Run Test
+    runs-on: ubuntu-latest
+    needs: [build]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build application
+        run: npm run build
+      
+      - name: Run dry-run smoke test
+        run: npm run test:dry-run
+        id: smoke-test
+        env:
+          NODE_ENV: test
+      
+      - name: Verify dry-run artifacts
+        run: |
+          echo "Checking for generated dry-run artifacts..."
+          if [ -f "dry-run-results.jsonl" ]; then
+            echo "✅ dry-run-results.jsonl found"
+            echo "File size: $(wc -c < dry-run-results.jsonl) bytes"
+            echo "Line count: $(wc -l < dry-run-results.jsonl) lines"
+          else
+            echo "❌ dry-run-results.jsonl not found"
+            exit 1
+          fi
+          
+          if [ -f "test-results.jsonl" ]; then
+            echo "✅ test-results.jsonl found"
+            echo "File size: $(wc -c < test-results.jsonl) bytes"
+          else
+            echo "❌ test-results.jsonl not found"
+            exit 1
+          fi
+          
+          if [ -f "test-results.dry-run.jsonl" ]; then
+            echo "✅ test-results.dry-run.jsonl found"
+            echo "File size: $(wc -c < test-results.dry-run.jsonl) bytes"
+          else
+            echo "❌ test-results.dry-run.jsonl not found"
+            exit 1
+          fi
+        id: verify-artifacts
+
   lint:
     name: Linting
     runs-on: ubuntu-latest
@@ -256,14 +312,14 @@ jobs:
   notify:
     name: Notify Results
     runs-on: ubuntu-latest
-    needs: [test, lint, type-check, build, security, coverage]
+    needs: [test, lint, type-check, build, security, coverage, smoke-test]
     if: always()
     
     steps:
       - name: Notify on success
-        if: ${{ needs.test.result == 'success' && needs.lint.result == 'success' && needs.type-check.result == 'success' && needs.build.result == 'success' && needs.security.result == 'success' && needs.coverage.result == 'success' }}
+        if: ${{ needs.test.result == 'success' && needs.lint.result == 'success' && needs.type-check.result == 'success' && needs.build.result == 'success' && needs.security.result == 'success' && needs.coverage.result == 'success' && needs.smoke-test.result == 'success' }}
         run: echo "All checks passed! ✅"
       
       - name: Notify on failure
-        if: ${{ needs.test.result == 'failure' || needs.lint.result == 'failure' || needs['type-check'].result == 'failure' || needs.build.result == 'failure' || needs.security.result == 'failure' || needs.coverage.result == 'failure' }}
+        if: ${{ needs.test.result == 'failure' || needs.lint.result == 'failure' || needs['type-check'].result == 'failure' || needs.build.result == 'failure' || needs.security.result == 'failure' || needs.coverage.result == 'failure' || needs.smoke-test.result == 'failure' }}
         run: echo "Some checks failed! ❌"
