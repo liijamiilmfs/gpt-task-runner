@@ -280,6 +280,24 @@ export class Database {
       this.db.all(
         `
         SELECT * FROM scheduled_tasks 
+        ORDER BY createdAt DESC
+      `,
+        (err, rows) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(rows as Record<string, unknown>[]);
+          }
+        }
+      );
+    });
+  }
+
+  async getActiveScheduledTasks(): Promise<Record<string, unknown>[]> {
+    return new Promise((resolve, reject) => {
+      this.db.all(
+        `
+        SELECT * FROM scheduled_tasks 
         WHERE isActive = 1
         ORDER BY createdAt DESC
       `,
@@ -288,6 +306,104 @@ export class Database {
             reject(err);
           } else {
             resolve(rows as Record<string, unknown>[]);
+          }
+        }
+      );
+    });
+  }
+
+  async getScheduledTask(id: string): Promise<Record<string, unknown> | null> {
+    return new Promise((resolve, reject) => {
+      this.db.get(
+        'SELECT * FROM scheduled_tasks WHERE id = ?',
+        [id],
+        (err, row) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(row as Record<string, unknown> | null);
+          }
+        }
+      );
+    });
+  }
+
+  async updateScheduledTask(
+    id: string,
+    updates: Record<string, unknown>
+  ): Promise<Record<string, unknown> | null> {
+    return new Promise((resolve, reject) => {
+      const fields = Object.keys(updates).filter((key) => key !== 'id');
+      const setClause = fields.map((field) => `${field} = ?`).join(', ');
+      const values = fields.map((field) => updates[field]);
+
+      this.db.run(
+        `UPDATE scheduled_tasks SET ${setClause} WHERE id = ?`,
+        [...values, id],
+        (err) => {
+          if (err) {
+            reject(err);
+          } else {
+            // Return the updated task
+            this.db.get(
+              'SELECT * FROM scheduled_tasks WHERE id = ?',
+              [id],
+              (err: unknown, row: unknown) => {
+                if (err) {
+                  reject(err);
+                } else {
+                  resolve(row as Record<string, unknown>);
+                }
+              }
+            );
+          }
+        }
+      );
+    });
+  }
+
+  async deleteScheduledTask(id: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.db.run(
+        'DELETE FROM scheduled_tasks WHERE id = ?',
+        [id],
+        function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(this.changes > 0);
+          }
+        }
+      );
+    });
+  }
+
+  async enableScheduledTask(id: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.db.run(
+        'UPDATE scheduled_tasks SET isActive = 1 WHERE id = ?',
+        [id],
+        function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(this.changes > 0);
+          }
+        }
+      );
+    });
+  }
+
+  async disableScheduledTask(id: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.db.run(
+        'UPDATE scheduled_tasks SET isActive = 0 WHERE id = ?',
+        [id],
+        function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(this.changes > 0);
           }
         }
       );
