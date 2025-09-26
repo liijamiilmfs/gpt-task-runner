@@ -13,6 +13,8 @@ A powerful task runner and automation tool designed to work with GPT models for 
 - 🔄 Workflow automation
 - 📊 Progress monitoring
 - 🛠️ Extensible plugin system
+- 🚀 Automated semantic versioning and releases
+- 📝 Conventional commit enforcement
 
 ## Getting Started
 
@@ -101,6 +103,28 @@ If you encounter any issues or have questions, please:
 1. Check the [Issues](https://github.com/yourusername/gpt-task-runner/issues) page
 2. Create a new issue with detailed information
 3. Contact the maintainers
+
+## 🚀 Release Process
+
+This project uses automated semantic versioning and releases. See [Release Process Documentation](docs/RELEASE_PROCESS.md) for details.
+
+### Quick Start for Contributors
+
+```bash
+# Use guided commit interface
+npm run commit
+
+# Or commit with conventional format
+git commit -m "feat: add new feature"
+git commit -m "fix: resolve bug in processing"
+git commit -m "docs: update README"
+```
+
+### Release Types
+
+- **`feat:`** → Minor version bump (1.0.0 → 1.1.0)
+- **`fix:`** → Patch version bump (1.0.0 → 1.0.1)
+- **`BREAKING CHANGE:`** → Major version bump (1.0.0 → 2.0.0)
 
 ## 🚀 TopTier Organization Initiative
 
