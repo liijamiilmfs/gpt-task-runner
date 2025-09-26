@@ -8,10 +8,11 @@ const db = new Database();
 // GET /api/scheduled-tasks/[id] - Get a specific scheduled task
 export async function GET(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const task = await db.getScheduledTask(params.id);
+    const { id } = await params;
+    const task = await db.getScheduledTask(id);
     if (!task) {
       return NextResponse.json(
         { error: 'Scheduled task not found' },
@@ -31,11 +32,12 @@ export async function GET(
 // PUT /api/scheduled-tasks/[id] - Update a scheduled task
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const body = await request.json();
-    const task: ScheduledTask = { ...body, id: params.id };
+    const task: ScheduledTask = { ...body, id };
 
     // Validate the task
     const validation = validateScheduledTask(task);
@@ -48,7 +50,7 @@ export async function PUT(
 
     // Update the task
     const updatedTask = await db.updateScheduledTask(
-      params.id,
+      id,
       task as unknown as Record<string, unknown>
     );
     if (!updatedTask) {
@@ -71,10 +73,11 @@ export async function PUT(
 // DELETE /api/scheduled-tasks/[id] - Delete a scheduled task
 export async function DELETE(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const success = await db.deleteScheduledTask(params.id);
+    const { id } = await params;
+    const success = await db.deleteScheduledTask(id);
     if (!success) {
       return NextResponse.json(
         { error: 'Scheduled task not found' },

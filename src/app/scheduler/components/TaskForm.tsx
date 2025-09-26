@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, FileText, Clock } from 'lucide-react';
 import { ScheduledTask } from '@/types';
-import { validateCronExpression } from '@/utils/schedule-validator';
+import { validateCronExpressionClient } from '@/utils/schedule-validator-client';
 
 interface TaskFormProps {
   isOpen: boolean;
@@ -69,12 +69,12 @@ const TaskForm: React.FC<TaskFormProps> = ({
 
     if (!formData.schedule.trim()) {
       newErrors.schedule = 'Schedule is required';
-    } else {
-      const cronValidation = validateCronExpression(formData.schedule);
-      if (!cronValidation.isValid) {
-        newErrors.schedule = cronValidation.error || 'Invalid cron expression';
-      }
-    }
+        } else {
+          const cronValidation = validateCronExpressionClient(formData.schedule);
+          if (!cronValidation.isValid) {
+            newErrors.schedule = cronValidation.error || 'Invalid cron expression';
+          }
+        }
 
     if (!formData.inputFile.trim()) {
       newErrors.inputFile = 'Input file is required';

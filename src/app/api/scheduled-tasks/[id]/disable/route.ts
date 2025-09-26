@@ -6,10 +6,11 @@ const db = new Database();
 // PATCH /api/scheduled-tasks/[id]/disable - Disable a scheduled task
 export async function PATCH(
   _request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const success = await db.disableScheduledTask(params.id);
+    const { id } = await params;
+    const success = await db.disableScheduledTask(id);
     if (!success) {
       return NextResponse.json(
         { error: 'Scheduled task not found' },

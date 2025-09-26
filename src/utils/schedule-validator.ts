@@ -3,6 +3,8 @@ import * as path from 'path';
 import validate from 'cron-validate';
 import { CronJob } from 'cron';
 
+// This file is server-side only - do not import in client components
+
 /**
  * Validates a cron expression
  */
