@@ -9,6 +9,15 @@ import { Database } from './database/database';
 import { Logger } from './logger';
 import { CliOptions } from './types';
 
+interface ScheduledTask {
+  id?: string;
+  name: string;
+  schedule: string;
+  isDryRun: boolean;
+  inputFile: string;
+  outputFile: string;
+}
+
 class GPTTaskService {
   private logger: Logger;
   private database: Database;
@@ -82,11 +91,11 @@ class GPTTaskService {
 
   private async loadScheduledTasks(): Promise<void> {
     try {
-      const tasks = await this.database.getScheduledTasks();
-      this.logger.info(`Loading ${tasks.length} scheduled tasks`);
+      const tasks = await this.database.getActiveScheduledTasks();
+      this.logger.info(`Loading ${tasks.length} active scheduled tasks`);
 
       for (const task of tasks) {
-        await this.scheduleTask(task);
+        await this.scheduleTask(task as unknown as ScheduledTask);
       }
     } catch (error) {
       this.logger.error('Failed to load scheduled tasks', {
@@ -95,7 +104,7 @@ class GPTTaskService {
     }
   }
 
-  private async scheduleTask(task: any): Promise<void> {
+  private async scheduleTask(task: ScheduledTask): Promise<void> {
     try {
       const scheduledTask = cron.schedule(
         task.schedule,
@@ -108,7 +117,7 @@ class GPTTaskService {
         }
       );
 
-      this.scheduledTasks.set(task.id, scheduledTask);
+      this.scheduledTasks.set(task.id!, scheduledTask);
       scheduledTask.start();
 
       this.logger.info(
@@ -126,19 +135,19 @@ class GPTTaskService {
     }
   }
 
-  private async executeScheduledTask(task: any): Promise<void> {
-    const executionId = `exec-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+  private async executeScheduledTask(task: ScheduledTask): Promise<void> {
+    let realExecutionId: string | null = null;
 
     try {
       this.logger.info(`Executing scheduled task: ${task.name}`);
       await this.database.logServiceEvent(
         'info',
         `Executing scheduled task '${task.name}'`,
-        { taskId: task.id, executionId }
+        { taskId: task.id }
       );
 
       // Update last run time
-      await this.updateTaskLastRun(task.id);
+      await this.updateTaskLastRun(task.id!);
 
       // Create transport based on dry run setting
       const transport = task.isDryRun
@@ -162,8 +171,8 @@ class GPTTaskService {
         verbose: false,
       };
 
-      // Record execution start
-      await this.database.saveTaskExecution({
+      // Record execution start and capture the real execution ID
+      realExecutionId = await this.database.saveTaskExecution({
         request: JSON.stringify(batchInput),
         status: 'running',
         isDryRun: task.isDryRun,
@@ -172,8 +181,8 @@ class GPTTaskService {
       // Execute tasks
       await taskRunner.runFromFile(task.inputFile, cliOptions);
 
-      // Record execution completion
-      await this.database.updateTaskExecution(executionId, {
+      // Record execution completion using the real execution ID
+      await this.database.updateTaskExecution(realExecutionId, {
         status: 'completed',
         completedAt: new Date().toISOString(),
       });
@@ -182,25 +191,28 @@ class GPTTaskService {
       await this.database.logServiceEvent(
         'info',
         `Completed scheduled task '${task.name}'`,
-        { taskId: task.id, executionId }
+        { taskId: task.id, executionId: realExecutionId }
       );
     } catch (error) {
       this.logger.error(`Failed to execute scheduled task '${task.name}'`, {
         error: error instanceof Error ? error.message : error,
       });
 
-      await this.database.updateTaskExecution(executionId, {
-        status: 'failed',
-        error: error instanceof Error ? error.message : 'Unknown error',
-        completedAt: new Date().toISOString(),
-      });
+      // Only update execution status if we have a real execution ID
+      if (realExecutionId) {
+        await this.database.updateTaskExecution(realExecutionId, {
+          status: 'failed',
+          error: error instanceof Error ? error.message : 'Unknown error',
+          completedAt: new Date().toISOString(),
+        });
+      }
 
       await this.database.logServiceEvent(
         'error',
         `Failed scheduled task '${task.name}'`,
         {
           taskId: task.id,
-          executionId,
+          executionId: realExecutionId,
           error: error instanceof Error ? error.message : error,
         }
       );
@@ -223,8 +235,10 @@ class GPTTaskService {
   }
 
   // Public methods for service management
-  async addScheduledTask(task: any): Promise<string> {
-    const taskId = await this.database.saveScheduledTask(task);
+  async addScheduledTask(task: ScheduledTask): Promise<string> {
+    const taskId = await this.database.saveScheduledTask(
+      task as unknown as Record<string, unknown>
+    );
     await this.scheduleTask({ ...task, id: taskId });
     return taskId;
   }
@@ -238,12 +252,16 @@ class GPTTaskService {
     // Also remove from database
   }
 
-  async getServiceStatus(): Promise<any> {
+  async getServiceStatus(): Promise<{
+    isRunning: boolean;
+    scheduledTasks: number;
+    metrics: Record<string, unknown>;
+  }> {
     const metrics = await this.database.getTaskMetrics();
     return {
       isRunning: this.isRunning,
       scheduledTasks: this.scheduledTasks.size,
-      metrics,
+      metrics: metrics as unknown as Record<string, unknown>,
     };
   }
 }

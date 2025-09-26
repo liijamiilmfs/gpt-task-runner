@@ -1,0 +1,21 @@
+- name: chore
+  color: 0366d6
+  description: Chore and maintenance tasks
+- name: toptier
+  color: 0e8a16
+  description: TopTier scaffolding and governance
+- name: governance
+  color: bfd4f2
+  description: Governance, CODEOWNERS, policies
+- name: ci-cd
+  color: 1d76db
+  description: CI/CD workflows and quality gates
+- name: security
+  color: d93f0b
+  description: Security and compliance
+- name: docs
+  color: 5319e7
+  description: Documentation changes
+- name: testing
+  color: c2e0c6
+  description: Tests and coverage

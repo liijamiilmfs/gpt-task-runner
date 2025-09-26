@@ -25,7 +25,7 @@ global.fetch = vi.fn();
 // Mock process.exit to prevent tests from actually exiting
 const originalExit = process.exit;
 beforeAll(() => {
-  process.exit = vi.fn() as any;
+  process.exit = vi.fn() as unknown as typeof process.exit;
 });
 
 afterAll(() => {

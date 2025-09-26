@@ -8,7 +8,7 @@ export interface TaskRequest {
   model?: string;
   temperature?: number;
   maxTokens?: number;
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
   batch_id?: string;
   corr_id?: string;
   idempotency_key?: string;
@@ -35,6 +35,9 @@ export interface TaskResponse {
   };
   batch_id?: string;
   corr_id?: string;
+  retryCount?: number;
+  errorCode?: string;
+  isRetryable?: boolean;
 }
 
 export interface DryRunResult {
@@ -77,4 +80,85 @@ export interface CliOptions {
   model?: string;
   temperature?: number;
   maxTokens?: number;
+  maxRetries?: number;
+  retryDelay?: number;
+  timeout?: number;
+  resume?: string;
+  onlyFailed?: boolean;
+  checkpointInterval?: number;
+  batchSize?: number;
+  maxInflight?: number;
+}
+
+export interface RetryConfig {
+  maxRetries: number;
+  baseDelayMs: number;
+  maxDelayMs: number;
+  backoffMultiplier: number;
+  jitterMs: number;
+  timeoutMs: number;
+}
+
+export interface ErrorInfo {
+  code: string;
+  message: string;
+  technicalMessage?: string;
+  isRetryable: boolean;
+  httpStatus?: number;
+  originalError?: Error;
+}
+
+export enum ErrorCodes {
+  // API and Transport Errors
+  RATE_LIMIT = 'E_RATE_LIMIT',
+  TIMEOUT = 'E_TIMEOUT',
+  AUTH = 'E_AUTH',
+  INPUT = 'E_INPUT',
+  QUOTA = 'E_QUOTA',
+  SERVER_ERROR = 'E_SERVER_ERROR',
+  NETWORK = 'E_NETWORK',
+
+  // File and I/O Errors
+  FILE_NOT_FOUND = 'E_FILE_NOT_FOUND',
+  FILE_PERMISSION = 'E_FILE_PERMISSION',
+  FILE_FORMAT = 'E_FILE_FORMAT',
+  FILE_CORRUPT = 'E_FILE_CORRUPT',
+
+  // Validation Errors
+  VALIDATION = 'E_VALIDATION',
+  SCHEMA = 'E_SCHEMA',
+  REQUIRED_FIELD = 'E_REQUIRED_FIELD',
+  INVALID_FORMAT = 'E_INVALID_FORMAT',
+
+  // Configuration Errors
+  CONFIG = 'E_CONFIG',
+  CONFIG_MISSING = 'E_CONFIG_MISSING',
+  CONFIG_INVALID = 'E_CONFIG_INVALID',
+
+  // System Errors
+  MEMORY = 'E_MEMORY',
+  DISK_SPACE = 'E_DISK_SPACE',
+  PROCESS = 'E_PROCESS',
+
+  // Business Logic Errors
+  BATCH_FAILED = 'E_BATCH_FAILED',
+  CHECKPOINT = 'E_CHECKPOINT',
+  RESUME = 'E_RESUME',
+
+  // Generic Errors
+  UNKNOWN = 'E_UNKNOWN',
+  INTERNAL = 'E_INTERNAL',
+}
+
+export interface ScheduledTask {
+  id?: string;
+  name: string;
+  schedule: string;
+  inputFile: string;
+  outputFile?: string;
+  isDryRun: boolean;
+  isActive?: boolean;
+  createdAt?: string;
+  lastRun?: string;
+  nextRun?: string;
 }

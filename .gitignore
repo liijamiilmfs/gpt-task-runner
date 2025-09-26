@@ -123,6 +123,9 @@ build/
 *.swo
 *~
 
+# Cursor IDE rules (team-specific processes)
+.cursor/rules/*.mdc
+
 # OS generated files
 .DS_Store
 .DS_Store?
@@ -149,6 +152,11 @@ temp/
 test-results/
 playwright-report/
 test-results.xml
+
+# Task runner output files
+*-results.jsonl
+dry-run-results.jsonl
+*.dry-run.jsonl
 
 # Security scan results
 security-reports/
@@ -184,3 +192,19 @@ local/
 
 # Build Logs
 docs/build_logs/
+
+# Dictionary QA system generated files
+dictionary-reports/
+expanded-phrase-book.json
+sample-phrase-book.json
+qa_report_*.json
+qa_report_*.md
+
+# Coverage reports
+coverage/
+
+# Temporary build files
+temp/
+
+# Database files
+data/

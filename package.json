@@ -7,8 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "lint:fix": "next lint --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
     "type-check": "tsc --noEmit",
     "test": "vitest",
     "test:ui": "vitest --ui",
@@ -50,11 +50,14 @@
     "npm": ">=10.0.0"
   },
   "dependencies": {
+    "@types/cron": "^2.0.1",
     "@types/node-cron": "^3.0.11",
     "@types/node-windows": "^0.1.6",
     "@types/ws": "^8.18.1",
     "commander": "^14.0.1",
     "cors": "^2.8.5",
+    "cron": "^4.3.3",
+    "cron-validate": "^1.5.2",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
     "dotenv": "^17.2.2",
@@ -76,6 +79,7 @@
     "ws": "^8.18.3"
   },
   "devDependencies": {
+    "@eslint/eslintrc": "^3.3.1",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/node": "^24.5.2",
