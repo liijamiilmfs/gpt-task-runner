@@ -192,3 +192,8 @@ local/
 
 # Build Logs
 docs/build_logs/
+
+# QA Reports
+dictionary-reports/
+qa_report_*.json
+qa_report_*.md
