@@ -6,7 +6,7 @@ export interface LogContext {
   task_id?: string;
   corr_id?: string;
   phase?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 export interface StructuredLogEntry {
@@ -17,7 +17,7 @@ export interface StructuredLogEntry {
   task_id?: string;
   corr_id?: string;
   phase?: string;
-  details?: any;
+  details?: unknown;
 }
 
 export class Logger {
@@ -64,9 +64,9 @@ export class Logger {
     });
   }
 
-  private formatLogEntry = (info: any) => {
+  private formatLogEntry = (info: Record<string, unknown>) => {
     // Extract the structured log entry from the second parameter
-    const logEntry = info[1] || info;
+    const logEntry = (info[1] || info) as Record<string, unknown>;
     const {
       timestamp,
       level,
@@ -82,7 +82,7 @@ export class Logger {
       // JSON mode - return structured JSON
       const structuredEntry = {
         timestamp,
-        level: level.replace(/\x1b\[[0-9;]*m/g, ''), // Remove color codes
+        level: (level as string).replace(/\x1b\[[0-9;]*m/g, ''), // Remove color codes
         message,
         batch_id,
         task_id,
@@ -110,7 +110,7 @@ export class Logger {
     }
   };
 
-  private sanitizeData(data: any): any {
+  private sanitizeData(data: unknown): unknown {
     if (typeof data !== 'object' || data === null) {
       return data;
     }
@@ -119,7 +119,7 @@ export class Logger {
       return data.map((item) => this.sanitizeData(item));
     }
 
-    const sanitized: any = {};
+    const sanitized: Record<string, unknown> = {};
     for (const [key, value] of Object.entries(data)) {
       const lowerKey = key.toLowerCase();
 
@@ -168,7 +168,7 @@ export class Logger {
     level: string,
     message: string,
     context?: LogContext,
-    details?: any
+    details?: unknown
   ): StructuredLogEntry {
     return {
       timestamp: new Date().toISOString(),
@@ -187,27 +187,27 @@ export class Logger {
     return uuidv4();
   }
 
-  info(message: string, context?: LogContext, details?: any): void {
+  info(message: string, context?: LogContext, details?: unknown): void {
     const logEntry = this.createLogEntry('info', message, context, details);
     this.logger.info(message, logEntry);
   }
 
-  error(message: string, context?: LogContext, details?: any): void {
+  error(message: string, context?: LogContext, details?: unknown): void {
     const logEntry = this.createLogEntry('error', message, context, details);
     this.logger.error(message, logEntry);
   }
 
-  warn(message: string, context?: LogContext, details?: any): void {
+  warn(message: string, context?: LogContext, details?: unknown): void {
     const logEntry = this.createLogEntry('warn', message, context, details);
     this.logger.warn(message, logEntry);
   }
 
-  debug(message: string, context?: LogContext, details?: any): void {
+  debug(message: string, context?: LogContext, details?: unknown): void {
     const logEntry = this.createLogEntry('debug', message, context, details);
     this.logger.debug(message, logEntry);
   }
 
-  verbose(message: string, context?: LogContext, details?: any): void {
+  verbose(message: string, context?: LogContext, details?: unknown): void {
     const logEntry = this.createLogEntry('verbose', message, context, details);
     this.logger.verbose(message, logEntry);
   }
@@ -217,7 +217,7 @@ export class Logger {
     taskId: string,
     batchId?: string,
     corrId?: string,
-    details?: any
+    details?: unknown
   ): void {
     this.info(
       'Task started',
@@ -230,7 +230,7 @@ export class Logger {
     taskId: string,
     batchId?: string,
     corrId?: string,
-    details?: any
+    details?: unknown
   ): void {
     this.info(
       'Task completed',
@@ -248,7 +248,7 @@ export class Logger {
     taskId: string,
     batchId?: string,
     corrId?: string,
-    details?: any
+    details?: unknown
   ): void {
     this.error(
       'Task failed',
@@ -257,7 +257,7 @@ export class Logger {
     );
   }
 
-  batchStart(batchId: string, corrId?: string, details?: any): void {
+  batchStart(batchId: string, corrId?: string, details?: unknown): void {
     this.info(
       'Batch started',
       { batch_id: batchId, corr_id: corrId, phase: 'batch_start' },
@@ -265,7 +265,7 @@ export class Logger {
     );
   }
 
-  batchComplete(batchId: string, corrId?: string, details?: any): void {
+  batchComplete(batchId: string, corrId?: string, details?: unknown): void {
     this.info(
       'Batch completed',
       { batch_id: batchId, corr_id: corrId, phase: 'batch_complete' },

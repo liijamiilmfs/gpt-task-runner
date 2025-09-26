@@ -4,7 +4,6 @@ import {
   CircuitBreaker,
   RetryError,
   CircuitBreakerError,
-  defaultRetryConfig,
 } from '../src/utils/retry';
 import { ErrorCodes } from '../src/types';
 
@@ -161,7 +160,6 @@ describe('RetryManager', () => {
         .mockRejectedValueOnce(new Error('Rate limit'))
         .mockResolvedValue('success');
 
-      const startTime = Date.now();
       retryManager.executeWithRetry(mockOperation);
       // Note: This test is simplified - in a real scenario we'd need to wait for completion
     });
@@ -190,7 +188,7 @@ describe('CircuitBreaker', () => {
       for (let i = 0; i < 3; i++) {
         try {
           await circuitBreaker.execute(failingOperation);
-        } catch (error) {
+        } catch {
           // Expected to fail
         }
       }
@@ -207,7 +205,7 @@ describe('CircuitBreaker', () => {
       for (let i = 0; i < 3; i++) {
         try {
           await circuitBreaker.execute(failingOperation);
-        } catch (error) {
+        } catch {
           // Expected to fail
         }
       }
@@ -225,7 +223,7 @@ describe('CircuitBreaker', () => {
       for (let i = 0; i < 3; i++) {
         try {
           await circuitBreaker.execute(failingOperation);
-        } catch (error) {
+        } catch {
           // Expected to fail
         }
       }
@@ -236,7 +234,7 @@ describe('CircuitBreaker', () => {
       // Next call should transition to HALF_OPEN
       try {
         await circuitBreaker.execute(failingOperation);
-      } catch (error) {
+      } catch {
         // Expected to fail, but circuit should be OPEN again
       }
 
@@ -252,7 +250,7 @@ describe('CircuitBreaker', () => {
       for (let i = 0; i < 2; i++) {
         try {
           await circuitBreaker.execute(failingOperation);
-        } catch (error) {
+        } catch {
           // Expected to fail
         }
       }

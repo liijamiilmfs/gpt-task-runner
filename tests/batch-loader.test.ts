@@ -184,11 +184,13 @@ task-2,"Explain AI",gpt-4,production,low`;
       );
     });
 
-    it.skip('should throw error for non-existent files', async () => {
+    it('should throw error for non-existent files', async () => {
       const nonExistentPath = path.join(tempDir, 'non-existent.csv');
 
-      await expect(batchLoader.loadFromFile(nonExistentPath)).rejects.toThrow();
-    }, 15000);
+      await expect(batchLoader.loadFromFile(nonExistentPath)).rejects.toThrow(
+        /ENOENT: no such file or directory/
+      );
+    });
 
     it('should handle CSV files with different delimiters and quotes', async () => {
       const csvContent = `id,prompt,model

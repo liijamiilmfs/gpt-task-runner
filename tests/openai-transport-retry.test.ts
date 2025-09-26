@@ -19,7 +19,6 @@ vi.mock('openai', () => ({
 }));
 
 describe('OpenAITransport with Retry', () => {
-  let transport: OpenAITransport;
   const mockApiKey = 'test-api-key';
 
   beforeEach(async () => {

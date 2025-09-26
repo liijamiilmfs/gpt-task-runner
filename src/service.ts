@@ -9,6 +9,15 @@ import { Database } from './database/database';
 import { Logger } from './logger';
 import { CliOptions } from './types';
 
+interface ScheduledTask {
+  id?: string;
+  name: string;
+  schedule: string;
+  isDryRun: boolean;
+  inputFile: string;
+  outputFile: string;
+}
+
 class GPTTaskService {
   private logger: Logger;
   private database: Database;
@@ -86,7 +95,7 @@ class GPTTaskService {
       this.logger.info(`Loading ${tasks.length} scheduled tasks`);
 
       for (const task of tasks) {
-        await this.scheduleTask(task);
+        await this.scheduleTask(task as unknown as ScheduledTask);
       }
     } catch (error) {
       this.logger.error('Failed to load scheduled tasks', {
@@ -95,7 +104,7 @@ class GPTTaskService {
     }
   }
 
-  private async scheduleTask(task: any): Promise<void> {
+  private async scheduleTask(task: ScheduledTask): Promise<void> {
     try {
       const scheduledTask = cron.schedule(
         task.schedule,
@@ -108,7 +117,7 @@ class GPTTaskService {
         }
       );
 
-      this.scheduledTasks.set(task.id, scheduledTask);
+      this.scheduledTasks.set(task.id!, scheduledTask);
       scheduledTask.start();
 
       this.logger.info(
@@ -126,7 +135,7 @@ class GPTTaskService {
     }
   }
 
-  private async executeScheduledTask(task: any): Promise<void> {
+  private async executeScheduledTask(task: ScheduledTask): Promise<void> {
     const executionId = `exec-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
     try {
@@ -138,7 +147,7 @@ class GPTTaskService {
       );
 
       // Update last run time
-      await this.updateTaskLastRun(task.id);
+      await this.updateTaskLastRun(task.id!);
 
       // Create transport based on dry run setting
       const transport = task.isDryRun
@@ -223,8 +232,10 @@ class GPTTaskService {
   }
 
   // Public methods for service management
-  async addScheduledTask(task: any): Promise<string> {
-    const taskId = await this.database.saveScheduledTask(task);
+  async addScheduledTask(task: ScheduledTask): Promise<string> {
+    const taskId = await this.database.saveScheduledTask(
+      task as unknown as Record<string, unknown>
+    );
     await this.scheduleTask({ ...task, id: taskId });
     return taskId;
   }
@@ -238,12 +249,16 @@ class GPTTaskService {
     // Also remove from database
   }
 
-  async getServiceStatus(): Promise<any> {
+  async getServiceStatus(): Promise<{
+    isRunning: boolean;
+    scheduledTasks: number;
+    metrics: Record<string, unknown>;
+  }> {
     const metrics = await this.database.getTaskMetrics();
     return {
       isRunning: this.isRunning,
       scheduledTasks: this.scheduledTasks.size,
-      metrics,
+      metrics: metrics as unknown as Record<string, unknown>,
     };
   }
 }
