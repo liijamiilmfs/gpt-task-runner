@@ -1,6 +1,7 @@
 import * as sqlite3 from 'sqlite3';
 import * as path from 'path';
 import * as fs from 'fs';
+import * as os from 'os';
 // import { TaskRequest, TaskResponse, DryRunResult } from '../types';
 
 export interface TaskExecution {
@@ -30,7 +31,9 @@ export class Database {
   private db: sqlite3.Database;
 
   constructor(dbPath?: string) {
-    const defaultPath = path.join(process.cwd(), 'data', 'gpt-task-runner.db');
+    // Use a stable location in the user's home directory or OS-specific data directory
+    const homeDir = os.homedir();
+    const defaultPath = path.join(homeDir, '.gpt-task-runner', 'database.db');
     const finalPath = dbPath || defaultPath;
 
     // Ensure the directory exists
@@ -292,6 +295,70 @@ export class Database {
         }
       );
     });
+  }
+
+  async getScheduledTask(id: string): Promise<Record<string, unknown> | null> {
+    return new Promise((resolve, reject) => {
+      this.db.get(
+        `SELECT * FROM scheduled_tasks WHERE id = ?`,
+        [id],
+        (err, row) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(row as Record<string, unknown> | null);
+          }
+        }
+      );
+    });
+  }
+
+  async updateScheduledTask(
+    id: string,
+    updates: Record<string, unknown>
+  ): Promise<void> {
+    return new Promise((resolve, reject) => {
+      const fields = Object.keys(updates)
+        .map((key) => `${key} = ?`)
+        .join(', ');
+      const values = Object.values(updates);
+
+      this.db.run(
+        `UPDATE scheduled_tasks SET ${fields} WHERE id = ?`,
+        [...values, id],
+        function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  }
+
+  async deleteScheduledTask(id: string): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.db.run(
+        `DELETE FROM scheduled_tasks WHERE id = ?`,
+        [id],
+        function (err) {
+          if (err) {
+            reject(err);
+          } else {
+            resolve();
+          }
+        }
+      );
+    });
+  }
+
+  async enableScheduledTask(id: string): Promise<void> {
+    return this.updateScheduledTask(id, { isActive: 1 });
+  }
+
+  async disableScheduledTask(id: string): Promise<void> {
+    return this.updateScheduledTask(id, { isActive: 0 });
   }
 
   async logServiceEvent(
