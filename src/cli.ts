@@ -551,6 +551,201 @@ scheduleCommand
     }
   });
 
+// Dictionary commands
+program
+  .command('dictionary-qa')
+  .description('Run QA analysis on dictionary entries')
+  .option('-i, --input <path>', 'Input dictionary file (JSON)')
+  .option('-o, --output <path>', 'Output directory for reports')
+  .option('-p, --previous <path>', 'Previous final dictionary for comparison')
+  .option('--format <format>', 'Report format (json, md, both)', 'both')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      logger.info('Starting dictionary QA analysis...');
+
+      // Import the dictionary engine
+      const { DictionaryQAEngine, createProcessingParams } = await import(
+        './dictionary/index'
+      );
+
+      // Load configuration
+      const params = createProcessingParams();
+
+      // Load input dictionary
+      if (!options.input) {
+        throw new Error('Input dictionary file is required');
+      }
+
+      const fs = await import('fs');
+      const inputData = JSON.parse(fs.readFileSync(options.input, 'utf8'));
+
+      // Load previous final if provided
+      let previousFinal = null;
+      if (options.previous) {
+        previousFinal = JSON.parse(fs.readFileSync(options.previous, 'utf8'));
+      }
+
+      // Initialize QA engine
+      const engine = new DictionaryQAEngine(params);
+
+      // Run QA analysis
+      const result = await engine.process_cycle(previousFinal, inputData);
+
+      // Generate reports
+      const outputDir = options.output || './dictionary-reports';
+      if (!fs.existsSync(outputDir)) {
+        fs.mkdirSync(outputDir, { recursive: true });
+      }
+
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+
+      if (options.format === 'json' || options.format === 'both') {
+        const jsonReport = {
+          timestamp,
+          qa_report: result.qa_report,
+          final_dictionary: result.final_dictionary,
+          changelog: result.changelog,
+        };
+        fs.writeFileSync(
+          `${outputDir}/qa_report_${timestamp}.json`,
+          JSON.stringify(jsonReport, null, 2)
+        );
+        logger.info(
+          `JSON report saved to ${outputDir}/qa_report_${timestamp}.json`
+        );
+      }
+
+      if (options.format === 'md' || options.format === 'both') {
+        const mdReport = engine.generate_markdown_report(result.qa_report);
+        fs.writeFileSync(`${outputDir}/qa_report_${timestamp}.md`, mdReport);
+        logger.info(
+          `Markdown report saved to ${outputDir}/qa_report_${timestamp}.md`
+        );
+      }
+
+      logger.info('Dictionary QA analysis completed successfully');
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+program
+  .command('dictionary-expand')
+  .description('Expand dictionary with new tranches')
+  .option('-i, --input <path>', 'Input dictionary file (JSON)')
+  .option('-o, --output <path>', 'Output file for expanded dictionary')
+  .option('-s, --strategy <strategy>', 'Expansion strategy', 'coverage_gaps')
+  .option('-t, --target-size <number>', 'Target tranche size', '300')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      logger.info('Starting dictionary expansion...');
+
+      // Import the dictionary engine
+      const { DictionaryQAEngine, createProcessingParams } = await import(
+        './dictionary/index'
+      );
+
+      // Load configuration
+      const params = createProcessingParams();
+      params.tranche_target_size = parseInt(options.targetSize);
+      params.add_tranche_strategy = [options.strategy];
+
+      // Load input dictionary
+      if (!options.input) {
+        throw new Error('Input dictionary file is required');
+      }
+
+      const fs = await import('fs');
+      const inputData = JSON.parse(fs.readFileSync(options.input, 'utf8'));
+
+      // Initialize QA engine
+      const engine = new DictionaryQAEngine(params);
+
+      // Run expansion
+      const result = await engine.process_cycle(null, inputData);
+
+      // Save expanded dictionary
+      const outputFile = options.output || './expanded_dictionary.json';
+      fs.writeFileSync(
+        outputFile,
+        JSON.stringify(result.final_dictionary, null, 2)
+      );
+
+      logger.info(`Expanded dictionary saved to ${outputFile}`);
+      const changelog = result.changelog as Record<string, unknown[]>;
+      logger.info(`Added ${changelog.added?.length || 0} new entries`);
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+program
+  .command('dictionary-validate')
+  .description('Validate dictionary entries against rules')
+  .option('-i, --input <path>', 'Input dictionary file (JSON)')
+  .option('-r, --rules <path>', 'Custom rules file (JSON)')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      logger.info('Starting dictionary validation...');
+
+      // Import the dictionary engine
+      const { DictionaryQAEngine, createProcessingParams } = await import(
+        './dictionary/index'
+      );
+
+      // Load configuration
+      const params = createProcessingParams();
+
+      // Load custom rules if provided
+      if (options.rules) {
+        const fs = await import('fs');
+        const customRules = JSON.parse(fs.readFileSync(options.rules, 'utf8'));
+        Object.assign(params, customRules);
+      }
+
+      // Load input dictionary
+      if (!options.input) {
+        throw new Error('Input dictionary file is required');
+      }
+
+      const fs = await import('fs');
+      const inputData = JSON.parse(fs.readFileSync(options.input, 'utf8'));
+
+      // Initialize QA engine
+      const engine = new DictionaryQAEngine(params);
+
+      // Run validation
+      const result = await engine.process_cycle(null, inputData);
+
+      // Report results
+      const qaReport = result.qa_report;
+      logger.info(`Validation completed:`);
+      logger.info(`  Total entries: ${qaReport.summary.counts.input}`);
+      logger.info(`  Passed QA: ${qaReport.summary.counts.final}`);
+      logger.info(`  Lazy candidates: ${qaReport.summary.counts.lazy}`);
+      logger.info(`  Warnings: ${qaReport.summary.counts.warnings}`);
+
+      if (qaReport.summary.counts.lazy > 0) {
+        logger.warn('Some entries failed laziness rules and need review');
+      }
+
+      if (qaReport.summary.counts.warnings > 0) {
+        logger.warn('Some entries have warnings that should be addressed');
+      }
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
 // Parse command line arguments
 program.parse();
 
