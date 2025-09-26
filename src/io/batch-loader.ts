@@ -36,68 +36,98 @@ export class BatchLoader {
 
       const stream = fs.createReadStream(filePath, { encoding: 'utf-8' });
       let buffer = '';
+      let inQuotes = false;
+      let currentFields: string[] = [];
+      let currentField = '';
 
       stream
         .on('data', (chunk: string | Buffer) => {
           buffer += chunk;
-          const lines = buffer.split('\n');
-
-          // Keep the last line in buffer (might be incomplete)
-          buffer = lines.pop() || '';
-
-          for (const line of lines) {
-            lineNumber++;
-
-            if (lineNumber === 1) {
-              // Parse headers
-              headers = line.split(',').map((h) => h.trim());
-              continue;
-            }
-
-            if (line.trim()) {
-              try {
-                const values = this.parseCSVLine(line);
-                const task = this.csvRowToTask(values, headers, lineNumber);
-
-                // Validate the task
-                const validation = TaskValidator.validateTask(
-                  task as unknown as Record<string, unknown>,
-                  lineNumber
-                );
-                validationErrors.push(...validation.errors);
-
-                tasks.push(task);
-              } catch (error) {
-                validationErrors.push({
-                  field: 'csv',
-                  message: `CSV parsing error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-                  value: line,
-                });
+          
+          // Process buffer character by character to handle multiline quoted fields
+          for (let i = 0; i < buffer.length; i++) {
+            const char = buffer[i];
+            
+            if (char === '"') {
+              // Handle escaped quotes ("")
+              if (i + 1 < buffer.length && buffer[i + 1] === '"') {
+                currentField += '"';
+                i++; // Skip the next quote
+              } else {
+                inQuotes = !inQuotes;
               }
+            } else if (char === ',' && !inQuotes) {
+              // Field separator found
+              currentFields.push(currentField.trim());
+              currentField = '';
+            } else if (char === '\n' && !inQuotes) {
+              // Complete row found
+              currentFields.push(currentField.trim());
+              
+              if (currentFields.some(field => field.length > 0)) {
+                lineNumber++;
+                
+                if (lineNumber === 1) {
+                  // Parse headers
+                  headers = currentFields;
+                } else {
+                  // Parse data row
+                  try {
+                    const task = this.csvRowToTask(currentFields, headers, lineNumber);
+
+                    // Validate the task
+                    const validation = TaskValidator.validateTask(
+                      task as unknown as Record<string, unknown>,
+                      lineNumber
+                    );
+                    validationErrors.push(...validation.errors);
+
+                    tasks.push(task);
+                  } catch (error) {
+                    validationErrors.push({
+                      field: 'csv',
+                      message: `CSV parsing error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                      value: currentFields.join(','),
+                    });
+                  }
+                }
+              }
+              
+              // Reset for next row
+              currentFields = [];
+              currentField = '';
+            } else {
+              currentField += char;
             }
           }
+          
+          // Keep the last incomplete row in buffer
+          buffer = currentField;
         })
         .on('end', () => {
-          // Process the last line if it exists
-          if (buffer.trim()) {
-            lineNumber++;
-            if (lineNumber > 1) {
-              // Skip if it's just headers
-              try {
-                const values = this.parseCSVLine(buffer);
-                const task = this.csvRowToTask(values, headers, lineNumber);
-                const validation = TaskValidator.validateTask(
-                  task as unknown as Record<string, unknown>,
-                  lineNumber
-                );
-                validationErrors.push(...validation.errors);
-                tasks.push(task);
-              } catch (error) {
-                validationErrors.push({
-                  field: 'csv',
-                  message: `CSV parsing error: ${error instanceof Error ? error.message : 'Unknown error'}`,
-                  value: buffer,
-                });
+          // Process the last row if it exists
+          if (currentField.trim() || currentFields.length > 0) {
+            currentFields.push(currentField.trim());
+            
+            if (currentFields.some(field => field.length > 0)) {
+              lineNumber++;
+              if (lineNumber > 1) {
+                // Skip if it's just headers
+                try {
+                  const task = this.csvRowToTask(currentFields, headers, lineNumber);
+                  const validation = TaskValidator.validateTask(
+                    task as unknown as Record<string, unknown>,
+                    lineNumber
+                  );
+                  validationErrors.push(...validation.errors);
+                  tasks.push(task);
+                } catch (error) {
+                  validationErrors.push({
+                    field: 'csv',
+                    message: `CSV parsing error: ${error instanceof Error ? error.message : 'Unknown error'}`,
+                    value: currentFields.join(','),
+                  });
+                }
               }
             }
           }
@@ -201,6 +231,7 @@ export class BatchLoader {
         });
     });
   }
+
 
   private parseCSVLine(line: string): string[] {
     const result: string[] = [];
