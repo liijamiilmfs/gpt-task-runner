@@ -6,12 +6,45 @@ import { OpenAITransport } from './transports/openai-transport';
 import { DryRunTransport } from './transports/dry-run-transport';
 import { TaskRunner } from './task-runner';
 import { Logger } from './logger';
-import { CliOptions } from './types';
+import { CliOptions, ErrorCodes } from './types';
+import { ErrorTaxonomy } from './utils/error-taxonomy';
+import {
+  getExitCodeFromErrorCode,
+  getExitCodeDescription,
+} from './utils/exit-codes';
 
 // Load environment variables
 dotenv.config();
 
 const program = new Command();
+
+/**
+ * Handle errors with enhanced taxonomy system
+ */
+function handleError(error: Error, logger: Logger): never {
+  const errorInfo = ErrorTaxonomy.classifyError(error);
+  const exitCode = getExitCodeFromErrorCode(errorInfo.code as ErrorCodes);
+
+  // Log the error with taxonomy information
+  logger.error(`Error: ${errorInfo.message}`);
+  logger.error(`Error Code: ${errorInfo.code}`);
+  logger.error(`Suggested Action: ${errorInfo.taxonomy.suggestedAction}`);
+
+  if (errorInfo.taxonomy.documentationUrl) {
+    logger.error(`Documentation: ${errorInfo.taxonomy.documentationUrl}`);
+  }
+
+  if (errorInfo.technicalMessage) {
+    logger.error(`Technical Details: ${errorInfo.technicalMessage}`);
+  }
+  if (errorInfo.originalError) {
+    logger.error(`Original Error: ${errorInfo.originalError.message}`);
+  }
+
+  logger.error(`Exit Code: ${exitCode} (${getExitCodeDescription(exitCode)})`);
+
+  process.exit(exitCode);
+}
 
 program
   .name('gpt-task-runner')
@@ -53,13 +86,13 @@ program
 
     // Validate options
     if (!options.input && !options.prompt) {
-      logger.error('Either --input or --prompt must be specified');
-      process.exit(1);
+      const error = new Error('Either --input or --prompt must be specified');
+      handleError(error, logger);
     }
 
     if (options.input && options.prompt) {
-      logger.error('Cannot specify both --input and --prompt');
-      process.exit(1);
+      const error = new Error('Cannot specify both --input and --prompt');
+      handleError(error, logger);
     }
 
     // Create transport
@@ -72,10 +105,10 @@ program
     } else {
       const apiKey = process.env['OPENAI_API_KEY'];
       if (!apiKey) {
-        logger.error(
+        const error = new Error(
           'OPENAI_API_KEY environment variable is required for live execution'
         );
-        process.exit(1);
+        handleError(error, logger);
       }
 
       const baseURL = process.env['OPENAI_BASE_URL'];
@@ -117,10 +150,14 @@ program
     };
 
     // Execute tasks
-    if (options.input) {
-      await taskRunner.runFromFile(options.input, cliOptions);
-    } else if (options.prompt) {
-      await taskRunner.runSingleTask(options.prompt, cliOptions);
+    try {
+      if (options.input) {
+        await taskRunner.runFromFile(options.input, cliOptions);
+      } else if (options.prompt) {
+        await taskRunner.runSingleTask(options.prompt, cliOptions);
+      }
+    } catch (error) {
+      handleError(error as Error, logger);
     }
   });
 
@@ -133,8 +170,8 @@ program
     const logger = new Logger(options.verbose ? 'debug' : 'info', options.json);
 
     if (!options.input) {
-      logger.error('--input is required for validation');
-      process.exit(1);
+      const error = new Error('--input is required for validation');
+      handleError(error, logger);
     }
 
     try {
@@ -155,10 +192,7 @@ program
 
       process.exit(0);
     } catch (error) {
-      logger.error('Validation failed', {
-        error: error instanceof Error ? error.message : error,
-      });
-      process.exit(1);
+      handleError(error as Error, logger);
     }
   });
 
