@@ -1,14 +1,17 @@
 # GPT Task Runner - API Documentation
 
 ## Overview
+
 The GPT Task Runner provides a comprehensive REST API for managing tasks, monitoring system performance, and configuring scheduled operations.
 
 ## Base URL
+
 - **Development**: `http://localhost:3000/api`
 - **Staging**: `https://staging.gpt-task-runner.com/api`
 - **Production**: `https://api.gpt-task-runner.com/api`
 
 ## Authentication
+
 Currently, the API uses API key-based authentication for external services. Future versions will include user authentication.
 
 ```http
@@ -20,9 +23,11 @@ Authorization: Bearer YOUR_API_KEY
 ### System Status
 
 #### GET /api/status
+
 Get current system status and health information.
 
 **Response:**
+
 ```json
 {
   "isRunning": true,
@@ -41,19 +46,23 @@ Get current system status and health information.
 ```
 
 **Status Codes:**
+
 - `200 OK` - System status retrieved successfully
 - `500 Internal Server Error` - System error
 
 ### Metrics
 
 #### GET /api/metrics
+
 Get detailed performance metrics and analytics.
 
 **Query Parameters:**
+
 - `period` (optional): Time period for metrics (`1h`, `24h`, `7d`, `30d`)
 - `granularity` (optional): Data granularity (`minute`, `hour`, `day`)
 
 **Response:**
+
 ```json
 {
   "totalTasks": 1250,
@@ -82,14 +91,17 @@ Get detailed performance metrics and analytics.
 ### Scheduled Tasks
 
 #### GET /api/scheduled-tasks
+
 Get list of all scheduled tasks.
 
 **Query Parameters:**
+
 - `active` (optional): Filter by active status (`true`, `false`)
 - `limit` (optional): Number of results to return (default: 50)
 - `offset` (optional): Number of results to skip (default: 0)
 
 **Response:**
+
 ```json
 {
   "tasks": [
@@ -113,9 +125,11 @@ Get list of all scheduled tasks.
 ```
 
 #### POST /api/scheduled-tasks
+
 Create a new scheduled task.
 
 **Request Body:**
+
 ```json
 {
   "name": "Weekly Analysis",
@@ -128,6 +142,7 @@ Create a new scheduled task.
 ```
 
 **Response:**
+
 ```json
 {
   "id": "task-456",
@@ -143,14 +158,17 @@ Create a new scheduled task.
 ```
 
 **Status Codes:**
+
 - `201 Created` - Task created successfully
 - `400 Bad Request` - Invalid request data
 - `409 Conflict` - Task with same name already exists
 
 #### GET /api/scheduled-tasks/:id
+
 Get details of a specific scheduled task.
 
 **Response:**
+
 ```json
 {
   "id": "task-123",
@@ -176,9 +194,11 @@ Get details of a specific scheduled task.
 ```
 
 #### PUT /api/scheduled-tasks/:id
+
 Update an existing scheduled task.
 
 **Request Body:**
+
 ```json
 {
   "name": "Updated Daily Report",
@@ -188,6 +208,7 @@ Update an existing scheduled task.
 ```
 
 **Response:**
+
 ```json
 {
   "id": "task-123",
@@ -202,9 +223,11 @@ Update an existing scheduled task.
 ```
 
 #### DELETE /api/scheduled-tasks/:id
+
 Delete a scheduled task.
 
 **Response:**
+
 ```json
 {
   "message": "Task deleted successfully",
@@ -213,13 +236,16 @@ Delete a scheduled task.
 ```
 
 **Status Codes:**
+
 - `200 OK` - Task deleted successfully
 - `404 Not Found` - Task not found
 
 #### POST /api/scheduled-tasks/:id/enable
+
 Enable a scheduled task.
 
 **Response:**
+
 ```json
 {
   "message": "Task enabled successfully",
@@ -229,9 +255,11 @@ Enable a scheduled task.
 ```
 
 #### POST /api/scheduled-tasks/:id/disable
+
 Disable a scheduled task.
 
 **Response:**
+
 ```json
 {
   "message": "Task disabled successfully",
@@ -242,6 +270,7 @@ Disable a scheduled task.
 ## Error Handling
 
 ### Error Response Format
+
 ```json
 {
   "error": {
@@ -258,6 +287,7 @@ Disable a scheduled task.
 ```
 
 ### Common Error Codes
+
 - `VALIDATION_ERROR` - Request validation failed
 - `NOT_FOUND` - Resource not found
 - `CONFLICT` - Resource conflict
@@ -266,6 +296,7 @@ Disable a scheduled task.
 - `SERVICE_UNAVAILABLE` - Service temporarily unavailable
 
 ## Rate Limiting
+
 - **Default Limit**: 100 requests per minute per IP
 - **Burst Limit**: 20 requests per second
 - **Headers**: Rate limit information included in response headers
@@ -277,24 +308,29 @@ X-RateLimit-Reset: 1642248000
 ```
 
 ## Webhooks (Planned)
+
 Future versions will support webhook notifications for:
+
 - Task completion
 - System alerts
 - Scheduled task failures
 - Performance thresholds
 
 ## SDK and Client Libraries (Planned)
+
 - JavaScript/TypeScript SDK
 - Python client library
 - Go client library
 - REST API collections for Postman/Insomnia
 
 ## OpenAPI Specification
+
 A complete OpenAPI 3.0 specification is available at `/api/docs` (planned).
 
 ## Examples
 
 ### Creating a Daily Scheduled Task
+
 ```bash
 curl -X POST http://localhost:3000/api/scheduled-tasks \
   -H "Content-Type: application/json" \
@@ -309,12 +345,14 @@ curl -X POST http://localhost:3000/api/scheduled-tasks \
 ```
 
 ### Getting System Metrics
+
 ```bash
 curl -X GET "http://localhost:3000/api/metrics?period=24h&granularity=hour" \
   -H "Accept: application/json"
 ```
 
 ### Disabling a Scheduled Task
+
 ```bash
 curl -X POST http://localhost:3000/api/scheduled-tasks/task-123/disable \
   -H "Content-Type: application/json"
@@ -322,5 +360,5 @@ curl -X POST http://localhost:3000/api/scheduled-tasks/task-123/disable \
 
 ---
 
-*Last Updated: September 26, 2025*
-*Next Review: October 10, 2025*
+_Last Updated: September 26, 2025_
+_Next Review: October 10, 2025_

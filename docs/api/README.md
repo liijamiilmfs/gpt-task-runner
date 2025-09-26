@@ -81,6 +81,7 @@ Paginated endpoints support the following parameters:
 Create a new task for execution.
 
 **Request Body:**
+
 ```json
 {
   "id": "task-001",
@@ -108,6 +109,7 @@ Create a new task for execution.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -127,6 +129,7 @@ Create a new task for execution.
 Retrieve a specific task by ID.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -155,12 +158,14 @@ Retrieve a specific task by ID.
 Retrieve a paginated list of tasks.
 
 **Query Parameters:**
+
 - `status`: Filter by status (`pending`, `running`, `completed`, `failed`)
 - `batchId`: Filter by batch ID
 - `createdAfter`: Filter tasks created after timestamp
 - `createdBefore`: Filter tasks created before timestamp
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -189,6 +194,7 @@ Retrieve a paginated list of tasks.
 Update an existing task.
 
 **Request Body:**
+
 ```json
 {
   "prompt": "Updated prompt text",
@@ -207,6 +213,7 @@ Update an existing task.
 Delete a task and its associated data.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -221,6 +228,7 @@ Delete a task and its associated data.
 Manually trigger task execution.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -241,6 +249,7 @@ Manually trigger task execution.
 Create a new batch of tasks.
 
 **Request Body:**
+
 ```json
 {
   "id": "batch-001",
@@ -265,6 +274,7 @@ Create a new batch of tasks.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -284,6 +294,7 @@ Create a new batch of tasks.
 Retrieve batch details and status.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -317,6 +328,7 @@ Retrieve batch details and status.
 Start batch execution.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -337,6 +349,7 @@ Start batch execution.
 Create a new scheduled task.
 
 **Request Body:**
+
 ```json
 {
   "name": "Daily Report Generator",
@@ -353,6 +366,7 @@ Create a new scheduled task.
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -374,10 +388,12 @@ Create a new scheduled task.
 Retrieve all scheduled tasks.
 
 **Query Parameters:**
+
 - `isActive`: Filter by active status
 - `name`: Filter by name (partial match)
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -403,6 +419,7 @@ Retrieve all scheduled tasks.
 Update a scheduled task.
 
 **Request Body:**
+
 ```json
 {
   "name": "Updated Task Name",
@@ -422,6 +439,7 @@ Enable a scheduled task.
 Disable a scheduled task.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -442,6 +460,7 @@ Disable a scheduled task.
 Retrieve system performance metrics.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -474,6 +493,7 @@ Retrieve system performance metrics.
 Retrieve detailed task execution metrics.
 
 **Query Parameters:**
+
 - `period`: Time period (`hour`, `day`, `week`, `month`)
 - `status`: Filter by task status
 - `model`: Filter by AI model
@@ -487,6 +507,7 @@ Retrieve detailed task execution metrics.
 Retrieve overall system health and status.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -511,6 +532,7 @@ Retrieve overall system health and status.
 Retrieve detailed status for a specific service.
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -529,6 +551,7 @@ Retrieve detailed status for a specific service.
 ## Error Codes
 
 ### Common HTTP Status Codes
+
 - `200`: Success
 - `201`: Created
 - `400`: Bad Request (validation errors)
@@ -539,6 +562,7 @@ Retrieve detailed status for a specific service.
 - `503`: Service Unavailable
 
 ### Application Error Codes
+
 - `VALIDATION_ERROR`: Input validation failed
 - `TASK_NOT_FOUND`: Task does not exist
 - `BATCH_NOT_FOUND`: Batch does not exist
@@ -591,6 +615,7 @@ curl -X GET http://localhost:3000/api/v1/metrics \
 ## SDK Support
 
 The API is designed to work with:
+
 - JavaScript/TypeScript SDK
 - Python SDK
 - REST API clients
@@ -609,6 +634,7 @@ Configure webhooks for real-time notifications:
 ```
 
 Available webhook events:
+
 - `task.created`
 - `task.started`
 - `task.completed`

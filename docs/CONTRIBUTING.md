@@ -3,6 +3,7 @@
 Thank you for your interest in contributing to the GPT Task Runner project! This guide will help you get started with contributing to our codebase.
 
 ## Table of Contents
+
 - [Code of Conduct](#code-of-conduct)
 - [Getting Started](#getting-started)
 - [Development Workflow](#development-workflow)
@@ -18,6 +19,7 @@ This project adheres to a code of conduct that we expect all contributors to fol
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js (v20.17.0 or higher)
 - npm (v10.0.0 or higher)
 - Git
@@ -25,23 +27,27 @@ This project adheres to a code of conduct that we expect all contributors to fol
 ### Setup Development Environment
 
 1. **Fork and Clone the Repository**
+
    ```bash
    git clone https://github.com/your-username/gpt-task-runner.git
    cd gpt-task-runner
    ```
 
 2. **Install Dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set Up Environment Variables**
+
    ```bash
    cp env.example .env
    # Edit .env with your configuration
    ```
 
 4. **Run Tests**
+
    ```bash
    npm test
    ```
@@ -54,6 +60,7 @@ This project adheres to a code of conduct that we expect all contributors to fol
 ## Development Workflow
 
 ### Branch Naming Convention
+
 - `feature/description` - New features
 - `bugfix/description` - Bug fixes
 - `chore/description` - Maintenance tasks
@@ -61,6 +68,7 @@ This project adheres to a code of conduct that we expect all contributors to fol
 - `refactor/description` - Code refactoring
 
 ### Commit Message Format
+
 We follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 ```
@@ -72,6 +80,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation changes
@@ -81,6 +90,7 @@ We follow the [Conventional Commits](https://www.conventionalcommits.org/) speci
 - `chore`: Maintenance tasks
 
 **Examples:**
+
 ```
 feat(api): add webhook support for task notifications
 fix(cli): resolve issue with CSV parsing for large files
@@ -91,6 +101,7 @@ test(validation): add tests for task schema validation
 ## Coding Standards
 
 ### TypeScript Guidelines
+
 - Use TypeScript for all new code
 - Provide proper type annotations
 - Avoid `any` type unless absolutely necessary
@@ -98,6 +109,7 @@ test(validation): add tests for task schema validation
 - Use enums for constants
 
 ### Code Style
+
 - Use Prettier for code formatting
 - Follow ESLint rules
 - Use meaningful variable and function names
@@ -105,6 +117,7 @@ test(validation): add tests for task schema validation
 - Add comments for complex logic
 
 ### File Organization
+
 ```
 src/
 ├── app/                 # Next.js app directory
@@ -119,11 +132,13 @@ src/
 ## Testing Guidelines
 
 ### Test Types
+
 1. **Unit Tests** - Test individual functions and components
 2. **Integration Tests** - Test component interactions
 3. **E2E Tests** - Test complete user workflows
 
 ### Testing Best Practices
+
 - Write tests for all new features
 - Maintain test coverage above 90%
 - Use descriptive test names
@@ -131,6 +146,7 @@ src/
 - Mock external dependencies
 
 ### Running Tests
+
 ```bash
 # Run all tests
 npm test
@@ -151,7 +167,9 @@ npm run test:e2e
 ## Pull Request Process
 
 ### Before Submitting
+
 1. **Run Quality Checks**
+
    ```bash
    npm run check
    ```
@@ -167,6 +185,7 @@ npm run test:e2e
    - Verify no breaking changes
 
 ### PR Requirements
+
 - [ ] All tests pass
 - [ ] Code coverage maintained
 - [ ] Documentation updated
@@ -175,22 +194,27 @@ npm run test:e2e
 - [ ] Link to related issues
 
 ### PR Template
+
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] Bug fix
 - [ ] New feature
 - [ ] Breaking change
 - [ ] Documentation update
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Integration tests added/updated
 - [ ] Manual testing completed
 
 ## Checklist
+
 - [ ] Code follows style guidelines
 - [ ] Self-review completed
 - [ ] Documentation updated
@@ -200,7 +224,9 @@ Brief description of changes
 ## Issue Reporting
 
 ### Bug Reports
+
 Use the bug report template and include:
+
 - Clear description of the issue
 - Steps to reproduce
 - Expected vs actual behavior
@@ -208,13 +234,16 @@ Use the bug report template and include:
 - Screenshots if applicable
 
 ### Feature Requests
+
 Use the feature request template and include:
+
 - Clear description of the feature
 - Use case and benefits
 - Proposed implementation (if any)
 - Alternative solutions considered
 
 ### Issue Labels
+
 - `bug` - Something isn't working
 - `enhancement` - New feature or request
 - `documentation` - Documentation improvements
@@ -225,18 +254,21 @@ Use the feature request template and include:
 ## Development Tips
 
 ### Debugging
+
 - Use VS Code debugger configuration
 - Add console.log statements for debugging
 - Use browser dev tools for frontend issues
 - Check logs for backend issues
 
 ### Performance
+
 - Profile code for performance bottlenecks
 - Optimize database queries
 - Use caching where appropriate
 - Monitor memory usage
 
 ### Security
+
 - Never commit sensitive data
 - Use environment variables for secrets
 - Validate all inputs
@@ -245,12 +277,14 @@ Use the feature request template and include:
 ## Getting Help
 
 ### Resources
+
 - [Project Documentation](./docs/)
 - [API Documentation](./docs/API_DOCUMENTATION.md)
 - [Architecture Guide](./docs/ARCHITECTURE.md)
 - [Troubleshooting Guide](./docs/troubleshooting.md)
 
 ### Communication
+
 - GitHub Issues for bug reports and feature requests
 - GitHub Discussions for questions and ideas
 - Code reviews for feedback on implementations
@@ -258,6 +292,7 @@ Use the feature request template and include:
 ## Recognition
 
 Contributors will be recognized in:
+
 - CONTRIBUTORS.md file
 - Release notes for significant contributions
 - GitHub contributor graphs

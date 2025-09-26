@@ -7,18 +7,21 @@ This guide provides comprehensive instructions for developers working on the GPT
 ## Prerequisites
 
 ### System Requirements
+
 - **Node.js**: Version 20.17.0 or higher
 - **npm**: Version 10.0.0 or higher
 - **Git**: Version 2.34.0 or higher
 - **Operating System**: Linux, macOS, or Windows (WSL2 recommended for Windows)
 
 ### Development Tools
+
 - **Code Editor**: VS Code, IntelliJ IDEA, or similar with TypeScript support
 - **Git Client**: Command line or GUI client
 - **Docker**: For containerized development (optional)
 - **Redis**: For caching during development (optional)
 
 ### Required Accounts
+
 - **OpenAI API Key**: For AI model integration
 - **GitHub Account**: For code contributions
 
@@ -27,17 +30,20 @@ This guide provides comprehensive instructions for developers working on the GPT
 ### 1. Environment Setup
 
 **Clone the Repository:**
+
 ```bash
 git clone https://github.com/your-org/gpt-task-runner.git
 cd gpt-task-runner
 ```
 
 **Install Dependencies:**
+
 ```bash
 npm install
 ```
 
 **Environment Configuration:**
+
 ```bash
 # Copy environment template
 cp .env.example .env
@@ -47,6 +53,7 @@ vim .env
 ```
 
 **Required Environment Variables:**
+
 ```env
 # OpenAI Configuration
 OPENAI_API_KEY=your_openai_api_key_here
@@ -66,6 +73,7 @@ REDIS_URL=redis://localhost:6379
 ### 2. Development Server
 
 **Start Development Server:**
+
 ```bash
 npm run dev
 ```
@@ -73,6 +81,7 @@ npm run dev
 The application will be available at `http://localhost:3000`
 
 **Available Scripts:**
+
 ```bash
 npm run dev          # Start development server
 npm run build        # Build for production
@@ -89,16 +98,19 @@ npm run test:coverage # Run tests with coverage
 ### 3. Initial Testing
 
 **Run Test Suite:**
+
 ```bash
 npm test
 ```
 
 **Run with Coverage:**
+
 ```bash
 npm run test:coverage
 ```
 
 **View Coverage Report:**
+
 ```bash
 npm run test:coverage
 # Open coverage/lcov-report/index.html in browser
@@ -121,6 +133,7 @@ main                    # Production-ready code
 ```
 
 **Creating Feature Branches:**
+
 ```bash
 # Feature branch
 git checkout -b feature/add-user-authentication
@@ -135,6 +148,7 @@ git checkout -b chore/update-dependencies
 ### Code Style & Standards
 
 **Prettier Configuration:**
+
 ```json
 {
   "semi": true,
@@ -146,12 +160,14 @@ git checkout -b chore/update-dependencies
 ```
 
 **ESLint Rules:**
+
 - No unused variables (with warnings)
 - Consistent import/export patterns
 - TypeScript strict mode
 - React hooks rules
 
 **Code Formatting:**
+
 ```bash
 # Format all files
 npm run format
@@ -175,6 +191,7 @@ chore: update dependencies
 ```
 
 **Commit Message Format:**
+
 ```bash
 type(scope): description
 
@@ -184,6 +201,7 @@ type(scope): description
 ```
 
 **Types:**
+
 - `feat`: New feature
 - `fix`: Bug fix
 - `docs`: Documentation
@@ -195,6 +213,7 @@ type(scope): description
 ### Pull Request Process
 
 **1. Create Pull Request:**
+
 ```bash
 # Ensure branch is up to date
 git fetch origin
@@ -205,11 +224,14 @@ git push origin feature/your-feature-name
 ```
 
 **2. PR Template:**
+
 ```markdown
 ## Description
+
 Brief description of changes
 
 ## Type of Change
+
 - [ ] feat: New feature
 - [ ] fix: Bug fix
 - [ ] docs: Documentation
@@ -219,12 +241,14 @@ Brief description of changes
 - [ ] chore: Maintenance
 
 ## Testing
+
 - [ ] Unit tests added/updated
 - [ ] Integration tests added/updated
 - [ ] Manual testing completed
 - [ ] All tests pass
 
 ## Checklist
+
 - [ ] Code follows project standards
 - [ ] Linting passes
 - [ ] Type checking passes
@@ -233,6 +257,7 @@ Brief description of changes
 ```
 
 **3. Code Review Process:**
+
 - At least one approval required
 - All CI checks must pass
 - Code coverage requirements met
@@ -241,11 +266,13 @@ Brief description of changes
 ### 4. Merge Process
 
 **Squash and Merge:**
+
 - Use "Squash and merge" for feature branches
 - Create meaningful commit messages
 - Reference issue numbers in commit messages
 
 **Merge Commit:**
+
 - Use "Merge commit" for release branches
 - Preserve merge history
 - Include release notes
@@ -279,6 +306,7 @@ src/
 ### Key Architecture Patterns
 
 **1. Repository Pattern:**
+
 ```typescript
 // Repository interface
 interface TaskRepository {
@@ -297,6 +325,7 @@ class SQLiteTaskRepository implements TaskRepository {
 ```
 
 **2. Service Layer Pattern:**
+
 ```typescript
 class TaskService {
   constructor(
@@ -319,6 +348,7 @@ class TaskService {
 ```
 
 **3. Dependency Injection:**
+
 ```typescript
 // Dependency container
 const container = new Container();
@@ -356,6 +386,7 @@ tests/
 ### Writing Tests
 
 **Unit Test Example:**
+
 ```typescript
 describe('TaskService', () => {
   let taskService: TaskService;
@@ -378,14 +409,16 @@ describe('TaskService', () => {
     });
 
     it('should throw error for non-existent task', async () => {
-      await expect(taskService.executeTask('invalid-id'))
-        .rejects.toThrow(TaskNotFoundError);
+      await expect(taskService.executeTask('invalid-id')).rejects.toThrow(
+        TaskNotFoundError
+      );
     });
   });
 });
 ```
 
 **Integration Test Example:**
+
 ```typescript
 describe('Task API', () => {
   let app: Express;
@@ -402,13 +435,11 @@ describe('Task API', () => {
 
   describe('POST /api/v1/tasks', () => {
     it('should create task successfully', async () => {
-      const response = await request(app)
-        .post('/api/v1/tasks')
-        .send({
-          id: 'test-task',
-          prompt: 'Test prompt',
-          model: 'gpt-3.5-turbo'
-        });
+      const response = await request(app).post('/api/v1/tasks').send({
+        id: 'test-task',
+        prompt: 'Test prompt',
+        model: 'gpt-3.5-turbo',
+      });
 
       expect(response.status).toBe(201);
       expect(response.body.success).toBe(true);
@@ -419,6 +450,7 @@ describe('Task API', () => {
 ```
 
 **Test Utilities:**
+
 ```typescript
 // Test helpers
 export const createTestTask = (overrides: Partial<Task> = {}): Task => ({
@@ -427,7 +459,7 @@ export const createTestTask = (overrides: Partial<Task> = {}): Task => ({
   model: 'gpt-3.5-turbo',
   status: 'pending',
   createdAt: new Date(),
-  ...overrides
+  ...overrides,
 });
 
 export const setupTestDatabase = async (): Promise<Database> => {
@@ -440,11 +472,13 @@ export const setupTestDatabase = async (): Promise<Database> => {
 ### Running Tests
 
 **All Tests:**
+
 ```bash
 npm test
 ```
 
 **Specific Test Suites:**
+
 ```bash
 # Unit tests only
 npm run test:unit
@@ -457,11 +491,13 @@ npm run test:e2e
 ```
 
 **Test with Coverage:**
+
 ```bash
 npm run test:coverage
 ```
 
 **Test Debugging:**
+
 ```bash
 # Run specific test file
 npm test -- task-service.test.ts
@@ -475,6 +511,7 @@ DEBUG=test:* npm test
 ### Development Debugging
 
 **1. VS Code Debugging:**
+
 ```json
 {
   "version": "0.2.0",
@@ -500,6 +537,7 @@ DEBUG=test:* npm test
 ```
 
 **2. Node.js Debugging:**
+
 ```bash
 # Debug with inspector
 node --inspect src/index.ts
@@ -509,6 +547,7 @@ node --inspect-brk src/index.ts
 ```
 
 **3. Chrome DevTools:**
+
 ```bash
 # Enable remote debugging
 npm run dev -- --inspect
@@ -517,6 +556,7 @@ npm run dev -- --inspect
 ### Common Debugging Scenarios
 
 **Database Issues:**
+
 ```bash
 # Check database file
 ls -la data/
@@ -527,6 +567,7 @@ sqlite3 data/tasks.db "SELECT * FROM tasks LIMIT 5;"
 ```
 
 **API Issues:**
+
 ```bash
 # Test API endpoints
 curl http://localhost:3000/api/v1/status
@@ -536,6 +577,7 @@ tail -f logs/app.log | grep "api"
 ```
 
 **Performance Issues:**
+
 ```bash
 # Profile memory usage
 node --prof src/index.ts
@@ -549,6 +591,7 @@ node --cpu-prof src/index.ts
 ### Linting & Formatting
 
 **Automated Checks:**
+
 ```bash
 # Run all quality checks
 npm run check
@@ -561,6 +604,7 @@ npm run test          # Tests
 ```
 
 **Pre-commit Hooks:**
+
 ```bash
 # Install hooks
 npx husky install
@@ -569,6 +613,7 @@ npx husky install
 ```
 
 **Manual Formatting:**
+
 ```bash
 # Format specific files
 npx prettier --write src/components/TaskForm.tsx
@@ -580,12 +625,14 @@ npx prettier --check src/**/*.ts
 ### Code Coverage Requirements
 
 **Minimum Coverage Thresholds:**
+
 - **Overall**: 90%
 - **Core Business Logic**: 95%
 - **Utilities**: 85%
 - **API Handlers**: 90%
 
 **Coverage Commands:**
+
 ```bash
 # Generate coverage report
 npm run test:coverage
@@ -602,6 +649,7 @@ open coverage/lcov-report/index.html
 ### Documentation Standards
 
 **Code Documentation:**
+
 ```typescript
 /**
  * Executes a task using the specified transport
@@ -620,6 +668,7 @@ async executeTask(
 ```
 
 **README Files:**
+
 - Every module should have a README.md
 - Include setup instructions, API documentation, and examples
 - Keep documentation in sync with code changes
@@ -627,6 +676,7 @@ async executeTask(
 ### Generating Documentation
 
 **API Documentation:**
+
 ```bash
 # Generate TypeDoc documentation
 npm run docs:api
@@ -636,6 +686,7 @@ npm run docs:jsdoc
 ```
 
 **Architecture Documentation:**
+
 - Update architecture docs when making structural changes
 - Include diagrams for complex workflows
 - Document design decisions and trade-offs
@@ -645,6 +696,7 @@ npm run docs:jsdoc
 ### Development Performance
 
 **Bundle Analysis:**
+
 ```bash
 # Analyze bundle size
 npm run build -- --analyze
@@ -654,12 +706,14 @@ npm run build -- --duplicates
 ```
 
 **Hot Module Replacement:**
+
 ```bash
 # Enable HMR in development
 npm run dev -- --hot
 ```
 
 **Development Server Options:**
+
 ```bash
 # Faster builds
 npm run dev -- --turbo
@@ -671,6 +725,7 @@ npm run dev -- --no-sourcemap
 ### Database Optimization
 
 **Query Optimization:**
+
 ```sql
 -- Add indexes for common queries
 CREATE INDEX idx_tasks_status_created ON tasks(status, created_at);
@@ -681,6 +736,7 @@ EXPLAIN QUERY PLAN SELECT * FROM tasks WHERE status = 'pending' ORDER BY created
 ```
 
 **Connection Pooling:**
+
 ```typescript
 const pool = new DatabasePool({
   min: 2,
@@ -695,6 +751,7 @@ const pool = new DatabasePool({
 ### Secure Development Practices
 
 **Environment Variables:**
+
 ```bash
 # Never commit secrets
 git status  # Check for .env files
@@ -705,6 +762,7 @@ cp .env.example .env.local
 ```
 
 **API Key Management:**
+
 ```bash
 # Store in environment, not code
 export OPENAI_API_KEY="your-key-here"
@@ -715,6 +773,7 @@ export OPENAI_API_KEY_PROD="prod-key"
 ```
 
 **Input Validation:**
+
 ```typescript
 // Always validate input
 const validateTaskInput = (input: unknown): TaskInput => {
@@ -733,6 +792,7 @@ const validateTaskInput = (input: unknown): TaskInput => {
 ### Common Development Issues
 
 **1. Port Already in Use:**
+
 ```bash
 # Find process using port
 lsof -i :3000
@@ -745,6 +805,7 @@ PORT=3001 npm run dev
 ```
 
 **2. Module Not Found:**
+
 ```bash
 # Clear node modules
 rm -rf node_modules package-lock.json
@@ -756,6 +817,7 @@ npm run dev
 ```
 
 **3. TypeScript Errors:**
+
 ```bash
 # Check TypeScript configuration
 npx tsc --noEmit
@@ -765,6 +827,7 @@ npm run type-check
 ```
 
 **4. Test Failures:**
+
 ```bash
 # Run specific failing test
 npm test -- --reporter=verbose task-service.test.ts
@@ -774,6 +837,7 @@ npm test -- --inspect task-service.test.ts
 ```
 
 **5. Database Connection Issues:**
+
 ```bash
 # Check database file
 ls -la data/
@@ -788,16 +852,19 @@ npm run dev
 ### Development Resources
 
 **Documentation:**
+
 - [Project Documentation](docs/README.md)
 - [API Reference](docs/api/README.md)
 - [Architecture Guide](docs/architecture/README.md)
 
 **Community:**
+
 - [GitHub Issues](https://github.com/your-org/gpt-task-runner/issues)
 - [Discussion Forum](https://forum.gpt-task-runner.io)
 - [Discord Chat](https://discord.gg/gpt-task-runner)
 
 **Code Examples:**
+
 ```bash
 # Example implementations
 examples/
@@ -809,45 +876,58 @@ tests/fixtures/
 ### Reporting Issues
 
 **Bug Reports:**
+
 ```markdown
 ## Bug Description
+
 [Describe the bug]
 
 ## Steps to Reproduce
+
 1. Step 1
 2. Step 2
 3. Step 3
 
 ## Expected Behavior
+
 [What should happen]
 
 ## Actual Behavior
+
 [What actually happens]
 
 ## Environment
+
 - OS: [e.g. macOS 12.1]
 - Node.js: [e.g. 18.12.0]
 - Browser: [e.g. Chrome 107]
 
 ## Additional Context
+
 [Additional information]
 ```
 
 **Feature Requests:**
+
 ```markdown
 ## Feature Description
+
 [Describe the feature]
 
 ## Use Case
+
 [Why is this feature needed?]
 
 ## Proposed Solution
+
 [How should it work?]
 
 ## Alternatives Considered
+
 [Other approaches considered]
 
 ## Additional Context
+
 [Additional information]
 ```
 
@@ -874,6 +954,7 @@ tests/fixtures/
 ### Code Style Guidelines
 
 **TypeScript:**
+
 ```typescript
 // Good
 interface User {
@@ -895,6 +976,7 @@ const user = { id: '1', name: 'John', email: 'john@example.com' };
 ```
 
 **React Components:**
+
 ```typescript
 // Good
 interface TaskFormProps {
@@ -916,6 +998,7 @@ const TaskForm = ({ onSubmit, initialData }) => {
 ```
 
 **Error Handling:**
+
 ```typescript
 // Good
 try {

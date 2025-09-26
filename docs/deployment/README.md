@@ -7,14 +7,17 @@ This guide provides comprehensive instructions for deploying the GPT Task Runner
 ## Deployment Options
 
 ### 1. Local Development
+
 **Best for**: Individual developers and testing
 
 **Prerequisites:**
+
 - Node.js 20.17.0+
 - npm 10.0.0+
 - OpenAI API key
 
 **Quick Start:**
+
 ```bash
 # Clone the repository
 git clone <repository-url>
@@ -32,6 +35,7 @@ npm run dev
 ```
 
 **Environment Variables:**
+
 ```env
 # Required
 OPENAI_API_KEY=your_openai_api_key
@@ -45,15 +49,18 @@ REDIS_URL=redis://localhost:6379
 ```
 
 ### 2. Docker Deployment
+
 **Best for**: Single-server production deployments
 
 #### Using Docker Compose
 
 **Prerequisites:**
+
 - Docker 20.0+
 - Docker Compose 2.0+
 
 **Setup:**
+
 ```bash
 # Copy docker configuration
 cp docker-compose.example.yml docker-compose.yml
@@ -69,13 +76,14 @@ docker-compose logs -f
 ```
 
 **Docker Compose Configuration:**
+
 ```yaml
 version: '3.8'
 services:
   app:
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - DATABASE_URL=/app/data/tasks.db
@@ -89,7 +97,7 @@ services:
   redis:
     image: redis:7-alpine
     ports:
-      - "6379:6379"
+      - '6379:6379'
     volumes:
       - redis_data:/data
 
@@ -110,9 +118,11 @@ volumes:
 #### Using Docker Swarm
 
 **Prerequisites:**
+
 - Docker Swarm cluster
 
 **Deploy:**
+
 ```bash
 # Initialize swarm (if not already)
 docker swarm init
@@ -123,9 +133,11 @@ docker stack deploy -c docker-compose.swarm.yml gpt-task-runner
 ```
 
 ### 3. Kubernetes Deployment
+
 **Best for**: High-availability production deployments
 
 #### Prerequisites
+
 - Kubernetes 1.24+
 - Helm 3.0+
 - kubectl configured for your cluster
@@ -133,6 +145,7 @@ docker stack deploy -c docker-compose.swarm.yml gpt-task-runner
 #### Quick Deployment
 
 **1. Install Helm Chart:**
+
 ```bash
 # Add repository
 helm repo add gpt-task-runner https://charts.gpt-task-runner.io
@@ -143,6 +156,7 @@ helm install gpt-task-runner gpt-task-runner/gpt-task-runner
 ```
 
 **2. Custom Installation:**
+
 ```bash
 # Create values file
 cat > values.yaml << EOF
@@ -210,11 +224,13 @@ helm install gpt-task-runner gpt-task-runner/gpt-task-runner \
 #### Manual Kubernetes Deployment
 
 **1. Create Namespace:**
+
 ```bash
 kubectl create namespace gpt-task-runner
 ```
 
 **2. Deploy Database:**
+
 ```bash
 # PostgreSQL
 kubectl apply -f k8s/postgres/
@@ -224,6 +240,7 @@ kubectl apply -f k8s/redis/
 ```
 
 **3. Deploy Application:**
+
 ```bash
 # ConfigMap for configuration
 kubectl apply -f k8s/config/
@@ -242,6 +259,7 @@ kubectl apply -f k8s/ingress/
 ```
 
 **4. Verify Deployment:**
+
 ```bash
 # Check pods
 kubectl get pods -n gpt-task-runner
@@ -258,10 +276,12 @@ kubectl logs -n gpt-task-runner deployment/gpt-task-runner
 #### AWS (ECS Fargate)
 
 **Prerequisites:**
+
 - AWS CLI configured
 - ECS cluster created
 
 **Deploy:**
+
 ```bash
 # Build and push image
 aws ecr create-repository --repository-name gpt-task-runner
@@ -277,6 +297,7 @@ aws ecs update-service --cluster gpt-task-runner --service gpt-task-runner --for
 #### Google Cloud (Cloud Run)
 
 **Deploy:**
+
 ```bash
 # Build and deploy
 gcloud builds submit --tag gcr.io/${PROJECT_ID}/gpt-task-runner
@@ -286,6 +307,7 @@ gcloud run deploy --image gcr.io/${PROJECT_ID}/gpt-task-runner --platform manage
 #### Azure (Container Instances)
 
 **Deploy:**
+
 ```bash
 # Build and push to ACR
 az acr build --registry ${ACR_NAME} --image gpt-task-runner:latest .
@@ -299,6 +321,7 @@ az container create --resource-group ${RESOURCE_GROUP} --name gpt-task-runner --
 ### Environment-Specific Configuration
 
 **Development:**
+
 ```env
 NODE_ENV=development
 LOG_LEVEL=debug
@@ -307,6 +330,7 @@ REDIS_URL=redis://localhost:6379
 ```
 
 **Staging:**
+
 ```env
 NODE_ENV=staging
 LOG_LEVEL=info
@@ -315,6 +339,7 @@ REDIS_URL=redis://redis-staging:6379
 ```
 
 **Production:**
+
 ```env
 NODE_ENV=production
 LOG_LEVEL=warn
@@ -325,6 +350,7 @@ REDIS_URL=redis://redis-prod:6379
 ### Secret Management
 
 **Using Kubernetes Secrets:**
+
 ```bash
 # Create secret for API keys
 kubectl create secret generic gpt-task-runner-secrets \
@@ -341,6 +367,7 @@ env:
 ```
 
 **Using Docker Secrets:**
+
 ```bash
 # Create secrets
 echo ${OPENAI_API_KEY} | docker secret create openai_api_key -
@@ -357,11 +384,13 @@ secrets:
 ### Health Checks
 
 **Application Health:**
+
 ```bash
 curl http://localhost:3000/api/v1/status
 ```
 
 **Kubernetes Liveness Probe:**
+
 ```yaml
 livenessProbe:
   httpGet:
@@ -372,6 +401,7 @@ livenessProbe:
 ```
 
 **Kubernetes Readiness Probe:**
+
 ```yaml
 readinessProbe:
   httpGet:
@@ -384,6 +414,7 @@ readinessProbe:
 ### Logging
 
 **Structured Logging Configuration:**
+
 ```json
 {
   "level": "info",
@@ -410,6 +441,7 @@ readinessProbe:
 ### Metrics & Dashboards
 
 **Prometheus Configuration:**
+
 ```yaml
 global:
   scrape_interval: 15s
@@ -422,6 +454,7 @@ scrape_configs:
 ```
 
 **Grafana Dashboard:**
+
 - Task execution metrics
 - System performance indicators
 - Error rates and patterns
@@ -432,6 +465,7 @@ scrape_configs:
 ### Database Backup
 
 **SQLite:**
+
 ```bash
 # Daily backup script
 #!/bin/bash
@@ -442,6 +476,7 @@ find ${BACKUP_DIR} -name "tasks_*.db" -mtime +7 -delete
 ```
 
 **PostgreSQL:**
+
 ```bash
 # Automated backup
 pg_dump gpt_tasks > /backups/gpt_tasks_$(date +%Y%m%d_%H%M%S).sql
@@ -450,6 +485,7 @@ pg_dump gpt_tasks > /backups/gpt_tasks_$(date +%Y%m%d_%H%M%S).sql
 ### Configuration Backup
 
 **Backup critical files:**
+
 ```bash
 tar -czf config_backup_$(date +%Y%m%d).tar.gz \
   /app/config/ \
@@ -460,6 +496,7 @@ tar -czf config_backup_$(date +%Y%m%d).tar.gz \
 ### Recovery Procedures
 
 **1. Database Recovery:**
+
 ```bash
 # Stop application
 systemctl stop gpt-task-runner
@@ -472,6 +509,7 @@ systemctl start gpt-task-runner
 ```
 
 **2. Full System Recovery:**
+
 ```bash
 # Restore configuration
 tar -xzf config_backup_20250101.tar.gz -C /
@@ -488,6 +526,7 @@ docker-compose down && docker-compose up -d
 ### Horizontal Scaling
 
 **Application Tier:**
+
 ```yaml
 # Kubernetes HPA
 apiVersion: autoscaling/v2
@@ -519,12 +558,14 @@ spec:
 ### Database Scaling
 
 **Read Replicas:**
+
 ```sql
 -- PostgreSQL read replica setup
 CREATE PUBLICATION gpt_tasks_pub FOR TABLE tasks, batches, scheduled_tasks;
 ```
 
 **Connection Pooling:**
+
 ```yaml
 # PgBouncer configuration
 [databases]
@@ -543,6 +584,7 @@ auth_file = /etc/pgbouncer/userlist.txt
 ### Network Security
 
 **Firewall Rules:**
+
 ```bash
 # Only allow necessary ports
 ufw allow 80/tcp
@@ -552,6 +594,7 @@ ufw default deny incoming
 ```
 
 **Security Groups (AWS):**
+
 ```json
 {
   "GroupId": "sg-12345",
@@ -561,13 +604,13 @@ ufw default deny incoming
       "IpProtocol": "tcp",
       "FromPort": 80,
       "ToPort": 80,
-      "IpRanges": [{"CidrIp": "0.0.0.0/0"}]
+      "IpRanges": [{ "CidrIp": "0.0.0.0/0" }]
     },
     {
       "IpProtocol": "tcp",
       "FromPort": 443,
       "ToPort": 443,
-      "IpRanges": [{"CidrIp": "0.0.0.0/0"}]
+      "IpRanges": [{ "CidrIp": "0.0.0.0/0" }]
     }
   ]
 }
@@ -576,12 +619,14 @@ ufw default deny incoming
 ### SSL/TLS Configuration
 
 **Certificate Management:**
+
 ```bash
 # Using Let's Encrypt
 certbot certonly --webroot -w /var/www/html -d gpt-task-runner.example.com
 ```
 
 **Nginx SSL Configuration:**
+
 ```nginx
 server {
     listen 443 ssl;
@@ -609,6 +654,7 @@ server {
 ### Common Issues
 
 **1. High Memory Usage:**
+
 ```bash
 # Check memory usage
 docker stats
@@ -619,6 +665,7 @@ docker-compose up -d --renew-anon-volumes
 ```
 
 **2. Database Connection Issues:**
+
 ```bash
 # Test database connectivity
 docker-compose exec app npx prisma db ping
@@ -628,6 +675,7 @@ docker-compose logs postgres
 ```
 
 **3. API Rate Limiting:**
+
 ```bash
 # Check rate limit status
 curl -H "Authorization: Bearer ${API_KEY}" \
@@ -641,12 +689,14 @@ curl -v -H "Authorization: Bearer ${API_KEY}" \
 ### Debug Mode
 
 **Enable Debug Logging:**
+
 ```env
 LOG_LEVEL=debug
 DEBUG_MODE=true
 ```
 
 **Check Application Logs:**
+
 ```bash
 # Docker Compose
 docker-compose logs -f app
@@ -656,6 +706,7 @@ kubectl logs -f deployment/gpt-task-runner -n gpt-task-runner
 ```
 
 **Database Inspection:**
+
 ```bash
 # SQLite
 sqlite3 /app/data/tasks.db ".schema"
@@ -671,12 +722,14 @@ docker-compose exec postgres psql -U gpt_user -d gpt_tasks -c "SELECT COUNT(*) F
 ### Application Tuning
 
 **Node.js Optimization:**
+
 ```env
 NODE_OPTIONS="--max-old-space-size=4096 --optimize-for-size"
 UV_THREADPOOL_SIZE=4
 ```
 
 **Database Optimization:**
+
 ```sql
 -- Create indexes
 CREATE INDEX idx_tasks_status ON tasks(status);
@@ -685,6 +738,7 @@ CREATE INDEX idx_batches_status ON batches(status);
 ```
 
 **Caching Configuration:**
+
 ```json
 {
   "cache": {
@@ -698,12 +752,14 @@ CREATE INDEX idx_batches_status ON batches(status);
 ## Cost Optimization
 
 ### Resource Optimization
+
 - Use appropriate instance sizes based on load
 - Implement auto-scaling to handle traffic spikes
 - Use spot instances for non-critical workloads
 - Monitor and right-size resources regularly
 
 ### API Cost Management
+
 - Implement request batching to reduce API calls
 - Use caching to avoid redundant requests
 - Monitor token usage and optimize prompts
@@ -714,16 +770,19 @@ CREATE INDEX idx_batches_status ON batches(status);
 ### Regular Maintenance Tasks
 
 **Daily:**
+
 - Monitor system health and performance
 - Check log files for errors
 - Verify backup completion
 
 **Weekly:**
+
 - Review resource utilization
 - Update dependencies
 - Test backup restoration
 
 **Monthly:**
+
 - Security updates and patches
 - Performance optimization review
 - Capacity planning
@@ -731,10 +790,12 @@ CREATE INDEX idx_batches_status ON batches(status);
 ### Support Contacts
 
 **Emergency Support:**
+
 - On-call engineer: +1-555-0123
 - Emergency email: support@gpt-task-runner.com
 
 **Regular Support:**
+
 - Documentation: https://docs.gpt-task-runner.io
 - Community Forum: https://forum.gpt-task-runner.io
 - Issue Tracker: https://github.com/your-org/gpt-task-runner/issues
@@ -743,28 +804,28 @@ CREATE INDEX idx_batches_status ON batches(status);
 
 ### Environment Variables Reference
 
-| Variable | Description | Default | Required |
-|----------|-------------|---------|----------|
-| `OPENAI_API_KEY` | OpenAI API key | - | Yes |
-| `DATABASE_URL` | Database connection string | `./data/tasks.db` | Yes |
-| `REDIS_URL` | Redis connection string | - | No |
-| `PORT` | Application port | `3000` | No |
-| `NODE_ENV` | Environment | `development` | No |
-| `LOG_LEVEL` | Logging level | `info` | No |
-| `MAX_CONCURRENCY` | Max concurrent tasks | `10` | No |
-| `BATCH_SIZE` | Task batch size | `50` | No |
-| `CACHE_TTL` | Cache time-to-live | `3600` | No |
+| Variable          | Description                | Default           | Required |
+| ----------------- | -------------------------- | ----------------- | -------- |
+| `OPENAI_API_KEY`  | OpenAI API key             | -                 | Yes      |
+| `DATABASE_URL`    | Database connection string | `./data/tasks.db` | Yes      |
+| `REDIS_URL`       | Redis connection string    | -                 | No       |
+| `PORT`            | Application port           | `3000`            | No       |
+| `NODE_ENV`        | Environment                | `development`     | No       |
+| `LOG_LEVEL`       | Logging level              | `info`            | No       |
+| `MAX_CONCURRENCY` | Max concurrent tasks       | `10`              | No       |
+| `BATCH_SIZE`      | Task batch size            | `50`              | No       |
+| `CACHE_TTL`       | Cache time-to-live         | `3600`            | No       |
 
 ### Port Reference
 
-| Service | Port | Protocol | Description |
-|---------|------|----------|-------------|
-| Application | 3000 | HTTP | Main application |
-| PostgreSQL | 5432 | TCP | Database |
-| Redis | 6379 | TCP | Cache |
-| Prometheus | 9090 | HTTP | Metrics |
-| Grafana | 3001 | HTTP | Dashboards |
-| Nginx | 80, 443 | HTTP/HTTPS | Reverse proxy |
+| Service     | Port    | Protocol   | Description      |
+| ----------- | ------- | ---------- | ---------------- |
+| Application | 3000    | HTTP       | Main application |
+| PostgreSQL  | 5432    | TCP        | Database         |
+| Redis       | 6379    | TCP        | Cache            |
+| Prometheus  | 9090    | HTTP       | Metrics          |
+| Grafana     | 3001    | HTTP       | Dashboards       |
+| Nginx       | 80, 443 | HTTP/HTTPS | Reverse proxy    |
 
 ### File System Layout
 
