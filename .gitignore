@@ -192,3 +192,13 @@ local/
 
 # Build Logs
 docs/build_logs/
+
+# Dictionary QA system generated files
+dictionary-reports/
+expanded-phrase-book.json
+sample-phrase-book.json
+qa_report_*.json
+qa_report_*.md
+
+# Testing improvement plan markdowns
+docs/testing-improvement-plan.md
