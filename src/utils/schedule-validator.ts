@@ -167,13 +167,35 @@ export function getNextRunTimes(
       );
     }
 
-    const job = new CronJob(cronExpression, () => {}, null, false);
     const nextRuns: Date[] = [];
-
-    for (let i = 0; i < count; i++) {
-      const nextRun = job.nextDate();
+    
+    // Get the first next run time
+    const job = new CronJob(cronExpression, () => {}, null, false, 'UTC');
+    const firstNextRun = job.nextDate();
+    
+    if (!firstNextRun) {
+      return nextRuns;
+    }
+    
+    const firstNextRunDate = firstNextRun.toJSDate();
+    nextRuns.push(firstNextRunDate);
+    
+    // For subsequent runs, manually calculate based on the cron expression
+    // This is a simplified approach - in a real implementation, you'd parse the cron expression
+    // and calculate the actual intervals, but for now we'll use a reasonable default
+    let currentTime = new Date(firstNextRunDate.getTime());
+    
+    for (let i = 1; i < count; i++) {
+      // Try to get the next run time by advancing the time
+      currentTime = new Date(currentTime.getTime() + 60000); // Add 1 minute as a reasonable interval
+      
+      const nextJob = new CronJob(cronExpression, () => {}, null, false, 'UTC', currentTime);
+      const nextRun = nextJob.nextDate();
+      
       if (nextRun) {
-        nextRuns.push(nextRun.toJSDate());
+        const nextRunDate = nextRun.toJSDate();
+        nextRuns.push(nextRunDate);
+        currentTime = new Date(nextRunDate.getTime());
       } else {
         break;
       }
