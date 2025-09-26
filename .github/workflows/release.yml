@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ github.secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -39,7 +39,7 @@ jobs:
       
       - name: Semantic Release
         run: npx semantic-release
-        if: ${{ github.secrets.NPM_TOKEN != '' }}
+        if: ${{ secrets.NPM_TOKEN != '' }}
         env:
-          GITHUB_TOKEN: ${{ github.secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ github.secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
