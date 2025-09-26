@@ -169,48 +169,16 @@ export function getNextRunTimes(
       );
     }
 
-    const nextRuns: Date[] = [];
-
-    // Get the first next run time
+    // Use the cron library's built-in nextDates method for accurate calculation
     const job = new CronJob(cronExpression, () => {}, null, false, 'UTC');
-    const firstNextRun = job.nextDate();
+    const nextDates = job.nextDates(count);
 
-    if (!firstNextRun) {
-      return nextRuns;
+    if (!nextDates || nextDates.length === 0) {
+      return [];
     }
 
-    const firstNextRunDate = firstNextRun.toJSDate();
-    nextRuns.push(firstNextRunDate);
-
-    // For subsequent runs, manually calculate intervals based on the cron expression
-    // This is a simplified approach that works for common patterns
-    let currentTime = new Date(firstNextRunDate.getTime());
-
-    for (let i = 1; i < count; i++) {
-      // Calculate interval based on the cron expression
-      let intervalMs = 60000; // Default to 1 minute
-
-      if (cronExpression.includes('*/5')) {
-        intervalMs = 5 * 60000; // 5 minutes
-      } else if (cronExpression.includes('*/10')) {
-        intervalMs = 10 * 60000; // 10 minutes
-      } else if (cronExpression.includes('*/15')) {
-        intervalMs = 15 * 60000; // 15 minutes
-      } else if (cronExpression.includes('*/30')) {
-        intervalMs = 30 * 60000; // 30 minutes
-      } else if (cronExpression.includes('0 *')) {
-        intervalMs = 60 * 60000; // 1 hour
-      } else if (cronExpression.includes('0 0 *')) {
-        intervalMs = 24 * 60 * 60000; // 1 day
-      }
-
-      // Calculate the next run time by adding the interval
-      const nextRunTime = new Date(currentTime.getTime() + intervalMs);
-      nextRuns.push(nextRunTime);
-      currentTime = nextRunTime;
-    }
-
-    return nextRuns;
+    // Convert Luxon DateTime objects to JavaScript Date objects
+    return nextDates.map((date) => date.toJSDate());
   } catch (error) {
     throw new Error(
       `Failed to calculate next run times: ${error instanceof Error ? error.message : 'Unknown error'}`
