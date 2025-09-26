@@ -69,12 +69,12 @@ const TaskForm: React.FC<TaskFormProps> = ({
 
     if (!formData.schedule.trim()) {
       newErrors.schedule = 'Schedule is required';
-        } else {
-          const cronValidation = validateCronExpressionClient(formData.schedule);
-          if (!cronValidation.isValid) {
-            newErrors.schedule = cronValidation.error || 'Invalid cron expression';
-          }
-        }
+    } else {
+      const cronValidation = validateCronExpressionClient(formData.schedule);
+      if (!cronValidation.isValid) {
+        newErrors.schedule = cronValidation.error || 'Invalid cron expression';
+      }
+    }
 
     if (!formData.inputFile.trim()) {
       newErrors.inputFile = 'Input file is required';
