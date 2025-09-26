@@ -44,7 +44,7 @@
         "name": "next"
       }
     ],
-    "types": ["node"]
+    "types": ["node", "cron", "cron-validate"]
   },
   "include": ["src/**/*", "tests/**/*", ".next/types/**/*.ts"],
   "exclude": [

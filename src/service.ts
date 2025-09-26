@@ -136,14 +136,14 @@ class GPTTaskService {
   }
 
   private async executeScheduledTask(task: ScheduledTask): Promise<void> {
-    const executionId = `exec-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    let realExecutionId: string | null = null;
 
     try {
       this.logger.info(`Executing scheduled task: ${task.name}`);
       await this.database.logServiceEvent(
         'info',
         `Executing scheduled task '${task.name}'`,
-        { taskId: task.id, executionId }
+        { taskId: task.id }
       );
 
       // Update last run time
@@ -171,8 +171,8 @@ class GPTTaskService {
         verbose: false,
       };
 
-      // Record execution start
-      await this.database.saveTaskExecution({
+      // Record execution start and capture the real execution ID
+      realExecutionId = await this.database.saveTaskExecution({
         request: JSON.stringify(batchInput),
         status: 'running',
         isDryRun: task.isDryRun,
@@ -181,8 +181,8 @@ class GPTTaskService {
       // Execute tasks
       await taskRunner.runFromFile(task.inputFile, cliOptions);
 
-      // Record execution completion
-      await this.database.updateTaskExecution(executionId, {
+      // Record execution completion using the real execution ID
+      await this.database.updateTaskExecution(realExecutionId, {
         status: 'completed',
         completedAt: new Date().toISOString(),
       });
@@ -191,25 +191,28 @@ class GPTTaskService {
       await this.database.logServiceEvent(
         'info',
         `Completed scheduled task '${task.name}'`,
-        { taskId: task.id, executionId }
+        { taskId: task.id, executionId: realExecutionId }
       );
     } catch (error) {
       this.logger.error(`Failed to execute scheduled task '${task.name}'`, {
         error: error instanceof Error ? error.message : error,
       });
 
-      await this.database.updateTaskExecution(executionId, {
-        status: 'failed',
-        error: error instanceof Error ? error.message : 'Unknown error',
-        completedAt: new Date().toISOString(),
-      });
+      // Only update execution status if we have a real execution ID
+      if (realExecutionId) {
+        await this.database.updateTaskExecution(realExecutionId, {
+          status: 'failed',
+          error: error instanceof Error ? error.message : 'Unknown error',
+          completedAt: new Date().toISOString(),
+        });
+      }
 
       await this.database.logServiceEvent(
         'error',
         `Failed scheduled task '${task.name}'`,
         {
           taskId: task.id,
-          executionId,
+          executionId: realExecutionId,
           error: error instanceof Error ? error.message : error,
         }
       );
