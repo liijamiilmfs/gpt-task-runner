@@ -43,11 +43,11 @@ export class BatchLoader {
       stream
         .on('data', (chunk: string | Buffer) => {
           buffer += chunk;
-          
+
           // Process buffer character by character to handle multiline quoted fields
           for (let i = 0; i < buffer.length; i++) {
             const char = buffer[i];
-            
+
             if (char === '"') {
               // Handle escaped quotes ("")
               if (i + 1 < buffer.length && buffer[i + 1] === '"') {
@@ -63,17 +63,21 @@ export class BatchLoader {
             } else if (char === '\n' && !inQuotes) {
               // Complete row found
               currentFields.push(currentField.trim());
-              
-              if (currentFields.some(field => field.length > 0)) {
+
+              if (currentFields.some((field) => field.length > 0)) {
                 lineNumber++;
-                
+
                 if (lineNumber === 1) {
                   // Parse headers
                   headers = currentFields;
                 } else {
                   // Parse data row
                   try {
-                    const task = this.csvRowToTask(currentFields, headers, lineNumber);
+                    const task = this.csvRowToTask(
+                      currentFields,
+                      headers,
+                      lineNumber
+                    );
 
                     // Validate the task
                     const validation = TaskValidator.validateTask(
@@ -92,7 +96,7 @@ export class BatchLoader {
                   }
                 }
               }
-              
+
               // Reset for next row
               currentFields = [];
               currentField = '';
@@ -100,7 +104,7 @@ export class BatchLoader {
               currentField += char;
             }
           }
-          
+
           // Keep the last incomplete row in buffer
           buffer = currentField;
         })
@@ -108,13 +112,17 @@ export class BatchLoader {
           // Process the last row if it exists
           if (currentField.trim() || currentFields.length > 0) {
             currentFields.push(currentField.trim());
-            
-            if (currentFields.some(field => field.length > 0)) {
+
+            if (currentFields.some((field) => field.length > 0)) {
               lineNumber++;
               if (lineNumber > 1) {
                 // Skip if it's just headers
                 try {
-                  const task = this.csvRowToTask(currentFields, headers, lineNumber);
+                  const task = this.csvRowToTask(
+                    currentFields,
+                    headers,
+                    lineNumber
+                  );
                   const validation = TaskValidator.validateTask(
                     task as unknown as Record<string, unknown>,
                     lineNumber
@@ -230,35 +238,6 @@ export class BatchLoader {
           reject(error);
         });
     });
-  }
-
-
-  private parseCSVLine(line: string): string[] {
-    const result: string[] = [];
-    let current = '';
-    let inQuotes = false;
-
-    for (let i = 0; i < line.length; i++) {
-      const char = line[i];
-
-      if (char === '"') {
-        // Handle escaped quotes ("")
-        if (i + 1 < line.length && line[i + 1] === '"') {
-          current += '"';
-          i++; // Skip the next quote
-        } else {
-          inQuotes = !inQuotes;
-        }
-      } else if (char === ',' && !inQuotes) {
-        result.push(current.trim());
-        current = '';
-      } else {
-        current += char;
-      }
-    }
-
-    result.push(current.trim());
-    return result;
   }
 
   private csvRowToTask(

@@ -85,7 +85,6 @@ export class TaskRunner {
 
       const results: TaskResponse[] = [];
       const batchSize = options.batchSize || 10;
-      const maxInflight = options.maxInflight || 5;
 
       // Process tasks in batches with inflight limiting
       for (let i = 0; i < tasksToProcess.length; i += batchSize) {
@@ -108,8 +107,7 @@ export class TaskRunner {
         // Process batch with inflight limiting
         const batchResults = await this.processBatchWithInflightLimit(
           batch,
-          batchId,
-          maxInflight
+          batchId
         );
         results.push(...batchResults);
 
@@ -265,8 +263,7 @@ export class TaskRunner {
    */
   private async processBatchWithInflightLimit(
     tasks: TaskRequest[],
-    batchId: string,
-    _maxInflight: number
+    batchId: string
   ): Promise<TaskResponse[]> {
     // For now, use the existing executeBatch method
     // TODO: Implement proper inflight limiting with sub-batching

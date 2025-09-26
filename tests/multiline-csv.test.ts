@@ -6,8 +6,10 @@ import { BatchLoader } from '../src/io/batch-loader';
 
 describe('Multiline CSV Parsing', () => {
   it('should handle multiline CSV fields with embedded newlines', async () => {
-    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'multiline-csv-test-'));
-    
+    const tempDir = fs.mkdtempSync(
+      path.join(os.tmpdir(), 'multiline-csv-test-')
+    );
+
     try {
       // Create a CSV with multiline prompt containing embedded newlines
       const csvContent = `id,prompt,model
@@ -39,8 +41,10 @@ in simple terms for beginners",gpt-4`;
   });
 
   it('should handle CSV fields with escaped quotes and newlines', async () => {
-    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'multiline-csv-test-'));
-    
+    const tempDir = fs.mkdtempSync(
+      path.join(os.tmpdir(), 'multiline-csv-test-')
+    );
+
     try {
       // Create a CSV with escaped quotes and newlines
       const csvContent = `id,prompt,model
@@ -55,7 +59,9 @@ task-2,"Simple prompt without quotes",gpt-4`;
       const result = await batchLoader.loadFromFile(csvPath);
 
       expect(result.tasks).toHaveLength(2);
-      expect(result.tasks[0].prompt).toBe('He said "Hello world"\nand then walked away');
+      expect(result.tasks[0].prompt).toBe(
+        'He said "Hello world"\nand then walked away'
+      );
       expect(result.tasks[1].prompt).toBe('Simple prompt without quotes');
     } finally {
       // Cleanup
@@ -64,8 +70,10 @@ task-2,"Simple prompt without quotes",gpt-4`;
   });
 
   it('should handle CSV with mixed single and multiline fields', async () => {
-    const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'multiline-csv-test-'));
-    
+    const tempDir = fs.mkdtempSync(
+      path.join(os.tmpdir(), 'multiline-csv-test-')
+    );
+
     try {
       const csvContent = `id,prompt,model,notes
 task-1,"Single line prompt",gpt-3.5-turbo,"Simple task"
@@ -82,15 +90,17 @@ task-3,"Another single line",gpt-3.5-turbo,"Basic task"`;
       const result = await batchLoader.loadFromFile(csvPath);
 
       expect(result.tasks).toHaveLength(3);
-      
+
       // Check single line field
       expect(result.tasks[0].prompt).toBe('Single line prompt');
       expect(result.tasks[0].metadata?.notes).toBe('Simple task');
-      
+
       // Check multiline fields
-      expect(result.tasks[1].prompt).toBe('Multiline prompt\nwith embedded newlines\nand more content');
+      expect(result.tasks[1].prompt).toBe(
+        'Multiline prompt\nwith embedded newlines\nand more content'
+      );
       expect(result.tasks[1].metadata?.notes).toBe('Complex task\nwith notes');
-      
+
       // Check another single line
       expect(result.tasks[2].prompt).toBe('Another single line');
       expect(result.tasks[2].metadata?.notes).toBe('Basic task');
