@@ -203,10 +203,14 @@ qa_report_*.md
 # Testing improvement plan markdowns
 docs/testing-improvement-plan.md
 
+# Repository visibility strategy (sensitive internal document)
+docs/REPOSITORY_VISIBILITY_STRATEGY.md
+
 # Generated test artifacts
 dry-run-results.jsonl
 test-results.jsonl
 test-results.dry-run.jsonl
+
 # Coverage reports
 coverage/
 

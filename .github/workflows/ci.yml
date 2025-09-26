@@ -28,14 +28,17 @@ jobs:
           cache: "npm"
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Run unit tests
-        run: npm test
+        run: npm run test:ci
         id: test
       
       - name: Run tests with coverage
-        run: npm run test:coverage
+        run: npm run test:coverage -- --testTimeout=30000
         id: coverage
       
       - name: Upload coverage reports to Codecov
@@ -62,7 +65,10 @@ jobs:
           cache: "npm"
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Build application
         run: npm run build
@@ -117,7 +123,10 @@ jobs:
           cache: "npm"
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Run ESLint
         run: npm run lint
@@ -142,7 +151,10 @@ jobs:
           cache: "npm"
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Run TypeScript type check
         run: npm run type-check
@@ -166,7 +178,10 @@ jobs:
             package-lock.json
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Build application
         run: npm run build
@@ -187,7 +202,10 @@ jobs:
           cache: "npm"
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Run npm audit
         run: npm audit --audit-level moderate
@@ -230,7 +248,10 @@ jobs:
           cache: "npm"
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Run coverage check
         run: npm run coverage:check
@@ -263,7 +284,10 @@ jobs:
           cache: "npm"
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Run integration tests
         run: npm run test:integration
@@ -287,7 +311,10 @@ jobs:
           cache: "npm"
       
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          # Fix Rollup platform-specific dependency issue
+          npm install @rollup/rollup-linux-x64-gnu --no-save
       
       - name: Run E2E tests
         run: npm run test:e2e

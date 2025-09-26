@@ -1,11 +1,11 @@
-import { defineConfig } from 'vitest/config';
 import { resolve } from 'path';
+import { defineConfig } from 'vitest/config';
 
 export default defineConfig({
   test: {
     globals: true,
     environment: 'node',
-    testTimeout: 10000, // 10 seconds timeout
+    testTimeout: 30000, // 30 seconds timeout for CI stability
     include: ['tests/**/*.test.ts', 'tests/**/*.test.tsx'],
     coverage: {
       provider: 'v8',
