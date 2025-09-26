@@ -102,12 +102,14 @@ export interface RetryConfig {
 export interface ErrorInfo {
   code: string;
   message: string;
+  technicalMessage?: string;
   isRetryable: boolean;
   httpStatus?: number;
   originalError?: Error;
 }
 
 export enum ErrorCodes {
+  // API and Transport Errors
   RATE_LIMIT = 'E_RATE_LIMIT',
   TIMEOUT = 'E_TIMEOUT',
   AUTH = 'E_AUTH',
@@ -115,5 +117,35 @@ export enum ErrorCodes {
   QUOTA = 'E_QUOTA',
   SERVER_ERROR = 'E_SERVER_ERROR',
   NETWORK = 'E_NETWORK',
+
+  // File and I/O Errors
+  FILE_NOT_FOUND = 'E_FILE_NOT_FOUND',
+  FILE_PERMISSION = 'E_FILE_PERMISSION',
+  FILE_FORMAT = 'E_FILE_FORMAT',
+  FILE_CORRUPT = 'E_FILE_CORRUPT',
+
+  // Validation Errors
+  VALIDATION = 'E_VALIDATION',
+  SCHEMA = 'E_SCHEMA',
+  REQUIRED_FIELD = 'E_REQUIRED_FIELD',
+  INVALID_FORMAT = 'E_INVALID_FORMAT',
+
+  // Configuration Errors
+  CONFIG = 'E_CONFIG',
+  CONFIG_MISSING = 'E_CONFIG_MISSING',
+  CONFIG_INVALID = 'E_CONFIG_INVALID',
+
+  // System Errors
+  MEMORY = 'E_MEMORY',
+  DISK_SPACE = 'E_DISK_SPACE',
+  PROCESS = 'E_PROCESS',
+
+  // Business Logic Errors
+  BATCH_FAILED = 'E_BATCH_FAILED',
+  CHECKPOINT = 'E_CHECKPOINT',
+  RESUME = 'E_RESUME',
+
+  // Generic Errors
   UNKNOWN = 'E_UNKNOWN',
+  INTERNAL = 'E_INTERNAL',
 }

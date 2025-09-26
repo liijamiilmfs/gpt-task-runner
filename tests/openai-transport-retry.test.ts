@@ -315,7 +315,7 @@ describe('OpenAITransport with Retry', () => {
       const result = await transport.execute(request);
 
       expect(result.success).toBe(false);
-      expect(result.error).toContain('Invalid input or bad request');
+      expect(result.error).toContain('Invalid input provided');
       expect(result.errorCode).toBe('E_INPUT');
     });
   });

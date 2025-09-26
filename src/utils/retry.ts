@@ -1,4 +1,5 @@
-import { ErrorCodes, ErrorInfo, RetryConfig } from '../types';
+import { ErrorInfo, RetryConfig } from '../types';
+import { ErrorTaxonomy } from './error-taxonomy';
 
 export class RetryError extends Error {
   constructor(
@@ -139,118 +140,8 @@ export class RetryManager {
   }
 
   private classifyError(error: Error): ErrorInfo {
-    const message = error.message.toLowerCase();
-
-    // Handle circuit breaker errors - these should be retryable
-    if (
-      error.name === 'CircuitBreakerError' ||
-      message.includes('circuit breaker')
-    ) {
-      return {
-        code: ErrorCodes.SERVER_ERROR,
-        message: 'Circuit breaker is open',
-        isRetryable: true,
-        originalError: error,
-      };
-    }
-
-    // OpenAI API specific error patterns
-    if (message.includes('rate limit') || message.includes('429')) {
-      return {
-        code: ErrorCodes.RATE_LIMIT,
-        message: 'Rate limit exceeded',
-        isRetryable: true,
-        httpStatus: 429,
-        originalError: error,
-      };
-    }
-
-    if (message.includes('timeout') || message.includes('etimedout')) {
-      return {
-        code: ErrorCodes.TIMEOUT,
-        message: 'Request timeout',
-        isRetryable: true,
-        originalError: error,
-      };
-    }
-
-    if (
-      message.includes('unauthorized') ||
-      message.includes('401') ||
-      message.includes('api key')
-    ) {
-      return {
-        code: ErrorCodes.AUTH,
-        message: 'Authentication failed',
-        isRetryable: false,
-        httpStatus: 401,
-        originalError: error,
-      };
-    }
-
-    if (
-      message.includes('quota') ||
-      message.includes('billing') ||
-      message.includes('payment')
-    ) {
-      return {
-        code: ErrorCodes.QUOTA,
-        message: 'Quota exceeded or billing issue',
-        isRetryable: false,
-        originalError: error,
-      };
-    }
-
-    if (
-      message.includes('500') ||
-      message.includes('502') ||
-      message.includes('503') ||
-      message.includes('504')
-    ) {
-      return {
-        code: ErrorCodes.SERVER_ERROR,
-        message: 'Server error',
-        isRetryable: true,
-        httpStatus: parseInt(
-          message.match(/\b(500|502|503|504)\b/)?.[1] || '500'
-        ),
-        originalError: error,
-      };
-    }
-
-    if (
-      message.includes('network') ||
-      message.includes('econnreset') ||
-      message.includes('enotfound')
-    ) {
-      return {
-        code: ErrorCodes.NETWORK,
-        message: 'Network error',
-        isRetryable: true,
-        originalError: error,
-      };
-    }
-
-    if (
-      message.includes('invalid') ||
-      message.includes('bad request') ||
-      message.includes('must be provided')
-    ) {
-      return {
-        code: ErrorCodes.INPUT,
-        message: 'Invalid input or bad request',
-        isRetryable: false,
-        httpStatus: 400,
-        originalError: error,
-      };
-    }
-
-    return {
-      code: ErrorCodes.UNKNOWN,
-      message: 'Unknown error',
-      isRetryable: true, // Default to retryable for unknown errors
-      originalError: error,
-    };
+    // Use the enhanced error taxonomy system
+    return ErrorTaxonomy.classifyError(error);
   }
 
   private calculateDelay(attempt: number): number {
