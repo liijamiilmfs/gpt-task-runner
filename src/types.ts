@@ -149,3 +149,16 @@ export enum ErrorCodes {
   UNKNOWN = 'E_UNKNOWN',
   INTERNAL = 'E_INTERNAL',
 }
+
+export interface ScheduledTask {
+  id?: string;
+  name: string;
+  schedule: string;
+  inputFile: string;
+  outputFile?: string;
+  isDryRun: boolean;
+  isActive?: boolean;
+  createdAt?: string;
+  lastRun?: string;
+  nextRun?: string;
+}

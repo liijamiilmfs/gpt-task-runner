@@ -6,12 +6,17 @@ import { OpenAITransport } from './transports/openai-transport';
 import { DryRunTransport } from './transports/dry-run-transport';
 import { TaskRunner } from './task-runner';
 import { Logger } from './logger';
-import { CliOptions, ErrorCodes } from './types';
+import { CliOptions, ErrorCodes, ScheduledTask } from './types';
 import { ErrorTaxonomy } from './utils/error-taxonomy';
 import {
   getExitCodeFromErrorCode,
   getExitCodeDescription,
 } from './utils/exit-codes';
+import { Database } from './database/database';
+import {
+  validateScheduledTask,
+  getNextRunTimes,
+} from './utils/schedule-validator';
 
 // Load environment variables
 dotenv.config();
@@ -188,6 +193,356 @@ program
       // Show sample task
       if (batchInput.tasks.length > 0) {
         logger.info('Sample task:', { task: batchInput.tasks[0] });
+      }
+
+      process.exit(0);
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+// Schedule command group
+const scheduleCommand = program
+  .command('schedule')
+  .description('Manage scheduled tasks');
+
+// Schedule add command
+scheduleCommand
+  .command('add')
+  .description('Add a new scheduled task')
+  .option('-n, --name <name>', 'Task name (required)')
+  .option('-s, --schedule <cron>', 'Cron expression (required)')
+  .option('-i, --input <path>', 'Input file path (required)')
+  .option('-o, --output <path>', 'Output file path (optional)')
+  .option('--dry-run', 'Run in dry-run mode', false)
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      // Validate required options
+      if (!options.name) {
+        const error = new Error('--name is required');
+        handleError(error, logger);
+      }
+      if (!options.schedule) {
+        const error = new Error('--schedule is required');
+        handleError(error, logger);
+      }
+      if (!options.input) {
+        const error = new Error('--input is required');
+        handleError(error, logger);
+      }
+
+      // Create scheduled task object
+      const task: ScheduledTask = {
+        name: options.name,
+        schedule: options.schedule,
+        inputFile: options.input,
+        outputFile: options.output,
+        isDryRun: options.dryRun || false,
+        isActive: true,
+      };
+
+      // Validate the task
+      const validation = validateScheduledTask(task);
+      if (!validation.isValid) {
+        const error = new Error(
+          `Validation failed: ${validation.errors.join(', ')}`
+        );
+        handleError(error, logger);
+      }
+
+      // Save to database
+      const database = new Database();
+      const taskId = await database.saveScheduledTask(
+        task as unknown as Record<string, unknown>
+      );
+
+      logger.info(`✓ Scheduled task created successfully`);
+      logger.info(`  ID: ${taskId}`);
+      logger.info(`  Name: ${task.name}`);
+      logger.info(`  Schedule: ${task.schedule}`);
+      logger.info(`  Input: ${task.inputFile}`);
+      if (task.outputFile) {
+        logger.info(`  Output: ${task.outputFile}`);
+      }
+      logger.info(`  Dry Run: ${task.isDryRun ? 'Yes' : 'No'}`);
+
+      // Show next run times
+      try {
+        const nextRuns = getNextRunTimes(task.schedule, 3);
+        logger.info(`  Next runs:`);
+        nextRuns.forEach((date, index) => {
+          logger.info(`    ${index + 1}. ${date.toLocaleString()}`);
+        });
+      } catch (error) {
+        logger.warn(
+          `  Could not calculate next run times: ${error instanceof Error ? error.message : 'Unknown error'}`
+        );
+      }
+
+      process.exit(0);
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+// Schedule list command
+scheduleCommand
+  .command('list')
+  .description('List all scheduled tasks')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      const database = new Database();
+      const tasks = await database.getScheduledTasks();
+
+      if (tasks.length === 0) {
+        logger.info('No scheduled tasks found');
+        process.exit(0);
+      }
+
+      logger.info(`Found ${tasks.length} scheduled task(s):`);
+      logger.info('');
+
+      tasks.forEach((task, index) => {
+        const taskData = task as unknown as ScheduledTask;
+        logger.info(`${index + 1}. ${taskData.name}`);
+        logger.info(`   ID: ${taskData.id}`);
+        logger.info(`   Schedule: ${taskData.schedule}`);
+        logger.info(`   Input: ${taskData.inputFile}`);
+        if (taskData.outputFile) {
+          logger.info(`   Output: ${taskData.outputFile}`);
+        }
+        logger.info(`   Dry Run: ${taskData.isDryRun ? 'Yes' : 'No'}`);
+        logger.info(`   Active: ${taskData.isActive ? 'Yes' : 'No'}`);
+        if (taskData.createdAt) {
+          logger.info(
+            `   Created: ${new Date(taskData.createdAt).toLocaleString()}`
+          );
+        }
+        if (taskData.lastRun) {
+          logger.info(
+            `   Last Run: ${new Date(taskData.lastRun).toLocaleString()}`
+          );
+        }
+        logger.info('');
+      });
+
+      process.exit(0);
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+// Schedule update command
+scheduleCommand
+  .command('update <id>')
+  .description('Update a scheduled task')
+  .option('-n, --name <name>', 'New task name')
+  .option('-s, --schedule <cron>', 'New cron expression')
+  .option('-i, --input <path>', 'New input file path')
+  .option('-o, --output <path>', 'New output file path')
+  .option('--dry-run', 'Set dry-run mode')
+  .option('--no-dry-run', 'Disable dry-run mode')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (id, options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      const database = new Database();
+
+      // Check if task exists
+      const existingTask = await database.getScheduledTask(id);
+      if (!existingTask) {
+        const error = new Error(`Scheduled task with ID '${id}' not found`);
+        handleError(error, logger);
+      }
+
+      // Build update object
+      const updates: Record<string, unknown> = {};
+
+      if (options.name !== undefined) {
+        updates.name = options.name;
+      }
+      if (options.schedule !== undefined) {
+        updates.schedule = options.schedule;
+      }
+      if (options.input !== undefined) {
+        updates.inputFile = options.input;
+      }
+      if (options.output !== undefined) {
+        updates.outputFile = options.output;
+      }
+      if (options.dryRun !== undefined) {
+        updates.isDryRun = options.dryRun;
+      }
+
+      if (Object.keys(updates).length === 0) {
+        logger.info('No updates specified');
+        process.exit(0);
+      }
+
+      // Validate updated task if critical fields are being updated
+      if (updates.name || updates.schedule || updates.inputFile) {
+        const updatedTask = {
+          ...existingTask,
+          ...updates,
+        } as unknown as ScheduledTask;
+        const validation = validateScheduledTask(updatedTask);
+        if (!validation.isValid) {
+          const error = new Error(
+            `Validation failed: ${validation.errors.join(', ')}`
+          );
+          handleError(error, logger);
+        }
+      }
+
+      // Update the task
+      await database.updateScheduledTask(id, updates);
+
+      logger.info(`✓ Scheduled task updated successfully`);
+      logger.info(`  ID: ${id}`);
+      Object.entries(updates).forEach(([key, value]) => {
+        logger.info(`  ${key}: ${value}`);
+      });
+
+      process.exit(0);
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+// Schedule delete command
+scheduleCommand
+  .command('delete <id>')
+  .description('Delete a scheduled task')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (id, options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      const database = new Database();
+
+      // Check if task exists
+      const existingTask = await database.getScheduledTask(id);
+      if (!existingTask) {
+        const error = new Error(`Scheduled task with ID '${id}' not found`);
+        handleError(error, logger);
+      }
+
+      // Delete the task
+      await database.deleteScheduledTask(id);
+
+      logger.info(`✓ Scheduled task deleted successfully`);
+      logger.info(`  ID: ${id}`);
+      logger.info(`  Name: ${existingTask.name}`);
+
+      process.exit(0);
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+// Schedule enable command
+scheduleCommand
+  .command('enable <id>')
+  .description('Enable a scheduled task')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (id, options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      const database = new Database();
+
+      // Check if task exists
+      const existingTask = await database.getScheduledTask(id);
+      if (!existingTask) {
+        const error = new Error(`Scheduled task with ID '${id}' not found`);
+        handleError(error, logger);
+      }
+
+      // Enable the task
+      await database.enableScheduledTask(id);
+
+      logger.info(`✓ Scheduled task enabled successfully`);
+      logger.info(`  ID: ${id}`);
+      logger.info(`  Name: ${existingTask.name}`);
+
+      process.exit(0);
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+// Schedule disable command
+scheduleCommand
+  .command('disable <id>')
+  .description('Disable a scheduled task')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (id, options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      const database = new Database();
+
+      // Check if task exists
+      const existingTask = await database.getScheduledTask(id);
+      if (!existingTask) {
+        const error = new Error(`Scheduled task with ID '${id}' not found`);
+        handleError(error, logger);
+      }
+
+      // Disable the task
+      await database.disableScheduledTask(id);
+
+      logger.info(`✓ Scheduled task disabled successfully`);
+      logger.info(`  ID: ${id}`);
+      logger.info(`  Name: ${existingTask.name}`);
+
+      process.exit(0);
+    } catch (error) {
+      handleError(error as Error, logger);
+    }
+  });
+
+// Schedule next command
+scheduleCommand
+  .command('next')
+  .description('Show next scheduled run times for all active tasks')
+  .option('-v, --verbose', 'Enable verbose logging')
+  .action(async (options) => {
+    const logger = new Logger(options.verbose ? 'debug' : 'info', false);
+
+    try {
+      const database = new Database();
+      const tasks = await database.getScheduledTasks();
+
+      if (tasks.length === 0) {
+        logger.info('No active scheduled tasks found');
+        process.exit(0);
+      }
+
+      logger.info(`Next run times for ${tasks.length} active task(s):`);
+      logger.info('');
+
+      for (const task of tasks) {
+        const taskData = task as unknown as ScheduledTask;
+        try {
+          const nextRuns = getNextRunTimes(taskData.schedule, 3);
+          logger.info(`${taskData.name} (${taskData.schedule}):`);
+          nextRuns.forEach((date, index) => {
+            logger.info(`  ${index + 1}. ${date.toLocaleString()}`);
+          });
+          logger.info('');
+        } catch (error) {
+          logger.warn(
+            `${taskData.name}: Could not calculate next run times - ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
+        }
       }
 
       process.exit(0);
