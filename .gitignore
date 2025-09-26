@@ -200,5 +200,14 @@ sample-phrase-book.json
 qa_report_*.json
 qa_report_*.md
 
+
 # Testing improvement plan markdowns
 docs/testing-improvement-plan.md
+# Coverage reports
+coverage/
+
+# Temporary build files
+temp/
+
+# Database files
+data/
