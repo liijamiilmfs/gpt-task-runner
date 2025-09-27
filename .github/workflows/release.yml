@@ -41,6 +41,5 @@ jobs:
       
       - name: Semantic Release
         run: npx semantic-release
-        if: env.NPM_TOKEN != ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
