@@ -603,11 +603,15 @@ class DashboardServer {
       }
     });
 
-    // Serve React app for all other routes - use global limiter
-    // Note: This route is disabled during testing to avoid path-to-regexp issues
+    // Serve Next.js frontend for all non-API routes
     if (process.env.NODE_ENV !== 'test') {
-      this.app.get('/*', (_req, res) => {
-        res.sendFile(path.join(__dirname, '../dashboard/dist/index.html'));
+      this.app.get('*', (req, res) => {
+        // Redirect to Next.js dev server if running
+        if (req.path !== '/api' && !req.path.startsWith('/api/')) {
+          res.redirect('http://localhost:3001' + req.path);
+        } else {
+          res.status(404).json({ error: 'Not found' });
+        }
       });
     }
   }
