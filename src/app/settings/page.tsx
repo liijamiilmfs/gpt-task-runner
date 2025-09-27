@@ -1,15 +1,15 @@
 'use client';
 
-import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Save,
-  Key,
-  Database,
   Bell,
-  Shield,
+  Database,
   Globe,
+  Key,
   RefreshCw,
+  Save,
+  Shield,
 } from 'lucide-react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 interface SettingsData {
   apiKeys: {
@@ -71,14 +71,18 @@ const SettingsPage: React.FC = () => {
 
   const fetchSettings = useCallback(async () => {
     try {
-      // TODO: Replace with actual API call
-      // const response = await fetch('/api/settings');
-      // const data = await response.json();
+      const response = await fetch('/api/settings');
+      const result = await response.json();
 
-      // Mock data for now - in real app, this would come from the API
-      setSettings((s) => s);
+      if (result.success) {
+        setSettings(result.data);
+      } else {
+        console.error('Failed to fetch settings:', result.error);
+        // Keep current settings on error
+      }
     } catch (error) {
       console.error('Failed to fetch settings:', error);
+      // Keep current settings on error
     } finally {
       setLoading(false);
     }
@@ -91,16 +95,20 @@ const SettingsPage: React.FC = () => {
   const handleSave = async () => {
     setSaving(true);
     try {
-      // TODO: Replace with actual API call
-      // await fetch('/api/settings', {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify(settings),
-      // });
+      const response = await fetch('/api/settings', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(settings),
+      });
 
-      // Mock save delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      alert('Settings saved successfully!');
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Settings saved successfully!');
+      } else {
+        console.error('Failed to save settings:', result.error);
+        alert(`Failed to save settings: ${result.error.message}`);
+      }
     } catch (error) {
       console.error('Failed to save settings:', error);
       alert('Failed to save settings. Please try again.');
