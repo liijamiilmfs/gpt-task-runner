@@ -404,6 +404,7 @@ class DashboardServer {
           }
 
           await this.database.enableScheduledTask(taskId);
+          await this.gptService.enableScheduledTask(taskId);
           return res.json({
             success: true,
             message: 'Scheduled task enabled successfully',
@@ -443,6 +444,7 @@ class DashboardServer {
           }
 
           await this.database.disableScheduledTask(taskId);
+          await this.gptService.disableScheduledTask(taskId);
           return res.json({
             success: true,
             message: 'Scheduled task disabled successfully',

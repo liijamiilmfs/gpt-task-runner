@@ -253,6 +253,32 @@ class GPTTaskService {
     await this.database.deleteScheduledTask(taskId);
   }
 
+  async enableScheduledTask(taskId: string): Promise<void> {
+    // Get the task from database
+    const task = await this.database.getScheduledTask(taskId);
+    if (!task) {
+      throw new Error(`Scheduled task with ID ${taskId} not found`);
+    }
+
+    // Check if task is already scheduled
+    if (this.scheduledTasks.has(taskId)) {
+      // Task is already running, no need to reschedule
+      return;
+    }
+
+    // Schedule the task
+    await this.scheduleTask(task as unknown as ScheduledTask);
+  }
+
+  async disableScheduledTask(taskId: string): Promise<void> {
+    // Stop the scheduled task if it's running
+    const scheduledTask = this.scheduledTasks.get(taskId);
+    if (scheduledTask) {
+      scheduledTask.stop();
+      this.scheduledTasks.delete(taskId);
+    }
+  }
+
   async getServiceStatus(): Promise<{
     isRunning: boolean;
     scheduledTasks: number;
