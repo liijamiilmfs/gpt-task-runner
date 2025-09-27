@@ -1,22 +1,28 @@
-import express from 'express';
-import { Server } from 'http';
 import cors from 'cors';
-import helmet from 'helmet';
-import * as path from 'path';
+import express from 'express';
 import rateLimit from 'express-rate-limit';
-import { WebSocketServer, WebSocket } from 'ws';
+import * as fs from 'fs';
+import helmet from 'helmet';
+import { Server, createServer as createHttpServer } from 'http';
+import {
+  Server as HttpsServer,
+  createServer as createHttpsServer,
+} from 'https';
+import * as path from 'path';
+import { WebSocket, WebSocketServer } from 'ws';
 import { Database } from './database/database';
 import { Logger } from './logger';
 import { GPTTaskService } from './service';
 
 class DashboardServer {
   public app: express.Application;
-  private server: Server | null = null;
+  private server: Server | HttpsServer | null = null;
   private wss!: WebSocketServer;
   private database: Database;
   private logger: Logger;
   private gptService: GPTTaskService;
   private strictLimiter!: ReturnType<typeof rateLimit>;
+  private isHttps: boolean = false;
 
   constructor() {
     this.app = express();
@@ -30,9 +36,48 @@ class DashboardServer {
   }
 
   private setupMiddleware(): void {
-    this.app.use(helmet());
-    this.app.use(cors());
-    this.app.use(express.json());
+    // Enhanced security headers with TLS 1.3 support
+    this.app.use(
+      helmet({
+        hsts: {
+          maxAge: 31536000, // 1 year
+          includeSubDomains: true,
+          preload: true,
+        },
+        contentSecurityPolicy: {
+          directives: {
+            defaultSrc: ["'self'"],
+            styleSrc: ["'self'", "'unsafe-inline'"],
+            scriptSrc: ["'self'"],
+            imgSrc: ["'self'", 'data:', 'https:'],
+            connectSrc: ["'self'", 'wss:', 'ws:'],
+            fontSrc: ["'self'"],
+            objectSrc: ["'none'"],
+            mediaSrc: ["'self'"],
+            frameSrc: ["'none'"],
+          },
+        },
+        referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+        crossOriginEmbedderPolicy: false, // Disable for compatibility
+      })
+    );
+
+    // CORS with secure defaults
+    this.app.use(
+      cors({
+        origin: process.env.ALLOWED_ORIGINS?.split(',') || [
+          'http://localhost:3000',
+          'https://localhost:3000',
+        ],
+        credentials: true,
+        methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+        allowedHeaders: ['Content-Type', 'Authorization', 'X-API-Key'],
+        maxAge: 86400, // 24 hours
+      })
+    );
+
+    this.app.use(express.json({ limit: '10mb' }));
+    this.app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
     // Authentication middleware
     this.app.use('/api', (req, res, next) => {
@@ -558,11 +603,31 @@ class DashboardServer {
       }
     });
 
-    // Serve React app for all other routes - use global limiter
-    // Note: This route is disabled during testing to avoid path-to-regexp issues
+    // Serve Next.js frontend for all non-API routes
     if (process.env.NODE_ENV !== 'test') {
-      this.app.get('*', (_req, res) => {
-        res.sendFile(path.join(__dirname, '../dashboard/dist/index.html'));
+      this.app.get('*', (req, res) => {
+        // Redirect to Next.js dev server if running
+        if (req.path !== '/api' && !req.path.startsWith('/api/')) {
+          // Validate and sanitize the path to prevent open redirect vulnerabilities
+          const sanitizedPath = req.path.replace(/[^a-zA-Z0-9\-_\/\.]/g, '');
+          const allowedPaths = [
+            '/',
+            '/dashboard',
+            '/settings',
+            '/tasks',
+            '/reports',
+          ];
+
+          // Only redirect to allowed paths or root
+          if (allowedPaths.includes(sanitizedPath) || sanitizedPath === '/') {
+            res.redirect('http://localhost:3001' + sanitizedPath);
+          } else {
+            // For unknown paths, redirect to root
+            res.redirect('http://localhost:3001/');
+          }
+        } else {
+          res.status(404).json({ error: 'Not found' });
+        }
       });
     }
   }
@@ -573,7 +638,51 @@ class DashboardServer {
       return;
     }
 
-    this.wss = new WebSocketServer({ port: 8081 });
+    const wsPort = this.isHttps ? 8082 : 8081; // Use WSS port if HTTPS is enabled
+    const wsOptions: Record<string, unknown> = { port: wsPort };
+
+    // Configure WSS if HTTPS is enabled
+    if (this.isHttps) {
+      const sslKeyPath = process.env.SSL_KEY_PATH;
+      const sslCertPath = process.env.SSL_CERT_PATH;
+      const sslCaPath = process.env.SSL_CA_PATH;
+
+      if (
+        sslKeyPath &&
+        sslCertPath &&
+        fs.existsSync(sslKeyPath) &&
+        fs.existsSync(sslCertPath)
+      ) {
+        wsOptions.server = createHttpsServer({
+          key: fs.readFileSync(sslKeyPath),
+          cert: fs.readFileSync(sslCertPath),
+          ca:
+            sslCaPath && fs.existsSync(sslCaPath)
+              ? fs.readFileSync(sslCaPath)
+              : undefined,
+          secureProtocol: 'TLSv1_3_method',
+          ciphers: [
+            'TLS_AES_256_GCM_SHA384',
+            'TLS_CHACHA20_POLY1305_SHA256',
+            'TLS_AES_128_GCM_SHA256',
+            '!aNULL',
+            '!eNULL',
+            '!EXPORT',
+            '!DES',
+            '!RC4',
+            '!MD5',
+            '!PSK',
+            '!SRP',
+            '!CAMELLIA',
+          ].join(':'),
+          honorCipherOrder: true,
+          minVersion: 'TLSv1.3',
+          maxVersion: 'TLSv1.3',
+        });
+      }
+    }
+
+    this.wss = new WebSocketServer(wsOptions);
 
     this.wss.on('connection', (ws: WebSocket) => {
       this.logger.info('Dashboard client connected');
@@ -615,9 +724,96 @@ class DashboardServer {
   }
 
   public start(port: number = 3000): void {
+    const httpsPort = process.env.HTTPS_PORT
+      ? parseInt(process.env.HTTPS_PORT)
+      : port + 1;
+
+    // Check for SSL certificates
+    const sslKeyPath = process.env.SSL_KEY_PATH;
+    const sslCertPath = process.env.SSL_CERT_PATH;
+    const sslCaPath = process.env.SSL_CA_PATH;
+
+    if (
+      sslKeyPath &&
+      sslCertPath &&
+      fs.existsSync(sslKeyPath) &&
+      fs.existsSync(sslCertPath)
+    ) {
+      try {
+        const httpsOptions: Record<string, unknown> = {
+          key: fs.readFileSync(sslKeyPath),
+          cert: fs.readFileSync(sslCertPath),
+          // TLS 1.3 configuration
+          secureProtocol: 'TLSv1_3_method',
+          ciphers: [
+            'TLS_AES_256_GCM_SHA384',
+            'TLS_CHACHA20_POLY1305_SHA256',
+            'TLS_AES_128_GCM_SHA256',
+            '!aNULL',
+            '!eNULL',
+            '!EXPORT',
+            '!DES',
+            '!RC4',
+            '!MD5',
+            '!PSK',
+            '!SRP',
+            '!CAMELLIA',
+          ].join(':'),
+          honorCipherOrder: true,
+          minVersion: 'TLSv1.3',
+          maxVersion: 'TLSv1.3',
+        };
+
+        // Add CA certificate if provided
+        if (sslCaPath && fs.existsSync(sslCaPath)) {
+          httpsOptions.ca = fs.readFileSync(sslCaPath);
+        }
+
+        this.server = createHttpsServer(httpsOptions, this.app);
+        this.isHttps = true;
+
+        this.server!.listen(httpsPort, () => {
+          this.logger.info(
+            `🔒 HTTPS Dashboard server running on port ${httpsPort} (TLS 1.3)`
+          );
+          this.logger.info(
+            `🔒 WebSocket server running on port ${httpsPort + 1} (WSS)`
+          );
+        });
+
+        // Redirect HTTP to HTTPS
+        const httpServer = createHttpServer((req, res) => {
+          res.writeHead(301, {
+            Location: `https://${req.headers.host}${req.url}`,
+          });
+          res.end();
+        });
+
+        httpServer.listen(port, () => {
+          this.logger.info(
+            `🔄 HTTP redirect server running on port ${port} (redirects to HTTPS)`
+          );
+        });
+      } catch (error) {
+        this.logger.error(
+          'Failed to start HTTPS server, falling back to HTTP:',
+          { error: error instanceof Error ? error.message : String(error) }
+        );
+        this.startHttpServer(port);
+      }
+    } else {
+      this.logger.warn('SSL certificates not found, starting HTTP server only');
+      this.logger.warn(
+        'For production, set SSL_KEY_PATH and SSL_CERT_PATH environment variables'
+      );
+      this.startHttpServer(port);
+    }
+  }
+
+  private startHttpServer(port: number): void {
     this.server = this.app.listen(port, () => {
-      this.logger.info(`Dashboard server running on port ${port}`);
-      this.logger.info(`WebSocket server running on port 8081`);
+      this.logger.info(`🌐 HTTP Dashboard server running on port ${port}`);
+      this.logger.info(`🌐 WebSocket server running on port 8081`);
     });
   }
 

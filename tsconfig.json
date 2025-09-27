@@ -35,7 +35,6 @@
       "@/io": ["src/io"]
     },
     "allowJs": true,
-    "noEmit": true,
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
@@ -44,7 +43,8 @@
         "name": "next"
       }
     ],
-    "types": ["node", "cron", "cron-validate"]
+    "types": ["node", "cron", "cron-validate"],
+    "noEmit": true
   },
   "include": ["src/**/*", "tests/**/*", ".next/types/**/*.ts"],
   "exclude": [
