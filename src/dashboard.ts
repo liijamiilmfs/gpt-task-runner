@@ -10,7 +10,7 @@ import { Logger } from './logger';
 import { GPTTaskService } from './service';
 
 class DashboardServer {
-  private app: express.Application;
+  public app: express.Application;
   private server: Server | null = null;
   private wss!: WebSocketServer;
   private database: Database;
@@ -112,47 +112,358 @@ class DashboardServer {
       }
     });
 
-    // Scheduled tasks
-    this.app.get('/api/scheduled-tasks', async (_req, res) => {
+    // Scheduled tasks - GET all with query parameters
+    this.app.get('/api/scheduled-tasks', async (req, res) => {
       try {
-        const tasks = await this.database.getScheduledTasks();
-        res.json(tasks);
+        const limit =
+          parseInt((req.query as Record<string, unknown>).limit as string) ||
+          100;
+        const offset =
+          parseInt((req.query as Record<string, unknown>).offset as string) ||
+          0;
+        const active = (req.query as Record<string, unknown>).active;
+
+        let tasks;
+        if (active === 'true') {
+          tasks = await this.database.getActiveScheduledTasks();
+        } else if (active === 'false') {
+          const allTasks = await this.database.getScheduledTasks();
+          tasks = allTasks.filter(
+            (task: Record<string, unknown>) => !task.isActive
+          );
+        } else {
+          tasks = await this.database.getScheduledTasks();
+        }
+
+        // Apply pagination
+        const paginatedTasks = tasks.slice(offset, offset + limit);
+
+        res.json({
+          success: true,
+          data: paginatedTasks,
+          pagination: {
+            limit,
+            offset,
+            total: tasks.length,
+            hasMore: offset + limit < tasks.length,
+          },
+        });
       } catch (error) {
         console.error('Failed to get scheduled tasks:', error);
-        res.status(500).json({ error: 'Failed to get scheduled tasks' });
+        res.status(500).json({
+          success: false,
+          error: {
+            code: 'E_DATABASE_ERROR',
+            message: 'Failed to get scheduled tasks',
+            details: error instanceof Error ? error.message : 'Unknown error',
+          },
+        });
       }
     });
 
+    // Scheduled tasks - GET specific task by ID
+    this.app.get('/api/scheduled-tasks/:id', async (req, res) => {
+      try {
+        const task = await this.database.getScheduledTask(req.params.id);
+        if (!task) {
+          return res.status(404).json({
+            success: false,
+            error: {
+              code: 'E_TASK_NOT_FOUND',
+              message: 'Scheduled task not found',
+            },
+          });
+        }
+
+        return res.json({
+          success: true,
+          data: task,
+        });
+      } catch (error) {
+        console.error('Failed to get scheduled task:', error);
+        return res.status(500).json({
+          success: false,
+          error: {
+            code: 'E_DATABASE_ERROR',
+            message: 'Failed to get scheduled task',
+            details: error instanceof Error ? error.message : 'Unknown error',
+          },
+        });
+      }
+    });
+
+    // Scheduled tasks - POST create new task
     this.app.post(
       '/api/scheduled-tasks',
       this.strictLimiter,
       async (req, res) => {
         try {
-          const taskId = await this.gptService.addScheduledTask(req.body);
-          res.json({
-            id: taskId,
+          // Validate required fields
+          const { name, schedule, inputFile, outputFile, isDryRun, isActive } =
+            req.body;
+
+          if (!name || !schedule || !inputFile) {
+            return res.status(400).json({
+              success: false,
+              error: {
+                code: 'E_INVALID_INPUT',
+                message: 'Missing required fields: name, schedule, inputFile',
+              },
+            });
+          }
+
+          const task = {
+            name,
+            schedule,
+            inputFile,
+            outputFile: outputFile || null,
+            isDryRun: Boolean(isDryRun),
+            isActive: isActive !== undefined ? Boolean(isActive) : true,
+          };
+
+          const taskId = await this.gptService.addScheduledTask(task);
+          return res.status(201).json({
+            success: true,
+            data: { id: taskId },
             message: 'Scheduled task created successfully',
           });
         } catch (error) {
           console.error('Failed to create scheduled task:', error);
-          res.status(500).json({ error: 'Failed to create scheduled task' });
+          return res.status(500).json({
+            success: false,
+            error: {
+              code: 'E_DATABASE_ERROR',
+              message: 'Failed to create scheduled task',
+              details: error instanceof Error ? error.message : 'Unknown error',
+            },
+          });
         }
       }
     );
 
+    // Scheduled tasks - PUT update existing task
+    this.app.put(
+      '/api/scheduled-tasks/:id',
+      this.strictLimiter,
+      async (req, res) => {
+        try {
+          const taskId = req.params.id;
+
+          // Check if task exists
+          const existingTask = await this.database.getScheduledTask(taskId);
+          if (!existingTask) {
+            return res.status(404).json({
+              success: false,
+              error: {
+                code: 'E_TASK_NOT_FOUND',
+                message: 'Scheduled task not found',
+              },
+            });
+          }
+
+          const { name, schedule, inputFile, outputFile, isDryRun, isActive } =
+            req.body;
+
+          const updateData: Record<string, unknown> = {};
+          if (name !== undefined) updateData.name = name;
+          if (schedule !== undefined) updateData.schedule = schedule;
+          if (inputFile !== undefined) updateData.inputFile = inputFile;
+          if (outputFile !== undefined) updateData.outputFile = outputFile;
+          if (isDryRun !== undefined) updateData.isDryRun = Boolean(isDryRun);
+          if (isActive !== undefined) updateData.isActive = Boolean(isActive);
+
+          await this.database.updateScheduledTask(taskId, updateData);
+
+          return res.json({
+            success: true,
+            message: 'Scheduled task updated successfully',
+          });
+        } catch (error) {
+          console.error('Failed to update scheduled task:', error);
+          return res.status(500).json({
+            success: false,
+            error: {
+              code: 'E_DATABASE_ERROR',
+              message: 'Failed to update scheduled task',
+              details: error instanceof Error ? error.message : 'Unknown error',
+            },
+          });
+        }
+      }
+    );
+
+    // Scheduled tasks - DELETE task
     this.app.delete(
       '/api/scheduled-tasks/:id',
       this.strictLimiter,
       async (req, res) => {
         try {
-          await this.gptService.removeScheduledTask(req.params.id);
-          res.json({ message: 'Scheduled task removed successfully' });
+          const taskId = req.params.id;
+
+          // Check if task exists
+          const existingTask = await this.database.getScheduledTask(taskId);
+          if (!existingTask) {
+            return res.status(404).json({
+              success: false,
+              error: {
+                code: 'E_TASK_NOT_FOUND',
+                message: 'Scheduled task not found',
+              },
+            });
+          }
+
+          await this.gptService.removeScheduledTask(taskId);
+          return res.json({
+            success: true,
+            message: 'Scheduled task removed successfully',
+          });
         } catch (error) {
           console.error('Failed to remove scheduled task:', error);
-          res.status(500).json({ error: 'Failed to remove scheduled task' });
+          return res.status(500).json({
+            success: false,
+            error: {
+              code: 'E_DATABASE_ERROR',
+              message: 'Failed to remove scheduled task',
+              details: error instanceof Error ? error.message : 'Unknown error',
+            },
+          });
         }
       }
     );
+
+    // Scheduled tasks - PATCH enable task
+    this.app.patch(
+      '/api/scheduled-tasks/:id/enable',
+      this.strictLimiter,
+      async (req, res) => {
+        try {
+          const taskId = req.params.id;
+
+          // Check if task exists
+          const existingTask = await this.database.getScheduledTask(taskId);
+          if (!existingTask) {
+            return res.status(404).json({
+              success: false,
+              error: {
+                code: 'E_TASK_NOT_FOUND',
+                message: 'Scheduled task not found',
+              },
+            });
+          }
+
+          await this.database.enableScheduledTask(taskId);
+          return res.json({
+            success: true,
+            message: 'Scheduled task enabled successfully',
+          });
+        } catch (error) {
+          console.error('Failed to enable scheduled task:', error);
+          return res.status(500).json({
+            success: false,
+            error: {
+              code: 'E_DATABASE_ERROR',
+              message: 'Failed to enable scheduled task',
+              details: error instanceof Error ? error.message : 'Unknown error',
+            },
+          });
+        }
+      }
+    );
+
+    // Scheduled tasks - PATCH disable task
+    this.app.patch(
+      '/api/scheduled-tasks/:id/disable',
+      this.strictLimiter,
+      async (req, res) => {
+        try {
+          const taskId = req.params.id;
+
+          // Check if task exists
+          const existingTask = await this.database.getScheduledTask(taskId);
+          if (!existingTask) {
+            return res.status(404).json({
+              success: false,
+              error: {
+                code: 'E_TASK_NOT_FOUND',
+                message: 'Scheduled task not found',
+              },
+            });
+          }
+
+          await this.database.disableScheduledTask(taskId);
+          return res.json({
+            success: true,
+            message: 'Scheduled task disabled successfully',
+          });
+        } catch (error) {
+          console.error('Failed to disable scheduled task:', error);
+          return res.status(500).json({
+            success: false,
+            error: {
+              code: 'E_DATABASE_ERROR',
+              message: 'Failed to disable scheduled task',
+              details: error instanceof Error ? error.message : 'Unknown error',
+            },
+          });
+        }
+      }
+    );
+
+    // Scheduled tasks - GET next run times
+    this.app.get('/api/scheduled-tasks/next-runs', async (req, res) => {
+      try {
+        const limit =
+          parseInt((req.query as Record<string, unknown>).limit as string) || 5;
+        const tasks = await this.database.getActiveScheduledTasks();
+
+        const nextRuns = [];
+
+        for (const task of tasks) {
+          try {
+            // Import getNextRunTimes dynamically to avoid circular dependencies
+            const { getNextRunTimes } = await import(
+              './utils/schedule-validator'
+            );
+            const taskData = task as Record<string, unknown>;
+            const runs = getNextRunTimes(taskData.schedule as string, limit);
+
+            nextRuns.push({
+              taskId: taskData.id,
+              taskName: taskData.name,
+              schedule: taskData.schedule,
+              nextRuns: runs.map((date) => date.toISOString()),
+            });
+          } catch (error) {
+            // If we can't calculate next runs for a task, include it with an error
+            const taskData = task as Record<string, unknown>;
+            nextRuns.push({
+              taskId: taskData.id,
+              taskName: taskData.name,
+              schedule: taskData.schedule,
+              error:
+                error instanceof Error
+                  ? error.message
+                  : 'Failed to calculate next runs',
+            });
+          }
+        }
+
+        return res.json({
+          success: true,
+          data: nextRuns,
+        });
+      } catch (error) {
+        console.error('Failed to get next run times:', error);
+        return res.status(500).json({
+          success: false,
+          error: {
+            code: 'E_DATABASE_ERROR',
+            message: 'Failed to get next run times',
+            details: error instanceof Error ? error.message : 'Unknown error',
+          },
+        });
+      }
+    });
 
     // Service logs
     this.app.get('/api/logs', async (_req, res) => {
@@ -194,12 +505,20 @@ class DashboardServer {
     });
 
     // Serve React app for all other routes - use global limiter
-    this.app.get('*', (_req, res) => {
-      res.sendFile(path.join(__dirname, '../dashboard/dist/index.html'));
-    });
+    // Note: This route is disabled during testing to avoid path-to-regexp issues
+    if (process.env.NODE_ENV !== 'test') {
+      this.app.get('*', (_req, res) => {
+        res.sendFile(path.join(__dirname, '../dashboard/dist/index.html'));
+      });
+    }
   }
 
   private setupWebSocket(): void {
+    // Skip WebSocket setup during testing
+    if (process.env.NODE_ENV === 'test') {
+      return;
+    }
+
     this.wss = new WebSocketServer({ port: 8081 });
 
     this.wss.on('connection', (ws: WebSocket) => {

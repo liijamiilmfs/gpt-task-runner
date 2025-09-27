@@ -250,6 +250,7 @@ class GPTTaskService {
       this.scheduledTasks.delete(taskId);
     }
     // Also remove from database
+    await this.database.deleteScheduledTask(taskId);
   }
 
   async getServiceStatus(): Promise<{
