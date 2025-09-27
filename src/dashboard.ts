@@ -608,23 +608,18 @@ class DashboardServer {
       this.app.get('*', (req, res) => {
         // Redirect to Next.js dev server if running
         if (req.path !== '/api' && !req.path.startsWith('/api/')) {
-          // Validate and sanitize the path to prevent open redirect vulnerabilities
-          const sanitizedPath = req.path.replace(/[^a-zA-Z0-9\-_\/\.]/g, '');
-          const allowedPaths = [
-            '/',
-            '/dashboard',
-            '/settings',
-            '/tasks',
-            '/reports',
-          ];
+          // Strict path mapping to prevent open redirect vulnerabilities
+          const pathMapping: Record<string, string> = {
+            '/': '/',
+            '/dashboard': '/dashboard',
+            '/settings': '/settings',
+            '/tasks': '/tasks',
+            '/reports': '/reports',
+          };
 
-          // Only redirect to allowed paths or root
-          if (allowedPaths.includes(sanitizedPath) || sanitizedPath === '/') {
-            res.redirect('http://localhost:3001' + sanitizedPath);
-          } else {
-            // For unknown paths, redirect to root
-            res.redirect('http://localhost:3001/');
-          }
+          // Use strict mapping - only redirect to predefined paths
+          const targetPath = pathMapping[req.path] || '/';
+          res.redirect('http://localhost:3001' + targetPath);
         } else {
           res.status(404).json({ error: 'Not found' });
         }
