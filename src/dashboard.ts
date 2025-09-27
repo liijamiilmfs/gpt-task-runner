@@ -34,6 +34,58 @@ class DashboardServer {
     this.app.use(cors());
     this.app.use(express.json());
 
+    // Authentication middleware
+    this.app.use('/api', (req, res, next) => {
+      const authHeader = req.headers.authorization;
+      const apiKey = req.headers['x-api-key'] as string;
+
+      // Skip auth for health check
+      if (req.path === '/health') {
+        return next();
+      }
+
+      // Check for API key in environment or header
+      const expectedApiKey = process.env.DASHBOARD_API_KEY || 'dev-api-key';
+
+      if (apiKey && apiKey === expectedApiKey) {
+        return next();
+      }
+
+      // Check for Bearer token
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.substring(7);
+        if (token === expectedApiKey) {
+          return next();
+        }
+      }
+
+      // Check for basic auth (username:password)
+      if (authHeader && authHeader.startsWith('Basic ')) {
+        const credentials = Buffer.from(
+          authHeader.substring(6),
+          'base64'
+        ).toString();
+        const [username, password] = credentials.split(':');
+        const expectedUsername = process.env.DASHBOARD_USERNAME || 'admin';
+        const expectedPassword = process.env.DASHBOARD_PASSWORD || 'admin';
+
+        if (username === expectedUsername && password === expectedPassword) {
+          return next();
+        }
+      }
+
+      return res.status(401).json({
+        success: false,
+        error: {
+          code: 'E_UNAUTHORIZED',
+          message:
+            'Authentication required. Provide API key, Bearer token, or Basic auth.',
+          details:
+            'Use X-API-Key header, Authorization: Bearer <token>, or Authorization: Basic <base64(username:password)>',
+        },
+      });
+    });
+
     // Global rate limiter for all requests
     const globalLimiter = rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
