@@ -1,16 +1,16 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
 import {
+  CheckCircle,
+  Clock,
+  Edit,
+  Eye,
   Play,
   Plus,
-  Edit,
   Trash2,
-  Eye,
-  Clock,
-  CheckCircle,
   XCircle,
 } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
 
 interface Task {
   id: string;
@@ -33,42 +33,39 @@ const TasksPage: React.FC = () => {
 
   const fetchTasks = async () => {
     try {
-      // TODO: Replace with actual API call
-      // const response = await fetch('/api/tasks');
-      // const data = await response.json();
+      const response = await fetch('/api/tasks');
+      const result = await response.json();
 
-      // Mock data for now
-      const mockTasks: Task[] = [
-        {
-          id: '1',
-          name: 'Sample Task 1',
-          description: 'A sample task for testing',
-          status: 'completed',
-          createdAt: '2024-01-15T10:00:00Z',
-          completedAt: '2024-01-15T10:05:00Z',
-          isDryRun: false,
-        },
-        {
-          id: '2',
-          name: 'Sample Task 2',
-          description: 'Another sample task',
-          status: 'running',
-          createdAt: '2024-01-15T10:30:00Z',
-          isDryRun: true,
-        },
-        {
-          id: '3',
-          name: 'Sample Task 3',
-          description: 'A failed task example',
-          status: 'failed',
-          createdAt: '2024-01-15T11:00:00Z',
-          isDryRun: false,
-        },
-      ];
+      if (result.success) {
+        // Transform API data to match Task interface
+        const transformedTasks: Task[] = result.data.map(
+          (task: Record<string, unknown>) => ({
+            id: String(task.id),
+            name: String(task.description || `Task ${task.id}`),
+            description: String(task.description || 'No description available'),
+            status: task.status as
+              | 'pending'
+              | 'running'
+              | 'completed'
+              | 'failed',
+            createdAt: String(task.createdAt),
+            completedAt: task.completedAt
+              ? String(task.completedAt)
+              : undefined,
+            isDryRun: Boolean(task.isDryRun),
+          })
+        );
 
-      setTasks(mockTasks);
+        setTasks(transformedTasks);
+      } else {
+        console.error('Failed to fetch tasks:', result.error);
+        // Keep empty array on error
+        setTasks([]);
+      }
     } catch (error) {
       console.error('Failed to fetch tasks:', error);
+      // Keep empty array on error
+      setTasks([]);
     } finally {
       setLoading(false);
     }
