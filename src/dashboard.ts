@@ -1,16 +1,15 @@
+import cors from 'cors';
 import express from 'express';
-import { Server } from 'http';
+import rateLimit from 'express-rate-limit';
+import * as fs from 'fs';
+import helmet from 'helmet';
+import { Server, createServer as createHttpServer } from 'http';
 import {
   Server as HttpsServer,
   createServer as createHttpsServer,
 } from 'https';
-import { createServer as createHttpServer } from 'http';
-import cors from 'cors';
-import helmet from 'helmet';
 import * as path from 'path';
-import * as fs from 'fs';
-import rateLimit from 'express-rate-limit';
-import { WebSocketServer, WebSocket } from 'ws';
+import { WebSocket, WebSocketServer } from 'ws';
 import { Database } from './database/database';
 import { Logger } from './logger';
 import { GPTTaskService } from './service';
@@ -607,7 +606,7 @@ class DashboardServer {
     // Serve React app for all other routes - use global limiter
     // Note: This route is disabled during testing to avoid path-to-regexp issues
     if (process.env.NODE_ENV !== 'test') {
-      this.app.get('*', (_req, res) => {
+      this.app.get('/*', (_req, res) => {
         res.sendFile(path.join(__dirname, '../dashboard/dist/index.html'));
       });
     }

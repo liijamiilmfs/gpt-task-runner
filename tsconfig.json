@@ -35,7 +35,6 @@
       "@/io": ["src/io"]
     },
     "allowJs": true,
-    "noEmit": true,
     "incremental": true,
     "isolatedModules": true,
     "jsx": "preserve",
